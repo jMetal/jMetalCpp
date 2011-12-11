@@ -1,12 +1,12 @@
 /*
- * ZDT1.h
+ * DTLZ1.h
  *
  *  Created on: 09/12/2011
  *      Author: antonio
  */
 
-#ifndef __ZDT1_H__
-#define __ZDT1_H__
+#ifndef __DTLZ1_H__
+#define __DTLZ1_H__
 
 #include <Problem.h>
 #include <math.h>
@@ -16,16 +16,16 @@
 #include <XReal.h>
 #include <Solution.h>
 
-class ZDT1 : public Problem {
+class DTLZ1 : public Problem {
 private:
 	double evalG(XReal *x) ;
 	double evalH(double f, double g) ;
 
 public:
-	ZDT1(string solutionType, int numberOfVariables = 30);
+	DTLZ1(string solutionType, int numberOfVariables = 7, int numberOfObjectives = 2);
 	void evaluate(Solution *solution);
 
-	~ZDT1();
+	~DTLZ1();
 };
 
-#endif /* ZDT1_H_ */
+#endif /* __DTLZ1_H__ */

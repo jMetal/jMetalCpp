@@ -5,9 +5,9 @@
  *      Author: antonio
  */
 
-#include <ZDT1.h>
+#include <DTLZ1.h>
 
-ZDT1::ZDT1(string solutionType, int numberOfVariables) {
+DTLZ1::DTLZ1(string solutionType, int numberOfVariables) {
 	numberOfVariables_   = numberOfVariables;
 	numberOfObjectives_  = 2;
 	numberOfConstraints_ = 0;
@@ -44,7 +44,7 @@ ZDT1::ZDT1(string solutionType, int numberOfVariables) {
 	}
 }
 
-ZDT1::~ZDT1() {
+DTLZ1::~DTLZ1() {
   delete [] lowerLimit_ ;
   delete [] upperLimit_ ;
   delete solutionType_ ;
@@ -54,7 +54,7 @@ ZDT1::~ZDT1() {
  * Evaluates a solution
  * @param solution The solution to evaluate
  */
-void ZDT1::evaluate(Solution *solution) {
+void DTLZ1::evaluate(Solution *solution) {
 	XReal * x = new XReal(solution);
 	double * fx = new double[numberOfObjectives_] ;
 
@@ -70,7 +70,7 @@ void ZDT1::evaluate(Solution *solution) {
 	delete x ;
 } // evaluate
 
-double ZDT1::evalG(XReal * x) {
+double DTLZ1::evalG(XReal * x) {
 	double g = 0.0 ;
 	for (int i = 1; i < x->getNumberOfDecisionVariables(); i++)
 		g += x->getValue(i) ;
@@ -81,7 +81,7 @@ double ZDT1::evalG(XReal * x) {
 	return g;
 }
 
-double ZDT1::evalH(double f, double g) {
+double DTLZ1::evalH(double f, double g) {
 	double h = 0.0 ;
 	h = 1.0 - sqrt(f/g) ;
 	return h ;
