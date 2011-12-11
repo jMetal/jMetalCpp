@@ -7,11 +7,11 @@
 
 #include <DTLZ1.h>
 
-DTLZ1::DTLZ1(string solutionType, int numberOfVariables) {
+DTLZ1::DTLZ1(string solutionType, int numberOfVariables, int numberOfObjectives) {
 	numberOfVariables_   = numberOfVariables;
-	numberOfObjectives_  = 2;
+	numberOfObjectives_  = numberOfObjectives;
 	numberOfConstraints_ = 0;
-	problemName_ 				 = "ZDT1";
+	problemName_ 				 = "DTLZ1";
 
 	lowerLimit_ = new double[numberOfVariables_];//(double *)malloc(sizeof(double)*numberOfVariables);
 	if (lowerLimit_ == NULL) {
@@ -55,34 +55,37 @@ DTLZ1::~DTLZ1() {
  * @param solution The solution to evaluate
  */
 void DTLZ1::evaluate(Solution *solution) {
-	XReal * x = new XReal(solution);
+	XReal * vars = new XReal(solution);
+
 	double * fx = new double[numberOfObjectives_] ;
+  double * x = new double[numberOfVariables_];
+  int k = numberOfVariables_ - numberOfObjectives_ + 1;
 
-	fx[0] = x->getValue(0) ;
-  double g = evalG(x) ;
-  double h = evalH(fx[0], g) ;
-	fx[1] = h * g ;
+  for (int i = 0; i < numberOfVariables_; i++)
+    x[i] = vars->getValue(i);
 
-	solution->setObjective(0,fx[0]);
-	solution->setObjective(1,fx[1]);
+  double g = 0.0 ;
+
+  for (int i = numberOfVariables_ - k; i < numberOfVariables_; i++)
+    g += (x[i] - 0.5)*(x[i] - 0.5) - cos(20.0 * M_PI * (x[i] - 0.5));
+
+  g = 100 * (k + g);
+  for (int i = 0; i < numberOfObjectives_; i++)
+    fx[i] = (1.0 + g) * 0.5;
+
+  for (int i = 0; i < numberOfObjectives_; i++){
+    for (int j = 0; j < numberOfObjectives_ - (i + 1); j++)
+      fx[i] *= x[j];
+      if (i != 0){
+        int aux = numberOfObjectives_ - (i + 1);
+        fx[i] *= 1 - x[aux];
+      } //if
+  }//for
+
+  for (int i = 0; i < numberOfObjectives_; i++)
+    solution->setObjective(i, fx[i]);
 
 	delete [] fx ;
-	delete x ;
+	delete [] x ;
+	delete vars ;
 } // evaluate
-
-double DTLZ1::evalG(XReal * x) {
-	double g = 0.0 ;
-	for (int i = 1; i < x->getNumberOfDecisionVariables(); i++)
-		g += x->getValue(i) ;
-
-	double c = 9.0/(numberOfVariables_ - 1) ;
-	g = c * g ;
-  g = g + 1.0 ;
-	return g;
-}
-
-double DTLZ1::evalH(double f, double g) {
-	double h = 0.0 ;
-	h = 1.0 - sqrt(f/g) ;
-	return h ;
-}

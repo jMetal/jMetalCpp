@@ -13,6 +13,7 @@
 #include <ZDT3.h>
 #include <ZDT4.h>
 #include <ZDT6.h>
+#include <DTLZ1.h>
 #include <Fonseca.h>
 #include <Schaffer.h>
 #include <RealSolutionType.h>
@@ -50,7 +51,8 @@ int main() {
   Operator  * mutation  ; // Mutation operator
   Operator  * selection ; // Selection operator
 
-	problem = new ZDT6("Real");
+	// problem = new ZDT6("Real");
+	problem = new DTLZ1("Real", 7, 2);
 
 	//problem   = new Schaffer("Real");
 	//problem   = new ZDT1("Real", 30);

@@ -17,10 +17,6 @@
 #include <Solution.h>
 
 class DTLZ1 : public Problem {
-private:
-	double evalG(XReal *x) ;
-	double evalH(double f, double g) ;
-
 public:
 	DTLZ1(string solutionType, int numberOfVariables = 7, int numberOfObjectives = 2);
 	void evaluate(Solution *solution);
