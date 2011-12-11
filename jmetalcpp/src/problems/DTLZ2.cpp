@@ -1,5 +1,5 @@
 /*
- * ZDT1.cpp
+ * DTLZ2.cpp
  *
  *  Created on: 09/12/2011
  *      Author: antonio

@@ -21,7 +21,7 @@ public:
 	DTLZ2(string solutionType, int numberOfVariables = 12, int numberOfObjectives = 3);
 	void evaluate(Solution *solution);
 
-	~DTLZ2();
+	virtual ~DTLZ2();
 };
 
 #endif /* __DTLZ2_H__ */
