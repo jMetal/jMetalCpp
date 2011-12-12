@@ -11,12 +11,12 @@
 #include <Algorithm.h>
 #include <Problem.h>
 #include <SolutionSet.h>
+#include <ObjectiveComparator.h>
 
 class gGA : public Algorithm {
 private:
   int populationSize_;
   int maxEvaluations_;
-  Problem *problem_;
 public:
   gGA(Problem * problem);
   SolutionSet * execute();

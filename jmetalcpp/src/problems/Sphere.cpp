@@ -25,7 +25,8 @@ Sphere::Sphere(string solutionType, int numberOfVariables) {
 	numberOfVariables_   = numberOfVariables;
 	numberOfObjectives_  = 1;
 	numberOfConstraints_ = 0;
-	
+	problemName_ 				 = "Sphere";
+
 	lowerLimit_ = new double[numberOfVariables_];
 	if (lowerLimit_ == NULL) {
 		cout << "Sphere::Sphere. Error reserving memory for storing the array of lower limits" << endl;

@@ -1,6 +1,6 @@
 CPP  = g++
 CC   = gcc
-OBJ  = Kursawe.o Fonseca.o Schaffer.o ZDT1.o ZDT2.o ZDT3.o ZDT4.o ZDT6.o \
+OBJ  = Sphere.o Kursawe.o Fonseca.o Schaffer.o ZDT1.o ZDT2.o ZDT3.o ZDT4.o ZDT6.o \
 DTLZ1.o DTLZ2.o DTLZ3.o DTLZ4.o
 LIBNAME= libproblems.a
 
