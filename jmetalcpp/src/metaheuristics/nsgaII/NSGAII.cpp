@@ -18,7 +18,7 @@
  */
 NSGAII::NSGAII(Problem *problem) : Algorithm(problem) {
 
-	problem_ = problem;
+	//problem_ = problem; // MODIFIED BY AJNEBRO
 	cout << "Inicializado por segunda vez..." << endl;
 
 } // NSGAII

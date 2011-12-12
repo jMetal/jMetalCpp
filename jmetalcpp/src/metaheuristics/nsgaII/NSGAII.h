@@ -25,7 +25,7 @@ private:
   int populationSize_;
   int maxEvaluations_;
   //QualityIndicator *indicators_;
-  Problem *problem_;
+  // Problem *problem_; // MODIFIED BY AJNEBRO
 public:
   NSGAII(Problem * problem);
   SolutionSet * execute();
