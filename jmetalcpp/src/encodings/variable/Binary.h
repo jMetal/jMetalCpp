@@ -11,6 +11,7 @@
 
 #include <Variable.h>
 #include <bitset>
+#include <vector>
 #include <PseudoRandom.h>
 #include <stdlib.h>
 
@@ -25,6 +26,7 @@ public:
 	Binary();
 	Binary(int numberOfBits);
 	Binary(Binary * variable);
+	~Binary() ;
 	void decode();
 	Variable * deepCopy();
 	int getNumberOfBits();
@@ -39,7 +41,7 @@ public:
 	double getUpperBound();
 
 protected:
-	bitset<10> bits_;
+	vector<bool> * bits_;
 	int numberOfBits_;
 };
 

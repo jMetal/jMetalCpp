@@ -12,6 +12,8 @@
  * Default constructor.
  */
 Binary::Binary() {
+	bits_ = NULL ;
+	numberOfBits_ = -1 ;
 } //Binary
 
 
@@ -21,12 +23,14 @@ Binary::Binary() {
  */
 Binary::Binary(int numberOfBits){
 	numberOfBits_ = numberOfBits;
-	//bits_ = new BitSet(numberOfBits_);
+
+  bits_ = new vector<bool>(numberOfBits_, false) ;
+
 	for (int i = 0; i < numberOfBits_; i++){
 		if (PseudoRandom::randDouble() < 0.5) {
-			bits_.set(i);
+			(*bits_)[i] = true ;
 		} else {
-			bits_.set(i,0);
+			(*bits_)[i] = false ;
 		}
 	}
 } //Binary
@@ -40,10 +44,13 @@ Binary::Binary(Binary * variable){
 	numberOfBits_ = variable->getNumberOfBits();
 	//bits_ = new BitSet(numberOfBits_);
 	for (int i = 0; i < numberOfBits_; i++) {
-		bits_.set(i,variable->bits_[i]);
+		(*bits_)[i] = (*variable->bits_)[i] ;
 	}
 } //Binary
 
+Binary::~Binary() {
+	delete bits_;
+}
 
 /**
  * This method is intended to be used in subclass of <code>Binary</code>,
@@ -81,8 +88,8 @@ int Binary::getNumberOfBits(){
  * @return The ith bit
  */
 bool Binary::getIth(int bit){
-	return bits_[bit];
-} //getNumberOfBits
+	return (*bits_)[bit];
+} //getIth
 
 
 /**
@@ -90,10 +97,7 @@ bool Binary::getIth(int bit){
  * @param bit The bit to set
  */
 void Binary::setIth(int bit, bool value){
-	if (value)
-		bits_.set(bit);
-	else
-		bits_.set(bit,0);
+	(*bits_)[bit] = value ;
 } //getNumberOfBits
 
 
@@ -105,7 +109,7 @@ void Binary::setIth(int bit, bool value){
 int Binary::hammingDistance(Binary * other) {
 	int distance = 0;
 	int i = 0;
-	while (i < bits_.size()) {
+	while (i < bits_->size()) {
 		if (bits_[i] != other->bits_[i]) {
 			distance++;
 		}
@@ -120,7 +124,15 @@ int Binary::hammingDistance(Binary * other) {
  * @return the string.
  */
 string Binary::toString() {
-	return bits_.to_string<char,char_traits<char>,allocator<char> >() ;
+	vector<bool>::iterator it;
+	string str = "" ;
+	for(it = bits_->begin(); it != bits_->end(); it++) {
+		if (*it == true)
+	    str += "1" ;
+		else
+			str += "0" ;
+	}
+	return str ;
 } // toString
 
 
