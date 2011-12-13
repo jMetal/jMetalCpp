@@ -471,6 +471,15 @@ double Solution::getAggregativeValue() {
 	return value;
 } // getAggregativeValue
 
+/**
+ * Returns the problem being solved
+ * @return The problem.
+ */
+Problem * Solution::getProblem() {
+	return problem_ ;
+} // getAggregativeValue
+
+
 
 /**
  * Returns the number of bits of the chromosome in case of using a binary

@@ -1,5 +1,5 @@
 /**
- * @file gGA_main.cpp
+ * @file gGAbin_main.cpp
  * @author Antonio J. Nebro
  * @date 02 December 2011
 **/
@@ -8,12 +8,11 @@
 #include <Problem.h>
 #include <Algorithm.h>
 #include <Solution.h>
-#include <RealSolutionType.h>
-#include <SBXCrossover.h>
-#include <PolynomialMutation.h>
+#include <BinarySolutionType.h>
 #include <BinaryTournament2.h>
+#include <BitFlipMutation.h>
 #include <iostream>
-#include <Sphere.h>
+#include <OneMax.h>
 #include <gGA.h>
 #include <time.h>
 
@@ -27,7 +26,7 @@ int main(int argc, char ** argv) {
   Operator  * mutation  ; // Mutation operator
   Operator  * selection ; // Selection operator
 
-	problem = new Sphere("Real");
+	problem = new OneMax(25);
 	//problem = new DTLZ1("Real", 7, 2);
 	//problem = new DTLZ3("Real", 12, 2);
 	//problem = new DTLZ4("Real", 12, 2);
@@ -49,8 +48,9 @@ int main(int argc, char ** argv) {
 	algorithm->setInputParameter("populationSize",populationSizePtr);
 	algorithm->setInputParameter("maxEvaluations",maxEvaluationsPtr);
 
-	// Mutation and Crossover for Real codification
 	map<string, void *> parameters;
+	/*
+	// Mutation and Crossover for Real codification
 	double probabilityValue1 = 0.9;
 	double *probabilityPtr1 = &probabilityValue1;
 	double distributionIndexValue1 = 20.0;
@@ -58,15 +58,11 @@ int main(int argc, char ** argv) {
 	parameters["probability"] =  probabilityPtr1 ;
 	parameters["distributionIndex"] = distributionIndexPtr1 ;
 	crossover = new SBXCrossover(parameters);
-
+*/
 	parameters.clear();
-	double probabilityValue2 = 1.0/problem->getNumberOfVariables();
-	double *probabilityPtr2 = &probabilityValue2;
-	double distributionIndexValue2 = 20.0;
-	double *distributionIndexPtr2 = &distributionIndexValue2;
-	parameters["probability"] = probabilityPtr2;
-	parameters["distributionIndex"] = distributionIndexPtr2 ;
-	mutation = new PolynomialMutation(parameters);
+	double mutationProbability = 1.0/problem->getNumberOfVariables();
+	parameters["probability"] = &mutationProbability;
+	mutation = new BitFlipMutation(parameters);
 
 	// Selection Operator
 	parameters.clear();
@@ -77,24 +73,9 @@ int main(int argc, char ** argv) {
 	// Add the operators to the algorithm
 	algorithm->addOperator("crossover",crossover);
 	algorithm->addOperator("mutation",mutation);
-	algorithm->addOperator("selection",selection);
-
-	// Checking parameters
-	cout << "SBXCrossover:" << endl;
-	cout << *(double *) algorithm->getOperator("crossover")->getParameter("probability") << endl;
-	cout << *(double *) algorithm->getOperator("crossover")->getParameter("distributionIndex") << endl;
-	cout << "PolynomialMutation:" << endl;
-	cout << *(double *) algorithm->getOperator("mutation")->getParameter("probability") << endl;
-	cout << *(double *) algorithm->getOperator("mutation")->getParameter("distributionIndex") << endl;
-	cout << "BinaryTournament:" << endl;
-	//cout << algorithm->getOperator("selection")->getParameter("probability") << endl;
-	//cout << algorithm->getOperator("selection")->getParameter("distributionIndex") << endl;
-
-	// Add the indicator object to the algorithm
-	//algorithm->setInputParameter("indicators", indicators) ;
+	//algorithm->addOperator("selection",selection);
 
 	// Execute the Algorithm
-
 	t_ini = clock();
 	SolutionSet * population = algorithm->execute();
 	t_fin = clock();
@@ -106,4 +87,5 @@ int main(int argc, char ** argv) {
 	population->printVariablesToFile("VAR");
 	cout << "Objectives values have been writen to file FUN" << endl;
 	population->printObjectivesToFile("FUN");
+
 } // main

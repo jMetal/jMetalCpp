@@ -91,6 +91,14 @@ bool Binary::getIth(int bit){
 	return (*bits_)[bit];
 } //getIth
 
+/**
+ * Flips the value of the ith bit.
+ * @param bit The bit to flip
+ */
+
+void Binary::flip(int bit){
+	(*bits_)[bit].flip();
+} //blip
 
 /**
  * Sets the value of the ith bit.

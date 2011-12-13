@@ -1,6 +1,6 @@
 CPP  = g++
 CC   = gcc
-OBJ  = Mutation.o PolynomialMutation.o
+OBJ  = Mutation.o PolynomialMutation.o BitFlipMutation.o
 LIB  = libmutation.a
 
 LIBS +=  -lm 

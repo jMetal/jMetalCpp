@@ -1,6 +1,6 @@
 CPP  = g++
 CC   = gcc
-OBJ  = Crossover.o SBXCrossover.o
+OBJ  = Crossover.o SBXCrossover.o SinglePointCrossover.o
 LIB  = libcrossover.a
 
 LIBS +=  -lm 

@@ -29,13 +29,13 @@ public:
 
 	PolynomialMutation(map<string, void *> parameters);
 
-	void * doMutation(double probability, Solution * solution);
 	void * execute(void *);
 
 private:
-
 	double mutationProbability_;
 	double distributionIndex_;
+
+	void * doMutation(double probability, Solution * solution);
 	// TODO: VALID_TYPES;
 
 }; // PolynomialMutation

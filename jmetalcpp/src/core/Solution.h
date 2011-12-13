@@ -87,6 +87,7 @@ public:
 	void setType(SolutionType * type);
 	SolutionType *getType();
 	double getAggregativeValue();
+	Problem * getProblem() ;
 	//int getNumberOfBits();
     
 };

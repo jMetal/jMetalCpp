@@ -11,7 +11,7 @@ INCS +=  -I. -I../core -I../util -I../problems -I../util/comparators \
 
 #EXECS = NSGAII_main PAES_main gGA_main autodock DE_main GDE3_main
 #DEPS = ../libjmetal.a ../metaheuristics/libmetaheuristics.a 
-EXECS = NSGAII_main gGA_main
+EXECS = NSGAII_main gGA_main gGAbin_main
 WINEXECS = NSGAII_main.exe gGA_main.exe
 DEPS = ../libjmetal.a
 
@@ -47,9 +47,13 @@ NSGAII_main: NSGAII_main.cpp $(DEPS)
 #	$(CPP) PAES_main.cpp ../libjmetal.a -o PAES_main $(INCS) $(LIBS)
 #	cp PAES_main $(BIN_DIRECTORY)
 
-gGA_main: gGA_main.cpp $(DEPS)
+gGA_main: gGA_main.cpp $(DEPS) 
 	$(CPP) gGA_main.cpp ../libjmetal.a -o gGA_main $(INCS) $(LIBS)
 	cp gGA_main $(BIN_DIRECTORY)
+
+gGAbin_main: gGAbin_main.cpp $(DEPS) 
+	$(CPP) gGAbin_main.cpp ../libjmetal.a -o gGAbin_main $(INCS) $(LIBS)
+	cp gGAbin_main $(BIN_DIRECTORY)
 
 #DE_main: DE_main.cpp $(DEPS)
 #	$(CPP) DE_main.cpp ../libjmetal.a -o DE_main $(INCS) $(LIBS)

@@ -32,6 +32,7 @@ public:
 	int getNumberOfBits();
 	bool getIth(int bit);
 	void setIth(int bit, bool value);
+	void flip(int bit) ;
 	int hammingDistance(Binary * other);
 	string toString();
 
