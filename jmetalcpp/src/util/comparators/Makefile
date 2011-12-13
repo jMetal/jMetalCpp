@@ -2,7 +2,7 @@ CPP  = g++
 CC   = gcc
 OBJ  = Comparator.o CrowdingComparator.o DominanceComparator.o \
 	ObjectiveComparator.o OverallConstraintViolationComparator.o \
-	RankComparator.o
+	RankComparator.o EqualSolutions.o CrowdingDistanceComparator.o
 LIB  = libcomparators.a
 
 LIBS +=  -lm 
