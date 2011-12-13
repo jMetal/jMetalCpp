@@ -31,6 +31,9 @@ Variable **BinarySolutionType::createVariables() {
 //		exit(-1);
 //	}
    
+  for (int var = 0; var < problem_->getNumberOfVariables(); var++)
+  	variables[var] = new Binary(problem_->getLength(var));
+	/*
 	for (int var = 0; var < problem_->getNumberOfVariables(); var++) {
 		if (problem_->getPrecision() == NULL) {
 			int * precision = new int[problem_->getNumberOfVariables()] ;
@@ -42,7 +45,15 @@ Variable **BinarySolutionType::createVariables() {
 																		problem_->getLowerLimit(var),
 																		problem_->getUpperLimit(var));
 	}
+	*/
+/*
+	Variable[]  variables = new Variable[problem_.getNumberOfVariables()];
 
+  for (int var = 0; var < problem_.getNumberOfVariables(); var++)
+  	variables[var] = new Binary(problem_.getLength(var));
+
+  return variables ;
+*/
 	return variables;
 } // createVariables
 

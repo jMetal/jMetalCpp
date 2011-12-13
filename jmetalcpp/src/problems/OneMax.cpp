@@ -28,4 +28,14 @@ OneMax::~OneMax() {
   */
 void OneMax::evaluate(Solution * solution) {
    Binary * variable ;
+   int    counter  ;
+
+   variable = (Binary *)(solution->getDecisionVariables()[0]) ;
+   counter = 0 ;
+
+   for (int i = 0; i < variable->getNumberOfBits() ; i++)
+     if (variable->getIth(i) == true)
+       counter ++ ;
+    // OneMax is a maximization problem: multiply by -1 to minimize
+    solution->setObjective(0, - 1.0*counter);
 }

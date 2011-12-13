@@ -108,7 +108,7 @@ SolutionSet * gGA::execute() {
 		} // for
 
 		cout << "gGA: Eval2 n. " << evaluations << ". Best fitness: "
-				<< population->get(0)->objective_[0]<< endl;
+				<< population->get(0)->getObjective(0)<< endl;
 		cout << "gGA: Eval2 n. " << evaluations << endl;
 
 		population->sort(comparator) ;

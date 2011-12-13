@@ -41,7 +41,6 @@ public:
 protected:
 	bitset<10> bits_;
 	int numberOfBits_;
-    
 };
 
 #endif
