@@ -6,7 +6,6 @@
 
 #include <gGA.h>
 
-
 /*
  * This class implements the NSGA-II algorithm.
  */
@@ -66,16 +65,11 @@ SolutionSet * gGA::execute() {
 	// Create the initial solutionSet
 	Solution * newSolution;
 	for (int i = 0; i < populationSize; i++) {
-//		cout << "Poblacion num. " << i << endl;
 		newSolution = new Solution(problem_);
-//		cout << "Solution inicializada" << endl;
 		problem_->evaluate(newSolution);
-//		cout << "Solution evaluada" << endl;
 		problem_->evaluateConstraints(newSolution);
-//		cout << "Solution constantes evaluadas" << endl;
 		evaluations++;
 		population->add(newSolution);
-//		cout << "Solution añadida a la poblacion" << endl;
 	} //for
 
 	cout << "gGA: Poblacion inicializada con size = " << population->size() << endl;
@@ -83,7 +77,10 @@ SolutionSet * gGA::execute() {
 
 	// Generations
 	while (evaluations < maxEvaluations) {
-		cout << "gGA: Eval n. " << evaluations << endl;
+		//cout << "Evals: " << evaluations << ". Fitness: "
+		//		<< population->get(0)->getObjective(0)<< endl;
+		cout << "Evals: " << evaluations << ". Fitness: "
+				<< population->best(comparator)->getObjective(0)<< endl;
 
 		// Create the offSpring solutionSet
 		offspringPopulation = new SolutionSet(populationSize);
@@ -101,16 +98,57 @@ SolutionSet * gGA::execute() {
 				problem_->evaluateConstraints(offSpring[0]);
 				problem_->evaluate(offSpring[1]);
 				problem_->evaluateConstraints(offSpring[1]);
+
 				offspringPopulation->add(offSpring[0]);
 				offspringPopulation->add(offSpring[1]);
 				evaluations += 2;
 			} // if
 		} // for
+		/*
+		for (int i = 0; i < (populationSize / 2); i++) {
+			if (evaluations < maxEvaluations) {
+				//obtain parents
+				parents[0] = (Solution *) (selectionOperator->execute(population));
+				parents[1] = (Solution *) (selectionOperator->execute(population));
+				Solution ** offSpring = (Solution **) (crossoverOperator->execute(parents));
+				cout << "CROSSOVER" << endl ;
 
-		cout << "gGA: Eval2 n. " << evaluations << ". Best fitness: "
-				<< population->get(0)->getObjective(0)<< endl;
-		cout << "gGA: Eval2 n. " << evaluations << endl;
+				cout << "P0: " << ((Binary *)(parents[0]->getDecisionVariables()[0]))->toString()
+						<< " " << parents[0]->getObjective(0) << endl ;
+				cout << "P1: " << ((Binary *)(parents[1]->getDecisionVariables()[0]))->toString()
+						<< " " << parents[1]->getObjective(0) << endl ;
 
+				cout << "Of0: " << ((Binary *)(offSpring[0]->getDecisionVariables()[0]))->toString()
+						<< " " << offSpring[0]->getObjective(0) << endl ;
+				cout << "Of1: " << ((Binary *)(offSpring[1]->getDecisionVariables()[0]))->toString()
+						<< " " << offSpring[1]->getObjective(0) << endl ;
+
+				mutationOperator->execute(offSpring[0]);
+				mutationOperator->execute(offSpring[1]);
+				cout << "MUTATION" << endl ;
+				problem_->evaluate(offSpring[0]);
+				problem_->evaluateConstraints(offSpring[0]);
+				problem_->evaluate(offSpring[1]);
+				problem_->evaluateConstraints(offSpring[1]);
+
+				cout << "P0 : " << ((Binary *)(parents[0]->getDecisionVariables()[0]))->toString()
+						<< " " << parents[0]->getObjective(0) << endl ;
+				cout << "P1 : " << ((Binary *)(parents[1]->getDecisionVariables()[0]))->toString()
+						<< " " << parents[1]->getObjective(0) << endl ;
+				cout << "Of0: " << ((Binary *)(offSpring[0]->getDecisionVariables()[0]))->toString()
+						<< " " << offSpring[0]->getObjective(0) << endl ;
+				cout << "Of1: " << ((Binary *)(offSpring[1]->getDecisionVariables()[0]))->toString()
+						<< " " << offSpring[1]->getObjective(0) << endl ;
+//exit(0) ;
+				offspringPopulation->add(offSpring[0]);
+				offspringPopulation->add(offSpring[1]);
+				evaluations += 2;
+
+				//exit(0) ;
+
+			} // if
+		} // for
+    */
 		population->sort(comparator) ;
 		offspringPopulation->sort(comparator) ;
 

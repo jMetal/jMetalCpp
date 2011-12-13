@@ -57,8 +57,8 @@ void * BinaryTournament2::execute(void * object) {
 //	for (int i=0; i<population->size(); i++) {
 //		cout << "a_[" << i << "] = " << a_[i] << endl;
 //	}
-	cout << "BinaryTournament2: valor de index = " << index_ << endl;
-	cout << "BinaryTournament2: population->size() = " << population->size() << endl;
+	//cout << "BinaryTournament2: valor de index = " << index_ << endl;
+	//cout << "BinaryTournament2: population->size() = " << population->size() << endl;
 
   Solution * solution1;
   Solution * solution2;
@@ -67,12 +67,12 @@ void * BinaryTournament2::execute(void * object) {
 
   index_ = (index_ + 2) % population->size();
 
-  cout << "BinaryTournament2: new valor de index = " << index_ << endl;
+  //cout << "BinaryTournament2: new valor de index = " << index_ << endl;
 
   int flag = dominance_->compare(solution1,solution2);
-  cout << "BinaryTournament2: CrowdingDistance de solution1 = " << solution1->getCrowdingDistance() << endl;
-  cout << "BinaryTournament2: CrowdingDistance de solution2 = " << solution2->getCrowdingDistance() << endl;
-  cout << "BinaryTournament2: El valor de flag es " << flag << endl;
+  //cout << "BinaryTournament2: CrowdingDistance de solution1 = " << solution1->getCrowdingDistance() << endl;
+  //cout << "BinaryTournament2: CrowdingDistance de solution2 = " << solution2->getCrowdingDistance() << endl;
+  //cout << "BinaryTournament2: El valor de flag es " << flag << endl;
   if (flag == -1)
     return solution1;
   else if (flag == 1)

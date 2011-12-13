@@ -11,6 +11,7 @@
 #include <BinarySolutionType.h>
 #include <BinaryTournament2.h>
 #include <BitFlipMutation.h>
+#include <SinglePointCrossover.h>
 #include <iostream>
 #include <OneMax.h>
 #include <gGA.h>
@@ -26,13 +27,9 @@ int main(int argc, char ** argv) {
   Operator  * mutation  ; // Mutation operator
   Operator  * selection ; // Selection operator
 
-	problem = new OneMax(25);
-	//problem = new DTLZ1("Real", 7, 2);
-	//problem = new DTLZ3("Real", 12, 2);
-	//problem = new DTLZ4("Real", 12, 2);
+  int bits = 512 ;
+	problem = new OneMax(bits);
 
-	//problem   = new Schaffer("Real");
-	//problem   = new ZDT1("Real", 30);
 	cout << "El numero de objetivos es " << problem->getNumberOfObjectives() << endl;
 	cout << "Problema: " << problem->getName() << endl;
 
@@ -43,26 +40,22 @@ int main(int argc, char ** argv) {
 	// Algorithm parameters
 	int populationSizeValue = 100;
 	int *populationSizePtr = &populationSizeValue;
-	int maxEvaluationsValue = 250000;
+	int maxEvaluationsValue = 20000;
 	int *maxEvaluationsPtr = &maxEvaluationsValue;
 	algorithm->setInputParameter("populationSize",populationSizePtr);
 	algorithm->setInputParameter("maxEvaluations",maxEvaluationsPtr);
 
 	map<string, void *> parameters;
-	/*
-	// Mutation and Crossover for Real codification
-	double probabilityValue1 = 0.9;
-	double *probabilityPtr1 = &probabilityValue1;
-	double distributionIndexValue1 = 20.0;
-	double *distributionIndexPtr1 = &distributionIndexValue1;
-	parameters["probability"] =  probabilityPtr1 ;
-	parameters["distributionIndex"] = distributionIndexPtr1 ;
-	crossover = new SBXCrossover(parameters);
-*/
+
 	parameters.clear();
-	double mutationProbability = 1.0/problem->getNumberOfVariables();
+	double mutationProbability = 1.0/bits;
 	parameters["probability"] = &mutationProbability;
 	mutation = new BitFlipMutation(parameters);
+
+	parameters.clear();
+	double crossoverProbability = 0.9;
+	parameters["probability"] = &crossoverProbability;
+	crossover = new SinglePointCrossover(parameters);
 
 	// Selection Operator
 	parameters.clear();
@@ -73,7 +66,7 @@ int main(int argc, char ** argv) {
 	// Add the operators to the algorithm
 	algorithm->addOperator("crossover",crossover);
 	algorithm->addOperator("mutation",mutation);
-	//algorithm->addOperator("selection",selection);
+	algorithm->addOperator("selection",selection);
 
 	// Execute the Algorithm
 	t_ini = clock();

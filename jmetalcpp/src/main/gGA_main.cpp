@@ -51,20 +51,18 @@ int main(int argc, char ** argv) {
 
 	// Mutation and Crossover for Real codification
 	map<string, void *> parameters;
-	double probabilityValue1 = 0.9;
-	double *probabilityPtr1 = &probabilityValue1;
+	double crossoverProbability = 0.9;
 	double distributionIndexValue1 = 20.0;
 	double *distributionIndexPtr1 = &distributionIndexValue1;
-	parameters["probability"] =  probabilityPtr1 ;
+	parameters["probability"] =  &crossoverProbability ;
 	parameters["distributionIndex"] = distributionIndexPtr1 ;
 	crossover = new SBXCrossover(parameters);
 
 	parameters.clear();
-	double probabilityValue2 = 1.0/problem->getNumberOfVariables();
-	double *probabilityPtr2 = &probabilityValue2;
+	double mutationProbability = 1.0/problem->getNumberOfVariables();
 	double distributionIndexValue2 = 20.0;
 	double *distributionIndexPtr2 = &distributionIndexValue2;
-	parameters["probability"] = probabilityPtr2;
+	parameters["probability"] = &mutationProbability;
 	parameters["distributionIndex"] = distributionIndexPtr2 ;
 	mutation = new PolynomialMutation(parameters);
 

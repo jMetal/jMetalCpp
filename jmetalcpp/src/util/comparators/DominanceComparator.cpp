@@ -43,7 +43,7 @@ int DominanceComparator::compare(Solution *one, Solution *two) {
   dominate2 = 0 ;
 
   int flag; //stores the result of the comparison
-
+/*
   if (one->getOverallConstraintViolation()!=
       two->getOverallConstraintViolation() &&
      (one->getOverallConstraintViolation() < 0) ||
@@ -51,7 +51,7 @@ int DominanceComparator::compare(Solution *one, Solution *two) {
   	int returnValue = overallConstraintViolationComparator_->compare(one,two);
     return returnValue;
   }
-
+*/
   // Equal number of violated constraints. Applying a dominance Test then
   double value1, value2;
   for (int i = 0; i < one->getNumberOfObjectives(); i++) {

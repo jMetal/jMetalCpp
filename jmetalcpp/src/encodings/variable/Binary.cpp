@@ -42,7 +42,7 @@ Binary::Binary(int numberOfBits){
  */
 Binary::Binary(Binary * variable){
 	numberOfBits_ = variable->getNumberOfBits();
-	//bits_ = new BitSet(numberOfBits_);
+  bits_ = new vector<bool>(numberOfBits_, false) ;
 	for (int i = 0; i < numberOfBits_; i++) {
 		(*bits_)[i] = (*variable->bits_)[i] ;
 	}
