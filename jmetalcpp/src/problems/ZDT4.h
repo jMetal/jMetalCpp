@@ -28,6 +28,9 @@ public:
 	void evaluate(Solution *solution);
 
 	virtual ~ZDT4();
+private:
+	double * fx_ ;
+  double * x_  ;
 };
 
 #endif /* __ZDT4_H__ */

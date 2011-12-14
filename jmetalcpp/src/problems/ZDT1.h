@@ -26,6 +26,9 @@ public:
 	void evaluate(Solution *solution);
 
 	~ZDT1();
+private:
+	double * fx_ ;
+  double * x_  ;
 };
 
 #endif /* ZDT1_H_ */

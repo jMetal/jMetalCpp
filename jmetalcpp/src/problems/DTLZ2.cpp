@@ -42,12 +42,17 @@ DTLZ2::DTLZ2(string solutionType, int numberOfVariables, int numberOfObjectives)
 		cout << "Error: solution type " << solutionType << " invalid" << endl;
 		exit(-1) ;
 	}
+
+	fx_ = new double[numberOfObjectives_] ;
+  x_ = new double[numberOfVariables_];
 }
 
 DTLZ2::~DTLZ2() {
   delete [] lowerLimit_ ;
   delete [] upperLimit_ ;
   delete solutionType_ ;
+	delete [] fx_ ;
+	delete [] x_ ;
 }
 
 /**
@@ -57,32 +62,28 @@ DTLZ2::~DTLZ2() {
 void DTLZ2::evaluate(Solution *solution) {
 	XReal * vars = new XReal(solution);
 
-	double * fx = new double[numberOfObjectives_] ;
-  double * x = new double[numberOfVariables_];
   int k = numberOfVariables_ - numberOfObjectives_ + 1;
 
   for (int i = 0; i < numberOfVariables_; i++)
-    x[i] = vars->getValue(i);
+    x_[i] = vars->getValue(i);
 
   double g = 0.0;
   for (int i = numberOfVariables_ - k; i < numberOfVariables_; i++)
-    g += (x[i] - 0.5)*(x[i] - 0.5);
+    g += (x_[i] - 0.5)*(x_[i] - 0.5);
 
   for (int i = 0; i < numberOfObjectives_; i++)
-    fx[i] = 1.0 + g;
+    fx_[i] = 1.0 + g;
 
   for (int i = 0; i < numberOfObjectives_; i++){
     for (int j = 0; j < numberOfObjectives_ - (i + 1); j++)
-      fx[i] *= cos(x[j]*0.5*M_PI);
+      fx_[i] *= cos(x_[j]*0.5*M_PI);
       if (i != 0){
         int aux = numberOfObjectives_ - (i + 1);
-        fx[i] *= sin(x[aux]*0.5*M_PI);
+        fx_[i] *= sin(x_[aux]*0.5*M_PI);
       } //if
   } // for
   for (int i = 0; i < numberOfObjectives_; i++)
-    solution->setObjective(i, fx[i]);
+    solution->setObjective(i, fx_[i]);
 
-	delete [] fx ;
-	delete [] x ;
 	delete vars ;
 } // evaluate

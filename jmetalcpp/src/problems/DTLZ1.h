@@ -22,6 +22,9 @@ public:
 	void evaluate(Solution *solution);
 
 	virtual ~DTLZ1();
+private:
+	double * fx_ ;
+  double * x_  ;
 };
 
 #endif /* __DTLZ1_H__ */

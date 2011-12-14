@@ -42,12 +42,17 @@ DTLZ1::DTLZ1(string solutionType, int numberOfVariables, int numberOfObjectives)
 		cout << "Error: solution type " << solutionType << " invalid" << endl;
 		exit(-1) ;
 	}
+
+	fx_ = new double[numberOfObjectives_] ;
+  x_ = new double[numberOfVariables_];
 }
 
 DTLZ1::~DTLZ1() {
   delete [] lowerLimit_ ;
   delete [] upperLimit_ ;
   delete solutionType_ ;
+	delete [] fx_ ;
+	delete [] x_ ;
 }
 
 /**
@@ -57,35 +62,31 @@ DTLZ1::~DTLZ1() {
 void DTLZ1::evaluate(Solution *solution) {
 	XReal * vars = new XReal(solution);
 
-	double * fx = new double[numberOfObjectives_] ;
-  double * x = new double[numberOfVariables_];
   int k = numberOfVariables_ - numberOfObjectives_ + 1;
 
   for (int i = 0; i < numberOfVariables_; i++)
-    x[i] = vars->getValue(i);
+    x_[i] = vars->getValue(i);
 
   double g = 0.0 ;
 
   for (int i = numberOfVariables_ - k; i < numberOfVariables_; i++)
-    g += (x[i] - 0.5)*(x[i] - 0.5) - cos(20.0 * M_PI * (x[i] - 0.5));
+    g += (x_[i] - 0.5)*(x_[i] - 0.5) - cos(20.0 * M_PI * (x_[i] - 0.5));
 
   g = 100 * (k + g);
   for (int i = 0; i < numberOfObjectives_; i++)
-    fx[i] = (1.0 + g) * 0.5;
+    fx_[i] = (1.0 + g) * 0.5;
 
   for (int i = 0; i < numberOfObjectives_; i++){
     for (int j = 0; j < numberOfObjectives_ - (i + 1); j++)
-      fx[i] *= x[j];
+      fx_[i] *= x_[j];
       if (i != 0){
         int aux = numberOfObjectives_ - (i + 1);
-        fx[i] *= 1 - x[aux];
+        fx_[i] *= 1 - x_[aux];
       } //if
   }//for
 
   for (int i = 0; i < numberOfObjectives_; i++)
-    solution->setObjective(i, fx[i]);
+    solution->setObjective(i, fx_[i]);
 
-	delete [] fx ;
-	delete [] x ;
 	delete vars ;
 } // evaluate
