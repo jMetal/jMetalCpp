@@ -118,7 +118,7 @@ int Binary::hammingDistance(Binary * other) {
 	int distance = 0;
 	int i = 0;
 	while (i < bits_->size()) {
-		if (bits_[i] != other->bits_[i]) {
+		if ((*bits_)[i] != (*other->bits_)[i]) {
 			distance++;
 		}
 		i++;

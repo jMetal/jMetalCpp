@@ -54,7 +54,7 @@ BinaryReal::BinaryReal(BinaryReal * variable) : Binary (variable) {
 void BinaryReal::decode(){
 	double value = 0.0;
 	for (int i = 0; i < numberOfBits_; i++) {
-		if (bits_[i]) {
+		if ((*bits_)[i] == true) {
 			value += pow(2.0,i);
 		}
 	}
