@@ -27,13 +27,14 @@ BitFlipMutation::BitFlipMutation(map<string, void *> parameters)
  * @param solution The solution to mutate
  */
 void * BitFlipMutation::doMutation(double probability, Solution *solution) {
-  Binary * variable = (Binary *)(solution->getDecisionVariables()[0]) ;
+  int numberOfVariables = solution->getNumberOfVariables() ;
 
-	vector<bool>::iterator it;
-	string str = "" ;
-  for (int i = 0; i < variable->getNumberOfBits() ; i++)
-		if (PseudoRandom::randDouble() <= mutationProbability_)
-      variable->flip(i) ;
+  for (int i = 0 ; i < numberOfVariables ; i++) {
+  	Binary * variable = (Binary *)(solution->getDecisionVariables()[i]) ;
+    for (int j = 0; j < variable->getNumberOfBits() ; j++)
+		  if (PseudoRandom::randDouble() <= mutationProbability_)
+        variable->flip(j) ;
+  }
 } // doMutation
 
 

@@ -14,7 +14,7 @@
 
 class OneMax : public Problem {
 public:
-	OneMax(int numberOfBits);
+	OneMax(int numberOfBits, int numberOfStrings = 1);
   void evaluate(Solution *solution);
 
 	virtual ~OneMax();

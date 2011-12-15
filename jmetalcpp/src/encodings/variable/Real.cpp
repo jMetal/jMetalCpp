@@ -103,3 +103,15 @@ void Real::setUpperBound(double bound) {
 	upperBound_ = bound;
 } // setUpperBound
 
+/**
+ * Returns a string representing the object
+ * @return The string
+ */
+string Real::toString(){
+	std::ostringstream stringStream;
+	stringStream << value_ ;
+	string aux = stringStream.str() + " ";
+
+	return aux ;
+} // toString
+

@@ -77,8 +77,6 @@ SolutionSet * gGA::execute() {
 
 	// Generations
 	while (evaluations < maxEvaluations) {
-		//cout << "Evals: " << evaluations << ". Fitness: "
-		//		<< population->get(0)->getObjective(0)<< endl;
 		cout << "Evals: " << evaluations << ". Fitness: "
 				<< population->best(comparator)->getObjective(0)<< endl;
 

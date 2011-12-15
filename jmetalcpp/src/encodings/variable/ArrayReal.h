@@ -41,7 +41,6 @@ public:
 	double getValue();
 	double getLowerBound();
 	double getUpperBound();
-    
 };
 
 #endif

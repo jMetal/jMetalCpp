@@ -27,8 +27,8 @@ int main(int argc, char ** argv) {
   Operator  * mutation  ; // Mutation operator
   Operator  * selection ; // Selection operator
 
-  int bits = 512 ;
-	problem = new OneMax(bits);
+  int bits = 200 ;
+	problem = new OneMax(bits, 2);
 
 	cout << "El numero de objetivos es " << problem->getNumberOfObjectives() << endl;
 	cout << "Problema: " << problem->getName() << endl;
@@ -40,7 +40,7 @@ int main(int argc, char ** argv) {
 	// Algorithm parameters
 	int populationSizeValue = 100;
 	int *populationSizePtr = &populationSizeValue;
-	int maxEvaluationsValue = 20000;
+	int maxEvaluationsValue = 25000;
 	int *maxEvaluationsPtr = &maxEvaluationsValue;
 	algorithm->setInputParameter("populationSize",populationSizePtr);
 	algorithm->setInputParameter("maxEvaluations",maxEvaluationsPtr);
@@ -48,7 +48,7 @@ int main(int argc, char ** argv) {
 	map<string, void *> parameters;
 
 	parameters.clear();
-	double mutationProbability = 1.0/bits;
+	double mutationProbability = 1.0/problem->getNumberOfBits();
 	parameters["probability"] = &mutationProbability;
 	mutation = new BitFlipMutation(parameters);
 

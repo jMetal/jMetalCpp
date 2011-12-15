@@ -32,7 +32,8 @@ public:
     void setUpperBound(double bound);
     //void setVariableType(VariableType_ variableType);
     string getVariableType();
-    
+    virtual string toString() = 0 ;
+
 }; // Variable
 
 #endif

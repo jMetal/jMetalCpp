@@ -12,6 +12,7 @@
 
 #include <Variable.h>
 #include <PseudoRandom.h>
+#include <sstream>
 
 /**
  * This class implements a Real value decision variable
@@ -29,12 +30,12 @@ public:
 	double getUpperBound();
 	void setLowerBound(double bound);
 	void setUpperBound(double bound);
+	string toString() ;
 
 private:
 	double value_;
 	double lowerBound_ ;
 	double upperBound_ ;
-    
 };
 
 #endif

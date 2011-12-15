@@ -31,8 +31,8 @@ int main(int argc, char ** argv) {
   Operator  * mutation  ; // Mutation operator
   Operator  * selection ; // Selection operator
 
-	problem = new ZDT5("Binary");
-	//problem = new OneMax(50);
+	//problem = new ZDT5("Binary");
+	problem = new OneMax(200,2);
 
 	cout << "El numero de objetivos es " << problem->getNumberOfObjectives() << endl;
 
