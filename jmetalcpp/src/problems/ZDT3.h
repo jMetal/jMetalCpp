@@ -30,7 +30,6 @@ public:
 	virtual ~ZDT3();
 private:
 	double * fx_ ;
-  double * x_  ;
 };
 
 #endif /* __ZDT3_H__ */

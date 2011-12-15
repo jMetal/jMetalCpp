@@ -29,7 +29,6 @@ public:
 	virtual ~ZDT2();
 private:
 	double * fx_ ;
-  double * x_  ;
 };
 
 #endif /* __ZDT2_H__ */

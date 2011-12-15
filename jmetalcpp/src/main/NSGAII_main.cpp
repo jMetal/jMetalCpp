@@ -54,8 +54,9 @@ int main(int argc, char ** argv) {
   Operator  * mutation  ; // Mutation operator
   Operator  * selection ; // Selection operator
 
-	problem = new ZDT6("Real");
+	//problem = new ZDT6("Real");
 	//problem = new DTLZ1("Real", 7, 2);
+	problem = new DTLZ1("Real");
 	//problem = new DTLZ3("Real", 12, 2);
 	//problem = new DTLZ4("Real", 12, 2);
 

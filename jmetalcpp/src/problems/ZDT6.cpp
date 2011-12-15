@@ -42,6 +42,7 @@ ZDT6::ZDT6(string solutionType, int numberOfVariables) {
 		cout << "Error: solution type " << solutionType << " invalid" << endl;
 		exit(-1) ;
 	}
+	fx_ = new double[numberOfObjectives_] ;
 }
 
 
@@ -49,6 +50,7 @@ ZDT6::~ZDT6() {
   delete [] lowerLimit_ ;
   delete [] upperLimit_ ;
   delete solutionType_ ;
+	delete [] fx_ ;
 }
 
 /**
@@ -57,18 +59,16 @@ ZDT6::~ZDT6() {
  */
 void ZDT6::evaluate(Solution *solution) {
 	XReal * x = new XReal(solution);
-	double * fx = new double[numberOfObjectives_] ;
 
 	double x1 = x->getValue(0) ;
-	fx[0] = 1.0 - exp(-4.0*x1) * pow(sin(6.0*M_PI*x1), 6.0) ;
+	fx_[0] = 1.0 - exp(-4.0*x1) * pow(sin(6.0*M_PI*x1), 6.0) ;
   double g = evalG(x) ;
-  double h = evalH(fx[0], g) ;
-	fx[1] = h * g ;
+  double h = evalH(fx_[0], g) ;
+	fx_[1] = h * g ;
 
-	solution->setObjective(0,fx[0]);
-	solution->setObjective(1,fx[1]);
+	solution->setObjective(0,fx_[0]);
+	solution->setObjective(1,fx_[1]);
 
-	delete [] fx ;
 	delete x ;
 } // evaluate
 

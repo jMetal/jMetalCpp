@@ -17,7 +17,6 @@
 #include <XReal.h>
 #include <Solution.h>
 
-
 class ZDT6 : public Problem {
 private:
 	double evalG(XReal *x) ;
@@ -30,7 +29,6 @@ public:
 	virtual ~ZDT6();
 private:
 	double * fx_ ;
-  double * x_  ;
 };
 
 #endif /* __ZDT6_H__ */

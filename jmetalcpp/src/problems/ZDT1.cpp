@@ -42,12 +42,14 @@ ZDT1::ZDT1(string solutionType, int numberOfVariables) {
 		cout << "Error: solution type " << solutionType << " invalid" << endl;
 		exit(-1) ;
 	}
+	fx_ = new double[numberOfObjectives_] ;
 }
 
 ZDT1::~ZDT1() {
   delete [] lowerLimit_ ;
   delete [] upperLimit_ ;
   delete solutionType_ ;
+	delete [] fx_ ;
 }
 
 /**
@@ -56,17 +58,15 @@ ZDT1::~ZDT1() {
  */
 void ZDT1::evaluate(Solution *solution) {
 	XReal * x = new XReal(solution);
-	double * fx = new double[numberOfObjectives_] ;
 
-	fx[0] = x->getValue(0) ;
+	fx_[0] = x->getValue(0) ;
   double g = evalG(x) ;
-  double h = evalH(fx[0], g) ;
-	fx[1] = h * g ;
+  double h = evalH(fx_[0], g) ;
+	fx_[1] = h * g ;
 
-	solution->setObjective(0,fx[0]);
-	solution->setObjective(1,fx[1]);
+	solution->setObjective(0,fx_[0]);
+	solution->setObjective(1,fx_[1]);
 
-	delete [] fx ;
 	delete x ;
 } // evaluate
 
