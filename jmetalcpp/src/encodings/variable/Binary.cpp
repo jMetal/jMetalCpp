@@ -143,6 +143,17 @@ string Binary::toString() {
 	return str ;
 } // toString
 
+/*
+ * Returns the number of 1's in the binary variable
+ */
+int Binary::cardinality() {
+	int counter = 0 ;
+	vector<bool>::iterator it;
+	for(it = bits_->begin(); it != bits_->end(); it++)
+		if (*it == true)
+			counter ++ ;
+	return counter ;
+}
 
 double Binary::getValue() {
 	return 0.0;

@@ -21,14 +21,13 @@ class ZDT2 : public Problem{
 private:
 	double evalG(XReal *x) ;
 	double evalH(double f, double g) ;
+	double * fx_ ;
 
 public:
 	ZDT2(string solutionType, int numberOfVariables = 30);
 	void evaluate(Solution *solution);
 
 	virtual ~ZDT2();
-private:
-	double * fx_ ;
 };
 
 #endif /* __ZDT2_H__ */

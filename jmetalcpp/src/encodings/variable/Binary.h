@@ -35,6 +35,7 @@ public:
 	void flip(int bit) ;
 	int hammingDistance(Binary * other);
 	string toString();
+	int cardinality() ;
 
 	double getValue();
 	void setValue(double value);

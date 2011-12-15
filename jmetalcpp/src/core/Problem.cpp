@@ -155,6 +155,18 @@ int Problem::getLength(int var) {
 	return length_[var] ;
 } // getLength
 
+/**
+ * Returns the number of bits of the solutions of the problem
+ * @return The number of bits solutions of the problem
+ */
+int Problem::getNumberOfBits() {
+  int result = 0;
+  for (int var = 0; var < numberOfVariables_; var++) {
+    result += getLength(var);
+  }
+  return result;
+} // getNumberOfBits
+
 
 ///**
 // * Gets the number of side constraints in the problem.
