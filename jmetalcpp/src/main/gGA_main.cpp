@@ -4,7 +4,6 @@
  * @date 02 December 2011
 **/
 
-
 #include <Problem.h>
 #include <Algorithm.h>
 #include <Solution.h>
@@ -92,7 +91,6 @@ int main(int argc, char ** argv) {
 	//algorithm->setInputParameter("indicators", indicators) ;
 
 	// Execute the Algorithm
-
 	t_ini = clock();
 	SolutionSet * population = algorithm->execute();
 	t_fin = clock();
