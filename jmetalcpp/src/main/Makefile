@@ -65,7 +65,7 @@ gGAbin_main: gGAbin_main.cpp $(DEPS)
 
 autodock_main: autodock_main.cpp $(DEPS)
 	$(CPP) autodock_main.cpp ../libjmetal.a -o  autodock_main $(INCS) $(LIBS) -pthread
-	cp autodock $(BIN_DIRECTORY)
+	cp autodock_main $(BIN_DIRECTORY)
 
 #.cpp.o: $(DEPS)
 #	$(CPP) $< $(DEPS) -o NSGAII_main $(INCS) $(LIBS)
