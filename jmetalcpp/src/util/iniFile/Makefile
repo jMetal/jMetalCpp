@@ -1,11 +1,10 @@
 CPP  = g++
 CC   = gcc
-OBJ  = QualityIndicator.o Hypervolume.o
-LIB  = libqualityIndicator.a
+OBJ  = iniFile.o
+LIB  = libinifile.a
 
 LIBS +=  -lm 
-INCS +=  -I. -I../core \
-	-I../util -I../util/comparators -I./util
+INCS +=  -I.
 
 #CXXFLAGS += $(INCS) -g 
 CXXFLAGS += $(INCS) -O3 
