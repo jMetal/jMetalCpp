@@ -164,6 +164,8 @@ int main(int argc, char ** argv) {
   pthread_t jmetalThread ;
   int result ;
 
+  cout << "Comenzando AutoDock..." << endl;
+
   result = pthread_mutex_init(&mutex1, NULL) ;
   if (result != 0) {
     perror("ERROR INICIALIZANDO EL MUTEX1");

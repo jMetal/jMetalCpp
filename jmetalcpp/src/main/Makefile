@@ -7,12 +7,13 @@ LIBS +=  -lm
 INCS +=  -I. -I../core -I../util -I../problems -I../util/comparators \
 	-I../encodings/solutionType -I../encodings/variable -I../util/wrapper \
 	-I../metaheuristics/nsgaII -I../operators/crossover -I../operators/mutation \
-	-I../operators/selection -I../metaheuristics/gGA
+	-I../operators/selection -I../metaheuristics/gGA -I../metaheuristics/gde3
 
 #EXECS = NSGAII_main PAES_main gGA_main autodock DE_main GDE3_main
 #DEPS = ../libjmetal.a ../metaheuristics/libmetaheuristics.a 
-EXECS = autodock_main NSGAII_main NSGAIIbin_main gGA_main gGAbin_main 
-WINEXECS = autodock_main.exe NSGAII_main.exe NSGAIIbin_main.exe NSGAII_main.exe gGA_main.exe gGAbin_main.exe
+EXECS = autodock_main NSGAII_main NSGAIIbin_main gGA_main gGAbin_main GDE3_main
+WINEXECS = autodock_main.exe NSGAII_main.exe NSGAIIbin_main.exe NSGAII_main.exe gGA_main.exe \
+	gGAbin_main.exe GDE3_main.exe
 DEPS = ../libjmetal.a
 
 BIN_DIRECTORY = ../../bin
@@ -39,13 +40,9 @@ NSGAIIbin_main: NSGAIIbin_main.cpp $(DEPS)
 	$(CPP) NSGAIIbin_main.cpp $(DEPS) -o NSGAIIbin_main $(INCS) $(LIBS)
 	cp NSGAIIbin_main $(BIN_DIRECTORY)
 
-#NSGAII_main: NSGAII_main.cpp $(DEPS)
-#	$(CPP) NSGAII_main.cpp  ../libjmetal.a -o NSGAII_main $(INCS) $(LIBS)
-#	cp NSGAII_main $(BIN_DIRECTORY)
-
-#GDE3_main: GDE3_main.cpp $(DEPS)
-#	$(CPP) GDE3_main.cpp  ../libjmetal.a -o GDE3_main $(INCS) $(LIBS)
-#	cp GDE3_main $(BIN_DIRECTORY)
+GDE3_main: GDE3_main.cpp $(DEPS)
+	$(CPP) GDE3_main.cpp  ../libjmetal.a -o GDE3_main $(INCS) $(LIBS)
+	cp GDE3_main $(BIN_DIRECTORY)
 
 #PAES_main: PAES_main.cpp $(DEPS)
 #	$(CPP) PAES_main.cpp ../libjmetal.a -o PAES_main $(INCS) $(LIBS)
