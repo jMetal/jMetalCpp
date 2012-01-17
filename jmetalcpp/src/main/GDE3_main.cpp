@@ -11,6 +11,7 @@
 //#include <QualityIndicator.h>
 #include <GDE3.h>
 #include <Kursawe.h>
+#include <ZDT1.h>
 #include <DifferentialEvolutionCrossover.h>
 #include <DifferentialEvolutionSelection.h>
 #include <iostream>
@@ -29,9 +30,9 @@ int main(int argc, char ** argv) {
 
   //TODO: QualityIndicator * indicators;
 
-  problem = new Kursawe("Real", 3);
+  //problem = new Kursawe("Real", 3);
   //problem = new Water("Real");
-  //problem = new ZDT1("ArrayReal", 100);
+  problem = new ZDT1("Real");
   //problem = new ConstrEx("Real");
   //problem = new DTLZ1("Real");
   //problem = new OKA2("Real") ;
