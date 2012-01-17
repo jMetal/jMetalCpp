@@ -36,12 +36,12 @@ int main(int argc, char ** argv) {
   //problem = new DTLZ1("Real");
   //problem = new OKA2("Real") ;
 
-  cout << "El numero de objetivos es " << problem->getNumberOfObjectives() << endl;
-  cout << "Problema: " << problem->getName() << endl;
+  cout << "GDE3_main: El numero de objetivos es " << problem->getNumberOfObjectives() << endl;
+  cout << "GDE3_main: Problema: " << problem->getName() << endl;
 
   algorithm = new GDE3(problem);
 
-  cout << "Algoritmo GDE3 inicializado." << endl;
+  cout << "GDE3_main: Algoritmo GDE3 inicializado." << endl;
 
   // Algorithm parameters
   int populationSizeValue = 100;
