@@ -5,7 +5,8 @@ LIB  = libmetaheuristics.a
 
 LIBS +=  -lm 
 INCS +=  -I. -I../core -InsgaII -IgGA -Ismpso -Igde3 -Ide -I../util \
-	 -I../util/archive -I../util/comparators
+	 -I../util/archive -I../util/comparators -I../util/wrapper \
+	 -I../encodings/solutionType -I../encodings/variable
 
 #CXXFLAGS += $(INCS) -g 
 CXXFLAGS += $(INCS) -O3 

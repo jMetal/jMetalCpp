@@ -14,6 +14,9 @@
 #include <Problem.h>
 //#include <QualityIndicator.h>
 #include <SolutionSet.h>
+#include <XReal.h>
+#include <PseudoRandom.h>
+#include <Math.h>
 #include <vector>
 #include <string>
 
