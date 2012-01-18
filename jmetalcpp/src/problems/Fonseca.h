@@ -27,8 +27,6 @@
 #include <RealSolutionType.h>
 #include <Solution.h>
 
-//using namespace std;
-
 /**
   * @class Fonseca
   * @brief Class representing problem Fonseca
