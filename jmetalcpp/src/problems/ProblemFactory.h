@@ -15,7 +15,11 @@
 #include <DTLZ1.h>
 #include <Fonseca.h>
 #include <ZDT1.h>
-
+#include <ZDT2.h>
+#include <ZDT3.h>
+#include <ZDT4.h>
+#include <ZDT5.h>
+#include <ZDT6.h>
 
 class ProblemFactory {
 

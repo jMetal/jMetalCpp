@@ -69,30 +69,24 @@ int main(int argc, char ** argv) {
   cout << "Algoritmo NGSAII inicializado." << endl;
 
   // Algorithm parameters
-  int populationSizeValue = 100;
-  int *populationSizePtr = &populationSizeValue;
-  int maxEvaluationsValue = 25000;
-  int *maxEvaluationsPtr = &maxEvaluationsValue;
-  algorithm->setInputParameter("populationSize",populationSizePtr);
-  algorithm->setInputParameter("maxEvaluations",maxEvaluationsPtr);
+  int populationSize = 100;
+  int maxEvaluations = 25000;
+  algorithm->setInputParameter("populationSize",&populationSize);
+  algorithm->setInputParameter("maxEvaluations",&maxEvaluations);
 
   // Mutation and Crossover for Real codification
   map<string, void *> parameters;
-  double probabilityValue1 = 0.9;
-  double *probabilityPtr1 = &probabilityValue1;
-  double distributionIndexValue1 = 20.0;
-  double *distributionIndexPtr1 = &distributionIndexValue1;
-  parameters["probability"] =  probabilityPtr1 ;
-  parameters["distributionIndex"] = distributionIndexPtr1 ;
+  double crossoverProbability = 0.9;
+  double crossoverDistributionIndex = 20.0;
+  parameters["probability"] =  &crossoverProbability ;
+  parameters["distributionIndex"] = &crossoverDistributionIndex ;
   crossover = new SBXCrossover(parameters);
 
   parameters.clear();
-  double probabilityValue2 = 1.0/problem->getNumberOfVariables();
-  double *probabilityPtr2 = &probabilityValue2;
-  double distributionIndexValue2 = 20.0;
-  double *distributionIndexPtr2 = &distributionIndexValue2;
-  parameters["probability"] = probabilityPtr2;
-  parameters["distributionIndex"] = distributionIndexPtr2 ;
+  double mutationProbability = 1.0/problem->getNumberOfVariables();
+  double mutationDistributionIndex = 20.0;
+  parameters["probability"] = &mutationProbability;
+  parameters["distributionIndex"] = &mutationDistributionIndex ;
   mutation = new PolynomialMutation(parameters);
 
   // Selection Operator

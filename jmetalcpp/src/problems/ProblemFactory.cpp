@@ -84,6 +84,61 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv) {
       cerr << "Incorrect number of arguments for ZDT1 problem." << endl;
       exit(-1);
     }
+  } else if (strcmp(name, "ZDT2")==0) { // ZDT2
+    if (argc==0)
+      return new ZDT2("Real");
+    else if (argc==1)
+      return new ZDT2(argv[0]);
+    else if (argc==2)
+      return new ZDT2(argv[0], atoi(argv[1]));
+    else {
+      cerr << "Incorrect number of arguments for ZDT3 problem." << endl;
+      exit(-1);
+    }
+  } else if (strcmp(name, "ZDT3")==0) { // ZDT3
+    if (argc==0)
+      return new ZDT3("Real");
+    else if (argc==1)
+      return new ZDT3(argv[0]);
+    else if (argc==2)
+      return new ZDT3(argv[0], atoi(argv[1]));
+    else {
+      cerr << "Incorrect number of arguments for ZDT4 problem." << endl;
+      exit(-1);
+    }
+  } else if (strcmp(name, "ZDT4")==0) { // ZDT4
+    if (argc==0)
+      return new ZDT4("Real");
+    else if (argc==1)
+      return new ZDT4(argv[0]);
+    else if (argc==2)
+      return new ZDT4(argv[0], atoi(argv[1]));
+    else {
+      cerr << "Incorrect number of arguments for ZDT4 problem." << endl;
+      exit(-1);
+    }
+  } else if (strcmp(name, "ZDT5")==0) { // ZDT5
+    if (argc==0)
+      return new ZDT5("Binary");
+    else if (argc==1)
+      return new ZDT5(argv[0]);
+    else if (argc==2)
+      return new ZDT5(argv[0], atoi(argv[1]));
+    else {
+      cerr << "Incorrect number of arguments for ZDT5 problem." << endl;
+      exit(-1);
+    }
+  } else if (strcmp(name, "ZDT6")==0) { // ZDT6
+    if (argc==0)
+      return new ZDT6("Real");
+    else if (argc==1)
+      return new ZDT6(argv[0]);
+    else if (argc==2)
+      return new ZDT6(argv[0], atoi(argv[1]));
+    else {
+      cerr << "Incorrect number of arguments for ZDT6 problem." << endl;
+      exit(-1);
+    }
 
   } else {
 
