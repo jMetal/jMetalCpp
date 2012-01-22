@@ -13,6 +13,9 @@
 #include <string.h>
 
 #include <DTLZ1.h>
+#include <DTLZ2.h>
+#include <DTLZ3.h>
+#include <DTLZ4.h>
 #include <Fonseca.h>
 #include <ZDT1.h>
 #include <ZDT2.h>

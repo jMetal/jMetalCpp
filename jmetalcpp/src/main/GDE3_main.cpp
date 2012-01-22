@@ -14,6 +14,7 @@
 #include <ZDT1.h>
 #include <DifferentialEvolutionCrossover.h>
 #include <DifferentialEvolutionSelection.h>
+#include <ProblemFactory.h>
 #include <iostream>
 #include <time.h>
 
@@ -28,14 +29,15 @@ int main(int argc, char ** argv) {
 
   map<string, void *> parameters;
 
-  //TODO: QualityIndicator * indicators;
-
-  //problem = new Kursawe("Real", 3);
-  //problem = new Water("Real");
-  problem = new ZDT1("Real");
-  //problem = new ConstrEx("Real");
-  //problem = new DTLZ1("Real");
-  //problem = new OKA2("Real") ;
+  if (argc>=2) {
+    problem = ProblemFactory::getProblem(argc, argv);
+  } else {
+    cout << "No problem selected." << endl;
+    cout << "Default problem will be used: Fonseca" << endl;
+//    char * defaultProblem;
+//    strcpy(defaultProblem, "Fonseca");
+    problem = ProblemFactory::getProblem("Fonseca");
+  }
 
   cout << "GDE3_main: El numero de objetivos es " << problem->getNumberOfObjectives() << endl;
   cout << "GDE3_main: Problema: " << problem->getName() << endl;
