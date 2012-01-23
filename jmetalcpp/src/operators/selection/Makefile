@@ -1,6 +1,7 @@
 CPP  = g++
 CC   = gcc
-OBJ  = BinaryTournament2.o DifferentialEvolutionSelection.o Selection.o
+OBJ  = BinaryTournament2.o DifferentialEvolutionSelection.o Selection.o \
+BestSolutionSelection.o WorstSolutionSelection.o
 LIB  = libselection.a
 
 LIBS +=  -lm 

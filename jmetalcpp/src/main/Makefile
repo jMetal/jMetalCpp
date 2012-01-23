@@ -7,15 +7,16 @@ LIBS +=  -lm
 INCS +=  -I. -I../core -I../util -I../problems -I../util/comparators \
 	-I../encodings/solutionType -I../encodings/variable -I../util/wrapper \
 	-I../metaheuristics/nsgaII -I../operators/crossover -I../operators/mutation \
-	-I../operators/selection -I../metaheuristics/gGA -I../metaheuristics/gde3 \
-	-I../metaheuristics/de -I../metaheuristics/smpso -I../util/archive
+	-I../operators/selection -I../metaheuristics/gGA -I../metaheuristics/ssGA \
+	-I../metaheuristics/gde3 -I../metaheuristics/de -I../metaheuristics/smpso \
+	-I../util/archive
 
 #EXECS = NSGAII_main PAES_main gGA_main autodock DE_main GDE3_main
 #DEPS = ../libjmetal.a ../metaheuristics/libmetaheuristics.a 
 EXECS = autodock_main NSGAII_main NSGAIIbin_main gGA_main gGAbin_main GDE3_main DE_main \
-	SMPSO_main NSGAIIFactory_main
+	SMPSO_main NSGAIIFactory_main ssGA_main
 WINEXECS = autodock_main.exe NSGAII_main.exe NSGAIIbin_main.exe NSGAII_main.exe gGA_main.exe \
-	gGAbin_main.exe GDE3_main.exe DE_main.exe SMPSO_main.exe NSGAIIFactory_main.exe
+	gGAbin_main.exe GDE3_main.exe DE_main.exe SMPSO_main.exe NSGAIIFactory_main.exe ssGA_main.exe
 DEPS = ../libjmetal.a
 
 BIN_DIRECTORY = ../../bin
@@ -62,9 +63,9 @@ gGAbin_main: gGAbin_main.cpp $(DEPS)
 	$(CPP) gGAbin_main.cpp ../libjmetal.a -o gGAbin_main $(INCS) $(LIBS)
 	cp gGAbin_main $(BIN_DIRECTORY)
 	
-#ssGA_main: ssGA_main.cpp $(DEPS) 
-#	$(CPP) ssGA_main.cpp ../libjmetal.a -o ssGA_main $(INCS) $(LIBS)
-#	cp ssGA_main $(BIN_DIRECTORY)
+ssGA_main: ssGA_main.cpp $(DEPS) 
+	$(CPP) ssGA_main.cpp ../libjmetal.a -o ssGA_main $(INCS) $(LIBS)
+	cp ssGA_main $(BIN_DIRECTORY)
 
 DE_main: DE_main.cpp $(DEPS)
 	$(CPP) DE_main.cpp ../libjmetal.a -o DE_main $(INCS) $(LIBS)

@@ -1,12 +1,13 @@
 CPP  = g++
 CC   = gcc
-OBJ  = nsgaII/NSGAII.o gGA/gGA.o smpso/SMPSO.o gde3/GDE3.o de/DE.o
+OBJ  = nsgaII/NSGAII.o gGA/gGA.o smpso/SMPSO.o gde3/GDE3.o de/DE.o \
+ssga/ssGA.o
 LIB  = libmetaheuristics.a
 
 LIBS +=  -lm 
-INCS +=  -I. -I../core -InsgaII -IgGA -Ismpso -Igde3 -Ide -I../util \
-	 -I../util/archive -I../util/comparators -I../util/wrapper \
-	 -I../encodings/solutionType -I../encodings/variable
+INCS +=  -I. -I../core -InsgaII -IgGA -Ismpso -Igde3 -Ide -Issga \
+	 -I../util -I../util/archive -I../util/comparators -I../util/wrapper \
+	 -I../encodings/solutionType -I../encodings/variable -I../operators/selection
 
 #CXXFLAGS += $(INCS) -g 
 CXXFLAGS += $(INCS) -O3 
