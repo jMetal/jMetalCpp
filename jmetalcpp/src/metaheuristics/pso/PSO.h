@@ -15,7 +15,7 @@
 #include <SolutionSet.h>
 #include <XReal.h>
 #include <PseudoRandom.h>
-#include <Math.h>
+#include <math.h>
 #include <string>
 
 /**
