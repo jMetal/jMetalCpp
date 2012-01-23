@@ -227,11 +227,11 @@ SolutionSet * SMPSO::execute() {
 
   //-> Step2. Initialize the speed_ of each particle to 0
   for (int i = 0; i < swarmSize_; i++) {
+    speed_[i] = new double[problem_->getNumberOfVariables()];
     for (int j = 0; j < problem_->getNumberOfVariables(); j++) {
       speed_[i][j] = 0.0;
     }
   }
-
 
   // Step4 and 5
   for (int i = 0; i < particles_->size(); i++) {

@@ -113,6 +113,15 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv) {
 			cerr << "Incorrect number of arguments for Fonseca problem." << endl;
 			exit(-1);
 		}
+	} else if (strcmp(name, "Kursawe")==0) { // Kursawe
+    if (argc==0)
+      return new Kursawe("Real");
+    else if (argc==1)
+      return new Kursawe(argv[0]);
+    else {
+      cerr << "Incorrect number of arguments for Kursawe problem." << endl;
+      exit(-1);
+    }
 	} else if (strcmp(name, "Sphere")==0) { // Sphere
     if (argc==0)
       return new Sphere("Real");

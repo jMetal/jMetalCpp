@@ -48,17 +48,11 @@ Solution::Solution (int numberOfObjectives) {
  * @throws ClassNotFoundException
  */
 Solution::Solution (Problem *problem) {
-	cout << "Inicializando solucion..." << endl;
 	problem_ = problem;
-	cout << "Problema pasado." << endl;
-	//cout << "Tipo de solucion: " << problem->getSolutionType()->toString() << endl;
-	//type_ = problem->getSolutionType();
 	type_ = problem_->getSolutionType();
 	numberOfObjectives_ = problem_->getNumberOfObjectives();
   numberOfVariables_  = problem_->getNumberOfVariables();
-  //objective_ = new double[numberOfObjectives_];
 	
-	cout << "El numero de objetivos es " << problem_->getNumberOfObjectives() << endl;
 	// creating the objective vector
 	objective_ = new double[numberOfObjectives_];//(double *)malloc(sizeof(double) * numberOfObjectives_);
    if (objective_ == NULL) {
@@ -72,7 +66,6 @@ Solution::Solution (Problem *problem) {
 	kDistance_ = 0.0;
 	crowdingDistance_ = 0.0;
 	distanceToSolutionSet_ = std::numeric_limits<double>::max();
-	cout << "Creando variables..." << endl;
 	variable_ = type_->createVariables();
 } // Solution
 

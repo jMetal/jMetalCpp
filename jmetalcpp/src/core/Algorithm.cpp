@@ -14,7 +14,6 @@
  * @param problem
 **/
 Algorithm::Algorithm(Problem *problem) {
-	cout << "INICIALIZADO ALGORITMO!!!" << endl;
 	problem_ = problem;
 }
 

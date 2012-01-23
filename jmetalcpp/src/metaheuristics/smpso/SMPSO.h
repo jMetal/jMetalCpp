@@ -103,8 +103,6 @@ private:
   double * deltaMin_;
   bool success_;
 
-  Problem *problem_;
-
   double inertiaWeight(int iter, int miter, double wma,
                                             double wmin);
   double constrictionCoefficient(double c1, double c2);
