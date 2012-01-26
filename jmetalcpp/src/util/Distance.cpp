@@ -185,7 +185,9 @@ void Distance::crowdingDistanceAssignment(SolutionSet * solutionSet, int nObjs) 
 
 	for (int i = 0; i<nObjs; i++) {
 		// Sort the population by Obj n
-		front->sort(new ObjectiveComparator(i));
+	  Comparator * c = new ObjectiveComparator(i);
+		front->sort(c);
+		delete c;
 		objetiveMinn = front->get(0)->getObjective(i);
 		objetiveMaxn = front->get(front->size()-1)->getObjective(i);
 
@@ -200,5 +202,9 @@ void Distance::crowdingDistanceAssignment(SolutionSet * solutionSet, int nObjs) 
 			front->get(j)->setCrowdingDistance(distance);
 		} // for
 	} // for
+
+	front->clear();
+	delete front;
+
 } // crowdingDistanceAssignment
 

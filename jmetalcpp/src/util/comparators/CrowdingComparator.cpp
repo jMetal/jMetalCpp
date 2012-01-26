@@ -19,14 +19,15 @@
 **/
 int CrowdingComparator::compare(Solution *o1, Solution *o2) {
 
-	comparator = new RankComparator();
+  if (o1 == NULL)
+    return 1;
+  else if (o2 == NULL)
+    return -1;
 
-	if (o1 == NULL)
-		return 1;
-	else if (o2 == NULL)
-		return -1;
-
+  comparator = new RankComparator();
 	int flagComparatorRank = comparator->compare(o1,o2);
+	delete comparator;
+
 	if (flagComparatorRank != 0)
 		return flagComparatorRank;
 
