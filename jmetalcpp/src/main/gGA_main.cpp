@@ -12,9 +12,9 @@
 #include <PolynomialMutation.h>
 #include <BinaryTournament2.h>
 #include <iostream>
-#include <Sphere.h>
 #include <gGA.h>
 #include <time.h>
+#include <ProblemFactory.h>
 
 int main(int argc, char ** argv) {
 
@@ -26,15 +26,22 @@ int main(int argc, char ** argv) {
   Operator  * mutation  ; // Mutation operator
   Operator  * selection ; // Selection operator
 
-	problem = new Sphere("Real");
-	//problem = new DTLZ1("Real", 7, 2);
-	//problem = new DTLZ3("Real", 12, 2);
-	//problem = new DTLZ4("Real", 12, 2);
+//  cout << "Numero de argumentos: " << argc << endl;
+  if (argc>=2) {
+    problem = ProblemFactory::getProblem(argc, argv);
+  } else {
+//    char * defaultProblem;
+//    strcpy(defaultProblem, "Sphere");
+    cout << "No problem selected." << endl;
+    cout << "Default problem will be used: Sphere" << endl;
+    problem = ProblemFactory::getProblem("Sphere");
+  }
 
-	//problem   = new Schaffer("Real");
-	//problem   = new ZDT1("Real", 30);
+  cout << "Problema: " << problem->getName() << endl;
 	cout << "El numero de objetivos es " << problem->getNumberOfObjectives() << endl;
-	cout << "Problema: " << problem->getName() << endl;
+	cout << "El numero de variables es " << problem->getNumberOfVariables() << endl;
+
+	system("pause");
 
 	algorithm = new gGA(problem);
 
@@ -42,27 +49,23 @@ int main(int argc, char ** argv) {
 
 	// Algorithm parameters
 	int populationSizeValue = 100;
-	int *populationSizePtr = &populationSizeValue;
 	int maxEvaluationsValue = 250000;
-	int *maxEvaluationsPtr = &maxEvaluationsValue;
-	algorithm->setInputParameter("populationSize",populationSizePtr);
-	algorithm->setInputParameter("maxEvaluations",maxEvaluationsPtr);
+	algorithm->setInputParameter("populationSize",&populationSizeValue);
+	algorithm->setInputParameter("maxEvaluations",&maxEvaluationsValue);
 
 	// Mutation and Crossover for Real codification
 	map<string, void *> parameters;
 	double crossoverProbability = 0.9;
 	double distributionIndexValue1 = 20.0;
-	double *distributionIndexPtr1 = &distributionIndexValue1;
 	parameters["probability"] =  &crossoverProbability ;
-	parameters["distributionIndex"] = distributionIndexPtr1 ;
+	parameters["distributionIndex"] = &distributionIndexValue1 ;
 	crossover = new SBXCrossover(parameters);
 
 	parameters.clear();
 	double mutationProbability = 1.0/problem->getNumberOfVariables();
 	double distributionIndexValue2 = 20.0;
-	double *distributionIndexPtr2 = &distributionIndexValue2;
 	parameters["probability"] = &mutationProbability;
-	parameters["distributionIndex"] = distributionIndexPtr2 ;
+	parameters["distributionIndex"] = &distributionIndexValue2 ;
 	mutation = new PolynomialMutation(parameters);
 
 	// Selection Operator
@@ -102,4 +105,11 @@ int main(int argc, char ** argv) {
 	population->printVariablesToFile("VAR");
 	cout << "Objectives values have been writen to file FUN" << endl;
 	population->printObjectivesToFile("FUN");
+
+	delete crossover;
+	delete mutation;
+	delete selection;
+	delete population;
+	delete algorithm;
+
 } // main

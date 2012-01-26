@@ -30,6 +30,12 @@ PolynomialMutation::PolynomialMutation(map<string, void *> parameters)
 
 
 /**
+ * Destructor
+ */
+PolynomialMutation::~PolynomialMutation() { } // ~PolynomialMutation
+
+
+/**
  * Perform the mutation operation
  * @param probability Mutation probability
  * @param solution The solution to mutate
@@ -65,6 +71,9 @@ void * PolynomialMutation::doMutation(double probability, Solution *solution) {
 			x->setValue(var, y);
 		}
 	} // for
+
+	delete x;
+
 } // doMutation
 
 

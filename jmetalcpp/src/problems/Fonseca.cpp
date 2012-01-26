@@ -28,6 +28,7 @@ Fonseca::Fonseca(string solutionType) {
   numberOfVariables_   = 3;
   numberOfObjectives_  = 2;
   numberOfConstraints_ = 0;
+  problemName_         = "Fonseca";
 	
   lowerLimit_ = new double[numberOfVariables_];
 	if (lowerLimit_ == NULL) {

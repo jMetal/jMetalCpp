@@ -25,6 +25,12 @@ Operator::Operator(map<string , void*> parameters) {
 
 
 /**
+ * Destructor.
+ */
+Operator::~Operator() { /* do nothing */ }
+
+
+/**
  * Sets a new <code>Object</code> parameter to the operator.
  * @param name The parameter name.
  * @param value Object representing the parameter.

@@ -28,6 +28,7 @@ public:
 	static const double eta_m_;
 
 	PolynomialMutation(map<string, void *> parameters);
+	~PolynomialMutation();
 
 	void * execute(void *);
 

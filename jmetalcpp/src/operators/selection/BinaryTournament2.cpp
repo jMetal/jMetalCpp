@@ -24,6 +24,7 @@
 BinaryTournament2::BinaryTournament2(map<string, void *> parameters)
 : Selection(parameters) {
 	index_ = 0;
+	a_ = new int[1]; // Initialized as dummy
 	dominance_ = new DominanceComparator();
   if (dominance_ == NULL) {
   	cout << "BinaryTournament::BinaryTournament: error creating comparator" ;
@@ -31,6 +32,15 @@ BinaryTournament2::BinaryTournament2(map<string, void *> parameters)
     exit(-1) ;
   }
 }
+
+
+/**
+ * Destructor
+ */
+BinaryTournament2::~BinaryTournament2() {
+  delete dominance_;
+  delete [] a_;
+} // ~BinaryTournament2
 
   
 /**
@@ -51,7 +61,9 @@ void * BinaryTournament2::execute(void * object) {
   if (index_ == 0) //Create the permutation
   {
   	PermutationUtility * permutationUtility = new PermutationUtility();
+  	delete [] a_;
     a_= permutationUtility->intPermutation(population->size());
+    delete permutationUtility;
   }
 
 //	for (int i=0; i<population->size(); i++) {

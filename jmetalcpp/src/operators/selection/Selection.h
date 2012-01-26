@@ -19,6 +19,7 @@ class Selection : public Operator {
 
 public:
 	Selection (map<string, void *> parameters);
+	virtual ~Selection() = 0;
 };
 
 #endif

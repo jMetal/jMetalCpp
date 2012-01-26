@@ -54,7 +54,6 @@ SolutionSet * gGA::execute() {
 	cout << "Poblacion inicializada con size = " << population->size() << endl;
 	cout << "Problema: " << problem_->getName() << endl;
 
-
 	//Read the operators
 	mutationOperator = operators_["mutation"];
 	crossoverOperator = operators_["crossover"];
@@ -100,8 +99,11 @@ SolutionSet * gGA::execute() {
 				offspringPopulation->add(offSpring[0]);
 				offspringPopulation->add(offSpring[1]);
 				evaluations += 2;
+				delete[] offSpring;
 			} // if
 		} // for
+		delete[] parents;
+		
 		/*
 		for (int i = 0; i < (populationSize / 2); i++) {
 			if (evaluations < maxEvaluations) {
@@ -150,17 +152,27 @@ SolutionSet * gGA::execute() {
 		population->sort(comparator) ;
 		offspringPopulation->sort(comparator) ;
 
+		delete offspringPopulation->get(offspringPopulation->size()-1);
+		delete offspringPopulation->get(offspringPopulation->size()-2);
 		offspringPopulation->replace(offspringPopulation->size()-1, new Solution(population->get(0))) ;
 		offspringPopulation->replace(offspringPopulation->size()-2, new Solution(population->get(1))) ;
 
+		for (int i=0;i<population->size();i++) {
+      delete population->get(i);
+    }
 		population->clear() ;
+		
 		for (int i = 0; i < populationSize; i++)
 			population->add(offspringPopulation->get(i)) ;
 		offspringPopulation->clear() ;
+		delete offspringPopulation;
 	}
 
+	delete comparator;
+
   SolutionSet * resultPopulation  = new SolutionSet(1) ;
-  resultPopulation->add(population->get(0)) ;
+  resultPopulation->add(new Solution(population->get(0))) ;
+  delete population;
 
   return resultPopulation ;
 } // execute

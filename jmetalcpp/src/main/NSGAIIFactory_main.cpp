@@ -117,5 +117,10 @@ int main(int argc, char ** argv) {
   cout << "Objectives values have been writen to file FUN" << endl;
   population->printObjectivesToFile("FUN");
 
-} // main
+  delete selection;
+  delete mutation;
+  delete crossover;
+  delete population;
+  delete algorithm;
 
+} // main

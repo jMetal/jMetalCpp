@@ -121,6 +121,10 @@ void Kursawe::evaluate(Solution *solution) {
 	solution->setObjective(0,fx[0]);
 	solution->setObjective(1,fx[1]);
 
+	delete [] fx;
+	delete [] x;
+	delete vars;
+
 	//	cout << "Kursawe::evaluate end..." << endl;
 
 } // evaluate

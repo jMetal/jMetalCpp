@@ -19,6 +19,7 @@ class Crossover : public Operator {
 
 public:
 	Crossover(map<string, void *> parameters);
+	virtual ~Crossover() = 0;
 
 };
 

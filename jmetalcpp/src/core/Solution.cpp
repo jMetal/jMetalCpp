@@ -32,13 +32,14 @@ Solution::Solution () {
  * variables of a SolutionSet to apply quality indicators
  */
 Solution::Solution (int numberOfObjectives) {
-   numberOfObjectives_ = numberOfObjectives;
-   numberOfVariables_ = 0;
-   objective_ = new double[numberOfObjectives_];//(double *)malloc(sizeof(double) * numberOfObjectives_);
-//   if (objective_ == NULL) {
-//   	 cout << "ERROR GRAVE: Impossible to reserve memory for storing objectives in class Solution" << endl;
-//   	 //exit(-1);
-//   }
+  overallConstraintViolation_ = 0.0;
+  numberOfObjectives_ = numberOfObjectives;
+  numberOfVariables_ = 0;
+  objective_ = new double[numberOfObjectives_];//(double *)malloc(sizeof(double) * numberOfObjectives_);
+  // if (objective_ == NULL) {
+  //  cout << "ERROR GRAVE: Impossible to reserve memory for storing objectives in class Solution" << endl;
+  //  exit(-1);
+  //}
 }
 
 
@@ -50,6 +51,7 @@ Solution::Solution (int numberOfObjectives) {
 Solution::Solution (Problem *problem) {
 	problem_ = problem;
 	type_ = problem_->getSolutionType();
+	overallConstraintViolation_ = 0.0;
 	numberOfObjectives_ = problem_->getNumberOfObjectives();
   numberOfVariables_  = problem_->getNumberOfVariables();
 	
@@ -135,7 +137,6 @@ Solution::Solution (Solution *solution) {
 
 /**
  * Destructor
- * @param solution Solution to copy.
  */
 Solution::~Solution() {
   delete[]objective_ ;

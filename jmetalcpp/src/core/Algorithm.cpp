@@ -19,6 +19,14 @@ Algorithm::Algorithm(Problem *problem) {
 
 
 /**
+ * Destructor
+ */
+Algorithm::~Algorithm() {
+  delete problem_;
+} // ~Algorithm
+
+
+/**
  * Offers facilities for add new operators for the algorithm. To use an
  * operator, an algorithm has to obtain it through the
  * <code>getOperator</code> method.

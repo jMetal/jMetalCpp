@@ -56,12 +56,13 @@ int main(int argc, char ** argv) {
 
 	//problem = new ZDT6("Real");
 	//problem = new DTLZ1("Real", 7, 2);
-	problem = new DTLZ1("Real");
+//	problem = new DTLZ1("Real");
 	//problem = new DTLZ3("Real", 12, 2);
 	//problem = new DTLZ4("Real", 12, 2);
 
 	//problem   = new Schaffer("Real");
 	//problem   = new ZDT1("Real", 30);
+	problem = new Kursawe("Real");
 	cout << "El numero de objetivos es " << problem->getNumberOfObjectives() << endl;
 
 	//HashMap  parameters ; // Operator parameters
@@ -76,29 +77,23 @@ int main(int argc, char ** argv) {
 
 	// Algorithm parameters
 	int populationSizeValue = 100;
-	int *populationSizePtr = &populationSizeValue;
 	int maxEvaluationsValue = 25000;
-	int *maxEvaluationsPtr = &maxEvaluationsValue;
-	algorithm->setInputParameter("populationSize",populationSizePtr);
-	algorithm->setInputParameter("maxEvaluations",maxEvaluationsPtr);
+	algorithm->setInputParameter("populationSize",&populationSizeValue);
+	algorithm->setInputParameter("maxEvaluations",&maxEvaluationsValue);
 
 	// Mutation and Crossover for Real codification
 	map<string, void *> parameters;
 	double probabilityValue1 = 0.9;
-	double *probabilityPtr1 = &probabilityValue1;
 	double distributionIndexValue1 = 20.0;
-	double *distributionIndexPtr1 = &distributionIndexValue1;
-	parameters["probability"] =  probabilityPtr1 ;
-	parameters["distributionIndex"] = distributionIndexPtr1 ;
+	parameters["probability"] =  &probabilityValue1;
+	parameters["distributionIndex"] = &distributionIndexValue1;
 	crossover = new SBXCrossover(parameters);
 
 	parameters.clear();
 	double probabilityValue2 = 1.0/problem->getNumberOfVariables();
-	double *probabilityPtr2 = &probabilityValue2;
 	double distributionIndexValue2 = 20.0;
-	double *distributionIndexPtr2 = &distributionIndexValue2;
-	parameters["probability"] = probabilityPtr2;
-	parameters["distributionIndex"] = distributionIndexPtr2 ;
+	parameters["probability"] = &probabilityValue2;
+	parameters["distributionIndex"] = &distributionIndexValue2;
 	mutation = new PolynomialMutation(parameters);
 
 	// Selection Operator
@@ -140,6 +135,12 @@ int main(int argc, char ** argv) {
 	cout << "Objectives values have been writen to file FUN" << endl;
 	population->printObjectivesToFile("FUN");
 
+	delete selection;
+	delete mutation;
+	delete crossover;
+	delete population;
+	delete algorithm;
+
 //	if (indicators != null) {
 //		logger_.info("Quality indicators") ;
 //		logger_.info("Hypervolume: " + indicators.getHypervolume(population)) ;
@@ -152,31 +153,5 @@ int main(int argc, char ** argv) {
 //		logger_.info("Speed      : " + evaluations + " evaluations") ;
 //	} // if
 	//cout << "El primer objetivo es: " << solution->getObjective(0) << " el segundo objetivo es: " << solution->getObjective(1) << endl;
-
-
-//	Solution * s = new Solution(2);
-//	Variable ** variables = new Variable*[3];
-//	variables[0] = new Real();
-//	variables[1] = new Real();
-//	variables[2] = new Real();
-//	variables[0]->setValue(-0.9805704198385127);
-//	variables[1]->setValue(2.263529211056179E-4);
-//	variables[2]->setValue(-0.9919233336300403);
-//	cout << variables[0]->getValue() << endl;
-//	s->setDecisionVariables(variables);
-//	Problem * k = new Kursawe("Real", 3);
-//
-//	SolutionType * rst = new RealSolutionType(k);
-//	s->setType(rst);
-//	k->evaluate(s);
-//	cout << s->getObjective(0) << endl;
-//	cout << s->getObjective(1) << endl;
 	
-
 } // main
-
-/*
-int main() {
-    cout <<PseudoRandom::randDouble(3.4,5.4) << endl;
-    cout <<PseudoRandom::randDouble() << endl;
-}*/

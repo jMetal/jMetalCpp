@@ -29,6 +29,7 @@ protected:
 public:
   Operator ();
   Operator (map<string, void*> parameters);
+  virtual ~Operator() = 0;
 	virtual void *execute(void *) = 0;
 	void setParameter(string name, void *value);
 	void *getParameter(string name);
