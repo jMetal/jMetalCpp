@@ -48,11 +48,9 @@ int main(int argc, char ** argv) {
 
   // Algorithm parameters
   int populationSizeValue = 100;
-  int *populationSizePtr = &populationSizeValue;
   int maxIterationsValue = 250;
-  int *maxIterationsPtr = &maxIterationsValue;
-  algorithm->setInputParameter("populationSize",populationSizePtr);
-  algorithm->setInputParameter("maxIterations",maxIterationsPtr);
+  algorithm->setInputParameter("populationSize",&populationSizeValue);
+  algorithm->setInputParameter("maxIterations",&maxIterationsValue);
 
   // Crossover operator
   double crParameter = 0.5;
@@ -84,5 +82,10 @@ int main(int argc, char ** argv) {
   population->printVariablesToFile("VAR");
   cout << "Objectives values have been writen to file FUN" << endl;
   population->printObjectivesToFile("FUN");
+
+  delete selection;
+  delete crossover;
+  delete population;
+  delete algorithm;
 
 } // main

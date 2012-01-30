@@ -38,7 +38,6 @@ SolutionSet * GDE3::execute() {
 
   SolutionSet * population;
   SolutionSet * offspringPopulation;
-  SolutionSet * unionSolution;
 
   Distance * distance;
   Comparator * dominance;
@@ -59,7 +58,7 @@ SolutionSet * GDE3::execute() {
   cout << "GDE3: maxIterations = " << maxIterations << endl;
 
   //Initialize the variables
-  population = new SolutionSet(populationSize);
+  population  = new SolutionSet(populationSize);
   evaluations = 0;
   iterations  = 0;
 
@@ -106,6 +105,7 @@ SolutionSet * GDE3::execute() {
       object2[1] = parent;
       child = (Solution *) (crossoverOperator->execute(object2));
       delete[] object2;
+      delete[] parent;
 
       problem_->evaluate(child) ;
       problem_->evaluateConstraints(child);
@@ -115,14 +115,15 @@ SolutionSet * GDE3::execute() {
       int result  ;
       result = dominance->compare(population->get(i), child) ;
       if (result == -1) { // Solution i dominates child
-        offspringPopulation->add(population->get(i)) ;
+        offspringPopulation->add(new Solution(population->get(i)));
+        delete child;
       } // if
       else if (result == 1) { // child dominates
         offspringPopulation->add(child) ;
       } // else if
       else { // the two solutions are non-dominated
         offspringPopulation->add(child) ;
-        offspringPopulation->add(population->get(i)) ;
+        offspringPopulation->add(new Solution(population->get(i)));
       } // else
     } // for
 
@@ -132,6 +133,9 @@ SolutionSet * GDE3::execute() {
     int remain = populationSize;
     int index  = 0;
     SolutionSet * front = NULL;
+    for (int i = 0; i < populationSize; i++) {
+      delete population->get(i);
+    }
     population->clear();
 
     // Obtain the next front
@@ -142,7 +146,7 @@ SolutionSet * GDE3::execute() {
       distance->crowdingDistanceAssignment(front,problem_->getNumberOfObjectives());
       //Add the individuals of this front
       for (int k = 0; k < front->size(); k++ ) {
-        population->add(front->get(k));
+        population->add(new Solution(front->get(k)));
       } // for
 
       //Decrement remain
@@ -159,19 +163,37 @@ SolutionSet * GDE3::execute() {
     if (remain > 0) {  // front contains individuals to insert
       while (front->size() > remain) {
          distance->crowdingDistanceAssignment(front,problem_->getNumberOfObjectives());
-         front->remove(front->indexWorst(new CrowdingComparator()));
+         Comparator * crowdingComparator = new CrowdingComparator();
+         int indexWorst = front->indexWorst(crowdingComparator);
+         delete crowdingComparator;
+         delete front->get(indexWorst);
+         front->remove(indexWorst);
       }
       for (int k = 0; k < front->size(); k++) {
-        population->add(front->get(k));
+        population->add(new Solution(front->get(k)));
       }
 
       remain = 0;
     } // if
 
+    delete ranking;
+    delete offspringPopulation;
+
     iterations ++ ;
   } // while
 
+  delete dominance;
+  delete distance;
+
   // Return the first non-dominated front
   Ranking * ranking = new Ranking(population);
-  return ranking->getSubfront(0);
+  SolutionSet * result = new SolutionSet(ranking->getSubfront(0)->size());
+  for (int i=0;i<ranking->getSubfront(0)->size();i++) {
+    result->add(new Solution(ranking->getSubfront(0)->get(i)));
+  }
+  delete ranking;
+  delete population;
+
+  return result;
+
 } // execute
