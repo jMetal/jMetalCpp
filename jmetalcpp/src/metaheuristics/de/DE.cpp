@@ -100,6 +100,7 @@ SolutionSet * DE::execute() {
      object2[1] = parent;
      child = (Solution *) (crossoverOperator->execute(object2));
      delete[] object2;
+     delete[] parent;
 
      problem_->evaluate(child);
 
@@ -107,23 +108,31 @@ SolutionSet * DE::execute() {
 
      if (comparator->compare(population->get(i), child) < 0) {
        offspringPopulation->add(new Solution(population->get(i)));
+       delete child;
      } else {
        offspringPopulation->add(child);
      }
    } // for
 
    // The offspring population becomes the new current population
+   for (int i = 0; i < populationSize; i++) {
+     delete population->get(i);
+   }
    population->clear();
    for (int i = 0; i < populationSize; i++) {
      population->add(offspringPopulation->get(i));
    }
    offspringPopulation->clear();
+   delete offspringPopulation;
    population->sort(comparator);
   } // while
 
+  delete comparator;
+
   // Return a population with the best individual
   SolutionSet * resultPopulation = new SolutionSet(1);
-  resultPopulation->add(population->get(0));
+  resultPopulation->add(new Solution(population->get(0)));
+  delete population;
 
   cout << "DE: Evaluations: " << evaluations << endl;
   return resultPopulation;
