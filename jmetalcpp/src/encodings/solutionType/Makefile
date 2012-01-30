@@ -3,11 +3,11 @@ CC   = gcc
 OBJ  = ArrayRealSolutionType.o BinaryRealSolutionType.o BinarySolutionType.o RealSolutionType.o
 LIBNAME= libsolutionType.a
 
-LIBS +=  -lm 
+LIBS +=  -lm -pthread
 INCS +=  -I. -I../../core -I../../util -I../variable
 
 #CXXFLAGS += $(INCS) -g 
-CXXFLAGS += $(INCS) -O3 
+CXXFLAGS += $(INCS) -g
 
 CFLAGS = $(INCS) 
 

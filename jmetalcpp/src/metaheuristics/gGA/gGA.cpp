@@ -85,14 +85,22 @@ SolutionSet * gGA::execute() {
 
 		for (int i = 0; i < (populationSize / 2); i++) {
 			if (evaluations < maxEvaluations) {
+				cout << "GA main loop. i = " << i << endl ;
 				//obtain parents
+				cout << "GA Selection 1" << endl ;
 				parents[0] = (Solution *) (selectionOperator->execute(population));
+				cout << "GA Selection 2" << endl ;
 				parents[1] = (Solution *) (selectionOperator->execute(population));
+				cout << "GA Crossover" << endl ;
 				Solution ** offSpring = (Solution **) (crossoverOperator->execute(parents));
+				cout << "GA Mutation 1" << endl ;
 				mutationOperator->execute(offSpring[0]);
+				cout << "GA Mutation 2" << endl ;
 				mutationOperator->execute(offSpring[1]);
+				cout << "GA evaluate 1" << endl ;
 				problem_->evaluate(offSpring[0]);
 				problem_->evaluateConstraints(offSpring[0]);
+				cout << "GA evaluate 2" << endl ;
 				problem_->evaluate(offSpring[1]);
 				problem_->evaluateConstraints(offSpring[1]);
 

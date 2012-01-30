@@ -1,7 +1,7 @@
-CPP  = g++
+CPP  = g++ -g
 CC   = gcc
 
-LIBS +=  -lm 
+LIBS +=  -lm  -pthread
 INCS +=  -I. -I../core -I../util -I../problems -I../util/comparators \
 	-I../encodings/solutionType -I../encodings/variable -I../util/wrapper \
 	-I../metaheuristics/nsgaII -I../operators/crossover -I../operators/mutation \

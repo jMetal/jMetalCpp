@@ -4,13 +4,13 @@ OBJ  = nsgaII/NSGAII.o gGA/gGA.o smpso/SMPSO.o gde3/GDE3.o de/DE.o \
 ssGA/ssGA.o pso/PSO.o
 LIB  = libmetaheuristics.a
 
-LIBS +=  -lm 
+LIBS +=  -lm -pthread
 INCS +=  -I. -I../core -InsgaII -IgGA -Ismpso -Igde3 -Ide -IssGA -Ipso \
 	 -I../util -I../util/archive -I../util/comparators -I../util/wrapper \
 	 -I../encodings/solutionType -I../encodings/variable -I../operators/selection
 
 #CXXFLAGS += $(INCS) -g 
-CXXFLAGS += $(INCS) -O3 
+CXXFLAGS += $(INCS) -g
 
 CFLAGS = $(INCS) 
 

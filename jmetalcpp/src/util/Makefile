@@ -3,12 +3,12 @@ CC   = gcc
 OBJ  = Distance.o PermutationUtility.o PseudoRandom.o RandomGenerator.o Ranking.o
 LIBNAME= libutil.a
 
-LIBS +=  -lm 
+LIBS +=  -lm -pthread
 #INCS +=  -I. -I../core -Icomparators
 INCS +=  -I. -I../core -Icomparators
 
 #CXXFLAGS += $(INCS) -g 
-CXXFLAGS += $(INCS) -O3 
+CXXFLAGS += $(INCS) -g 
 
 CFLAGS = $(INCS) 
 

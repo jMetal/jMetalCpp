@@ -4,12 +4,12 @@ OBJ  = BinaryTournament2.o DifferentialEvolutionSelection.o Selection.o \
 BestSolutionSelection.o WorstSolutionSelection.o
 LIB  = libselection.a
 
-LIBS +=  -lm 
+LIBS +=  -lm -pthread
 INCS +=  -I. -I../../core -I../../encodings/solutionType -I../../encodings/variable \
 	-I../../util -I../../util/comparators
 
 #CXXFLAGS += $(INCS) -g 
-CXXFLAGS += $(INCS) -O3 
+CXXFLAGS += $(INCS) -g
 
 CFLAGS = $(INCS) 
 
