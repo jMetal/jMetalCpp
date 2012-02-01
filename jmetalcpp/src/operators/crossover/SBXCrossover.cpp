@@ -36,12 +36,6 @@ SBXCrossover::SBXCrossover(map<string, void *> parameters)
 
 
 /**
- * Destructor
- */
-SBXCrossover::~SBXCrossover() { } // ~SBXCrossover
-
-
-/**
 * Perform the crossover operation. 
 * @param probability Crossover probability
 * @param parent1 The first parent
@@ -155,14 +149,8 @@ Solution ** SBXCrossover::doCrossover(double probability, Solution *parent1, Sol
       } // if
     } // if
   } // if
-
-  delete x1;
-  delete x2;
-  delete offs1;
-  delete offs2;
                                   
-  return offSpring;
-
+   return offSpring;                                                                                      
 } // doCrossover
   
   

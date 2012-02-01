@@ -257,12 +257,6 @@ void * DifferentialEvolutionCrossover::execute(void *object) {
 
   } // if
 
-  delete xParent0;
-  delete xParent1;
-  delete xParent2;
-  delete xCurrent;
-  delete xChild;
-
   return child;
 
 } // execute

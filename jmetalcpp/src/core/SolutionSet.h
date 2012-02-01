@@ -40,7 +40,7 @@ public:
 
   SolutionSet();
   SolutionSet(int maximumSize);
-  ~SolutionSet();
+  //~SolutionSet();
    
   bool add(Solution * solution);
   Solution *get(int index);
@@ -54,13 +54,10 @@ public:
   void printObjectivesToFile(string path);
   void printVariablesToFile(string file);
   void clear();
-  void clear(bool del);
   void remove(int i);
-  void remove(int i, bool del);
   // Iterator iterator();
   SolutionSet * join(SolutionSet * another);
   void replace(int position, Solution * solution);
-  void replace(int position, Solution * solution, bool del);
   //double **writeObjectivesToMatrix();
 
   //void reset() ;

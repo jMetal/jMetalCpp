@@ -14,7 +14,6 @@
 #include <ZDT1.h>
 #include <DifferentialEvolutionCrossover.h>
 #include <DifferentialEvolutionSelection.h>
-#include <ProblemFactory.h>
 #include <iostream>
 #include <time.h>
 
@@ -29,15 +28,14 @@ int main(int argc, char ** argv) {
 
   map<string, void *> parameters;
 
-  if (argc>=2) {
-    problem = ProblemFactory::getProblem(argc, argv);
-  } else {
-    cout << "No problem selected." << endl;
-    cout << "Default problem will be used: Fonseca" << endl;
-//    char * defaultProblem;
-//    strcpy(defaultProblem, "Fonseca");
-    problem = ProblemFactory::getProblem("Fonseca");
-  }
+  //TODO: QualityIndicator * indicators;
+
+  //problem = new Kursawe("Real", 3);
+  //problem = new Water("Real");
+  problem = new ZDT1("Real");
+  //problem = new ConstrEx("Real");
+  //problem = new DTLZ1("Real");
+  //problem = new OKA2("Real") ;
 
   cout << "GDE3_main: El numero de objetivos es " << problem->getNumberOfObjectives() << endl;
   cout << "GDE3_main: Problema: " << problem->getName() << endl;
@@ -48,9 +46,11 @@ int main(int argc, char ** argv) {
 
   // Algorithm parameters
   int populationSizeValue = 100;
+  int *populationSizePtr = &populationSizeValue;
   int maxIterationsValue = 250;
-  algorithm->setInputParameter("populationSize",&populationSizeValue);
-  algorithm->setInputParameter("maxIterations",&maxIterationsValue);
+  int *maxIterationsPtr = &maxIterationsValue;
+  algorithm->setInputParameter("populationSize",populationSizePtr);
+  algorithm->setInputParameter("maxIterations",maxIterationsPtr);
 
   // Crossover operator
   double crParameter = 0.5;
@@ -82,10 +82,5 @@ int main(int argc, char ** argv) {
   population->printVariablesToFile("VAR");
   cout << "Objectives values have been writen to file FUN" << endl;
   population->printObjectivesToFile("FUN");
-
-  delete selection;
-  delete crossover;
-  delete population;
-  delete algorithm;
 
 } // main

@@ -51,14 +51,14 @@ Sphere::Sphere(string solutionType, int numberOfVariables) {
 
 
 void Sphere::evaluate(Solution *solution) {
-  double *fx;
-  double *x;
+	double fx [numberOfObjectives_] ;
+  double x [numberOfVariables_];
 	Variable **variables = solution->getDecisionVariables();
-
-	fx = new double[numberOfObjectives_];
+	/*
+	fx = new double[numberOfObjectives_]; //(double *)malloc(sizeof(double) * numberOfObjectives_);
 	if (fx == NULL) {
-	  cout << "Sphere::evaluate: Error reserving memory for the function values array" << endl;
-    exit(-1);
+		cout << "Sphere::evaluate: Error reserving memory while evaluating the problem" << endl;
+        exit(-1);
 	}
 	
   x = new double[numberOfVariables_]; 
@@ -66,9 +66,9 @@ void Sphere::evaluate(Solution *solution) {
     cout << "Sphere::evaluate: Error reserving memory for the variable values array" << endl;
     exit(-1);
   } // if
-
+  */
   for (int i = 0; i < numberOfVariables_; i++)
-    x[i] = variables[i]->getValue();
+    x[i] = variables[i]->getValue() ;
 
   double sum = 0.0;
   for (int var = 0; var < numberOfVariables_; var++) {
@@ -79,9 +79,8 @@ void Sphere::evaluate(Solution *solution) {
 	fx[0] = sum ;
 		
 	solution->setObjective(0,fx[0]);
-
-	delete[]fx ;
-  delete[]x;
+  //delete[]fx ;
+  //delete[]x; 
 }
 
 

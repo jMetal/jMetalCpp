@@ -14,16 +14,9 @@
  * @param problem
 **/
 Algorithm::Algorithm(Problem *problem) {
+	cout << "INICIALIZADO ALGORITMO!!!" << endl;
 	problem_ = problem;
 }
-
-
-/**
- * Destructor
- */
-Algorithm::~Algorithm() {
-  delete problem_;
-} // ~Algorithm
 
 
 /**

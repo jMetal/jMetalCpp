@@ -16,6 +16,8 @@
  */
 SolutionSet::SolutionSet () {
 	capacity_ = 0;
+	// solutionsList_ = new ArrayList<Solution>();
+	// size_ = 0;
 } // SolutionSet
 
 
@@ -25,17 +27,9 @@ SolutionSet::SolutionSet () {
  */
 SolutionSet::SolutionSet (int maximumSize) {
   capacity_ = maximumSize;
+  //size_ = 0;
+  //list_ = new Solution*[capacity_];
 } // SolutionSet
-
-
-/**
- * Destructor
- */
-SolutionSet::~SolutionSet() {
-  for (int i = 0; i < solutionsList_.size(); i++) {
-    delete solutionsList_[i];
-  }
-} // ~SolutionSet
 
 
 /**
@@ -236,7 +230,7 @@ void SolutionSet::printVariablesToFile(string file) {
  * Empties the SolutionSet
  */
 void SolutionSet::clear(){
-  solutionsList_.clear();
+	solutionsList_.clear();
 } // clear
 
 
@@ -245,10 +239,10 @@ void SolutionSet::clear(){
  * @param i The position of the solution to remove.
  */
 void SolutionSet::remove(int i) {
-  if (i < 0 || i >= solutionsList_.size()) {
-    cout << "Error in class SolutionSet trying to access to an element out of range" << endl;
-    exit(-1);
-  }
+	if (i < 0 || i >= solutionsList_.size()) {
+		cout << "Error in class SolutionSet trying to access to an element out of range" << endl;
+		exit(-1);
+	}
   solutionsList_.erase(solutionsList_.begin() + i);
 } // remove
 
@@ -263,10 +257,10 @@ SolutionSet * SolutionSet::join(SolutionSet *another) {
   SolutionSet *result =
   		new SolutionSet(solutionsList_.size()+another->size());
   for (int i=0;i<solutionsList_.size();i++) {
-  	result->add(new Solution(this->get(i)));
+  	result->add(this->get(i));
   }
   for (int i=0;i<another->size();i++) {
-  	result->add(new Solution(another->get(i)));
+  	result->add(another->get(i));
   }
   return result;
 } // join
@@ -278,11 +272,11 @@ SolutionSet * SolutionSet::join(SolutionSet *another) {
  * @param solution The new solution
  */
 void SolutionSet::replace(int position, Solution *solution) {
-  if (position < 0 || position >= solutionsList_.size()) {
-    cout << "Error in class SolutionSet trying to access to an element out of range" << endl;
-    exit(-1);
-  }
-  solutionsList_[position] = solution;
+	if (position < 0 || position >= solutionsList_.size()) {
+		cout << "Error in class SolutionSet trying to access to an element out of range" << endl;
+		exit(-1);
+	}
+	solutionsList_[position] = solution;
 } // replace
 
 

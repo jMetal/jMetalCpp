@@ -1,6 +1,6 @@
 CPP  = g++
 CC   = gcc
-OBJ  = Archive.o CrowdingArchive.o
+OBJ  = Archive.o CrowdingArchive.o AdaptiveGridArchive.o
 LIB  = libarchive.a
 
 LIBS +=  -lm 

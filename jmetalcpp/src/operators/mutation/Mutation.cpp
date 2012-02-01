@@ -10,5 +10,3 @@
 
 Mutation::Mutation(map<string, void *> parameters)
 : Operator (parameters) {}
-
-Mutation::~Mutation() { /* do nothing */ }

@@ -9,8 +9,8 @@
 #include <Solution.h>
 #include <Operator.h>
 //#include <QualityIndicator.h>
-#include <ProblemFactory.h>
 #include <SMPSO.h>
+#include <Kursawe.h>
 #include <PolynomialMutation.h>
 #include <iostream>
 #include <time.h>
@@ -35,28 +35,31 @@ int main(int argc, char ** argv) {
 
   //TODO: QualityIndicator * indicators; // Object to get quality indicators
 
-  if (argc>=2) {
-    problem = ProblemFactory::getProblem(argc, argv);
-  } else {
-    cout << "No problem selected." << endl;
-    cout << "Default problem will be used: Kursawe" << endl;
-//    char * defaultProblem;
-//    strcpy(defaultProblem, "Fonseca");
-    problem = ProblemFactory::getProblem("Kursawe");
-  }
+  problem = new Kursawe("Real", 3);
+  //problem = new Water("Real");
+  //problem = new ZDT1("ArrayReal", 1000);
+  //problem = new ZDT4("BinaryReal");
+  //problem = new WFG1("Real");
+  //problem = new DTLZ1("Real");
+  //problem = new OKA2("Real");
+
+  cout << "SMPSO_main: El numero de objetivos es " << problem->getNumberOfObjectives() << endl;
+  cout << "SMPSO_main: Problema: " << problem->getName() << endl;
 
   algorithm = new SMPSO(problem);
 
-  cout << "SMPSO algorithm initialized." << endl;
-  system("pause");
+  cout << "SMPSO_main: Algoritmo SMPSO inicializado." << endl;
 
   // Algorithm parameters
   int swarmSizeValue = 100;
+  int *swarmSizePtr = &swarmSizeValue;
   int archiveSizeValue = 100;
+  int *archiveSizePtr = &archiveSizeValue;
   int maxIterationsValue = 250;
-  algorithm->setInputParameter("swarmSize",&swarmSizeValue);
-  algorithm->setInputParameter("archiveSize",&archiveSizeValue);
-  algorithm->setInputParameter("maxIterations",&maxIterationsValue);
+  int *maxIterationsPtr = &maxIterationsValue;
+  algorithm->setInputParameter("populationSize",swarmSizePtr);
+  algorithm->setInputParameter("populationSize",archiveSizePtr);
+  algorithm->setInputParameter("maxIterations",maxIterationsPtr);
 
   // Mutation operator
   double probabilityParameter = 1.0/(problem->getNumberOfVariables());

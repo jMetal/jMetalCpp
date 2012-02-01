@@ -3,12 +3,12 @@ CC   = gcc
 OBJ  = Mutation.o PolynomialMutation.o BitFlipMutation.o
 LIB  = libmutation.a
 
-LIBS +=  -lm -pthread
+LIBS +=  -lm 
 INCS +=  -I. -I../../core -I../../util/wrapper -I../../encodings/solutionType -I../../encodings/variable \
 	-I../../util
 
 #CXXFLAGS += $(INCS) -g 
-CXXFLAGS += $(INCS) -g
+CXXFLAGS += $(INCS) -O3 
 
 CFLAGS = $(INCS) 
 

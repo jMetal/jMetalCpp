@@ -3,12 +3,12 @@ CC   = gcc
 OBJ  = QualityIndicator.o Hypervolume.o
 LIB  = libqualityIndicator.a
 
-LIBS +=  -lm -pthread
+LIBS +=  -lm 
 INCS +=  -I. -I../core \
 	-I../util -I../util/comparators -I./util
 
 #CXXFLAGS += $(INCS) -g 
-CXXFLAGS += $(INCS) -g 
+CXXFLAGS += $(INCS) -O3 
 
 CFLAGS = $(INCS) 
 

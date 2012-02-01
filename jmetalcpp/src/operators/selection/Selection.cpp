@@ -9,5 +9,3 @@
 
 Selection::Selection(map<string, void *> parameters)
 : Operator(parameters) {}
-
-Selection::~Selection() { /* do nothing */ }

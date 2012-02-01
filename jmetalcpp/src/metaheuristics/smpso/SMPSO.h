@@ -16,7 +16,7 @@
 #include <SolutionSet.h>
 #include <XReal.h>
 #include <PseudoRandom.h>
-#include <math.h>
+#include <Math.h>
 #include <vector>
 #include <string>
 
@@ -102,6 +102,8 @@ private:
   double * deltaMax_;
   double * deltaMin_;
   bool success_;
+
+  Problem *problem_;
 
   double inertiaWeight(int iter, int miter, double wma,
                                             double wmin);
