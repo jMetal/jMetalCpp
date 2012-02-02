@@ -30,7 +30,6 @@ private:
 
 public:
   BinaryTournament2(map<string, void *> parameters);
-  ~BinaryTournament2();
   void *execute(void *);
 
 };

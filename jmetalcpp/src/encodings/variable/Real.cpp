@@ -25,7 +25,7 @@ Real::Real() {
  * value between those upper and lower bound values.
  **/
 Real::Real(double lowerBound, double upperBound) {
-	value_ = PseudoRandom::randDouble(lowerBound, upperBound);
+  value_ = PseudoRandom::randDouble(lowerBound, upperBound);
   lowerBound_ = lowerBound;
   upperBound_ = upperBound;
 } // Real

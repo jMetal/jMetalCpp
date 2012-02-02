@@ -29,17 +29,6 @@ Problem::Problem(SolutionType * solutionType) {
 } // Problem
 
 
-/**
- * Destructor
- */
-Problem::~Problem() {
-  cout << "Borrando Problem" << endl;
-  delete solutionType_;
-  delete [] lowerLimit_;
-  delete [] upperLimit_;
-} // ~Problem
-
-
 //void Problem::evaluateConstraints(Solution solution) {};
 
 

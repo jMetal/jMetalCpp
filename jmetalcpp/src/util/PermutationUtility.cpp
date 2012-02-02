@@ -33,7 +33,6 @@ int * PermutationUtility::intPermutation(int length) {
 			} // if
 		} // for
 	} // for
-	delete[] aux;
 
 	return result;
 

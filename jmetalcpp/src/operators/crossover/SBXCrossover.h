@@ -23,7 +23,6 @@ class SBXCrossover : public Crossover {
 
 public:
 	SBXCrossover(map<string, void *> parameters);
-	~SBXCrossover();
 	void *execute(void *);
 
 protected:

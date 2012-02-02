@@ -19,7 +19,7 @@ class Mutation : public Operator{
 
 public:
 	Mutation(map<string, void *> parameters);
-  virtual ~Mutation() = 0;
+
 };
 
 #endif

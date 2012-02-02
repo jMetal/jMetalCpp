@@ -3,12 +3,12 @@ CC   = gcc
 OBJ  = Crossover.o DifferentialEvolutionCrossover.o SBXCrossover.o SinglePointCrossover.o
 LIB  = libcrossover.a
 
-LIBS +=  -lm -pthread
+LIBS +=  -lm 
 INCS +=  -I. -I../../core -I../../util/wrapper -I../../encodings/solutionType -I../../encodings/variable \
 	-I../../util
 
 #CXXFLAGS += $(INCS) -g 
-CXXFLAGS += $(INCS) -g
+CXXFLAGS += $(INCS) -O3 
 
 CFLAGS = $(INCS) 
 

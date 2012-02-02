@@ -1,15 +1,15 @@
 CPP  = g++
 CC   = gcc
 OBJ  = Sphere.o Kursawe.o Fonseca.o Schaffer.o ZDT1.o ZDT2.o ZDT3.o ZDT4.o   \
-ZDT5.o ZDT6.o DTLZ1.o DTLZ2.o DTLZ3.o DTLZ4.o OneMax.o AutoDock.o ProblemFactory.o
+ZDT5.o ZDT6.o DTLZ1.o DTLZ2.o DTLZ3.o DTLZ4.o OneMax.o AutoDock.o
 LIBNAME= libproblems.a
 
-LIBS +=  -lm -pthread
+LIBS +=  -lm 
 INCS +=  -I. -I../core -I../util -I../encodings/solutionType \
 	-I../encodings/variable -I../util/wrapper
 
 #CXXFLAGS += $(INCS) -g 
-CXXFLAGS += $(INCS) -g
+CXXFLAGS += $(INCS) -O3 
 
 CFLAGS = $(INCS) 
 

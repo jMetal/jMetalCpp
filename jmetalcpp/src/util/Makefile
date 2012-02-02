@@ -1,14 +1,15 @@
 CPP  = g++
 CC   = gcc
-OBJ  = Distance.o PermutationUtility.o PseudoRandom.o RandomGenerator.o Ranking.o
+OBJ  = Distance.o PermutationUtility.o PseudoRandom.o RandomGenerator.o Ranking.o \
+AdaptiveGrid.o
 LIBNAME= libutil.a
 
-LIBS +=  -lm -pthread
+LIBS +=  -lm 
 #INCS +=  -I. -I../core -Icomparators
 INCS +=  -I. -I../core -Icomparators
 
 #CXXFLAGS += $(INCS) -g 
-CXXFLAGS += $(INCS) -g 
+CXXFLAGS += $(INCS) -O3 
 
 CFLAGS = $(INCS) 
 

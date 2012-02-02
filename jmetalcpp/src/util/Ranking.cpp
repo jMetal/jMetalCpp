@@ -132,28 +132,11 @@ Ranking::Ranking (SolutionSet * solutionSet) {
 	for (int j = 0; j < i; j++) {
 		ranking_[j] = new SolutionSet(front[j].size());
 		for (it1=front[j].begin(); it1<front[j].end(); it1++) {
-			ranking_[j]->add(new Solution(solutionSet_->get(*it1)));
+			ranking_[j]->add(solutionSet_->get(*it1));
 		} // for
 	} // for
 
-  delete [] dominateMe;
-  delete [] iDominate;
-  delete [] front;
-
 } // Ranking
-
-
-/**
- * Destructor
- */
-Ranking::~Ranking() {
-  for (int i = 0; i < numberOfSubfronts_; i++) {
-    delete ranking_[i];
-  }
-  delete [] ranking_;
-  delete dominance_;
-  delete constraint_;
-} // ~Ranking
 
 
 /**

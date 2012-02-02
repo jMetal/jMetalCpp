@@ -35,7 +35,6 @@ private:
 
 public:
   Ranking (SolutionSet * solutionSet);
-  ~Ranking();
   SolutionSet * getSubfront(int rank);
   int getNumberOfSubfronts();
 

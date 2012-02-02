@@ -102,21 +102,21 @@ SolutionSet * NSGAII::execute() {
 		offspringPopulation = new SolutionSet(populationSize);
 		Solution ** parents = new Solution*[2];
 
-//		cout << "NSGAII: Comenzamos a operar..." << endl;
+		cout << "NSGAII: Comenzamos a operar..." << endl;
 
 		for (int i = 0; i < (populationSize / 2); i++) {
 			if (evaluations < maxEvaluations) {
 				//obtain parents
 				parents[0] = (Solution *) (selectionOperator->execute(population));
 				parents[1] = (Solution *) (selectionOperator->execute(population));
-//			  cout << "NSGAII: AggregativeValue de parents[0] = " << parents[0]->getAggregativeValue() << endl;
-//			  cout << "NSGAII: AggregativeValue de parents[1] = " << parents[1]->getAggregativeValue() << endl;
-//				cout << "Ya tenemos los padres..." << endl;
+			  cout << "NSGAII: AggregativeValue de parents[0] = " << parents[0]->getAggregativeValue() << endl;
+			  cout << "NSGAII: AggregativeValue de parents[1] = " << parents[1]->getAggregativeValue() << endl;
+				cout << "Ya tenemos los padres..." << endl;
 				Solution ** offSpring = (Solution **) (crossoverOperator->execute(parents));
-//				cout << "Hallado offspring..." << endl;
+				cout << "Hallado offspring..." << endl;
 				mutationOperator->execute(offSpring[0]);
 				mutationOperator->execute(offSpring[1]);
-//				cout << "Ejecutada mutacion..." << endl;
+				cout << "Ejecutada mutacion..." << endl;
 				problem_->evaluate(offSpring[0]);
 				problem_->evaluateConstraints(offSpring[0]);
 				problem_->evaluate(offSpring[1]);
@@ -124,83 +124,71 @@ SolutionSet * NSGAII::execute() {
 				offspringPopulation->add(offSpring[0]);
 				offspringPopulation->add(offSpring[1]);
 				evaluations += 2;
-				delete[] offSpring;
 			} // if
 		} // for
 
-		delete[] parents;
-
-//		cout << "NSGAII: Eval2 n. " << evaluations << endl;
-//		cout << "NSGAII: Poblacion con size = " << population->size() << endl;
-//		cout << "NSGAII: offspringPopulation con size = " << offspringPopulation->size() << endl;
+		cout << "NSGAII: Eval2 n. " << evaluations << endl;
+		cout << "NSGAII: Poblacion con size = " << population->size() << endl;
+		cout << "NSGAII: offspringPopulation con size = " << offspringPopulation->size() << endl;
 
 		// Create the solutionSet union of solutionSet and offSpring
 		unionSolution = population->join(offspringPopulation);
-		delete offspringPopulation;
 
-//		cout << "NSGAII: unionSolution con size = " << unionSolution->size() << endl;
-//		cout << "NSGAII: Ejecutada unión..." << endl;
+		cout << "NSGAII: unionSolution con size = " << unionSolution->size() << endl;
+		cout << "NSGAII: Ejecutada unión..." << endl;
 
 		// Ranking the union
 		Ranking * ranking = new Ranking(unionSolution);
 
-//		cout << "NSGAII: Inicializado ranking con tamaño = " << ranking->getNumberOfSubfronts() << endl;
+		cout << "NSGAII: Inicializado ranking con tamaño = " << ranking->getNumberOfSubfronts() << endl;
 
 		int remain = populationSize;
 		int index = 0;
 		SolutionSet * front = NULL;
-	  for (int i=0;i<population->size();i++) {
-	    delete population->get(i);
-	  }
 		population->clear();
 
 		// Obtain the next front
 		front = ranking->getSubfront(index);
 
-//		cout << "NSGAII: Obtenido frente de pareto con tamaño " << front->size() << endl;
-//		cout << "NSGAII: remain = " << remain << endl;
+		cout << "NSGAII: Obtenido frente de pareto con tamaño " << front->size() << endl;
+		cout << "NSGAII: remain = " << remain << endl;
 
 		while ((remain > 0) && (remain >= front->size())) {
 			//Assign crowding distance to individuals
 			distance->crowdingDistanceAssignment(front, problem_->getNumberOfObjectives());
 
-//			cout << "NSGAII: distance calculada... " << endl;
+			cout << "NSGAII: distance calculada... " << endl;
 
 			//Add the individuals of this front
 			for (int k = 0; k < front->size(); k++) {
-				population->add(new Solution(front->get(k)));
-//				cout << "NSGAII: Añadido frente(" << k << ") a la poblacion con tamaño " << population->size() << endl;
+				population->add(front->get(k));
+				cout << "NSGAII: Añadido frente(" << k << ") a la poblacion con tamaño " << population->size() << endl;
 			} // for
 
 			//Decrement remain
 			remain = remain - front->size();
 
-//			cout << "NSGAII: remain = " << remain << endl;
+			cout << "NSGAII: remain = " << remain << endl;
 
 			//Obtain the next front
 			index++;
 			if (remain > 0) {
-//				cout << "NSGAII: index = " << index << endl;
+				cout << "NSGAII: index = " << index << endl;
 				front = ranking->getSubfront(index);
-//				cout << "NSGAII: Obtenido frente de pareto con tamaño " << front->size() << endl;
+				cout << "NSGAII: Obtenido frente de pareto con tamaño " << front->size() << endl;
 			} // if
 		} // while
 
 		// Remain is less than front(index).size, insert only the best one
 		if (remain > 0) {  // front contains individuals to insert
 			distance->crowdingDistanceAssignment(front, problem_->getNumberOfObjectives());
-			Comparator * c = new CrowdingComparator();
-			front->sort(c);
-			delete c;
+			front->sort(new CrowdingComparator());
 			for (int k = 0; k < remain; k++) {
-				population->add(new Solution(front->get(k)));
+				population->add(front->get(k));
 			} // for
 
 			remain = 0;
 		} // if
-
-		delete ranking;
-		delete unionSolution;
 
 		// This piece of code shows how to use the indicator object into the code
 		// of NSGA-II. In particular, it finds the number of evaluations required
@@ -214,10 +202,7 @@ SolutionSet * NSGAII::execute() {
 //				requiredEvaluations = evaluations;
 //			} // if
 //		} // if
-
 	} // while
-	
-	delete distance;
 
 	// Return as output parameter the required evaluations
 	// TODO:
@@ -225,13 +210,6 @@ SolutionSet * NSGAII::execute() {
 
 	// Return the first non-dominated front
 	Ranking * ranking = new Ranking(population);
-	SolutionSet * result = new SolutionSet(ranking->getSubfront(0)->size());
-	for (int i=0;i<ranking->getSubfront(0)->size();i++) {
-    result->add(new Solution(ranking->getSubfront(0)->get(i)));
-  }
-	delete ranking;
-	delete population;
-
-	return result;
+	return ranking->getSubfront(0);
 
 } // execute

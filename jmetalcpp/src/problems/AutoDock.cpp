@@ -10,7 +10,6 @@
 
 #include <AutoDock.h>
 
-static int evals = 0 ;
 
 AutoDock::AutoDock(string solutionType,
                    int numberOfVariables,
@@ -33,14 +32,15 @@ AutoDock::AutoDock(string solutionType,
     exit(-1) ;
   } // if
 
-
+/*
   for (int i = 0; i < numberOfVariables_; i++) {
     lowerLimit_[i] = -5.12;
     upperLimit_[i] =  5.12;
   } // for
+*/
 
-  cout << "Inicializando limites... Variables = " << numberOfVariables << endl;
-/*
+  cout << "Inicializando limites..." << endl;
+
   lowerLimit_[0] = 3.262;
   upperLimit_[0] = 33.262;
   lowerLimit_[0+numberOfVariables_/2] = 3.262;
@@ -66,7 +66,7 @@ AutoDock::AutoDock(string solutionType,
     lowerLimit_[i+numberOfVariables_/2] = -3.1418;
     upperLimit_[i+numberOfVariables_/2] = 3.1418;
   }
-*/
+
   // TODO: Solution type initialization
   solutionType_ = new RealSolutionType(this);
 
@@ -85,8 +85,6 @@ AutoDock::AutoDock(string solutionType,
 
 void AutoDock::evaluate(Solution *solution) {
   Variable **variables = solution->getDecisionVariables();
-evals ++ ;
-cout << "EVALS in evaluate: " << evals << endl ;
 
   for (int i = 0; i < numberOfVariables_; i++) {
     x_[i] = variables[i]->getValue() ;

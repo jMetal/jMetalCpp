@@ -30,6 +30,7 @@
 #include <time.h>
 
 const int EVALS=200 ;
+
 //AutoDock * problem ;
 pthread_mutex_t mutex1, mutex2 ;
 const int numberOfVariables = 10 ;
@@ -64,7 +65,7 @@ void * jmetal(void *param) {
   cout << "Algoritmo gGA inicializado." << endl;
 
   // Algorithm parameters
-  int populationSizeValue = 210;
+  int populationSizeValue = 100;
   //int *populationSizePtr = &populationSizeValue;
   int maxEvaluationsValue = EVALS;
   //int *maxEvaluationsPtr = &maxEvaluationsValue;
@@ -80,12 +81,9 @@ void * jmetal(void *param) {
   cout << "1..." << endl;
   cout << *(int*)algorithm->getInputParameter("maxEvaluations") << endl;
 
-  algorithm->execute();
 //map<string, void *> parameters;
 //cout << parameters.size() << endl;
 //cout << parameters.max_size() << endl;
-
-  cout << "FINISHING GA" << endl ;
 
   delete algorithm;
   delete problem;
@@ -216,7 +214,7 @@ int main(int argc, char ** argv) {
     fx[0] = sum ;
     /////
 
-    cout << "::::::::::: EVALS: " << i << " :::::::::::::" << endl ;
+    //cout << "::::::::::: EVALS: " << i << " :::::::::::::" << endl ;
 
     int result = pthread_mutex_unlock(&mutex2) ;
     if (result != 0) {

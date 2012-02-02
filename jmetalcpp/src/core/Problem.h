@@ -54,7 +54,6 @@ public:
 
   Problem();
   Problem(SolutionType * solutionType);
-  ~Problem();
   int getNumberOfVariables();
   void setNumberOfVariables(int numberOfVariables);
   int getNumberOfObjectives();

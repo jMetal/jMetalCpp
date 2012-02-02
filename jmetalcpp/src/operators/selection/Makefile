@@ -1,15 +1,14 @@
 CPP  = g++
 CC   = gcc
-OBJ  = BinaryTournament2.o DifferentialEvolutionSelection.o Selection.o \
-BestSolutionSelection.o WorstSolutionSelection.o
+OBJ  = BinaryTournament2.o DifferentialEvolutionSelection.o Selection.o
 LIB  = libselection.a
 
-LIBS +=  -lm -pthread
+LIBS +=  -lm 
 INCS +=  -I. -I../../core -I../../encodings/solutionType -I../../encodings/variable \
 	-I../../util -I../../util/comparators
 
 #CXXFLAGS += $(INCS) -g 
-CXXFLAGS += $(INCS) -g
+CXXFLAGS += $(INCS) -O3 
 
 CFLAGS = $(INCS) 
 
