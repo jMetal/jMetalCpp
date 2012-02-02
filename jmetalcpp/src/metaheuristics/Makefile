@@ -22,8 +22,10 @@ clean: clean-custom
 	rm -f *.o $(LIB)
 
 $(LIB): $(OBJ)
-	ar -r $(LIB) *.o
+	ar -r $(LIB) $(OBJ)
 	ranlib $(LIB)
+	ar -r ../libjmetal.a libmetaheuristics.a
 
 .cpp.o:
-	$(CPP) $(CXXFLAGS) -c $< 
+	$(CPP) $(CXXFLAGS) -c $< -o $@
+

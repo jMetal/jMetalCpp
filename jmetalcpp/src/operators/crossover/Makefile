@@ -22,6 +22,7 @@ clean: clean-custom
 $(LIB): $(OBJ)
 	ar -r $(LIB) *.o
 	ranlib $(LIB)
+	ar -l ../../libjmetal.a libcrossover.a
 
 .cpp.o:
 	$(CPP) $(CXXFLAGS) -c $< 

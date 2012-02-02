@@ -27,7 +27,7 @@ int main(int argc, char ** argv) {
   Operator  * mutation  ; // Mutation operator
   Operator  * selection ; // Selection operator
 
-  int bits = 200 ;
+  int bits = 400 ;
 	problem = new OneMax(bits, 2);
 
 	cout << "El numero de objetivos es " << problem->getNumberOfObjectives() << endl;
@@ -40,7 +40,7 @@ int main(int argc, char ** argv) {
 	// Algorithm parameters
 	int populationSizeValue = 100;
 	int *populationSizePtr = &populationSizeValue;
-	int maxEvaluationsValue = 25000;
+	int maxEvaluationsValue = 250000;
 	int *maxEvaluationsPtr = &maxEvaluationsValue;
 	algorithm->setInputParameter("populationSize",populationSizePtr);
 	algorithm->setInputParameter("maxEvaluations",maxEvaluationsPtr);

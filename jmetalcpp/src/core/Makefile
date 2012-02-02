@@ -21,6 +21,8 @@ clean: clean-custom
 libcore.a: $(OBJ)
 	ar -r $(LIB) *.o
 	ranlib $(LIB)
+	ar -r ../libjmetal.a libcore.a
 
 .cpp.o:
 	$(CPP) $(CXXFLAGS) -c $< 
+
