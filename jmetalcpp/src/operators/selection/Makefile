@@ -22,7 +22,6 @@ clean: clean-custom
 $(LIB): $(OBJ)
 	ar -r $(LIB) *.o
 	ranlib $(LIB)
-	ar -r ../../libjmetal.a libselection.a
 
 .cpp.o:
 	$(CPP) $(CXXFLAGS) -c $< 

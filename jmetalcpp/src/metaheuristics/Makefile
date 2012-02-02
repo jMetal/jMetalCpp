@@ -18,13 +18,14 @@ CFLAGS = $(INCS)
 all: all-before $(LIB) all-after
 
 clean: clean-custom
-	rm -f *.o $(LIB)
+	rm  $(LIB) 
+	find . -name "*.o" -exec rm {} \;
 
 $(LIB): $(OBJ)
 	ar -r $(LIB) $(OBJ)
 	ranlib $(LIB)
-	ar -r ../libjmetal.a libmetaheuristics.a
 
 .cpp.o:
 	$(CPP) $(CXXFLAGS) -c $< -o $@
+	cp $@ .
 

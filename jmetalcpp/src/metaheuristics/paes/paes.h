@@ -14,7 +14,6 @@
 #include <DominanceComparator.h>
 #include <AdaptiveGridArchive.h>
 
-
 class paes : public Algorithm {
 
 public:

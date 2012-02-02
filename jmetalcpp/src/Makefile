@@ -10,7 +10,7 @@ LIBRARIES = core/libcore.a util/libarchive.a util/libinifile.a util/libutil.a ut
 	
 all:
 	for subdir in `echo "$(SUBDIRS)"`; do ($(MAKE) -C $$subdir $@) ; done
-#	for subdir in `echo "$(SUBDIRS)"`; do (ar -r libjmetal.a $$subdir/*.o) ; done
+	for subdir in `echo "$(SUBDIRS)"`; do (ar -r libjmetal.a $$subdir/*.o) ; done
 	ranlib libjmetal.a
 	make -C main
 

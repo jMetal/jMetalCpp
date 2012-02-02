@@ -21,7 +21,6 @@ clean: clean-custom
 $(LIBNAME): $(OBJ)
 	ar -r $(LIBNAME) *.o
 	ranlib $(LIBNAME) 
-	ar -r ../../libjmetal.a libsolutionType.a
 
 .cpp.o:
 	$(CPP) $(CXXFLAGS) -c $< 

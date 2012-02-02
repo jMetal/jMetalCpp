@@ -23,7 +23,6 @@ clean: clean-custom
 $(LIBNAME): $(OBJ)
 	ar -r $(LIBNAME) *.o
 	ranlib $(LIBNAME) 
-	ar -r ../libjmetal.a libutil.a
 
 .cpp.o:
 	$(CPP) $(CXXFLAGS) -c $< 
