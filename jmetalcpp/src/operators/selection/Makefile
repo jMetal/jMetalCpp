@@ -8,7 +8,7 @@ INCS +=  -I. -I../../core -I../../encodings/solutionType -I../../encodings/varia
 	-I../../util -I../../util/comparators
 
 #CXXFLAGS += $(INCS) -g 
-CXXFLAGS += $(INCS) -O3 
+CXXFLAGS += $(INCS) 
 
 CFLAGS = $(INCS) 
 

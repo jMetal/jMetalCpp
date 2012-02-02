@@ -8,7 +8,7 @@ INCS +=  -I. -I../../core -I../../util/wrapper -I../../encodings/solutionType -I
 	-I../../util
 
 #CXXFLAGS += $(INCS) -g 
-CXXFLAGS += $(INCS) -O3 
+CXXFLAGS += $(INCS) 
 
 CFLAGS = $(INCS) 
 

@@ -7,7 +7,7 @@ LIBS +=  -lm
 INCS +=  -I. -I../../core -I../../util -I../variable
 
 #CXXFLAGS += $(INCS) -g 
-CXXFLAGS += $(INCS) -O3 
+CXXFLAGS += $(INCS) 
 
 CFLAGS = $(INCS) 
 

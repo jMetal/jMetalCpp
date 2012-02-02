@@ -3,11 +3,11 @@ CC   = gcc
 OBJ  = Algorithm.o Operator.o Problem.o Solution.o SolutionSet.o SolutionType.o Variable.o
 LIB  = libcore.a
 
-LIBS +=  -lm 
+LIBS +=  
 INCS +=  -I. -I../util/comparators
 
 #CXXFLAGS += $(INCS) -g 
-CXXFLAGS += $(INCS) -O3 
+CXXFLAGS += $(INCS)  
 
 CFLAGS = $(INCS) 
 

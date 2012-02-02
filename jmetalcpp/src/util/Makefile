@@ -4,12 +4,12 @@ OBJ  = Distance.o PermutationUtility.o PseudoRandom.o RandomGenerator.o Ranking.
 AdaptiveGrid.o
 LIBNAME= libutil.a
 
-LIBS +=  -lm 
+LIBS += 
 #INCS +=  -I. -I../core -Icomparators
 INCS +=  -I. -I../core -Icomparators
 
 #CXXFLAGS += $(INCS) -g 
-CXXFLAGS += $(INCS) -O3 
+CXXFLAGS += $(INCS) 
 
 CFLAGS = $(INCS) 
 

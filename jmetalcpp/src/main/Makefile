@@ -1,7 +1,7 @@
 CPP  = g++
 CC   = gcc
 
-LIBS +=  -lm 
+LIBS +=  
 #INCS +=  -I. -I../core -I../util -I../util/comparators -I../operators -I../metaheuristics -I../problems \
 	-I../encodings/solutionType -I../encodings/variable
 INCS +=  -I. -I../core -I../util -I../problems -I../util/comparators \
@@ -22,7 +22,7 @@ DEPS = ../libjmetal.a
 BIN_DIRECTORY = ../../bin
 
 #CXXFLAGS += $(INCS) -g 
-CXXFLAGS += $(INCS) -O3 
+CXXFLAGS += $(INCS) 
 
 CFLAGS = $(INCS)
 #$(CPP) $(CXXFLAGS) -c $<  
