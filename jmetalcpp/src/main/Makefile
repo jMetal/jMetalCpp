@@ -68,7 +68,7 @@ SMPSO_main: SMPSO_main.cpp $(DEPS)
 	cp SMPSO_main $(BIN_DIRECTORY)
 
 autodock_main: autodock_main.cpp $(DEPS)
-	$(CPP) autodock_main.cpp ../libjmetal.a -o  autodock_main $(INCS) $(LIBS) -pthread
+	$(CPP) autodock_main.cpp ../libjmetal.a -o  autodock_main $(INCS) $(LIBS)
 	cp autodock_main $(BIN_DIRECTORY)
 
 #.cpp.o: $(DEPS)
