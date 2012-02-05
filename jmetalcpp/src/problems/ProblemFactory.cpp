@@ -104,7 +104,22 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv) {
 			cerr << "Incorrect number of arguments for DTLZ4 problem." << endl;
 			exit(-1);
 		}
-	} else if (strcmp(name, "Fonseca")==0) { // Fonseca
+	}
+	else if (strcmp(name, "DTLZ5")==0) { // DTLZ4
+			if (argc==0)
+				return new DTLZ5("Real");
+			else if (argc==1)
+				return new DTLZ5(argv[0]);
+			else if (argc==2)
+				return new DTLZ5(argv[0], atoi(argv[1]));
+			else if (argc==3)
+				return new DTLZ5(argv[0], atoi(argv[1]), atoi(argv[2]));
+			else {
+				cerr << "Incorrect number of arguments for DTLZ4 problem." << endl;
+				exit(-1);
+		}
+	}
+	else if (strcmp(name, "Fonseca")==0) { // Fonseca
 		if (argc==0)
 			return new Fonseca("Real");
 		else if (argc==1)
