@@ -10,10 +10,9 @@
 #include <Operator.h>
 //#include <QualityIndicator.h>
 #include <GDE3.h>
-#include <Kursawe.h>
-#include <ZDT1.h>
 #include <DifferentialEvolutionCrossover.h>
 #include <DifferentialEvolutionSelection.h>
+#include <ProblemFactory.h>
 #include <iostream>
 #include <time.h>
 
@@ -27,30 +26,28 @@ int main(int argc, char ** argv) {
   Operator  * selection ; // Selection operator
 
   map<string, void *> parameters;
-
+  
   //TODO: QualityIndicator * indicators;
 
-  //problem = new Kursawe("Real", 3);
-  //problem = new Water("Real");
-  problem = new ZDT1("Real");
-  //problem = new ConstrEx("Real");
-  //problem = new DTLZ1("Real");
-  //problem = new OKA2("Real") ;
-
-  cout << "GDE3_main: El numero de objetivos es " << problem->getNumberOfObjectives() << endl;
-  cout << "GDE3_main: Problema: " << problem->getName() << endl;
+  if (argc>=2) {
+    problem = ProblemFactory::getProblem(argc, argv);
+  } else {
+    cout << "No problem selected." << endl;
+    cout << "Default problem will be used: Fonseca" << endl;
+    // char * defaultProblem;
+    // strcpy(defaultProblem, "Fonseca");
+    problem = ProblemFactory::getProblem("Fonseca");
+  }
 
   algorithm = new GDE3(problem);
 
-  cout << "GDE3_main: Algoritmo GDE3 inicializado." << endl;
+  cout << "GDE3_main: GDE3 algorithm initialized." << endl;
 
   // Algorithm parameters
   int populationSizeValue = 100;
-  int *populationSizePtr = &populationSizeValue;
   int maxIterationsValue = 250;
-  int *maxIterationsPtr = &maxIterationsValue;
-  algorithm->setInputParameter("populationSize",populationSizePtr);
-  algorithm->setInputParameter("maxIterations",maxIterationsPtr);
+  algorithm->setInputParameter("populationSize",&populationSizeValue);
+  algorithm->setInputParameter("maxIterations",&maxIterationsValue);
 
   // Crossover operator
   double crParameter = 0.5;
@@ -78,9 +75,14 @@ int main(int argc, char ** argv) {
 
   // Result messages
   cout << "Total execution time: " << secs << "s" << endl;
-  cout << "Variables values have been writen to file VAR" << endl;
+  cout << "Variables values have been written to file VAR" << endl;
   population->printVariablesToFile("VAR");
-  cout << "Objectives values have been writen to file FUN" << endl;
+  cout << "Objectives values have been written to file FUN" << endl;
   population->printObjectivesToFile("FUN");
+
+  delete selection;
+  delete crossover;
+  delete population;
+  delete algorithm;
 
 } // main

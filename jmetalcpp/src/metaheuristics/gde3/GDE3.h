@@ -24,7 +24,6 @@ private:
   int populationSize_;
   int maxEvaluations_;
   //QualityIndicator *indicators_;
-  // Problem *problem_; // MODIFIED BY AJNEBRO
 public:
   GDE3(Problem * problem);
   SolutionSet * execute();
