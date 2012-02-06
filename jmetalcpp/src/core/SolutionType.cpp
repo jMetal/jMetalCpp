@@ -14,7 +14,7 @@
  * @param problem The problem to solve
 **/
 SolutionType::SolutionType(Problem *problem) {
-	problem_ = problem;
+  problem_ = problem;
 }
 
 
@@ -24,19 +24,18 @@ SolutionType::SolutionType(Problem *problem) {
  * @return An array of variables
 **/
 Variable ** SolutionType::copyVariables(Variable **vars) {
-	int numberOfVar = problem_->getNumberOfVariables();
-	int var;
-	//Variable *variables =(Variable *)malloc(sizeof(*vars));
-	Variable ** variables = new Variable*[numberOfVar];
+  int numberOfVar = problem_->getNumberOfVariables();
+  int var;
+  Variable ** variables = new Variable*[numberOfVar];
 
-	if (variables == NULL)	{
-		cout << "Error grave: Impossible to reserve memory for allocating a copy of variables" << endl;
-		exit(-1);
-	}
-	
-	for (var = 0; var < numberOfVar; var++) {
-		variables[var] = vars[var]->deepCopy();
-	}
-	
-	return variables;
+  if (variables == NULL)  {
+    cout << "Error grave: Impossible to reserve memory for allocating a copy of variables" << endl;
+    exit(-1);
+  }
+
+  for (var = 0; var < numberOfVar; var++) {
+    variables[var] = vars[var]->deepCopy();
+  }
+
+  return variables;
 } // copyVariables

@@ -20,7 +20,7 @@
 class EqualSolutions : public Comparator {
 
 public:
-   int compare(Solution *solution1, Solution *solution2);
+  int compare(Solution *solution1, Solution *solution2);
 };
 
 #endif

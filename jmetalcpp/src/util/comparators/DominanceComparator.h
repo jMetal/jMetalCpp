@@ -20,10 +20,10 @@
 class DominanceComparator : public Comparator {
 
 private:
-	Comparator * overallConstraintViolationComparator_;
+  Comparator * overallConstraintViolationComparator_;
 
 public:
-   int compare(Solution *one, Solution *two);
+  int compare(Solution *one, Solution *two);
 };
 
 #endif

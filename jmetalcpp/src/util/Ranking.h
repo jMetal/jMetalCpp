@@ -27,7 +27,7 @@
 class Ranking {
 
 private:
-	SolutionSet * solutionSet_;
+  SolutionSet * solutionSet_;
   SolutionSet ** ranking_;
   int numberOfSubfronts_;
   DominanceComparator * dominance_;
@@ -35,6 +35,7 @@ private:
 
 public:
   Ranking (SolutionSet * solutionSet);
+  ~Ranking();
   SolutionSet * getSubfront(int rank);
   int getNumberOfSubfronts();
 

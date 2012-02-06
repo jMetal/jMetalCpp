@@ -13,7 +13,7 @@
  * @param nObj The index of the objective to compare
  */
 ObjectiveComparator::ObjectiveComparator(int nObj) {
-	this->nObj = nObj;
+  this->nObj = nObj;
 } // ObjectiveComparator
 
 

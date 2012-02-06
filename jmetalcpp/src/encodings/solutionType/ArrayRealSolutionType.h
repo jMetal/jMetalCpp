@@ -21,7 +21,7 @@ public:
   ArrayRealSolutionType(Problem *problem);
   Variable **createVariables();
   Variable **copyVariables(Variable ** vars);
-	
+
 };
 
 #endif

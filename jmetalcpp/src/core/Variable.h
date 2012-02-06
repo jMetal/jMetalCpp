@@ -23,16 +23,16 @@ using namespace std ;
 class Variable {
 
 public:
-    virtual Variable * deepCopy() = 0;
-    virtual double getValue() = 0;
-    virtual void setValue(double value) = 0;
-    virtual double getLowerBound() = 0;
-    virtual double getUpperBound() = 0;
-    void setLowerBound(double bound);
-    void setUpperBound(double bound);
-    //void setVariableType(VariableType_ variableType);
-    string getVariableType();
-    virtual string toString() = 0 ;
+  virtual Variable * deepCopy() = 0;
+  virtual double getValue() = 0;
+  virtual void setValue(double value) = 0;
+  virtual double getLowerBound() = 0;
+  virtual double getUpperBound() = 0;
+  void setLowerBound(double bound);
+  void setUpperBound(double bound);
+  //void setVariableType(VariableType_ variableType);
+  string getVariableType();
+  virtual string toString() = 0;
 
 }; // Variable
 

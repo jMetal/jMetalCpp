@@ -30,8 +30,8 @@ using namespace std;
 // * must redefine it.
 // */
 //double Variable::getValue() {
-//	cout << "Class " << typeid(this).name() << " does not implement " <<
-//			"method getValue" << endl;
+//  cout << "Class " << typeid(this).name() << " does not implement " <<
+//      "method getValue" << endl;
 //} // getValue
 //
 //
@@ -43,8 +43,8 @@ using namespace std;
 // * must redefine it.
 // */
 //void Variable::setValue(double value) {
-//	cout << "Class " << typeid(this).name() << " does not implement " <<
-//				"method setValue" << endl;
+//  cout << "Class " << typeid(this).name() << " does not implement " <<
+//        "method setValue" << endl;
 //} // setValue
 
 
@@ -56,8 +56,8 @@ using namespace std;
  * Those classes requiring this method must redefine it.
  */
 //double Variable::getLowerBound() {
-//	cout << "Class " << typeid(this).name() << " does not implement " <<
-//				"method getLowerBound" << endl;
+//  cout << "Class " << typeid(this).name() << " does not implement " <<
+//        "method getLowerBound" << endl;
 //} // getLowerBound
 
 
@@ -68,8 +68,8 @@ using namespace std;
  * program is terminated. Those classes requiring this method must redefine it.
  */
 //double Variable::getUpperBound() {
-//	cout << "Class " << typeid(this).name() << " does not implement " <<
-//				"method getUpperBound" << endl;
+//  cout << "Class " << typeid(this).name() << " does not implement " <<
+//        "method getUpperBound" << endl;
 //} // getUpperBound
 
 
@@ -80,8 +80,8 @@ using namespace std;
  * Those classes requiring this method must to redefine it.
  */
 void Variable::setLowerBound(double lowerBound) {
-	cout << "Class " << typeid(this).name() << " does not implement " <<
-				"method setLowerBound" << endl;
+  cout << "Class " << typeid(this).name() << " does not implement " <<
+        "method setLowerBound" << endl;
 } // setLowerBound
 
 
@@ -92,8 +92,8 @@ void Variable::setLowerBound(double lowerBound) {
  * Those classes requiring this method must redefine it.
  */
 void Variable::setUpperBound(double upperBound) {
-	cout << "Class " << typeid(this).name() << " does not implement " <<
-				"method setUpperBound" << endl;
+  cout << "Class " << typeid(this).name() << " does not implement " <<
+        "method setUpperBound" << endl;
 } // setUpperBound
 
 
@@ -103,5 +103,5 @@ void Variable::setUpperBound(double upperBound) {
  */
 
 string Variable::getVariableType() {
-	return typeid(this).name() ;
+  return typeid(this).name() ;
 } // getVariableType

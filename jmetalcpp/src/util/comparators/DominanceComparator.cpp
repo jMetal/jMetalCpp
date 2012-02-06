@@ -48,7 +48,7 @@ int DominanceComparator::compare(Solution *one, Solution *two) {
       two->getOverallConstraintViolation() &&
      (one->getOverallConstraintViolation() < 0) ||
      (two->getOverallConstraintViolation() < 0)){
-  	int returnValue = overallConstraintViolationComparator_->compare(one,two);
+    int returnValue = overallConstraintViolationComparator_->compare(one,two);
     return returnValue;
   }
 */

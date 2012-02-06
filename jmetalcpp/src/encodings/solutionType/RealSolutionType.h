@@ -19,9 +19,9 @@
 class RealSolutionType : public SolutionType {
 
 public:
-   RealSolutionType(Problem *problem);
-   Variable **createVariables();
-	
+  RealSolutionType(Problem *problem);
+  Variable **createVariables();
+
 };
 
 #endif

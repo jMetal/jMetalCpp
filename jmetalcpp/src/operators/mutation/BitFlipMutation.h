@@ -21,13 +21,13 @@
 class BitFlipMutation : public Mutation {
 
 public:
-	BitFlipMutation(map<string, void *> parameters);
+  BitFlipMutation(map<string, void *> parameters);
+  void * execute(void *);
 
-	void * execute(void *);
 private:
-	double mutationProbability_;
-	// TODO: VALID_TYPES;
-	void * doMutation(double probability, Solution * solution);
+  double mutationProbability_;
+  // TODO: VALID_TYPES;
+  void * doMutation(double probability, Solution * solution);
 
 }; // BitFlipMutation
 

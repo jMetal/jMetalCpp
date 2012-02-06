@@ -15,9 +15,7 @@
  * Creates an unbounded solution set.
  */
 SolutionSet::SolutionSet () {
-	capacity_ = 0;
-	// solutionsList_ = new ArrayList<Solution>();
-	// size_ = 0;
+  capacity_ = 0;
 } // SolutionSet
 
 
@@ -27,9 +25,17 @@ SolutionSet::SolutionSet () {
  */
 SolutionSet::SolutionSet (int maximumSize) {
   capacity_ = maximumSize;
-  //size_ = 0;
-  //list_ = new Solution*[capacity_];
 } // SolutionSet
+
+
+/**
+ * Destructor
+ */
+SolutionSet::~SolutionSet() {
+  for (int i = 0; i < solutionsList_.size(); i++) {
+    delete solutionsList_[i];
+  }
+} // ~SolutionSet
 
 
 /**
@@ -39,12 +45,12 @@ SolutionSet::SolutionSet (int maximumSize) {
  * otherwise.
  */
 bool SolutionSet::add(Solution * solution) {
-	if (solutionsList_.size() >= capacity_) {
-		cout << "Error in class SolutionSet the maximum capacity of the set has been reached" << endl;
-		exit(-1);
-	}
-	solutionsList_.push_back(solution);
-	return true;
+  if (solutionsList_.size() >= capacity_) {
+    cout << "Error in class SolutionSet the maximum capacity of the set has been reached" << endl;
+    exit(-1);
+  }
+  solutionsList_.push_back(solution);
+  return true;
 } // add
 
 
@@ -55,11 +61,11 @@ bool SolutionSet::add(Solution * solution) {
  * @throws IndexOutOfBoundsException.
  */
 Solution * SolutionSet::get(int i) {
-	if (i < 0 || i >= solutionsList_.size()) {
-		cout << "Error in class SolutionSet trying to access to an element out of range" << endl;
-		exit(-1);
-	}
-	return solutionsList_[i];
+  if (i < 0 || i >= solutionsList_.size()) {
+    cout << "Error in class SolutionSet trying to access to an element out of range" << endl;
+    exit(-1);
+  }
+  return solutionsList_[i];
 } // get
 
 
@@ -68,7 +74,7 @@ Solution * SolutionSet::get(int i) {
  * @return The maximum capacity of the solution set
  */
 int SolutionSet::getMaxSize() {
-	return capacity_;
+  return capacity_;
 } // getMaxSize
 
 
@@ -77,19 +83,19 @@ int SolutionSet::getMaxSize() {
  * @param comparator <code>Comparator</code> used to sort.
  */
 void SolutionSet::sort(Comparator * comparator){
-	if (comparator == NULL) {
-		cout << "Error. No criterium for compare exist" << endl;
-		exit(-1);
-	} // if
-	for (int i = 0; i < solutionsList_.size(); i++) {
-		for (int j = i+1; j < solutionsList_.size(); j++) {
-			if ((comparator->compare(solutionsList_[i],solutionsList_[j]))==1) {
-				Solution *tmp = solutionsList_[i];
-				solutionsList_[i] = solutionsList_[j];
-				solutionsList_[j] = tmp;
-			}
-		}
-	} // At this point the solution set will be sorted
+  if (comparator == NULL) {
+    cout << "Error. No criterium for compare exist" << endl;
+    exit(-1);
+  } // if
+  for (int i = 0; i < solutionsList_.size(); i++) {
+    for (int j = i+1; j < solutionsList_.size(); j++) {
+      if ((comparator->compare(solutionsList_[i],solutionsList_[j]))==1) {
+        Solution *tmp = solutionsList_[i];
+        solutionsList_[i] = solutionsList_[j];
+        solutionsList_[j] = tmp;
+      }
+    }
+  } // At this point the solution set will be sorted
 } // sort
 
 
@@ -101,23 +107,23 @@ void SolutionSet::sort(Comparator * comparator){
  * <code>-1<code> if the SolutionSet is empty
  */
 int SolutionSet::indexBest(Comparator *comparator) {
-	if (solutionsList_.empty()) {
-		return -1;
-	}
-	int index = 0;
-	Solution * bestKnown = solutionsList_[0];
-	Solution * candidateSolution;
-	int flag;
-	for (int i = 1; i < solutionsList_.size(); i++) {
-		candidateSolution = solutionsList_[i];
-		flag = comparator->compare(bestKnown, candidateSolution);
-		//cout << "flag: " << flag << endl;
-		if (flag == 1) {
-			index = i;
-			bestKnown = candidateSolution;
-		}
-	}
-	return index;
+  if (solutionsList_.empty()) {
+    return -1;
+  }
+  int index = 0;
+  Solution * bestKnown = solutionsList_[0];
+  Solution * candidateSolution;
+  int flag;
+  for (int i = 1; i < solutionsList_.size(); i++) {
+    candidateSolution = solutionsList_[i];
+    flag = comparator->compare(bestKnown, candidateSolution);
+    //cout << "flag: " << flag << endl;
+    if (flag == 1) {
+      index = i;
+      bestKnown = candidateSolution;
+    }
+  }
+  return index;
 } // indexBest
 
 
@@ -129,12 +135,12 @@ int SolutionSet::indexBest(Comparator *comparator) {
  * if the SolutionSet is empty
  */
 Solution * SolutionSet::best(Comparator * comparator){
-	int indexBest = this->indexBest(comparator);
-	if (indexBest < 0) {
-		return NULL;
-	} else {
-		return solutionsList_[indexBest];
-	}
+  int indexBest = this->indexBest(comparator);
+  if (indexBest < 0) {
+    return NULL;
+  } else {
+    return solutionsList_[indexBest];
+  }
 } // best
 
 
@@ -146,22 +152,22 @@ Solution * SolutionSet::best(Comparator * comparator){
  * <code>-1<code> if the SolutionSet is empty
  */
 int SolutionSet::indexWorst(Comparator * comparator){
-	if (solutionsList_.empty()) {
-		return -1;
-	}
-	int index = 0;
-	Solution * worstKnown = solutionsList_[0];
-	Solution * candidateSolution;
-	int flag;
-	for (int i = 1; i < solutionsList_.size(); i++) {
-		candidateSolution = solutionsList_[i];
-		flag = comparator->compare(worstKnown, candidateSolution);
-		if (flag == -1) {
-			index = i;
-			worstKnown = candidateSolution;
-		}
-	}
-	return index;
+  if (solutionsList_.empty()) {
+    return -1;
+  }
+  int index = 0;
+  Solution * worstKnown = solutionsList_[0];
+  Solution * candidateSolution;
+  int flag;
+  for (int i = 1; i < solutionsList_.size(); i++) {
+    candidateSolution = solutionsList_[i];
+    flag = comparator->compare(worstKnown, candidateSolution);
+    if (flag == -1) {
+      index = i;
+      worstKnown = candidateSolution;
+    }
+  }
+  return index;
 } // indexWorst
 
 
@@ -173,12 +179,12 @@ int SolutionSet::indexWorst(Comparator * comparator){
  * if the SolutionSet is empty
  */
 Solution * SolutionSet::worst(Comparator * comparator){
-	int index = indexWorst(comparator);
-	if (index < 0) {
-		return NULL;
-	} else {
-		return solutionsList_[index];
-	}
+  int index = indexWorst(comparator);
+  if (index < 0) {
+    return NULL;
+  } else {
+    return solutionsList_[index];
+  }
 } // worst
 
 
@@ -187,7 +193,7 @@ Solution * SolutionSet::worst(Comparator * comparator){
  * @return The size of the SolutionSet.
  */
 int SolutionSet::size() {
-	return solutionsList_.size();
+  return solutionsList_.size();
 } // size
 
 
@@ -197,18 +203,18 @@ int SolutionSet::size() {
  * @param path The output file name
  */
 void SolutionSet::printObjectivesToFile(string file){
-	std::ofstream out(file.c_str());
-	cout.setf(ios::fixed);
-	for (int i = 0; i < solutionsList_.size(); i++) {
-		int nObj = solutionsList_[i]->getNumberOfObjectives();
-		for (int obj = 0; obj < nObj; obj++) {
-			out << solutionsList_[i]->getObjective(obj) << " ";
-			cout << setprecision(15) << solutionsList_[i]->getObjective(obj) << " ";
-		}
-		out << endl;
-		cout << endl;
-	}
-	out.close();
+  std::ofstream out(file.c_str());
+  cout.setf(ios::fixed);
+  for (int i = 0; i < solutionsList_.size(); i++) {
+    int nObj = solutionsList_[i]->getNumberOfObjectives();
+    for (int obj = 0; obj < nObj; obj++) {
+      out << solutionsList_[i]->getObjective(obj) << " ";
+      cout << setprecision(15) << solutionsList_[i]->getObjective(obj) << " ";
+    }
+    out << endl;
+    cout << endl;
+  }
+  out.close();
 } // printObjectivesToFile
 
 
@@ -230,7 +236,7 @@ void SolutionSet::printVariablesToFile(string file) {
  * Empties the SolutionSet
  */
 void SolutionSet::clear(){
-	solutionsList_.clear();
+  solutionsList_.clear();
 } // clear
 
 
@@ -239,10 +245,10 @@ void SolutionSet::clear(){
  * @param i The position of the solution to remove.
  */
 void SolutionSet::remove(int i) {
-	if (i < 0 || i >= solutionsList_.size()) {
-		cout << "Error in class SolutionSet trying to access to an element out of range" << endl;
-		exit(-1);
-	}
+  if (i < 0 || i >= solutionsList_.size()) {
+    cout << "Error in class SolutionSet trying to access to an element out of range" << endl;
+    exit(-1);
+  }
   solutionsList_.erase(solutionsList_.begin() + i);
 } // remove
 
@@ -255,12 +261,12 @@ void SolutionSet::remove(int i) {
  */
 SolutionSet * SolutionSet::join(SolutionSet *another) {
   SolutionSet *result =
-  		new SolutionSet(solutionsList_.size()+another->size());
+      new SolutionSet(solutionsList_.size()+another->size());
   for (int i=0;i<solutionsList_.size();i++) {
-  	result->add(this->get(i));
+    result->add(new Solution(this->get(i)));
   }
   for (int i=0;i<another->size();i++) {
-  	result->add(another->get(i));
+    result->add(new Solution(another->get(i)));
   }
   return result;
 } // join
@@ -272,11 +278,10 @@ SolutionSet * SolutionSet::join(SolutionSet *another) {
  * @param solution The new solution
  */
 void SolutionSet::replace(int position, Solution *solution) {
-	if (position < 0 || position >= solutionsList_.size()) {
-		cout << "Error in class SolutionSet trying to access to an element out of range" << endl;
-		exit(-1);
-	}
-	solutionsList_[position] = solution;
+  if (position < 0 || position >= solutionsList_.size()) {
+    cout << "Error in class SolutionSet trying to access to an element out of range" << endl;
+    exit(-1);
+  }
+  solutionsList_[position] = solution;
 } // replace
-
 

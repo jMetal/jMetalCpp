@@ -23,18 +23,18 @@ ArrayRealSolutionType::ArrayRealSolutionType(Problem * problem)
  * @param decisionVariables
  */
 Variable ** ArrayRealSolutionType::createVariables() {
-	int i;
-	
-	Variable **variables = new Variable*[1]; //malloc(sizeof(Real) * problem->getNumberOfVariables());
-	if (problem_->getSolutionType() ==  NULL) {
-		cout << "Error grave: Impossible to reserve memory for variable type" << endl;
-		exit(-1);
+  int i;
+
+  Variable **variables = new Variable*[1]; //malloc(sizeof(Real) * problem->getNumberOfVariables());
+  if (problem_->getSolutionType() ==  NULL) {
+    cout << "Error grave: Impossible to reserve memory for variable type" << endl;
+    exit(-1);
   }
    
   for (i = 0; i < problem_->getNumberOfVariables(); i++) {
-  	variables[0] = new ArrayReal(problem_->getNumberOfVariables(),problem_);
+    variables[0] = new ArrayReal(problem_->getNumberOfVariables(),problem_);
   }
-	
+
   return variables;
 } // createVariables
 
@@ -45,7 +45,7 @@ Variable ** ArrayRealSolutionType::createVariables() {
  * @return An array of variables
  */
 Variable ** ArrayRealSolutionType::copyVariables(Variable ** vars) {
-	Variable **variables = new Variable*[1];
-	variables[0] = vars[0]->deepCopy();
-	return variables ;
+  Variable **variables = new Variable*[1];
+  variables[0] = vars[0]->deepCopy();
+  return variables ;
 } // copyVariables

@@ -19,7 +19,7 @@
  * Constructor.
  */
 Distance::Distance() {
-	//do nothing.
+  //do nothing.
 } // Distance
 
 
@@ -30,28 +30,28 @@ Distance::Distance() {
  * @return a matrix with distances.
  */
 double ** Distance::distanceMatrix(SolutionSet * solutionSet) {
-	Solution * solutionI;
-	Solution * solutionJ;
+  Solution * solutionI;
+  Solution * solutionJ;
 
-	//The matrix of distances
-	int size = solutionSet->size();
-	double ** distance;// = new double [size][size];
-	for (int i = 0; i < solutionSet->size(); i++){
-		distance[i] = new double[size];
-	}
-	//-> Calculate the distances
-	for (int i = 0; i < solutionSet->size(); i++){
-		distance[i][i] = 0.0;
-		solutionI = solutionSet->get(i);
-		for (int j = i + 1; j < solutionSet->size(); j++){
-			solutionJ = solutionSet->get(j);
-			distance[i][j] = this->distanceBetweenObjectives(solutionI,solutionJ);
-			distance[j][i] = distance[i][j];
-		} // for
-	} // for
+  //The matrix of distances
+  int size = solutionSet->size();
+  double ** distance;// = new double [size][size];
+  for (int i = 0; i < solutionSet->size(); i++){
+    distance[i] = new double[size];
+  }
+  //-> Calculate the distances
+  for (int i = 0; i < solutionSet->size(); i++){
+    distance[i][i] = 0.0;
+    solutionI = solutionSet->get(i);
+    for (int j = i + 1; j < solutionSet->size(); j++){
+      solutionJ = solutionSet->get(j);
+      distance[i][j] = this->distanceBetweenObjectives(solutionI,solutionJ);
+      distance[j][i] = distance[i][j];
+    } // for
+  } // for
 
-	//->Return the matrix of distances
-	return distance;
+  //->Return the matrix of distances
+  return distance;
 } // distanceMatrix
 
 
@@ -63,19 +63,19 @@ double ** Distance::distanceMatrix(SolutionSet * solutionSet) {
  * @return The minimum distance between solution and the set.
  */
 double Distance::distanceToSolutionSetInObjectiveSpace(Solution *solution,
-																		SolutionSet * solutionSet) {
-	//At start point the distance is the max
-	double distance = std::numeric_limits<double>::max();
+                                    SolutionSet * solutionSet) {
+  //At start point the distance is the max
+  double distance = std::numeric_limits<double>::max();
 
-	// found the min distance respect to population
-	for (int i = 0; i < solutionSet->size();i++){
-		double aux = this->distanceBetweenObjectives(solution,solutionSet->get(i));
-		if (aux < distance)
-			distance = aux;
-	} // for
+  // found the min distance respect to population
+  for (int i = 0; i < solutionSet->size();i++){
+    double aux = this->distanceBetweenObjectives(solution,solutionSet->get(i));
+    if (aux < distance)
+      distance = aux;
+  } // for
 
-	//->Return the best distance
-	return distance;
+  //->Return the best distance
+  return distance;
 } // distanceToSolutionSetinObjectiveSpace
 
 
@@ -87,19 +87,19 @@ double Distance::distanceToSolutionSetInObjectiveSpace(Solution *solution,
  * @return The minimum distance between solution and the set.
  */
 double Distance::distanceToSolutionSetInSolutionSpace(Solution * solution,
-																	SolutionSet * solutionSet) {
-	//At start point the distance is the max
-	double distance = std::numeric_limits<double>::max();
+                                  SolutionSet * solutionSet) {
+  //At start point the distance is the max
+  double distance = std::numeric_limits<double>::max();
 
-	// found the min distance respect to population
-	for (int i = 0; i < solutionSet->size(); i++) {
-		double aux = this->distanceBetweenSolutions(solution,solutionSet->get(i));
-		if (aux < distance)
-			distance = aux;
-	} // for
+  // found the min distance respect to population
+  for (int i = 0; i < solutionSet->size(); i++) {
+    double aux = this->distanceBetweenSolutions(solution,solutionSet->get(i));
+    if (aux < distance)
+      distance = aux;
+  } // for
 
-	//->Return the best distance
-	return distance;
+  //->Return the best distance
+  return distance;
 } // distanceToSolutionSetInSolutionSpace
 
 
@@ -110,21 +110,21 @@ double Distance::distanceToSolutionSetInSolutionSpace(Solution * solution,
  * @return the distance between solutions.
  */
 double Distance::distanceBetweenSolutions(Solution * solutionI, Solution * solutionJ) {
-	//->Obtain his decision variables
-	Variable ** decisionVariableI = solutionI->getDecisionVariables();
-	Variable ** decisionVariableJ = solutionJ->getDecisionVariables();
+  //->Obtain his decision variables
+  Variable ** decisionVariableI = solutionI->getDecisionVariables();
+  Variable ** decisionVariableJ = solutionJ->getDecisionVariables();
 
-	double diff;    //Auxiliar var
-	double distance = 0.0;
-	//-> Calculate the Euclidean distance
-	for (int i = 0; i < solutionI->getNumberOfVariables(); i++){
-		diff = decisionVariableI[i]->getValue() -
-					 decisionVariableJ[i]->getValue();
-		distance += pow(diff,2.0);
-	} // for
+  double diff;    //Auxiliar var
+  double distance = 0.0;
+  //-> Calculate the Euclidean distance
+  for (int i = 0; i < solutionI->getNumberOfVariables(); i++){
+    diff = decisionVariableI[i]->getValue() -
+           decisionVariableJ[i]->getValue();
+    distance += pow(diff,2.0);
+  } // for
 
-	//-> Return the euclidean distance
-	return sqrt(distance);
+  //-> Return the euclidean distance
+  return sqrt(distance);
 } // distanceBetweenSolutions
 
 
@@ -135,16 +135,16 @@ double Distance::distanceBetweenSolutions(Solution * solutionI, Solution * solut
  * @return the distance between solutions in objective space.
  */
 double Distance::distanceBetweenObjectives(Solution * solutionI, Solution * solutionJ) {
-	double diff;    //Auxiliar var
-	double distance = 0.0;
-	//-> Calculate the euclidean distance
-	for (int nObj = 0; nObj < solutionI->getNumberOfObjectives(); nObj++){
-		diff = solutionI->getObjective(nObj) - solutionJ->getObjective(nObj);
-		distance += pow(diff,2.0);
-	} // for
+  double diff;    //Auxiliar var
+  double distance = 0.0;
+  //-> Calculate the euclidean distance
+  for (int nObj = 0; nObj < solutionI->getNumberOfObjectives(); nObj++){
+    diff = solutionI->getObjective(nObj) - solutionJ->getObjective(nObj);
+    distance += pow(diff,2.0);
+  } // for
 
-	//Return the euclidean distance
-	return sqrt(distance);
+  //Return the euclidean distance
+  return sqrt(distance);
 } // distanceBetweenObjectives
 
 
@@ -154,51 +154,57 @@ double Distance::distanceBetweenObjectives(Solution * solutionI, Solution * solu
  * @param nObjs Number of objectives.
  */
 void Distance::crowdingDistanceAssignment(SolutionSet * solutionSet, int nObjs) {
-	int size = solutionSet->size();
+  int size = solutionSet->size();
 
-	if (size == 0)
-		return;
+  if (size == 0)
+    return;
 
-	if (size == 1) {
-		solutionSet->get(0)->setCrowdingDistance(std::numeric_limits<double>::max());
-		return;
-	} // if
+  if (size == 1) {
+    solutionSet->get(0)->setCrowdingDistance(std::numeric_limits<double>::max());
+    return;
+  } // if
 
-	if (size == 2) {
-		solutionSet->get(0)->setCrowdingDistance(std::numeric_limits<double>::max());
-		solutionSet->get(1)->setCrowdingDistance(std::numeric_limits<double>::max());
-		return;
-	} // if
+  if (size == 2) {
+    solutionSet->get(0)->setCrowdingDistance(std::numeric_limits<double>::max());
+    solutionSet->get(1)->setCrowdingDistance(std::numeric_limits<double>::max());
+    return;
+  } // if
 
-	//Use a new SolutionSet to evite alter original solutionSet
-	SolutionSet * front = new SolutionSet(size);
-	for (int i = 0; i < size; i++){
-		front->add(solutionSet->get(i));
-	}
+  //Use a new SolutionSet to evite alter original solutionSet
+  SolutionSet * front = new SolutionSet(size);
+  for (int i = 0; i < size; i++){
+    front->add(solutionSet->get(i));
+  }
 
-	for (int i = 0; i < size; i++)
-		front->get(i)->setCrowdingDistance(0.0);
+  for (int i = 0; i < size; i++)
+    front->get(i)->setCrowdingDistance(0.0);
 
-	double objetiveMaxn;
-	double objetiveMinn;
-	double distance;
+  double objetiveMaxn;
+  double objetiveMinn;
+  double distance;
 
-	for (int i = 0; i<nObjs; i++) {
-		// Sort the population by Obj n
-		front->sort(new ObjectiveComparator(i));
-		objetiveMinn = front->get(0)->getObjective(i);
-		objetiveMaxn = front->get(front->size()-1)->getObjective(i);
+  for (int i = 0; i<nObjs; i++) {
+    // Sort the population by Obj n
+    Comparator * c = new ObjectiveComparator(i);
+    front->sort(c);
+    delete c;
+    objetiveMinn = front->get(0)->getObjective(i);
+    objetiveMaxn = front->get(front->size()-1)->getObjective(i);
 
-		//Set de crowding distance
-		front->get(0)->setCrowdingDistance(std::numeric_limits<double>::max());
-		front->get(size-1)->setCrowdingDistance(std::numeric_limits<double>::max());
+    //Set de crowding distance
+    front->get(0)->setCrowdingDistance(std::numeric_limits<double>::max());
+    front->get(size-1)->setCrowdingDistance(std::numeric_limits<double>::max());
 
-		for (int j = 1; j < size-1; j++) {
-			distance = front->get(j+1)->getObjective(i) - front->get(j-1)->getObjective(i);
-			distance = distance / (objetiveMaxn - objetiveMinn);
-			distance += front->get(j)->getCrowdingDistance();
-			front->get(j)->setCrowdingDistance(distance);
-		} // for
-	} // for
+    for (int j = 1; j < size-1; j++) {
+      distance = front->get(j+1)->getObjective(i) - front->get(j-1)->getObjective(i);
+      distance = distance / (objetiveMaxn - objetiveMinn);
+      distance += front->get(j)->getCrowdingDistance();
+      front->get(j)->setCrowdingDistance(distance);
+    } // for
+  } // for
+
+  front->clear();
+  delete front;
+
 } // crowdingDistanceAssignment
 

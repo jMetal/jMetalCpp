@@ -28,9 +28,9 @@ BinaryReal::BinaryReal() : Binary() { }
  */
 BinaryReal::BinaryReal(int numberOfBits, double lowerBound, double upperBound)
 : Binary(numberOfBits) {
-	lowerBound_ = lowerBound;
-	upperBound_ = upperBound;
-	this->decode();
+  lowerBound_ = lowerBound;
+  upperBound_ = upperBound;
+  this->decode();
 } //BinaryReal
 
 
@@ -39,9 +39,9 @@ BinaryReal::BinaryReal(int numberOfBits, double lowerBound, double upperBound)
  * @param variable The variable to copy
  */
 BinaryReal::BinaryReal(BinaryReal * variable) : Binary (variable) {
-	lowerBound_   = variable->lowerBound_;
-	upperBound_   = variable->upperBound_;
-	value_ = variable->value_;
+  lowerBound_   = variable->lowerBound_;
+  upperBound_   = variable->upperBound_;
+  value_ = variable->value_;
 } //BinaryReal
 
 
@@ -52,15 +52,15 @@ BinaryReal::BinaryReal(BinaryReal * variable) : Binary (variable) {
  * <code>getValue</code>.
  */
 void BinaryReal::decode(){
-	double value = 0.0;
-	for (int i = 0; i < numberOfBits_; i++) {
-		if ((*bits_)[i] == true) {
-			value += pow(2.0,i);
-		}
-	}
-	value_ = value * (upperBound_ - lowerBound_) /
-			(pow(2.0,numberOfBits_)-1.0);
-	value_ += lowerBound_;
+  double value = 0.0;
+  for (int i = 0; i < numberOfBits_; i++) {
+    if ((*bits_)[i] == true) {
+      value += pow(2.0,i);
+    }
+  }
+  value_ = value * (upperBound_ - lowerBound_) /
+      (pow(2.0,numberOfBits_)-1.0);
+  value_ += lowerBound_;
 } //decode
 
 
@@ -69,12 +69,12 @@ void BinaryReal::decode(){
  * @return the double value.
  */
 double BinaryReal::getValue() {
-	return value_;
+  return value_;
 } //getValue
 
 
 void BinaryReal::setValue(double value) {
-	value_ = value;
+  value_ = value;
 }
 
 
@@ -83,7 +83,7 @@ void BinaryReal::setValue(double value) {
  * @return The copy of the object
  */
 Variable * BinaryReal::deepCopy() {
-	return new BinaryReal(this);
+  return new BinaryReal(this);
 } //deepCopy
 
 
@@ -92,7 +92,7 @@ Variable * BinaryReal::deepCopy() {
  * @return the lower bound.
  */
 double BinaryReal::getLowerBound() {
-	return lowerBound_;
+  return lowerBound_;
 } // getLowerBound
 
 
@@ -101,7 +101,7 @@ double BinaryReal::getLowerBound() {
  * @return the upper bound.
  */
 double BinaryReal::getUpperBound() {
-	return upperBound_;
+  return upperBound_;
 } // getUpperBound
 
 
@@ -110,7 +110,7 @@ double BinaryReal::getUpperBound() {
  * @param lowerBound the lower bound.
  */
 void BinaryReal::setLowerBound(double lowerBound) {
-	lowerBound_ = lowerBound;
+  lowerBound_ = lowerBound;
 } // setLowerBound
 
 
@@ -119,7 +119,7 @@ void BinaryReal::setLowerBound(double lowerBound) {
  * @param upperBound the upper bound.
  */
 void BinaryReal::setUpperBound(double upperBound) {
-	upperBound_ = upperBound;
+  upperBound_ = upperBound;
 } // setUpperBound
 
 
@@ -128,7 +128,7 @@ void BinaryReal::setUpperBound(double upperBound) {
  * @return the string.
  */
 string BinaryReal::toString() {
-	string string_ = "";
-	string_ += value_;
-	return string_;
+  string string_ = "";
+  string_ += value_;
+  return string_;
 } // toString

@@ -23,28 +23,28 @@
 class Binary : public Variable {
 
 public:
-	Binary();
-	Binary(int numberOfBits);
-	Binary(Binary * variable);
-	~Binary() ;
-	void decode();
-	Variable * deepCopy();
-	int getNumberOfBits();
-	bool getIth(int bit);
-	void setIth(int bit, bool value);
-	void flip(int bit) ;
-	int hammingDistance(Binary * other);
-	string toString();
-	int cardinality() ;
+  Binary();
+  Binary(int numberOfBits);
+  Binary(Binary * variable);
+  ~Binary() ;
+  void decode();
+  Variable * deepCopy();
+  int getNumberOfBits();
+  bool getIth(int bit);
+  void setIth(int bit, bool value);
+  void flip(int bit) ;
+  int hammingDistance(Binary * other);
+  string toString();
+  int cardinality() ;
 
-	double getValue();
-	void setValue(double value);
-	double getLowerBound();
-	double getUpperBound();
+  double getValue();
+  void setValue(double value);
+  double getLowerBound();
+  double getUpperBound();
 
 protected:
-	vector<bool> * bits_;
-	int numberOfBits_;
+  vector<bool> * bits_;
+  int numberOfBits_;
 };
 
 #endif

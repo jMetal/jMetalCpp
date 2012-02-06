@@ -12,7 +12,6 @@
 #include <Problem.h>
 #include <Variable.h>
 #include <stddef.h>
-//#include <stdlib.h>
 #include <string>
 
 class Problem;
@@ -27,12 +26,12 @@ class Problem;
 class SolutionType {
 
 protected:
-	Problem *problem_;
+  Problem *problem_;
 
 public:
-	SolutionType(Problem *problem);
-	virtual Variable **createVariables() = 0;
-	Variable **copyVariables(Variable **vars);
+  SolutionType(Problem *problem);
+  virtual Variable **createVariables() = 0;
+  Variable **copyVariables(Variable **vars);
 
 }; // SolutionType
 

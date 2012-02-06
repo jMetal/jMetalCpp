@@ -10,3 +10,5 @@
 
 Crossover::Crossover(map<string , void*> parameters)
 : Operator(parameters) {}
+
+Crossover::~Crossover() { /* do nothing */ }

@@ -7,17 +7,18 @@
 
 #include <BitFlipMutation.h>
 
+
 /**
  * Constructor
  * Creates a new instance of the polynomial mutation operator
  */
 BitFlipMutation::BitFlipMutation(map<string, void *> parameters)
 : Mutation(parameters) {
-	mutationProbability_ = 0.0 ;
-	if (parameters["probability"] != NULL)
-		mutationProbability_ = *(double *) parameters["probability"];
+  mutationProbability_ = 0.0 ;
+  if (parameters["probability"] != NULL)
+    mutationProbability_ = *(double *) parameters["probability"];
 
-	cout << "bitflipmutation -> prob: " << mutationProbability_ << endl ;
+  cout << "bitflipmutation -> prob: " << mutationProbability_ << endl ;
 } // BitFlipMutation
 
 
@@ -30,9 +31,9 @@ void * BitFlipMutation::doMutation(double probability, Solution *solution) {
   int numberOfVariables = solution->getNumberOfVariables() ;
 
   for (int i = 0 ; i < numberOfVariables ; i++) {
-  	Binary * variable = (Binary *)(solution->getDecisionVariables()[i]) ;
+    Binary * variable = (Binary *)(solution->getDecisionVariables()[i]) ;
     for (int j = 0; j < variable->getNumberOfBits() ; j++)
-		  if (PseudoRandom::randDouble() <= mutationProbability_)
+      if (PseudoRandom::randDouble() <= mutationProbability_)
         variable->flip(j) ;
   }
 } // doMutation
@@ -45,10 +46,10 @@ void * BitFlipMutation::doMutation(double probability, Solution *solution) {
  * @throws JMException
  */
 void * BitFlipMutation::execute(void *object) {
-	Solution *solution = (Solution *)object;
-	// TODO: VALID_TYPES?
+  Solution *solution = (Solution *)object;
+  // TODO: VALID_TYPES?
 
-	doMutation(mutationProbability_, solution)  ;
+  doMutation(mutationProbability_, solution)  ;
 
-	return solution;
+  return solution;
 } // execute

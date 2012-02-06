@@ -12,8 +12,8 @@
  * Default constructor.
  */
 Binary::Binary() {
-	bits_ = NULL ;
-	numberOfBits_ = -1 ;
+  bits_ = NULL ;
+  numberOfBits_ = -1 ;
 } //Binary
 
 
@@ -22,17 +22,17 @@ Binary::Binary() {
  *  @param numberOfBits Length of the bit string
  */
 Binary::Binary(int numberOfBits){
-	numberOfBits_ = numberOfBits;
+  numberOfBits_ = numberOfBits;
 
   bits_ = new vector<bool>(numberOfBits_, false) ;
 
-	for (int i = 0; i < numberOfBits_; i++){
-		if (PseudoRandom::randDouble() < 0.5) {
-			(*bits_)[i] = true ;
-		} else {
-			(*bits_)[i] = false ;
-		}
-	}
+  for (int i = 0; i < numberOfBits_; i++){
+    if (PseudoRandom::randDouble() < 0.5) {
+      (*bits_)[i] = true ;
+    } else {
+      (*bits_)[i] = false ;
+    }
+  }
 } //Binary
 
 
@@ -41,15 +41,15 @@ Binary::Binary(int numberOfBits){
  * @param variable The Binary variable to copy.
  */
 Binary::Binary(Binary * variable){
-	numberOfBits_ = variable->getNumberOfBits();
+  numberOfBits_ = variable->getNumberOfBits();
   bits_ = new vector<bool>(numberOfBits_, false) ;
-	for (int i = 0; i < numberOfBits_; i++) {
-		(*bits_)[i] = (*variable->bits_)[i] ;
-	}
+  for (int i = 0; i < numberOfBits_; i++) {
+    (*bits_)[i] = (*variable->bits_)[i] ;
+  }
 } //Binary
 
 Binary::~Binary() {
-	delete bits_;
+  delete bits_;
 }
 
 /**
@@ -60,7 +60,7 @@ Binary::~Binary() {
  * value, this method do noting
  */
 void Binary::decode() {
-	//do nothing
+  //do nothing
 } //decode
 
 
@@ -69,7 +69,7 @@ void Binary::decode() {
  * @return An exact copy of the object.
  **/
 Variable * Binary::deepCopy() {
-	return new Binary(this);
+  return new Binary(this);
 } //deepCopy
 
 
@@ -78,7 +78,7 @@ Variable * Binary::deepCopy() {
  * @return The length
  */
 int Binary::getNumberOfBits(){
-	return numberOfBits_;
+  return numberOfBits_;
 } //getNumberOfBits
 
 
@@ -88,7 +88,7 @@ int Binary::getNumberOfBits(){
  * @return The ith bit
  */
 bool Binary::getIth(int bit){
-	return (*bits_)[bit];
+  return (*bits_)[bit];
 } //getIth
 
 /**
@@ -97,7 +97,7 @@ bool Binary::getIth(int bit){
  */
 
 void Binary::flip(int bit){
-	(*bits_)[bit].flip();
+  (*bits_)[bit].flip();
 } //blip
 
 /**
@@ -105,7 +105,7 @@ void Binary::flip(int bit){
  * @param bit The bit to set
  */
 void Binary::setIth(int bit, bool value){
-	(*bits_)[bit] = value ;
+  (*bits_)[bit] = value ;
 } //getNumberOfBits
 
 
@@ -115,15 +115,15 @@ void Binary::setIth(int bit, bool value){
 * @return The hamming distance
 */
 int Binary::hammingDistance(Binary * other) {
-	int distance = 0;
-	int i = 0;
-	while (i < bits_->size()) {
-		if ((*bits_)[i] != (*other->bits_)[i]) {
-			distance++;
-		}
-		i++;
-	}
-	return distance;
+  int distance = 0;
+  int i = 0;
+  while (i < bits_->size()) {
+    if ((*bits_)[i] != (*other->bits_)[i]) {
+      distance++;
+    }
+    i++;
+  }
+  return distance;
 } // hammingDistance
 
 
@@ -132,43 +132,43 @@ int Binary::hammingDistance(Binary * other) {
  * @return the string.
  */
 string Binary::toString() {
-	vector<bool>::iterator it;
-	string str = "" ;
-	for(it = bits_->begin(); it != bits_->end(); it++) {
-		if (*it == true)
-	    str += "1" ;
-		else
-			str += "0" ;
-	}
-	return str ;
+  vector<bool>::iterator it;
+  string str = "" ;
+  for(it = bits_->begin(); it != bits_->end(); it++) {
+    if (*it == true)
+      str += "1" ;
+    else
+      str += "0" ;
+  }
+  return str ;
 } // toString
 
 /*
  * Returns the number of 1's in the binary variable
  */
 int Binary::cardinality() {
-	int counter = 0 ;
-	vector<bool>::iterator it;
-	for(it = bits_->begin(); it != bits_->end(); it++)
-		if (*it == true)
-			counter ++ ;
-	return counter ;
+  int counter = 0 ;
+  vector<bool>::iterator it;
+  for(it = bits_->begin(); it != bits_->end(); it++)
+    if (*it == true)
+      counter ++ ;
+  return counter ;
 }
 
 double Binary::getValue() {
-	return 0.0;
+  return 0.0;
 }
 
 void Binary::setValue(double value) {
-	//value_ = value;
+  //value_ = value;
 }
 
 double Binary::getLowerBound() {
-	//	return 0.0;
-	exit(-1);
+  //  return 0.0;
+  exit(-1);
 }
 
 double Binary::getUpperBound() {
-//	return 0.0;
-	exit(-1);
+//  return 0.0;
+  exit(-1);
 }

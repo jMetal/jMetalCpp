@@ -10,7 +10,6 @@
 #define __SBX_CROSSOVER__
 
 #include <Crossover.h>
-//#include <PseudoRandom.h>
 #include <XReal.h>
 #include <Solution.h>
 #include <math.h>
@@ -22,19 +21,20 @@
 class SBXCrossover : public Crossover {
 
 public:
-	SBXCrossover(map<string, void *> parameters);
-	void *execute(void *);
+  SBXCrossover(map<string, void *> parameters);
+  ~SBXCrossover();
+  void *execute(void *);
 
 protected:
-	static const double ETA_C_DEFAULT_;
-	static const double EPS;
+  static const double ETA_C_DEFAULT_;
+  static const double EPS;
 
 private:
-	double crossoverProbability_;
-	double distributionIndex_;
-	//TODO: Añadir VALID_TYPES;
+  double crossoverProbability_;
+  double distributionIndex_;
+  //TODO: Añadir VALID_TYPES;
   Solution ** doCrossover(double probability,
-  		Solution * parent1, Solution * parent2);
+      Solution * parent1, Solution * parent2);
 };
 
 #endif

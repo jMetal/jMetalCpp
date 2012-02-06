@@ -8,7 +8,6 @@
 #define __SPX_CROSSOVER__
 
 #include <Crossover.h>
-//#include <PseudoRandom.h>
 #include <Binary.h>
 #include <Solution.h>
 #include <math.h>
@@ -20,13 +19,13 @@
 class SinglePointCrossover : public Crossover {
 
 public:
-	SinglePointCrossover(map<string, void *> parameters);
-	void *execute(void *);
+  SinglePointCrossover(map<string, void *> parameters);
+  void *execute(void *);
 
 private:
-	double crossoverProbability_;
+  double crossoverProbability_;
   Solution ** doCrossover(double probability,
-  		Solution * parent1, Solution * parent2);
+      Solution * parent1, Solution * parent2);
 };
 
 #endif
