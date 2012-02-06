@@ -1,17 +1,17 @@
 /*
- * DTLZ5.cpp
+ * DTLZ6.cpp
  *
  *  Created on: 04/02/2012
  *      Author: antonio
  */
 
-#include <DTLZ5.h>
+#include <DTLZ6.h>
 
-DTLZ5::DTLZ5(string solutionType, int numberOfVariables, int numberOfObjectives) {
+DTLZ6::DTLZ6(string solutionType, int numberOfVariables, int numberOfObjectives) {
 	numberOfVariables_   = numberOfVariables;
 	numberOfObjectives_  = numberOfObjectives;
 	numberOfConstraints_ = 0;
-	problemName_ 				 = "DTLZ5";
+	problemName_ 				 = "DTLZ6";
 
 	lowerLimit_ = new double[numberOfVariables_];//(double *)malloc(sizeof(double)*numberOfVariables);
 	if (lowerLimit_ == NULL) {
@@ -48,7 +48,7 @@ DTLZ5::DTLZ5(string solutionType, int numberOfVariables, int numberOfObjectives)
   theta_ = new double[numberOfObjectives_-1];
 }
 
-DTLZ5::~DTLZ5() {
+DTLZ6::~DTLZ6() {
   delete [] lowerLimit_ ;
   delete [] upperLimit_ ;
   delete solutionType_ ;
@@ -59,7 +59,7 @@ DTLZ5::~DTLZ5() {
  * Evaluates a solution
  * @param solution The solution to evaluate
  */
-void DTLZ5::evaluate(Solution *solution) {
+void DTLZ6::evaluate(Solution *solution) {
 	XReal * vars = new XReal(solution);
   double g = 0.0;
 
@@ -70,7 +70,7 @@ void DTLZ5::evaluate(Solution *solution) {
     x_[i] = vars->getValue(i);
 
   for (int i = numberOfVariables_ - k; i < numberOfVariables_; i++)
-    g += (x_[i] - 0.5)*(x_[i] - 0.5);
+    g += pow(x_[i],0.1);
 
   double t = M_PI  / (4.0 * (1.0 + g));
 

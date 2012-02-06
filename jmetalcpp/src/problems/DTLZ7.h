@@ -1,12 +1,12 @@
 /*
- * DTL54.h
+ * DTLZ7.h
  *
  *  Created on: 04/02/2012
  *      Author: antonio
  */
 
-#ifndef __DTLZ5_H__
-#define __DTLZ5_H__
+#ifndef __DTLZ7_H__
+#define __DTLZ7_H__
 
 #include <Problem.h>
 #include <math.h>
@@ -16,16 +16,15 @@
 #include <XReal.h>
 #include <Solution.h>
 
-class DTLZ5 : public Problem {
+class DTLZ7 : public Problem {
 public:
-	DTLZ5(string solutionType, int numberOfVariables = 12, int numberOfObjectives = 3);
+	DTLZ7(string solutionType, int numberOfVariables = 12, int numberOfObjectives = 3);
 	void evaluate(Solution *solution);
 
-	virtual ~DTLZ5();
+	virtual ~DTLZ7();
 private:
 	double * fx_ ;
   double * x_  ;
-  double * theta_ ;
 };
 
-#endif /* __DTLZ5_H__ */
+#endif /* __DTLZ7_H__ */

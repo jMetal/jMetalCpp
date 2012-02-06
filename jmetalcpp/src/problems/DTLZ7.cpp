@@ -1,17 +1,17 @@
 /*
- * DTLZ5.cpp
+ * DTLZ7.cpp
  *
  *  Created on: 04/02/2012
  *      Author: antonio
  */
 
-#include <DTLZ5.h>
+#include <DTLZ7.h>
 
-DTLZ5::DTLZ5(string solutionType, int numberOfVariables, int numberOfObjectives) {
+DTLZ7::DTLZ7(string solutionType, int numberOfVariables, int numberOfObjectives) {
 	numberOfVariables_   = numberOfVariables;
 	numberOfObjectives_  = numberOfObjectives;
 	numberOfConstraints_ = 0;
-	problemName_ 				 = "DTLZ5";
+	problemName_ 				 = "DTLZ7";
 
 	lowerLimit_ = new double[numberOfVariables_];//(double *)malloc(sizeof(double)*numberOfVariables);
 	if (lowerLimit_ == NULL) {
@@ -45,21 +45,19 @@ DTLZ5::DTLZ5(string solutionType, int numberOfVariables, int numberOfObjectives)
 
 	fx_ = new double[numberOfObjectives_] ;
   x_ = new double[numberOfVariables_];
-  theta_ = new double[numberOfObjectives_-1];
 }
 
-DTLZ5::~DTLZ5() {
+DTLZ7::~DTLZ7() {
   delete [] lowerLimit_ ;
   delete [] upperLimit_ ;
   delete solutionType_ ;
-  delete [] theta_     ;
 }
 
 /**
  * Evaluates a solution
  * @param solution The solution to evaluate
  */
-void DTLZ5::evaluate(Solution *solution) {
+void DTLZ7::evaluate(Solution *solution) {
 	XReal * vars = new XReal(solution);
   double g = 0.0;
 
@@ -70,25 +68,22 @@ void DTLZ5::evaluate(Solution *solution) {
     x_[i] = vars->getValue(i);
 
   for (int i = numberOfVariables_ - k; i < numberOfVariables_; i++)
-    g += (x_[i] - 0.5)*(x_[i] - 0.5);
+    g += x_[i] ;
 
-  double t = M_PI  / (4.0 * (1.0 + g));
+  g = 1 + (9.0 * g)/k ;
 
-  theta_[0] = x_[0] * M_PI / 2.0;
-  for (int i = 1; i < (numberOfObjectives_-1); i++)
-    theta_[i] = t * (1.0 + 2.0 * g * x_[i]);
 
-  for (int i = 0; i < numberOfObjectives_; i++)
-    fx_[i] = 1.0 + g;
+  for (int i = 0; i < numberOfObjectives_ - 1; i++)
+    fx_[i] = x_[i] ;
 
-  for (int i = 0; i < numberOfObjectives_; i++){
-    for (int j = 0; j < numberOfObjectives_ - (i + 1); j++)
-      fx_[i] *= cos(theta_[j]);
-      if (i != 0){
-        int aux = numberOfObjectives_ - (i + 1);
-        fx_[i] *= sin(theta_[aux]);
-      } // if
+  double h = 0.0 ;
+  for (int i = 0; i < numberOfObjectives_ - 1; i++){
+    h+=(fx_[i]/(1.0+g))*(1 + sin(3.0*M_PI*fx_[i])) ;
   } //for
+
+  h = numberOfObjectives_ - h ;
+
+  fx_[numberOfObjectives_ - 1] = (1+g)*h ;
 
   for (int i = 0; i < numberOfObjectives_; i++)
     solution->setObjective(i, fx_[i]);

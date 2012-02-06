@@ -106,45 +106,45 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv) {
 		}
 	}
 	else if (strcmp(name, "DTLZ5")==0) { // DTLZ5
-			if (argc==0)
-				return new DTLZ5("Real");
-			else if (argc==1)
-				return new DTLZ5(argv[0]);
-			else if (argc==2)
-				return new DTLZ5(argv[0], atoi(argv[1]));
-			else if (argc==3)
-				return new DTLZ5(argv[0], atoi(argv[1]), atoi(argv[2]));
-			else {
-				cerr << "Incorrect number of arguments for DTLZ5 problem." << endl;
-				exit(-1);
+		if (argc==0)
+			return new DTLZ5("Real");
+		else if (argc==1)
+			return new DTLZ5(argv[0]);
+		else if (argc==2)
+			return new DTLZ5(argv[0], atoi(argv[1]));
+		else if (argc==3)
+			return new DTLZ5(argv[0], atoi(argv[1]), atoi(argv[2]));
+		else {
+			cerr << "Incorrect number of arguments for DTLZ5 problem." << endl;
+			exit(-1);
 		}
 	}
 	else if (strcmp(name, "DTLZ6")==0) { // DTLZ6
-			if (argc==0)
-				return new DTLZ6("Real");
-			else if (argc==1)
-				return new DTLZ6(argv[0]);
-			else if (argc==2)
-				return new DTLZ6(argv[0], atoi(argv[1]));
-			else if (argc==3)
-				return new DTLZ6(argv[0], atoi(argv[1]), atoi(argv[2]));
-			else {
-				cerr << "Incorrect number of arguments for DTLZ6 problem." << endl;
-				exit(-1);
+		if (argc==0)
+			return new DTLZ6("Real");
+		else if (argc==1)
+			return new DTLZ6(argv[0]);
+		else if (argc==2)
+			return new DTLZ6(argv[0], atoi(argv[1]));
+		else if (argc==3)
+			return new DTLZ6(argv[0], atoi(argv[1]), atoi(argv[2]));
+		else {
+			cerr << "Incorrect number of arguments for DTLZ6 problem." << endl;
+			exit(-1);
 		}
 	}
 	else if (strcmp(name, "DTLZ7")==0) { // DTLZ7
-			if (argc==0)
-				return new DTLZ7("Real");
-			else if (argc==1)
-				return new DTLZ7(argv[0]);
-			else if (argc==2)
-				return new DTLZ7(argv[0], atoi(argv[1]));
-			else if (argc==3)
-				return new DTLZ7(argv[0], atoi(argv[1]), atoi(argv[2]));
-			else {
-				cerr << "Incorrect number of arguments for DTLZ7 problem." << endl;
-				exit(-1);
+		if (argc==0)
+			return new DTLZ7("Real");
+		else if (argc==1)
+			return new DTLZ7(argv[0]);
+		else if (argc==2)
+			return new DTLZ7(argv[0], atoi(argv[1]));
+		else if (argc==3)
+			return new DTLZ7(argv[0], atoi(argv[1]), atoi(argv[2]));
+		else {
+			cerr << "Incorrect number of arguments for DTLZ7 problem." << endl;
+			exit(-1);
 		}
 	}
 	else if (strcmp(name, "Fonseca")==0) { // Fonseca
@@ -157,23 +157,23 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv) {
 			exit(-1);
 		}
 	} else if (strcmp(name, "Kursawe")==0) { // Kursawe
-    if (argc==0)
-      return new Kursawe("Real");
-    else if (argc==1)
-      return new Kursawe(argv[0]);
-    else {
-      cerr << "Incorrect number of arguments for Kursawe problem." << endl;
-      exit(-1);
-    }
+		if (argc==0)
+			return new Kursawe("Real");
+		else if (argc==1)
+			return new Kursawe(argv[0]);
+		else {
+			cerr << "Incorrect number of arguments for Kursawe problem." << endl;
+			exit(-1);
+		}
 	} else if (strcmp(name, "Sphere")==0) { // Sphere
-    if (argc==0)
-      return new Sphere("Real");
-    else if (argc==1)
-      return new Sphere(argv[0]);
-    else {
-      cerr << "Incorrect number of arguments for Sphere problem." << endl;
-      exit(-1);
-    }
+		if (argc==0)
+			return new Sphere("Real");
+		else if (argc==1)
+			return new Sphere(argv[0]);
+		else {
+			cerr << "Incorrect number of arguments for Sphere problem." << endl;
+			exit(-1);
+		}
 
 	} else if (strcmp(name, "ZDT1")==0) { // ZDT1
 		if (argc==0)

@@ -17,6 +17,8 @@
 #include <DTLZ3.h>
 #include <DTLZ4.h>
 #include <DTLZ5.h>
+#include <DTLZ6.h>
+#include <DTLZ7.h>
 #include <Fonseca.h>
 #include <Kursawe.h>
 #include <Sphere.h>
