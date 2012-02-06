@@ -12,13 +12,14 @@
 #include <Operator.h>
 
 /**
-  * @class Mutation
-  * @brief This class is aimed at representing a Mutation operator
+ * @class Mutation
+ * @brief This class is aimed at representing a Mutation operator
 **/
 class Mutation : public Operator{
 
 public:
-	Mutation(map<string, void *> parameters);
+  Mutation(map<string, void *> parameters);
+  virtual ~Mutation() = 0;
 
 };
 

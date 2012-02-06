@@ -12,7 +12,7 @@
 class PermutationUtility {
 
 public:
-	int * intPermutation(int length);
+  int * intPermutation(int length);
 
 };
 

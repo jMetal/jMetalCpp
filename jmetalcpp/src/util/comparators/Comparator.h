@@ -18,7 +18,7 @@
 class Comparator {
 
 public:
-	virtual int compare(Solution * one, Solution * two) = 0;
+  virtual int compare(Solution * one, Solution * two) = 0;
 
 };
 

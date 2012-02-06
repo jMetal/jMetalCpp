@@ -17,7 +17,7 @@ const int Problem::DEFAULT_PRECISSION = 16;
  * Constructor.
  */
 Problem::Problem() {
-	solutionType_ = NULL;
+  solutionType_ = NULL;
 } // Problem
 
 
@@ -25,8 +25,19 @@ Problem::Problem() {
  * Constructor.
  */
 Problem::Problem(SolutionType * solutionType) {
-	solutionType_ = solutionType ;
+  solutionType_ = solutionType ;
 } // Problem
+
+
+/**
+ * Destructor
+ */
+Problem::~Problem() {
+  cout << "Borrando Problem" << endl;
+  delete solutionType_;
+  delete [] lowerLimit_;
+  delete [] upperLimit_;
+} // ~Problem
 
 
 //void Problem::evaluateConstraints(Solution solution) {};
@@ -37,7 +48,7 @@ Problem::Problem(SolutionType * solutionType) {
  * @return the number of decision variables.
  */
 int Problem::getNumberOfVariables() {
-	return numberOfVariables_;
+  return numberOfVariables_;
 } // getNumberOfVariables
 
 
@@ -45,7 +56,7 @@ int Problem::getNumberOfVariables() {
  * Sets the number of decision variables of the problem.
  */
 void Problem::setNumberOfVariables(int numberOfVariables) {
-	numberOfVariables_ = numberOfVariables;
+  numberOfVariables_ = numberOfVariables;
 } // setNumberOfVariables
 
 
@@ -54,7 +65,7 @@ void Problem::setNumberOfVariables(int numberOfVariables) {
  * @return the number of objectives.
  */
 int Problem::getNumberOfObjectives() {
-	return numberOfObjectives_;
+  return numberOfObjectives_;
 } // getNumberOfObjectives
 
 
@@ -62,7 +73,7 @@ int Problem::getNumberOfObjectives() {
  * Sets the the number of objectives of the problem.
  */
 void Problem::setNumberOfObjectives(int numberOfObjectives) {
-	numberOfObjectives_ = numberOfObjectives;
+  numberOfObjectives_ = numberOfObjectives;
 } // setNumberOfObjectives
   
 
@@ -72,11 +83,11 @@ void Problem::setNumberOfObjectives(int numberOfObjectives) {
  * @return The lower bound.
  */
 double Problem::getLowerLimit(int i) {
-	if ((lowerLimit_ == NULL) || (i >= numberOfVariables_)) {
-		cout << "Error: lower limits have been not initialized or accessing to a variable out of range" << endl;
-		// exit(-1);
-	}
-	return lowerLimit_[i];
+  if ((lowerLimit_ == NULL) || (i >= numberOfVariables_)) {
+    cout << "Error: lower limits have been not initialized or accessing to a variable out of range" << endl;
+    // exit(-1);
+  }
+  return lowerLimit_[i];
 } // getLowerLimit
 
 
@@ -86,11 +97,11 @@ double Problem::getLowerLimit(int i) {
  * @return The upper bound.
  */
 double Problem::getUpperLimit(int i) {
-	if ((upperLimit_ == NULL) || (i >= numberOfVariables_)) {
-		cout << "Error: upper limits have been not initialized or accessing to a variable out of range" << endl;
-		//exit(-1);
-	}
-	return upperLimit_[i];
+  if ((upperLimit_ == NULL) || (i >= numberOfVariables_)) {
+    cout << "Error: upper limits have been not initialized or accessing to a variable out of range" << endl;
+    //exit(-1);
+  }
+  return upperLimit_[i];
 } // getUpperLimit
 
 
@@ -99,7 +110,7 @@ double Problem::getUpperLimit(int i) {
  * @return the number of constraints.
  */
 int Problem::getNumberOfConstraints() {
-	return numberOfConstraints_ ;
+  return numberOfConstraints_ ;
 } // getNumberOfConstraints
 
 
@@ -109,8 +120,8 @@ int Problem::getNumberOfConstraints() {
  * @param solution The <code>Solution</code> to evaluate.
  */
 void Problem::evaluateConstraints(Solution * solution) {
-	// The default behavior is to do nothing. Only constrained problems have to
-	// re-define this method
+  // The default behavior is to do nothing. Only constrained problems have to
+  // re-define this method
 } // evaluateConstraints
 
 
@@ -120,7 +131,7 @@ void Problem::evaluateConstraints(Solution * solution) {
  * @return the number of bits.
  */
 int Problem::getPrecision(int var) {
-	return precision_[var] ;
+  return precision_[var] ;
 } // getPrecision
 
 
@@ -130,7 +141,7 @@ int Problem::getPrecision(int var) {
  * @return the number of bits.
  */
 int * Problem::getPrecision() {
-	return precision_;
+  return precision_;
 } // getPrecision
 
 
@@ -140,7 +151,7 @@ int * Problem::getPrecision() {
  * @param precision The array
  */
 void Problem::setPrecision(int * precision) {
-	precision_ = precision;
+  precision_ = precision;
 } // setPrecision
 
 
@@ -149,10 +160,10 @@ void Problem::setPrecision(int * precision) {
  * @return the variable length.
  */
 int Problem::getLength(int var) {
-	if (length_ == NULL) {
-		return DEFAULT_PRECISSION;
-	}
-	return length_[var] ;
+  if (length_ == NULL) {
+    return DEFAULT_PRECISSION;
+  }
+  return length_[var] ;
 } // getLength
 
 /**
@@ -173,7 +184,7 @@ int Problem::getNumberOfBits() {
 // * @return the number of constraints.
 // */
 //int Problem::getNumberOfConstraints() {
-//	return numberOfConstraints_;
+//  return numberOfConstraints_;
 //} // getNumberOfConstraints
   
 
@@ -182,7 +193,7 @@ int Problem::getNumberOfBits() {
  * @param type The type of the variables
  */
 void Problem::setSolutionType(SolutionType * type) {
-	solutionType_ = type;
+  solutionType_ = type;
 } // setSolutionType
 
 
@@ -191,7 +202,7 @@ void Problem::setSolutionType(SolutionType * type) {
  * @return type of the variables of the problem.
  */
 SolutionType * Problem::getSolutionType() {
-	return solutionType_;
+  return solutionType_;
 } // getSolutionType
 
 
@@ -200,6 +211,6 @@ SolutionType * Problem::getSolutionType() {
  * @return The problem name
  */
 string Problem::getName() {
-	return problemName_;
+  return problemName_;
 } // getName
   

@@ -24,14 +24,15 @@ using namespace std;
 class Operator {
 
 protected:
-    map<string,void *> parameters_;
+  map<string,void *> parameters_;
     
 public:
   Operator ();
   Operator (map<string, void*> parameters);
-	virtual void *execute(void *) = 0;
-	void setParameter(string name, void *value);
-	void *getParameter(string name);
+  virtual ~Operator() = 0;
+  virtual void *execute(void *) = 0;
+  void setParameter(string name, void *value);
+  void *getParameter(string name);
 
 }; // Operator
 

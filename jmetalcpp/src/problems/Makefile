@@ -1,7 +1,8 @@
 CPP  = g++
 CC   = gcc
 OBJ  = Sphere.o Kursawe.o Fonseca.o Schaffer.o ZDT1.o ZDT2.o ZDT3.o ZDT4.o   \
-ZDT5.o ZDT6.o DTLZ1.o DTLZ2.o DTLZ3.o DTLZ4.o OneMax.o AutoDock.o DTLZ5.o
+ZDT5.o ZDT6.o DTLZ1.o DTLZ2.o DTLZ3.o DTLZ4.o OneMax.o AutoDock.o DTLZ5.o \
+ProblemFactory.o
 LIBNAME= libproblems.a
 
 LIBS +=  

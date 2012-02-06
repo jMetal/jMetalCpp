@@ -10,7 +10,6 @@
 
 #include <SolutionType.h>
 #include <BinaryReal.h>
-//#include <Global.h>
 
 /**
  * This class is aimed at defining a Type encoding a Real solution
@@ -18,8 +17,8 @@
 class BinarySolutionType : public SolutionType {
 
 public:
-	BinarySolutionType(Problem *problem);
-   Variable **createVariables();
+  BinarySolutionType(Problem *problem);
+  Variable **createVariables();
 	
 };
 

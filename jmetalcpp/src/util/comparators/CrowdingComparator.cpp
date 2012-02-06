@@ -6,6 +6,7 @@
  * @date 29 November 2011
 **/
 
+
 #include <RankComparator.h>
 #include <CrowdingComparator.h>
 
@@ -19,26 +20,26 @@
 **/
 int CrowdingComparator::compare(Solution *o1, Solution *o2) {
 
-	comparator = new RankComparator();
+  if (o1 == NULL)
+    return 1;
+  else if (o2 == NULL)
+    return -1;
 
-	if (o1 == NULL)
-		return 1;
-	else if (o2 == NULL)
-		return -1;
+  comparator = new RankComparator();
+  int flagComparatorRank = comparator->compare(o1,o2);
+  delete comparator;
 
-	int flagComparatorRank = comparator->compare(o1,o2);
-	if (flagComparatorRank != 0)
-		return flagComparatorRank;
+  if (flagComparatorRank != 0)
+    return flagComparatorRank;
 
-	/* His rank is equal, then distance crowding comparator */
-	double distance1 = o1->getCrowdingDistance();
-	double distance2 = o2->getCrowdingDistance();
-	if (distance1 >  distance2)
-		return -1;
+  /* His rank is equal, then distance crowding comparator */
+  double distance1 = o1->getCrowdingDistance();
+  double distance2 = o2->getCrowdingDistance();
+  if (distance1 >  distance2)
+    return -1;
 
-	if (distance1 < distance2)
-		return 1;
+  if (distance1 < distance2)
+    return 1;
 
-	return 0;
+  return 0;
 } // compare
-

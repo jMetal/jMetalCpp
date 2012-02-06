@@ -12,8 +12,6 @@
 #include <SolutionSet.h>
 #include <Selection.h>
 #include <Comparator.h>
-//#include <PseudoRandom.h>
-//#include <Solution.h>
 #include <PermutationUtility.h>
 #include <DominanceComparator.h>
 
@@ -30,6 +28,7 @@ private:
 
 public:
   BinaryTournament2(map<string, void *> parameters);
+  ~BinaryTournament2();
   void *execute(void *);
 
 };

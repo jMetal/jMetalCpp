@@ -9,14 +9,22 @@
 
 #include <Algorithm.h>
 
+
 /**
  * Constructor
  * @param problem
 **/
 Algorithm::Algorithm(Problem *problem) {
-	cout << "INICIALIZADO ALGORITMO!!!" << endl;
-	problem_ = problem;
+  problem_ = problem;
 }
+
+
+/**
+ * Destructor
+ */
+Algorithm::~Algorithm() {
+  delete problem_;
+} // ~Algorithm
 
 
 /**
@@ -27,7 +35,7 @@ Algorithm::Algorithm(Problem *problem) {
  * @param operator The operator
 **/
 void Algorithm::addOperator(string name, Operator * operator_) {
-	operators_[name] = operator_;
+  operators_[name] = operator_;
 }
 
 
@@ -39,7 +47,7 @@ void Algorithm::addOperator(string name, Operator * operator_) {
  * @return The operator if exists, null in another case.
 **/
 Operator * Algorithm::getOperator(string name) {
-	return operators_[name];
+  return operators_[name];
 }
 
 
@@ -53,7 +61,7 @@ Operator * Algorithm::getOperator(string name) {
  * algorithm.
 **/
 void Algorithm::setInputParameter(string name, void *value) {
-	inputParameters_[name] = value;
+  inputParameters_[name] = value;
 }
 
 
@@ -65,7 +73,7 @@ void Algorithm::setInputParameter(string name, void *value) {
  * exist or the name is wrong
 **/
 void * Algorithm::getInputParameter(string name) {
-	return inputParameters_[name];
+  return inputParameters_[name];
 }
 
 
@@ -78,7 +86,7 @@ void * Algorithm::getInputParameter(string name) {
  * @param object Object representing the output parameter
 **/
 void Algorithm::setOutputParameter(string name, void *value) {
-	outputParameters_[name] = value;
+  outputParameters_[name] = value;
 }
 
 
@@ -90,7 +98,7 @@ void Algorithm::setOutputParameter(string name, void *value) {
  * doesn't exist or the name is wrong.
 **/
 void * Algorithm::getOutputParameter(string name) {
-	return outputParameters_[name];
+  return outputParameters_[name];
 }
 
 
@@ -99,5 +107,5 @@ void * Algorithm::getOutputParameter(string name) {
  * @return Problem The problem to solve
 **/
 Problem * Algorithm::getProblem() {
-	return problem_;
+  return problem_;
 }

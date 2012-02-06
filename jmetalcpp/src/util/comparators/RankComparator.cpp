@@ -17,20 +17,18 @@
  */
 int RankComparator::compare(Solution *o1, Solution *o2) {
 
-	if (o1 == NULL)
-		return 1;
-	else if (o2 == NULL)
-		return -1;
+  if (o1 == NULL)
+    return 1;
+  else if (o2 == NULL)
+    return -1;
 
-	if (o1->getRank() < o2->getRank()) {
-	return -1;
-	}
+  if (o1->getRank() < o2->getRank())
+    return -1;
 
-	if (o1->getRank() > o2->getRank()) {
-	return 1;
-	}
+  if (o1->getRank() > o2->getRank())
+    return 1;
 
-	return 0;
+  return 0;
 
 } // compare
 

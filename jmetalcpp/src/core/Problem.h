@@ -11,16 +11,14 @@
 
 #include <string>
 #include <iostream>
-//#include <Global.h>
 #include <SolutionType.h>
 #include <Solution.h>
 #include <stddef.h>
-//#include <stdlib.h>
 
 using namespace std;
 
-class SolutionType ;
-class Solution ;
+class SolutionType;
+class Solution;
 
 /**
  * Abstract class representing a multiobjective optimization problem
@@ -28,7 +26,7 @@ class Solution ;
 class Problem {
 
 private:
-	static const int DEFAULT_PRECISSION;
+  static const int DEFAULT_PRECISSION;
 
 protected:
   int numberOfVariables_;
@@ -42,18 +40,9 @@ protected:
   int *length_;
    
 public:
-
-  //VariableType *variableType_;
-  /**
-   * Receives as parameter a solution to be evaluated. 
-   * Evaluates this solution according to the objective
-   * functions that will be stored in the solution itself.
-   * After the execution of this method the objective values
-   * can be retrieved using solution->getObjective(int)
-   */
-
   Problem();
   Problem(SolutionType * solutionType);
+  ~Problem();
   int getNumberOfVariables();
   void setNumberOfVariables(int numberOfVariables);
   int getNumberOfObjectives();
@@ -71,18 +60,6 @@ public:
   SolutionType * getSolutionType();
   string getName();
   int getNumberOfBits();
-
-//  virtual void evaluateConstraints(Solution solution);
-//  virtual int getNumberOfVariables();
-//  virtual void setNumberOfVariables(int value);
-//  int getNumberOfObjectives();
-//  virtual void setNumberOfObjectives(int value);
-//  virtual double getLowerLimit(int index);
-//  virtual double getUpperLimit(int index);
-//  virtual int getNumberOfConstraints();
-//  virtual void setSolutionType(SolutionType *type);
-//  virtual SolutionType *getSolutionType();
-//  virtual std::string getName();
 
 }; // Problem
 

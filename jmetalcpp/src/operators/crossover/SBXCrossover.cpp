@@ -26,13 +26,19 @@ const double SBXCrossover::ETA_C_DEFAULT_ = 20.0;
  */
 SBXCrossover::SBXCrossover(map<string, void *> parameters)
 : Crossover(parameters) {
-	//TODO: crossoverProbability_ = NULL;
-	distributionIndex_ = ETA_C_DEFAULT_;
-	if (parameters["probability"] != NULL)
-		crossoverProbability_ = *(double *)parameters["probability"];
-	if (parameters["distributionIndex"] != NULL)
-		distributionIndex_ = *(double *)parameters["distributionIndex"];
+  //TODO: crossoverProbability_ = NULL;
+  distributionIndex_ = ETA_C_DEFAULT_;
+  if (parameters["probability"] != NULL)
+    crossoverProbability_ = *(double *)parameters["probability"];
+  if (parameters["distributionIndex"] != NULL)
+    distributionIndex_ = *(double *)parameters["distributionIndex"];
 } // SBXCrossover
+
+
+/**
+ * Destructor
+ */
+SBXCrossover::~SBXCrossover() { } // ~SBXCrossover
 
 
 /**
@@ -47,8 +53,8 @@ Solution ** SBXCrossover::doCrossover(double probability, Solution *parent1, Sol
   Solution** offSpring = new Solution*[2];
   
   if (offSpring == NULL) {
-  	cout << "Error grave: Impossible reserve memory for allocating new solutions when performing SBXCrossover " << endl;
-  	exit(-1);
+    cout << "Error grave: Impossible reserve memory for allocating new solutions when performing SBXCrossover " << endl;
+    exit(-1);
   }
 
 //  cout << "SBXCrossover: AggregativeValue de parent1 = " << parent1->getAggregativeValue() << endl;
@@ -67,9 +73,9 @@ Solution ** SBXCrossover::doCrossover(double probability, Solution *parent1, Sol
   double alpha, beta, betaq;
   double valueX1,valueX2;
   XReal * x1 = new XReal(parent1) ;
-	XReal * x2 = new XReal(parent2) ;
-	XReal * offs1 = new XReal(offSpring[0]) ;
-	XReal * offs2 = new XReal(offSpring[1]) ;
+  XReal * x2 = new XReal(parent2) ;
+  XReal * offs1 = new XReal(offSpring[0]) ;
+  XReal * offs2 = new XReal(offSpring[1]) ;
 
   int numberOfVariables = x1->getNumberOfDecisionVariables();
     
@@ -144,13 +150,19 @@ Solution ** SBXCrossover::doCrossover(double probability, Solution *parent1, Sol
           offs2->setValue(i,valueX2);
         } // if
       } else {
-      	offs1->setValue(i,valueX2);
-      	offs2->setValue(i,valueX1);
+        offs1->setValue(i,valueX2);
+        offs2->setValue(i,valueX1);
       } // if
     } // if
   } // if
+
+  delete x1;
+  delete x2;
+  delete offs1;
+  delete offs2;
                                   
-   return offSpring;                                                                                      
+  return offSpring;
+
 } // doCrossover
   
   

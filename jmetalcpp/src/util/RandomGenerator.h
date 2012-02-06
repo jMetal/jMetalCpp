@@ -20,20 +20,21 @@
  **/
 
 class RandomGenerator {
+
 private:
-    double seed_;
-    double oldrand_[55];
-    int jrand_;
-    void randomize();
-    void warmup_random(double seed);
-    void advance_random();
-    double randomperc();
+  double seed_;
+  double oldrand_[55];
+  int jrand_;
+  void randomize();
+  void warmup_random(double seed);
+  void advance_random();
+  double randomperc();
     
 public:
-    RandomGenerator(void);
-    ~RandomGenerator(void);
-    int rnd (int low, int high);
-    double rndreal(double low, double high);
+  RandomGenerator(void);
+  ~RandomGenerator(void);
+  int rnd (int low, int high);
+  double rndreal(double low, double high);
     
 }; // RandomGenerator
 

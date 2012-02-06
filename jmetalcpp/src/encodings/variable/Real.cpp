@@ -6,6 +6,7 @@
  * @date 30 November 2011
  */
 
+
 #include <Real.h>
 
 
@@ -14,7 +15,7 @@
   * It will only initialize all the variables.
  **/
 Real::Real() {
-	value_ = 0.0;
+  value_ = 0.0;
 } // Real
 
 
@@ -35,9 +36,9 @@ Real::Real(double lowerBound, double upperBound) {
  * Constructor
  */
 Real::Real(Variable * variable) {
-	lowerBound_ = variable->getLowerBound();
-	upperBound_ = variable->getUpperBound();
-	value_      = variable->getValue();
+  lowerBound_ = variable->getLowerBound();
+  upperBound_ = variable->getUpperBound();
+  value_      = variable->getValue();
 } // Real
 
 
@@ -46,7 +47,7 @@ Real::Real(Variable * variable) {
  * @return the value.
  */
 double Real::getValue() {
-	return value_;
+  return value_;
 } // getValue
 
 
@@ -55,7 +56,7 @@ double Real::getValue() {
  * @param value The value.
  */
 void Real::setValue(double value) {
-	value_ = value;
+  value_ = value;
 } // setValue
 
 
@@ -64,7 +65,7 @@ void Real::setValue(double value) {
  * @return the copy
  */
 Variable *Real::deepCopy() {
-	return new Real(this);
+  return new Real(this);
 } // deepCopy
 
 
@@ -73,7 +74,7 @@ Variable *Real::deepCopy() {
  * @return the lower bound.
  */
 double Real::getLowerBound() {
-	return lowerBound_;
+  return lowerBound_;
 } // getLowerBound
 
 
@@ -82,7 +83,7 @@ double Real::getLowerBound() {
  * @return the upper bound.
  */
 double Real::getUpperBound() {
-	return upperBound_;
+  return upperBound_;
 } // getUpperBound
 
 
@@ -91,7 +92,7 @@ double Real::getUpperBound() {
  * @param lowerBound The lower bound.
  */
 void Real::setLowerBound(double bound) {
-	lowerBound_ = bound;
+  lowerBound_ = bound;
 } // setLowerBound
 
 
@@ -100,18 +101,18 @@ void Real::setLowerBound(double bound) {
  * @param upperBound The upper bound.
  */
 void Real::setUpperBound(double bound) {
-	upperBound_ = bound;
+  upperBound_ = bound;
 } // setUpperBound
+
 
 /**
  * Returns a string representing the object
  * @return The string
  */
 string Real::toString(){
-	std::ostringstream stringStream;
-	stringStream << value_ ;
-	string aux = stringStream.str() + " ";
+  std::ostringstream stringStream;
+  stringStream << value_ ;
+  string aux = stringStream.str() + " ";
 
-	return aux ;
+  return aux ;
 } // toString
-

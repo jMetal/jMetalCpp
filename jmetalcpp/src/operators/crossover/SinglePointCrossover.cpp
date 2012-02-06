@@ -5,13 +5,15 @@
  *      Author: antonio
  */
 
+
 #include <SinglePointCrossover.h>
-#include <SinglePointCrossover.h>
+
 
 /**
  * @class SinglePointCrossover
  * @brief This class is aimed at representing a SinglePointCrossover operator
  **/
+
 
 /**
  * Constructor
@@ -20,10 +22,10 @@
  */
 SinglePointCrossover::SinglePointCrossover(map<string, void *> parameters)
 : Crossover(parameters) {
-	crossoverProbability_ = 0.0 ;
-	//TODO: crossoverProbability_ = NULL;
-	if (parameters["probability"] != NULL)
-		crossoverProbability_ = *(double *)parameters["probability"];
+  crossoverProbability_ = 0.0 ;
+  //TODO: crossoverProbability_ = NULL;
+  if (parameters["probability"] != NULL)
+    crossoverProbability_ = *(double *)parameters["probability"];
 } // SinglePointCrossover
 
 
@@ -36,86 +38,85 @@ SinglePointCrossover::SinglePointCrossover(map<string, void *> parameters)
  **/
 Solution ** SinglePointCrossover::doCrossover(double probability, Solution *parent1, Solution *parent2) {
 
-	Solution** offSpring = new Solution*[2];
+  Solution** offSpring = new Solution*[2];
 
-	if (offSpring == NULL) {
-		cout << "Error grave: Impossible reserve memory for allocating new solutions when performing SinglePointCrossover " << endl;
-		exit(-1);
-	}
+  if (offSpring == NULL) {
+    cout << "Error grave: Impossible reserve memory for allocating new solutions when performing SinglePointCrossover " << endl;
+    exit(-1);
+  }
 
-	offSpring[0] = new Solution(parent1);
-	offSpring[1] = new Solution(parent2);
+  offSpring[0] = new Solution(parent1);
+  offSpring[1] = new Solution(parent2);
 
-	if (PseudoRandom::randDouble() < probability) {
-		//1. Compute the total number of bits
-		int totalNumberOfBits = 0;
-		for (int i = 0; i < parent1->getProblem()->getNumberOfVariables(); i++) {
-			totalNumberOfBits +=
-					((Binary *)(parent1->getDecisionVariables()[0]))->getNumberOfBits() ;
-		}
+  if (PseudoRandom::randDouble() < probability) {
+    //1. Compute the total number of bits
+    int totalNumberOfBits = 0;
+    for (int i = 0; i < parent1->getProblem()->getNumberOfVariables(); i++) {
+      totalNumberOfBits +=
+          ((Binary *)(parent1->getDecisionVariables()[0]))->getNumberOfBits() ;
+    }
 
-		//2. Calculate the point to make the crossover
-		int crossoverPoint = PseudoRandom::randInt(0, totalNumberOfBits - 1);
+    //2. Calculate the point to make the crossover
+    int crossoverPoint = PseudoRandom::randInt(0, totalNumberOfBits - 1);
 
-		//3. Compute the variable containing the crossoverPoint bit
-		int variable = 0;
-		int acountBits =
-				((Binary *)(parent1->getDecisionVariables()[variable]))->getNumberOfBits() ;
+    //3. Compute the variable containing the crossoverPoint bit
+    int variable = 0;
+    int acountBits =
+        ((Binary *)(parent1->getDecisionVariables()[variable]))->getNumberOfBits() ;
 
-		while (acountBits < (crossoverPoint + 1)) {
-			variable++;
-			acountBits +=
-					((Binary *)(parent1->getDecisionVariables()[variable]))->getNumberOfBits() ;
-		}
+    while (acountBits < (crossoverPoint + 1)) {
+      variable++;
+      acountBits +=
+          ((Binary *)(parent1->getDecisionVariables()[variable]))->getNumberOfBits() ;
+    }
 
-		//4. Compute the bit into the variable selected
-		int diff = acountBits - crossoverPoint;
-		int intoVariableCrossoverPoint =
-				((Binary *)(parent1->getDecisionVariables()[variable]))->getNumberOfBits() - diff;
+    //4. Compute the bit into the variable selected
+    int diff = acountBits - crossoverPoint;
+    int intoVariableCrossoverPoint =
+        ((Binary *)(parent1->getDecisionVariables()[variable]))->getNumberOfBits() - diff;
 
 
-		//5. Make the crossover into the the gene;
-		Variable* offSpring1, * offSpring2;
-		Binary * of1, *of2 ;
-		offSpring1 =
-				((parent1->getDecisionVariables()[variable]))->deepCopy();
+    //5. Make the crossover into the the gene;
+    Variable* offSpring1, * offSpring2;
+    Binary * of1, *of2 ;
+    offSpring1 =
+        ((parent1->getDecisionVariables()[variable]))->deepCopy();
 
-		offSpring2 =
-				((parent2->getDecisionVariables()[variable]))->deepCopy();
-		of1 = (Binary *)offSpring1 ;
-		of2 = (Binary *)offSpring2 ;
+    offSpring2 =
+        ((parent2->getDecisionVariables()[variable]))->deepCopy();
+    of1 = (Binary *)offSpring1 ;
+    of2 = (Binary *)offSpring2 ;
 
-		for (int i = intoVariableCrossoverPoint;
-				i < of1->getNumberOfBits();
-				i++) {
-			bool swap = of1->getIth(i) ;
-			of1->setIth(i, of2->getIth(i)) ;
-			of2->setIth(i, swap) ;
-		}
+    for (int i = intoVariableCrossoverPoint;
+        i < of1->getNumberOfBits();
+        i++) {
+      bool swap = of1->getIth(i) ;
+      of1->setIth(i, of2->getIth(i)) ;
+      of2->setIth(i, swap) ;
+    }
 
-		offSpring[0]->getDecisionVariables()[variable] = of1 ;
-		offSpring[1]->getDecisionVariables()[variable] = of2 ;
+    offSpring[0]->getDecisionVariables()[variable] = of1 ;
+    offSpring[1]->getDecisionVariables()[variable] = of2 ;
 
-		//6. Apply the crossover to the other variables
-		for (int i = 0; i < variable; i++) {
-			offSpring[0]->getDecisionVariables()[i] =
-					parent2->getDecisionVariables()[i]->deepCopy();
+    //6. Apply the crossover to the other variables
+    for (int i = 0; i < variable; i++) {
+      offSpring[0]->getDecisionVariables()[i] =
+          parent2->getDecisionVariables()[i]->deepCopy();
 
-			offSpring[1]->getDecisionVariables()[i] =
-					parent1->getDecisionVariables()[i]->deepCopy();
+      offSpring[1]->getDecisionVariables()[i] =
+          parent1->getDecisionVariables()[i]->deepCopy();
 
-		}
+    }
 
-		//
-      //7. Decode the results
+    //7. Decode the results
     //  for (int i = 0; i < offSpring[0].getDecisionVariables().length; i++) {
     //    ((Binary) offSpring[0].getDecisionVariables()[i]).decode();
     //    ((Binary) offSpring[1].getDecisionVariables()[i]).decode();
     //  }
 
-	} // Binary or BinaryReal
+  } // Binary or BinaryReal
 
-	return offSpring;
+  return offSpring;
 } // doCrossover
 
 
@@ -125,12 +126,11 @@ Solution ** SinglePointCrossover::doCrossover(double probability, Solution *pare
  * @return An object containing the offSprings
  */
 void * SinglePointCrossover::execute(void *object) {
-	Solution ** parents = (Solution **) object;
-	// TODO: Comprobar la longitud de parents
-	// TODO: Chequear el tipo de parents
+  Solution ** parents = (Solution **) object;
+  // TODO: Comprobar la longitud de parents
+  // TODO: Chequear el tipo de parents
 
-	Solution ** offSpring = (Solution **)doCrossover(crossoverProbability_, parents[0], parents[1]);
+  Solution ** offSpring = (Solution **)doCrossover(crossoverProbability_, parents[0], parents[1]);
 
-	return offSpring;
+  return offSpring;
 } // execute
-

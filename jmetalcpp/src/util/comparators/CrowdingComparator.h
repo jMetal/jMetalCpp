@@ -19,10 +19,10 @@
 class CrowdingComparator : public Comparator {
 
 private:
-	Comparator * comparator;
+  Comparator * comparator;
 
 public:
-	int compare(Solution * o1, Solution * o2);
+  int compare(Solution * o1, Solution * o2);
 
 };
 

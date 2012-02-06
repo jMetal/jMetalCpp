@@ -18,10 +18,10 @@ using namespace std;
 RandomGenerator * PseudoRandom::randomGenerator_ = NULL ;
 
 PseudoRandom::PseudoRandom() {
-    //randomGenerator_ = NULL ; 
-    if (PseudoRandom::randomGenerator_ == NULL) {
-        PseudoRandom::randomGenerator_ = new RandomGenerator();
-    }
+  //randomGenerator_ = NULL ;
+  if (PseudoRandom::randomGenerator_ == NULL) {
+    PseudoRandom::randomGenerator_ = new RandomGenerator();
+  }
 }
 
 //static int PseudoRandom::randInt() {
@@ -32,28 +32,23 @@ PseudoRandom::PseudoRandom() {
 //}
 
 double PseudoRandom::randDouble() {
-    if (PseudoRandom::randomGenerator_ == NULL) {
-        PseudoRandom::randomGenerator_ = new RandomGenerator();
-//        cout << "PseudoRandom::randDouble(): es null" << endl ;
-    }    
-    else
-  //      cout << "PseudoRandom::randDouble(): NO es null " << endl ;
-    
-    return PseudoRandom::randomGenerator_->rndreal(0.0,1.0);
+  if (PseudoRandom::randomGenerator_ == NULL) {
+    PseudoRandom::randomGenerator_ = new RandomGenerator();
+  }
+  return PseudoRandom::randomGenerator_->rndreal(0.0,1.0);
 }
 
 int PseudoRandom::randInt(int minBound, int maxBound) {
-    if (PseudoRandom::randomGenerator_ == NULL) {
-        PseudoRandom::randomGenerator_ = new RandomGenerator();
-    }
-    return PseudoRandom::randomGenerator_->rnd(minBound,maxBound);
+  if (PseudoRandom::randomGenerator_ == NULL) {
+    PseudoRandom::randomGenerator_ = new RandomGenerator();
+  }
+  return PseudoRandom::randomGenerator_->rnd(minBound,maxBound);
 }
 
 double PseudoRandom::randDouble(double minBound, double maxBound) {
-    if (PseudoRandom::randomGenerator_ == NULL) {
-        PseudoRandom::randomGenerator_ = new RandomGenerator();
-    }
-    return PseudoRandom::randomGenerator_->rndreal(minBound,maxBound);
+  if (PseudoRandom::randomGenerator_ == NULL) {
+    PseudoRandom::randomGenerator_ = new RandomGenerator();
+  }
+  return PseudoRandom::randomGenerator_->rndreal(minBound,maxBound);
 }
     
-

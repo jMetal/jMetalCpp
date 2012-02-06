@@ -6,21 +6,23 @@
  * @date 28 November 2011
 **/
 
+
 #include <Solution.h>
+
 
 /**
  * Constructor.
  */
 Solution::Solution () {
-	problem_ = NULL;
-	marked_ = false;
-	overallConstraintViolation_ = 0.0;
-	numberOfViolatedConstraints_ = 0;
-	numberOfVariables_ = 0;
-	numberOfObjectives_ = 0;
-	type_ = NULL;
-	variable_ = NULL;
-	objective_ = NULL;
+  problem_ = NULL;
+  marked_ = false;
+  overallConstraintViolation_ = 0.0;
+  numberOfViolatedConstraints_ = 0;
+  numberOfVariables_ = 0;
+  numberOfObjectives_ = 0;
+  type_ = NULL;
+  variable_ = NULL;
+  objective_ = NULL;
 } //Solution
 
 
@@ -32,13 +34,14 @@ Solution::Solution () {
  * variables of a SolutionSet to apply quality indicators
  */
 Solution::Solution (int numberOfObjectives) {
-   numberOfObjectives_ = numberOfObjectives;
-   numberOfVariables_ = 0;
-   objective_ = new double[numberOfObjectives_];//(double *)malloc(sizeof(double) * numberOfObjectives_);
-//   if (objective_ == NULL) {
-//   	 cout << "ERROR GRAVE: Impossible to reserve memory for storing objectives in class Solution" << endl;
-//   	 //exit(-1);
-//   }
+  overallConstraintViolation_ = 0.0;
+  numberOfObjectives_ = numberOfObjectives;
+  numberOfVariables_ = 0;
+  objective_ = new double[numberOfObjectives_];
+  if (objective_ == NULL) {
+    cout << "ERROR GRAVE: Impossible to reserve memory for storing objectives in class Solution" << endl;
+    exit(-1);
+  }
 }
 
 
@@ -48,33 +51,26 @@ Solution::Solution (int numberOfObjectives) {
  * @throws ClassNotFoundException
  */
 Solution::Solution (Problem *problem) {
-	cout << "Inicializando solucion..." << endl;
-	problem_ = problem;
-	cout << "Problema pasado." << endl;
-	//cout << "Tipo de solucion: " << problem->getSolutionType()->toString() << endl;
-	//type_ = problem->getSolutionType();
-	type_ = problem_->getSolutionType();
-	numberOfObjectives_ = problem_->getNumberOfObjectives();
+  problem_ = problem;
+  type_ = problem_->getSolutionType();
+  overallConstraintViolation_ = 0.0;
+  numberOfObjectives_ = problem_->getNumberOfObjectives();
   numberOfVariables_  = problem_->getNumberOfVariables();
-  //objective_ = new double[numberOfObjectives_];
-	
-	cout << "El numero de objetivos es " << problem_->getNumberOfObjectives() << endl;
-	// creating the objective vector
-	objective_ = new double[numberOfObjectives_];//(double *)malloc(sizeof(double) * numberOfObjectives_);
+
+  // creating the objective vector
+  objective_ = new double[numberOfObjectives_];
    if (objective_ == NULL) {
-   	 cout << "ERROR GRAVE: Impossible to reserve memory for storing objectives in class Solution" << endl;
-   	 exit(-1);
+     cout << "ERROR GRAVE: Impossible to reserve memory for storing objectives in class Solution" << endl;
+     exit(-1);
    }
    // at this point objective vector has been created successfully
 
   // Setting initial values
-	fitness_ = 0.0;
-	kDistance_ = 0.0;
-	crowdingDistance_ = 0.0;
-	distanceToSolutionSet_ = std::numeric_limits<double>::max();
-	cout << "Creando variables..." << endl;
-	variable_ = type_->createVariables();
-
+  fitness_ = 0.0;
+  kDistance_ = 0.0;
+  crowdingDistance_ = 0.0;
+  distanceToSolutionSet_ = std::numeric_limits<double>::max();
+  variable_ = type_->createVariables();
 } // Solution
 
 
@@ -83,18 +79,18 @@ Solution::Solution (Problem *problem) {
  * @param problem The problem to solve
  */
 Solution::Solution (Problem * problem, Variable ** variables) {
-	problem_ = problem;
-	type_ = problem->getSolutionType();
-	numberOfObjectives_ = problem->getNumberOfObjectives();
-	numberOfVariables_  = problem_->getNumberOfVariables();
-	objective_ = new double[numberOfObjectives_] ;
+  problem_ = problem;
+  type_ = problem->getSolutionType();
+  numberOfObjectives_ = problem->getNumberOfObjectives();
+  numberOfVariables_  = problem_->getNumberOfVariables();
+  objective_ = new double[numberOfObjectives_] ;
 
-	// Setting initial values
-	fitness_ = 0.0;
-	kDistance_ = 0.0;
-	crowdingDistance_ = 0.0;
-	distanceToSolutionSet_ = std::numeric_limits<double>::max();
-	variable_ = variables;
+  // Setting initial values
+  fitness_ = 0.0;
+  kDistance_ = 0.0;
+  crowdingDistance_ = 0.0;
+  distanceToSolutionSet_ = std::numeric_limits<double>::max();
+  variable_ = variables;
 } // Solution
 
 
@@ -104,46 +100,45 @@ Solution::Solution (Problem * problem, Variable ** variables) {
  */
 Solution::Solution (Solution *solution) {
   problem_ = solution->problem_;
-	type_ = solution->type_;
-	numberOfObjectives_ = solution->getNumberOfObjectives();
+  type_ = solution->type_;
+  numberOfObjectives_ = solution->getNumberOfObjectives();
   numberOfVariables_ = solution->getNumberOfVariables();
 
-	// creating the objective vector
-	objective_ = new double[numberOfObjectives_];//(double *)malloc(sizeof(double) * numberOfObjectives_);
-//	if (objective_ == NULL) {
-//		cout << "ERROR GRAVE: Impossible to reserve memory for storing objectives in class Solution" << endl;
-//		//exit(-1);
-//	}
-	for (int i = 0; i< numberOfObjectives_; i++) {
-			objective_[i] = solution->objective_[i];
-	}
+  // creating the objective vector
+  objective_ = new double[numberOfObjectives_];
+  if (objective_ == NULL) {
+    cout << "ERROR GRAVE: Impossible to reserve memory for storing objectives in class Solution" << endl;
+    exit(-1);
+  }
+  for (int i = 0; i< numberOfObjectives_; i++) {
+      objective_[i] = solution->objective_[i];
+  }
 
-	variable_ = type_->copyVariables(solution->variable_) ;
-	overallConstraintViolation_ = solution->getOverallConstraintViolation();
-	numberOfViolatedConstraints_ = solution->getNumberOfViolatedConstraints();
-	distanceToSolutionSet_ = solution->getDistanceToSolutionSet();
-	crowdingDistance_ = solution->getCrowdingDistance();
-	kDistance_ = solution->getKDistance();
-	fitness_ = solution->getFitness();
-	marked_ = solution->isMarked();
-	rank_ = solution->getRank();
-	location_ = solution->getLocation();
+  variable_ = type_->copyVariables(solution->variable_) ;
+  overallConstraintViolation_ = solution->getOverallConstraintViolation();
+  numberOfViolatedConstraints_ = solution->getNumberOfViolatedConstraints();
+  distanceToSolutionSet_ = solution->getDistanceToSolutionSet();
+  crowdingDistance_ = solution->getCrowdingDistance();
+  kDistance_ = solution->getKDistance();
+  fitness_ = solution->getFitness();
+  marked_ = solution->isMarked();
+  rank_ = solution->getRank();
+  location_ = solution->getLocation();
     
-    // create the variables
-		//old fashion of copying variables
-    //decisionVariables_ = (Variable *)new Variable*[numberOfVariables_];
-    //for (i = 0; i < numberOfVariables_; i++) {
-    //    decisionVariables_[i] = another_->decisionVariables_[i].deepCopy()
-    //}
-		//new fashion of copying variables
-    //decisionVariables_ = solutionType_->copyVariables(another->decisionVariables_);
+  // create the variables
+  //old fashion of copying variables
+  //decisionVariables_ = (Variable *)new Variable*[numberOfVariables_];
+  //for (i = 0; i < numberOfVariables_; i++) {
+  //    decisionVariables_[i] = another_->decisionVariables_[i].deepCopy()
+  //}
+  //new fashion of copying variables
+  //decisionVariables_ = solutionType_->copyVariables(another->decisionVariables_);
     
 } // Solution
 
 
 /**
  * Destructor
- * @param solution Solution to copy.
  */
 Solution::~Solution() {
   delete[]objective_ ;
@@ -171,7 +166,7 @@ void Solution::setDistanceToSolutionSet(double distance) {
  * @return the distance to a specific solutionSet.
  */
 double Solution::getDistanceToSolutionSet() {
-	return distanceToSolutionSet_;
+  return distanceToSolutionSet_;
 } // getDistanceToSolutionSet
 
 
@@ -181,7 +176,7 @@ double Solution::getDistanceToSolutionSet() {
  * @param distance The distance to the k-nearest neighbor.
  */
 void Solution::setKDistance(double distance) {
-	kDistance_ = distance;
+  kDistance_ = distance;
 } // setKDistance
 
 
@@ -193,7 +188,7 @@ void Solution::setKDistance(double distance) {
  * @return the distance to k-nearest neighbor.
  */
 double Solution::getKDistance() {
-	return kDistance_;
+  return kDistance_;
 } // getKDistance
 
 
@@ -203,7 +198,7 @@ double Solution::getKDistance() {
  * @param distance The crowding distance of the solution.
  */
 void Solution::setCrowdingDistance(double distance) {
-	crowdingDistance_ = distance;
+  crowdingDistance_ = distance;
 } // setCrowdingDistance
 
 
@@ -215,7 +210,7 @@ void Solution::setCrowdingDistance(double distance) {
  * @return the distance crowding distance of the solution.
  */
 double Solution::getCrowdingDistance() {
-	return crowdingDistance_;
+  return crowdingDistance_;
 } // getCrowdingDistance
 
 
@@ -225,7 +220,7 @@ double Solution::getCrowdingDistance() {
  * @param fitness The fitness of the solution.
  */
 void Solution::setFitness(double fitness) {
-	fitness_ = fitness;
+  fitness_ = fitness;
 } // setFitness
 
 
@@ -237,7 +232,7 @@ void Solution::setFitness(double fitness) {
  * @return the fitness.
  */
 double Solution::getFitness() {
-	return fitness_;
+  return fitness_;
 } // getFitness
 
 
@@ -247,12 +242,12 @@ double Solution::getFitness() {
  * @param value The value to be stored.
  */
 void Solution::setObjective(int i, double value) {
-	if (i < 0 || i >= numberOfObjectives_) {
-		cout << "Solution::setObjective: objective index out of range: " << i
-					<< endl;
-		exit(-1);
-	}
-	objective_[i] = value;
+  if (i < 0 || i >= numberOfObjectives_) {
+    cout << "Solution::setObjective: objective index out of range: " << i
+          << endl;
+    exit(-1);
+  }
+  objective_[i] = value;
 } // setObjective
 
 
@@ -261,11 +256,11 @@ void Solution::setObjective(int i, double value) {
  * @param i The value of the objective.
  */
 double Solution::getObjective(int i) {
-	if (i < 0 || i >= numberOfObjectives_) {
-		cout << "Solution::getObjective: objective index out of range: " << i
-					<< endl;
-		exit(-1);
-	}
+  if (i < 0 || i >= numberOfObjectives_) {
+    cout << "Solution::getObjective: objective index out of range: " << i
+          << endl;
+    exit(-1);
+  }
   return objective_[i];
 } // getObjective
 
@@ -275,7 +270,7 @@ double Solution::getObjective(int i) {
  * @return The number of objectives.
  */
 int Solution::getNumberOfObjectives() {
-	return numberOfObjectives_;
+  return numberOfObjectives_;
 } // getNumberOfObjectives
 
 
@@ -284,7 +279,7 @@ int Solution::getNumberOfObjectives() {
  * @return The number of decision variables.
  */
 int Solution::getNumberOfVariables() {
-	return problem_->getNumberOfVariables() ;
+  return problem_->getNumberOfVariables() ;
 } // getNumberOfVariables
 
 
@@ -293,14 +288,14 @@ int Solution::getNumberOfVariables() {
  * @return The string.
  */
 string Solution::toString() {
-	string aux = "";
+  string aux = "";
     
-	for (int i = 0; i < numberOfVariables_; i++) {
-		std::ostringstream stringStream;
-//		stringStream << this->getDecisionVariables()[i]->getValue() ;
-		stringStream << this->getDecisionVariables()[i]->toString() ;
-		aux = aux + stringStream.str() + " ";
-	}
+  for (int i = 0; i < numberOfVariables_; i++) {
+    std::ostringstream stringStream;
+//    stringStream << this->getDecisionVariables()[i]->getValue() ;
+    stringStream << this->getDecisionVariables()[i]->toString() ;
+    aux = aux + stringStream.str() + " ";
+  }
   aux = aux + " | " ;
   for (int i = 0; i < numberOfObjectives_; i++) {
     std::ostringstream stringStream;
@@ -310,7 +305,7 @@ string Solution::toString() {
     aux = aux + stringStream.str() +  " ";
   }
 
-	return aux;
+  return aux;
 } // toString
 
 
@@ -320,7 +315,7 @@ string Solution::toString() {
  * variables of the solution.
  */
 Variable ** Solution::getDecisionVariables() {
-	return variable_;
+  return variable_;
 } // getDecisionVariables
 
 
@@ -330,7 +325,7 @@ Variable ** Solution::getDecisionVariables() {
  * representing the decision variables of the solution.
  */
 void Solution::setDecisionVariables(Variable **variables) {
-	variable_ = variables ;
+  variable_ = variables ;
 } // setDecisionVariables
 
 
@@ -341,7 +336,7 @@ void Solution::setDecisionVariables(Variable **variables) {
  * case.
  */
 bool Solution::isMarked() {
-	return marked_;
+  return marked_;
 } // isMarked
 
 
@@ -349,7 +344,7 @@ bool Solution::isMarked() {
  * Establishes the solution as marked.
  */
 void Solution::mark() {
-	marked_ = true;
+  marked_ = true;
 } // mark
 
 
@@ -357,7 +352,7 @@ void Solution::mark() {
  * Established the solution as unmarked.
  */
 void Solution::unMark() {
-	marked_ = false;
+  marked_ = false;
 } // unMark
 
 
@@ -366,7 +361,7 @@ void Solution::unMark() {
  * @param value The rank of the solution.
  */
 void Solution::setRank(int rank) {
-	rank_ = rank ;
+  rank_ = rank ;
 } // setRank
 
 
@@ -377,7 +372,7 @@ void Solution::setRank(int rank) {
  * @return the rank of the solution.
  */
 int Solution::getRank() {
-	return rank_;
+  return rank_;
 } // getRank
 
 
@@ -386,7 +381,7 @@ int Solution::getRank() {
  * @param value The overall constraints violated by the solution.
  */
 void Solution::setOverallConstraintViolation(double value) {
-	overallConstraintViolation_ = value;
+  overallConstraintViolation_ = value;
 } // setOverallConstraintViolation
 
 
@@ -397,7 +392,7 @@ void Solution::setOverallConstraintViolation(double value) {
  * @return the overall constraint violation by the solution.
  */
 double Solution::getOverallConstraintViolation() {
-	return overallConstraintViolation_;
+  return overallConstraintViolation_;
 } // getOverallConstraintViolation
 
 
@@ -406,7 +401,7 @@ double Solution::getOverallConstraintViolation() {
  * @param value The number of constraints violated by the solution.
  */
 void Solution::setNumberOfViolatedConstraints(int number) {
-	numberOfViolatedConstraints_ = number;
+  numberOfViolatedConstraints_ = number;
 } // setNumberOfViolatedConstraints
 
 
@@ -417,7 +412,7 @@ void Solution::setNumberOfViolatedConstraints(int number) {
  * @return the number of constraints violated by the solution.
  */
 int Solution::getNumberOfViolatedConstraints() {
-	return numberOfViolatedConstraints_;
+  return numberOfViolatedConstraints_;
 } // getNumberOfViolatedConstraints
 
 
@@ -426,7 +421,7 @@ int Solution::getNumberOfViolatedConstraints() {
  * @param location The location of the solution.
  */
 void Solution::setLocation(int location) {
-	location_ = location;
+  location_ = location;
 } // setLocation
 
 
@@ -437,7 +432,7 @@ void Solution::setLocation(int location) {
  * @return the location of the solution into a solutionSet
  */
 int Solution::getLocation() {
-	return location_;
+  return location_;
 } // getLocation
 
 
@@ -446,7 +441,7 @@ int Solution::getLocation() {
  * @param type The type of the variable.
  */
 void Solution::setType(SolutionType * type) {
-	type_ = type;
+  type_ = type;
 } // setType
 
 
@@ -455,7 +450,7 @@ void Solution::setType(SolutionType * type) {
  * @return the type of the variable
  */
 SolutionType * Solution::getType() {
-	return type_;
+  return type_;
 } // getType
 
 
@@ -464,11 +459,11 @@ SolutionType * Solution::getType() {
  * @return The aggregative value.
  */
 double Solution::getAggregativeValue() {
-	double value = 0.0;
-	for (int i = 0; i < numberOfObjectives_; i++){
-		value += objective_[i];
-	}
-	return value;
+  double value = 0.0;
+  for (int i = 0; i < numberOfObjectives_; i++){
+    value += objective_[i];
+  }
+  return value;
 } // getAggregativeValue
 
 /**
@@ -476,9 +471,8 @@ double Solution::getAggregativeValue() {
  * @return The problem.
  */
 Problem * Solution::getProblem() {
-	return problem_ ;
+  return problem_ ;
 } // getAggregativeValue
-
 
 
 /**
@@ -490,7 +484,7 @@ Problem * Solution::getProblem() {
 
 
 //Variable **Solution::getDecisionVariables() {
-//	return decisionVariables_;
+//  return decisionVariables_;
 //}
 //
 //int Solution::getNumberOfVariables() {

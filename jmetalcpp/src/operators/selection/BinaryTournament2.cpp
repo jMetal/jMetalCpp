@@ -23,14 +23,24 @@
  */
 BinaryTournament2::BinaryTournament2(map<string, void *> parameters)
 : Selection(parameters) {
-	index_ = 0;
-	dominance_ = new DominanceComparator();
+  index_ = 0;
+  a_ = new int[1]; // Initialized as dummy
+  dominance_ = new DominanceComparator();
   if (dominance_ == NULL) {
-  	cout << "BinaryTournament::BinaryTournament: error creating comparator" ;
-  	cout << endl ;
+    cout << "BinaryTournament::BinaryTournament: error creating comparator" ;
+    cout << endl ;
     exit(-1) ;
   }
 }
+
+
+/**
+ * Destructor
+ */
+BinaryTournament2::~BinaryTournament2() {
+  delete dominance_;
+  delete [] a_;
+} // ~BinaryTournament2
 
   
 /**
@@ -40,25 +50,27 @@ BinaryTournament2::BinaryTournament2(map<string, void *> parameters)
 */
 void * BinaryTournament2::execute(void * object) {
 
-	SolutionSet * population = (SolutionSet *)object;
+  SolutionSet * population = (SolutionSet *)object;
 
-//	cout << "Poblacion con tamaño: " << population->size() << endl;
-//	for (int i=0; i<population->size(); i++) {
-//		cout << "pop[" << i << "] = " << population->get(i)->getAggregativeValue() << endl;
-//	}
+//  cout << "Poblacion con tamaño: " << population->size() << endl;
+//  for (int i=0; i<population->size(); i++) {
+//    cout << "pop[" << i << "] = " << population->get(i)->getAggregativeValue() << endl;
+//  }
 
 
   if (index_ == 0) //Create the permutation
   {
-  	PermutationUtility * permutationUtility = new PermutationUtility();
+    PermutationUtility * permutationUtility = new PermutationUtility();
+    delete [] a_;
     a_= permutationUtility->intPermutation(population->size());
+    delete permutationUtility;
   }
 
-//	for (int i=0; i<population->size(); i++) {
-//		cout << "a_[" << i << "] = " << a_[i] << endl;
-//	}
-	//cout << "BinaryTournament2: valor de index = " << index_ << endl;
-	//cout << "BinaryTournament2: population->size() = " << population->size() << endl;
+//  for (int i=0; i<population->size(); i++) {
+//    cout << "a_[" << i << "] = " << a_[i] << endl;
+//  }
+  //cout << "BinaryTournament2: valor de index = " << index_ << endl;
+  //cout << "BinaryTournament2: population->size() = " << population->size() << endl;
 
   Solution * solution1;
   Solution * solution2;

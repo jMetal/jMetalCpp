@@ -17,11 +17,11 @@
 class ObjectiveComparator : public Comparator {
 
 private:
-	int nObj;
+  int nObj;
 
 public:
-	ObjectiveComparator(int nObj);
-	int compare(Solution * o1, Solution * o2);
+  ObjectiveComparator(int nObj);
+  int compare(Solution * o1, Solution * o2);
 
 };
 

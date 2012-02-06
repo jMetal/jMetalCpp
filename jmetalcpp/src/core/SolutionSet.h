@@ -17,8 +17,6 @@
 #include <vector>
 #include <stddef.h>
 #include <Solution.h>
-//#include <list>
-//#include <stdlib.h>
 #include <Comparator.h>
 
 using namespace std;
@@ -33,15 +31,15 @@ class Comparator;
 class SolutionSet {
 
 protected:
-	vector<Solution*> solutionsList_;
+  vector<Solution*> solutionsList_;
   int capacity_;
 
 public:
 
   SolutionSet();
   SolutionSet(int maximumSize);
-  //~SolutionSet();
-   
+  ~SolutionSet();
+
   bool add(Solution * solution);
   Solution *get(int index);
   int getMaxSize();
@@ -54,10 +52,12 @@ public:
   void printObjectivesToFile(string path);
   void printVariablesToFile(string file);
   void clear();
+  void clear(bool del);
   void remove(int i);
-  // Iterator iterator();
+  void remove(int i, bool del);
   SolutionSet * join(SolutionSet * another);
   void replace(int position, Solution * solution);
+  void replace(int position, Solution * solution, bool del);
   //double **writeObjectivesToMatrix();
 
   //void reset() ;

@@ -6,6 +6,7 @@
  * @date 23 November 2011
 **/
 
+
 #include <Operator.h>
 
 
@@ -20,8 +21,14 @@ Operator::Operator() {
  * Constructor.
 **/
 Operator::Operator(map<string , void*> parameters) {
-	parameters_ = parameters;
+  parameters_ = parameters;
 } // Operator
+
+
+/**
+ * Destructor.
+ */
+Operator::~Operator() { /* do nothing */ }
 
 
 /**
@@ -30,7 +37,7 @@ Operator::Operator(map<string , void*> parameters) {
  * @param value Object representing the parameter.
 **/
 void Operator::setParameter(string name, void *value) {
-	parameters_[name] = value;
+  parameters_[name] = value;
 } // setParameter
 
 
@@ -40,15 +47,6 @@ void Operator::setParameter(string name, void *value) {
  * @return the parameter.
 **/
 void * Operator::getParameter(string name) {
-	return parameters_[name];
+  return parameters_[name];
 }
 
-
-//int main() {
-//	Operator unOperador;
-//	int value = 15;
-//	int *ptr = &value;
-//	unOperador.setParameter("Edad",ptr);
-//	
-//	cout << "la edad es: " << *(int *)unOperador.getParameter("Edad") << endl;
-//}

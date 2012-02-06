@@ -17,9 +17,9 @@
 class BinaryRealSolutionType : public SolutionType {
 
 public:
-   BinaryRealSolutionType(Problem * problem);
-   Variable ** createVariables();
-	
+  BinaryRealSolutionType(Problem * problem);
+  Variable ** createVariables();
+
 };
 
 #endif

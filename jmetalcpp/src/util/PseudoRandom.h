@@ -20,13 +20,13 @@
 class PseudoRandom {
 //private:
 public:
-    static RandomGenerator * randomGenerator_;
-    PseudoRandom();
+  static RandomGenerator * randomGenerator_;
+  PseudoRandom();
 
 public:
-    static double randDouble();//    static int randInt();
-    static int randInt(int minBound, int maxBound);
-    static double randDouble(double minBound, double maxBound);    
+  static double randDouble();//    static int randInt();
+  static int randInt(int minBound, int maxBound);
+  static double randDouble(double minBound, double maxBound);
 };
 
 
