@@ -35,7 +35,6 @@ int main(int argc, char ** argv) {
   algorithm = new PSO(problem);
 
   cout << "PSO algorithm initialized." << endl;
-  system("pause");
 
   // Algorithm parameters
   int swarmSize = 50;
@@ -43,6 +42,7 @@ int main(int argc, char ** argv) {
   algorithm->setInputParameter("swarmSize",&swarmSize);
   algorithm->setInputParameter("maxIterations",&maxIterations);
 
+  // Mutation operator
   map<string, void *> parameters;
   double probability = 1.0/problem->getNumberOfVariables();
   double distributionIndex = 20.0;
@@ -61,8 +61,13 @@ int main(int argc, char ** argv) {
 
   // Result messages
   cout << "Total execution time: " << secs << "s" << endl;
-  cout << "Variables values have been writen to file VAR" << endl;
+  cout << "Variables values have been written to file VAR" << endl;
   population->printVariablesToFile("VAR");
-  cout << "Objectives values have been writen to file FUN" << endl;
+  cout << "Objectives values have been written to file FUN" << endl;
   population->printObjectivesToFile("FUN");
+
+  delete mutation;
+  delete population;
+  delete algorithm;
+
 } // main

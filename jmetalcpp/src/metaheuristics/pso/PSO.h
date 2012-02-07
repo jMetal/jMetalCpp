@@ -96,11 +96,13 @@ private:
   void computeSpeed(int iter, int miter);
   void computeNewPositions();
   void mopsoMutation(int actualIteration, int totalIterations);
+  void initParams();
+  void deleteParams();
 
 public:
   PSO(Problem * problem);
-  void initParams();
   SolutionSet * execute();
+
 };
 
 #endif /* __PSO__ */

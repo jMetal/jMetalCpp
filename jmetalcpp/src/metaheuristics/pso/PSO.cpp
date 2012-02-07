@@ -72,6 +72,29 @@ void PSO::initParams() {
 } // initParams
 
 
+/**
+ * Initialize all parameter of the algorithm
+ */
+void PSO::deleteParams() {
+
+  for (int i = 0; i < particlesSize_; i++) {
+    delete [] speed_[i];
+  }
+  delete [] speed_;
+  delete [] deltaMax_;
+  delete [] deltaMin_;
+  for (int i = 0; i < particles_->size(); i++) {
+    delete localBest_[i];
+  }
+  delete [] localBest_;
+  delete globalBest_;
+  delete particles_;
+  delete findBestSolution_;
+  delete comparator_;
+
+} // deleteParams
+
+
 // Adaptive inertia
 double PSO::inertiaWeight(int iter, int miter, double wmax, double wmin) {
   //return wmax; // - (((wmax-wmin)*(double)iter)/(double)miter);
@@ -182,7 +205,14 @@ void PSO::computeSpeed(int iter, int miter) {
         C1 * r1 * (bestParticle->getValue(var) - particle->getValue(var)) +
         C2 * r2 * (bestGlobal->getValue(var) - particle->getValue(var)) ;
     }
+
+    delete particle;
+    delete bestParticle;
+
   }
+
+  delete bestGlobal;
+
 } // computeSpeed
 
 
@@ -207,6 +237,7 @@ void PSO::computeNewPositions() {
       }
 
     }
+    delete particle;
   }
 } // computeNewPositions
 
@@ -244,10 +275,14 @@ SolutionSet * PSO::execute() {
   for (int i = 0; i < particlesSize_; i++) {
     Solution * particle = new Solution(problem_);
     problem_->evaluate(particle);
-    evaluations_ ++ ;
+    evaluations_ ++;
     particles_->add(particle);
-    if ((globalBest_ == NULL) || (particle->getObjective(0) < globalBest_->getObjective(0)))
-      globalBest_ = new Solution(particle) ;
+    if ((globalBest_ == NULL) || (particle->getObjective(0) < globalBest_->getObjective(0))) {
+      if (globalBest_!= NULL) {
+        delete globalBest_;
+      }
+      globalBest_ = new Solution(particle);
+    }
   }
 
   //-> Step2. Initialize the speed_ of each particle to 0
@@ -266,7 +301,9 @@ SolutionSet * PSO::execute() {
 
   //-> Step 7. Iterations ..
   while (iteration_ < maxIterations_) {
-    int bestIndividual = *(int *)findBestSolution_->execute(particles_) ;
+    int * bestIndividualPtr = (int*)findBestSolution_->execute(particles_);
+    int bestIndividual = *bestIndividualPtr;
+    delete bestIndividualPtr;
     computeSpeed(iteration_, maxIterations_);
 
     //Compute the new positions for the particles_
@@ -288,10 +325,12 @@ SolutionSet * PSO::execute() {
      //if (flag < 0) { // the new particle is best_ than the older remember
      if ((particles_->get(i)->getObjective(0) < localBest_[i]->getObjective(0))) {
        Solution * particle = new Solution(particles_->get(i));
+       delete localBest_[i];
        localBest_[i] = particle;
      } // if
      if ((particles_->get(i)->getObjective(0) < globalBest_->getObjective(0))) {
        Solution * particle = new Solution(particles_->get(i));
+       delete globalBest_;
        globalBest_ = particle;
      } // if
 
@@ -301,7 +340,15 @@ SolutionSet * PSO::execute() {
 
   // Return a population with the best individual
   SolutionSet * resultPopulation = new SolutionSet(1);
-  resultPopulation->add(particles_->get(*(int *)findBestSolution_->execute(particles_)));
+  int * bestIndexPtr = (int *)findBestSolution_->execute(particles_);
+  int bestIndex = *bestIndexPtr;
+  delete bestIndexPtr;
+  cout << "Best index = " << bestIndex << endl;
+  Solution * s = particles_->get(bestIndex);
+  resultPopulation->add(new Solution(s));
+
+  // Free memory
+  deleteParams();
 
   return resultPopulation;
 } // execute
