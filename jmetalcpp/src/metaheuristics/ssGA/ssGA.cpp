@@ -87,21 +87,31 @@ SolutionSet * ssGA::execute() {
     evaluations ++;
 
     // Replacement: replace the last individual is the new one is better
-    int worstIndividual = *(int *) findWorstSolution->execute(population);
-//    system("pause");
-//    cout << "Worst individual: " << worstIndividual << endl;
-//    system("pause");
+    int * worstIndividualPtr = (int *) findWorstSolution->execute(population);
+    int worstIndividual = *worstIndividualPtr;
+    delete worstIndividualPtr;
 
     if (comparator->compare(population->get(worstIndividual), offspring[0]) > 0) {
+      delete population->get(worstIndividual);
       population->remove(worstIndividual);
-      population->add(offspring[0]);
+      population->add(new Solution(offspring[0]));
     } // if
+
+    delete offspring[0];
+    delete offspring[1];
+    delete [] offspring;
+    delete [] parents;
+
   } // while
 
   // Return a population with the best individual
 
   SolutionSet * resultPopulation  = new SolutionSet(1);
-  resultPopulation->add(population->best(comparator));
+  resultPopulation->add(new Solution(population->best(comparator)));
+
+  delete population;
+  delete comparator;
+  delete findWorstSolution;
 
   return resultPopulation;
 } // execute

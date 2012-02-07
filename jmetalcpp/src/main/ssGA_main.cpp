@@ -86,8 +86,15 @@ int main(int argc, char ** argv) {
 
   // Result messages
   cout << "Total execution time: " << secs << "s" << endl;
-  cout << "Variables values have been writen to file VAR" << endl;
+  cout << "Variables values have been written to file VAR" << endl;
   population->printVariablesToFile("VAR");
-  cout << "Objectives values have been writen to file FUN" << endl;
+  cout << "Objectives values have been written to file FUN" << endl;
   population->printObjectivesToFile("FUN");
+
+  delete crossover;
+  delete mutation;
+  delete selection;
+  delete population;
+  delete algorithm;
+
 } // main

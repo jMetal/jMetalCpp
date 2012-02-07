@@ -1,11 +1,11 @@
 CPP  = g++
 CC   = gcc
-OBJ  = nsgaII/NSGAII.o gGA/gGA.o smpso/SMPSO.o gde3/GDE3.o de/DE.o pso/PSO.o \
-	paes/paes.o
+OBJ  = nsgaII/NSGAII.o gGA/gGA.o ssGA/ssGA.o smpso/SMPSO.o gde3/GDE3.o de/DE.o \
+	pso/PSO.o paes/paes.o
 LIB  = libmetaheuristics.a
 
 LIBS +=  -lm 
-INCS +=  -I. -I../core -InsgaII -IgGA -Ismpso -Ipso -Igde3 -Ide -Ipaes \
+INCS +=  -I. -I../core -InsgaII -IgGA -IssGA -Ismpso -Ipso -Igde3 -Ide -Ipaes \
 	-I../util -I../util/archive -I../util/comparators -I../util/wrapper \
 	-I../encodings/solutionType -I../encodings/variable -I../operators/selection
 
