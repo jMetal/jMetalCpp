@@ -24,18 +24,19 @@
 #include <string>
 #include <Problem.h>
 #include <Algorithm.h>
+#include <ProblemFactory.h>
 
 class Settings {
 protected:
   Problem * problem_ ;
-  string problemName_ ;
+  char * problemName_ ;
   string paretoFrontFile_ ;
 
 public:
   Settings() ;
-  Settings(string problemName) ;
+  Settings(char * problemName) ;
 
-  virtual Algorithm * connfigure() = 0 ;
+  virtual Algorithm * configure() = 0 ;
   Algorithm * configure(map<string, void *> * settings) ;
 }; // Settings
 

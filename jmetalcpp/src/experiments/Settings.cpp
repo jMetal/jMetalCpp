@@ -29,7 +29,7 @@ Settings::Settings () {
 /**
  * Constructor
  */
-Settings::Settings(string problemName) {
+Settings::Settings(char * problemName) {
 	problemName_ = problemName;
 } // Settings
 

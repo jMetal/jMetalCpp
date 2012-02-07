@@ -40,7 +40,7 @@ int main(int argc, char ** argv) {
 	// Algorithm parameters
 	int populationSizeValue = 100;
 	int *populationSizePtr = &populationSizeValue;
-	int maxEvaluationsValue = 250000;
+	int maxEvaluationsValue = 25000;
 	int *maxEvaluationsPtr = &maxEvaluationsValue;
 	algorithm->setInputParameter("populationSize",populationSizePtr);
 	algorithm->setInputParameter("maxEvaluations",maxEvaluationsPtr);
