@@ -113,14 +113,16 @@ private:
   void computeSpeed(int iter, int miter);
   void computeNewPositions();
   void mopsoMutation(int actualIteration, int totalIterations);
+  void initParams();
+  void deleteParams();
 
 public:
   SMPSO(Problem * problem);
   //TODO: SMPSO(Problem * problem, vector<double> variables, string trueParetoFront);
   //TODO: SMPSO(Problem * problem, string trueParetoFront);
-  void initParams();
   SolutionSet * execute();
   //TODO: SolutionSet * getLeader();
+
 };
 
 #endif /* SMPSO_H_ */

@@ -73,6 +73,30 @@ void SMPSO::initParams() {
 } // initParams
 
 
+/**
+ * Free all the memory reserved by the algorithm
+ */
+void SMPSO::deleteParams() {
+
+  for (int i = 0; i < swarmSize_; i++) {
+    delete [] speed_[i];
+  }
+  delete [] speed_;
+  delete dominance_;
+  delete crowdingDistanceComparator_;
+  delete distance_;
+  delete [] deltaMax_;
+  delete [] deltaMin_;
+  delete particles_;
+  for (int i = 0; i < swarmSize_; i++) {
+    delete best_[i];
+  }
+  delete [] best_;
+  delete leaders_;
+
+} // deleteParams
+
+
 // Adaptive inertia
 double SMPSO::inertiaWeight(int iter, int miter, double wma, double wmin) {
   return wma; // - (((wma-wmin)*(double)iter)/(double)miter);
@@ -304,26 +328,14 @@ SolutionSet * SMPSO::execute() {
     iteration_++;
   }
 
-  for (int i = 0; i < swarmSize_; i++) {
-    delete [] speed_[i];
-  }
-  delete [] speed_;
-  delete dominance_;
-  delete crowdingDistanceComparator_;
-  delete distance_;
-  delete [] deltaMax_;
-  delete [] deltaMin_;
-  delete particles_;
-  for (int i = 0; i < swarmSize_; i++) {
-    delete best_[i];
-  }
-  delete [] best_;
-
+  // Build the solution set result
   SolutionSet * result = new SolutionSet(leaders_->size());
   for (int i=0;i<leaders_->size();i++) {
     result->add(new Solution(leaders_->get(i)));
   }
-  delete leaders_;
+
+  // Free memory
+  deleteParams();
 
   return result;
 } // execute
