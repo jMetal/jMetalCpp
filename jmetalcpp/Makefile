@@ -1,5 +1,5 @@
 export LIBS = -pthread -lm
-export CXXFLAGS = -g
+export CXXFLAGS = -O3
 
 all: 
 	make -C src

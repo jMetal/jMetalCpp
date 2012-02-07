@@ -1,7 +1,7 @@
 MAKE = make
 SUBDIRS = core util util/archive util/comparators util/iniFile util/wrapper operators/crossover \
 	operators/mutation operators/selection encodings/solutionType encodings/variable metaheuristics \
-	problems
+	problems experiments
 LIBRARIES = core/libcore.a util/libarchive.a util/libinifile.a util/libutil.a util/libwrapper.a \
 	problems/libproblems.a util/comparators/libcomparators.a operators/crossover/libcrossover.a \
 	operators/mutation/libmutation.a operators/selection/libselection.a \

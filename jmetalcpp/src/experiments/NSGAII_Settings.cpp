@@ -29,16 +29,26 @@ NSGAII_Settings::NSGAII_Settings () {
 /**
  * Constructor
  */
-NSGAII_Settings::NSGAII_Settings(string problemName) {
-	problemName_ = problemName;
+NSGAII_Settings::NSGAII_Settings(char * problemName) {
+	problemName_ = problemName ;
+
+  problem_ = ProblemFactory::getProblem(problemName_);
+
+  // Algorithm parameters
+  populationSize_ = 100;
+  maxEvaluations_ = 25000;
 } // Settings
 
 /**
  * Configure method
- *
- * To be implemented. Missing the reflection features of Java here
  */
-Algorithm * Settings::configure(map<string, void *> *settings) {
-	return NULL ;
-} // configure
+Algorithm * NSGAII_Settings::configure() {
+	Algorithm * algorithm ;
+
+	algorithm = new NSGAII(problem_);
+  algorithm->setInputParameter("populationSize",&populationSize_);
+  algorithm->setInputParameter("maxEvaluations",&maxEvaluations_);
+
+	cout << "NGSAII algorithm initialized." << endl;
+}
 

@@ -22,12 +22,22 @@
 #define __NSGAII_SETTINGS__
 
 #include <Settings.h>
+#include <NSGAII.h>
 
 class NSGAII_Settings : public Settings{
+private:
+	int populationSize_                 ;
+	int maxEvaluations_                 ;
+	double mutationProbability_         ;
+	double crossoverProbability_        ;
+	double mutationDistributionIndex_   ;
+	double crossoverDistributionIndex_  ;
 
 public:
-  NSGAII_Settings() ;
-  NSGAII_Settings(string problemName) ;
+	NSGAII_Settings() ;
+	NSGAII_Settings(char * problemName) ;
+
+  Algorithm * configure() ;
 }; // NSGAII_Settings
 
 #endif __NSGAII_SETTINGS__
