@@ -32,6 +32,7 @@ private:
 
 public:
   CrowdingArchive(int maxSize, int numberOfObjectives);
+  ~CrowdingArchive();
   bool add(Solution * solution);
 
 };

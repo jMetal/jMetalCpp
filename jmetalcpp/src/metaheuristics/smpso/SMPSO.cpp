@@ -163,6 +163,11 @@ void SMPSO::computeSpeed(int iter, int miter) {
         var,
         i);
     } // for
+
+    delete bestGlobal;
+    delete particle;
+    delete bestParticle;
+
   }// for
 
 } // computeSpeed
@@ -186,6 +191,7 @@ void SMPSO::computeNewPositions() {
         speed_[i][var] = speed_[i][var] * ChVel2_; //
       }
     }// for
+    delete particle;
   }// for
 } // computeNewPositions
 
@@ -227,16 +233,19 @@ SolutionSet * SMPSO::execute() {
 
   //-> Step2. Initialize the speed_ of each particle to 0
   for (int i = 0; i < swarmSize_; i++) {
+    speed_[i] = new double[problem_->getNumberOfVariables()];
     for (int j = 0; j < problem_->getNumberOfVariables(); j++) {
       speed_[i][j] = 0.0;
     }
   }
 
-
   // Step4 and 5
   for (int i = 0; i < particles_->size(); i++) {
     Solution * particle = new Solution(particles_->get(i));
-    leaders_->add(particle);
+    bool isAdded = leaders_->add(particle);
+    if (isAdded == false) {
+      delete particle;
+    }
   }
 
   //-> Step 6. Initialize the memory of each particle
@@ -270,17 +279,21 @@ SolutionSet * SMPSO::execute() {
       problem_->evaluate(particle);
     }
 
-    //Actualize the archive
+    //Update the archive
     for (int i = 0; i < particles_->size(); i++) {
       Solution * particle = new Solution(particles_->get(i));
-      leaders_->add(particle);
+      bool isAdded = leaders_->add(particle);
+      if (isAdded == false) {
+        delete particle;
+      }
     }
 
-    //Actualize the memory of this particle
+    //Update the memory of this particle
     for (int i = 0; i < particles_->size(); i++) {
       int flag = dominance_->compare(particles_->get(i), best_[i]);
-      if (flag != 1) { // the new particle is best_ than the older remeber
+      if (flag != 1) { // the new particle is best_ than the older remembered
         Solution * particle = new Solution(particles_->get(i));
+        delete best_[i];
         best_[i] = particle;
       }
     }
@@ -290,5 +303,27 @@ SolutionSet * SMPSO::execute() {
       problem_->getNumberOfObjectives());
     iteration_++;
   }
-  return leaders_;
+
+  for (int i = 0; i < swarmSize_; i++) {
+    delete [] speed_[i];
+  }
+  delete [] speed_;
+  delete dominance_;
+  delete crowdingDistanceComparator_;
+  delete distance_;
+  delete [] deltaMax_;
+  delete [] deltaMin_;
+  delete particles_;
+  for (int i = 0; i < swarmSize_; i++) {
+    delete best_[i];
+  }
+  delete [] best_;
+
+  SolutionSet * result = new SolutionSet(leaders_->size());
+  for (int i=0;i<leaders_->size();i++) {
+    result->add(new Solution(leaders_->get(i)));
+  }
+  delete leaders_;
+
+  return result;
 } // execute

@@ -9,8 +9,8 @@
 #include <Solution.h>
 #include <Operator.h>
 //#include <QualityIndicator.h>
+#include <ProblemFactory.h>
 #include <SMPSO.h>
-#include <Kursawe.h>
 #include <PolynomialMutation.h>
 #include <iostream>
 #include <time.h>
@@ -35,31 +35,30 @@ int main(int argc, char ** argv) {
 
   //TODO: QualityIndicator * indicators; // Object to get quality indicators
 
-  problem = new Kursawe("Real", 3);
-  //problem = new Water("Real");
-  //problem = new ZDT1("ArrayReal", 1000);
-  //problem = new ZDT4("BinaryReal");
-  //problem = new WFG1("Real");
-  //problem = new DTLZ1("Real");
-  //problem = new OKA2("Real");
+  if (argc>=2) {
+    problem = ProblemFactory::getProblem(argc, argv);
+  } else {
+    cout << "No problem selected." << endl;
+    cout << "Default problem will be used: Kursawe" << endl;
+		// char * defaultProblem;
+		// strcpy(defaultProblem, "Kursawe");
+    problem = ProblemFactory::getProblem("Kursawe");
+  }
 
-  cout << "SMPSO_main: El numero de objetivos es " << problem->getNumberOfObjectives() << endl;
-  cout << "SMPSO_main: Problema: " << problem->getName() << endl;
+  cout << "SMPSO_main: Number of objectives: " << problem->getNumberOfObjectives() << endl;
+  cout << "SMPSO_main: Problem: " << problem->getName() << endl;
 
   algorithm = new SMPSO(problem);
 
-  cout << "SMPSO_main: Algoritmo SMPSO inicializado." << endl;
+  cout << "SMPSO_main: SMPSO algorithm initialized." << endl;
 
   // Algorithm parameters
   int swarmSizeValue = 100;
-  int *swarmSizePtr = &swarmSizeValue;
   int archiveSizeValue = 100;
-  int *archiveSizePtr = &archiveSizeValue;
   int maxIterationsValue = 250;
-  int *maxIterationsPtr = &maxIterationsValue;
-  algorithm->setInputParameter("populationSize",swarmSizePtr);
-  algorithm->setInputParameter("populationSize",archiveSizePtr);
-  algorithm->setInputParameter("maxIterations",maxIterationsPtr);
+  algorithm->setInputParameter("swarmSize",&swarmSizeValue);
+  algorithm->setInputParameter("archiveSize",&archiveSizeValue);
+  algorithm->setInputParameter("maxIterations",&maxIterationsValue);
 
   // Mutation operator
   double probabilityParameter = 1.0/(problem->getNumberOfVariables());
@@ -82,9 +81,13 @@ int main(int argc, char ** argv) {
 
   // Result messages
   cout << "Total execution time: " << secs << "s" << endl;
-  cout << "Variables values have been writen to file VAR" << endl;
+  cout << "Variables values have been written to file VAR" << endl;
   population->printVariablesToFile("VAR");
-  cout << "Objectives values have been writen to file FUN" << endl;
+  cout << "Objectives values have been written to file FUN" << endl;
   population->printObjectivesToFile("FUN");
+
+  delete mutation;
+  delete population;
+  delete algorithm;
 
 } // main

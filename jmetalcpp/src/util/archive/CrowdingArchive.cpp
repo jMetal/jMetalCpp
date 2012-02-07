@@ -34,6 +34,21 @@ CrowdingArchive::CrowdingArchive(int maxSize, int numberOfObjectives)
 
 
 /**
+ * Destructor.
+ */
+CrowdingArchive::~CrowdingArchive() {
+
+  cout << "Borrando crowding archive..." << endl;
+
+  delete dominance_;
+  delete equals_;
+  delete crowdingDistance_;
+  delete distance_;
+
+} // ~CrowdingArchive
+
+
+/**
  * Adds a <code>Solution</code> to the archive. If the <code>Solution</code>
  * is dominated by any member of the archive, then it is discarded. If the
  * <code>Solution</code> dominates some members of the archive, these are
@@ -56,6 +71,7 @@ bool CrowdingArchive::add(Solution * solution){
       return false;                // Discard the new solution
     } else if (flag == -1) {       // A solution in the archive is dominated
       // Remove it from the population
+      delete aux;
       solutionsList_.erase (solutionsList_.begin()+i);
     } else {
         if (equals_->compare(aux,solution)==0) {
@@ -69,7 +85,9 @@ bool CrowdingArchive::add(Solution * solution){
   solutionsList_.push_back(solution);
   if (size() > maxSize_) { // The archive is full
     distance_->crowdingDistanceAssignment(this,objectives_);
-    remove(indexWorst(crowdingDistance_));
+    int indexWorst_ = indexWorst(crowdingDistance_);
+    delete solutionsList_[indexWorst_];
+    remove(indexWorst_);
   }
   return true;
 } // add
