@@ -56,7 +56,7 @@ protected:
 public:
   Problem();
   Problem(SolutionType * solutionType);
-  ~Problem();
+  virtual ~Problem() = 0;
   int getNumberOfVariables();
   void setNumberOfVariables(int numberOfVariables);
   int getNumberOfObjectives();

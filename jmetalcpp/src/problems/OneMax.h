@@ -28,9 +28,9 @@
 class OneMax : public Problem {
 public:
 	OneMax(int numberOfBits, int numberOfStrings = 1);
+	~OneMax();
   void evaluate(Solution *solution);
 
-	virtual ~OneMax();
 };
 
 #endif /* __ONEMAX_H__ */

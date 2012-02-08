@@ -20,7 +20,13 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <Sphere.h>
-     
+
+/**
+ * Constructor.
+ * Creates a new instance of the Sphere problem.
+ * @param solutionType The solution type must "Real", "BinaryReal, and "ArrayReal".
+ * @param numberOfVariables Number of variables of the problem
+ */
 Sphere::Sphere(string solutionType, int numberOfVariables) {
 	numberOfVariables_   = numberOfVariables;
 	numberOfObjectives_  = 1;
@@ -47,26 +53,40 @@ Sphere::Sphere(string solutionType, int numberOfVariables) {
 
     // TODO: Solution type initialization
     solutionType_ = new RealSolutionType(this);	
-}
+} // Sphere
 
 
+/**
+ * Destructor
+ */
+Sphere::~Sphere() {
+  delete [] lowerLimit_ ;
+  delete [] upperLimit_ ;
+  delete solutionType_ ;
+} // ~Sphere
+
+
+/**
+ * Evaluates a solution
+ * @param solution The solution to evaluate
+ */
 void Sphere::evaluate(Solution *solution) {
-	double fx [numberOfObjectives_] ;
-  double x [numberOfVariables_];
+	//double fx [numberOfObjectives_] ;
+  //double x [numberOfVariables_];
 	Variable **variables = solution->getDecisionVariables();
-	/*
-	fx = new double[numberOfObjectives_]; //(double *)malloc(sizeof(double) * numberOfObjectives_);
+
+	double * fx = new double[numberOfObjectives_]; //(double *)malloc(sizeof(double) * numberOfObjectives_);
 	if (fx == NULL) {
 		cout << "Sphere::evaluate: Error reserving memory while evaluating the problem" << endl;
         exit(-1);
 	}
 	
-  x = new double[numberOfVariables_]; 
+  double * x = new double[numberOfVariables_];
   if (x == NULL) {
     cout << "Sphere::evaluate: Error reserving memory for the variable values array" << endl;
     exit(-1);
   } // if
-  */
+
   for (int i = 0; i < numberOfVariables_; i++)
     x[i] = variables[i]->getValue() ;
 
@@ -79,8 +99,8 @@ void Sphere::evaluate(Solution *solution) {
 	fx[0] = sum ;
 		
 	solution->setObjective(0,fx[0]);
-  //delete[]fx ;
-  //delete[]x; 
-}
+  delete[]fx ;
+  delete[]x;
+} // evaluate
 
 

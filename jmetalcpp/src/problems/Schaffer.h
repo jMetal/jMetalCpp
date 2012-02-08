@@ -35,6 +35,7 @@ class Schaffer : public Problem {
 
 public:
   Schaffer(string solutionType);
+  ~Schaffer();
   void evaluate(Solution *solution);
 };
 

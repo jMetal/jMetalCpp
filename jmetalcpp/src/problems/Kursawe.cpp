@@ -75,6 +75,16 @@ Kursawe::Kursawe(string solutionType, int numberOfVariables) {
 
 
 /**
+ * Destructor
+ */
+Kursawe::~Kursawe() {
+  delete [] lowerLimit_ ;
+  delete [] upperLimit_ ;
+  delete solutionType_ ;
+} // ~Kursawe
+
+
+/**
  * Evaluates a solution
  * @param solution The solution to evaluate
  */

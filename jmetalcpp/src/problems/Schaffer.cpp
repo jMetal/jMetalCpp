@@ -21,6 +21,11 @@
 
 #include <Schaffer.h>
 
+/**
+ * Constructor.
+ * Creates a new instance of the Schaffer problem.
+ * @param solutionType The solution type must "Real", "BinaryReal, and "ArrayReal".
+ */
 Schaffer::Schaffer(string solutionType) {
 	numberOfVariables_   = 1;
 	numberOfObjectives_  = 2;
@@ -46,15 +51,29 @@ Schaffer::Schaffer(string solutionType) {
 
     // TO-DO: Solution type initialization
     solutionType_ = new RealSolutionType(this);
-}
+} // Schaffer
 
 
+/**
+ * Destructor
+ */
+Schaffer::~Schaffer() {
+  delete [] lowerLimit_ ;
+  delete [] upperLimit_ ;
+  delete solutionType_ ;
+} // ~Schaffer
+
+
+/**
+ * Evaluates a solution
+ * @param solution The solution to evaluate
+ */
 void Schaffer::evaluate(Solution *solution) {
 
 	double *fx;
 	Variable **variables = solution->getDecisionVariables();
 
-	fx = new double[numberOfObjectives_]; //(double *)malloc(sizeof(double) * numberOfObjectives_);
+	fx = new double[numberOfObjectives_];
 	if (fx == NULL) {
 		cout << "Schaffer::evaluate: Error reserving memory while evaluating the problem" << endl;
         exit(-1);
@@ -66,6 +85,8 @@ void Schaffer::evaluate(Solution *solution) {
 	solution->setObjective(0,fx[0]);
 	solution->setObjective(1,fx[1]);
 
-}
+	delete [] fx;
+
+} // evaluate
 
 

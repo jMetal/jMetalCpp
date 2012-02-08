@@ -20,6 +20,9 @@
 
 #include <OneMax.h>
 
+/**
+ * Class constructor
+ */
 OneMax::OneMax(int numberOfBits, int numberOfStrings) {
 	numberOfVariables_   = numberOfStrings;
 	numberOfObjectives_  = 1;
@@ -30,11 +33,12 @@ OneMax::OneMax(int numberOfBits, int numberOfStrings) {
   length_       = new int[numberOfVariables_];
   for (int i = 0; i < numberOfVariables_; i++)
     length_  [i] = numberOfBits ;
-}
+} // OneMax
 
 OneMax::~OneMax() {
   delete []length_ ;
-}
+  delete solutionType_;
+} // ~OneMax
 
  /**
   * Evaluates a solution
@@ -59,4 +63,4 @@ void OneMax::evaluate(Solution * solution) {
   */
     // OneMax is a maximization problem: multiply by -1 to minimize
     solution->setObjective(0, - 1.0*counter);
-}
+} // evaluate

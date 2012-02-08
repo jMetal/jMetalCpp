@@ -34,6 +34,7 @@
 class Fonseca : public Problem {
 public:
   Fonseca(string solutionType);
+  ~Fonseca();
   void evaluate(Solution *solution);  
 };
 

@@ -35,6 +35,7 @@ class Sphere : public Problem {
    
 public:
 	Sphere(string solutionType, int numberOfVariables = 10);
+	~Sphere();
 	void evaluate(Solution *solution);
 };
 

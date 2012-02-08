@@ -47,7 +47,17 @@ Fonseca::Fonseca(string solutionType) {
 
     // TO-DO: Solution type initialization    		
   solutionType_ = new RealSolutionType(this);	
-}
+} // Fonseca
+
+
+/**
+ * Destructor
+ */
+Fonseca::~Fonseca() {
+  delete [] lowerLimit_ ;
+  delete [] upperLimit_ ;
+  delete solutionType_ ;
+} // ~Fonseca
 
 
 /**
@@ -92,5 +102,5 @@ void Fonseca::evaluate(Solution *solution) {
   
   delete[]fx ;
   delete[]x ;
-}
+} // evaluate
 

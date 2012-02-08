@@ -40,6 +40,7 @@ class Kursawe : public Problem {
 
 public:
   Kursawe(string solutionType, int numberOfVariables = 3);
+  ~Kursawe();
   void evaluate(Solution *solution);  
 };
 
