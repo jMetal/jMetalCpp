@@ -13,9 +13,9 @@ INCS +=  -I. -I../core -I../util -I../problems -I../util/comparators \
 
 #EXECS = NSGAII_main PAES_main gGA_main autodock DE_main GDE3_main
 #DEPS = ../libjmetal.a ../metaheuristics/libmetaheuristics.a 
-EXECS = autodock_main NSGAII_main NSGAIIbin_main gGA_main gGAbin_main ssGA_main GDE3_main \
+EXECS = NSGAII_main NSGAIIbin_main gGA_main gGAbin_main ssGA_main GDE3_main \
 	DE_main SMPSO_main PSO_main PAES_main
-WINEXECS = autodock_main.exe NSGAII_main.exe NSGAIIbin_main.exe NSGAII_main.exe gGA_main.exe \
+WINEXECS = NSGAII_main.exe NSGAIIbin_main.exe NSGAII_main.exe gGA_main.exe \
 	gGAbin_main.exe ssGA_main.exe GDE3_main.exe DE_main.exe SMPSO_main.exe PSO_main.exe \
 	PAES_main.exe
 DEPS = ../libjmetal.a
@@ -75,10 +75,6 @@ SMPSO_main: SMPSO_main.cpp $(DEPS)
 PSO_main: PSO_main.cpp $(DEPS)
 	$(CPP) PSO_main.cpp ../libjmetal.a -o PSO_main $(INCS) $(LIBS)
 	cp PSO_main $(BIN_DIRECTORY)
-
-autodock_main: autodock_main.cpp $(DEPS)
-	$(CPP) autodock_main.cpp ../libjmetal.a -o  autodock_main $(INCS) $(LIBS)
-	cp autodock_main $(BIN_DIRECTORY)
 
 #.cpp.o: $(DEPS)
 #	$(CPP) $< $(DEPS) -o NSGAII_main $(INCS) $(LIBS)
