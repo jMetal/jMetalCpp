@@ -24,7 +24,7 @@
 #include <RealSolutionType.h>
 #include <SBXCrossover.h>
 #include <PolynomialMutation.h>
-#include <BinaryTournament2.h>
+#include <BinaryTournament.h>
 #include <iostream>
 #include <ssGA.h>
 #include <time.h>
@@ -50,14 +50,9 @@ int main(int argc, char ** argv) {
     problem = ProblemFactory::getProblem("Sphere");
   }
 
-
-  //algorithm = new gGA(problem) ; // Generational GA
   algorithm = new ssGA(problem); // Steady-state GA
-  //algorithm = new scGA(problem) ; // Synchronous cGA
-  //algorithm = new acGA(problem) ;   // Asynchronous cGA
 
-  cout << "Algoritmo ssGA inicializado." << endl;
-  system("pause");
+  cout << "Steady-state genetic algorithm initialized." << endl;
 
   // Algorithm parameters
   int populationSize = 100;
@@ -82,7 +77,7 @@ int main(int argc, char ** argv) {
 
   // Selection Operator
   parameters.clear();
-  selection = new BinaryTournament2(parameters) ;
+  selection = new BinaryTournament(parameters) ;
 
   // Add the operators to the algorithm
   algorithm->addOperator("crossover",crossover);
