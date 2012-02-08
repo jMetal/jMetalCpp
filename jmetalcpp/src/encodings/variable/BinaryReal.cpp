@@ -60,6 +60,12 @@ BinaryReal::BinaryReal(BinaryReal * variable) : Binary (variable) {
 
 
 /**
+ * Destructor
+ */
+BinaryReal::~BinaryReal() { /* do nothing */ }
+
+
+/**
  * Decodes the real value encoded in the binary string represented
  * by the <code>BinaryReal</code> object. The decoded value is stores in the
  * <code>value_</code> field and can be accessed by the method

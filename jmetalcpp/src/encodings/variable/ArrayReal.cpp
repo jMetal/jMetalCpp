@@ -65,6 +65,14 @@ ArrayReal::ArrayReal(ArrayReal * arrayReal) {
 
 
 /**
+ * Destructor
+ */
+ArrayReal::~ArrayReal() {
+  delete [] array_;
+} // ~ArrayReal
+
+
+/**
  * Creates an exact copy of a <code>BinaryReal</code> object.
  * @return The copy of the object
  */

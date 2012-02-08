@@ -62,9 +62,14 @@ Binary::Binary(Binary * variable){
   }
 } //Binary
 
+
+/**
+ * Destructor
+ */
 Binary::~Binary() {
   delete bits_;
-}
+} //~Binary
+
 
 /**
  * This method is intended to be used in subclass of <code>Binary</code>,

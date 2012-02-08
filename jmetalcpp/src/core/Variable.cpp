@@ -89,6 +89,12 @@ using namespace std;
 
 
 /**
+ * Destructor
+ */
+Variable::~Variable() { /* do nothing */ }
+
+
+/**
  * Sets the lower bound for a variable. As not all objects belonging to a
  * subclass of <code>Variable</code> have a lower bound, a call to this method
  * is considered a fatal error by default and the program is terminated.

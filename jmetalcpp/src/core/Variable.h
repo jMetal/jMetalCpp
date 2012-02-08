@@ -37,6 +37,7 @@ using namespace std ;
 class Variable {
 
 public:
+  virtual ~Variable() = 0;
   virtual Variable * deepCopy() = 0;
   virtual double getValue() = 0;
   virtual void setValue(double value) = 0;

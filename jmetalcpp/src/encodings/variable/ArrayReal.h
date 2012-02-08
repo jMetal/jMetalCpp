@@ -40,6 +40,7 @@ public:
   ArrayReal();
   ArrayReal(int size, Problem * problem);
   ArrayReal(ArrayReal * arrayReal);
+  ~ArrayReal();
 
   Variable * deepCopy();
   int getLength();

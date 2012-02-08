@@ -39,6 +39,7 @@ public:
   BinaryReal();
   BinaryReal(int numberOfBits, double lowerBound, double upperBound);
   BinaryReal(BinaryReal * variable);
+  ~BinaryReal();
 
   void decode();
   double getValue();

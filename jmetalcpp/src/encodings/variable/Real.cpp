@@ -56,6 +56,12 @@ Real::Real(Variable * variable) {
 
 
 /**
+ * Destructor
+ */
+Real::~Real() { /* do nothing */ }
+
+
+/**
  * Gets the value of the <code>Real</code> variable.
  * @return the value.
  */

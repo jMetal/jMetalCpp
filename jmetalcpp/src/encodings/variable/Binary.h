@@ -36,10 +36,12 @@
 class Binary : public Variable {
 
 public:
+
   Binary();
   Binary(int numberOfBits);
   Binary(Binary * variable);
-  ~Binary() ;
+  ~Binary();
+
   void decode();
   Variable * deepCopy();
   int getNumberOfBits();

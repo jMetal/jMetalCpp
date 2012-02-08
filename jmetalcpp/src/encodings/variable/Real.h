@@ -32,9 +32,12 @@
 class Real : public Variable {
 
 public:
+
   Real();
   Real(double lowerBound, double upperBound);
   Real(Variable * variable);
+  ~Real();
+
   double getValue();
   void setValue(double value);
   Variable * deepCopy();
