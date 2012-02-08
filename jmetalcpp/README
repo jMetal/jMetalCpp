@@ -1,0 +1,137 @@
+ -------------------------------
+|                               |
+|     jMetalCpp - README        |
+|                               |
+ -------------------------------
+
+=======================================================================================
+TABLE OF CONTENTS
+=======================================================================================
+1. Installing jMetalCpp
+2. Executing jMetalCpp
+3. Choosing a problem
+4. Configuring a problem
+=======================================================================================
+
+
+=======================================================================================
+1. Installing jMetalCpp
+=======================================================================================
+
+Copy the compressed file to the location where you want jMetal to be installed and
+unzip it.
+
+Then, compile the code with the following command:
+	% make
+
+=======================================================================================
+
+
+=======================================================================================	
+2. Executing jMetal
+=======================================================================================
+
+All the binaries are in the 'bin' folder. Enter the folder to execute jMetal.
+	
+	% cd bin
+
+The following algorithms are provided in this version of jMetal:
+
+	Algorithm                                   Command
+	---------------------------------------------------------
+	DE (Differential Evolution)                 DE_main
+	GDE3                                        GDE3_main
+	gGA (Generational Genetic Algorithm)        gGA_main
+	NSGA-II                                     NSGAII_main
+	PSO (Particle Swarm Optimization)           PSO_main
+	SMPSO                                       SMPSO_main
+	ssGA (Steady-state Genetic Algorithm)       ssGA_main
+	
+To execute one metaheuristic just use its associated command. For example, to execute
+GDE3 use the following command:
+	
+	% ./GDE3_main
+
+=======================================================================================
+
+
+=======================================================================================
+3. Choosing a problem
+=======================================================================================
+
+If you execute an algorithm like before, a default problem will be used for each
+algorithm. You can specify what problem to solve passing it as a parameter to the
+algoritm command. For example, if you desire to execute the Generational Genetic
+Algorithm to solve the Sphere problem, you need to execute the following command:
+	
+	% ./gGA_main Sphere
+	
+The following problems are included:
+	- Fonseca
+	- Kursawe
+	- OneMax
+	- Schaffer
+	- Sphere
+	- DTLZ1
+	- DTLZ2
+	- DTLZ3
+	- DTLZ4
+	- DTLZ5
+	- DTLZ6
+	- DTLZ7
+	- ZDT1
+	- ZDT2
+	- ZDT3
+	- ZDT4
+	- ZDT5
+	- ZDT6
+
+=======================================================================================
+
+
+=======================================================================================
+4. Configuring a problem
+=======================================================================================
+
+When you select a problem to solve, you can configure some problem parameters passing
+them as parameters. If a problem has three parameters, you can choose to specify one,
+two or the three of them.
+
+The following parameters can be configured when going to solve a problem:
+
+ Problem        Parameter 1         Parameter 2             Parameter 3
+--------------------------------------------------------------------------------------
+ Fonseca        Solution type
+ Kursawe        Solution type       Number of variables
+ OneMax         Number of bits      Number of strings
+ Shaffer        Solution type
+ Sphere         Solution type       Number of variables
+ DTLZ1          Solution type       Number of variables     Number of objectives
+ DTLZ2          Solution type       Number of variables     Number of objectives
+ DTLZ3          Solution type       Number of variables     Number of objectives
+ DTLZ4          Solution type       Number of variables     Number of objectives
+ DTLZ5          Solution type       Number of variables     Number of objectives
+ DTLZ6          Solution type       Number of variables     Number of objectives
+ DTLZ7          Solution type       Number of variables     Number of objectives
+ ZDT1           Solution type       Number of variables
+ ZDT2           Solution type       Number of variables
+ ZDT3           Solution type       Number of variables
+ ZDT4           Solution type       Number of variables
+ ZDT5           Solution type       Number of variables
+ ZDT6           Solution type       Number of variables
+
+The following values are allowed for the 'Solution type' parameter:
+	- Real
+	- Binary
+	
+For example, if you wanted to solve the DTLZ5 problem using SMPSO using 'Real" as
+solution type, you would need to execute the following command:
+	
+	% ./SMPSO_main DTLZ5 Real
+	
+If you wanted to modify the default parameters and use ten variables and two objectives,
+you would need to execute the following command:
+	
+	%./SMPSO_main DTLZ5 Real 10 2
+
+=======================================================================================

@@ -174,18 +174,32 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv) {
 			return new Kursawe("Real");
 		else if (argc==1)
 			return new Kursawe(argv[0]);
+		else if (argc==2)
+		  return new Kursawe(argv[0], atoi(argv[1]));
 		else {
 			cerr << "Incorrect number of arguments for Kursawe problem." << endl;
 			exit(-1);
 		}
 
 	} else if (strcmp(name, "OneMax")==0) { // OneMax
-    if (argc==1)
+	  if (argc==0)
+	    return new OneMax(400);
+	  else if (argc==1)
       return new OneMax(atoi(argv[0]));
     else if (argc==2)
       return new OneMax(atoi(argv[0]), atoi(argv[1]));
     else {
       cerr << "Incorrect number of arguments for OneMax problem." << endl;
+      exit(-1);
+    }
+
+  } else if (strcmp(name, "Schaffer")==0) { // Schaffer
+    if (argc==0)
+      return new Schaffer("Real");
+    else if (argc==1)
+      return new Schaffer(argv[0]);
+    else {
+      cerr << "Incorrect number of arguments for Schaffer problem." << endl;
       exit(-1);
     }
 
