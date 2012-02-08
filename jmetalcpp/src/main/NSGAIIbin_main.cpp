@@ -21,9 +21,7 @@
 
 #include <Problem.h>
 #include <Solution.h>
-#include <ZDT5.h>
-#include <OneMax.h>
-#include <RealSolutionType.h>
+#include <ProblemFactory.h>
 #include <SinglePointCrossover.h>
 #include <BitFlipMutation.h>
 #include <BinaryTournament2.h>
@@ -45,23 +43,42 @@ int main(int argc, char ** argv) {
   Operator  * mutation  ; // Mutation operator
   Operator  * selection ; // Selection operator
 
-	//problem = new ZDT5("Binary");
-	problem = new OneMax(200,2);
+  if (argc>=2) {
+    problem = ProblemFactory::getProblem(argc, argv);
+  } else {
 
-	cout << "El numero de objetivos es " << problem->getNumberOfObjectives() << endl;
+    cout << "No problem selected." << endl;
+    cout << "Default problem will be used: OneMax" << endl;
 
+    char ** argv = new char*[2];
+    argv[0] = new char[3];
+    strcpy(argv[0], "200");
+    argv[1] = new char[1];
+    strcpy(argv[1], "2");
+    char * problemName = new char[6];
+    strcpy(problemName, "OneMax");
+
+    problem = ProblemFactory::getProblem(problemName, 2, argv);
+
+    delete argv[0];
+    delete argv[1];
+    delete [] argv;
+    delete problemName;
+
+  }
+
+  cout << "Number of objectives: " << problem->getNumberOfObjectives() << endl;
+  cout << "Problem name: " << problem->getName() << endl;
 
 	algorithm = new NSGAII(problem);
 
-	cout << "Algoritmo NGSAII inicializado." << endl;
+	cout << "NGSAII algorithm initialized." << endl;
 
 	// Algorithm parameters
-	int populationSizeValue = 100;
-	int *populationSizePtr = &populationSizeValue;
-	int maxEvaluationsValue = 25000;
-	int *maxEvaluationsPtr = &maxEvaluationsValue;
-	algorithm->setInputParameter("populationSize",populationSizePtr);
-	algorithm->setInputParameter("maxEvaluations",maxEvaluationsPtr);
+	int populationSize = 100;
+	int maxEvaluations = 25000;
+	algorithm->setInputParameter("populationSize",&populationSize);
+	algorithm->setInputParameter("maxEvaluations",&maxEvaluations);
 
 	map<string, void *> parameters;
 
@@ -81,15 +98,12 @@ int main(int argc, char ** argv) {
 	parameters.clear();
 	selection = new BinaryTournament2(parameters) ;
 
-	cout << "Adding operators..." << endl;
-
 	// Add the operators to the algorithm
 	algorithm->addOperator("crossover",crossover);
 	algorithm->addOperator("mutation",mutation);
 	algorithm->addOperator("selection",selection);
 
 	// Execute the Algorithm
-
 	t_ini = clock();
 	SolutionSet * population = algorithm->execute();
 	t_fin = clock();
@@ -97,9 +111,16 @@ int main(int argc, char ** argv) {
 
 	// Result messages
 	cout << "Total execution time: " << secs << "s" << endl;
-	cout << "Variables values have been writen to file VAR" << endl;
+	cout << "Variables values have been written to file VAR" << endl;
 	population->printVariablesToFile("VAR");
-	cout << "Objectives values have been writen to file FUN" << endl;
+	cout << "Objectives values have been written to file FUN" << endl;
 	population->printObjectivesToFile("FUN");
+
+  delete selection;
+  delete mutation;
+  delete crossover;
+  delete population;
+  delete algorithm;
+
 } // main
 

@@ -108,14 +108,19 @@ Solution ** SinglePointCrossover::doCrossover(double probability, Solution *pare
       of2->setIth(i, swap) ;
     }
 
+    delete offSpring[0]->getDecisionVariables()[variable];
+    delete offSpring[1]->getDecisionVariables()[variable];
     offSpring[0]->getDecisionVariables()[variable] = of1 ;
     offSpring[1]->getDecisionVariables()[variable] = of2 ;
 
     //6. Apply the crossover to the other variables
     for (int i = 0; i < variable; i++) {
+
+      delete offSpring[0]->getDecisionVariables()[i];
       offSpring[0]->getDecisionVariables()[i] =
           parent2->getDecisionVariables()[i]->deepCopy();
 
+      delete offSpring[1]->getDecisionVariables()[i];
       offSpring[1]->getDecisionVariables()[i] =
           parent1->getDecisionVariables()[i]->deepCopy();
 

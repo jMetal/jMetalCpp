@@ -34,6 +34,7 @@
 #include <DTLZ7.h>
 #include <Fonseca.h>
 #include <Kursawe.h>
+#include <OneMax.h>
 #include <Sphere.h>
 #include <ZDT1.h>
 #include <ZDT2.h>

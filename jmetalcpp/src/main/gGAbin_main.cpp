@@ -22,12 +22,11 @@
 #include <Problem.h>
 #include <Algorithm.h>
 #include <Solution.h>
-#include <BinarySolutionType.h>
 #include <BinaryTournament2.h>
 #include <BitFlipMutation.h>
 #include <SinglePointCrossover.h>
 #include <iostream>
-#include <OneMax.h>
+#include <ProblemFactory.h>
 #include <gGA.h>
 #include <time.h>
 
@@ -41,31 +40,52 @@ int main(int argc, char ** argv) {
   Operator  * mutation  ; // Mutation operator
   Operator  * selection ; // Selection operator
 
-  int bits = 400 ;
-	problem = new OneMax(bits, 2);
+  if (argc>=2) {
+    problem = ProblemFactory::getProblem(argc, argv);
+  } else {
 
-	cout << "El numero de objetivos es " << problem->getNumberOfObjectives() << endl;
-	cout << "Problema: " << problem->getName() << endl;
+    cout << "No problem selected." << endl;
+    cout << "Default problem will be used: OneMax" << endl;
+
+    char ** argv = new char*[2];
+    argv[0] = new char[3];
+    strcpy(argv[0], "400");
+    argv[1] = new char[1];
+    strcpy(argv[1], "2");
+    char * problemName = new char[6];
+    strcpy(problemName, "OneMax");
+
+    problem = ProblemFactory::getProblem(problemName, 2, argv);
+
+    delete argv[0];
+    delete argv[1];
+    delete [] argv;
+    delete problemName;
+
+  }
+
+	cout << "Number of objectives: " << problem->getNumberOfObjectives() << endl;
+	cout << "Problem name: " << problem->getName() << endl;
 
 	algorithm = new gGA(problem);
 
-	cout << "Algoritmo gGA inicializado." << endl;
+	cout << "gGA algorithm inicializado." << endl;
 
 	// Algorithm parameters
-	int populationSizeValue = 100;
-	int *populationSizePtr = &populationSizeValue;
-	int maxEvaluationsValue = 25000;
-	int *maxEvaluationsPtr = &maxEvaluationsValue;
-	algorithm->setInputParameter("populationSize",populationSizePtr);
-	algorithm->setInputParameter("maxEvaluations",maxEvaluationsPtr);
+	int populationSize = 100;
+	int maxEvaluations = 25000;
+	algorithm->setInputParameter("populationSize",&populationSize);
+	algorithm->setInputParameter("maxEvaluations",&maxEvaluations);
 
 	map<string, void *> parameters;
 
+	// Mutation operator
 	parameters.clear();
 	double mutationProbability = 1.0/problem->getNumberOfBits();
 	parameters["probability"] = &mutationProbability;
 	mutation = new BitFlipMutation(parameters);
 
+	// Crossover operator
 	parameters.clear();
 	double crossoverProbability = 0.9;
 	parameters["probability"] = &crossoverProbability;
@@ -74,8 +94,6 @@ int main(int argc, char ** argv) {
 	// Selection Operator
 	parameters.clear();
 	selection = new BinaryTournament2(parameters) ;
-
-	cout << "Adding operators..." << endl;
 
 	// Add the operators to the algorithm
 	algorithm->addOperator("crossover",crossover);
@@ -90,180 +108,15 @@ int main(int argc, char ** argv) {
 
 	// Result messages
 	cout << "Total execution time: " << secs << "s" << endl;
-	cout << "Variables values have been writen to file VAR" << endl;
+	cout << "Variables values have been written to file VAR" << endl;
 	population->printVariablesToFile("VAR");
-	cout << "Objectives values have been writen to file FUN" << endl;
+	cout << "Objectives values have been written to file FUN" << endl;
 	population->printObjectivesToFile("FUN");
 
-} // main
-
-/**
-
- * @file gGAbin_main.cpp
-
- * @author Antonio J. Nebro
-
- * @date 02 December 2011
-
-**/
-
-
-
-/*
-
-#include <Problem.h>
-
-#include <Algorithm.h>
-
-#include <Solution.h>
-
-#include <BinarySolutionType.h>
-
-#include <BinaryTournament2.h>
-
-#include <BitFlipMutation.h>
-
-#include <SinglePointCrossover.h>
-
-#include <iostream>
-
-#include <OneMax.h>
-
-#include <gGA.h>
-
-#include <time.h>
-
-
-
-int main(int argc, char ** argv) {
-
-
-
-	clock_t t_ini, t_fin;
-
-
-
-  Problem   * problem   ; // The problem to solve
-
-  Algorithm * algorithm ; // The algorithm to use
-
-  Operator  * crossover ; // Crossover operator
-
-  Operator  * mutation  ; // Mutation operator
-
-  Operator  * selection ; // Selection operator
-
-
-
-  int bits = 200 ;
-
-	problem = new OneMax(bits, 2);
-
-
-
-	cout << "El numero de objetivos es " << problem->getNumberOfObjectives() << endl;
-
-	cout << "Problema: " << problem->getName() << endl;
-
-
-
-	algorithm = new gGA(problem);
-
-
-
-	cout << "Algoritmo gGA inicializado." << endl;
-
-
-
-	// Algorithm parameters
-
-	int populationSizeValue = 100;
-
-	int *populationSizePtr = &populationSizeValue;
-
-	int maxEvaluationsValue = 25000;
-
-	int *maxEvaluationsPtr = &maxEvaluationsValue;
-
-	algorithm->setInputParameter("populationSize",populationSizePtr);
-
-	algorithm->setInputParameter("maxEvaluations",maxEvaluationsPtr);
-
-
-
-	map<string, void *> parameters;
-
-
-
-	parameters.clear();
-
-	double mutationProbability = 1.0/problem->getNumberOfBits();
-
-	parameters["probability"] = &mutationProbability;
-
-	mutation = new BitFlipMutation(parameters);
-
-
-
-	parameters.clear();
-
-	double crossoverProbability = 0.9;
-
-	parameters["probability"] = &crossoverProbability;
-
-	crossover = new SinglePointCrossover(parameters);
-
-
-
-	// Selection Operator
-
-	parameters.clear();
-
-	selection = new BinaryTournament2(parameters) ;
-
-
-
-	cout << "Adding operators..." << endl;
-
-
-
-	// Add the operators to the algorithm
-
-	algorithm->addOperator("crossover",crossover);
-
-	algorithm->addOperator("mutation",mutation);
-
-	algorithm->addOperator("selection",selection);
-
-
-
-	// Execute the Algorithm
-
-	t_ini = clock();
-
-	SolutionSet * population = algorithm->execute();
-
-	t_fin = clock();
-
-	double secs = (double) (t_fin - t_ini);
-
-
-
-	// Result messages
-
-	cout << "Total execution time: " << secs << "s" << endl;
-
-	cout << "Variables values have been writen to file VAR" << endl;
-
-	population->printVariablesToFile("VAR");
-
-	cout << "Objectives values have been writen to file FUN" << endl;
-
-	population->printObjectivesToFile("FUN");
-
-
+  delete selection;
+  delete mutation;
+  delete crossover;
+  delete population;
+  delete algorithm;
 
 } // main
-
->>>>>>> 06f11d8061e89ace6f1c08ca6077996496466ce2
-*/

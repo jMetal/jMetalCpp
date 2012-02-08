@@ -37,6 +37,12 @@ BitFlipMutation::BitFlipMutation(map<string, void *> parameters)
 
 
 /**
+ * Destructor
+ */
+BitFlipMutation::~BitFlipMutation() { } // ~BitFlipMutation
+
+
+/**
  * Perform the mutation operation
  * @param probability Mutation probability
  * @param solution The solution to mutate

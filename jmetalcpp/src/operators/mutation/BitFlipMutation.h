@@ -36,6 +36,7 @@ class BitFlipMutation : public Mutation {
 
 public:
   BitFlipMutation(map<string, void *> parameters);
+  ~BitFlipMutation();
   void * execute(void *);
 
 private:

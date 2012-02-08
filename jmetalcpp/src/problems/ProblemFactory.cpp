@@ -178,6 +178,17 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv) {
 			cerr << "Incorrect number of arguments for Kursawe problem." << endl;
 			exit(-1);
 		}
+
+	} else if (strcmp(name, "OneMax")==0) { // OneMax
+    if (argc==1)
+      return new OneMax(atoi(argv[0]));
+    else if (argc==2)
+      return new OneMax(atoi(argv[0]), atoi(argv[1]));
+    else {
+      cerr << "Incorrect number of arguments for OneMax problem." << endl;
+      exit(-1);
+    }
+
 	} else if (strcmp(name, "Sphere")==0) { // Sphere
 		if (argc==0)
 			return new Sphere("Real");
