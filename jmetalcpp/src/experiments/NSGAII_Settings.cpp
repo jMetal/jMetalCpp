@@ -37,6 +37,10 @@ NSGAII_Settings::NSGAII_Settings(char * problemName) {
   // Algorithm parameters
   populationSize_ = 100;
   maxEvaluations_ = 25000;
+  mutationProbability_         = 1.0/problem_->getNumberOfVariables() ;
+  crossoverProbability_        = 0.9   ;
+  mutationDistributionIndex_   = 20.0  ;
+  crossoverDistributionIndex_  = 20.0  ;
 } // Settings
 
 /**
@@ -44,11 +48,41 @@ NSGAII_Settings::NSGAII_Settings(char * problemName) {
  */
 Algorithm * NSGAII_Settings::configure() {
 	Algorithm * algorithm ;
+  Operator  * crossover ; // Crossover operator
+  Operator  * mutation  ; // Mutation operator
+  Operator  * selection ; // Selection operator
 
 	algorithm = new NSGAII(problem_);
   algorithm->setInputParameter("populationSize",&populationSize_);
   algorithm->setInputParameter("maxEvaluations",&maxEvaluations_);
 
+	// Mutation and Crossover for Real codification
+	map<string, void *> parameters;
+
+  double crossoverProbability = crossoverProbability_;
+  double crossoverDistributionIndex = crossoverDistributionIndex_ ;
+  parameters["probability"] =  &crossoverProbability;
+  parameters["distributionIndex"] = &crossoverDistributionIndex;
+  crossover = new SBXCrossover(parameters);
+
+	parameters.clear();
+  double mutationProbability = mutationProbability_;
+  double mutationDistributionIndex = mutationDistributionIndex_;
+  parameters["probability"] = &mutationProbability;
+  parameters["distributionIndex"] = &mutationDistributionIndex;
+  mutation = new PolynomialMutation(parameters);
+
+	// Selection Operator
+	parameters.clear();
+	selection = new BinaryTournament2(parameters);
+
+	// Add the operators to the algorithm
+	algorithm->addOperator("crossover",crossover);
+	algorithm->addOperator("mutation",mutation);
+	algorithm->addOperator("selection",selection);
+
 	cout << "NGSAII algorithm initialized." << endl;
+
+	return algorithm ;
 }
 

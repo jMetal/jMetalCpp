@@ -23,6 +23,9 @@
 
 #include <Settings.h>
 #include <NSGAII.h>
+#include <SBXCrossover.h>
+#include <PolynomialMutation.h>
+#include <BinaryTournament2.h>
 
 class NSGAII_Settings : public Settings{
 private:
