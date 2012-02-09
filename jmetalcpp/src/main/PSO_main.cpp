@@ -72,6 +72,7 @@ int main(int argc, char ** argv) {
   SolutionSet * population = algorithm->execute();
   t_fin = clock();
   double secs = (double) (t_fin - t_ini);
+  secs = secs / CLOCKS_PER_SEC;
 
   // Result messages
   cout << "Total execution time: " << secs << "s" << endl;

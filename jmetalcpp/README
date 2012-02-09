@@ -14,11 +14,17 @@ TABLE OF CONTENTS
 4. Configuring a problem
 =======================================================================================
 
+
 =======================================================================================
 0. Requirements
 =======================================================================================
 
-jMetalCpp has been developed in Unix machines (Ubuntu and MacOS X) as well as in Windows (Cygwin) using the G++ compiler. The make utility has been used to compile the software package.
+jMetalCpp has been developed in Unix machines (Ubuntu and MacOS X) as well as in
+Windows (Cygwin) using the G++ compiler. The make utility has been used to compile the
+software package.
+
+=======================================================================================
+
 
 =======================================================================================
 1. Installing jMetalCpp
@@ -71,7 +77,9 @@ GDE3 use the following command:
 =======================================================================================
 
 If you execute an algorithm like before, a default problem will be used for each
-algorithm. You can specify what problem to solve by passing it as a parameter. For example, if you desire to execute the Generational Genetic Algorithm to solve the Sphere problem, you need to execute the following command:
+algorithm. You can specify what problem to solve by passing it as a parameter. For
+example, if you desire to execute the Generational Genetic Algorithm to solve the
+Sphere problem, you need to execute the following command:
 	
 	% ./gGA_main Sphere
 	
