@@ -34,7 +34,7 @@ LZ09::LZ09(int nvar, int nobj, int ptype, int dtype, int ltype) {
 /**
  * Alpha function
  */
-void LZ09::alphaFunction(double *alpha, double* x, int dim, int type) {
+void LZ09::alphaFunction(double *alpha, vector<double> x, int dim, int type) {
 	if (dim == 2) {
 		if (type == 21) {
 			alpha[0] = x[0];
@@ -90,12 +90,14 @@ void LZ09::alphaFunction(double *alpha, double* x, int dim, int type) {
 /**
  * Beta function
  */
+
+
 double LZ09::betaFunction(vector<double> x, int type) {
 
 	double beta;
 	beta = 0;
-	/*
-	int dim = x.size();
+
+	int dim = x.size() ;
 
 	if (dim == 0)
 		beta = 0;
@@ -103,7 +105,7 @@ double LZ09::betaFunction(vector<double> x, int type) {
 	if (type == 1) {
 		beta = 0;
 		for (int i = 0; i < dim; i++) {
-			beta += x.elementAt(i) * x.elementAt(i);
+			beta += x[i] * x[i];
 		}
 		beta = 2.0 * beta / dim;
 	}
@@ -111,7 +113,7 @@ double LZ09::betaFunction(vector<double> x, int type) {
 	if (type == 2) {
 		beta = 0;
 		for (int i = 0; i < dim; i++) {
-			beta += Math.sqrt(i + 1) * x.elementAt(i) * x.elementAt(i);
+			beta += sqrt(i + 1) * x[i] * x[i];
 		}
 		beta = 2.0 * beta / dim;
 	}
@@ -119,8 +121,8 @@ double LZ09::betaFunction(vector<double> x, int type) {
 	if (type == 3) {
 		double sum = 0, xx;
 		for (int i = 0; i < dim; i++) {
-			xx = 2 * x.elementAt(i);
-			sum += (xx * xx - Math.cos(4 * Math.PI * xx) + 1);
+			xx = 2 * x[i];
+			sum += (xx * xx - cos(4 * M_PI * xx) + 1);
 		}
 		beta = 2.0 * sum / dim;
 	}
@@ -128,13 +130,12 @@ double LZ09::betaFunction(vector<double> x, int type) {
 	if (type == 4) {
 		double sum = 0, prod = 1, xx;
 		for (int i = 0; i < dim; i++) {
-			xx = 2 * x.elementAt(i);
+			xx = 2 * x[i];
 			sum += xx * xx;
-			prod *= Math.cos(10 * Math.PI * xx / Math.sqrt(i + 1));
+			prod *= cos(10 * M_PI * xx / sqrt(i + 1));
 		}
 		beta = 2.0 * (sum - 2 * prod + 2) / dim;
 	}
-*/
 	return beta;
 }
 
