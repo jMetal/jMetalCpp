@@ -129,7 +129,7 @@ SolutionSet * gGA::execute() {
     }
     population->clear() ;
 
-    for (int i = 0; i < populationSize; i++)
+    for (int i = 0; i < offspringPopulation->size(); i++)
       population->add(offspringPopulation->get(i)) ;
     offspringPopulation->clear() ;
     delete offspringPopulation;
