@@ -1,6 +1,6 @@
 CPP  = g++
 CC   = gcc
-OBJ  = Settings.o NSGAII_Settings.o
+OBJ  = Experiment.o NSGAII_Settings.o Settings.o
 LIBNAME= libexperiments.a
 
 LIBS +=  

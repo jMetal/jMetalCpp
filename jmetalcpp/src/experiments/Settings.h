@@ -40,4 +40,4 @@ public:
   Algorithm * configure(map<string, void *> * settings) ;
 }; // Settings
 
-#endif __SETTINGS__
+#endif //__SETTINGS__

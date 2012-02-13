@@ -43,4 +43,4 @@ public:
   Algorithm * configure() ;
 }; // NSGAII_Settings
 
-#endif __NSGAII_SETTINGS__
+#endif // __NSGAII_SETTINGS__
