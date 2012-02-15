@@ -1,6 +1,6 @@
 CPP  = g++
 CC   = gcc
-OBJ  = RunExperiment.o
+OBJ  = FileUtils.o RunExperiment.o
 LIBNAME= libexperimentsutil.a
 
 LIBS +=  

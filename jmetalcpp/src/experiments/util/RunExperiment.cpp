@@ -97,7 +97,7 @@ void RunExperiment::run() {
     if (indicatorList_.size() > 0) {
 
       const char* paretoFrontPath = (paretoFrontDirectory_ + "/" + paretoFrontFile_[problemId]).c_str ();
-      int paretoFrontResult = existsPath(paretoFrontPath);
+      int paretoFrontResult = FileUtils::existsPath(paretoFrontPath);
 
       //int isDir = 0;
       if (paretoFrontResult != -1) {
@@ -131,8 +131,8 @@ void RunExperiment::run() {
         string directory;
         directory = experimentBaseDirectory_ + "/data/" + algorithmNameList_[i] + "/" +
             problemList_[problemId];
-        if (existsPath(directory.c_str()) != 1) {
-          createDirectory(directory);
+        if (FileUtils::existsPath(directory.c_str()) != 1) {
+          FileUtils::createDirectory(directory);
           cout << "Creating " << directory << endl;;
         }
 
@@ -229,41 +229,5 @@ void RunExperiment::run() {
       } // for
     } // for
   } //for
+} // run
 
-}
-
-/**
- * Checks if a path exists and if it is a file or a folder
- * Returns:
- *   -1: error
- *    0: path doesn't exist
- *    1: path is a folder
- *    2: path is a file
- */
-int RunExperiment::existsPath(const char* path) {
-  int res = -1;
-  struct stat statbuf;
-  if (stat(path, &statbuf) != -1) {
-    if (S_ISDIR(statbuf.st_mode)) {
-     return 1;
-    } else {
-     return 2;
-    }
-  } else {
-    return 0;
-  }
-  return res;
-}
-
-
-/**
- * Creates a directory in the specified path
- */
-void RunExperiment::createDirectory(string path) {
-  #ifdef linux
-    mkdir(path.c_str() , S_IRWXU | S_IRWXG | S_IRWXO);
-  #endif
-  #ifdef WINDOWS
-    mkdir(path.c_str());
-  #endif
-}

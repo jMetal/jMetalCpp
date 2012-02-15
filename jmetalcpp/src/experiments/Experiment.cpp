@@ -22,9 +22,11 @@
 #include <Experiment.h>
 
 
-/**
- * Abstract class representing jMetal experiments
- */
+void* executeRun(void* ctx) {
+  RunExperiment* cptr = (RunExperiment*)ctx;
+  cptr->run();
+  pthread_exit(0);
+} // executeRun
 
 
 /**
@@ -93,25 +95,26 @@ void Experiment::runExperiment(int numberOfThreads) {
     cout << "Experiments: creating " << numberOfThreads << " threads." << endl;
   }
   //TODO: Continuar implementación
-/*
-  pthread_t[] p = new pthread_t[numberOfThreads];
-  //Thread[] p = new RunExperiment[numberOfThreads];
+
+  int result;
+  pthread_t * p = new pthread_t[numberOfThreads];
+  RunExperiment ** experiments_ = new RunExperiment*[numberOfThreads];
   for (int i = 0; i < numberOfThreads; i++) {
-    //p[i] = new Experiment(map_, i, numberOfThreads, problemList_.length);
-    //p[i] = new RunExperiment(this, map_, i, numberOfThreads, problemList_.length);
-    //p[i].start();
-    //p[i] = new RunExperiment(this, map_, i, numberOfThreads, problemList_.length);
-    //p[i].start();
+    experiments_[i] = new RunExperiment(this, map_, i, numberOfThreads, problemList_.size());
+    result = pthread_create(&p[i], NULL, executeRun, experiments_[i]);
+    if (result != 0) {
+      perror("ERROR CREANDO EL THREAD");
+      exit(-1) ;
+    }
   }
 
-  try {
-    for (int i = 0; i < numberOfThreads; i++) {
-      p[i].join();
+  for (int i = 0; i < numberOfThreads; i++) {
+    result = pthread_join(p[i], NULL) ;
+    if (result != 0) {
+      perror("ERROR AL HACER JOIN");
+      exit(-1) ;
     }
-  } catch (InterruptedException ex) {
-    Logger.getLogger(Experiment.class.getName()).log(Level.SEVERE, null, ex);
   }
-  */
 
 } // runExperiment
 
@@ -125,24 +128,30 @@ void Experiment::runExperiment() {
 
 
 void Experiment::checkExperimentDirectory() {
-//TODO: Implementar checkExperimentDictory
-//  File experimentDirectory;
-//
-//  experimentDirectory = new File(experimentBaseDirectory_);
-//  if (experimentDirectory.exists()) {
-//    System.out.println("Experiment directory exists");
-//    if (experimentDirectory.isDirectory()) {
-//      System.out.println("Experiment directory is a directory");
-//    } else {
-//      System.out.println("Experiment directory is not a directory. Deleting file and creating directory");
-//    }
-//    experimentDirectory.delete();
-//    new File(experimentBaseDirectory_).mkdirs();
-//  } // if
-//  else {
-//    System.out.println("Experiment directory does NOT exist. Creating");
-//    new File(experimentBaseDirectory_).mkdirs();
-//  } // else
+  int res = FileUtils::existsPath(experimentBaseDirectory_.c_str());
+  switch (res) {
+  case 0:
+    cout << "Experiment directory does NOT exist. Creating" << endl;
+    FileUtils::createDirectory(experimentBaseDirectory_);
+    break;
+  case 1:
+    cout << "Experiment directory exists." << endl;
+    cout << "Experiment directory is a directory" << endl;
+    break;
+  case 2:
+    cout << "Experiment directory exists." << endl;
+    cout << "Experiment directory is not a directory. Deleting file and creating directory" << endl;
+    //FIX Borrar fichero
+    //experimentDirectory.delete();
+    FileUtils::createDirectory(experimentBaseDirectory_);
+    break;
+  case -1:
+    cout << "Error checking experiment directory" << endl;
+    exit(-1);
+  }
+
+
+
 } // checkExperimentDirectory
 
 

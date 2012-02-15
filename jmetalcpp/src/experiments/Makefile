@@ -7,7 +7,8 @@ LIBS +=
 INCS +=  -I. -I../core -I../util -I../encodings/solutionType \
 	-I../encodings/variable -I../util/comparators \
 	-I../problems -I../util/wrapper -I../metaheuristics/nsgaII \
-	-I../operators/crossover -I../operators/mutation -I../operators/selection
+	-I../operators/crossover -I../operators/mutation -I../operators/selection \
+	-Iutil
 
 #CXXFLAGS += $(INCS) -g 
 CXXFLAGS += $(INCS) 
@@ -24,6 +25,9 @@ clean: clean-custom
 $(LIBNAME): $(OBJ)
 	ar -r $(LIBNAME) *.o
 	ranlib $(LIBNAME) 
+	
+Experiment.o: Experiment.cpp
+	$(CPP) $(CXXFLAGS) -c Experiment.cpp $(LIBS)
 
 .cpp.o:
-	$(CPP) $(CXXFLAGS) -c $< 
+	$(CPP) $(CXXFLAGS) -c $<

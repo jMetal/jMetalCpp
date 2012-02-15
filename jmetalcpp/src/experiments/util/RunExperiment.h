@@ -18,24 +18,25 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifdef WIN32
- #define WINDOWS
-#elif WIN64
- #define WINDOWS
-#endif
-
 #ifndef __RUNEXPERIMENT__
 #define __RUNEXPERIMENT__
 
 #include <string>
-#include <Experiment.h>
+#include <map>
+#include <vector>
+#include <iostream>
+#include <stdlib.h>
+#include <stddef.h>
 #include <sys/stat.h>
-
-#ifdef WINDOWS
-  #include <dir.h>
-#endif
+#include <Algorithm.h>
+#include <Experiment.h>
+#include <FileUtils.h>
+#include <Problem.h>
+#include <SolutionSet.h>
 
 using namespace std;
+
+class Experiment;
 
 class RunExperiment {
 
@@ -74,9 +75,6 @@ private:
                                // Pareto set
   int independentRuns_; // Number of independent runs per algorithm
   // TODO: Settings[] algorithmSettings_; // Paremeter settings of each algorithm
-
-  int existsPath(const char* path);
-  void createDirectory(string path);
 
 }; // RunExperiment
 

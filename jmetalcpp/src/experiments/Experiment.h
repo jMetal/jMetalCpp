@@ -24,8 +24,11 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <pthread.h>
 #include <Algorithm.h>
 #include <Settings.h>
+#include <RunExperiment.h>
+#include <FileUtils.h>
 
 using namespace std;
 
