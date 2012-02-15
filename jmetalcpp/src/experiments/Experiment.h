@@ -29,6 +29,13 @@
 
 using namespace std;
 
+
+template<typename T, size_t N>
+T * end(T (&ra)[N]) {
+    return ra + N;
+}
+
+
 /**
  * Abstract class representing jMetal experiments
  */
@@ -46,20 +53,17 @@ private:
       double*** stdDev);
   void printMedianIQR(string fileName, int indicator, double*** median,
       double*** IQR);
-  void generateRBoxplotScripts(int rows, int cols, string * problems,
-      string prefix, bool notch, Experiment * experiment);
-  void generateRWilcoxonScripts(string * problems, string prefix,
-      Experiment * experiment);
 
 public:
 
   string experimentName_;
-  string * algorithmNameList_; // List of the names of the algorithms to be
-                               // executed
-  string * problemList_; // List of problems to be solved
-  string * paretoFrontFile_; // List of the files containing the pareto fronts
-                             // corresponding to the problems in problemList_
-  string * indicatorList_; // List of the quality indicators to be applied
+  vector<string> algorithmNameList_; // List of the names of the algorithms to
+                                     // be executed
+  vector<string> problemList_; // List of problems to be solved
+  vector<string> paretoFrontFile_; // List of the files containing the pareto
+                                   // fronts corresponding to the problems in
+                                   // problemList_
+  vector<string> indicatorList_; // List of the quality indicators to be applied
   string experimentBaseDirectory_; // Directory to store the results
   string latexDirectory_; // Directory to store the latex files
   string paretoFrontDirectory_; // Directory containing the Pareto front files
@@ -77,10 +81,15 @@ public:
   //Properties [] problemsSettings_ ;
 
   Experiment();
+
   void runExperiment(int numberOfThreads);
   void runExperiment();
   void checkExperimentDirectory();
   void generateLatexTables();
+  void generateRBoxplotScripts(int rows, int cols, vector<string> problems,
+      string prefix, bool notch, Experiment * experiment);
+  void generateRWilcoxonScripts(vector<string> problems, string prefix,
+      Experiment * experiment);
 
   virtual void algorithmSettings(string problemName, int problemId,
       Algorithm ** algorithm) = 0;

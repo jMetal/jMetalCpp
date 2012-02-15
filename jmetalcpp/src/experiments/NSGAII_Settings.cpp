@@ -23,16 +23,16 @@
 /**
  * Default constructor
  */
-NSGAII_Settings::NSGAII_Settings () {
+NSGAII_Settings::NSGAII_Settings () : Settings() {
 } // Settings
 
 /**
  * Constructor
  */
-NSGAII_Settings::NSGAII_Settings(char * problemName) {
+NSGAII_Settings::NSGAII_Settings(string problemName) {
 	problemName_ = problemName ;
 
-  problem_ = ProblemFactory::getProblem(problemName_);
+  problem_ = ProblemFactory::getProblem((char *) problemName_.c_str());
 
   // Algorithm parameters
   populationSize_ = 100;

@@ -1,13 +1,12 @@
 CPP  = g++
 CC   = gcc
-OBJ  = Experiment.o NSGAII_Settings.o NSGAIIStudy.o Settings.o
-LIBNAME= libexperiments.a
+OBJ  = RunExperiment.o
+LIBNAME= libexperimentsutil.a
 
 LIBS +=  
-INCS +=  -I. -I../core -I../util -I../encodings/solutionType \
-	-I../encodings/variable -I../util/comparators \
-	-I../problems -I../util/wrapper -I../metaheuristics/nsgaII \
-	-I../operators/crossover -I../operators/mutation -I../operators/selection
+INCS +=  -I. -I.. -I../../core -I../../encodings/solutionType \
+	-I../../encodings/variable -I../../util/comparators -I../../util \
+	-I../../problems -I../../util/wrapper
 
 #CXXFLAGS += $(INCS) -g 
 CXXFLAGS += $(INCS) 

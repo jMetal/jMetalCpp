@@ -38,7 +38,7 @@ Settings::Settings(char * problemName) {
  *
  * To be implemented. Missing the reflection features of Java here
  */
-Algorithm * Settings::configure(map<string, void *> *settings) {
+Algorithm * Settings::configure(map<string, void *> settings) {
 	return NULL ;
 } // configure
 

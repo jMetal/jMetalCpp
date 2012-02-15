@@ -36,12 +36,12 @@ Experiment::Experiment() {
 
   experimentName_ = "noName";
 
-  // TODO: problemsSettings_ = NULL;
+  //CHECK: problemsSettings_ = NULL;
 
-  algorithmNameList_ = NULL;
-  problemList_ = NULL;
-  paretoFrontFile_ = NULL;
-  indicatorList_ = NULL;
+  //CHECK: algorithmNameList_ = NULL;
+  //CHECK: problemList_ = NULL;
+  //CHECK: paretoFrontFile_ = NULL;
+  //CHECK: indicatorList_ = NULL;
 
   experimentBaseDirectory_ = "";
   paretoFrontDirectory_ = "";
@@ -82,24 +82,26 @@ void Experiment::runExperiment(int numberOfThreads) {
   map_["outputParetoSetFile"] = &outputParetoSetFile_;
   // TODO: map_["problemsSettings"] = &problemsSettings_;
 
-  //SolutionSet ** resultFront = new SolutionSet[algorithmNameList_.length];
+  SolutionSet ** resultFront = new SolutionSet*[algorithmNameList_.size()];
 
-  //TODO:
-  /*
-  if (problemList_.length < numberOfThreads) {
-    numberOfThreads = problemList_.length;
-    System.out.println("Experiments: list of problems is shorter than the " +
-            "of requested threads. Creating " + numberOfThreads);
+  if (problemList_.size() < numberOfThreads) {
+    numberOfThreads = problemList_.size();
+    cout << "Experiments: list of problems is shorter than the number of " <<
+        "requested threads. Creating " << numberOfThreads << " threads." << endl;
   } // if
   else {
-    System.out.println("Experiments: creating " + numberOfThreads + " threads");
+    cout << "Experiments: creating " << numberOfThreads << " threads." << endl;
   }
-
-  Thread[] p = new RunExperiment[numberOfThreads];
+  //TODO: Continuar implementación
+/*
+  pthread_t[] p = new pthread_t[numberOfThreads];
+  //Thread[] p = new RunExperiment[numberOfThreads];
   for (int i = 0; i < numberOfThreads; i++) {
     //p[i] = new Experiment(map_, i, numberOfThreads, problemList_.length);
-    p[i] = new RunExperiment(this, map_, i, numberOfThreads, problemList_.length);
-    p[i].start();
+    //p[i] = new RunExperiment(this, map_, i, numberOfThreads, problemList_.length);
+    //p[i].start();
+    //p[i] = new RunExperiment(this, map_, i, numberOfThreads, problemList_.length);
+    //p[i].start();
   }
 
   try {
@@ -110,7 +112,38 @@ void Experiment::runExperiment(int numberOfThreads) {
     Logger.getLogger(Experiment.class.getName()).log(Level.SEVERE, null, ex);
   }
   */
+
 } // runExperiment
+
+
+/**
+ * Runs the experiment
+ */
+void Experiment::runExperiment() {
+  runExperiment(1);
+} // runExperiment
+
+
+void Experiment::checkExperimentDirectory() {
+//TODO: Implementar checkExperimentDictory
+//  File experimentDirectory;
+//
+//  experimentDirectory = new File(experimentBaseDirectory_);
+//  if (experimentDirectory.exists()) {
+//    System.out.println("Experiment directory exists");
+//    if (experimentDirectory.isDirectory()) {
+//      System.out.println("Experiment directory is a directory");
+//    } else {
+//      System.out.println("Experiment directory is not a directory. Deleting file and creating directory");
+//    }
+//    experimentDirectory.delete();
+//    new File(experimentBaseDirectory_).mkdirs();
+//  } // if
+//  else {
+//    System.out.println("Experiment directory does NOT exist. Creating");
+//    new File(experimentBaseDirectory_).mkdirs();
+//  } // else
+} // checkExperimentDirectory
 
 
 void Experiment::generateLatexTables() {
@@ -151,7 +184,7 @@ void Experiment::printMedianIQR(string fileName, int indicator, double *** media
 /**
  * Invoking the generateScripts method on the RBoxplot class
  */
-void Experiment::generateRBoxplotScripts (int rows, int cols, string * problems,
+void Experiment::generateRBoxplotScripts (int rows, int cols, vector<string> problems,
     string prefix, bool notch, Experiment * experiment) {
   //TODO
 } // generateRBoxplotScripts
@@ -160,7 +193,7 @@ void Experiment::generateRBoxplotScripts (int rows, int cols, string * problems,
 /**
  * Invoking the generateScripts method on the RWilcoxon class
  */
-void Experiment::generateRWilcoxonScripts(string * problems, string prefix,
+void Experiment::generateRWilcoxonScripts(vector<string> problems, string prefix,
     Experiment * experiment) {
   //TODO
 } //generateRWilcoxonScripts

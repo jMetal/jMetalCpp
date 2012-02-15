@@ -29,7 +29,7 @@
 class Settings {
 protected:
   Problem * problem_ ;
-  char * problemName_ ;
+  string problemName_ ;
   string paretoFrontFile_ ;
 
 public:
@@ -37,7 +37,7 @@ public:
   Settings(char * problemName) ;
 
   virtual Algorithm * configure() = 0 ;
-  Algorithm * configure(map<string, void *> * settings) ;
+  Algorithm * configure(map<string, void *> settings) ;
 }; // Settings
 
 #endif //__SETTINGS__

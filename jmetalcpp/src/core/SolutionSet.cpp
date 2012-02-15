@@ -238,11 +238,11 @@ void SolutionSet::printObjectivesToFile(string file){
  * @param path The output file name
  */
 void SolutionSet::printVariablesToFile(string file) {
-    std::ofstream out(file.c_str());
-    for (int i = 0; i < solutionsList_.size(); i++) {
-        out << solutionsList_[i]->toString() << endl ;
-    }
-    out.close();
+  std::ofstream out(file.c_str());
+  for (int i = 0; i < solutionsList_.size(); i++) {
+  	out << solutionsList_[i]->toString() << endl ;
+  }
+  out.close();
 } // printVariablesToFile
 
 

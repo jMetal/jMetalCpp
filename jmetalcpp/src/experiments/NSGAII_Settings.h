@@ -38,7 +38,7 @@ private:
 
 public:
 	NSGAII_Settings() ;
-	NSGAII_Settings(char * problemName) ;
+	NSGAII_Settings(string problemName) ;
 
   Algorithm * configure() ;
 }; // NSGAII_Settings
