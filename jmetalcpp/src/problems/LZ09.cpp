@@ -139,4 +139,198 @@ double LZ09::betaFunction(vector<double> x, int type) {
 	return beta;
 }
 
+double LZ09::psfunc2(double x, double t1, int dim, int type, int css) {
+	double beta;
+	beta = 0.0;
+
+	dim++;
+
+	if(type==21){
+		double xy   = 2*(x - 0.5);
+		beta = xy - pow(t1, 0.5*(nvar_ + 3*dim - 8)/(nvar_ - 2));
+	}
+
+	if(type==22){
+		double theta = 6*M_PI*t1 + dim*M_PI/nvar_;
+		double xy    = 2*(x - 0.5);
+		beta = xy - sin(theta);
+	}
+
+	if(type==23){
+		double theta = 6*M_PI*t1 + dim*M_PI/nvar_;
+		double ra    = 0.8*t1;
+		double xy    = 2*(x - 0.5);
+		if(css==1)
+			beta = xy - ra*cos(theta);
+		else{
+			beta = xy - ra*sin(theta);
+		}
+	}
+
+	if(type==24){
+		double theta = 6*M_PI*t1 + dim*M_PI/nvar_;
+		double xy    = 2*(x - 0.5);
+		double ra    = 0.8*t1;
+		if(css==1)
+			beta = xy - ra*cos(theta/3);
+		else{
+			beta = xy - ra*sin(theta);
+		}
+	}
+
+	if(type==25){
+		double rho   = 0.8;
+		double phi   = M_PI*t1;
+		double theta = 6*M_PI*t1 + dim*M_PI/nvar_;
+		double xy    = 2*(x - 0.5);
+		if(css==1)
+			beta = xy - rho*sin(phi)*sin(theta);
+		else if(css==2)
+			beta = xy - rho*sin(phi)*cos(theta);
+		else
+			beta = xy - rho*cos(phi);
+	}
+
+	if(type==26){
+		double theta = 6*M_PI*t1 + dim*M_PI/nvar_;
+		double ra    = 0.3*t1*(t1*cos(4*theta) + 2);
+		double xy    = 2*(x - 0.5);
+		if(css==1)
+			beta = xy - ra*cos(theta);
+		else{
+			beta = xy - ra*sin(theta);
+		}
+	}
+
+	return beta;
+}
+
+double LZ09::psfunc3(double x, double t1, double t2, int dim, int type){
+	// type:  the type of curve
+	// css:   the class of index
+	double beta;
+	beta = 0.0 ;
+
+	dim++;
+
+	if(type==31){
+		double xy  = 4*(x - 0.5);
+		double rate = 1.0*dim/nvar_;
+		beta = xy - 4*(t1*t1*rate + t2*(1.0-rate)) + 2;
+	}
+
+	if(type==32){
+		double theta = 2*M_PI*t1 + dim*M_PI/nvar_;
+		double xy    = 4*(x - 0.5);
+		beta = xy - 2*t2*sin(theta);
+	}
+
+	return beta;
+}
+
+void LZ09::objective(vector<double> x_var, vector <double> y_obj) {
+	// 2-objective case
+	if(nobj_==2)
+	{
+		if(ltype_==21||ltype_==22||ltype_==23||ltype_==24||ltype_==26)
+		{
+			double g = 0, h = 0, a, b;
+			vector <double> aa  ; // *aa = new vector();
+			vector <double> bb ; // *bb = new vector();
+			for(int n=1;n<nvar_;n++)
+			{
+
+				if(n%2==0){
+					a = psfunc2(x_var[n],x_var[0],n,ltype_,1);  // linkage
+					aa.push_back(a);
+				}
+				else
+				{
+					b = psfunc2(x_var[n],x_var[0],n,ltype_,2);
+					bb.push_back(b);
+				}
+
+			}
+
+			g = betaFunction(aa, dtype_);
+			h = betaFunction(bb, dtype_);
+
+			double alpha[2] ;
+			alphaFunction(alpha,x_var,2,ptype_);  // shape function
+			y_obj[0] = alpha[0] + h;
+			y_obj[1] = alpha[1] + g;
+			aa.clear();
+			bb.clear();
+		}
+
+		if(ltype_==25)
+		{
+			double g = 0, h = 0, a, b;
+			double e = 0, c;
+			vector <double> aa ; //= new Vector() ;
+			vector <double> bb ; //= new Vector() ;
+			for(int n=1;n<nvar_;n++){
+				if(n%3==0){
+					a = psfunc2(x_var[n],x_var[0],n,ltype_,1);
+					aa.push_back(a);
+				}
+				else if(n%3==1)
+				{
+					b = psfunc2(x_var[n],x_var[0],n,ltype_,2);
+					bb.push_back(b);
+				}
+				else{
+					c = psfunc2(x_var[n],x_var[0],n,ltype_,3);
+					if(n%2==0)    aa.push_back(c);
+					else          bb.push_back(c);
+				}
+			}
+			g = betaFunction(aa,dtype_);          // distance function
+			h = betaFunction(bb,dtype_);
+
+			//double * alpha = new double[2];
+			double alpha[2] ;
+			alphaFunction(alpha,x_var,2,ptype_);  // shape function
+			y_obj[0] = alpha[0] + h;
+			y_obj[1] = alpha[1] + g;
+			aa.clear();
+			bb.clear();
+		}
+	}
+
+
+	// 3-objective case
+	if(nobj_==3)
+	{
+		if(ltype_==31||ltype_==32)
+		{
+			double g = 0, h = 0, e = 0, a;
+			vector <double> aa ;
+			vector <double> bb ;
+			vector <double> cc ;
+			for(int n=2;n<nvar_;n++)
+			{
+				a = psfunc3(x_var[n],x_var[0],x_var[1],n,ltype_);
+				if(n%3==0)	    aa.push_back(a);
+				else if(n%3==1)	bb.push_back(a);
+				else            cc.push_back(a);
+			}
+
+			g = betaFunction(aa,dtype_);
+			h = betaFunction(bb,dtype_);
+			e = betaFunction(cc,dtype_);
+
+			//double * alpha = new double[3];
+			double alpha[3] ;
+			alphaFunction(alpha,x_var,3,ptype_);  // shape function
+			y_obj[0] = alpha[0] + h;
+			y_obj[1] = alpha[1] + g;
+			y_obj[2] = alpha[2] + e;
+			aa.clear();
+			bb.clear();
+			cc.clear();
+		}
+	}
+}
+
 
