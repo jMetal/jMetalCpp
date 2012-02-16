@@ -24,6 +24,8 @@
 #include <string>
 #include <Experiment.h>
 
+class Experiment;
+
 /**
  * Class producing R scripts that generate latex tables including the Wilcoxon
  * rank-sum test

@@ -25,6 +25,8 @@
 #include <Experiment.h>
 #include <FileUtils.h>
 
+class Experiment;
+
 /**
  * Class for generating results in form of boxplots
  */
