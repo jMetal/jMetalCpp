@@ -34,55 +34,55 @@ LZ09::LZ09(int nvar, int nobj, int ptype, int dtype, int ltype) {
 /**
  * Alpha function
  */
-void LZ09::alphaFunction(double *alpha, vector<double> x, int dim, int type) {
+void LZ09::alphaFunction(double *alpha, vector<double> * x, int dim, int type) {
 	if (dim == 2) {
 		if (type == 21) {
-			alpha[0] = x[0];
-			alpha[1] = 1 - sqrt(x[0]);
+			alpha[0] = x->at(0);
+			alpha[1] = 1 - sqrt(x->at(0));
 		}
 
 		if (type == 22) {
-			alpha[0] = x[0];
-			alpha[1] = 1 - x[0] * x[0];
+			alpha[0] = x->at(0);
+			alpha[1] = 1 - x->at(0) * x->at(0);
 		}
 
 		if (type == 23) {
-			alpha[0] = x[0];
+			alpha[0] = x->at(0);
 			alpha[1] = 1 - sqrt(alpha[0]) - alpha[0]
 			           * sin(10 * alpha[0] * alpha[0] * M_PI);
 		}
 
 		if (type == 24) {
-			alpha[0] = x[0];
-			alpha[1] = 1 - x[0] - 0.05 * sin(4 * M_PI * x[0]);
+			alpha[0] = x->at(0);
+			alpha[1] = 1 - x->at(0) - 0.05 * sin(4 * M_PI * x->at(0));
 		}
 	} else {
 		if (type == 31) {
-			alpha[0] = cos(x[0] * M_PI / 2) * cos(x[1] * M_PI / 2);
-			alpha[1] = cos(x[0] * M_PI / 2) * sin(x[1] * M_PI / 2);
-			alpha[2] = sin(x[0] * M_PI / 2);
+			alpha[0] = cos(x->at(0) * M_PI / 2) * cos(x->at(1) * M_PI / 2);
+			alpha[1] = cos(x->at(0) * M_PI / 2) * sin(x->at(1) * M_PI / 2);
+			alpha[2] = sin(x->at(0) * M_PI / 2);
 		}
 
 		if (type == 32) {
-			alpha[0] = 1 - cos(x[0] * M_PI / 2)
-			* cos(x[1] * M_PI / 2);
-			alpha[1] = 1 - cos(x[0] * M_PI / 2)
-			* sin(x[1] * M_PI / 2);
-			alpha[2] = 1 - sin(x[0] * M_PI / 2);
+			alpha[0] = 1 - cos(x->at(0) * M_PI / 2)
+			* cos(x->at(1) * M_PI / 2);
+			alpha[1] = 1 - cos(x->at(0) * M_PI / 2)
+			* sin(x->at(1) * M_PI / 2);
+			alpha[2] = 1 - sin(x->at(0) * M_PI / 2);
 		}
 
 		if (type == 33) {
-			alpha[0] = x[0];
-			alpha[1] = x[1];
+			alpha[0] = x->at(0);
+			alpha[1] = x->at(1);
 			alpha[2] = 3
-			- (sin(3 * M_PI * x[0]) + sin(3 * M_PI * x[1])) - 2
-			* (x[0] + x[1]);
+			- (sin(3 * M_PI * x->at(0)) + sin(3 * M_PI * x->at(1))) - 2
+			* (x->at(0) + x->at(1));
 		}
 
 		if (type == 34) {
-			alpha[0] = x[0] * x[1];
-			alpha[1] = x[0] * (1 - x[1]);
-			alpha[2] = (1 - x[0]);
+			alpha[0] = x->at(0) * x->at(1);
+			alpha[1] = x->at(0) * (1 - x->at(1));
+			alpha[2] = (1 - x->at(0));
 		}
 	}
 }
@@ -92,12 +92,12 @@ void LZ09::alphaFunction(double *alpha, vector<double> x, int dim, int type) {
  */
 
 
-double LZ09::betaFunction(vector<double> x, int type) {
+double LZ09::betaFunction(vector<double> * x, int type) {
 
 	double beta;
 	beta = 0;
 
-	int dim = x.size() ;
+	int dim = x->size() ;
 
 	if (dim == 0)
 		beta = 0;
@@ -105,7 +105,7 @@ double LZ09::betaFunction(vector<double> x, int type) {
 	if (type == 1) {
 		beta = 0;
 		for (int i = 0; i < dim; i++) {
-			beta += x[i] * x[i];
+			beta += x->at(i) * x->at(i);
 		}
 		beta = 2.0 * beta / dim;
 	}
@@ -113,7 +113,7 @@ double LZ09::betaFunction(vector<double> x, int type) {
 	if (type == 2) {
 		beta = 0;
 		for (int i = 0; i < dim; i++) {
-			beta += sqrt(i + 1) * x[i] * x[i];
+			beta += sqrt(i + 1) * x->at(i) * x->at(i);
 		}
 		beta = 2.0 * beta / dim;
 	}
@@ -121,7 +121,7 @@ double LZ09::betaFunction(vector<double> x, int type) {
 	if (type == 3) {
 		double sum = 0, xx;
 		for (int i = 0; i < dim; i++) {
-			xx = 2 * x[i];
+			xx = 2 * x->at(i);
 			sum += (xx * xx - cos(4 * M_PI * xx) + 1);
 		}
 		beta = 2.0 * sum / dim;
@@ -130,7 +130,7 @@ double LZ09::betaFunction(vector<double> x, int type) {
 	if (type == 4) {
 		double sum = 0, prod = 1, xx;
 		for (int i = 0; i < dim; i++) {
-			xx = 2 * x[i];
+			xx = 2 * x->at(i);
 			sum += xx * xx;
 			prod *= cos(10 * M_PI * xx / sqrt(i + 1));
 		}
@@ -228,7 +228,7 @@ double LZ09::psfunc3(double x, double t1, double t2, int dim, int type){
 	return beta;
 }
 
-void LZ09::objective(vector<double> x_var, vector <double> y_obj) {
+void LZ09::objective(vector<double> *x_var, vector <double> *y_obj) {
 	// 2-objective case
 	if(nobj_==2)
 	{
@@ -241,24 +241,24 @@ void LZ09::objective(vector<double> x_var, vector <double> y_obj) {
 			{
 
 				if(n%2==0){
-					a = psfunc2(x_var[n],x_var[0],n,ltype_,1);  // linkage
+					a = psfunc2(x_var->at(n),x_var->at(0),n,ltype_,1);  // linkage
 					aa.push_back(a);
 				}
 				else
 				{
-					b = psfunc2(x_var[n],x_var[0],n,ltype_,2);
+					b = psfunc2(x_var->at(n),x_var->at(0),n,ltype_,2);
 					bb.push_back(b);
 				}
 
 			}
 
-			g = betaFunction(aa, dtype_);
-			h = betaFunction(bb, dtype_);
+			g = betaFunction(&aa, dtype_);
+			h = betaFunction(&bb, dtype_);
 
 			double alpha[2] ;
 			alphaFunction(alpha,x_var,2,ptype_);  // shape function
-			y_obj[0] = alpha[0] + h;
-			y_obj[1] = alpha[1] + g;
+			y_obj->at(0) = alpha[0] + h;
+			y_obj->at(1) = alpha[1] + g;
 			aa.clear();
 			bb.clear();
 		}
@@ -271,28 +271,28 @@ void LZ09::objective(vector<double> x_var, vector <double> y_obj) {
 			vector <double> bb ; //= new Vector() ;
 			for(int n=1;n<nvar_;n++){
 				if(n%3==0){
-					a = psfunc2(x_var[n],x_var[0],n,ltype_,1);
+					a = psfunc2(x_var->at(n),x_var->at(0),n,ltype_,1);
 					aa.push_back(a);
 				}
 				else if(n%3==1)
 				{
-					b = psfunc2(x_var[n],x_var[0],n,ltype_,2);
+					b = psfunc2(x_var->at(n),x_var->at(0),n,ltype_,2);
 					bb.push_back(b);
 				}
 				else{
-					c = psfunc2(x_var[n],x_var[0],n,ltype_,3);
+					c = psfunc2(x_var->at(n),x_var->at(0),n,ltype_,3);
 					if(n%2==0)    aa.push_back(c);
 					else          bb.push_back(c);
 				}
 			}
-			g = betaFunction(aa,dtype_);          // distance function
-			h = betaFunction(bb,dtype_);
+			g = betaFunction(&aa,dtype_);          // distance function
+			h = betaFunction(&bb,dtype_);
 
 			//double * alpha = new double[2];
 			double alpha[2] ;
 			alphaFunction(alpha,x_var,2,ptype_);  // shape function
-			y_obj[0] = alpha[0] + h;
-			y_obj[1] = alpha[1] + g;
+			y_obj->at(0) = alpha[0] + h;
+			y_obj->at(1) = alpha[1] + g;
 			aa.clear();
 			bb.clear();
 		}
@@ -310,22 +310,22 @@ void LZ09::objective(vector<double> x_var, vector <double> y_obj) {
 			vector <double> cc ;
 			for(int n=2;n<nvar_;n++)
 			{
-				a = psfunc3(x_var[n],x_var[0],x_var[1],n,ltype_);
+				a = psfunc3(x_var->at(n),x_var->at(0),x_var->at(1),n,ltype_);
 				if(n%3==0)	    aa.push_back(a);
 				else if(n%3==1)	bb.push_back(a);
 				else            cc.push_back(a);
 			}
 
-			g = betaFunction(aa,dtype_);
-			h = betaFunction(bb,dtype_);
-			e = betaFunction(cc,dtype_);
+			g = betaFunction(&aa,dtype_);
+			h = betaFunction(&bb,dtype_);
+			e = betaFunction(&cc,dtype_);
 
 			//double * alpha = new double[3];
 			double alpha[3] ;
 			alphaFunction(alpha,x_var,3,ptype_);  // shape function
-			y_obj[0] = alpha[0] + h;
-			y_obj[1] = alpha[1] + g;
-			y_obj[2] = alpha[2] + e;
+			y_obj->at(0) = alpha[0] + h;
+			y_obj->at(1) = alpha[1] + g;
+			y_obj->at(2) = alpha[2] + e;
 			aa.clear();
 			bb.clear();
 			cc.clear();

@@ -1,4 +1,4 @@
-//  LZ09_F1.cpp
+//  LZ09_F2.cpp
 //
 //  Author:
 //       Antonio J. Nebro <antonio@lcc.uma.es>
@@ -18,16 +18,16 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include <LZ09_F1.h>
+#include <LZ09_F2.h>
 
 /**
  * Constructor
  */
-LZ09_F1::LZ09_F1(string solutionType, int ptype, int dtype, int ltype) {
-  numberOfVariables_  = 10;
+LZ09_F2::LZ09_F2(string solutionType, int ptype, int dtype, int ltype) {
+  numberOfVariables_  = 30;
   numberOfObjectives_ = 2;
   numberOfConstraints_= 0;
-  problemName_        = "LZ09_F1";
+  problemName_        = "LZ09_F2";
 
 	 LZ09_  = new LZ09(numberOfVariables_,
 			               numberOfObjectives_,
@@ -37,20 +37,22 @@ LZ09_F1::LZ09_F1(string solutionType, int ptype, int dtype, int ltype) {
 
 		lowerLimit_ = new double[numberOfVariables_];
 		if (lowerLimit_ == NULL) {
-			cout << "LZ09_F1::LZ09_F1: Error reserving memory for storing the "
+			cout << "LZ09_F2::LZ09_F2: Error reserving memory for storing the "
 					<< "variable lower limits" << endl;
 			exit(-1);
 		}
 
 		upperLimit_ = new double[numberOfVariables_];
 		if (upperLimit_ == NULL) {
-			cout << "LZ09_F1::LZ09_F1: Error reserving  memory for storing the "
+			cout << "LZ09_F2::LZ09_F2: Error reserving  memory for storing the "
 					<< "variable lower limits" << endl;
 			exit(-1);
 		}
 
-		for (int i = 0; i < numberOfVariables_; i++) {
-			lowerLimit_[i] = 0.0;
+		lowerLimit_[0] = 0.0;
+		upperLimit_[0] = 1.0;
+		for (int i = 1; i < numberOfVariables_; i++) {
+			lowerLimit_[i] = -1.0;
 			upperLimit_[i] = 1.0;
 		}
 
@@ -62,25 +64,25 @@ LZ09_F1::LZ09_F1(string solutionType, int ptype, int dtype, int ltype) {
 		else if (solutionType.compare("ArrayReal") == 0)
 			solutionType_ = new ArrayRealSolutionType(this) ;
 		else {
-			cout << "LZ09_F1::LZ09_F1: solution type " << solutionType << " invalid" << endl;
+			cout << "LZ09_F2::LZ09_F2: solution type " << solutionType << " invalid" << endl;
 			exit(-1) ;
 		}
 
 		fx_ = new double[numberOfObjectives_] ;
 	  x_ = new double[numberOfVariables_];
-} // LZ09_F1::LZ09_F1
+} // LZ09_F2::LZ09_F2
 
 /**
  * Destructor
  */
-LZ09_F1::~LZ09_F1 () {
+LZ09_F2::~LZ09_F2 () {
   delete [] lowerLimit_ ;
   delete [] upperLimit_ ;
   delete solutionType_ ;
   delete LZ09_ ;
 }
 
-void LZ09_F1::evaluate(Solution * solution) {
+void LZ09_F2::evaluate(Solution * solution) {
 	XReal * vars = new XReal(solution);
 
   vector<double> * x = new vector<double>(numberOfVariables_) ;
