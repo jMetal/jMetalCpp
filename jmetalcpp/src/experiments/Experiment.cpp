@@ -73,6 +73,7 @@ void Experiment::runExperiment(int numberOfThreads) {
   // Step 1: check experiment base directory
   checkExperimentDirectory();
 
+  map_["name"] = &experimentName_;
   map_["experimentDirectory"] = &experimentBaseDirectory_;
   map_["algorithmNameList"] = &algorithmNameList_;
   map_["problemList"] = &problemList_;
@@ -82,7 +83,7 @@ void Experiment::runExperiment(int numberOfThreads) {
   map_["independentRuns"] = &independentRuns_;
   map_["outputParetoFrontFile"] = &outputParetoFrontFile_;
   map_["outputParetoSetFile"] = &outputParetoSetFile_;
-  // TODO: map_["problemsSettings"] = &problemsSettings_;
+  //CHECK: map_["problemsSettings"] = &problemsSettings_;
 
   SolutionSet ** resultFront = new SolutionSet*[algorithmNameList_.size()];
 
@@ -94,7 +95,6 @@ void Experiment::runExperiment(int numberOfThreads) {
   else {
     cout << "Experiments: creating " << numberOfThreads << " threads." << endl;
   }
-  //TODO: Continuar implementación
 
   int result;
   pthread_t * p = new pthread_t[numberOfThreads];
@@ -103,7 +103,7 @@ void Experiment::runExperiment(int numberOfThreads) {
     experiments_[i] = new RunExperiment(this, map_, i, numberOfThreads, problemList_.size());
     result = pthread_create(&p[i], NULL, executeRun, experiments_[i]);
     if (result != 0) {
-      perror("ERROR CREANDO EL THREAD");
+      perror("ERROR CREATING THREADS");
       exit(-1) ;
     }
   }
@@ -111,7 +111,7 @@ void Experiment::runExperiment(int numberOfThreads) {
   for (int i = 0; i < numberOfThreads; i++) {
     result = pthread_join(p[i], NULL) ;
     if (result != 0) {
-      perror("ERROR AL HACER JOIN");
+      perror("ERROR MAKING THREAD JOIN");
       exit(-1) ;
     }
   }
@@ -132,7 +132,10 @@ void Experiment::checkExperimentDirectory() {
   switch (res) {
   case 0:
     cout << "Experiment directory does NOT exist. Creating" << endl;
-    FileUtils::createDirectory(experimentBaseDirectory_);
+    if (FileUtils::createDirectory(experimentBaseDirectory_) == -1) {
+      cout << "Error creating directory" << endl;
+      exit(-1);
+    }
     break;
   case 1:
     cout << "Experiment directory exists." << endl;
@@ -143,15 +146,15 @@ void Experiment::checkExperimentDirectory() {
     cout << "Experiment directory is not a directory. Deleting file and creating directory" << endl;
     //FIX Borrar fichero
     //experimentDirectory.delete();
-    FileUtils::createDirectory(experimentBaseDirectory_);
+    if (FileUtils::createDirectory(experimentBaseDirectory_) == -1) {
+      cout << "Error creating directory" << endl;
+      exit(-1);
+    }
     break;
   case -1:
     cout << "Error checking experiment directory" << endl;
     exit(-1);
   }
-
-
-
 } // checkExperimentDirectory
 
 

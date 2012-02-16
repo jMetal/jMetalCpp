@@ -51,13 +51,23 @@ int FileUtils::existsPath(const char* path) {
  */
 int FileUtils::createDirectory(string path) {
   int res;
+  cout << "Creating directory: " << path << endl;
 
   #ifdef linux
     res = mkdir(path.c_str() , S_IRWXU | S_IRWXG | S_IRWXO);
   #endif
 
   #ifdef WINDOWS
-    res = mkdir(path.c_str());
+    // res = mkdir(path.c_str());
+    if (path.size() > 512)
+      res = 1;
+    else {
+      for (int i = 0; i <= path.size(); i++)
+        if (path[i] == '/' || i == path.size()-1) {
+          string path2 = path.substr(0, i+1);
+          res = mkdir(path2.c_str());
+        }
+    }
   #endif
 
   return res;

@@ -111,7 +111,7 @@ SolutionSet * NSGAII::execute() {
   // Generations
   while (evaluations < maxEvaluations) {
 
-    cout << "NSGAII: Eval n. " << evaluations << endl;
+    //cout << "NSGAII: Eval n. " << evaluations << endl;
 
     // Create the offSpring solutionSet
     offspringPopulation = new SolutionSet(populationSize);

@@ -124,8 +124,7 @@ void RunExperiment::run() {
       // STEP 5: run the algorithms
       for (int i = 0; i < numberOfAlgorithms; i++) {
 
-        // CHECK: Buscar alguna alternativa para getClass
-        // cout << algorithm[i].getClass() << endl;
+        cout << typeid(algorithm[i]).name() << endl;
 
         // STEP 6: create output directories
         string directory;
@@ -133,7 +132,7 @@ void RunExperiment::run() {
             problemList_[problemId];
         if (FileUtils::existsPath(directory.c_str()) != 1) {
           FileUtils::createDirectory(directory);
-          cout << "Creating " << directory << endl;;
+          cout << "Creating " << directory << endl;
         }
 
         // STEP 7: run the algorithm

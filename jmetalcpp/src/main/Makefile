@@ -9,15 +9,16 @@ INCS +=  -I. -I../core -I../util -I../problems -I../util/comparators \
 	-I../metaheuristics/nsgaII -I../operators/crossover -I../operators/mutation \
 	-I../operators/selection -I../metaheuristics/gGA -I../metaheuristics/ssGA \
 	-I../metaheuristics/gde3 -I../metaheuristics/de -I../metaheuristics/smpso \
-	-I../metaheuristics/pso -I../util/archive -I../metaheuristics/paes 
+	-I../metaheuristics/pso -I../util/archive -I../metaheuristics/paes -I../experiments \
+	-I../experiments/util
 
 #EXECS = NSGAII_main PAES_main gGA_main autodock DE_main GDE3_main
 #DEPS = ../libjmetal.a ../metaheuristics/libmetaheuristics.a 
 EXECS = NSGAII_main NSGAIIbin_main gGA_main gGAbin_main ssGA_main GDE3_main \
-	DE_main SMPSO_main PSO_main PAES_main
+	DE_main SMPSO_main PSO_main PAES_main NSGAIIStudy
 WINEXECS = NSGAII_main.exe NSGAIIbin_main.exe NSGAII_main.exe gGA_main.exe \
 	gGAbin_main.exe ssGA_main.exe GDE3_main.exe DE_main.exe SMPSO_main.exe PSO_main.exe \
-	PAES_main.exe
+	PAES_main.exe NSGAIIStudy.exe
 DEPS = ../libjmetal.a
 
 BIN_DIRECTORY = ../../bin
@@ -75,6 +76,10 @@ SMPSO_main: SMPSO_main.cpp $(DEPS)
 PSO_main: PSO_main.cpp $(DEPS)
 	$(CPP) PSO_main.cpp ../libjmetal.a -o PSO_main $(INCS) $(LIBS)
 	cp PSO_main $(BIN_DIRECTORY)
+	
+NSGAIIStudy: ../experiments/NSGAIIStudy.cpp $(DEPS)
+	$(CPP) ../experiments/NSGAIIStudy.cpp ../libjmetal.a -o NSGAIIStudy $(INCS) $(LIBS)
+	cp NSGAIIStudy $(BIN_DIRECTORY)
 
 #.cpp.o: $(DEPS)
 #	$(CPP) $< $(DEPS) -o NSGAII_main $(INCS) $(LIBS)

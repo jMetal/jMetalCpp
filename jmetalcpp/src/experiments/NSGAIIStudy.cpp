@@ -64,7 +64,9 @@ void NSGAIIStudy::algorithmSettings(string problemName,
 
   for (int i = 0; i < numberOfAlgorithms; i++) {
     Settings * settings = new NSGAII_Settings(problemName);
-    algorithm[i] = settings->configure(parameters[i]);
+    // TODO: Cambiar a settings global?
+    //algorithm[i] = settings->configure(parameters[i]);
+    algorithm[i] = settings->configure();
   }
 } // algorithmSettings
 
@@ -79,11 +81,13 @@ int main(int argc, char ** argv) {
   exp->algorithmNameList_.assign(algorithmNameList_, end(algorithmNameList_));
 
   const char * problemList_[] = {
-      "ZDT1", "ZDT2", "ZDT3", "ZDT4", "DTLZ1", "WFG2"};
+      //"ZDT1", "ZDT2", "ZDT3", "ZDT4", "DTLZ1", "WFG2"};
+      "ZDT1", "ZDT2", "ZDT3", "ZDT4", "DTLZ1"};
   exp->problemList_.assign(problemList_, end(problemList_));
 
   const char * paretoFrontFile_[] = {
-      "ZDT1.pf", "ZDT2.pf", "ZDT3.pf","ZDT4.pf", "DTLZ1.2D.pf", "WFG2.2D.pf"};
+      //"ZDT1.pf", "ZDT2.pf", "ZDT3.pf","ZDT4.pf", "DTLZ1.2D.pf", "WFG2.2D.pf"};
+      "ZDT1.pf", "ZDT2.pf", "ZDT3.pf","ZDT4.pf", "DTLZ1.2D.pf"};
   exp->paretoFrontFile_.assign(paretoFrontFile_, end(paretoFrontFile_));
 
   const char * indicatorList_[] = {
@@ -92,9 +96,11 @@ int main(int argc, char ** argv) {
 
   int numberOfAlgorithms = exp->algorithmNameList_.size();
 
-  exp->experimentBaseDirectory_ = "/Users/antonio/Softw/pruebas/jmetal/kk/" +
+  //exp->experimentBaseDirectory_ = "/Users/antonio/Softw/pruebas/jmetal/kk/" +
+  exp->experimentBaseDirectory_ = "C:/antonio/Softw/pruebas/jmetal/kk/" +
                                  exp->experimentName_;
-  exp->paretoFrontDirectory_ = "/Users/antonio/Softw/pruebas/data/paretoFronts";
+  //exp->paretoFrontDirectory_ = "/Users/antonio/Softw/pruebas/data/paretoFronts";
+  exp->paretoFrontDirectory_ = "C:/antonio/Softw/pruebas/data/paretoFronts";
 
   exp->algorithmSettings_ = new Settings*[numberOfAlgorithms];
 
@@ -120,3 +126,4 @@ int main(int argc, char ** argv) {
 //  exp->generateRBoxplotScripts(rows, columns, problems, prefix, notch = true, exp);
 //  exp->generateRWilcoxonScripts(problems, prefix, exp);
 } // main
+
