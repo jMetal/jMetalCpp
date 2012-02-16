@@ -110,20 +110,21 @@ int main(int argc, char ** argv) {
   int numberOfThreads;
   exp->runExperiment(numberOfThreads = 1);
 
-// TODO Continuar más allá de abrir hebras
-//  // Generate latex tables (comment this sentence is not desired)
-//  exp->generateLatexTables() ;
-//
-//  // Configure the R scripts to be generated
-//  int rows = 2 ;
-//  int columns = 3 ;
-//  string prefix = "Problems";
-//  const char * problemsValues[] = {
-//      "ZDT1", "ZDT2","ZDT3", "ZDT4", "DTLZ1", "WFG2"};
-//  vector<string> problems (problemsValues, end(problemsValues));
-//
-//  bool notch;
-//  exp->generateRBoxplotScripts(rows, columns, problems, prefix, notch = true, exp);
-//  exp->generateRWilcoxonScripts(problems, prefix, exp);
+  // Generate latex tables (comment this sentence is not desired)
+  // TODO : Implementar código de generación de tablas de Latex
+  // exp->generateLatexTables() ;
+
+  // Configure the R scripts to be generated
+  int rows = 2 ;
+  int columns = 3 ;
+  string prefix = "Problems";
+  const char * problemsValues[] = {
+      //"ZDT1", "ZDT2","ZDT3", "ZDT4", "DTLZ1", "WFG2"};
+      "ZDT1", "ZDT2","ZDT3", "ZDT4", "DTLZ1"};
+  vector<string> problems (problemsValues, end(problemsValues));
+
+  bool notch;
+  exp->generateRBoxplotScripts(rows, columns, problems, prefix, notch = true, exp);
+  exp->generateRWilcoxonScripts(problems, prefix, exp);
 } // main
 

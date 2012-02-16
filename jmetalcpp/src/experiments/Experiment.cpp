@@ -198,7 +198,7 @@ void Experiment::printMedianIQR(string fileName, int indicator, double *** media
  */
 void Experiment::generateRBoxplotScripts (int rows, int cols, vector<string> problems,
     string prefix, bool notch, Experiment * experiment) {
-  //TODO
+  RBoxplot::generateScripts(rows, cols, problems, prefix, notch, this);
 } // generateRBoxplotScripts
 
 
@@ -207,5 +207,5 @@ void Experiment::generateRBoxplotScripts (int rows, int cols, vector<string> pro
  */
 void Experiment::generateRWilcoxonScripts(vector<string> problems, string prefix,
     Experiment * experiment) {
-  //TODO
+  RWilcoxon::generateScripts(problems, prefix, this);
 } //generateRWilcoxonScripts

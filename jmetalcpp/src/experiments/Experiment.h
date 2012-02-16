@@ -29,6 +29,8 @@
 #include <Settings.h>
 #include <RunExperiment.h>
 #include <FileUtils.h>
+#include <RBoxplot.h>
+#include <RWilcoxon.h>
 
 using namespace std;
 
