@@ -20,7 +20,14 @@
 
 #include <AdaptiveGridArchive.h>
 
-
+	/**
+	 * Constructor.
+	 *
+	 * @param maxSize The maximum size of the archive
+	 * @param bisections The maximum number of bi-divisions for the adaptive
+	 * grid.
+	 * @param objectives The number of objectives.
+	 */
 AdaptiveGridArchive::AdaptiveGridArchive (int maxSize,int bisections,
 		int objectives) : Archive(maxSize) {
 
@@ -28,6 +35,18 @@ AdaptiveGridArchive::AdaptiveGridArchive (int maxSize,int bisections,
 	dominance_ = new DominanceComparator();
 	grid_      = new AdaptiveGrid(bisections,objectives);
 }
+
+/**
+ * Adds a <code>Solution</code> to the archive. If the <code>Solution</code>
+ * is dominated by any member of the archive then it is discarded. If the
+ * <code>Solution</code> dominates some members of the archive, these are
+ * removed. If the archive is full and the <code>Solution</code> has to be
+ * inserted, one <code>Solution</code> of the most populated hypercube of the
+ * adaptive grid is removed.
+ * @param solution The <code>Solution</code>
+ * @return true if the <code>Solution</code> has been inserted, false
+ * otherwise.
+ */
 
 bool AdaptiveGridArchive::add(Solution * solution, int eval) {
 	int i=0;
@@ -60,15 +79,11 @@ bool AdaptiveGridArchive::add(Solution * solution, int eval) {
 	} //
 
 	if (size() < maxSize_){ //The archive is not full
-		//cout << "Agregar " << eval << endl;
 		grid_->updateGrid(solution,this,eval); // Update the grid if applicable
-		//cout << "OK Update " << eval << endl;
 		int location ;
 		location= grid_->location(solution); // Get the location of the solution
 		grid_->addSolution(location); // Increment the density of the hypercube
-		//cout << "OK AddSol " << eval << endl;
 		solutionsList_.push_back(solution);// Add the solution to the list
-		//cout << "OK Agregado " << eval << endl;
 		return true;
 	} // if
 
@@ -84,15 +99,12 @@ bool AdaptiveGridArchive::add(Solution * solution, int eval) {
 		i=0;
 		bool removed = false;
 
-		//cout << "Empieza a remover" << endl;
 		while (i < solutionsList_.size()){
 			if (!removed) {
 				aux = solutionsList_[i];
 				int location2 = grid_->location(aux);
 				if (location2 == grid_->getMostPopulated()) {
-					//cout << "Va a remover" << endl;
 					solutionsList_.erase (solutionsList_.begin()+i);
-					//cout << "Removio " << endl;
 					grid_->removeSolution(location2);
 				} // if
 			} // if
@@ -106,8 +118,15 @@ bool AdaptiveGridArchive::add(Solution * solution, int eval) {
 	return true;
 } // add
 
+/**
+	 * Returns the AdaptativeGrid used
+	 * @return the AdaptativeGrid
+	 */
+
 AdaptiveGrid * AdaptiveGridArchive::getGrid() {
 	return grid_;
 } // AdaptativeGrid
+
+
 
 

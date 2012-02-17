@@ -21,9 +21,12 @@
 
 #include <paes.h>
 
-paes::paes(Problem * problem) : Algorithm(problem){
-	cout << "Inicializado por segunda vez..." << endl;
-}
+ /**
+  * Create a new PAES instance for resolve a problem
+  * @param problem Problem to solve
+  */
+
+paes::paes(Problem * problem) : Algorithm(problem){ }
 
 /**
    * Tests two solutions to determine which one becomes be the guide of PAES
@@ -58,7 +61,6 @@ Solution * paes::test(Solution * solution, Solution * mutatedSolution,
   * Runs of the Paes algorithm.
   * @return a <code>SolutionSet</code> that is a set of non dominated solutions
   * as a result of the algorithm execution
-   * @throws JMException
   */
 
 SolutionSet * paes::execute() {
@@ -109,19 +111,15 @@ SolutionSet * paes::execute() {
         solution = new Solution(mutatedIndividual);
         archive->add(mutatedIndividual,evaluations );
       } else if (flag == 0) { //If none dominate the other
-    	//cout << "Va a Agregar Mutada Eval " << evaluations << endl;
-        if (archive->add(mutatedIndividual,evaluations )) {
-        	  //cout << "OK Agregada Mutada Eval " << evaluations << endl;;
-//          //solution = test(solution,mutatedIndividual,archive);
+            if (archive->add(mutatedIndividual,evaluations )) {
+              solution = test(solution,mutatedIndividual,archive);
         }
       }
 
 
     } while (evaluations < maxEvaluations);
 
-
     //Return the  population of non-dominated solution
     return archive;
-	//return NULL;
-  }  // execute
+ }  // execute
 

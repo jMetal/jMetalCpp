@@ -39,8 +39,9 @@ int main() {
     Operator  * mutation  ; // Mutation operator
 
     //problem = new Kursawe("Real", 3);
+    problem = new Fonseca("Real");
     //problem = new ZDT6("Real");
-	problem = new DTLZ1("Real", 7, 2);
+	//problem = new DTLZ1("Real", 7, 2);
 	//problem = new DTLZ1("Real");
 	//problem = new DTLZ3("Real", 12, 2);
 	//problem = new DTLZ4("Real", 12, 2);

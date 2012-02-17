@@ -34,8 +34,19 @@
 class AdaptiveGridArchive : public Archive {
 
 private:
+	/**
+		 * Stores the adaptive grid
+		 */
 	AdaptiveGrid * grid_;
+
+	/**
+	 * Stores the maximum size of the archive
+	 */
 	int maxSize_;
+
+	/**
+	 * Stores a <code>Comparator</code> for dominance checking
+	 */
 	Comparator * dominance_;
 
 public:

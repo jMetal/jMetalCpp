@@ -35,6 +35,10 @@
 class AdaptiveGrid {
 
 private:
+
+	 /**
+	   * Number of bi-divisions of the objective space
+	   */
 	int bisections_;
 
 	/**

@@ -21,6 +21,13 @@
 #include "AdaptiveGrid.h"
 using namespace std;
 
+/**
+* Constructor.
+* Creates an instance of AdaptativeGrid.
+* @param bisections Number of bi-divisions of the objective space.
+* @param objetives Number of objectives of the problem.
+*/
+
 AdaptiveGrid::AdaptiveGrid(int bisections, int objetives) {
 	bisections_ = bisections;
 	objectives_  = objetives ;
@@ -33,10 +40,15 @@ AdaptiveGrid::AdaptiveGrid(int bisections, int objetives) {
 	hypercubes_ = new int[sizehypercubes_];
 	for (int i = 0; i < sizehypercubes_;i++)
 	      hypercubes_[i] = 0;
-}
+}//AdaptativeGrid
 
+
+/**
+*  Updates the grid limits considering the solutions contained in a
+*  <code>SolutionSet</code>.
+*  @param solutionSet The <code>SolutionSet</code> considered.
+*/
 void AdaptiveGrid::updateLimits(SolutionSet * solutionSet){
-
 
     //Init the lower and upper limits
     for (int obj = 0; obj < objectives_; obj++){
@@ -58,7 +70,15 @@ void AdaptiveGrid::updateLimits(SolutionSet * solutionSet){
         }
       } // for
     } // for
-}
+}//updateLimits
+
+
+/**
+  * Updates the grid adding solutions contained in a specific
+  * <code>SolutionSet</code>.
+  * <b>REQUIRE</b> The grid limits must have been previously calculated.
+  * @param solutionSet The <code>SolutionSet</code> considered.
+  */
 
 void AdaptiveGrid::addSolutionSet(SolutionSet * solutionSet){
     //Calculate the location of all individuals and update the grid
@@ -77,7 +97,11 @@ void AdaptiveGrid::addSolutionSet(SolutionSet * solutionSet){
  } // addSolutionSet
 
 
-
+/**
+ * Updates the grid limits and the grid content adding the solutions contained
+ * in a specific <code>SolutionSet</code>.
+ * @param solutionSet The <code>SolutionSet</code>.
+ */
 void AdaptiveGrid::updateGrid(SolutionSet * solutionSet){
     //Update lower and upper limits
     updateLimits(solutionSet);
@@ -96,9 +120,17 @@ void AdaptiveGrid::updateGrid(SolutionSet * solutionSet){
     addSolutionSet(solutionSet);
  } //updateGrid
 
+
+/**
+ * Updates the grid limits and the grid content adding a new
+ * <code>Solution</code>.
+ * If the solution falls out of the grid bounds, the limits and content of the
+ * grid must be re-calculated.
+ * @param solution <code>Solution</code> considered to update the grid.
+ * @param solutionSet <code>SolutionSet</code> used to update the grid.
+ */
 void AdaptiveGrid::updateGrid(Solution * solution, SolutionSet * solutionSet, int eval){
 
-	//cout << "UpdateGrid " << eval << endl;
     int location_ = location(solution);
     if (location_ == -1) {//Re-build the Adaptative-Grid
       //Update lower and upper limits
@@ -122,22 +154,25 @@ void AdaptiveGrid::updateGrid(Solution * solution, SolutionSet * solutionSet, in
         hypercubes_[i] = 0;
       }
 
-      //cout << "Ok UpdateGrid " << eval << endl;
-
-      //add the population
+     //add the population
       addSolutionSet(solutionSet);
 
 
     } // if
  } //updateGrid
 
-
+/**
+ * Calculates the hypercube of a solution.
+ * @param solution The <code>Solution</code>.
+ */
 int AdaptiveGrid::location(Solution * solution){
     //Create a int [] to store the range of each objetive
     int * position = new int[objectives_];
 
     //Calculate the position for each objetive
     for (int obj = 0; obj < objectives_; obj++) {
+
+      position[obj] = 0; //Inicialize
 
       if ((solution->getObjective(obj) > upperLimits_[obj])
           || (solution->getObjective(obj) < lowerLimits_[obj]))
@@ -170,6 +205,11 @@ int AdaptiveGrid::location(Solution * solution){
     return location;
  } //location
 
+
+/**
+ * Returns the value of the most populated hypercube.
+ * @return The hypercube with the maximum number of solutions.
+ */
 int AdaptiveGrid::getMostPopulated(){
     return mostPopulated_;
   } // getMostPopulated
@@ -203,6 +243,10 @@ void AdaptiveGrid::removeSolution(int location) {
   } //removeSolution
 
 
+/**
+ * Increases the number of solutions into a specific hypercube.
+ * @param location Number of hypercube.
+ */
 void AdaptiveGrid::addSolution(int location) {
     //Increase the solutions in the location specified.
     hypercubes_[location]++;
