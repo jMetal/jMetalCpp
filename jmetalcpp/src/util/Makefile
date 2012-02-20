@@ -1,7 +1,7 @@
 CPP  = g++
 CC   = gcc
 OBJ  = Distance.o PermutationUtility.o PseudoRandom.o RandomGenerator.o Ranking.o \
-AdaptiveGrid.o
+AdaptiveGrid.o NonDominatedSolutionList.o
 LIBNAME= libutil.a
 
 LIBS += 
