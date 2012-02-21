@@ -1,11 +1,11 @@
 CPP  = g++
 CC   = gcc
-OBJ  = MetricUtil.o
+OBJ  = LexicoGraphicalComparator.o MetricsUtil.o
 LIB  = libqualityIndicatorUtil.a
 
 LIBS +=  -lm 
 INCS +=  -I. -I../../core \
-	-I../../util
+	-I../../util -I../../util/comparators
 
 #CXXFLAGS += $(INCS) -g 
 CXXFLAGS += $(INCS) -O3 

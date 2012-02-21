@@ -20,28 +20,68 @@
 
 
 #include <MetricsUtil.h>
-#include <iostream>
 
 
 using namespace std;
 
 
-int MetricsUtil::getSumaUno(int i) {
+/**
+ * This method reads a Pareto Front for a file.
+ * @param path The path to the file that contains the pareto front
+ * @return double [][] whit the pareto front
+ **/
+vector< vector <double> > MetricsUtil::readFront(string path) {
 
-	return (i+1);
+  vector< vector <double> > front;
+
+  std::ifstream in(path.c_str());
+  if( !in ) {
+    cout << "Error trying to read Pareto Front file: " << path << endl;
+    exit(-1);
+  }
+
+  string line;
+  while( getline(in, line ) ) {
+
+    vector<double> list;
+
+    istringstream iss(line);
+
+    while (iss) {
+      string token;
+      iss >> token;
+      if (token.compare("")!=0) {
+        cout << "Substring: " << token << endl;
+        list.push_back(atof(token.c_str()));
+      }
+    }
+    front.push_back(list);
+
+  }
+
+  in.close();
 
 }
 
 
-double *MetricsUtil::getMaximumValues(double **front, int frontSize, int noObjectives) {
+/** Gets the maximum values for each objectives in a given pareto
+ *  front
+ *  @param front The pareto front
+ *  @param noObjectives Number of objectives in the pareto front
+ *  @return vector<double> A vector of noOjectives values with the maximum values
+ *  for each objective
+ **/
+vector<double> MetricsUtil::getMaximumValues(vector< vector<double> > front,
+    int noObjectives) {
 
-	double *maximumValue = new double[noObjectives];
+  vector<double> maximumValue;
+
 	for (int i = 0; i < noObjectives; i++) {
-		maximumValue[i] =- std::numeric_limits<double>::max();
+		maximumValue[i] = std::numeric_limits<double>::min();
 	}
 
-	for (int i =0; i < frontSize; i++ ) {
-		for (int j = 0; j < noObjectives; j++) {
+	for (int i =0; i < front.size(); i++ ) {
+		for (int j = 0; j < front[i].size(); j++) {
 			if (front[i][j] > maximumValue[j]) {
 				maximumValue[j] = front[i][j];
 			}
@@ -53,57 +93,202 @@ double *MetricsUtil::getMaximumValues(double **front, int frontSize, int noObjec
 } // getMaximumValues
 
 
-double *MetricsUtil::getMinimumValues(double ** front, int frontSize, int noObjectives) {
+/** Gets the minimum values for each objectives in a given pareto
+ *  front
+ *  @param front The pareto front
+ *  @param noObjectives Number of objectives in the pareto front
+ *  @return vector<double> A vector of noOjectives values with the minimum values
+ *  for each objective
+ **/
+vector<double> MetricsUtil::getMinimumValues(vector< vector<double> > front,
+    int noObjectives) {
 
-	double *minimumValue = new double[noObjectives];
-	for (int i = 0; i < noObjectives; i++) {
-		minimumValue[i] = std::numeric_limits<double>::max();
-	}
+  vector<double> minimumValue;
 
-	for (int i =0; i < frontSize; i++ ) {
-		for (int j = 0; j < noObjectives; j++) {
-			if (front[i][j] < minimumValue[j]) {
-				minimumValue[j] = front[i][j];
-			}
-		}
-	}
-	return minimumValue;
+  for (int i = 0; i < noObjectives; i++) {
+    minimumValue[i] = std::numeric_limits<double>::max();
+  }
+
+  for (int i =0; i < front.size(); i++ ) {
+    for (int j = 0; j < front[i].size(); j++) {
+      if (front[i][j] < minimumValue[j]) {
+        minimumValue[j] = front[i][j];
+      }
+    }
+  }
+
+  return minimumValue;
 
 } // getMinimumValues
 
 
-double **MetricsUtil::getNormalizedFront(double **front, int frontSizeX, int frontSizeY,
-			double *maximumValue, double *minimumValue) {
+/**
+ *  This method returns the distance (taken the euclidean distance) between
+ *  two points given as <code>double []</code>
+ *  @param a A point
+ *  @param b A point
+ *  @return The euclidean distance between the points
+ **/
+double MetricsUtil::distance(vector<double> a, vector<double> b) {
 
-	double **normalizedFront = new double*[frontSizeX];
-	for (int i = 0; i < frontSizeX; i++) {
-		normalizedFront[i] = new double[frontSizeY];
-		for (int j = 0; j < frontSizeY; j++) {
-			normalizedFront[i][j] = (front[i][j] - minimumValue[j]) /
-															(maximumValue[j] - minimumValue[j]);
-		}
-	}
-	return normalizedFront;
+  double distance = 0.0;
+
+  for (int i = 0; i < a.size(); i++) {
+    distance += pow(a[i]-b[i],2.0);
+  }
+
+  return sqrt(distance);
+} // distance
+
+
+/**
+ * Gets the distance between a point and the nearest one in
+ * a given front (the front is given as <code>vector< vector<double> ></code>)
+ * @param point The point
+ * @param front The front that contains the other points to calculate the
+ * distances
+ * @return The minimum distance between the point and the front
+ **/
+double MetricsUtil::distanceToClosedPoint(vector<double> point,
+    vector< vector<double> > front) {
+
+  double minDistance = distance(point,front[0]);
+
+  for (int i = 1; i < front.size(); i++) {
+    double aux = distance(point,front[i]);
+    if (aux < minDistance) {
+      minDistance = aux;
+    }
+  }
+
+  return minDistance;
+
+} // distanceToClosedPoint
+
+
+/**
+ * Gets the distance between a point and the nearest one in
+ * a given front, and this distance is greater than 0.0
+ * @param point The point
+ * @param front The front that contains the other points to calculate the
+ * distances
+ * @return The minimun distances greater than zero between the point and
+ * the front
+ */
+double MetricsUtil::distanceToNearestPoint(vector<double> point,
+    vector< vector<double> > front) {
+
+  double minDistance = std::numeric_limits<double>::max();
+
+  for (int i = 0; i < front.size(); i++) {
+    double aux = distance(point,front[i]);
+    if ((aux < minDistance) && (aux > 0.0)) {
+      minDistance = aux;
+    }
+  }
+
+  return minDistance;
+
+} // distanceToNearestPoint
+
+
+/**
+ * This method receives a pareto front and two points, one with maximum values
+ * and the other with minimum values allowed, and returns the normalized
+ * pareto front.
+ * @param front A pareto front.
+ * @param maximumValue The maximum values allowed
+ * @param minimumValue The minimum values allowed
+ * @return the normalized pareto front
+ **/
+vector< vector<double> > MetricsUtil::getNormalizedFront(vector< vector<double> > front,
+    vector<double> maximumValue, vector<double> minimumValue) {
+
+  vector< vector<double> > normalizedFront;
+
+  for (int i = 0; i < front.size();i++) {
+    vector<double> list;
+    for (int j = 0; j < front[i].size(); j++) {
+      //normalizedFront[i][j] = (front[i][j] - minimumValue[j]) /
+      //                        (maximumValue[j] - minimumValue[j]);
+      list[j] = (front[i][j] - minimumValue[j]) / (maximumValue[j] - minimumValue[j]);
+    }
+    normalizedFront.push_back(list);
+  }
+
+  return normalizedFront;
 
 } // getNormalizedFront
 
 
-double **MetricsUtil::invertedFront(double ** front, int frontSizeX, int frontSizeY) {
+/**
+ * This method receives a normalized pareto front and return the inverted one.
+ * This operation needed for minimization problems
+ * @param front The pareto front to inverse
+ * @return The inverted pareto front
+ **/
+vector< vector<double> > MetricsUtil::invertedFront(vector< vector<double> > front) {
 
-	double **invertedFront = new double*[frontSizeX];
+	vector< vector<double> > invertedFront;
 
-	for (int i = 0; i < frontSizeX; i++) {
-		invertedFront[i] = new double[frontSizeY];
-		for (int j = 0; j < frontSizeY; j++) {
+	for (int i = 0; i < front.size(); i++) {
+		vector<double> list;
+		for (int j = 0; j < front[i].size(); j++) {
 			if (front[i][j] <= 1.0 && front[i][j]>= 0.0) {
-				invertedFront[i][j] = 1.0 - front[i][j];
+				list[j] = 1.0 - front[i][j];
 			} else if (front[i][j] > 1.0) {
-				invertedFront[i][j] = 0.0;
+			  list[j] = 0.0;
 			} else if (front[i][j] < 0.0) {
-				invertedFront[i][j] = 1.0;
+			  list[j] = 1.0;
 			}
 		}
+		invertedFront.push_back(list);
 	}
+
 	return invertedFront;
 
 } // invertedFront
+
+
+/**
+ * Reads a set of non dominated solutions from a file
+ * @param path The path of the file containing the data
+ * @return A solution set
+ */
+SolutionSet * MetricsUtil::readNonDominatedSolutionSet(string path) {
+
+  std::ifstream in(path.c_str());
+  if( !in ) {
+    cout << "Error trying to read non dominated solutions file: "
+        << path << endl;
+    exit(-1);
+  } // if
+
+  SolutionSet * solutionSet = new NonDominatedSolutionList();
+  string line;
+
+  while( getline(in, line ) ) {
+
+    vector<double> list;
+    istringstream iss(line);
+    while (iss) {
+      string token;
+      iss >> token;
+      if (token.compare("")!=0) {
+        cout << "Substring: " << token << endl;
+        list.push_back(atof(token.c_str()));
+      } // if
+    } // while
+
+    Solution * solution = new Solution(list.size());
+    for (int i=0; i<list.size(); i++) {
+      solution->setObjective(i,list[i]);
+    } //for
+    solutionSet->add(solution);
+
+  } // while
+
+  in.close();
+  return solutionSet;
+
+} // readNonDominatedSolutionSet

@@ -103,7 +103,7 @@ double QualityIndicator::getSpread(SolutionSet * solutionSet) {
  * @return The value of the hypervolume indicator
  */
 double QualityIndicator::getEpsilon(SolutionSet * solutionSet);
-return new Epsilon().epsilon(solutionSet.writeObjectivesToMatrix(),
+  return new Epsilon().epsilon(solutionSet.writeObjectivesToMatrix(),
                              trueParetoFront_.writeObjectivesToMatrix(),
                              problem_.getNumberOfObjectives());
 } // getEpsilon

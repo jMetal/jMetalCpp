@@ -34,12 +34,10 @@
 
 using namespace std;
 
-
 template<typename T, size_t N>
 T * end(T (&ra)[N]) {
     return ra + N;
 }
-
 
 /**
  * Abstract class representing jMetal experiments

@@ -22,6 +22,17 @@
 #define __METRICSUTIL__
 
 #include <limits>
+#include <vector>
+#include <iostream>
+#include <cstdlib>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <math.h>
+#include <SolutionSet.h>
+#include <NonDominatedSolutionList.h>
+
+using namespace std;
 
 /**
   * @class MetricsUtil
@@ -29,23 +40,18 @@
 **/
 
 class MetricsUtil {
-private:
-  int populationSize_;
-  //int maxEvaluations_;
-  //QualityIndicator *indicators_;
-  //Problem *problem_;
+
 public:
-	int getSumaUno(int i);
-	//TODO: double **readFront(string path);
-	double *getMaximumValues(double **front, int frontSize, int noObjectives);
-	double *getMinimumValues(double **front, int frontSize, int noObjectives);
-	//TODO: double distance(double *a, double *b);
-	//TODO: double distanceToClosedPoint(double *point, double **front);
-	//TODO: double distanceToNearestPoint(double *point, double **front);
-	double **getNormalizedFront(double **front, int frontSizeX, int frontSizeY,
-			double *maximumValue, double *minimumValue);
-	double **invertedFront(double **front, int frontSizeX, int frontSizeY);
-	//TODO: SolutionSet readNonDominatedSolutionSet(string path);
+	vector< vector<double> > readFront(string path);
+	vector<double> getMaximumValues(vector< vector<double> > front, int noObjectives);
+	vector<double> getMinimumValues(vector< vector<double> > front, int noObjectives);
+	double distance(vector<double> a, vector<double> b);
+	double distanceToClosedPoint(vector<double> point, vector< vector<double> > front);
+	double distanceToNearestPoint(vector<double> point, vector< vector<double> > front);
+	vector< vector<double> > getNormalizedFront(vector< vector<double> > front,
+	    vector<double> maximumValue, vector<double> minimumValue);
+	vector< vector<double> > invertedFront(vector< vector<double> > front);
+	SolutionSet * readNonDominatedSolutionSet(string path);
 };
 
 #endif /* __METRICSUTIL__ */

@@ -1,6 +1,7 @@
 CPP  = g++
 CC   = gcc
-OBJ  = QualityIndicator.o Hypervolume.o
+OBJ  = Epsilon.o GenerationalDistance.o Hypervolume.o \
+	InvertedGenerationalDistance.o Spread.o
 LIB  = libqualityIndicator.a
 
 LIBS +=  
