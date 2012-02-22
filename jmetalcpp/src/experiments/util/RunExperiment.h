@@ -33,6 +33,7 @@
 #include <FileUtils.h>
 #include <Problem.h>
 #include <SolutionSet.h>
+#include <QualityIndicator.h>
 
 using namespace std;
 

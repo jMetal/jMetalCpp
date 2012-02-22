@@ -96,13 +96,15 @@ void RunExperiment::run() {
     //synchronized(experiment_) {
     if (indicatorList_.size() > 0) {
 
-      const char* paretoFrontPath = (paretoFrontDirectory_ + "/" + paretoFrontFile_[problemId]).c_str ();
+      const char* paretoFrontPath = (paretoFrontDirectory_ + "/" +
+          paretoFrontFile_[problemId]).c_str ();
       int paretoFrontResult = FileUtils::existsPath(paretoFrontPath);
 
       //int isDir = 0;
       if (paretoFrontResult != -1) {
         if (paretoFrontResult == 1) {
-          paretoFrontFile_[problemId] = paretoFrontDirectory_ + "/" + paretoFrontFile_[problemId];
+          paretoFrontFile_[problemId] = paretoFrontDirectory_ + "/" +
+              paretoFrontFile_[problemId];
         } else {
           paretoFrontFile_[problemId] = "";
         }
@@ -153,77 +155,39 @@ void RunExperiment::run() {
         // STEP 9: calculate quality indicators
         if (indicatorList_.size() > 0) {
 
-          // TODO: Implementar indicadores de calidad
-          /*
-          QualityIndicator indicators;
-          //System.out.println("PF file: " + paretoFrontFile_[problemId]);
+          QualityIndicator * indicators;
+          cout << "PF file: " << paretoFrontFile_[problemId] << endl;
           indicators = new QualityIndicator(problem, paretoFrontFile_[problemId]);
 
-          for (int j = 0; j < indicatorList_.length; j++) {
-            if (indicatorList_[j].equals("HV")) {
-              double value = indicators.getHypervolume(resultFront);
-              FileWriter os;
-              try {
-                os = new FileWriter(experimentDirectory + "/HV", true);
-                os.write("" + value + "\n");
-                os.close();
-              } catch (IOException ex) {
-                Logger.getLogger(Experiment.class.getName()).log(Level.SEVERE, null, ex);
-              }
+          for (int j = 0; j < indicatorList_.size(); j++) {
+            string qualityIndicatorFile = directory;
+            double value;
+
+            if (indicatorList_[j].compare("HV")==0) {
+              value = indicators->getHypervolume(resultFront);
+              qualityIndicatorFile = qualityIndicatorFile + "/HV";
             }
-            if (indicatorList_[j].equals("SPREAD")) {
-              FileWriter os = null;
-              try {
-                double value = indicators.getSpread(resultFront);
-                os = new FileWriter(experimentDirectory + "/SPREAD", true);
-                os.write("" + value + "\n");
-                os.close();
-              } catch (IOException ex) {
-                Logger.getLogger(Experiment.class.getName()).log(Level.SEVERE, null, ex);
-              } finally {
-                try {
-                  os.close();
-                } catch (IOException ex) {
-                  Logger.getLogger(Experiment.class.getName()).log(Level.SEVERE, null, ex);
-                }
-              }
+            if (indicatorList_[j].compare("SPREAD")==0) {
+              value = indicators->getSpread(resultFront);
+              qualityIndicatorFile = qualityIndicatorFile + "/SPREAD";
             }
-            if (indicatorList_[j].equals("IGD")) {
-              FileWriter os = null;
-              try {
-                double value = indicators.getIGD(resultFront);
-                os = new FileWriter(experimentDirectory + "/IGD", true);
-                os.write("" + value + "\n");
-                os.close();
-              } catch (IOException ex) {
-                Logger.getLogger(Experiment.class.getName()).log(Level.SEVERE, null, ex);
-              } finally {
-                try {
-                  os.close();
-                } catch (IOException ex) {
-                  Logger.getLogger(Experiment.class.getName()).log(Level.SEVERE, null, ex);
-                }
-              }
+            if (indicatorList_[j].compare("IGD")==0) {
+              value = indicators->getIGD(resultFront);
+              qualityIndicatorFile = qualityIndicatorFile + "/IGD";
             }
-            if (indicatorList_[j].equals("EPSILON")) {
-              FileWriter os = null;
-              try {
-                double value = indicators.getEpsilon(resultFront);
-                os = new FileWriter(experimentDirectory + "/EPSILON", true);
-                os.write("" + value + "\n");
-                os.close();
-              } catch (IOException ex) {
-                Logger.getLogger(Experiment.class.getName()).log(Level.SEVERE, null, ex);
-              } finally {
-                try {
-                  os.close();
-                } catch (IOException ex) {
-                  Logger.getLogger(Experiment.class.getName()).log(Level.SEVERE, null, ex);
-                }
-              }
+            if (indicatorList_[j].compare("EPSILON")==0) {
+              value = indicators->getEpsilon(resultFront);
+              qualityIndicatorFile = qualityIndicatorFile + "/EPSILON";
             }
+
+            if (qualityIndicatorFile.compare(directory)!=0) {
+              std::fstream out(qualityIndicatorFile.c_str(),
+                  std::ios::out | std::ios::app);
+              out << value << endl;
+              out.close();
+            }
+
           } // for
-          */
         } // if
       } // for
     } // for

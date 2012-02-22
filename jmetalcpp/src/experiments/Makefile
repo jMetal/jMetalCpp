@@ -8,7 +8,7 @@ INCS +=  -I. -I../core -I../util -I../encodings/solutionType \
 	-I../encodings/variable -I../util/comparators \
 	-I../problems -I../util/wrapper -I../metaheuristics/nsgaII \
 	-I../operators/crossover -I../operators/mutation -I../operators/selection \
-	-Iutil
+	-Iutil -I../qualityIndicator -I../qualityIndicator/util
 
 #CXXFLAGS += $(INCS) -g 
 CXXFLAGS += $(INCS) 

@@ -34,7 +34,7 @@ class NonDominatedSolutionList : public SolutionSet {
 
 private:
   Comparator * dominance_;
-  static Comparator * equal_;
+  Comparator * equal_;
 
 public:
   NonDominatedSolutionList();

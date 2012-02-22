@@ -6,7 +6,8 @@ LIBNAME= libexperimentsutil.a
 LIBS +=  
 INCS +=  -I. -I.. -I../../core -I../../encodings/solutionType \
 	-I../../encodings/variable -I../../util/comparators -I../../util \
-	-I../../problems -I../../util/wrapper
+	-I../../problems -I../../util/wrapper -I../../qualityIndicator \
+	-I../../qualityIndicator/util
 
 #CXXFLAGS += $(INCS) -g 
 CXXFLAGS += $(INCS) 
