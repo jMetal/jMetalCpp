@@ -25,12 +25,18 @@
 #include <map>
 #include <vector>
 #include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <algorithm>
+#include <limits>
 #include <Algorithm.h>
 #include <Settings.h>
 #include <RunExperiment.h>
 #include <FileUtils.h>
 #include <RBoxplot.h>
 #include <RWilcoxon.h>
+#include <Statistics.h>
 
 using namespace std;
 
@@ -49,7 +55,7 @@ private:
 
   map<string, void *> map_; // Map used to send experiment parameters to threads
 
-  void calculateStatistics(vector<int> vector_, map<string, double> values);
+  void calculateStatistics(vector<double> vector_, map<string, double> values);
   void printHeaderLatexCommands(string fileName);
   void printEndLatexCommands(string fileName);
   void printMeanStdDev(string fileName, int indicator, double*** mean,

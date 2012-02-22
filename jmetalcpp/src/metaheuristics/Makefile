@@ -19,7 +19,7 @@ CFLAGS = $(INCS)
 all: all-before $(LIB) all-after
 
 clean: clean-custom
-	rm  $(LIB) 
+	rm  -f $(LIB) 
 	find . -name "*.o" -exec rm {} \;
 
 $(LIB): $(OBJ)

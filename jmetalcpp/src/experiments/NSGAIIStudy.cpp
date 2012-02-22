@@ -111,8 +111,7 @@ int main(int argc, char ** argv) {
   exp->runExperiment(numberOfThreads = 1);
 
   // Generate latex tables (comment this sentence is not desired)
-  // TODO : Implementar código de generación de tablas de Latex
-  // exp->generateLatexTables() ;
+  exp->generateLatexTables();
 
   // Configure the R scripts to be generated
   int rows = 2 ;
