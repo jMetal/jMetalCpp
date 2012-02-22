@@ -299,3 +299,21 @@ void SolutionSet::replace(int position, Solution *solution) {
   solutionsList_[position] = solution;
 } // replace
 
+
+/**
+ * Copies the objectives of the solution set to a matrix
+ * @return A matrix containing the objectives
+ */
+vector <vector<double> > SolutionSet::writeObjectivesToMatrix() {
+  vector <vector<double> > objectives;
+  //objectives = new double[size()][get(0).numberOfObjectives()];
+  for (int i = 0; i < size(); i++) {
+    vector<double> list;
+    for (int j = 0; j < get(0)->getNumberOfObjectives(); j++) {
+      list.push_back(get(i)->getObjective(j));
+    }
+    objectives.push_back(list);
+  }
+  return objectives;
+} // writeObjectivesMatrix
+

@@ -25,6 +25,11 @@
 #include <SolutionSet.h>
 #include <Problem.h>
 #include <MetricsUtil.h>
+#include <Hypervolume.h>
+#include <Spread.h>
+#include <Epsilon.h>
+#include <GenerationalDistance.h>
+#include <InvertedGenerationalDistance.h>
 
 class QualityIndicator {
 

@@ -1,7 +1,7 @@
 CPP  = g++
 CC   = gcc
 OBJ  = Epsilon.o GenerationalDistance.o Hypervolume.o \
-	InvertedGenerationalDistance.o Spread.o
+	InvertedGenerationalDistance.o QualityIndicator.o Spread.o
 LIB  = libqualityIndicator.a
 
 LIBS +=  

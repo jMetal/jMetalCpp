@@ -72,7 +72,7 @@ public:
   SolutionSet * join(SolutionSet * another);
   void replace(int position, Solution * solution);
   void replace(int position, Solution * solution, bool del);
-  //double **writeObjectivesToMatrix();
+  vector <vector<double> > writeObjectivesToMatrix();
 
   //void reset() ;
   //string toString();
