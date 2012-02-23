@@ -144,8 +144,12 @@ void Experiment::checkExperimentDirectory() {
   case 2:
     cout << "Experiment directory exists." << endl;
     cout << "Experiment directory is not a directory. Deleting file and creating directory" << endl;
-    //FIX Borrar fichero
-    //experimentDirectory.delete();
+    if( remove(experimentBaseDirectory_.c_str()) != 0 ) {
+      cout << "Error deleting file." << endl;
+      exit(-1);
+    } else {
+      cout << "File successfully deleted." << endl;
+    }
     if (FileUtils::createDirectory(experimentBaseDirectory_) == -1) {
       cout << "Error creating directory" << endl;
       exit(-1);
@@ -428,10 +432,10 @@ void Experiment::printMeanStdDev(string fileName, int indicator, double *** mean
       }
     } // if
     else { // indicator to maximize e.g., the HV
-      bestValue = std::numeric_limits<double>::min();
-      bestValueIQR = std::numeric_limits<double>::min();
-      secondBestValue = std::numeric_limits<double>::min();
-      secondBestValueIQR = std::numeric_limits<double>::min();
+      bestValue = -std::numeric_limits<double>::max();
+      bestValueIQR = -std::numeric_limits<double>::max();
+      secondBestValue = -std::numeric_limits<double>::max();
+      secondBestValueIQR = -std::numeric_limits<double>::max();
       for (int j = 0; j < (algorithmNameList_.size()); j++) {
         if ((mean[indicator][i][j] > bestValue) ||
                 ((mean[indicator][i][j] == bestValue) && (stdDev[indicator][i][j] < bestValueIQR))) {
@@ -545,10 +549,10 @@ void Experiment::printMedianIQR(string fileName, int indicator, double *** media
       } // for
     } // if
     else { // indicator to maximize e.g., the HV
-      bestValue = std::numeric_limits<double>::min();
-      bestValueIQR = std::numeric_limits<double>::min();
-      secondBestValue = std::numeric_limits<double>::min();
-      secondBestValueIQR = std::numeric_limits<double>::min();
+      bestValue = -std::numeric_limits<double>::max();
+      bestValueIQR = -std::numeric_limits<double>::max();
+      secondBestValue = -std::numeric_limits<double>::max();
+      secondBestValueIQR = -std::numeric_limits<double>::max();
       for (int j = 0; j < (algorithmNameList_.size()); j++) {
         if ((median[indicator][i][j] > bestValue) ||
             ((median[indicator][i][j] == bestValue) && (IQR[indicator][i][j] < bestValueIQR))) {

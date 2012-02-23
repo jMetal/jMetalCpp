@@ -51,7 +51,7 @@ vector< vector <double> > MetricsUtil::readFront(string path) {
       string token;
       iss >> token;
       if (token.compare("")!=0) {
-        cout << "Substring: " << token << endl;
+        //cout << "Substring: " << token << endl;
         list.push_back(atof(token.c_str()));
       }
     }
@@ -60,6 +60,8 @@ vector< vector <double> > MetricsUtil::readFront(string path) {
   }
 
   in.close();
+
+  return front;
 
 }
 
@@ -77,7 +79,7 @@ vector<double> MetricsUtil::getMaximumValues(vector< vector<double> > front,
   vector<double> maximumValue;
 
 	for (int i = 0; i < noObjectives; i++) {
-		maximumValue[i] = std::numeric_limits<double>::min();
+		maximumValue.push_back(-std::numeric_limits<double>::max());
 	}
 
 	for (int i =0; i < front.size(); i++ ) {
@@ -106,7 +108,7 @@ vector<double> MetricsUtil::getMinimumValues(vector< vector<double> > front,
   vector<double> minimumValue;
 
   for (int i = 0; i < noObjectives; i++) {
-    minimumValue[i] = std::numeric_limits<double>::max();
+    minimumValue.push_back(std::numeric_limits<double>::max());
   }
 
   for (int i =0; i < front.size(); i++ ) {
@@ -211,7 +213,7 @@ vector< vector<double> > MetricsUtil::getNormalizedFront(vector< vector<double> 
     for (int j = 0; j < front[i].size(); j++) {
       //normalizedFront[i][j] = (front[i][j] - minimumValue[j]) /
       //                        (maximumValue[j] - minimumValue[j]);
-      list[j] = (front[i][j] - minimumValue[j]) / (maximumValue[j] - minimumValue[j]);
+      list.push_back((front[i][j] - minimumValue[j]) / (maximumValue[j] - minimumValue[j]));
     }
     normalizedFront.push_back(list);
   }
@@ -235,11 +237,11 @@ vector< vector<double> > MetricsUtil::invertedFront(vector< vector<double> > fro
 		vector<double> list;
 		for (int j = 0; j < front[i].size(); j++) {
 			if (front[i][j] <= 1.0 && front[i][j]>= 0.0) {
-				list[j] = 1.0 - front[i][j];
+				list.push_back(1.0 - front[i][j]);
 			} else if (front[i][j] > 1.0) {
-			  list[j] = 0.0;
+			  list.push_back(0.0);
 			} else if (front[i][j] < 0.0) {
-			  list[j] = 1.0;
+			  list.push_back(1.0);
 			}
 		}
 		invertedFront.push_back(list);
@@ -275,7 +277,7 @@ SolutionSet * MetricsUtil::readNonDominatedSolutionSet(string path) {
       string token;
       iss >> token;
       if (token.compare("")!=0) {
-        cout << "Substring: " << token << endl;
+        //cout << "Substring: " << token << endl;
         list.push_back(atof(token.c_str()));
       } // if
     } // while
