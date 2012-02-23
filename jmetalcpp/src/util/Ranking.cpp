@@ -65,8 +65,11 @@ Ranking::Ranking (SolutionSet * solutionSet) {
   //-> Fast non dominated sorting algorithm
   for (int p = 0; p < solutionSet_->size(); p++) {
     dominateMe[p] = 0;
-    // For all q individuals , calculate if p dominates q or vice versa
-    for (int q = 0; q < solutionSet_->size(); q++) {
+  }
+
+  // For all q individuals , calculate if p dominates q or vice versa
+  for (int p = 0; p < (solutionSet_->size() - 1); p++) {
+    for (int q = p + 1; q < solutionSet_->size(); q++) {
 
       flagDominate =constraint_->compare(solutionSet->get(p),solutionSet->get(q));
       if (flagDominate == 0) {
@@ -75,12 +78,16 @@ Ranking::Ranking (SolutionSet * solutionSet) {
 
       if (flagDominate == -1) {
         iDominate[p].push_back(q);
+        dominateMe[q]++;
       } else if (flagDominate == 1) {
+        iDominate[q].push_back(p);
         dominateMe[p]++;
       } // if
 
     } // for
-            
+  } // for
+
+  for (int p = 0; p < solutionSet_->size(); p++) {
     // If nobody dominates p, p belongs to the first front
     if (dominateMe[p] == 0) {
       front[0].push_back(p);
