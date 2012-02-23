@@ -46,6 +46,7 @@ public:
   MetricsUtil * utils_;
 
   GenerationalDistance();
+  ~GenerationalDistance();
   double generationalDistance(vector< vector<double> > front,
       vector< vector<double> > trueParetoFront, int numberOfObjectives);
 

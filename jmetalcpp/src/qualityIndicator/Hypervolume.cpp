@@ -30,6 +30,14 @@ Hypervolume::Hypervolume() {
 } // Hypervolume
 
 
+/**
+ * Destructor
+ */
+Hypervolume::~Hypervolume() {
+  delete utils_;
+} // ~Hypervolume
+
+
 /*
  * returns true if 'point1' dominates 'points2' with respect to the
  * to the first 'noObjectives' objectives

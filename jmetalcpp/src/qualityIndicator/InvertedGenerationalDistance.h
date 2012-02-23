@@ -46,6 +46,7 @@ public:
   MetricsUtil * utils_;
 
   InvertedGenerationalDistance();
+  ~InvertedGenerationalDistance();
   double invertedGenerationalDistance(vector< vector<double> > front,
       vector< vector<double> > trueParetoFront, int numberOfObjectives);
 

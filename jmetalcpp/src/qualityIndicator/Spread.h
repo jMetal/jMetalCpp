@@ -48,6 +48,7 @@ public:
   MetricsUtil * utils_;
 
   Spread();
+  ~Spread();
   double spread (vector< vector<double> > front,
       vector< vector<double> > trueParetoFront, int numberOfObjectives);
 

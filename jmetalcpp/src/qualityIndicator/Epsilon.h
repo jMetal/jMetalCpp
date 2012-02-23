@@ -51,6 +51,7 @@ public:
   MetricsUtil * utils_; // stores a reference to  qualityIndicatorUtils
 
   Epsilon();
+  ~Epsilon();
   double epsilon(vector <vector<double> > b, vector< vector<double> > a, int dim);
 
 }; // Epsilon

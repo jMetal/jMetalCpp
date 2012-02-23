@@ -41,6 +41,7 @@ private:
 
 public:
 	QualityIndicator(Problem * problem, string paretoFrontFile);
+	~QualityIndicator();
 	double getHypervolume(SolutionSet * solutionSet);
 	double getTrueParetoFrontHypervolume();
 	double getIGD(SolutionSet * solutionSet);

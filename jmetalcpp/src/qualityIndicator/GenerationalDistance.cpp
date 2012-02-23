@@ -37,6 +37,14 @@ GenerationalDistance::GenerationalDistance() {
 
 
 /**
+ * Destructor
+ */
+GenerationalDistance::~GenerationalDistance() {
+  delete utils_;
+} // ~GenerationalDistance
+
+
+/**
  * Returns the generational distance value for a given front
  * @param front The front
  * @param trueParetoFront The true pareto front

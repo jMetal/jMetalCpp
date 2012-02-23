@@ -58,6 +58,7 @@ public:
   MetricsUtil * utils_;
 
   Hypervolume();
+  ~Hypervolume();
 
   double calculateHypervolume(vector< vector<double> > front, int noPoints,
       int noObjectives);

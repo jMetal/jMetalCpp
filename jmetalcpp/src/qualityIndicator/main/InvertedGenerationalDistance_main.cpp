@@ -51,5 +51,7 @@ int main(int argc, char ** argv) {
   double value = qualityIndicator->invertedGenerationalDistance(
       solutionFront, trueFront, atoi(argv[3]));
 
+  delete qualityIndicator;
+
   cout << value << endl;
 } // main

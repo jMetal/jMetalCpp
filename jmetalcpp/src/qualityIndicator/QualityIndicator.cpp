@@ -39,6 +39,14 @@ QualityIndicator::QualityIndicator(Problem * problem,
 
 
 /**
+ * Destructor
+ */
+QualityIndicator::~QualityIndicator() {
+  delete utilities_;
+} // ~QualityIndicator
+
+
+/**
  * Returns the hypervolume of solution set
  * @param solutionSet
  * @return The value of the hypervolume indicator

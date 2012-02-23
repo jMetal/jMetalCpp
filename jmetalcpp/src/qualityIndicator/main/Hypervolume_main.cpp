@@ -50,5 +50,7 @@ int main(int argc, char ** argv) {
   double value = qualityIndicator->hypervolume(solutionFront,
       trueFront, atoi(argv[3]));
 
+  delete qualityIndicator;
+
   cout << value << endl;
 } // main

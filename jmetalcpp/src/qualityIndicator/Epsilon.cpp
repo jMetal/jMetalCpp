@@ -32,6 +32,14 @@ Epsilon::Epsilon() {
 
 
 /**
+ * Destructor
+ */
+Epsilon::~Epsilon() {
+  delete utils_;
+} // ~Epsilon
+
+
+/**
  * Returns the epsilon indicator.
  * @param b. True Pareto front
  * @param a. Solution front

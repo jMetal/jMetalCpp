@@ -31,6 +31,14 @@ Spread::Spread() {
 } // Spread
 
 
+/**
+ * Destructor
+ */
+Spread::~Spread() {
+  delete utils_;
+} // ~Spread
+
+
 bool Spread::compareFront(vector<double> pointOne, vector<double> pointTwo) {
 
   int value;

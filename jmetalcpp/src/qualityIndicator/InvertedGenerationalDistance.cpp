@@ -37,6 +37,14 @@ InvertedGenerationalDistance::InvertedGenerationalDistance() {
 
 
 /**
+ * Destructor
+ */
+InvertedGenerationalDistance::~InvertedGenerationalDistance() {
+  delete utils_;
+} // ~InvertedGenerationalDistance
+
+
+/**
  * Returns the inverted generational distance value for a given front
  * @param front The front
  * @param trueParetoFront The true pareto front
