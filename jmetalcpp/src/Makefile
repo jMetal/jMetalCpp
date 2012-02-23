@@ -14,8 +14,10 @@ all:
 	for subdir in `echo "$(SUBDIRS)"`; do (ar -r libjmetal.a $$subdir/*.o) ; done
 	ranlib libjmetal.a
 	make -C main
+	make -C qualityIndicator/main
 
 clean:
 	for subdir in `echo "$(SUBDIRS)"`; do ($(MAKE) -C $$subdir $@) ; done
 	make -C main clean
+	make -C qualityIndicator/main clean
 	rm -f libjmetal.a

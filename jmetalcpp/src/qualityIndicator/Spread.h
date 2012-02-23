@@ -41,10 +41,12 @@ using namespace std;
 class Spread {
 
 private:
-  MetricsUtil * utils_;
   static bool compareFront(vector<double> pointOne, vector<double> pointTwo);
 
 public:
+
+  MetricsUtil * utils_;
+
   Spread();
   double spread (vector< vector<double> > front,
       vector< vector<double> > trueParetoFront, int numberOfObjectives);

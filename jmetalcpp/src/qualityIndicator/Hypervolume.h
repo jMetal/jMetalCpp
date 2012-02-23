@@ -41,7 +41,7 @@ using namespace std;
 class Hypervolume {
 
 private:
-  MetricsUtil * utils_;
+
   bool dominates(vector<double> point1, vector<double> point2, int noObjectives);
   void swap(vector< vector<double> > front, int i, int j);
   int filterNondominatedSet(vector< vector<double> > front, int noPoints,
@@ -54,7 +54,11 @@ private:
       vector< vector<double> > front2);
 
 public:
+
+  MetricsUtil * utils_;
+
   Hypervolume();
+
   double calculateHypervolume(vector< vector<double> > front, int noPoints,
       int noObjectives);
   double hypervolume(vector< vector<double> > paretoFront,

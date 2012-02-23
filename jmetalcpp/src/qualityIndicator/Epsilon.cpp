@@ -47,7 +47,7 @@ double Epsilon::epsilon(vector <vector<double> > b, vector <vector<double> > a,
   set_params() ;
 
   if (method_ == 0)
-    eps = std::numeric_limits<double>::min();
+    eps = -std::numeric_limits<double>::max();
   else
     eps= 0;
 

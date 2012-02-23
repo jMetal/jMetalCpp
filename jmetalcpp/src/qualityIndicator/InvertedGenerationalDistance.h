@@ -39,10 +39,12 @@
 class InvertedGenerationalDistance {
 
 private:
-  MetricsUtil * utils_;
   static const double pow_;
 
 public:
+
+  MetricsUtil * utils_;
+
   InvertedGenerationalDistance();
   double invertedGenerationalDistance(vector< vector<double> > front,
       vector< vector<double> > trueParetoFront, int numberOfObjectives);

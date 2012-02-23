@@ -260,7 +260,7 @@ double Hypervolume::hypervolume(vector< vector<double> > paretoFront,
   //metric by Zitzler is for maximization problems
   invertedFront = utils_->invertedFront(normalizedFront);
 
-  // STEP4. The hypervolumen (control is passed to java version of Zitzler code)
+  // STEP4. The hypervolume (control is passed to java version of Zitzler code)
   return this->calculateHypervolume(invertedFront,invertedFront.size(),numberOfObjectives);
 
 }// hypervolume

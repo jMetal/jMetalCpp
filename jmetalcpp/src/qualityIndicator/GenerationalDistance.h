@@ -39,10 +39,12 @@
 class GenerationalDistance {
 
 private:
-  MetricsUtil * utils_;
   static const double pow_;
 
 public:
+
+  MetricsUtil * utils_;
+
   GenerationalDistance();
   double generationalDistance(vector< vector<double> > front,
       vector< vector<double> > trueParetoFront, int numberOfObjectives);

@@ -43,11 +43,13 @@ private:
               //the minimization of all the objectives
   int method_; // method_ = 0 means apply additive epsilon and method_ = 1 means multiplicative
                // epsilon. This code always apply additive epsilon
-  MetricsUtil * utils_; // stores a reference to  qualityIndicatorUtils
 
   void set_params();
 
 public:
+
+  MetricsUtil * utils_; // stores a reference to  qualityIndicatorUtils
+
   Epsilon();
   double epsilon(vector <vector<double> > b, vector< vector<double> > a, int dim);
 
