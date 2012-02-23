@@ -35,7 +35,7 @@ private:
 
 public:
   ObjectiveComparator(int nObj);
-  int compare(Solution * o1, Solution * o2);
+  int compare(void * o1, void * o2);
 
 };
 

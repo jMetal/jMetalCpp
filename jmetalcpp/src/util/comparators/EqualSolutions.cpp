@@ -38,11 +38,11 @@
  * and solution2 are equals, or solution1 is greater than solution2,
  * respectively.
  */
-int EqualSolutions::compare(Solution * solution1, Solution * solution2) {
+int EqualSolutions::compare(void * o1, void * o2) {
 
-  if (solution1==NULL)
+  if (o1==NULL)
     return 1;
-  else if (solution2 == NULL)
+  else if (o2 == NULL)
     return -1;
 
   int dominate1 ; // dominate1 indicates if some objective of solution1
@@ -51,6 +51,9 @@ int EqualSolutions::compare(Solution * solution1, Solution * solution2) {
 
   dominate1 = 0 ;
   dominate2 = 0 ;
+
+  Solution * solution1 = (Solution *) o1;
+  Solution * solution2 = (Solution *) o2;
 
   int flag;
   double value1, value2;

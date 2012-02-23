@@ -37,7 +37,7 @@ private:
   Comparator * overallConstraintViolationComparator_;
 
 public:
-  int compare(Solution *one, Solution *two);
+  int compare(void *one, void *two);
 };
 
 #endif

@@ -35,15 +35,18 @@ double SolutionComparator::EPSILON  = 1e-10;
  * @return 0, if both solutions are equals with a certain dissimilarity, -1
  * otherwise.
 **/
-int SolutionComparator::compare(Solution *o1, Solution *o2) {
+int SolutionComparator::compare(void *o1, void *o2) {
+
+  Solution * solution1 = (Solution *) o1;
+  Solution * solution2 = (Solution *) o2;
 
   int res = -1;
 
-  if (o1->getNumberOfVariables() != o2->getNumberOfVariables())
+  if (solution1->getNumberOfVariables() != solution2->getNumberOfVariables())
     return res;
 
   Distance * d = new Distance();
-  if (d->distanceBetweenSolutions(o1,o2) < EPSILON) {
+  if (d->distanceBetweenSolutions(solution1,solution2) < EPSILON) {
     res = 0;
   }
   delete d;

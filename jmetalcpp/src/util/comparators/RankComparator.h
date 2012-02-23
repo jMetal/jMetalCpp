@@ -31,7 +31,7 @@
 class RankComparator : public Comparator {
 
 public:
-  int compare(Solution * o1, Solution * o2);
+  int compare(void * o1, void * o2);
 
 };
 

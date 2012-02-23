@@ -24,7 +24,7 @@
 #include <Comparator.h>
 #include <vector>
 
-class LexicoGraphicalComparator {
+class LexicoGraphicalComparator : public Comparator {
 
 public:
   int compare(void * o1, void * o2);

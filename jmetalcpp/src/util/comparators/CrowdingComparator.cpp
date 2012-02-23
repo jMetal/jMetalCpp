@@ -32,7 +32,7 @@
  * @return -1, or 0, or 1 if o1 is less than, equal, or greater than o2,
  * respectively.
 **/
-int CrowdingComparator::compare(Solution *o1, Solution *o2) {
+int CrowdingComparator::compare(void *o1, void *o2) {
 
   if (o1 == NULL)
     return 1;
@@ -47,8 +47,8 @@ int CrowdingComparator::compare(Solution *o1, Solution *o2) {
     return flagComparatorRank;
 
   /* His rank is equal, then distance crowding comparator */
-  double distance1 = o1->getCrowdingDistance();
-  double distance2 = o2->getCrowdingDistance();
+  double distance1 = ((Solution *) o1)->getCrowdingDistance();
+  double distance2 = ((Solution *) o2)->getCrowdingDistance();
   if (distance1 >  distance2)
     return -1;
 

@@ -35,7 +35,7 @@ private:
   static double EPSILON;
 
 public:
-  int compare(Solution * o1, Solution * o2);
+  int compare(void * o1, void * o2);
 
 }; // SolutionComparator
 

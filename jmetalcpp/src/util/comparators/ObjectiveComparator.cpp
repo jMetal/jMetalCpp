@@ -38,14 +38,14 @@ ObjectiveComparator::ObjectiveComparator(int nObj) {
  * @return -1, or 0, or 1 if o1 is less than, equal, or greater than o2,
  * respectively.
 **/
-int ObjectiveComparator::compare(Solution *o1, Solution *o2) {
+int ObjectiveComparator::compare(void *o1, void *o2) {
   if (o1==NULL)
     return 1;
   else if (o2 == NULL)
     return -1;
 
-  double objetive1 = o1->getObjective(this->nObj);
-  double objetive2 = o2->getObjective(this->nObj);
+  double objetive1 = ((Solution *) o1)->getObjective(this->nObj);
+  double objetive2 = ((Solution *) o2)->getObjective(this->nObj);
   if (objetive1 < objetive2) {
     return -1;
   } else if (objetive1 > objetive2) {

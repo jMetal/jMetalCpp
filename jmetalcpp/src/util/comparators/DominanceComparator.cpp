@@ -29,12 +29,15 @@
     non dominated only if: !compare(one,two) = false and !compare(two,one)
 **/
 
-int DominanceComparator::compare(Solution *one, Solution *two) {
+int DominanceComparator::compare(void * o1, void * o2) {
 
-  if (one==NULL)
+  if (o1==NULL)
     return 1;
-  else if (two == NULL)
+  else if (o2 == NULL)
     return -1;
+
+  Solution * one = (Solution *) o1;
+  Solution * two = (Solution *) o2;
 
   int dominate1 ; // dominate1 indicates if some objective of solution1
                   // dominates the same objective in solution2. dominate2
