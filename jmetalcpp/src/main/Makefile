@@ -10,7 +10,7 @@ INCS +=  -I. -I../core -I../util -I../problems -I../util/comparators \
 	-I../operators/selection -I../metaheuristics/gGA -I../metaheuristics/ssGA \
 	-I../metaheuristics/gde3 -I../metaheuristics/de -I../metaheuristics/smpso \
 	-I../metaheuristics/pso -I../util/archive -I../metaheuristics/paes -I../experiments \
-	-I../experiments/util
+	-I../experiments/util -I../qualityIndicator/util -I../qualityIndicator
 
 #EXECS = NSGAII_main PAES_main gGA_main autodock DE_main GDE3_main
 #DEPS = ../libjmetal.a ../metaheuristics/libmetaheuristics.a 

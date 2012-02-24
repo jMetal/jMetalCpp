@@ -266,7 +266,7 @@ SolutionSet * MetricsUtil::readNonDominatedSolutionSet(string path) {
     exit(-1);
   } // if
 
-  SolutionSet * solutionSet = new NonDominatedSolutionList();
+  NonDominatedSolutionList * solutionSet = new NonDominatedSolutionList();
   string line;
 
   while( getline(in, line ) ) {
