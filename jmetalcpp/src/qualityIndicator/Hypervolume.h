@@ -43,12 +43,12 @@ class Hypervolume {
 private:
 
   bool dominates(vector<double> point1, vector<double> point2, int noObjectives);
-  void swap(vector< vector<double> > front, int i, int j);
-  int filterNondominatedSet(vector< vector<double> > front, int noPoints,
+  void swap(vector< vector<double> > * front, int i, int j);
+  int filterNondominatedSet(vector< vector<double> > * front, int noPoints,
       int noObjectives);
   double surfaceUnchangedTo(vector< vector<double> > front, int noPoints,
       int objective);
-  int reduceNondominatedSet(vector< vector<double> > front, int noPoints,
+  int reduceNondominatedSet(vector< vector<double> > * front, int noPoints,
       int objective, double threshold);
   vector< vector<double> > mergeFronts(vector< vector<double> > front1,
       vector< vector<double> > front2);

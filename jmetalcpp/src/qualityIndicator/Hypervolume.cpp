@@ -59,13 +59,13 @@ bool Hypervolume::dominates(vector<double> point1, vector<double> point2,
 } // dominates
 
 
-void Hypervolume::swap(vector< vector<double> > front, int i, int j) {
+void Hypervolume::swap(vector< vector<double> > * front, int i, int j) {
 
   vector<double> temp;
 
-  temp = front[i];
-  front[i] = front[j];
-  front[j] = temp;
+  temp = front->at(i);
+  front->at(i) = front->at(j);
+  front->at(j) = temp;
 
 } // swap
 
@@ -76,7 +76,7 @@ void Hypervolume::swap(vector< vector<double> > front, int i, int j) {
  * considered; 'front' is resorted, such that 'front[0..n-1]' contains
  * the nondominated points; n is returned
  */
-int Hypervolume::filterNondominatedSet(vector< vector<double> > front,
+int Hypervolume::filterNondominatedSet(vector< vector<double> > * front,
     int noPoints, int noObjectives) {
 
   int i, j;
@@ -88,11 +88,11 @@ int Hypervolume::filterNondominatedSet(vector< vector<double> > front,
   while (i < n) {
     j = i + 1;
     while (j < n) {
-      if (dominates(front[i], front[j], noObjectives)) {
+      if (dominates(front->at(i), front->at(j), noObjectives)) {
         /* remove point 'j' */
         n--;
         swap(front, j, n);
-      } else if (dominates(front[j], front[i], noObjectives)) {
+      } else if (dominates(front->at(j), front->at(i), noObjectives)) {
         /* remove point 'i'; ensure that the point copied to index 'i'
            is considered in the next outer loop (thus, decrement i) */
         n--;
@@ -133,7 +133,7 @@ double Hypervolume::surfaceUnchangedTo(vector< vector<double> > front,
       minValue = value;
     }
   }
-
+  
   return minValue;
 
 } // surfaceUnchangedTo
@@ -145,7 +145,7 @@ double Hypervolume::surfaceUnchangedTo(vector< vector<double> > front,
  * 'front[0..noPoints-1]' are considered; 'front' is resorted, such that
  * 'front[0..n-1]' contains the remaining points; 'n' is returned
  */
-int Hypervolume::reduceNondominatedSet(vector< vector<double> > front,
+int Hypervolume::reduceNondominatedSet(vector< vector<double> > * front,
     int noPoints, int objective, double threshold) {
 
   int n;
@@ -153,7 +153,7 @@ int Hypervolume::reduceNondominatedSet(vector< vector<double> > front,
 
   n = noPoints;
   for (i = 0; i < n; i++) {
-    if (front[i][objective] <= threshold) {
+    if (front->at(i)[objective] <= threshold) {
       n--;
       swap(front, i, n);
     } // if
@@ -178,7 +178,7 @@ double Hypervolume::calculateHypervolume(vector< vector<double> > front,
     int noNondominatedPoints;
     double tempVolume, tempDistance;
 
-    noNondominatedPoints = filterNondominatedSet(front, n, noObjectives - 1);
+    noNondominatedPoints = filterNondominatedSet(&front, n, noObjectives - 1);
     tempVolume = 0;
     if (noObjectives < 3) {
       if (noNondominatedPoints < 1) {
@@ -195,7 +195,7 @@ double Hypervolume::calculateHypervolume(vector< vector<double> > front,
     tempDistance = surfaceUnchangedTo(front, n, noObjectives - 1);
     volume += tempVolume * (tempDistance - distance);
     distance = tempDistance;
-    n = reduceNondominatedSet(front, n, noObjectives - 1, distance);
+    n = reduceNondominatedSet(&front, n, noObjectives - 1, distance);
   } // while
 
   return volume;
