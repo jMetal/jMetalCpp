@@ -1,4 +1,4 @@
-//  LZ09_F4.h
+//  LZ09_F7.h
 //
 //  Author:
 //       Antonio J. Nebro <antonio@lcc.uma.es>
@@ -18,8 +18,8 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef __LZ09_F4_H__
-#define __LZ09_F4_H__
+#ifndef __LZ09_F7_H__
+#define __LZ09_F7_H__
 
 #include <math.h>
 #include <string>
@@ -31,16 +31,16 @@
 #include <Solution.h>
 #include <LZ09.h>
 
-class LZ09_F4 : public Problem {
+class LZ09_F7 : public Problem {
 public:
-	LZ09_F4(string solutionType, int ptype=21, int dtype=1, int ltype=24);
+	LZ09_F7(string solutionType, int ptype=21, int dtype=3, int ltype=21);
 	void evaluate(Solution *solution);
 
-	virtual ~LZ09_F4();
+	virtual ~LZ09_F7();
 private:
 	LZ09 * LZ09_ ;
 	double * fx_ ;
 	double * x_  ;
 };
 
-#endif /* __LZ09_F4_H__ */
+#endif /* __LZ09_F7_H__ */
