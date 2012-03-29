@@ -1,7 +1,7 @@
-//  Settings.h
+//  GDE3_Settings.h
 //
 //  Author:
-//       Antonio J. Nebro <antonio@lcc.uma.es>
+//       Esteban López <esteban@lcc.uma.es>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -18,27 +18,34 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef __SETTINGS__
-#define __SETTINGS__
+#ifndef __GDE3_SETTINGS__
+#define __GDE3_SETTINGS__
 
-#include <string>
-#include <Problem.h>
-#include <Algorithm.h>
-#include <ProblemFactory.h>
+#include <Settings.h>
+#include <GDE3.h>
+#include <DifferentialEvolutionCrossover.h>
+#include <DifferentialEvolutionSelection.h>
 
-class Settings {
-protected:
-  Problem * problem_ ;
-  string problemName_ ;
-  string paretoFrontFile_ ;
+class GDE3_Settings : public Settings{
+
+private:
+
+  double CR_          ;
+  double F_           ;
+  int populationSize_ ;
+  int maxIterations_  ;
+
+  Algorithm * algorithm ;
+  Operator  * crossover ; // Crossover operator
+  Operator  * selection ; // Selection operator
 
 public:
-  Settings() ;
-  Settings(char * problemName) ;
-  virtual ~Settings() = 0;
+	GDE3_Settings() ;
+	GDE3_Settings(string problemName) ;
+	~GDE3_Settings() ;
 
-  virtual Algorithm * configure() = 0 ;
-  Algorithm * configure(map<string, void *> settings) ;
-}; // Settings
+  Algorithm * configure() ;
 
-#endif //__SETTINGS__
+}; // GDE3_Settings
+
+#endif // __GDE3_SETTINGS__

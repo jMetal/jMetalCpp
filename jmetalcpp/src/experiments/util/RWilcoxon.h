@@ -22,9 +22,9 @@
 #define __RWILCOXON__
 
 #include <string>
-#include <Experiment.h>
+#include <ExperimentReport.h>
 
-class Experiment;
+class ExperimentReport;
 
 /**
  * Class producing R scripts that generate latex tables including the Wilcoxon
@@ -34,7 +34,7 @@ class Experiment;
 class RWilcoxon {
 public:
   static void generateScripts(vector<string> problems, string prefix,
-      Experiment * experiment);
+      ExperimentReport * experiment);
 
 }; // RWilcoxon
 

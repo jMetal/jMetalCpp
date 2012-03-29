@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Antonio J. Nebro <antonio@lcc.uma.es>
+//       Esteban López <esteban@lcc.uma.es>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -24,7 +25,17 @@
  * Default constructor
  */
 NSGAII_Settings::NSGAII_Settings () : Settings() {
-} // Settings
+} // NSGAII_Settings
+
+/**
+ * Destructor
+ */
+NSGAII_Settings::~NSGAII_Settings () {
+  delete algorithm ;
+  delete crossover ; // Crossover operator
+  delete mutation  ; // Mutation operator
+  delete selection ; // Selection operator
+} // ~NSGAII_Settings
 
 /**
  * Constructor
@@ -41,16 +52,12 @@ NSGAII_Settings::NSGAII_Settings(string problemName) {
   crossoverProbability_        = 0.9   ;
   mutationDistributionIndex_   = 20.0  ;
   crossoverDistributionIndex_  = 20.0  ;
-} // Settings
+} // NSGAII_Settings
 
 /**
  * Configure method
  */
 Algorithm * NSGAII_Settings::configure() {
-	Algorithm * algorithm ;
-  Operator  * crossover ; // Crossover operator
-  Operator  * mutation  ; // Mutation operator
-  Operator  * selection ; // Selection operator
 
 	algorithm = new NSGAII(problem_);
   algorithm->setInputParameter("populationSize",&populationSize_);
@@ -84,5 +91,5 @@ Algorithm * NSGAII_Settings::configure() {
 	cout << "NGSAII algorithm initialized." << endl;
 
 	return algorithm ;
-}
+} // configure
 

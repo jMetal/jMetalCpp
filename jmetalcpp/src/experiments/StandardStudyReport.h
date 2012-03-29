@@ -1,4 +1,4 @@
-//  RBoxplot.h
+//  StandardStudyReport.h
 //
 //  Author:
 //       Esteban López <esteban@lcc.uma.es>
@@ -18,23 +18,18 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef __RBOXPLOT__
-#define __RBOXPLOT__
+#ifndef __STANDARD_STUDY_REPORT__
+#define __STANDARD_STUDY_REPORT__
 
-#include <string>
-#include <FileUtils.h>
 #include <ExperimentReport.h>
-
-class ExperimentReport;
+#include <string>
 
 /**
- * Class for generating results in form of boxplots
+ * Class implementing a typical experimental study. Five algorithms are
+ * compared when solving the ZDT, DTLZ, and WFG benchmarks, and the hypervolume,
+ * spread and additive epsilon indicators are used for performance assessment.
  */
 
-class RBoxplot {
-public:
-  static void generateScripts(int rows, int cols, vector<string> problems,
-      string prefix, bool notch, ExperimentReport * experiment);
-};
+class StandardStudyReport : public ExperimentReport { };
 
-#endif /* __RBOXPLOT__ */
+#endif /* __STANDARD_STUDY_REPORT__ */

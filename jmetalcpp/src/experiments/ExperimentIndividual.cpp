@@ -1,4 +1,4 @@
-//  RBoxplot.h
+//  ExperimentIndividual.cpp
 //
 //  Author:
 //       Esteban López <esteban@lcc.uma.es>
@@ -18,23 +18,34 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef __RBOXPLOT__
-#define __RBOXPLOT__
-
-#include <string>
-#include <FileUtils.h>
-#include <ExperimentReport.h>
-
-class ExperimentReport;
+#include <ExperimentIndividual.h>
 
 /**
- * Class for generating results in form of boxplots
+ * Constructor
  */
+ExperimentIndividual::ExperimentIndividual(int algorithmIndex, int problemIndex, int numRun) {
+  algorithmIndex_ = algorithmIndex;
+  problemIndex_ = problemIndex;
+  numRun_ = numRun;
+}
 
-class RBoxplot {
-public:
-  static void generateScripts(int rows, int cols, vector<string> problems,
-      string prefix, bool notch, ExperimentReport * experiment);
-};
+/**
+ * Return the algorithm index atribute
+ */
+int ExperimentIndividual::getAlgorithmIndex() {
+  return algorithmIndex_;
+}
 
-#endif /* __RBOXPLOT__ */
+/**
+ * Return the problem index atribute
+ */
+int ExperimentIndividual::getProblemIndex() {
+  return problemIndex_;
+}
+
+/**
+ * Return the algorithm index atribute
+ */
+int ExperimentIndividual::getNumRun() {
+  return numRun_;
+}

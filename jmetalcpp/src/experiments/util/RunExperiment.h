@@ -29,7 +29,7 @@
 #include <stddef.h>
 #include <sys/stat.h>
 #include <Algorithm.h>
-#include <Experiment.h>
+#include <ExperimentExecution.h>
 #include <FileUtils.h>
 #include <Problem.h>
 #include <SolutionSet.h>
@@ -37,26 +37,28 @@
 
 using namespace std;
 
-class Experiment;
+class ExperimentExecution;
 
 class RunExperiment {
 
 public:
 
-  Experiment * experiment_;
+  ExperimentExecution * experiment_;
   int id_;
   map<string, void *> map_;
   int numberOfThreads_;
   int numberOfProblems_;
 
-  RunExperiment(Experiment * experiment, map<string, void *> map, int id,
-        int numberOfThreads, int numberOfProblems);
+  RunExperiment(ExperimentExecution * experiment, map<string, void *> map, int id,
+        int numberOfThreads, int numberOfProblems, int threadIndex,
+        pthread_mutex_t * mutex);
   void run();
 
 private:
 
-  int first_;
-  int last_;
+  int threadIndex_;
+
+  pthread_mutex_t * mutex_;
 
   string experimentName_;
   vector<string> algorithmNameList_; // List of the names of the algorithms to

@@ -22,7 +22,7 @@
 #include <RBoxplot.h>
 
 void RBoxplot::generateScripts(int rows, int cols, vector<string> problems, string prefix,
-      bool notch, Experiment * experiment) {
+      bool notch, ExperimentReport * experiment) {
 
   // STEP 1. Creating R output directory
 

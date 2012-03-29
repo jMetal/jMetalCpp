@@ -30,8 +30,11 @@
 /**
  * Constructor
  */
-RunExperiment::RunExperiment(Experiment * experiment, map<string, void *> map,
-    int id, int numberOfThreads, int numberOfProblems) {
+RunExperiment::RunExperiment(ExperimentExecution * experiment, map<string, void *> map,
+    int id, int numberOfThreads, int numberOfProblems, int threadIndex,
+    pthread_mutex_t * mutex) {
+
+  threadIndex_ = threadIndex;
 
   experiment_ = experiment;
   id_ = id;
@@ -39,24 +42,16 @@ RunExperiment::RunExperiment(Experiment * experiment, map<string, void *> map,
   numberOfThreads_ = numberOfThreads;
   numberOfProblems_ = numberOfProblems;
 
+  mutex_ = mutex;
+
   int partitions = numberOfProblems / numberOfThreads;
-
-  first_ = partitions * id;
-  if (id == (numberOfThreads - 1)) {
-    last_ = numberOfProblems - 1;
-  } else {
-    last_ = first_ + partitions - 1;
-  }
-
-  cout << "Id: " << id << "  Partitions: " << partitions << " First: "
-      << first_ << " Last: " + last_ << endl;
 
 } // RunExperiment
 
 
 void RunExperiment::run() {
 
-  Algorithm ** algorithm; // jMetal algorithms to be executed
+  Algorithm * algorithm; // jMetal algorithm to be executed
 
   string experimentName = *(string*) map_["name"];
   experimentBaseDirectory_ = *(string*) map_["experimentDirectory"];
@@ -70,127 +65,193 @@ void RunExperiment::run() {
   outputParetoSetFile_ = *(string*) map_["outputParetoSetFile"];
 
   int numberOfAlgorithms = algorithmNameList_.size();
-  cout << "Experiment: Number of algorithms: " << numberOfAlgorithms << endl;
-  cout << "Experiment: runs: " << independentRuns_ << endl;
-  algorithm = new Algorithm*[numberOfAlgorithms] ;
 
   cout << "Name: " <<  experimentName << endl;
   cout << "experimentDirectory: " << experimentBaseDirectory_ << endl;
   cout << "numberOfThreads_: " << numberOfThreads_ << endl;
-  cout << "numberOfProblems_: " << numberOfProblems_ << endl;
-  cout << "first: " << first_ << endl;
-  cout << "last: " << last_ << endl;
 
   SolutionSet * resultFront = NULL;
 
+  int problemIndex = -1;
+  int algorithmIndex = -1;
+  int numRun = -1;
 
-  for (int problemId = first_; problemId <= last_; problemId++) {
-    Problem * problem; // The problem to solve
-    string problemName;
+  bool end = false;
 
-    // STEP 2: get the problem from the list
-    problemName = problemList_[problemId] ;
+  while (!end) {
 
-    // STEP 3: check the file containing the Pareto front of the problem
-    // FIX: añadir bloqueo
-    //synchronized(experiment_) {
-    if (indicatorList_.size() > 0) {
+    // WAIT MUTEX
+    int result = pthread_mutex_lock(mutex_) ;
+    if (result != 0) {
+      cerr << "RUNEXPERIMENT [" << threadIndex_ << "]: ERROR LOCKING THE MUTEX" << endl;
+      exit(-1) ;
+    }
 
-      const char* paretoFrontPath = (paretoFrontDirectory_ + "/" +
-          paretoFrontFile_[problemId]).c_str ();
-      int paretoFrontResult = FileUtils::existsPath(paretoFrontPath);
+    int experimentIndividualListIndex = experiment_->experimentIndividualListIndex_;
+    cout << "Thread[" << threadIndex_ << "] experimentIndividualListIndex = " << experimentIndividualListIndex << endl;
+    cout << "Thread[" << threadIndex_ << "] experiment_->experimentIndividualList_.size() = " << experiment_->experimentIndividualList_.size() << endl;
+    if (experimentIndividualListIndex < experiment_->experimentIndividualList_.size()) {
+      ExperimentIndividual * expIndv
+          = experiment_->experimentIndividualList_[experimentIndividualListIndex];
+      problemIndex = expIndv->getProblemIndex();
+      algorithmIndex = expIndv->getAlgorithmIndex();
+      numRun = expIndv->getNumRun();
+      experiment_->experimentIndividualListIndex_ = experimentIndividualListIndex + 1;
+    } else {
+      cout << "Thread[" << threadIndex_ << "] debe terminar..." << endl;
+      end = true;
+    }
 
-      //int isDir = 0;
-      if (paretoFrontResult != -1) {
-        if (paretoFrontResult == 1) {
-          paretoFrontFile_[problemId] = paretoFrontDirectory_ + "/" +
-              paretoFrontFile_[problemId];
+    if (end) {
+      cout << "Thread[" << threadIndex_ << "] esta terminando..." << endl;
+    }
+
+    // SIGNAL MUTEX
+    result = pthread_mutex_unlock(mutex_) ;
+    if (result != 0) {
+      cerr << "RUNEXPERIMENT [" << threadIndex_ << "]: ERROR UNLOCKING THE MUTEX" << endl;
+      exit(-1) ;
+    }
+
+    if (end) {
+      cout << "Thread[" << threadIndex_ << "] ha desbloqueado el mutex..." << endl;
+    }
+
+    if (!end) {
+
+      Problem * problem; // The problem to solve
+      string problemName;
+      string pfFilePath = "";
+
+      // STEP 2: get the problem from the list
+      problemName = problemList_[problemIndex] ;
+
+      // STEP 3: check the file containing the Pareto front of the problem
+      // FIX: añadir bloqueo
+      //synchronized(experiment_) {
+      if (indicatorList_.size() > 0) {
+
+        const char* paretoFrontPath = (paretoFrontDirectory_ + "/" +
+            paretoFrontFile_[problemIndex]).c_str();
+        int paretoFrontResult = FileUtils::existsPath(paretoFrontPath);
+
+        // FIX: Arreglar caso cuando no existe el fichero!!!!
+        cout << "Thread [" << threadIndex_ << "]: paretoFrontResult: " <<paretoFrontResult << endl;
+
+        //int isDir = 0;
+        if (paretoFrontResult != -1) {
+          if (paretoFrontResult == 2) {
+            pfFilePath = paretoFrontDirectory_ + "/" +
+                paretoFrontFile_[problemIndex];
+          }
         } else {
-          paretoFrontFile_[problemId] = "";
+          cout << "Error searching for this path: " << paretoFrontPath << endl;
+          exit(-1);
         }
-      } else {
-        cout << "Error searching for this path: " << paretoFrontPath << endl;
-        exit(-1);
+      } // if
+      //}
+
+      char * problemName_ = (char *) problemName.c_str();
+      // FIX Settings
+      algorithm = experiment_->algorithmSettings(problemName, algorithmIndex);
+
+      //cout << "Algorithm settings ended!" << endl;
+
+      //cout << algorithm->getInputParameter("populationSize") << endl;
+
+      //cout << "problemName_ = " << problemName_ << endl;
+
+      problem = algorithm->getProblem();
+
+      //cout << "Problem?" << endl;
+
+      //cout << typeid(algorithm).name() << endl;
+
+      // STEP 6: create output directories
+      string directory;
+      directory = experimentBaseDirectory_ + "/data/" + algorithmNameList_[algorithmIndex] + "/" +
+          problemList_[problemIndex];
+      if (FileUtils::existsPath(directory.c_str()) != 1) {
+        FileUtils::createDirectory(directory);
+        cout << "Creating " << directory << endl;
       }
+
+      // STEP 7: run the algorithm
+      cout << "Thread [" << threadIndex_ << "]: Running algorithm: " << algorithmNameList_[algorithmIndex] << ", problem: " <<
+          problemList_[problemIndex] << ", run: " << numRun << endl;
+      resultFront= algorithm->execute();
+
+      // STEP 8: put the results in the output directory
+      stringstream outputParetoFrontFilePath;
+      outputParetoFrontFilePath << directory << "/" << outputParetoFrontFile_
+          << "." << numRun;
+      stringstream outputParetoSetFilePath;
+      outputParetoSetFilePath << directory << "/" << outputParetoSetFile_
+          << "." << numRun;
+      resultFront->printObjectivesToFile(outputParetoFrontFilePath.str());
+      resultFront->printVariablesToFile(outputParetoSetFilePath.str());
+
+      cout << "Thread [" << threadIndex_ << "]: Ended algorithm: " << algorithmNameList_[algorithmIndex] << ", problem: " <<
+          problemList_[problemIndex] << ", run: " << numRun << endl;
+
+      // STEP 9: calculate quality indicators
+      if (indicatorList_.size() > 0) {
+
+        QualityIndicator * indicators;
+        cout << "PF file: " << pfFilePath << endl;
+        indicators = new QualityIndicator(problem, pfFilePath);
+
+        cout << "Thread [" << threadIndex_ << "]: Quality indicator created!" << endl;
+
+        for (int j = 0; j < indicatorList_.size(); j++) {
+          string qualityIndicatorFile = directory;
+          double value;
+
+          cout << "Thread [" << threadIndex_ << "]: Quality indicator: " << indicatorList_[j] << endl;
+
+          if (indicatorList_[j].compare("HV")==0) {
+            value = indicators->getHypervolume(resultFront);
+            qualityIndicatorFile = qualityIndicatorFile + "/HV";
+          }
+          if (indicatorList_[j].compare("SPREAD")==0) {
+            value = indicators->getSpread(resultFront);
+            qualityIndicatorFile = qualityIndicatorFile + "/SPREAD";
+          }
+          if (indicatorList_[j].compare("IGD")==0) {
+            value = indicators->getIGD(resultFront);
+            qualityIndicatorFile = qualityIndicatorFile + "/IGD";
+          }
+          if (indicatorList_[j].compare("EPSILON")==0) {
+            value = indicators->getEpsilon(resultFront);
+            qualityIndicatorFile = qualityIndicatorFile + "/EPSILON";
+          }
+
+          cout << "Thread [" << threadIndex_ << "]: Quality indicator file: " << qualityIndicatorFile << endl;
+
+          if (qualityIndicatorFile.compare(directory)!=0) {
+            std::fstream out(qualityIndicatorFile.c_str(),
+                std::ios::out | std::ios::app);
+            out << value << endl;
+            out.close();
+          }
+
+        } // for
+        //delete indicators;
+      } // if
+
+      delete resultFront;
+
     } // if
-    //}
 
-    char * problemName_ = (char *) problemName.c_str();
-    experiment_->algorithmSettings(problemName, problemId, algorithm);
+    if (end) {
+      cout << "Thread[" << threadIndex_ << "] ya no hace nada mas..." << endl;
+    }
 
-    problem = algorithm[0]->getProblem();
-    for (int runs = 0; runs < independentRuns_; runs++) {
-      cout << "Iruns: " << runs<< endl;
-      // STEP 4: configure the algorithms
+  } // while
 
-      // STEP 5: run the algorithms
-      for (int i = 0; i < numberOfAlgorithms; i++) {
+  if (end) {
+    cout << "Thread[" << threadIndex_ << "] sale del while..." << endl;
+  }
 
-        cout << typeid(algorithm[i]).name() << endl;
-
-        // STEP 6: create output directories
-        string directory;
-        directory = experimentBaseDirectory_ + "/data/" + algorithmNameList_[i] + "/" +
-            problemList_[problemId];
-        if (FileUtils::existsPath(directory.c_str()) != 1) {
-          FileUtils::createDirectory(directory);
-          cout << "Creating " << directory << endl;
-        }
-
-        // STEP 7: run the algorithm
-        cout << "Running algorithm: " << algorithmNameList_[i] << ", problem: " <<
-            problemList_[problemId] << ", run: " << runs << endl;
-        resultFront= algorithm[i]->execute();
-
-        // STEP 8: put the results in the output directory
-        stringstream outputParetoFrontFilePath;
-        outputParetoFrontFilePath << directory << "/" << outputParetoFrontFile_
-            << "." << runs;
-        stringstream outputParetoSetFilePath;
-        outputParetoSetFilePath << directory << "/" << outputParetoSetFile_
-            << "." << runs;
-        resultFront->printObjectivesToFile(outputParetoFrontFilePath.str());
-        resultFront->printVariablesToFile(outputParetoSetFilePath.str());
-
-        // STEP 9: calculate quality indicators
-        if (indicatorList_.size() > 0) {
-
-          QualityIndicator * indicators;
-          cout << "PF file: " << paretoFrontFile_[problemId] << endl;
-          indicators = new QualityIndicator(problem, paretoFrontFile_[problemId]);
-
-          for (int j = 0; j < indicatorList_.size(); j++) {
-            string qualityIndicatorFile = directory;
-            double value;
-
-            if (indicatorList_[j].compare("HV")==0) {
-              value = indicators->getHypervolume(resultFront);
-              qualityIndicatorFile = qualityIndicatorFile + "/HV";
-            }
-            if (indicatorList_[j].compare("SPREAD")==0) {
-              value = indicators->getSpread(resultFront);
-              qualityIndicatorFile = qualityIndicatorFile + "/SPREAD";
-            }
-            if (indicatorList_[j].compare("IGD")==0) {
-              value = indicators->getIGD(resultFront);
-              qualityIndicatorFile = qualityIndicatorFile + "/IGD";
-            }
-            if (indicatorList_[j].compare("EPSILON")==0) {
-              value = indicators->getEpsilon(resultFront);
-              qualityIndicatorFile = qualityIndicatorFile + "/EPSILON";
-            }
-
-            if (qualityIndicatorFile.compare(directory)!=0) {
-              std::fstream out(qualityIndicatorFile.c_str(),
-                  std::ios::out | std::ios::app);
-              out << value << endl;
-              out.close();
-            }
-
-          } // for
-        } // if
-      } // for
-    } // for
-  } //for
 } // run
 

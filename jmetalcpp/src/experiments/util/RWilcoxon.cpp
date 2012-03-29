@@ -22,7 +22,7 @@
 #include <RWilcoxon.h>
 
 
-void RWilcoxon::generateScripts(vector<string> problems, string prefix, Experiment * experiment) {
+void RWilcoxon::generateScripts(vector<string> problems, string prefix, ExperimentReport * experiment) {
 
   // STEP 1. Creating R output directory
 

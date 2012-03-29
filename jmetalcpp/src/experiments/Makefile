@@ -1,6 +1,7 @@
 CPP  = g++
 CC   = gcc
-OBJ  = Experiment.o NSGAII_Settings.o NSGAIIStudy.o Settings.o
+OBJ  = ExperimentExecution.o ExperimentReport.o ExperimentIndividual.o \
+	Settings.o 
 LIBNAME= libexperiments.a
 
 LIBS +=  
@@ -8,7 +9,7 @@ INCS +=  -I. -I../core -I../util -I../encodings/solutionType \
 	-I../encodings/variable -I../util/comparators \
 	-I../problems -I../util/wrapper -I../metaheuristics/nsgaII \
 	-I../operators/crossover -I../operators/mutation -I../operators/selection \
-	-Iutil -I../qualityIndicator -I../qualityIndicator/util
+	-Iutil -Isettings -I../qualityIndicator -I../qualityIndicator/util
 
 #CXXFLAGS += $(INCS) -g 
 CXXFLAGS += $(INCS) 
@@ -25,9 +26,6 @@ clean: clean-custom
 $(LIBNAME): $(OBJ)
 	ar -r $(LIBNAME) *.o
 	ranlib $(LIBNAME) 
-	
-Experiment.o: Experiment.cpp
-	$(CPP) $(CXXFLAGS) -c Experiment.cpp $(LIBS)
 
 .cpp.o:
 	$(CPP) $(CXXFLAGS) -c $<

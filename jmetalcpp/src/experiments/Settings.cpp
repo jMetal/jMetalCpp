@@ -34,6 +34,11 @@ Settings::Settings(char * problemName) {
 } // Settings
 
 /**
+ * Destructor
+ */
+Settings::~Settings() { /* do nothing */ }
+
+/**
  * Configure method
  *
  * To be implemented. Missing the reflection features of Java here

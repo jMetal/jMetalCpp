@@ -1,4 +1,4 @@
-//  RBoxplot.h
+//  ExperimentIndividual.h
 //
 //  Author:
 //       Esteban López <esteban@lcc.uma.es>
@@ -18,23 +18,22 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef __RBOXPLOT__
-#define __RBOXPLOT__
+#ifndef EXPERIMENTINDIVIDUAL_H_
+#define EXPERIMENTINDIVIDUAL_H_
 
-#include <string>
-#include <FileUtils.h>
-#include <ExperimentReport.h>
+class ExperimentIndividual {
 
-class ExperimentReport;
+private:
+  int algorithmIndex_;
+  int problemIndex_;
+  int numRun_;
 
-/**
- * Class for generating results in form of boxplots
- */
-
-class RBoxplot {
 public:
-  static void generateScripts(int rows, int cols, vector<string> problems,
-      string prefix, bool notch, ExperimentReport * experiment);
+  ExperimentIndividual(int algorithmIndex, int problemIndex, int numRun);
+  int getAlgorithmIndex();
+  int getProblemIndex();
+  int getNumRun();
+
 };
 
-#endif /* __RBOXPLOT__ */
+#endif /* EXPERIMENTINDIVIDUAL_H_ */

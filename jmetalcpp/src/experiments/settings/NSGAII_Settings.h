@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Antonio J. Nebro <antonio@lcc.uma.es>
+//       Esteban López <esteban@lcc.uma.es>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -36,9 +37,15 @@ private:
 	double mutationDistributionIndex_   ;
 	double crossoverDistributionIndex_  ;
 
+  Algorithm * algorithm ;
+  Operator  * crossover ; // Crossover operator
+  Operator  * mutation  ; // Mutation operator
+  Operator  * selection ; // Selection operator
+
 public:
 	NSGAII_Settings() ;
 	NSGAII_Settings(string problemName) ;
+	~NSGAII_Settings() ;
 
   Algorithm * configure() ;
 }; // NSGAII_Settings
