@@ -1,4 +1,4 @@
-//  CrowdingDistanceComparator.cpp
+//  SolutionComparator.cpp
 //
 //  Author:
 //       Esteban López <esteban@lcc.uma.es>

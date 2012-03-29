@@ -164,7 +164,7 @@ int Hypervolume::reduceNondominatedSet(vector< vector<double> > * front,
 } // ReduceNondominatedSet
 
 
-double Hypervolume::calculateHypervolume(vector< vector<double> > front,
+double Hypervolume::calculateHypervolume(vector< vector<double> > * front,
     int noPoints, int noObjectives){
 
   int n;
@@ -175,27 +175,29 @@ double Hypervolume::calculateHypervolume(vector< vector<double> > front,
   n = noPoints;
   while (n > 0) {
 
+    //cout << "Hypervolume::calculateHypervolume: n = " << n << endl;
+
     int noNondominatedPoints;
     double tempVolume, tempDistance;
 
-    noNondominatedPoints = filterNondominatedSet(&front, n, noObjectives - 1);
+    noNondominatedPoints = filterNondominatedSet(front, n, noObjectives - 1);
     tempVolume = 0;
     if (noObjectives < 3) {
       if (noNondominatedPoints < 1) {
         cout << "run-time error" << endl;
         exit(-1);
       } // if
-      tempVolume = front[0][0];
+      tempVolume = front->at(0)[0];
     } else {
       tempVolume = calculateHypervolume(front,
                                         noNondominatedPoints,
                                         noObjectives - 1);
     } // if
 
-    tempDistance = surfaceUnchangedTo(front, n, noObjectives - 1);
+    tempDistance = surfaceUnchangedTo(*front, n, noObjectives - 1);
     volume += tempVolume * (tempDistance - distance);
     distance = tempDistance;
-    n = reduceNondominatedSet(&front, n, noObjectives - 1, distance);
+    n = reduceNondominatedSet(front, n, noObjectives - 1, distance);
   } // while
 
   return volume;
@@ -255,20 +257,28 @@ double Hypervolume::hypervolume(vector< vector<double> > paretoFront,
    */
   vector< vector<double> > invertedFront;
 
+  cout << "Hypervolume::hypervolume: Start STEP1" << endl;
+
   // STEP 1. Obtain the maximum and minimum values of the Pareto front
   maximumValues = utils_->getMaximumValues(paretoTrueFront, numberOfObjectives);
   minimumValues = utils_->getMinimumValues(paretoTrueFront, numberOfObjectives);
+
+  cout << "Hypervolume::hypervolume: Start STEP2" << endl;
 
   // STEP 2. Get the normalized front
   normalizedFront = utils_->getNormalizedFront(paretoFront,
                                               maximumValues,
                                               minimumValues);
 
+  cout << "Hypervolume::hypervolume: Start STEP3" << endl;
+
   // STEP 3. Inverse the pareto front. This is needed because of the original
   //metric by Zitzler is for maximization problems
   invertedFront = utils_->invertedFront(normalizedFront);
 
+  cout << "Hypervolume::hypervolume: Start STEP4" << endl;
+
   // STEP4. The hypervolume (control is passed to java version of Zitzler code)
-  return this->calculateHypervolume(invertedFront,invertedFront.size(),numberOfObjectives);
+  return this->calculateHypervolume(&invertedFront,invertedFront.size(),numberOfObjectives);
 
 }// hypervolume

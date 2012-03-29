@@ -223,10 +223,10 @@ void SolutionSet::printObjectivesToFile(string file){
     int nObj = solutionsList_[i]->getNumberOfObjectives();
     for (int obj = 0; obj < nObj; obj++) {
       out << solutionsList_[i]->getObjective(obj) << " ";
-      cout << setprecision(15) << solutionsList_[i]->getObjective(obj) << " ";
+      //cout << setprecision(15) << solutionsList_[i]->getObjective(obj) << " ";
     }
     out << endl;
-    cout << endl;
+    //cout << endl;
   }
   out.close();
 } // printObjectivesToFile

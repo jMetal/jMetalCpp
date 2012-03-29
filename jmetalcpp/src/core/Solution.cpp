@@ -51,6 +51,7 @@ Solution::Solution (int numberOfObjectives) {
   overallConstraintViolation_ = 0.0;
   numberOfObjectives_ = numberOfObjectives;
   numberOfVariables_ = 0;
+  variable_ = NULL;
   objective_ = new double[numberOfObjectives_];
   if (objective_ == NULL) {
     cout << "ERROR GRAVE: Impossible to reserve memory for storing objectives in class Solution" << endl;
@@ -293,7 +294,7 @@ int Solution::getNumberOfObjectives() {
  * @return The number of decision variables.
  */
 int Solution::getNumberOfVariables() {
-  return problem_->getNumberOfVariables() ;
+  return numberOfVariables_;
 } // getNumberOfVariables
 
 

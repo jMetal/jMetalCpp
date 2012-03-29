@@ -60,7 +60,7 @@ public:
   Hypervolume();
   ~Hypervolume();
 
-  double calculateHypervolume(vector< vector<double> > front, int noPoints,
+  double calculateHypervolume(vector< vector<double> > * front, int noPoints,
       int noObjectives);
   double hypervolume(vector< vector<double> > paretoFront,
       vector< vector<double> > paretoTrueFront, int numberOfObjectives);

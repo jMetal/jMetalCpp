@@ -24,7 +24,7 @@ ZDT3::ZDT3(string solutionType, int numberOfVariables) {
 	numberOfVariables_   = numberOfVariables;
 	numberOfObjectives_  = 2;
 	numberOfConstraints_ = 0;
-	problemName_ 				 = "ZDT2";
+	problemName_ 				 = "ZDT3";
 
 	lowerLimit_ = new double[numberOfVariables_];//(double *)malloc(sizeof(double)*numberOfVariables);
 	if (lowerLimit_ == NULL) {
