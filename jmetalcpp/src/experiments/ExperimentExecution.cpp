@@ -171,36 +171,36 @@ void ExperimentExecution::runExperiment() {
 } // runExperiment
 
 
-void ExperimentExecution::checkExperimentDirectory() {
-  int res = FileUtils::existsPath(experimentBaseDirectory_.c_str());
-  switch (res) {
-  case 0:
-    cout << "Experiment directory does NOT exist. Creating" << endl;
-    if (FileUtils::createDirectory(experimentBaseDirectory_) == -1) {
-      cout << "Error creating directory" << endl;
-      exit(-1);
-    }
-    break;
-  case 1:
-    cout << "Experiment directory exists." << endl;
-    cout << "Experiment directory is a directory" << endl;
-    break;
-  case 2:
-    cout << "Experiment directory exists." << endl;
-    cout << "Experiment directory is not a directory. Deleting file and creating directory" << endl;
-    if( remove(experimentBaseDirectory_.c_str()) != 0 ) {
-      cout << "Error deleting file." << endl;
-      exit(-1);
-    } else {
-      cout << "File successfully deleted." << endl;
-    }
-    if (FileUtils::createDirectory(experimentBaseDirectory_) == -1) {
-      cout << "Error creating directory" << endl;
-      exit(-1);
-    }
-    break;
-  case -1:
-    cout << "Error checking experiment directory" << endl;
-    exit(-1);
-  }
-} // checkExperimentDirectory
+//void ExperimentExecution::checkExperimentDirectory() {
+//  int res = FileUtils::existsPath(experimentBaseDirectory_.c_str());
+//  switch (res) {
+//  case 0:
+//    cout << "Experiment directory does NOT exist. Creating" << endl;
+//    if (FileUtils::createDirectory(experimentBaseDirectory_) == -1) {
+//      cout << "Error creating directory" << endl;
+//      exit(-1);
+//    }
+//    break;
+//  case 1:
+//    cout << "Experiment directory exists." << endl;
+//    cout << "Experiment directory is a directory" << endl;
+//    break;
+//  case 2:
+//    cout << "Experiment directory exists." << endl;
+//    cout << "Experiment directory is not a directory. Deleting file and creating directory" << endl;
+//    if( remove(experimentBaseDirectory_.c_str()) != 0 ) {
+//      cout << "Error deleting file." << endl;
+//      exit(-1);
+//    } else {
+//      cout << "File successfully deleted." << endl;
+//    }
+//    if (FileUtils::createDirectory(experimentBaseDirectory_) == -1) {
+//      cout << "Error creating directory" << endl;
+//      exit(-1);
+//    }
+//    break;
+//  case -1:
+//    cout << "Error checking experiment directory" << endl;
+//    exit(-1);
+//  }
+//} // checkExperimentDirectory

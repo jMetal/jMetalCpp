@@ -1,4 +1,4 @@
-//  ExperimentReport.cpp
+//  Experiment.cpp
 //
 //  Author:
 //       Esteban López <esteban@lcc.uma.es>
@@ -19,7 +19,14 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include <ExperimentReport.h>
+#include <Experiment.h>
+
+
+void* executeRun(void* ctx) {
+  RunExperiment* cptr = (RunExperiment*)ctx;
+  cptr->run();
+  pthread_exit(0);
+} // executeRun
 
 
 /**
@@ -27,7 +34,7 @@
  *
  * Contains default settings
  */
-ExperimentReport::ExperimentReport() {
+Experiment::Experiment() {
 
   experimentName_ = "noName";
 
@@ -42,10 +49,10 @@ ExperimentReport::ExperimentReport() {
   paretoFrontDirectory_ = "";
   latexDirectory_ = "latex";
 
-//  outputParetoFrontFile_ = "FUN";
-//  outputParetoSetFile_ = "VAR";
-//
-//  algorithmSettings_ = NULL;
+  outputParetoFrontFile_ = "FUN";
+  outputParetoSetFile_ = "VAR";
+
+  algorithmSettings_ = NULL;
   //algorithm_ = NULL;
 
   independentRuns_ = 0;
@@ -56,133 +63,150 @@ ExperimentReport::ExperimentReport() {
   indicatorMinimize_["GD"] = true;
   indicatorMinimize_["IGD"] = true;
 
-} // ExperimentReport
+  experimentIndividualListIndex_ = 0;
+  experimentIndividualListSize_ = -1;
+
+} // Experiment
 
 
-//void ExperimentReport::checkExperimentDirectory() {
-//  int res = FileUtils::existsPath(experimentBaseDirectory_.c_str());
-//  switch (res) {
-//  case 0:
-//    cout << "Experiment directory does NOT exist. Creating" << endl;
-//    if (FileUtils::createDirectory(experimentBaseDirectory_) == -1) {
-//      cout << "Error creating directory" << endl;
-//      exit(-1);
-//    }
-//    break;
-//  case 1:
-//    cout << "Experiment directory exists." << endl;
-//    cout << "Experiment directory is a directory" << endl;
-//    break;
-//  case 2:
-//    cout << "Experiment directory exists." << endl;
-//    cout << "Experiment directory is not a directory. Deleting file and creating directory" << endl;
-//    if( remove(experimentBaseDirectory_.c_str()) != 0 ) {
-//      cout << "Error deleting file." << endl;
-//      exit(-1);
-//    } else {
-//      cout << "File successfully deleted." << endl;
-//    }
-//    if (FileUtils::createDirectory(experimentBaseDirectory_) == -1) {
-//      cout << "Error creating directory" << endl;
-//      exit(-1);
-//    }
-//    break;
-//  case -1:
-//    cout << "Error checking experiment directory" << endl;
-//    exit(-1);
+/**
+ * Runs the experiment
+ */
+void Experiment::runExperiment(int numberOfThreads) {
+  // Step 1: check experiment base directory
+  checkExperimentDirectory();
+
+  map_["name"] = &experimentName_;
+  map_["experimentDirectory"] = &experimentBaseDirectory_;
+  map_["algorithmNameList"] = &algorithmNameList_;
+  map_["problemList"] = &problemList_;
+  map_["indicatorList"] = &indicatorList_;
+  map_["paretoFrontDirectory"] = &paretoFrontDirectory_;
+  map_["paretoFrontFile"] = &paretoFrontFile_;
+  map_["independentRuns"] = &independentRuns_;
+  map_["outputParetoFrontFile"] = &outputParetoFrontFile_;
+  map_["outputParetoSetFile"] = &outputParetoSetFile_;
+  //CHECK: map_["problemsSettings"] = &problemsSettings_;
+
+  //SolutionSet ** resultFront = new SolutionSet*[algorithmNameList_.size()];
+
+  cout << "Inicializando lista de tareas..." << endl;
+
+  cout << "algorithmNameList_.size() = " << algorithmNameList_.size() << endl;
+
+  experimentIndividualListSize_ =
+      problemList_.size() * algorithmNameList_.size() * independentRuns_;
+  for (int i=0; i<problemList_.size(); i++) {
+    for (int j=0; j<algorithmNameList_.size(); j++) {
+      for (int k=0; k<independentRuns_; k++) {
+//        cout << "i,j,k = " << i << "," << j << "," << k << endl;
+        ExperimentIndividual * expInd = new ExperimentIndividual(j, i, k);
+//        cout << "Experimento individual creado" << endl;
+        experimentIndividualList_.push_back(expInd);
+//        cout << "Experimento añadido al vector..." << endl;
+      }
+    }
+  }
+
+  cout << "Lista de tareas inicializada..." << endl;
+
+//  if (problemList_.size() < numberOfThreads) {
+//    numberOfThreads = problemList_.size();
+//    cout << "Experiments: list of problems is shorter than the number of " <<
+//        "requested threads. Creating " << numberOfThreads << " threads." << endl;
+//  } // if
+//  else {
+//    cout << "Experiments: creating " << numberOfThreads << " threads." << endl;
 //  }
-//} // checkExperimentDirectory
 
-void ExperimentReport::generateQualityIndicators() {
+  int result;
 
-  if (indicatorList_.size() > 0) {
+  pthread_mutex_t mutex;
+  result = pthread_mutex_init(&mutex, NULL) ;
+  if (result != 0) {
+    perror("ERROR INITIALIZING THE MUTEX");
+    exit(-1) ;
+  }
+  else
+    cout << "------- MUTEX OK ------" << endl ;
 
-    cout << "PF file: " << paretoFrontDirectory_ << endl;
+  pthread_t * p = new pthread_t[numberOfThreads];
+  RunExperiment ** experiments_ = new RunExperiment*[numberOfThreads];
+  for (int i = 0; i < numberOfThreads; i++) {
+    experiments_[i] = new RunExperiment(this, map_, i, numberOfThreads,
+        problemList_.size(), i, &mutex);
+    result = pthread_create(&p[i], NULL, executeRun, experiments_[i]);
+    if (result != 0) {
+      perror("ERROR CREATING THREADS");
+      exit(-1) ;
+    }
+  }
 
-    for (int algorithmIndex=0; algorithmIndex<algorithmNameList_.size(); algorithmIndex++) {
+  for (int i = 0; i < numberOfThreads; i++) {
+    result = pthread_join(p[i], NULL) ;
+    cout << "Join con el thread " << i << endl;
+    if (result != 0) {
+      perror("ERROR MAKING THREAD JOIN");
+      exit(-1) ;
+    }
+  }
 
-      string algorithmDirectory;
-      algorithmDirectory = experimentBaseDirectory_ + "/data/" + algorithmNameList_[algorithmIndex] + "/";
+  cout << "Join terminado...." << endl;
 
-      for (int problemIndex=0; problemIndex<problemList_.size(); problemIndex++) {
+  delete [] p;
+  for (int i=0; i< numberOfThreads; i++)
+    delete experiments_[i];
+  delete [] experiments_;
 
-        string paretoFrontPath = paretoFrontDirectory_ + "/" + paretoFrontFile_[problemIndex];
-        string problemDirectory = algorithmDirectory + problemList_[problemIndex];
+  cout << "Experiments borrados..." << endl;
 
-        for (int indicatorIndex = 0; indicatorIndex < indicatorList_.size(); indicatorIndex++) {
-
-          for (int numRun=0; numRun<independentRuns_; numRun++) {
-
-            stringstream outputParetoFrontFilePath;
-            outputParetoFrontFilePath << problemDirectory << "/FUN." << numRun;
-            string solutionFrontFile = outputParetoFrontFilePath.str();
-            string qualityIndicatorFile = problemDirectory;
-            double value;
-
-            cout << "ExperimentReport: Quality indicator: " << indicatorList_[indicatorIndex] << endl;
-
-            // TODO: Realizar comprobación de size de trueFront
-
-            if (indicatorList_[indicatorIndex].compare("HV")==0) {
-              Hypervolume * indicators = new Hypervolume();
-              vector< vector<double> > solutionFront =
-                  indicators->utils_->readFront(solutionFrontFile);
-              vector< vector<double> > trueFront =
-                  indicators->utils_->readFront(paretoFrontPath);
-              value = indicators->hypervolume(solutionFront, trueFront, trueFront[0].size());
-              delete indicators;
-              qualityIndicatorFile = qualityIndicatorFile + "/HV";
-            }
-            if (indicatorList_[indicatorIndex].compare("SPREAD")==0) {
-              Spread * indicators = new Spread();
-              vector< vector<double> > solutionFront =
-                  indicators->utils_->readFront(solutionFrontFile);
-              vector< vector<double> > trueFront =
-                  indicators->utils_->readFront(paretoFrontPath);
-              value = indicators->spread(solutionFront, trueFront, trueFront[0].size());
-              delete indicators;
-              qualityIndicatorFile = qualityIndicatorFile + "/SPREAD";
-            }
-            if (indicatorList_[indicatorIndex].compare("IGD")==0) {
-              InvertedGenerationalDistance * indicators = new InvertedGenerationalDistance();
-              vector< vector<double> > solutionFront =
-                  indicators->utils_->readFront(solutionFrontFile);
-              vector< vector<double> > trueFront =
-                  indicators->utils_->readFront(paretoFrontPath);
-              value = indicators->invertedGenerationalDistance(solutionFront, trueFront, trueFront[0].size());
-              delete indicators;
-              qualityIndicatorFile = qualityIndicatorFile + "/IGD";
-            }
-            if (indicatorList_[indicatorIndex].compare("EPSILON")==0) {
-              Epsilon * indicators = new Epsilon();
-              vector< vector<double> > solutionFront =
-                  indicators->utils_->readFront(solutionFrontFile);
-              vector< vector<double> > trueFront =
-                  indicators->utils_->readFront(paretoFrontPath);
-              value = indicators->epsilon(solutionFront, trueFront, trueFront[0].size());
-              delete indicators;
-              qualityIndicatorFile = qualityIndicatorFile + "/EPSILON";
-            }
-
-            cout << "ExperimentReport: Quality indicator file: " << qualityIndicatorFile << endl;
-
-            // FIX: ¿Qué esta comprobando?
-            if (qualityIndicatorFile.compare(problemDirectory)!=0) {
-              std::fstream out(qualityIndicatorFile.c_str(),
-                  std::ios::out | std::ios::app);
-              out << value << endl;
-              out.close();
-            } // if
-
-          } // for
-        } // for
-      } // for
-    } // for
-  } // if
-} // generateQualityIndicators
+} // runExperiment
 
 
-void ExperimentReport::generateLatexTables() {
+/**
+ * Runs the experiment
+ */
+void Experiment::runExperiment() {
+  runExperiment(1);
+} // runExperiment
+
+
+void Experiment::checkExperimentDirectory() {
+  int res = FileUtils::existsPath(experimentBaseDirectory_.c_str());
+  switch (res) {
+  case 0:
+    cout << "Experiment directory does NOT exist. Creating" << endl;
+    if (FileUtils::createDirectory(experimentBaseDirectory_) == -1) {
+      cout << "Error creating directory" << endl;
+      exit(-1);
+    }
+    break;
+  case 1:
+    cout << "Experiment directory exists." << endl;
+    cout << "Experiment directory is a directory" << endl;
+    break;
+  case 2:
+    cout << "Experiment directory exists." << endl;
+    cout << "Experiment directory is not a directory. Deleting file and creating directory" << endl;
+    if( remove(experimentBaseDirectory_.c_str()) != 0 ) {
+      cout << "Error deleting file." << endl;
+      exit(-1);
+    } else {
+      cout << "File successfully deleted." << endl;
+    }
+    if (FileUtils::createDirectory(experimentBaseDirectory_) == -1) {
+      cout << "Error creating directory" << endl;
+      exit(-1);
+    }
+    break;
+  case -1:
+    cout << "Error checking experiment directory" << endl;
+    exit(-1);
+  }
+} // checkExperimentDirectory
+
+
+void Experiment::generateLatexTables() {
   latexDirectory_ = experimentBaseDirectory_ + "/" + latexDirectory_;
   cout << "latex directory: " << latexDirectory_ << endl;
 
@@ -311,45 +335,13 @@ void ExperimentReport::generateLatexTables() {
     printMedianIQR(latexFile, i, median, iqr);
   } // for
   printEndLatexCommands(latexFile);
-
-  // Free memory:
-  for (int indicator = 0; indicator < indicatorList_.size(); indicator++) {
-    for (int problem = 0; problem < problemList_.size(); problem++) {
-      delete [] data[indicator][problem];
-      delete [] mean[indicator][problem];
-      delete [] median[indicator][problem];
-      delete [] stdDeviation[indicator][problem];
-      delete [] iqr[indicator][problem];
-      delete [] max[indicator][problem];
-      delete [] min[indicator][problem];
-      delete [] numberOfValues[indicator][problem];
-
-    }
-    delete [] data[indicator];
-    delete [] mean[indicator];
-    delete [] median[indicator];
-    delete [] stdDeviation[indicator];
-    delete [] iqr[indicator];
-    delete [] max[indicator];
-    delete [] min[indicator];
-    delete [] numberOfValues[indicator];
-  }
-  delete [] data;
-  delete [] mean;
-  delete [] median;
-  delete [] stdDeviation;
-  delete [] iqr;
-  delete [] max;
-  delete [] min;
-  delete [] numberOfValues;
-
 } // generateLatexTables
 
 
 /**
  * Calculates statistical values from a vector of Double objects
  */
-void ExperimentReport::calculateStatistics(vector<double> vector, map<string, double> * values) {
+void Experiment::calculateStatistics(vector<double> vector, map<string, double> * values) {
   if (vector.size() > 0) {
     double sum, minimum, maximum, sqsum, min, max, median, mean, iqr, stdDeviation;
 
@@ -399,7 +391,7 @@ void ExperimentReport::calculateStatistics(vector<double> vector, map<string, do
 } // calculateStatistics
 
 
-void ExperimentReport::printHeaderLatexCommands(string fileName) {
+void Experiment::printHeaderLatexCommands(string fileName) {
   std::ofstream out(fileName.c_str());
   out << "\\documentclass{article}" << endl;
   out << "\\title{" << experimentName_ << "}" << endl;
@@ -415,14 +407,14 @@ void ExperimentReport::printHeaderLatexCommands(string fileName) {
 } // printHeaderLatexCommands
 
 
-void ExperimentReport::printEndLatexCommands(string fileName) {
+void Experiment::printEndLatexCommands(string fileName) {
   std::fstream out(fileName.c_str(), std::ios::out | std::ios::app);
   out << "\\end{document}" << endl;
   out.close();
 } //printEndLatexCommands
 
 
-void ExperimentReport::printMeanStdDev(string fileName, int indicator, double *** mean,
+void Experiment::printMeanStdDev(string fileName, int indicator, double *** mean,
     double *** stdDev) {
   std::fstream out(fileName.c_str(), std::ios::out | std::ios::app);
   out << "\\" << endl;
@@ -539,7 +531,7 @@ void ExperimentReport::printMeanStdDev(string fileName, int indicator, double **
 } // printMeanStdDev
 
 
-void ExperimentReport::printMedianIQR(string fileName, int indicator, double *** median,
+void Experiment::printMedianIQR(string fileName, int indicator, double *** median,
     double *** IQR) {
   std::fstream out(fileName.c_str(), std::ios::out | std::ios::app);
   out << "\\" << endl;
@@ -659,8 +651,8 @@ void ExperimentReport::printMedianIQR(string fileName, int indicator, double ***
 /**
  * Invoking the generateScripts method on the RBoxplot class
  */
-void ExperimentReport::generateRBoxplotScripts (int rows, int cols, vector<string> problems,
-    string prefix, bool notch, ExperimentReport * experiment) {
+void Experiment::generateRBoxplotScripts (int rows, int cols, vector<string> problems,
+    string prefix, bool notch, Experiment * experiment) {
   RBoxplot::generateScripts(rows, cols, problems, prefix, notch, this);
 } // generateRBoxplotScripts
 
@@ -668,7 +660,7 @@ void ExperimentReport::generateRBoxplotScripts (int rows, int cols, vector<strin
 /**
  * Invoking the generateScripts method on the RWilcoxon class
  */
-void ExperimentReport::generateRWilcoxonScripts(vector<string> problems, string prefix,
-    ExperimentReport * experiment) {
+void Experiment::generateRWilcoxonScripts(vector<string> problems, string prefix,
+    Experiment * experiment) {
   RWilcoxon::generateScripts(problems, prefix, this);
 } //generateRWilcoxonScripts

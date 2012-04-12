@@ -1,7 +1,7 @@
 CPP  = g++
 CC   = gcc
-OBJ  = ExperimentExecution.o ExperimentReport.o ExperimentIndividual.o \
-	Settings.o 
+OBJ  = Experiment.o ExperimentExecution.o ExperimentReport.o \
+	ExperimentIndividual.o Settings.o 
 LIBNAME= libexperiments.a
 
 LIBS +=  

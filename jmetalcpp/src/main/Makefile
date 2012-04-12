@@ -10,15 +10,16 @@ INCS +=  -I. -I../core -I../util -I../problems -I../util/comparators \
 	-I../operators/selection -I../metaheuristics/gGA -I../metaheuristics/ssGA \
 	-I../metaheuristics/gde3 -I../metaheuristics/de -I../metaheuristics/smpso \
 	-I../metaheuristics/pso -I../util/archive -I../metaheuristics/paes -I../experiments \
-	-I../experiments/util -I../qualityIndicator/util -I../qualityIndicator
+	-I../experiments/util -I../experiments/settings -I../qualityIndicator/util \
+	-I../qualityIndicator
 
 #EXECS = NSGAII_main PAES_main gGA_main autodock DE_main GDE3_main
 #DEPS = ../libjmetal.a ../metaheuristics/libmetaheuristics.a 
 EXECS = NSGAII_main NSGAIIbin_main gGA_main gGAbin_main ssGA_main GDE3_main \
-	DE_main SMPSO_main PSO_main PAES_main StandardStudyReport
+	DE_main SMPSO_main PSO_main PAES_main StandardStudyExecution StandardStudyReport
 WINEXECS = NSGAII_main.exe NSGAIIbin_main.exe NSGAII_main.exe gGA_main.exe \
 	gGAbin_main.exe ssGA_main.exe GDE3_main.exe DE_main.exe SMPSO_main.exe PSO_main.exe \
-	PAES_main.exe StandardStudyReport.exe
+	PAES_main.exe StandardStudyExecution.exe StandardStudyReport.exe
 DEPS = ../libjmetal.a
 
 BIN_DIRECTORY = ../../bin
@@ -81,6 +82,10 @@ PSO_main: PSO_main.cpp $(DEPS)
 #	$(CPP) ../experiments/NSGAIIStudy.cpp ../libjmetal.a -o NSGAIIStudy $(INCS) $(LIBS)
 #	cp NSGAIIStudy $(BIN_DIRECTORY)
 
+StandardStudyExecution: ../experiments/StandardStudyExecution.cpp $(DEPS)
+	$(CPP) ../experiments/StandardStudyExecution.cpp ../libjmetal.a -o StandardStudyExecution $(INCS) $(LIBS)
+	cp StandardStudyExecution $(BIN_DIRECTORY)
+	
 StandardStudyReport: ../experiments/StandardStudyReport.cpp $(DEPS)
 	$(CPP) ../experiments/StandardStudyReport.cpp ../libjmetal.a -o StandardStudyReport $(INCS) $(LIBS)
 	cp StandardStudyReport $(BIN_DIRECTORY)

@@ -28,11 +28,12 @@
 #include <Settings.h>
 #include <Algorithm.h>
 #include <RunExperiment.h>
+#include <Experiment.h>
 #include <ExperimentIndividual.h>
 
 using namespace std;
 
-class ExperimentExecution {
+class ExperimentExecution : public Experiment {
 
 private:
 
@@ -40,16 +41,16 @@ private:
 
 public:
 
-  string experimentName_;
-  vector<string> algorithmNameList_; // List of the names of the algorithms to
-                                     // be executed
-  vector<string> problemList_; // List of problems to be solved
-  string experimentBaseDirectory_; // Directory to store the results
+//  string experimentName_;
+//  vector<string> algorithmNameList_; // List of the names of the algorithms to
+//                                     // be executed
+//  vector<string> problemList_; // List of problems to be solved
+//  string experimentBaseDirectory_; // Directory to store the results
   string outputParetoFrontFile_; // Name of the file containing the output
                                  // Pareto front
   string outputParetoSetFile_; // Name of the file containing the output Pareto
                                // set
-  int independentRuns_; // Number of independent runs per algorithm
+//  int independentRuns_; // Number of independent runs per algorithm
 //  Settings ** algorithmSettings_; // Parameter settings of each algorithm
   //Algorithm ** algorithm_; // jMetal algorithms to be executed
 
@@ -63,7 +64,7 @@ public:
 
   void runExperiment(int numberOfThreads);
   void runExperiment();
-  void checkExperimentDirectory();
+//  void checkExperimentDirectory();
 
   // FIX: ¿Qué hacer con esto?
 //  virtual void algorithmSettings(string problemName, int problemId,

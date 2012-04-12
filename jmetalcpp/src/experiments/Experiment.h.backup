@@ -1,4 +1,4 @@
-//  ExperimentReport.h
+//  Experiment.h
 //
 //  Author:
 //       Esteban López <esteban@lcc.uma.es>
@@ -18,30 +18,26 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef __EXPERIMENT_REPORT__
-#define __EXPERIMENT_REPORT__
+#ifndef __EXPERIMENT__
+#define __EXPERIMENT__
 
 #include <string>
 #include <map>
 #include <vector>
+#include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <algorithm>
 #include <limits>
-#include <iostream>
-#include <sstream>
-#include <stddef.h>
-#include <fstream>
+#include <Algorithm.h>
+#include <Settings.h>
+#include <RunExperiment.h>
+#include <ExperimentIndividual.h>
 #include <FileUtils.h>
 #include <RBoxplot.h>
 #include <RWilcoxon.h>
 #include <Statistics.h>
-#include <Hypervolume.h>
-#include <Spread.h>
-#include <InvertedGenerationalDistance.h>
-#include <Epsilon.h>
-#include <Experiment.h>
 
 using namespace std;
 
@@ -51,12 +47,14 @@ using namespace std;
 //}
 
 /**
- * Abstract class generating jMetal experiments reports
+ * Abstract class representing jMetal experiments
  */
 
-class ExperimentReport : public Experiment {
+class Experiment {
 
 private:
+
+  map<string, void *> map_; // Map used to send experiment parameters to threads
 
   void calculateStatistics(vector<double> vector_, map<string, double> * values);
   void printHeaderLatexCommands(string fileName);
@@ -68,32 +66,49 @@ private:
 
 public:
 
-//  string experimentName_;
-//  vector<string> algorithmNameList_; // List of the names of the algorithms to
-//                                     // be analyzed
-//  vector<string> problemList_; // List of problems to be analyzed
+  string experimentName_;
+  vector<string> algorithmNameList_; // List of the names of the algorithms to
+                                     // be executed
+  vector<string> problemList_; // List of problems to be solved
   vector<string> paretoFrontFile_; // List of the files containing the pareto
                                    // fronts corresponding to the problems in
                                    // problemList_
   vector<string> indicatorList_; // List of the quality indicators to be applied
-//  string experimentBaseDirectory_; // Directory to read the results
+  string experimentBaseDirectory_; // Directory to store the results
   string latexDirectory_; // Directory to store the latex files
   string paretoFrontDirectory_; // Directory containing the Pareto front files
-//  int independentRuns_; // Number of independent runs per algorithm
+  string outputParetoFrontFile_; // Name of the file containing the output
+                                 // Pareto front
+  string outputParetoSetFile_; // Name of the file containing the output Pareto
+                               // set
+  int independentRuns_; // Number of independent runs per algorithm
+  Settings ** algorithmSettings_; // Parameter settings of each algorithm
+  //Algorithm ** algorithm_; // jMetal algorithms to be executed
   map<string, bool> indicatorMinimize_; // To indicate whether an indicator
                                         // is to be minimized. Hard-coded
                                         // in the constructor
 
-  ExperimentReport();
+  vector<ExperimentIndividual*> experimentIndividualList_;
+  int experimentIndividualListIndex_;
+  int experimentIndividualListSize_;
 
-//  void checkExperimentDirectory();
-  void generateQualityIndicators();
+  //Properties [] problemsSettings_ ;
+
+  Experiment();
+
+  void runExperiment(int numberOfThreads);
+  void runExperiment();
+  void checkExperimentDirectory();
   void generateLatexTables();
   void generateRBoxplotScripts(int rows, int cols, vector<string> problems,
-      string prefix, bool notch, ExperimentReport * experiment);
+      string prefix, bool notch, Experiment * experiment);
   void generateRWilcoxonScripts(vector<string> problems, string prefix,
-      ExperimentReport * experiment);
+      Experiment * experiment);
+
+  virtual void algorithmSettings(string problemName, int problemId,
+      Algorithm ** algorithm) = 0;
+  virtual Algorithm * algorithmSettings(string problemName) = 0;
 
 };
 
-#endif /* __EXPERIMENT_REPORT__ */
+#endif /* __EXPERIMENT__ */

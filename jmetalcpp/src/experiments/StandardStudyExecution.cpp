@@ -134,7 +134,7 @@ int main(int argc, char ** argv) {
   int numberOfAlgorithms = exp->algorithmNameList_.size();
 
   //exp->experimentBaseDirectory_ = "/Users/antonio/Softw/pruebas/jmetal/kk/" +
-  exp->experimentBaseDirectory_ = "C:/antonio/Softw/pruebas/jmetal/" +
+  exp->experimentBaseDirectory_ = "C:/antonio/Softw/pruebas/jmetal-cpp/" +
                                  exp->experimentName_;
 //  //exp->paretoFrontDirectory_ = "/Users/antonio/Softw/pruebas/data/paretoFronts";
 //  exp->paretoFrontDirectory_ = "C:/antonio/Softw/pruebas/data/paretoFronts";

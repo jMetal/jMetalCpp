@@ -36,6 +36,7 @@ class NSGAIIStudy : public Experiment {
 
 public:
   void algorithmSettings(string problemName, int problemIndex, Algorithm ** algorithm);
+  Algorithm * algorithmSettings(string problemName);
 
 };
 

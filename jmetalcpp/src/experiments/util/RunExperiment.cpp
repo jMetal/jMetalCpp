@@ -54,15 +54,21 @@ void RunExperiment::run() {
   Algorithm * algorithm; // jMetal algorithm to be executed
 
   string experimentName = *(string*) map_["name"];
+  cout << experimentName << endl;
   experimentBaseDirectory_ = *(string*) map_["experimentDirectory"];
+  cout << experimentBaseDirectory_ << endl;
   algorithmNameList_ = *(vector<string>*) map_["algorithmNameList"];
   problemList_ = *(vector<string>*) map_["problemList"];
-  indicatorList_ = *(vector<string>*) map_["indicatorList"];
-  paretoFrontDirectory_ = *(string*) map_["paretoFrontDirectory"];
-  paretoFrontFile_ = *(vector<string>*) map_["paretoFrontFile"];
+//  indicatorList_ = *(vector<string>*) map_["indicatorList"];
+//  paretoFrontDirectory_ = *(string*) map_["paretoFrontDirectory"];
+//  cout << paretoFrontDirectory_ << endl;
+//  paretoFrontFile_ = *(vector<string>*) map_["paretoFrontFile"];
   independentRuns_ = *(int*) map_["independentRuns"];
+  cout << independentRuns_ << endl;
   outputParetoFrontFile_ = *(string*) map_["outputParetoFrontFile"];
+  cout << outputParetoFrontFile_ << endl;
   outputParetoSetFile_ = *(string*) map_["outputParetoSetFile"];
+  cout << outputParetoSetFile_ << endl;
 
   int numberOfAlgorithms = algorithmNameList_.size();
 
@@ -129,26 +135,26 @@ void RunExperiment::run() {
       // STEP 3: check the file containing the Pareto front of the problem
       // FIX: añadir bloqueo
       //synchronized(experiment_) {
-      if (indicatorList_.size() > 0) {
-
-        const char* paretoFrontPath = (paretoFrontDirectory_ + "/" +
-            paretoFrontFile_[problemIndex]).c_str();
-        int paretoFrontResult = FileUtils::existsPath(paretoFrontPath);
-
-        // FIX: Arreglar caso cuando no existe el fichero!!!!
-        cout << "Thread [" << threadIndex_ << "]: paretoFrontResult: " <<paretoFrontResult << endl;
-
-        //int isDir = 0;
-        if (paretoFrontResult != -1) {
-          if (paretoFrontResult == 2) {
-            pfFilePath = paretoFrontDirectory_ + "/" +
-                paretoFrontFile_[problemIndex];
-          }
-        } else {
-          cout << "Error searching for this path: " << paretoFrontPath << endl;
-          exit(-1);
-        }
-      } // if
+//      if (indicatorList_.size() > 0) {
+//
+//        const char* paretoFrontPath = (paretoFrontDirectory_ + "/" +
+//            paretoFrontFile_[problemIndex]).c_str();
+//        int paretoFrontResult = FileUtils::existsPath(paretoFrontPath);
+//
+//        // FIX: Arreglar caso cuando no existe el fichero!!!!
+//        cout << "Thread [" << threadIndex_ << "]: paretoFrontResult: " <<paretoFrontResult << endl;
+//
+//        //int isDir = 0;
+//        if (paretoFrontResult != -1) {
+//          if (paretoFrontResult == 2) {
+//            pfFilePath = paretoFrontDirectory_ + "/" +
+//                paretoFrontFile_[problemIndex];
+//          }
+//        } else {
+//          cout << "Error searching for this path: " << paretoFrontPath << endl;
+//          exit(-1);
+//        }
+//      } // if
       //}
 
       char * problemName_ = (char *) problemName.c_str();
@@ -194,50 +200,50 @@ void RunExperiment::run() {
       cout << "Thread [" << threadIndex_ << "]: Ended algorithm: " << algorithmNameList_[algorithmIndex] << ", problem: " <<
           problemList_[problemIndex] << ", run: " << numRun << endl;
 
-      // STEP 9: calculate quality indicators
-      if (indicatorList_.size() > 0) {
-
-        QualityIndicator * indicators;
-        cout << "PF file: " << pfFilePath << endl;
-        indicators = new QualityIndicator(problem, pfFilePath);
-
-        cout << "Thread [" << threadIndex_ << "]: Quality indicator created!" << endl;
-
-        for (int j = 0; j < indicatorList_.size(); j++) {
-          string qualityIndicatorFile = directory;
-          double value;
-
-          cout << "Thread [" << threadIndex_ << "]: Quality indicator: " << indicatorList_[j] << endl;
-
-          if (indicatorList_[j].compare("HV")==0) {
-            value = indicators->getHypervolume(resultFront);
-            qualityIndicatorFile = qualityIndicatorFile + "/HV";
-          }
-          if (indicatorList_[j].compare("SPREAD")==0) {
-            value = indicators->getSpread(resultFront);
-            qualityIndicatorFile = qualityIndicatorFile + "/SPREAD";
-          }
-          if (indicatorList_[j].compare("IGD")==0) {
-            value = indicators->getIGD(resultFront);
-            qualityIndicatorFile = qualityIndicatorFile + "/IGD";
-          }
-          if (indicatorList_[j].compare("EPSILON")==0) {
-            value = indicators->getEpsilon(resultFront);
-            qualityIndicatorFile = qualityIndicatorFile + "/EPSILON";
-          }
-
-          cout << "Thread [" << threadIndex_ << "]: Quality indicator file: " << qualityIndicatorFile << endl;
-
-          if (qualityIndicatorFile.compare(directory)!=0) {
-            std::fstream out(qualityIndicatorFile.c_str(),
-                std::ios::out | std::ios::app);
-            out << value << endl;
-            out.close();
-          }
-
-        } // for
-        //delete indicators;
-      } // if
+//      // STEP 9: calculate quality indicators
+//      if (indicatorList_.size() > 0) {
+//
+//        QualityIndicator * indicators;
+//        cout << "PF file: " << pfFilePath << endl;
+//        indicators = new QualityIndicator(problem, pfFilePath);
+//
+//        cout << "Thread [" << threadIndex_ << "]: Quality indicator created!" << endl;
+//
+//        for (int j = 0; j < indicatorList_.size(); j++) {
+//          string qualityIndicatorFile = directory;
+//          double value;
+//
+//          cout << "Thread [" << threadIndex_ << "]: Quality indicator: " << indicatorList_[j] << endl;
+//
+//          if (indicatorList_[j].compare("HV")==0) {
+//            value = indicators->getHypervolume(resultFront);
+//            qualityIndicatorFile = qualityIndicatorFile + "/HV";
+//          }
+//          if (indicatorList_[j].compare("SPREAD")==0) {
+//            value = indicators->getSpread(resultFront);
+//            qualityIndicatorFile = qualityIndicatorFile + "/SPREAD";
+//          }
+//          if (indicatorList_[j].compare("IGD")==0) {
+//            value = indicators->getIGD(resultFront);
+//            qualityIndicatorFile = qualityIndicatorFile + "/IGD";
+//          }
+//          if (indicatorList_[j].compare("EPSILON")==0) {
+//            value = indicators->getEpsilon(resultFront);
+//            qualityIndicatorFile = qualityIndicatorFile + "/EPSILON";
+//          }
+//
+//          cout << "Thread [" << threadIndex_ << "]: Quality indicator file: " << qualityIndicatorFile << endl;
+//
+//          if (qualityIndicatorFile.compare(directory)!=0) {
+//            std::fstream out(qualityIndicatorFile.c_str(),
+//                std::ios::out | std::ios::app);
+//            out << value << endl;
+//            out.close();
+//          }
+//
+//        } // for
+//        //delete indicators;
+//      } // if
 
       delete resultFront;
 

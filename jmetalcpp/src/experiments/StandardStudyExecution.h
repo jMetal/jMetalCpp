@@ -22,6 +22,9 @@
 #define __STANDARD_STUDY_EXECUTION__
 
 #include <ExperimentExecution.h>
+#include <NSGAII_Settings.h>
+#include <GDE3_Settings.h>
+#include <SMPSO_Settings.h>
 #include <string>
 
 /**
@@ -33,8 +36,9 @@
 class StandardStudyExecution : public ExperimentExecution {
 
 public:
-  void algorithmSettings(string problemName, int problemIndex, Algorithm ** algorithm);
-  Algorithm * algorithmSettings(string problemName);
+//  void algorithmSettings(string problemName, int problemIndex, Algorithm ** algorithm);
+//  Algorithm * algorithmSettings(string problemName);
+  Algorithm * algorithmSettings(string problemName, int algorithmId);
 
 };
 

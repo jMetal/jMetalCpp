@@ -40,34 +40,45 @@ void NSGAIIStudy::algorithmSettings(string problemName,
 
   int numberOfAlgorithms = algorithmNameList_.size();
 
-  map<string, void *> * parameters
-    = new map<string, void *>[numberOfAlgorithms];
-
-//  for (int i = 0; i < numberOfAlgorithms; i++) {
-//    parameters[i] = new HashMap();
-//  } // for
-
-  double crossoverProbability_0 = 1.0;
-  double crossoverProbability_1 = 0.9;
-  double crossoverProbability_2 = 0.8;
-  double crossoverProbability_3 = 0.7;
-  parameters[0]["crossoverProbability_"] = &crossoverProbability_0;
-  parameters[1]["crossoverProbability_"] = &crossoverProbability_1;
-  parameters[2]["crossoverProbability_"] = &crossoverProbability_2;
-  parameters[3]["crossoverProbability_"] = &crossoverProbability_3;
-
-  if (paretoFrontFile_[problemIndex].compare("") != 0) {
-     // TODO: (paretoFrontFile_[problemIndex] == NULL)) {
-    for (int i = 0; i < numberOfAlgorithms; i++)
-      parameters[i]["paretoFrontFile_"] = &paretoFrontFile_[problemIndex];
-  } // if
+// TODO: Usaremos esta parte cuando usemos el Settings no global
+//  map<string, void *> * parameters
+//    = new map<string, void *>[numberOfAlgorithms];
+//
+//  double crossoverProbability_0 = 1.0;
+//  double crossoverProbability_1 = 0.9;
+//  double crossoverProbability_2 = 0.8;
+//  double crossoverProbability_3 = 0.7;
+//  parameters[0]["crossoverProbability_"] = &crossoverProbability_0;
+//  parameters[1]["crossoverProbability_"] = &crossoverProbability_1;
+//  parameters[2]["crossoverProbability_"] = &crossoverProbability_2;
+//  parameters[3]["crossoverProbability_"] = &crossoverProbability_3;
+//
+//  if (paretoFrontFile_[problemIndex].compare("") != 0) {
+//     // FIX: (paretoFrontFile_[problemIndex] == NULL)) {
+//    for (int i = 0; i < numberOfAlgorithms; i++)
+//      parameters[i]["paretoFrontFile_"] = &paretoFrontFile_[problemIndex];
+//  } // if
 
   for (int i = 0; i < numberOfAlgorithms; i++) {
     Settings * settings = new NSGAII_Settings(problemName);
-    // TODO: Cambiar a settings global?
-    //algorithm[i] = settings->configure(parameters[i]);
     algorithm[i] = settings->configure();
+    // TODO: Cambiar a settings no global?
+    //settings = settings->configure(parameters[i]);
+//    algorithmSettings_[i] = new NSGAII_Settings(problemName);
+//    algorithm[i] = algorithmSettings_[i]->configure();
   }
+} // algorithmSettings
+
+
+/**
+ * Configures the algorithms in each independent run
+ * @param problem The problem to solve
+ */
+Algorithm * NSGAIIStudy::algorithmSettings(string problemName) {
+
+  Settings * settings = new NSGAII_Settings(problemName);
+  return settings->configure();
+
 } // algorithmSettings
 
 
@@ -77,27 +88,33 @@ int main(int argc, char ** argv) {
   exp->experimentName_ = "NSGAIIStudy";
 
   const char * algorithmNameList_[] = {
-      "NSGAIIa", "NSGAIIb", "NSGAIIc", "NSGAIId"};
+      //"NSGAIIa", "NSGAIIb", "NSGAIIc", "NSGAIId"};
+      "NSGAIIa", "NSGAIIb"};
   exp->algorithmNameList_.assign(algorithmNameList_, end(algorithmNameList_));
 
   const char * problemList_[] = {
       //"ZDT1", "ZDT2", "ZDT3", "ZDT4", "DTLZ1", "WFG2"};
-      "ZDT1", "ZDT2", "ZDT3", "ZDT4", "DTLZ1"};
+      //"ZDT1", "ZDT2", "ZDT3", "ZDT4", "DTLZ1"};
+      //"ZDT1"};
+      "ZDT1", "ZDT2", "ZDT3", "ZDT4", "ZDT6"};
   exp->problemList_.assign(problemList_, end(problemList_));
 
   const char * paretoFrontFile_[] = {
       //"ZDT1.pf", "ZDT2.pf", "ZDT3.pf","ZDT4.pf", "DTLZ1.2D.pf", "WFG2.2D.pf"};
-      "ZDT1.pf", "ZDT2.pf", "ZDT3.pf","ZDT4.pf", "DTLZ1.2D.pf"};
+      //"ZDT1.pf", "ZDT2.pf", "ZDT3.pf","ZDT4.pf", "DTLZ1.2D.pf"};
+      //"ZDT1.pf"};
+      "ZDT1.pf", "ZDT2.pf", "ZDT3.pf", "ZDT4.pf", "ZDT6.pf"};
   exp->paretoFrontFile_.assign(paretoFrontFile_, end(paretoFrontFile_));
 
   const char * indicatorList_[] = {
-      "HV", "SPREAD", "IGD", "EPSILON"};
+      //"HV", "SPREAD", "IGD", "EPSILON"};
+      "HV", "SPREAD", "EPSILON"};
   exp->indicatorList_.assign(indicatorList_, end(indicatorList_));
 
   int numberOfAlgorithms = exp->algorithmNameList_.size();
 
   //exp->experimentBaseDirectory_ = "/Users/antonio/Softw/pruebas/jmetal/kk/" +
-  exp->experimentBaseDirectory_ = "C:/antonio/Softw/pruebas/jmetal/kk/" +
+  exp->experimentBaseDirectory_ = "C:/antonio/Softw/pruebas/jmetal-cpp/" +
                                  exp->experimentName_;
   //exp->paretoFrontDirectory_ = "/Users/antonio/Softw/pruebas/data/paretoFronts";
   exp->paretoFrontDirectory_ = "C:/antonio/Softw/pruebas/data/paretoFronts";
@@ -110,6 +127,8 @@ int main(int argc, char ** argv) {
   int numberOfThreads;
   exp->runExperiment(numberOfThreads = 1);
 
+  cout << "Run Experiment terminado..." << endl;
+
   // Generate latex tables (comment this sentence is not desired)
   exp->generateLatexTables();
 
@@ -119,11 +138,21 @@ int main(int argc, char ** argv) {
   string prefix = "Problems";
   const char * problemsValues[] = {
       //"ZDT1", "ZDT2","ZDT3", "ZDT4", "DTLZ1", "WFG2"};
-      "ZDT1", "ZDT2","ZDT3", "ZDT4", "DTLZ1"};
+      //"ZDT1", "ZDT2","ZDT3", "ZDT4", "DTLZ1"};
+      //"ZDT1"};
+      "ZDT1", "ZDT2", "ZDT3", "ZDT4", "ZDT6"};
   vector<string> problems (problemsValues, end(problemsValues));
 
   bool notch;
   exp->generateRBoxplotScripts(rows, columns, problems, prefix, notch = true, exp);
   exp->generateRWilcoxonScripts(problems, prefix, exp);
+
+//  for (int i=0; i<numberOfAlgorithms; i++)
+//    delete exp->algorithmSettings_[i];
+//  delete [] exp->algorithmSettings_;
+  delete exp;
+
+  cout << "main ended..." << endl;
+
 } // main
 
