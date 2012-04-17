@@ -1,4 +1,4 @@
-//  Experiment.h
+//  Fitness.cpp
 //
 //  Author:
 //       Esteban López <esteban@lcc.uma.es>
@@ -18,41 +18,45 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef __EXPERIMENT__
-#define __EXPERIMENT__
 
-#include <string>
-#include <vector>
-#include <FileUtils.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include <Fitness.h>
 
-using namespace std;
-
-template<typename T, size_t N>
-T * end(T (&ra)[N]) {
-    return ra + N;
-}
 
 /**
- * Abstract class representing jMetal experiments
+ * Constructor
+ * Creates a new instance of a Fitness object
  */
+Fitness::Fitness() {
+  utils_ = new MetricsUtil();
+} // Fitness
 
-class Experiment {
 
-public:
+/**
+ * Destructor
+ */
+Fitness::~Fitness() {
+  delete utils_;
+} // ~Fitness
 
-  string experimentName_;
-  vector<string> algorithmNameList_; // List of the names of the algorithms to
-                                     // be executed
-  vector<string> problemList_; // List of problems to be solved
-  string experimentBaseDirectory_; // Directory to store the results
-  int independentRuns_; // Number of independent runs per algorithm
 
-  Experiment();
+/**
+ * Returns the fitness indicator.
+ * @param b. True Pareto front
+ * @param a. Solution front
+ * @return the value of the epsilon indicator
+ */
+void Fitness::fitness(vector <vector<double> > a, string file) {
+  std::fstream out(file.c_str(), std::ios::out | std::ios::app);
+  for (int i=0; i<a.size(); i++) {
+    for (int j=0; j<a[i].size(); j++) {
+      if (j!=0) {
+        out << " ";
+      }
+      out << a[i][j];
+    }
+    out << endl;
 
-  void checkExperimentDirectory();
+  }
+  out.close();
+}
 
-};
-
-#endif /* __EXPERIMENT__ */

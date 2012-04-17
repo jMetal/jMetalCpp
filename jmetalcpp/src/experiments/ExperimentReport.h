@@ -41,6 +41,8 @@
 #include <Spread.h>
 #include <InvertedGenerationalDistance.h>
 #include <Epsilon.h>
+#include <Fitness.h>
+#include <MetricsUtil.h>
 #include <Experiment.h>
 
 using namespace std;

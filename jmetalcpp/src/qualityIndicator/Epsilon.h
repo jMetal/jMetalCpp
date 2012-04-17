@@ -45,6 +45,7 @@ private:
                // epsilon. This code always apply additive epsilon
 
   void set_params();
+  void free_params();
 
 public:
 

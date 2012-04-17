@@ -37,6 +37,7 @@ private:
 	SolutionSet * trueParetoFront_;
 	double trueParetoFrontHypervolume_;
 	Problem * problem_;
+	int dim_;
 	MetricsUtil * utilities_;
 
 public:

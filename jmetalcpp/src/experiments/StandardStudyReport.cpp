@@ -56,7 +56,8 @@ int main(int argc, char ** argv) {
   exp->experimentBaseDirectory_ = "C:/antonio/Softw/pruebas/jmetal-cpp/" +
                                  exp->experimentName_;
   //exp->paretoFrontDirectory_ = "/Users/antonio/Softw/pruebas/data/paretoFronts";
-  exp->paretoFrontDirectory_ = "C:/antonio/Softw/pruebas/data/paretoFronts";
+  //exp->paretoFrontDirectory_ = "C:/antonio/Softw/pruebas/data/paretoFronts";
+  exp->paretoFrontDirectory_ = "C:/antonio/Softw/pruebas/data/newParetoFronts";
 
   exp->independentRuns_ = 20;
 

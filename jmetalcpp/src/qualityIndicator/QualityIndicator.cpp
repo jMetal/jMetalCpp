@@ -29,6 +29,7 @@
 QualityIndicator::QualityIndicator(Problem * problem,
 																	 string paretoFrontFile) {
   problem_ = problem;
+  dim_ = problem_->getNumberOfObjectives();
   utilities_ = new MetricsUtil();
   trueParetoFront_ = utilities_->readNonDominatedSolutionSet(paretoFrontFile);
   Hypervolume * hv = new Hypervolume();
@@ -36,6 +37,26 @@ QualityIndicator::QualityIndicator(Problem * problem,
       trueParetoFront_->writeObjectivesToMatrix(), problem_->getNumberOfObjectives());
   delete hv;
 } // Constructor
+
+
+///**
+// * Constructor
+// * @param paretoFrontFile
+// */
+//QualityIndicator::QualityIndicator(string paretoFrontFile) {
+//  dim_ = -1;
+//  utilities_ = new MetricsUtil();
+//  trueParetoFront_ = utilities_->readNonDominatedSolutionSet(paretoFrontFile);
+//  vector<vector<double>> trueParetoFront = trueParetoFront_->writeObjectivesToMatrix();
+//  int dim = dim_;
+//  if (trueParetoFront.size()>0) {
+//    dim = trueParetoFront[0].size();
+//  }
+//  Hypervolume * hv = new Hypervolume();
+//  trueParetoFrontHypervolume_ = hv->hypervolume(trueParetoFront,
+//      trueParetoFront, dim);
+//  delete hv;
+//} // Constructor
 
 
 /**
@@ -55,10 +76,26 @@ double QualityIndicator::getHypervolume(SolutionSet * solutionSet) {
   Hypervolume * hv = new Hypervolume();
 	double res =  hv->hypervolume(solutionSet->writeObjectivesToMatrix(),
 	    trueParetoFront_->writeObjectivesToMatrix(),
-	    problem_->getNumberOfObjectives());
+	    dim_);
 	delete hv;
 	return res;
 } // getHypervolume
+
+
+///**
+// * Returns the hypervolume of a solution front file
+// * @param solution front file
+// * @return The value of the hypervolume indicator
+// */
+//double QualityIndicator::getHypervolume(string solutionfrontFile) {
+//  vector< vector<double> > solutionFront = utilities_->readFront(solutionfrontFile);
+//  Hypervolume * hv = new Hypervolume();
+//  double res =  hv->hypervolume(solutionFront,
+//      trueParetoFront_->writeObjectivesToMatrix(),
+//      dim_);
+//  delete hv;
+//  return res;
+//} // getHypervolume
 
 
 /**
@@ -80,7 +117,7 @@ double QualityIndicator::getIGD(SolutionSet * solutionSet) {
   double res = igd->invertedGenerationalDistance(
       solutionSet->writeObjectivesToMatrix(),
       trueParetoFront_->writeObjectivesToMatrix(),
-      problem_->getNumberOfObjectives());
+      dim_);
   delete igd;
   return res;
 } // getIGD
@@ -95,7 +132,7 @@ double QualityIndicator::getGD(SolutionSet * solutionSet) {
   GenerationalDistance * gd = new GenerationalDistance();
   double res = gd->generationalDistance(solutionSet->writeObjectivesToMatrix(),
       trueParetoFront_->writeObjectivesToMatrix(),
-      problem_->getNumberOfObjectives());
+      dim_);
   delete gd;
   return res;
 } // getGD
@@ -110,7 +147,7 @@ double QualityIndicator::getSpread(SolutionSet * solutionSet) {
   Spread * s = new Spread();
   double res = s->spread(solutionSet->writeObjectivesToMatrix(),
       trueParetoFront_->writeObjectivesToMatrix(),
-      problem_->getNumberOfObjectives());
+      dim_);
   delete s;
   return res;
 } // getSpread
@@ -125,7 +162,7 @@ double QualityIndicator::getEpsilon(SolutionSet * solutionSet) {
   Epsilon * e = new Epsilon();
   double res = e->epsilon(solutionSet->writeObjectivesToMatrix(),
       trueParetoFront_->writeObjectivesToMatrix(),
-      problem_->getNumberOfObjectives());
+      dim_);
   delete e;
   return res;
 } // getEpsilon

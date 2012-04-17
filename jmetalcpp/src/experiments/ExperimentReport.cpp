@@ -95,6 +95,9 @@ ExperimentReport::ExperimentReport() {
 
 void ExperimentReport::generateQualityIndicators() {
 
+  // TODO: Check if it is possible to use QualityIndicator class instead each independent class.
+  // Problem: knowing number of objectives of each problem
+
   if (indicatorList_.size() > 0) {
 
     cout << "PF file: " << paretoFrontDirectory_ << endl;
@@ -109,8 +112,14 @@ void ExperimentReport::generateQualityIndicators() {
         string paretoFrontPath = paretoFrontDirectory_ + "/" + paretoFrontFile_[problemIndex];
         string problemDirectory = algorithmDirectory + problemList_[problemIndex];
 
-        for (int indicatorIndex = 0; indicatorIndex < indicatorList_.size(); indicatorIndex++) {
 
+        // if paretoFrontPath doesn't exist, create one
+        // TODO: Crear directorio si no existe
+        int res = FileUtils::existsPath(paretoFrontPath.c_str());
+        cout << "Checking: " << paretoFrontPath << endl;
+        cout << "ExperimentReport: res= " << res << endl;
+        if (res!=2) {
+          MetricsUtil * metricsUtils = new MetricsUtil();
           for (int numRun=0; numRun<independentRuns_; numRun++) {
 
             stringstream outputParetoFrontFilePath;
@@ -119,62 +128,118 @@ void ExperimentReport::generateQualityIndicators() {
             string qualityIndicatorFile = problemDirectory;
             double value;
 
-            cout << "ExperimentReport: Quality indicator: " << indicatorList_[indicatorIndex] << endl;
-
-            // TODO: Realizar comprobación de size de trueFront
-
-            if (indicatorList_[indicatorIndex].compare("HV")==0) {
-              Hypervolume * indicators = new Hypervolume();
-              vector< vector<double> > solutionFront =
-                  indicators->utils_->readFront(solutionFrontFile);
-              vector< vector<double> > trueFront =
-                  indicators->utils_->readFront(paretoFrontPath);
-              value = indicators->hypervolume(solutionFront, trueFront, trueFront[0].size());
-              delete indicators;
-              qualityIndicatorFile = qualityIndicatorFile + "/HV";
-            }
-            if (indicatorList_[indicatorIndex].compare("SPREAD")==0) {
-              Spread * indicators = new Spread();
-              vector< vector<double> > solutionFront =
-                  indicators->utils_->readFront(solutionFrontFile);
-              vector< vector<double> > trueFront =
-                  indicators->utils_->readFront(paretoFrontPath);
-              value = indicators->spread(solutionFront, trueFront, trueFront[0].size());
-              delete indicators;
-              qualityIndicatorFile = qualityIndicatorFile + "/SPREAD";
-            }
-            if (indicatorList_[indicatorIndex].compare("IGD")==0) {
-              InvertedGenerationalDistance * indicators = new InvertedGenerationalDistance();
-              vector< vector<double> > solutionFront =
-                  indicators->utils_->readFront(solutionFrontFile);
-              vector< vector<double> > trueFront =
-                  indicators->utils_->readFront(paretoFrontPath);
-              value = indicators->invertedGenerationalDistance(solutionFront, trueFront, trueFront[0].size());
-              delete indicators;
-              qualityIndicatorFile = qualityIndicatorFile + "/IGD";
-            }
-            if (indicatorList_[indicatorIndex].compare("EPSILON")==0) {
-              Epsilon * indicators = new Epsilon();
-              vector< vector<double> > solutionFront =
-                  indicators->utils_->readFront(solutionFrontFile);
-              vector< vector<double> > trueFront =
-                  indicators->utils_->readFront(paretoFrontPath);
-              value = indicators->epsilon(solutionFront, trueFront, trueFront[0].size());
-              delete indicators;
-              qualityIndicatorFile = qualityIndicatorFile + "/EPSILON";
-            }
-
-            cout << "ExperimentReport: Quality indicator file: " << qualityIndicatorFile << endl;
-
-            // FIX: ¿Qué esta comprobando?
-            if (qualityIndicatorFile.compare(problemDirectory)!=0) {
-              std::fstream out(qualityIndicatorFile.c_str(),
-                  std::ios::out | std::ios::app);
-              out << value << endl;
+            vector< vector<double> > solutionFront =
+                metricsUtils->readFront(solutionFrontFile);
+            std::fstream out(paretoFrontPath.c_str(), std::ios::out | std::ios::app);
+              for (int i=0; i<solutionFront.size(); i++) {
+                for (int j=0; j<solutionFront[i].size(); j++) {
+                  if (j!=0) {
+                    out << " ";
+                  } // if
+                  out << solutionFront[i][j];
+                } // for
+                out << endl;
+              } // for
               out.close();
-            } // if
 
           } // for
+          delete metricsUtils;
+          system("PAUSE");
+        } // if
+
+//        // START MOD
+//        QualityIndicator * indicators;
+//        indicators = new QualityIndicator(paretoFrontPath);
+//        // END MOD
+
+        for (int indicatorIndex = 0; indicatorIndex < indicatorList_.size(); indicatorIndex++) {
+
+          if (indicatorList_[indicatorIndex].compare("FIT")==0) {
+
+            string solutionFrontFile = problemDirectory + "/FUN";
+            string qualityIndicatorFile = problemDirectory;
+
+            Fitness * indicators = new Fitness();
+            vector< vector<double> > solutionFront =
+                indicators->utils_->readFront(solutionFrontFile);
+            qualityIndicatorFile = qualityIndicatorFile + "/FIT";
+            indicators->fitness(solutionFront, qualityIndicatorFile);
+            delete indicators;
+
+          } else {
+
+            for (int numRun=0; numRun<independentRuns_; numRun++) {
+
+              stringstream outputParetoFrontFilePath;
+              outputParetoFrontFilePath << problemDirectory << "/FUN." << numRun;
+              string solutionFrontFile = outputParetoFrontFilePath.str();
+              string qualityIndicatorFile = problemDirectory;
+              double value;
+
+              cout << "ExperimentReport: Quality indicator: " << indicatorList_[indicatorIndex] << endl;
+
+              // TODO: Realizar comprobación de size de trueFront
+
+              if (indicatorList_[indicatorIndex].compare("HV")==0) {
+
+//                //START MOD
+//                value = indicators->hypervolume(solutionFrontFile);
+//                // print result in file
+//                //END MOD
+
+                Hypervolume * indicators = new Hypervolume();
+                vector< vector<double> > solutionFront =
+                    indicators->utils_->readFront(solutionFrontFile);
+                vector< vector<double> > trueFront =
+                    indicators->utils_->readFront(paretoFrontPath);
+                value = indicators->hypervolume(solutionFront, trueFront, trueFront[0].size());
+                delete indicators;
+                qualityIndicatorFile = qualityIndicatorFile + "/HV";
+              }
+              if (indicatorList_[indicatorIndex].compare("SPREAD")==0) {
+                Spread * indicators = new Spread();
+                vector< vector<double> > solutionFront =
+                    indicators->utils_->readFront(solutionFrontFile);
+                vector< vector<double> > trueFront =
+                    indicators->utils_->readFront(paretoFrontPath);
+                value = indicators->spread(solutionFront, trueFront, trueFront[0].size());
+                delete indicators;
+                qualityIndicatorFile = qualityIndicatorFile + "/SPREAD";
+              }
+              if (indicatorList_[indicatorIndex].compare("IGD")==0) {
+                InvertedGenerationalDistance * indicators = new InvertedGenerationalDistance();
+                vector< vector<double> > solutionFront =
+                    indicators->utils_->readFront(solutionFrontFile);
+                vector< vector<double> > trueFront =
+                    indicators->utils_->readFront(paretoFrontPath);
+                value = indicators->invertedGenerationalDistance(solutionFront, trueFront, trueFront[0].size());
+                delete indicators;
+                qualityIndicatorFile = qualityIndicatorFile + "/IGD";
+              }
+              if (indicatorList_[indicatorIndex].compare("EPSILON")==0) {
+                Epsilon * indicators = new Epsilon();
+                vector< vector<double> > solutionFront =
+                    indicators->utils_->readFront(solutionFrontFile);
+                vector< vector<double> > trueFront =
+                    indicators->utils_->readFront(paretoFrontPath);
+                value = indicators->epsilon(solutionFront, trueFront, trueFront[0].size());
+                delete indicators;
+                qualityIndicatorFile = qualityIndicatorFile + "/EPSILON";
+              }
+
+              cout << "ExperimentReport: Quality indicator file: " << qualityIndicatorFile << endl;
+
+              // FIX: ¿Qué esta comprobando?
+              if (qualityIndicatorFile.compare(problemDirectory)!=0) {
+                std::fstream out(qualityIndicatorFile.c_str(),
+                    std::ios::out | std::ios::app);
+                out << value << endl;
+                out.close();
+              } // if
+
+            } // for
+
+          } // if
         } // for
       } // for
     } // for

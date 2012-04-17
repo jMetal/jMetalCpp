@@ -104,6 +104,7 @@ double Epsilon::epsilon(vector <vector<double> > b, vector <vector<double> > a,
     else if (eps < eps_j)
       eps = eps_j;
   }
+  free_params();
   return eps;
 } // epsilon
 
@@ -118,4 +119,12 @@ void Epsilon::set_params() {
     obj_[i] = 0;
   }
   method_ = 0;
+} // set_params
+
+
+/**
+ * Free the reserved memory for the params
+ */
+void Epsilon::free_params() {
+  delete [] obj_;
 } // set_params

@@ -1,4 +1,4 @@
-//  Experiment.h
+//  Fitness.h
 //
 //  Author:
 //       Esteban López <esteban@lcc.uma.es>
@@ -18,41 +18,33 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef __EXPERIMENT__
-#define __EXPERIMENT__
+#ifndef FITNESS_H_
+#define FITNESS_H_
 
-#include <string>
+#include <MetricsUtil.h>
 #include <vector>
-#include <FileUtils.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include <fstream>
+#include <iostream>
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <sstream>
+//#include <stddef.h>
+
 
 using namespace std;
 
-template<typename T, size_t N>
-T * end(T (&ra)[N]) {
-    return ra + N;
-}
+class Fitness {
 
-/**
- * Abstract class representing jMetal experiments
- */
-
-class Experiment {
+private:
 
 public:
 
-  string experimentName_;
-  vector<string> algorithmNameList_; // List of the names of the algorithms to
-                                     // be executed
-  vector<string> problemList_; // List of problems to be solved
-  string experimentBaseDirectory_; // Directory to store the results
-  int independentRuns_; // Number of independent runs per algorithm
+  MetricsUtil * utils_; // stores a reference to  qualityIndicatorUtils
 
-  Experiment();
+  Fitness();
+  ~Fitness();
+  void fitness(vector <vector<double> > a, string file);
 
-  void checkExperimentDirectory();
+}; // Fitness
 
-};
-
-#endif /* __EXPERIMENT__ */
+#endif /* FITNESS_H_ */
