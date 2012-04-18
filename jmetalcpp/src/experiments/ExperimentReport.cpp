@@ -116,6 +116,11 @@ void ExperimentReport::generateQualityIndicators() {
 
         if (paretoFrontDirectory_.empty()) {
 
+          if (FileUtils::existsPath(referenceFrontDirectory_.c_str()) != 1) {
+            FileUtils::createDirectory(referenceFrontDirectory_);
+            cout << "Creating " << referenceFrontDirectory_ << endl;
+          }
+
           paretoFrontPath = referenceFrontDirectory_ + "/" + problemList_[problemIndex] + ".rf";
 
           // if paretoFrontPath doesn't exist, create one
