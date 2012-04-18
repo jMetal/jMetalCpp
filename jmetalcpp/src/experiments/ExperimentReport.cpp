@@ -109,43 +109,59 @@ void ExperimentReport::generateQualityIndicators() {
 
       for (int problemIndex=0; problemIndex<problemList_.size(); problemIndex++) {
 
-        string paretoFrontPath = paretoFrontDirectory_ + "/" + paretoFrontFile_[problemIndex];
         string problemDirectory = algorithmDirectory + problemList_[problemIndex];
+        string paretoFrontPath;
 
+        //paretoFrontPath = paretoFrontDirectory_ + "/" + paretoFrontFile_[problemIndex];
 
-        // if paretoFrontPath doesn't exist, create one
-        // TODO: Crear directorio si no existe
-        int res = FileUtils::existsPath(paretoFrontPath.c_str());
-        cout << "Checking: " << paretoFrontPath << endl;
-        cout << "ExperimentReport: res= " << res << endl;
-        if (res!=2) {
-          MetricsUtil * metricsUtils = new MetricsUtil();
-          for (int numRun=0; numRun<independentRuns_; numRun++) {
+        if (paretoFrontDirectory_.empty()) {
 
-            stringstream outputParetoFrontFilePath;
-            outputParetoFrontFilePath << problemDirectory << "/FUN." << numRun;
-            string solutionFrontFile = outputParetoFrontFilePath.str();
-            string qualityIndicatorFile = problemDirectory;
-            double value;
+          paretoFrontPath = referenceFrontDirectory_ + "/" + problemList_[problemIndex] + ".rf";
 
-            vector< vector<double> > solutionFront =
-                metricsUtils->readFront(solutionFrontFile);
-            std::fstream out(paretoFrontPath.c_str(), std::ios::out | std::ios::app);
-              for (int i=0; i<solutionFront.size(); i++) {
-                for (int j=0; j<solutionFront[i].size(); j++) {
-                  if (j!=0) {
-                    out << " ";
-                  } // if
-                  out << solutionFront[i][j];
+          // if paretoFrontPath doesn't exist, create one
+          // TODO: Crear directorio si no existe
+          int res = FileUtils::existsPath(paretoFrontPath.c_str());
+          cout << "Checking: " << paretoFrontPath << endl;
+          cout << "ExperimentReport: res= " << res << endl;
+
+          if (res!=2) {
+
+            MetricsUtil * metricsUtils = new MetricsUtil();
+            for (int numRun=0; numRun<independentRuns_; numRun++) {
+
+              stringstream outputParetoFrontFilePath;
+              outputParetoFrontFilePath << problemDirectory << "/FUN." << numRun;
+              string solutionFrontFile = outputParetoFrontFilePath.str();
+              string qualityIndicatorFile = problemDirectory;
+              double value;
+
+              vector< vector<double> > solutionFront =
+                  metricsUtils->readFront(solutionFrontFile);
+              std::fstream out(paretoFrontPath.c_str(), std::ios::out | std::ios::app);
+                for (int i=0; i<solutionFront.size(); i++) {
+                  for (int j=0; j<solutionFront[i].size(); j++) {
+                    if (j!=0) {
+                      out << " ";
+                    } // if
+                    out << solutionFront[i][j];
+                  } // for
+                  out << endl;
                 } // for
-                out << endl;
-              } // for
-              out.close();
+                out.close();
 
-          } // for
-          delete metricsUtils;
-          system("PAUSE");
-        } // if
+            } // for
+            delete metricsUtils;
+            //system("PAUSE");
+
+
+
+          } //if
+
+
+
+        } else {
+          paretoFrontPath = paretoFrontDirectory_ + "/" + paretoFrontFile_[problemIndex];
+        }
 
 //        // START MOD
 //        QualityIndicator * indicators;

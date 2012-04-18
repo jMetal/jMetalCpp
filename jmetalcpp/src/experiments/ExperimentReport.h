@@ -81,6 +81,7 @@ public:
 //  string experimentBaseDirectory_; // Directory to read the results
   string latexDirectory_; // Directory to store the latex files
   string paretoFrontDirectory_; // Directory containing the Pareto front files
+  string referenceFrontDirectory_; // Directory containing the Pareto front files
 //  int independentRuns_; // Number of independent runs per algorithm
   map<string, bool> indicatorMinimize_; // To indicate whether an indicator
                                         // is to be minimized. Hard-coded

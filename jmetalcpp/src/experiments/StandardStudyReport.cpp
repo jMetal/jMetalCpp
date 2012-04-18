@@ -55,9 +55,11 @@ int main(int argc, char ** argv) {
   //exp->experimentBaseDirectory_ = "/Users/antonio/Softw/pruebas/jmetal/kk/" +
   exp->experimentBaseDirectory_ = "C:/antonio/Softw/pruebas/jmetal-cpp/" +
                                  exp->experimentName_;
-  //exp->paretoFrontDirectory_ = "/Users/antonio/Softw/pruebas/data/paretoFronts";
-  //exp->paretoFrontDirectory_ = "C:/antonio/Softw/pruebas/data/paretoFronts";
-  exp->paretoFrontDirectory_ = "C:/antonio/Softw/pruebas/data/newParetoFronts";
+
+  // Comment this line to not use pareto fronts in order to calculate reference fronts
+  exp->paretoFrontDirectory_ = "C:/antonio/Softw/pruebas/data/paretoFronts";
+
+  exp->referenceFrontDirectory_= "C:/antonio/Softw/pruebas/data/referenceFronts";
 
   exp->independentRuns_ = 20;
 
