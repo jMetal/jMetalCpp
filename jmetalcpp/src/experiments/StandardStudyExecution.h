@@ -36,8 +36,6 @@
 class StandardStudyExecution : public ExperimentExecution {
 
 public:
-//  void algorithmSettings(string problemName, int problemIndex, Algorithm ** algorithm);
-//  Algorithm * algorithmSettings(string problemName);
   Algorithm * algorithmSettings(string problemName, int algorithmId,
       int experimentIndividualId);
 

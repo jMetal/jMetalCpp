@@ -18,8 +18,8 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef EXPERIMENTINDIVIDUAL_H_
-#define EXPERIMENTINDIVIDUAL_H_
+#ifndef __EXPERIMENT_INDIVIDUAL__
+#define __EXPERIMENT_INDIVIDUAL__
 
 class ExperimentIndividual {
 
@@ -34,6 +34,6 @@ public:
   int getProblemIndex();
   int getNumRun();
 
-};
+}; // ExperimentIndividual
 
-#endif /* EXPERIMENTINDIVIDUAL_H_ */
+#endif /* __EXPERIMENT_INDIVIDUAL__ */

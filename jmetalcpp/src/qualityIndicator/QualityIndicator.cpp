@@ -39,26 +39,6 @@ QualityIndicator::QualityIndicator(Problem * problem,
 } // Constructor
 
 
-///**
-// * Constructor
-// * @param paretoFrontFile
-// */
-//QualityIndicator::QualityIndicator(string paretoFrontFile) {
-//  dim_ = -1;
-//  utilities_ = new MetricsUtil();
-//  trueParetoFront_ = utilities_->readNonDominatedSolutionSet(paretoFrontFile);
-//  vector<vector<double>> trueParetoFront = trueParetoFront_->writeObjectivesToMatrix();
-//  int dim = dim_;
-//  if (trueParetoFront.size()>0) {
-//    dim = trueParetoFront[0].size();
-//  }
-//  Hypervolume * hv = new Hypervolume();
-//  trueParetoFrontHypervolume_ = hv->hypervolume(trueParetoFront,
-//      trueParetoFront, dim);
-//  delete hv;
-//} // Constructor
-
-
 /**
  * Destructor
  */
@@ -80,22 +60,6 @@ double QualityIndicator::getHypervolume(SolutionSet * solutionSet) {
 	delete hv;
 	return res;
 } // getHypervolume
-
-
-///**
-// * Returns the hypervolume of a solution front file
-// * @param solution front file
-// * @return The value of the hypervolume indicator
-// */
-//double QualityIndicator::getHypervolume(string solutionfrontFile) {
-//  vector< vector<double> > solutionFront = utilities_->readFront(solutionfrontFile);
-//  Hypervolume * hv = new Hypervolume();
-//  double res =  hv->hypervolume(solutionFront,
-//      trueParetoFront_->writeObjectivesToMatrix(),
-//      dim_);
-//  delete hv;
-//  return res;
-//} // getHypervolume
 
 
 /**

@@ -28,16 +28,8 @@
 #define __FILEUTILS__
 
 #include <string>
-//#include <map>
-//#include <vector>
 #include <iostream>
-//#include <stdlib.h>
-//#include <stddef.h>
 #include <sys/stat.h>
-//#include <Algorithm.h>
-//#include <Experiment.h>
-//#include <Problem.h>
-//#include <SolutionSet.h>
 
 #ifdef WINDOWS
   #include <dir.h>

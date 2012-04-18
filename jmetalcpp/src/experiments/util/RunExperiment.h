@@ -33,7 +33,6 @@
 #include <FileUtils.h>
 #include <Problem.h>
 #include <SolutionSet.h>
-//#include <QualityIndicator.h>
 
 using namespace std;
 
@@ -64,10 +63,6 @@ private:
   vector<string> algorithmNameList_; // List of the names of the algorithms to
                                      // be executed
   vector<string> problemList_; // List of problems to be solved
-//  vector<string> paretoFrontFile_; // List of the files containing the pareto
-//                                   // fronts corresponding to the problems in
-//                                   // problemList_
-//  vector<string> indicatorList_; // List of the quality indicators to be applied
   string experimentBaseDirectory_; // Directory to store the results
   string latexDirectory_; // Directory to store the latex files
   string rDirectory_; // Directory to store the generated R scripts
@@ -77,7 +72,7 @@ private:
   string outputParetoSetFile_; // Name of the file containing the output
                                // Pareto set
   int independentRuns_; // Number of independent runs per algorithm
-  // TODO: Settings[] algorithmSettings_; // Paremeter settings of each algorithm
+  // TODO: Settings[] algorithmSettings_; // Parameter settings of each algorithm
 
 }; // RunExperiment
 

@@ -32,36 +32,51 @@
 int main(int argc, char ** argv) {
   StandardStudyReport * exp = new StandardStudyReport() ;
 
+  // Name of the experiment:
   exp->experimentName_ = "StandardStudy";
 
+  // List of algorithm names to be analyzed in the experiment
+  // (please, refer to the README to check the possible values):
   const char * algorithmNameList_[] = {
       "NSGAII", "SMPSO", "GDE3"};
   exp->algorithmNameList_.assign(algorithmNameList_, end(algorithmNameList_));
 
+  // List of problem names to be analyzed in the experiment
+  // (please, refer to the README to check the possible values):
   const char * problemList_[] = {
       "ZDT1", "ZDT2", "ZDT3", "ZDT4", "ZDT6"};
   exp->problemList_.assign(problemList_, end(problemList_));
 
+  // List of optimal pareto front files to be used when calculating quality
+  // indicators. It's not necessary to define this variable when not knowing
+  // or not wanting to use optimal pareto fronts.
   const char * paretoFrontFile_[] = {
       "ZDT1.pf", "ZDT2.pf", "ZDT3.pf", "ZDT4.pf", "ZDT6.pf"};
   exp->paretoFrontFile_.assign(paretoFrontFile_, end(paretoFrontFile_));
 
+  // List of quality indicator names to be calculated in the reports
+  // (please, refer to the README to check the possible values):
   const char * indicatorList_[] = {
       "HV", "SPREAD", "EPSILON"};
   exp->indicatorList_.assign(indicatorList_, end(indicatorList_));
 
-  int numberOfAlgorithms = exp->algorithmNameList_.size();
-
-  //exp->experimentBaseDirectory_ = "/Users/antonio/Softw/pruebas/jmetal/kk/" +
+  // Directory from where the execution results will be readed:
   exp->experimentBaseDirectory_ = "C:/antonio/Softw/pruebas/jmetal-cpp/" +
                                  exp->experimentName_;
 
-  // Comment this line to not use pareto fronts in order to calculate reference fronts
+  // Directory from where the optimal pareto front files will be readed.
+  // Comment this following line to not use pareto fronts in order to
+  // calculate reference fronts.
   exp->paretoFrontDirectory_ = "C:/antonio/Softw/pruebas/data/paretoFronts";
 
+  // Directory where the calculated references front files will be stored.
+  // This line is not needed when you are using existing optimal pareto fronts.
   exp->referenceFrontDirectory_= "C:/antonio/Softw/pruebas/data/referenceFronts";
 
+  // Number of independent runs of each algorithm for each problem:
   exp->independentRuns_ = 20;
+
+  int numberOfAlgorithms = exp->algorithmNameList_.size();
 
   // Generate quality indicators
   exp->generateQualityIndicators();

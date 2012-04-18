@@ -47,11 +47,6 @@
 
 using namespace std;
 
-//template<typename T, size_t N>
-//T * end(T (&ra)[N]) {
-//    return ra + N;
-//}
-
 /**
  * Abstract class generating jMetal experiments reports
  */
@@ -70,26 +65,19 @@ private:
 
 public:
 
-//  string experimentName_;
-//  vector<string> algorithmNameList_; // List of the names of the algorithms to
-//                                     // be analyzed
-//  vector<string> problemList_; // List of problems to be analyzed
   vector<string> paretoFrontFile_; // List of the files containing the pareto
                                    // fronts corresponding to the problems in
                                    // problemList_
   vector<string> indicatorList_; // List of the quality indicators to be applied
-//  string experimentBaseDirectory_; // Directory to read the results
   string latexDirectory_; // Directory to store the latex files
   string paretoFrontDirectory_; // Directory containing the Pareto front files
   string referenceFrontDirectory_; // Directory containing the Pareto front files
-//  int independentRuns_; // Number of independent runs per algorithm
   map<string, bool> indicatorMinimize_; // To indicate whether an indicator
                                         // is to be minimized. Hard-coded
                                         // in the constructor
 
   ExperimentReport();
 
-//  void checkExperimentDirectory();
   void generateQualityIndicators();
   void generateLatexTables();
   void generateRBoxplotScripts(int rows, int cols, vector<string> problems,
@@ -97,6 +85,6 @@ public:
   void generateRWilcoxonScripts(vector<string> problems, string prefix,
       ExperimentReport * experiment);
 
-};
+}; // ExperimentReport
 
 #endif /* __EXPERIMENT_REPORT__ */

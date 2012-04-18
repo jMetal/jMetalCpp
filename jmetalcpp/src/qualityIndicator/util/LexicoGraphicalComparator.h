@@ -28,7 +28,6 @@ class LexicoGraphicalComparator : public Comparator {
 
 public:
   int compare(void * o1, void * o2);
-  //bool compare(vector<double> o1, vector<double> o2);
 
 };
 

@@ -41,40 +41,28 @@ private:
 
 public:
 
-//  string experimentName_;
-//  vector<string> algorithmNameList_; // List of the names of the algorithms to
-//                                     // be executed
-//  vector<string> problemList_; // List of problems to be solved
-//  string experimentBaseDirectory_; // Directory to store the results
   string outputParetoFrontFile_; // Name of the file containing the output
                                  // Pareto front
   string outputParetoSetFile_; // Name of the file containing the output Pareto
                                // set
-//  int independentRuns_; // Number of independent runs per algorithm
-//  Settings ** algorithmSettings_; // Parameter settings of each algorithm
-  //Algorithm ** algorithm_; // jMetal algorithms to be executed
 
   vector<ExperimentIndividual*> experimentIndividualList_;
   Settings ** algorithmSettingsList_;
   int experimentIndividualListIndex_;
   int experimentIndividualListSize_;
 
-  //Properties [] problemsSettings_ ;
-
   ExperimentExecution();
 
   void runExperiment(int numberOfThreads);
   void runExperiment();
-//  void checkExperimentDirectory();
 
-  // FIX: ¿Qué hacer con esto?
-//  virtual void algorithmSettings(string problemName, int problemId,
-//      Algorithm ** algorithm) = 0;
-//  virtual Algorithm * algorithmSettings(string problemName) = 0;
-
+  // TODO: Check different algorithmSettings configurations
+  // virtual void algorithmSettings(string problemName, int problemId,
+  //      Algorithm ** algorithm) = 0;
+  // virtual Algorithm * algorithmSettings(string problemName) = 0;
   virtual Algorithm * algorithmSettings(string problemName, int algorithmId,
       int experimentIndividiualId) = 0;
 
-};
+}; // ExperimentExecution
 
 #endif /* __EXPERIMENT_EXECUTION__ */

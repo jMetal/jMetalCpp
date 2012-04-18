@@ -43,7 +43,7 @@ int FileUtils::existsPath(const char* path) {
     return 0;
   }
   return res;
-}
+} // existsPath
 
 
 /**
@@ -70,6 +70,6 @@ int FileUtils::createDirectory(string path) {
 
       }
   }
-
+  
   return res;
-}
+} // createDirectory

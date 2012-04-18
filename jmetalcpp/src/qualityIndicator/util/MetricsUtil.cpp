@@ -63,7 +63,7 @@ vector< vector <double> > MetricsUtil::readFront(string path) {
 
   return front;
 
-}
+} // readFront
 
 
 /** Gets the maximum values for each objectives in a given pareto

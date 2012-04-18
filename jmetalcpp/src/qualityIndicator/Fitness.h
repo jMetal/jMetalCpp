@@ -18,18 +18,13 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef FITNESS_H_
-#define FITNESS_H_
+#ifndef __FITNESS__
+#define __FITNESS__
 
 #include <MetricsUtil.h>
 #include <vector>
 #include <fstream>
 #include <iostream>
-//#include <stdio.h>
-//#include <stdlib.h>
-//#include <sstream>
-//#include <stddef.h>
-
 
 using namespace std;
 
@@ -47,4 +42,4 @@ public:
 
 }; // Fitness
 
-#endif /* FITNESS_H_ */
+#endif /* __FITNESS__ */

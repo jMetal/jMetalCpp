@@ -23,9 +23,7 @@
 
 #include <Settings.h>
 #include <SMPSO.h>
-//#include <SBXCrossover.h>
 #include <PolynomialMutation.h>
-//#include <BinaryTournament2.h>
 
 class SMPSO_Settings : public Settings{
 
@@ -35,17 +33,9 @@ private:
   int    archiveSize_               ;
   double mutationDistributionIndex_ ;
   double mutationProbability_       ;
-//	int populationSize_                 ;
-//	int maxEvaluations_                 ;
-//	double mutationProbability_         ;
-//	double crossoverProbability_        ;
-//	double mutationDistributionIndex_   ;
-//	double crossoverDistributionIndex_  ;
 
   Algorithm * algorithm ;
-//  Operator  * crossover ; // Crossover operator
   Operator  * mutation  ; // Mutation operator
-//  Operator  * selection ; // Selection operator
 
 public:
   SMPSO_Settings() ;

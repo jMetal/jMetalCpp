@@ -38,31 +38,13 @@ ExperimentExecution::ExperimentExecution() {
 
   experimentName_ = "noName";
 
-  //CHECK: problemsSettings_ = NULL;
-
-  //CHECK: algorithmNameList_ = NULL;
-  //CHECK: problemList_ = NULL;
-  //CHECK: paretoFrontFile_ = NULL;
-  //CHECK: indicatorList_ = NULL;
-
   experimentBaseDirectory_ = "";
-//  paretoFrontDirectory_ = "";
-//  latexDirectory_ = "latex";
 
   outputParetoFrontFile_ = "FUN";
   outputParetoSetFile_ = "VAR";
 
-//  algorithmSettings_ = NULL;
-  //algorithm_ = NULL;
-
   independentRuns_ = 0;
 
-//  indicatorMinimize_["HV"] = false;
-//  indicatorMinimize_["EPSILON"] = true;
-//  indicatorMinimize_["SPREAD"] = true;
-//  indicatorMinimize_["GD"] = true;
-//  indicatorMinimize_["IGD"] = true;
-//
   experimentIndividualListIndex_ = 0;
   experimentIndividualListSize_ = -1;
 
@@ -73,22 +55,16 @@ ExperimentExecution::ExperimentExecution() {
  * Runs the experiment
  */
 void ExperimentExecution::runExperiment(int numberOfThreads) {
-  // Step 1: check experiment base directory
+
   checkExperimentDirectory();
 
   map_["name"] = &experimentName_;
   map_["experimentDirectory"] = &experimentBaseDirectory_;
   map_["algorithmNameList"] = &algorithmNameList_;
   map_["problemList"] = &problemList_;
-//  map_["indicatorList"] = &indicatorList_;
-//  map_["paretoFrontDirectory"] = &paretoFrontDirectory_;
-//  map_["paretoFrontFile"] = &paretoFrontFile_;
   map_["independentRuns"] = &independentRuns_;
   map_["outputParetoFrontFile"] = &outputParetoFrontFile_;
   map_["outputParetoSetFile"] = &outputParetoSetFile_;
-  //CHECK: map_["problemsSettings"] = &problemsSettings_;
-
-  //SolutionSet ** resultFront = new SolutionSet*[algorithmNameList_.size()];
 
   cout << "Inicializando lista de tareas..." << endl;
 
@@ -99,27 +75,15 @@ void ExperimentExecution::runExperiment(int numberOfThreads) {
   for (int i=0; i<problemList_.size(); i++) {
     for (int j=0; j<algorithmNameList_.size(); j++) {
       for (int k=0; k<independentRuns_; k++) {
-//        cout << "i,j,k = " << i << "," << j << "," << k << endl;
         ExperimentIndividual * expInd = new ExperimentIndividual(j, i, k);
-//        cout << "Experimento individual creado" << endl;
         experimentIndividualList_.push_back(expInd);
-//        cout << "Experimento añadido al vector..." << endl;
       }
     }
   }
 
   algorithmSettingsList_ = new Settings*[experimentIndividualList_.size()];
 
-  cout << "Lista de tareas inicializada..." << endl;
-
-//  if (problemList_.size() < numberOfThreads) {
-//    numberOfThreads = problemList_.size();
-//    cout << "Experiments: list of problems is shorter than the number of " <<
-//        "requested threads. Creating " << numberOfThreads << " threads." << endl;
-//  } // if
-//  else {
-//    cout << "Experiments: creating " << numberOfThreads << " threads." << endl;
-//  }
+  cout << "Task list initialized." << endl;
 
   int result;
 
@@ -153,7 +117,7 @@ void ExperimentExecution::runExperiment(int numberOfThreads) {
     }
   }
 
-  cout << "Join terminado...." << endl;
+  cout << "All the threads have finished." << endl;
 
   for (int i=0; i < experimentIndividualList_.size(); i++) {
     delete experimentIndividualList_[i];
@@ -166,8 +130,6 @@ void ExperimentExecution::runExperiment(int numberOfThreads) {
     delete experiments_[i];
   delete [] experiments_;
 
-  cout << "Experiments borrados..." << endl;
-
 } // runExperiment
 
 
@@ -177,38 +139,3 @@ void ExperimentExecution::runExperiment(int numberOfThreads) {
 void ExperimentExecution::runExperiment() {
   runExperiment(1);
 } // runExperiment
-
-
-//void ExperimentExecution::checkExperimentDirectory() {
-//  int res = FileUtils::existsPath(experimentBaseDirectory_.c_str());
-//  switch (res) {
-//  case 0:
-//    cout << "Experiment directory does NOT exist. Creating" << endl;
-//    if (FileUtils::createDirectory(experimentBaseDirectory_) == -1) {
-//      cout << "Error creating directory" << endl;
-//      exit(-1);
-//    }
-//    break;
-//  case 1:
-//    cout << "Experiment directory exists." << endl;
-//    cout << "Experiment directory is a directory" << endl;
-//    break;
-//  case 2:
-//    cout << "Experiment directory exists." << endl;
-//    cout << "Experiment directory is not a directory. Deleting file and creating directory" << endl;
-//    if( remove(experimentBaseDirectory_.c_str()) != 0 ) {
-//      cout << "Error deleting file." << endl;
-//      exit(-1);
-//    } else {
-//      cout << "File successfully deleted." << endl;
-//    }
-//    if (FileUtils::createDirectory(experimentBaseDirectory_) == -1) {
-//      cout << "Error creating directory" << endl;
-//      exit(-1);
-//    }
-//    break;
-//  case -1:
-//    cout << "Error checking experiment directory" << endl;
-//    exit(-1);
-//  }
-//} // checkExperimentDirectory

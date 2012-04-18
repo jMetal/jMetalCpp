@@ -31,22 +31,9 @@ ExperimentReport::ExperimentReport() {
 
   experimentName_ = "noName";
 
-  //CHECK: problemsSettings_ = NULL;
-
-  //CHECK: algorithmNameList_ = NULL;
-  //CHECK: problemList_ = NULL;
-  //CHECK: paretoFrontFile_ = NULL;
-  //CHECK: indicatorList_ = NULL;
-
   experimentBaseDirectory_ = "";
   paretoFrontDirectory_ = "";
   latexDirectory_ = "latex";
-
-//  outputParetoFrontFile_ = "FUN";
-//  outputParetoSetFile_ = "VAR";
-//
-//  algorithmSettings_ = NULL;
-  //algorithm_ = NULL;
 
   independentRuns_ = 0;
 
@@ -58,40 +45,6 @@ ExperimentReport::ExperimentReport() {
 
 } // ExperimentReport
 
-
-//void ExperimentReport::checkExperimentDirectory() {
-//  int res = FileUtils::existsPath(experimentBaseDirectory_.c_str());
-//  switch (res) {
-//  case 0:
-//    cout << "Experiment directory does NOT exist. Creating" << endl;
-//    if (FileUtils::createDirectory(experimentBaseDirectory_) == -1) {
-//      cout << "Error creating directory" << endl;
-//      exit(-1);
-//    }
-//    break;
-//  case 1:
-//    cout << "Experiment directory exists." << endl;
-//    cout << "Experiment directory is a directory" << endl;
-//    break;
-//  case 2:
-//    cout << "Experiment directory exists." << endl;
-//    cout << "Experiment directory is not a directory. Deleting file and creating directory" << endl;
-//    if( remove(experimentBaseDirectory_.c_str()) != 0 ) {
-//      cout << "Error deleting file." << endl;
-//      exit(-1);
-//    } else {
-//      cout << "File successfully deleted." << endl;
-//    }
-//    if (FileUtils::createDirectory(experimentBaseDirectory_) == -1) {
-//      cout << "Error creating directory" << endl;
-//      exit(-1);
-//    }
-//    break;
-//  case -1:
-//    cout << "Error checking experiment directory" << endl;
-//    exit(-1);
-//  }
-//} // checkExperimentDirectory
 
 void ExperimentReport::generateQualityIndicators() {
 
@@ -112,8 +65,6 @@ void ExperimentReport::generateQualityIndicators() {
         string problemDirectory = algorithmDirectory + problemList_[problemIndex];
         string paretoFrontPath;
 
-        //paretoFrontPath = paretoFrontDirectory_ + "/" + paretoFrontFile_[problemIndex];
-
         if (paretoFrontDirectory_.empty()) {
 
           if (FileUtils::existsPath(referenceFrontDirectory_.c_str()) != 1) {
@@ -123,8 +74,7 @@ void ExperimentReport::generateQualityIndicators() {
 
           paretoFrontPath = referenceFrontDirectory_ + "/" + problemList_[problemIndex] + ".rf";
 
-          // if paretoFrontPath doesn't exist, create one
-          // TODO: Crear directorio si no existe
+          // if referenceFrontPath doesn't exist, create one
           int res = FileUtils::existsPath(paretoFrontPath.c_str());
           cout << "Checking: " << paretoFrontPath << endl;
           cout << "ExperimentReport: res= " << res << endl;
@@ -158,20 +108,11 @@ void ExperimentReport::generateQualityIndicators() {
             delete metricsUtils;
             //system("PAUSE");
 
-
-
           } //if
-
-
 
         } else {
           paretoFrontPath = paretoFrontDirectory_ + "/" + paretoFrontFile_[problemIndex];
-        }
-
-//        // START MOD
-//        QualityIndicator * indicators;
-//        indicators = new QualityIndicator(paretoFrontPath);
-//        // END MOD
+        } // if
 
         for (int indicatorIndex = 0; indicatorIndex < indicatorList_.size(); indicatorIndex++) {
 
@@ -199,14 +140,7 @@ void ExperimentReport::generateQualityIndicators() {
 
               cout << "ExperimentReport: Quality indicator: " << indicatorList_[indicatorIndex] << endl;
 
-              // TODO: Realizar comprobación de size de trueFront
-
               if (indicatorList_[indicatorIndex].compare("HV")==0) {
-
-//                //START MOD
-//                value = indicators->hypervolume(solutionFrontFile);
-//                // print result in file
-//                //END MOD
 
                 Hypervolume * indicators = new Hypervolume();
                 vector< vector<double> > solutionFront =
@@ -250,7 +184,6 @@ void ExperimentReport::generateQualityIndicators() {
 
               cout << "ExperimentReport: Quality indicator file: " << qualityIndicatorFile << endl;
 
-              // FIX: ¿Qué esta comprobando?
               if (qualityIndicatorFile.compare(problemDirectory)!=0) {
                 std::fstream out(qualityIndicatorFile.c_str(),
                     std::ios::out | std::ios::app);
@@ -281,7 +214,6 @@ void ExperimentReport::generateLatexTables() {
       data[indicator][problem] = new vector<double>[algorithmNameList_.size()];
 
       for (int algorithm = 0; algorithm < algorithmNameList_.size(); algorithm++) {
-        //data[indicator][problem][algorithm] = new Vector();
 
         string directory = experimentBaseDirectory_;
         directory += "/data/";
@@ -298,7 +230,6 @@ void ExperimentReport::generateLatexTables() {
         string aux;
         while( getline(in, aux ) ) {
           data[indicator][problem][algorithm].push_back(atof(aux.c_str()));
-          //cout << (atof(aux.c_str())) << endl;
         } // while
       } // for
     } // for
