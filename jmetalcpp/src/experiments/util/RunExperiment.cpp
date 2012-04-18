@@ -159,7 +159,8 @@ void RunExperiment::run() {
 
       char * problemName_ = (char *) problemName.c_str();
       // FIX Settings
-      algorithm = experiment_->algorithmSettings(problemName, algorithmIndex);
+      algorithm = experiment_->algorithmSettings(problemName, algorithmIndex,
+          experimentIndividualListIndex);
 
       //cout << "Algorithm settings ended!" << endl;
 
@@ -246,6 +247,9 @@ void RunExperiment::run() {
 //      } // if
 
       delete resultFront;
+      //delete algorithm;
+      //experiment_->deleteSettings();
+      delete experiment_->algorithmSettingsList_[experimentIndividualListIndex];
 
     } // if
 

@@ -84,19 +84,25 @@
 
 
 Algorithm * StandardStudyExecution::algorithmSettings(string problemName,
-    int algorithmId) {
+    int algorithmId, int experimentIndividualId) {
 
   Algorithm * alg;
 
   switch (algorithmId) {
   case 0:
-    alg = (new NSGAII_Settings(problemName))->configure();
+    algorithmSettingsList_[experimentIndividualId] =
+        new NSGAII_Settings(problemName);
+    alg = (algorithmSettingsList_[experimentIndividualId])->configure();
     break;
   case 1:
-    alg = (new SMPSO_Settings(problemName))->configure();
+    algorithmSettingsList_[experimentIndividualId] =
+        new SMPSO_Settings(problemName);
+    alg = (algorithmSettingsList_[experimentIndividualId])->configure();
     break;
   case 2:
-    alg = (new GDE3_Settings(problemName))->configure();
+    algorithmSettingsList_[experimentIndividualId] =
+        new GDE3_Settings(problemName);
+    alg = (algorithmSettingsList_[experimentIndividualId])->configure();
     break;
   }
 

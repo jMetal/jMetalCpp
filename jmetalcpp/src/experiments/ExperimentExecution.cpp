@@ -108,6 +108,8 @@ void ExperimentExecution::runExperiment(int numberOfThreads) {
     }
   }
 
+  algorithmSettingsList_ = new Settings*[experimentIndividualList_.size()];
+
   cout << "Lista de tareas inicializada..." << endl;
 
 //  if (problemList_.size() < numberOfThreads) {
@@ -153,8 +155,14 @@ void ExperimentExecution::runExperiment(int numberOfThreads) {
 
   cout << "Join terminado...." << endl;
 
+  for (int i=0; i < experimentIndividualList_.size(); i++) {
+    delete experimentIndividualList_[i];
+  }
+
+  delete [] algorithmSettingsList_;
   delete [] p;
-  for (int i=0; i< numberOfThreads; i++)
+
+  for (int i=0; i < numberOfThreads; i++)
     delete experiments_[i];
   delete [] experiments_;
 

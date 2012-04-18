@@ -55,6 +55,7 @@ public:
   //Algorithm ** algorithm_; // jMetal algorithms to be executed
 
   vector<ExperimentIndividual*> experimentIndividualList_;
+  Settings ** algorithmSettingsList_;
   int experimentIndividualListIndex_;
   int experimentIndividualListSize_;
 
@@ -71,7 +72,8 @@ public:
 //      Algorithm ** algorithm) = 0;
 //  virtual Algorithm * algorithmSettings(string problemName) = 0;
 
-  virtual Algorithm * algorithmSettings(string problemName, int algorithmId) = 0;
+  virtual Algorithm * algorithmSettings(string problemName, int algorithmId,
+      int experimentIndividiualId) = 0;
 
 };
 
