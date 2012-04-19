@@ -67,12 +67,14 @@ void ExperimentReport::generateQualityIndicators() {
 
         if (paretoFrontDirectory_.empty()) {
 
-          if (FileUtils::existsPath(referenceFrontDirectory_.c_str()) != 1) {
-            FileUtils::createDirectory(referenceFrontDirectory_);
-            cout << "Creating " << referenceFrontDirectory_ << endl;
+          string referenceFrontDirectory = experimentBaseDirectory_ + "/referenceFronts";
+
+          if (FileUtils::existsPath(referenceFrontDirectory.c_str()) != 1) {
+            FileUtils::createDirectory(referenceFrontDirectory);
+            cout << "Creating " << referenceFrontDirectory << endl;
           }
 
-          paretoFrontPath = referenceFrontDirectory_ + "/" + problemList_[problemIndex] + ".rf";
+          paretoFrontPath = referenceFrontDirectory + "/" + problemList_[problemIndex] + ".rf";
 
           // if referenceFrontPath doesn't exist, create one
           int res = FileUtils::existsPath(paretoFrontPath.c_str());
@@ -115,6 +117,8 @@ void ExperimentReport::generateQualityIndicators() {
         } // if
 
         for (int indicatorIndex = 0; indicatorIndex < indicatorList_.size(); indicatorIndex++) {
+
+          resetFile(problemDirectory + "/" + indicatorList_[indicatorIndex]);
 
           if (indicatorList_[indicatorIndex].compare("FIT")==0) {
 

@@ -71,7 +71,6 @@ public:
   vector<string> indicatorList_; // List of the quality indicators to be applied
   string latexDirectory_; // Directory to store the latex files
   string paretoFrontDirectory_; // Directory containing the Pareto front files
-  string referenceFrontDirectory_; // Directory containing the Pareto front files
   map<string, bool> indicatorMinimize_; // To indicate whether an indicator
                                         // is to be minimized. Hard-coded
                                         // in the constructor

@@ -159,8 +159,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv) {
 			cerr << "Incorrect number of arguments for DTLZ7 problem." << endl;
 			exit(-1);
 		}
-	}
-	else if (strcmp(name, "Fonseca")==0) { // Fonseca
+	}	else if (strcmp(name, "Fonseca")==0) { // Fonseca
 		if (argc==0)
 			return new Fonseca("Real");
 		else if (argc==1)
@@ -169,6 +168,17 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv) {
 			cerr << "Incorrect number of arguments for Fonseca problem." << endl;
 			exit(-1);
 		}
+	} else if (strcmp(name, "Griewank")==0) { // Griewank
+	    if (argc==0)
+	      return new Griewank("Real");
+	    else if (argc==1)
+	      return new Griewank(argv[0]);
+	    else if (argc==2)
+	      return new Griewank(argv[0], atoi(argv[1]));
+	    else {
+	      cerr << "Incorrect number of arguments for Griewank problem." << endl;
+	      exit(-1);
+	    }
 	} else if (strcmp(name, "Kursawe")==0) { // Kursawe
 		if (argc==0)
 			return new Kursawe("Real");
@@ -208,6 +218,8 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv) {
 			return new Sphere("Real");
 		else if (argc==1)
 			return new Sphere(argv[0]);
+		else if (argc==2)
+		  return new Sphere(argv[0], atoi(argv[1]));
 		else {
 			cerr << "Incorrect number of arguments for Sphere problem." << endl;
 			exit(-1);

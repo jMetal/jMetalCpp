@@ -51,8 +51,6 @@ CrowdingArchive::CrowdingArchive(int maxSize, int numberOfObjectives)
  */
 CrowdingArchive::~CrowdingArchive() {
 
-  cout << "Borrando crowding archive..." << endl;
-
   delete dominance_;
   delete equals_;
   delete crowdingDistance_;

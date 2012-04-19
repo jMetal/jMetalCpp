@@ -1,8 +1,8 @@
-//  ProblemFactory.h
+//  Griewank.h
 //
-//  Author:
+//  Authors:
 //       Esteban López <esteban@lcc.uma.es>
-//
+// 
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
 //  This program is free software: you can redistribute it and/or modify
@@ -14,44 +14,29 @@
 //  but WITHOUT ANY WARRANTY; without even the implied warranty of
 //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //  GNU Lesser General Public License for more details.
-//
+// 
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef __PROBLEM_FACTORY__
-#define __PROBLEM_FACTORY__
+#ifndef __GRIEWANK__
+#define __GRIEWANK__
 
 #include <Problem.h>
-#include <stdio.h>
-#include <string.h>
+#include <math.h>
+#include <RealSolutionType.h>
+#include <BinaryRealSolutionType.h>
+#include <Solution.h>
 
-#include <DTLZ1.h>
-#include <DTLZ2.h>
-#include <DTLZ3.h>
-#include <DTLZ4.h>
-#include <DTLZ5.h>
-#include <DTLZ6.h>
-#include <DTLZ7.h>
-#include <Fonseca.h>
-#include <Griewank.h>
-#include <Kursawe.h>
-#include <OneMax.h>
-#include <Schaffer.h>
-#include <Sphere.h>
-#include <ZDT1.h>
-#include <ZDT2.h>
-#include <ZDT3.h>
-#include <ZDT4.h>
-#include <ZDT5.h>
-#include <ZDT6.h>
-
-class ProblemFactory {
-
+/**
+  * @class Griewank
+  * @brief Class representing problem Griewank
+ **/
+class Griewank : public Problem {
+   
 public:
-  static Problem * getProblem(char * name);
-  static Problem * getProblem(int argc, char ** argv);
-  static Problem * getProblem(char * name, int argc, char ** argv);
+  Griewank(string solutionType, int numberOfVariables = 10);
+	~Griewank();
+	void evaluate(Solution *solution);
 };
 
-#endif // __PROBLEM_FACTORY__
-
+#endif /* __GRIEWANK__ */

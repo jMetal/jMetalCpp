@@ -64,3 +64,36 @@ void Experiment::checkExperimentDirectory() {
   }
 } // checkExperimentDirectory
 
+
+void Experiment::resetFile(string file) {
+  int res = FileUtils::existsPath(file.c_str());
+  switch (res) {
+  case 0:
+    cout << "File (" << file << ") does NOT exist." << endl;
+    break;
+  case 1:
+    cout << "File (" << file << ") exists." << endl;
+    cout << "File (" << file << ") is a directory. Deleting directory." << endl;
+    if( remove(file.c_str()) != 0 ) {
+      cout << "Error deleting directory." << endl;
+      exit(-1);
+    } else {
+      cout << "Directory successfully deleted." << endl;
+    }
+    break;
+  case 2:
+    cout << "File (" << file << ") exists." << endl;
+    cout << "File (" << file << ") is a file. Deleting file." << endl;
+    if( remove(file.c_str()) != 0 ) {
+      cout << "Error deleting file." << endl;
+      exit(-1);
+    } else {
+      cout << "File successfully deleted." << endl;
+    }
+    break;
+  case -1:
+    cout << "Error checking file (" << file << ")" << endl;
+    exit(-1);
+  }
+} // resetFile
+

@@ -52,6 +52,7 @@ public:
   Experiment();
 
   void checkExperimentDirectory();
+  void resetFile(string file);
 
 };
 

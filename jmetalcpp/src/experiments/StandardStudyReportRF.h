@@ -1,4 +1,4 @@
-//  ProblemFactory.h
+//  StandardStudyReportRF.h
 //
 //  Author:
 //       Esteban López <esteban@lcc.uma.es>
@@ -18,40 +18,18 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef __PROBLEM_FACTORY__
-#define __PROBLEM_FACTORY__
+#ifndef __STANDARD_STUDY_REPORT_RF__
+#define __STANDARD_STUDY_REPORT_RF__
 
-#include <Problem.h>
-#include <stdio.h>
-#include <string.h>
+#include <ExperimentReport.h>
+#include <string>
 
-#include <DTLZ1.h>
-#include <DTLZ2.h>
-#include <DTLZ3.h>
-#include <DTLZ4.h>
-#include <DTLZ5.h>
-#include <DTLZ6.h>
-#include <DTLZ7.h>
-#include <Fonseca.h>
-#include <Griewank.h>
-#include <Kursawe.h>
-#include <OneMax.h>
-#include <Schaffer.h>
-#include <Sphere.h>
-#include <ZDT1.h>
-#include <ZDT2.h>
-#include <ZDT3.h>
-#include <ZDT4.h>
-#include <ZDT5.h>
-#include <ZDT6.h>
+/**
+ * Class implementing a typical experimental study. Five algorithms are
+ * compared when solving the ZDT, DTLZ, and WFG benchmarks, and the hypervolume,
+ * spread and additive epsilon indicators are used for performance assessment.
+ */
 
-class ProblemFactory {
+class StandardStudyReportRF : public ExperimentReport { };
 
-public:
-  static Problem * getProblem(char * name);
-  static Problem * getProblem(int argc, char ** argv);
-  static Problem * getProblem(char * name, int argc, char ** argv);
-};
-
-#endif // __PROBLEM_FACTORY__
-
+#endif /* __STANDARD_STUDY_REPORT_RF__ */
