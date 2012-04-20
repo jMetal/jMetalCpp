@@ -146,13 +146,21 @@ void RunExperiment::run() {
 
       // Put the results in the output directory
       stringstream outputParetoFrontFilePath;
-      outputParetoFrontFilePath << directory << "/" << outputParetoFrontFile_
-          << "." << numRun;
       stringstream outputParetoSetFilePath;
-      outputParetoSetFilePath << directory << "/" << outputParetoSetFile_
-          << "." << numRun;
-      resultFront->printObjectivesToFile(outputParetoFrontFilePath.str());
-      resultFront->printVariablesToFile(outputParetoSetFilePath.str());
+      if (experiment_->isSingleObjective_) {
+        outputParetoFrontFilePath << directory << "/" << outputParetoFrontFile_;
+        outputParetoSetFilePath << directory << "/" << outputParetoSetFile_;
+      } else {
+        outputParetoFrontFilePath << directory << "/" << outputParetoFrontFile_
+            << "." << numRun;
+        outputParetoSetFilePath << directory << "/" << outputParetoSetFile_
+            << "." << numRun;
+      }
+
+      resultFront->printObjectivesToFile(outputParetoFrontFilePath.str(),
+          experiment_->isSingleObjective_);
+      resultFront->printVariablesToFile(outputParetoSetFilePath.str(),
+          experiment_->isSingleObjective_);
 
       cout << "Thread[" << threadIndex_ << "]: End of algorithm: " <<
           algorithmNameList_[algorithmIndex] << ", problem: " <<

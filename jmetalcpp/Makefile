@@ -1,4 +1,4 @@
-export LIBS = -pthread -lm
+export LIBS = -lpthread -lm
 export CXXFLAGS = -O3
 
 all: 

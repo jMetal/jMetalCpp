@@ -48,6 +48,8 @@ ExperimentExecution::ExperimentExecution() {
   experimentIndividualListIndex_ = 0;
   experimentIndividualListSize_ = -1;
 
+  isSingleObjective_ = false;
+
 } // ExperimentExecution
 
 

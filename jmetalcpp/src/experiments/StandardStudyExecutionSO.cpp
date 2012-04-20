@@ -1,4 +1,4 @@
-//  StandardStudyExecutionRF.cpp
+//  StandardStudyExecutionSO.cpp
 //
 //  Author:
 //       Esteban López <esteban@lcc.uma.es>
@@ -19,7 +19,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include <StandardStudyExecutionRF.h>
+#include <StandardStudyExecutionSO.h>
 
 
 /**
@@ -35,7 +35,7 @@
  * @algorithmId Index of the algorithm to be configured
  * @param experimentIndividualId Index of the experiment individual
  */
-Algorithm * StandardStudyExecutionRF::algorithmSettings(string problemName,
+Algorithm * StandardStudyExecutionSO::algorithmSettings(string problemName,
     int algorithmId, int experimentIndividualId) {
 
   Algorithm * alg;
@@ -43,17 +43,22 @@ Algorithm * StandardStudyExecutionRF::algorithmSettings(string problemName,
   switch (algorithmId) {
   case 0:
     algorithmSettingsList_[experimentIndividualId] =
-        new NSGAII_Settings(problemName);
+        new gGA_Settings(problemName);
     alg = (algorithmSettingsList_[experimentIndividualId])->configure();
     break;
   case 1:
     algorithmSettingsList_[experimentIndividualId] =
-        new SMPSO_Settings(problemName);
+        new ssGA_Settings(problemName);
     alg = (algorithmSettingsList_[experimentIndividualId])->configure();
     break;
   case 2:
     algorithmSettingsList_[experimentIndividualId] =
-        new GDE3_Settings(problemName);
+        new DE_Settings(problemName);
+    alg = (algorithmSettingsList_[experimentIndividualId])->configure();
+    break;
+  case 3:
+    algorithmSettingsList_[experimentIndividualId] =
+        new PSO_Settings(problemName);
     alg = (algorithmSettingsList_[experimentIndividualId])->configure();
     break;
   }
@@ -65,20 +70,20 @@ Algorithm * StandardStudyExecutionRF::algorithmSettings(string problemName,
 
 int main(int argc, char ** argv) {
 
-  StandardStudyExecutionRF * exp = new StandardStudyExecutionRF() ;
+  StandardStudyExecutionSO * exp = new StandardStudyExecutionSO() ;
 
   // Name of the experiment:
-  exp->experimentName_ = "StandardStudyRF";
+  exp->experimentName_ = "StandardStudySO";
 
   // List of algorithm names to be used in the experiment
   // (please, refer to the README to check the possible values):
   const char * algorithmNameList_[] = {
-      "NSGAII", "SMPSO", "GDE3"};
+      "gGA", "ssGA", "DE", "PSO"};
 
   // List of problem names to be used in the experiment
   // (please, refer to the README to check the possible values):
   const char * problemList_[] = {
-      "ZDT1", "ZDT2", "ZDT3", "ZDT4", "ZDT6"};
+      "Sphere", "Griewank"};
 
   // Directory where the execution results will be stored:
   exp->experimentBaseDirectory_ = "C:/jMetal/pruebas/jmetal-cpp/" +
@@ -93,6 +98,7 @@ int main(int argc, char ** argv) {
   exp->algorithmNameList_.assign(algorithmNameList_, end(algorithmNameList_));
   exp->problemList_.assign(problemList_, end(problemList_));
   int numberOfAlgorithms = exp->algorithmNameList_.size();
+  exp->isSingleObjective_ = true;
 
   cout << "Experiment (" << exp->experimentName_ << ") is starting." << endl;
 

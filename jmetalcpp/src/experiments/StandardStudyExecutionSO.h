@@ -1,4 +1,4 @@
-//  StandardStudyExecutionPF.h
+//  StandardStudyExecutionSO.h
 //
 //  Author:
 //       Esteban López <esteban@lcc.uma.es>
@@ -18,13 +18,14 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef __STANDARD_STUDY_EXECUTION_PF__
-#define __STANDARD_STUDY_EXECUTION_PF__
+#ifndef __STANDARD_STUDY_EXECUTION_SO__
+#define __STANDARD_STUDY_EXECUTION_SO__
 
 #include <ExperimentExecution.h>
-#include <NSGAII_Settings.h>
-#include <GDE3_Settings.h>
-#include <SMPSO_Settings.h>
+#include <gGA_Settings.h>
+#include <ssGA_Settings.h>
+#include <DE_Settings.h>
+#include <PSO_Settings.h>
 #include <string>
 
 /**
@@ -33,7 +34,7 @@
  * spread and additive epsilon indicators are used for performance assessment.
  */
 
-class StandardStudyExecutionPF : public ExperimentExecution {
+class StandardStudyExecutionSO : public ExperimentExecution {
 
 public:
   Algorithm * algorithmSettings(string problemName, int algorithmId,
@@ -41,4 +42,4 @@ public:
 
 };
 
-#endif /* __STANDARD_STUDY_EXECUTION_PF__ */
+#endif /* __STANDARD_STUDY_EXECUTION_SO__ */

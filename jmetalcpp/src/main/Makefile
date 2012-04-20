@@ -16,13 +16,12 @@ INCS +=  -I. -I../core -I../util -I../problems -I../util/comparators \
 #EXECS = NSGAII_main PAES_main gGA_main autodock DE_main GDE3_main
 #DEPS = ../libjmetal.a ../metaheuristics/libmetaheuristics.a 
 EXECS = NSGAII_main NSGAIIbin_main gGA_main gGAbin_main ssGA_main GDE3_main \
-	DE_main SMPSO_main PSO_main PAES_main StandardStudyExecution StandardStudyReport \
-	StandardStudyExecutionPF StandardStudyReportPF StandardStudyExecutionRF \
-	StandardStudyReportRF
+	DE_main SMPSO_main PSO_main PAES_main StandardStudyExecution StandardStudyReportPF \
+	StandardStudyReportRF StandardStudyExecutionSO StandardStudyReportSO
 WINEXECS = NSGAII_main.exe NSGAIIbin_main.exe NSGAII_main.exe gGA_main.exe \
 	gGAbin_main.exe ssGA_main.exe GDE3_main.exe DE_main.exe SMPSO_main.exe PSO_main.exe \
-	PAES_main.exe StandardStudyExecution.exe StandardStudyReport.exe StandardStudyExecutionPF.exe \
-	StandardStudyReportPF.exe StandardStudyExecutionRF.exe StandardStudyReportRF.exe
+	PAES_main.exe StandardStudyExecution.exe StandardStudyReportPF.exe \
+	StandardStudyReportRF.exe StandardStudyExecutionSO.exe StandardStudyReportSO.exe
 DEPS = ../libjmetal.a
 
 BIN_DIRECTORY = ../../bin
@@ -89,25 +88,21 @@ StandardStudyExecution: ../experiments/StandardStudyExecution.cpp $(DEPS)
 	$(CPP) ../experiments/StandardStudyExecution.cpp ../libjmetal.a -o StandardStudyExecution $(INCS) $(LIBS)
 	cp StandardStudyExecution $(BIN_DIRECTORY)
 	
-StandardStudyReport: ../experiments/StandardStudyReport.cpp $(DEPS)
-	$(CPP) ../experiments/StandardStudyReport.cpp ../libjmetal.a -o StandardStudyReport $(INCS) $(LIBS)
-	cp StandardStudyReport $(BIN_DIRECTORY)
-	
-StandardStudyExecutionPF: ../experiments/StandardStudyExecutionPF.cpp $(DEPS)
-	$(CPP) ../experiments/StandardStudyExecutionPF.cpp ../libjmetal.a -o StandardStudyExecutionPF $(INCS) $(LIBS)
-	cp StandardStudyExecutionPF $(BIN_DIRECTORY)
-	
 StandardStudyReportPF: ../experiments/StandardStudyReportPF.cpp $(DEPS)
 	$(CPP) ../experiments/StandardStudyReportPF.cpp ../libjmetal.a -o StandardStudyReportPF $(INCS) $(LIBS)
 	cp StandardStudyReportPF $(BIN_DIRECTORY)
 	
-StandardStudyExecutionRF: ../experiments/StandardStudyExecutionRF.cpp $(DEPS)
-	$(CPP) ../experiments/StandardStudyExecutionRF.cpp ../libjmetal.a -o StandardStudyExecutionRF $(INCS) $(LIBS)
-	cp StandardStudyExecutionRF $(BIN_DIRECTORY)
-	
 StandardStudyReportRF: ../experiments/StandardStudyReportRF.cpp $(DEPS)
 	$(CPP) ../experiments/StandardStudyReportRF.cpp ../libjmetal.a -o StandardStudyReportRF $(INCS) $(LIBS)
 	cp StandardStudyReportRF $(BIN_DIRECTORY)
+	
+StandardStudyExecutionSO: ../experiments/StandardStudyExecutionSO.cpp $(DEPS)
+	$(CPP) ../experiments/StandardStudyExecutionSO.cpp ../libjmetal.a -o StandardStudyExecutionSO $(INCS) $(LIBS)
+	cp StandardStudyExecutionSO $(BIN_DIRECTORY)
+	
+StandardStudyReportSO: ../experiments/StandardStudyReportSO.cpp $(DEPS)
+	$(CPP) ../experiments/StandardStudyReportSO.cpp ../libjmetal.a -o StandardStudyReportSO $(INCS) $(LIBS)
+	cp StandardStudyReportSO $(BIN_DIRECTORY)
 
 #.cpp.o: $(DEPS)
 #	$(CPP) $< $(DEPS) -o NSGAII_main $(INCS) $(LIBS)

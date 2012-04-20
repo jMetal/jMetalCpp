@@ -33,7 +33,7 @@ int main(int argc, char ** argv) {
   StandardStudyReportRF * exp = new StandardStudyReportRF() ;
 
   // Name of the experiment:
-  exp->experimentName_ = "StandardStudyRF";
+  exp->experimentName_ = "StandardStudy";
 
   // List of algorithm names to be analyzed in the experiment
   // (please, refer to the README to check the possible values):
@@ -47,12 +47,12 @@ int main(int argc, char ** argv) {
       "ZDT1", "ZDT2", "ZDT3", "ZDT4", "ZDT6"};
   exp->problemList_.assign(problemList_, end(problemList_));
 
-  // List of optimal pareto front files to be used when calculating quality
-  // indicators. It's not necessary to define this variable when not knowing
-  // or not wanting to use optimal pareto fronts.
-  const char * paretoFrontFile_[] = {
-      "ZDT1.pf", "ZDT2.pf", "ZDT3.pf", "ZDT4.pf", "ZDT6.pf"};
-  exp->paretoFrontFile_.assign(paretoFrontFile_, end(paretoFrontFile_));
+//  // List of optimal pareto front files to be used when calculating quality
+//  // indicators. It's not necessary to define this variable when not knowing
+//  // or not wanting to use optimal pareto fronts.
+//  const char * paretoFrontFile_[] = {
+//      "ZDT1.pf", "ZDT2.pf", "ZDT3.pf", "ZDT4.pf", "ZDT6.pf"};
+//  exp->paretoFrontFile_.assign(paretoFrontFile_, end(paretoFrontFile_));
 
   // List of quality indicator names to be calculated in the reports
   // (please, refer to the README to check the possible values):

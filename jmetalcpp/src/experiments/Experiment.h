@@ -48,6 +48,7 @@ public:
   vector<string> problemList_; // List of problems to be solved
   string experimentBaseDirectory_; // Directory to store the results
   int independentRuns_; // Number of independent runs per algorithm
+  bool isSingleObjective_; // If this experiment is a singleObjective one or not
 
   Experiment();
 

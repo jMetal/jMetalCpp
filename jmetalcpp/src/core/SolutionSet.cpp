@@ -233,6 +233,31 @@ void SolutionSet::printObjectivesToFile(string file){
 
 
 /**
+ * Writes the objective function values of the <code>Solution</code>
+ * objects into the set in a file.
+ * @param path The output file name
+ * @param append If the objectives will be appended in case a file
+ * already exists
+ */
+void SolutionSet::printObjectivesToFile(string file, bool append){
+  if (append) {
+    std::fstream out(file.c_str(), std::ios::out | std::ios::app);
+    cout.setf(ios::fixed);
+    for (int i = 0; i < solutionsList_.size(); i++) {
+      int nObj = solutionsList_[i]->getNumberOfObjectives();
+      for (int obj = 0; obj < nObj; obj++) {
+        out << solutionsList_[i]->getObjective(obj) << " ";
+      }
+      out << endl;
+    }
+    out.close();
+  } else {
+    this->printObjectivesToFile(file);
+  }
+} // printObjectivesToFile
+
+
+/**
  * Writes the decision variable values of the <code>Solution</code>
  * solutions objects into the set in a file.
  * @param path The output file name
@@ -243,6 +268,24 @@ void SolutionSet::printVariablesToFile(string file) {
   	out << solutionsList_[i]->toString() << endl ;
   }
   out.close();
+} // printVariablesToFile
+
+
+/**
+ * Writes the decision variable values of the <code>Solution</code>
+ * solutions objects into the set in a file.
+ * @param path The output file name
+ */
+void SolutionSet::printVariablesToFile(string file, bool append) {
+  if (append) {
+    std::fstream out(file.c_str(), std::ios::out | std::ios::app);
+    for (int i = 0; i < solutionsList_.size(); i++) {
+        out << solutionsList_[i]->toString() << endl ;
+    }
+    out.close();
+  } else {
+    this->printVariablesToFile(file);
+  }
 } // printVariablesToFile
 
 

@@ -33,7 +33,7 @@ int main(int argc, char ** argv) {
   StandardStudyReportPF * exp = new StandardStudyReportPF() ;
 
   // Name of the experiment:
-  exp->experimentName_ = "StandardStudyPF";
+  exp->experimentName_ = "StandardStudy";
 
   // List of algorithm names to be analyzed in the experiment
   // (please, refer to the README to check the possible values):

@@ -1,4 +1,4 @@
-//  StandardStudyReport.cpp
+//  StandardStudyReportSO.cpp
 //
 //  Author:
 //       Esteban López <esteban@lcc.uma.es>
@@ -19,7 +19,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include <StandardStudyReport.h>
+#include <StandardStudyReportSO.h>
 
 
 /**
@@ -30,44 +30,44 @@
 
 
 int main(int argc, char ** argv) {
-  StandardStudyReport * exp = new StandardStudyReport() ;
+  StandardStudyReportSO * exp = new StandardStudyReportSO() ;
 
   // Name of the experiment:
-  exp->experimentName_ = "StandardStudy";
+  exp->experimentName_ = "StandardStudySO";
 
   // List of algorithm names to be analyzed in the experiment
   // (please, refer to the README to check the possible values):
   const char * algorithmNameList_[] = {
-      "NSGAII", "SMPSO", "GDE3"};
+      "gGA", "ssGA", "DE", "PSO"};
   exp->algorithmNameList_.assign(algorithmNameList_, end(algorithmNameList_));
 
   // List of problem names to be analyzed in the experiment
   // (please, refer to the README to check the possible values):
   const char * problemList_[] = {
-      "ZDT1", "ZDT2", "ZDT3", "ZDT4", "ZDT6"};
+      "Sphere", "Griewank"};
   exp->problemList_.assign(problemList_, end(problemList_));
 
-  // List of optimal pareto front files to be used when calculating quality
-  // indicators. It's not necessary to define this variable when not knowing
-  // or not wanting to use optimal pareto fronts.
-  const char * paretoFrontFile_[] = {
-      "ZDT1.pf", "ZDT2.pf", "ZDT3.pf", "ZDT4.pf", "ZDT6.pf"};
-  exp->paretoFrontFile_.assign(paretoFrontFile_, end(paretoFrontFile_));
+//  // List of optimal pareto front files to be used when calculating quality
+//  // indicators. It's not necessary to define this variable when not knowing
+//  // or not wanting to use optimal pareto fronts.
+//  const char * paretoFrontFile_[] = {
+//      "ZDT1.pf", "ZDT2.pf", "ZDT3.pf", "ZDT4.pf", "ZDT6.pf"};
+//  exp->paretoFrontFile_.assign(paretoFrontFile_, end(paretoFrontFile_));
 
   // List of quality indicator names to be calculated in the reports
   // (please, refer to the README to check the possible values):
   const char * indicatorList_[] = {
-      "HV", "SPREAD", "EPSILON"};
+      "FIT"};
   exp->indicatorList_.assign(indicatorList_, end(indicatorList_));
 
   // Directory from where the execution results will be readed:
-  exp->experimentBaseDirectory_ = "C:/antonio/Softw/pruebas/jmetal-cpp/" +
+  exp->experimentBaseDirectory_ = "C:/jMetal/pruebas/jmetal-cpp/" +
                                  exp->experimentName_;
 
-  // Directory from where the optimal pareto front files will be readed.
-  // Comment this following line to not use pareto fronts in order to
-  // calculate reference fronts.
-  exp->paretoFrontDirectory_ = "C:/antonio/Softw/pruebas/data/paretoFronts";
+//  // Directory from where the optimal pareto front files will be readed.
+//  // Comment this following line to not use pareto fronts in order to
+//  // calculate reference fronts.
+//  exp->paretoFrontDirectory_ = "C:/jMetal/pruebas/data/paretoFronts";
 
 //  // Directory where the calculated references front files will be stored.
 //  // This line is not needed when you are using existing optimal pareto fronts.
@@ -77,6 +77,7 @@ int main(int argc, char ** argv) {
   exp->independentRuns_ = 20;
 
   int numberOfAlgorithms = exp->algorithmNameList_.size();
+  exp->isSingleObjective_ = true;
 
   // Generate quality indicators
   exp->generateQualityIndicators();
@@ -87,9 +88,9 @@ int main(int argc, char ** argv) {
   // Configure the R scripts to be generated
   int rows = 3 ;
   int columns = 2 ;
-  string prefix = "ZDT";
+  string prefix = "SO"; // ¿Qué poner aquí?
   const char * problemsValues[] = {
-      "ZDT1", "ZDT2", "ZDT3", "ZDT4", "ZDT6"};
+      "Sphere", "Griewank"};
   vector<string> problems (problemsValues, end(problemsValues));
 
   bool notch;
