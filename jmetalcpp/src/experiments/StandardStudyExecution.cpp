@@ -88,7 +88,7 @@ int main(int argc, char ** argv) {
   exp->independentRuns_ = 20;
 
   // Number of threads to be used to execute the experiment
-  int numberOfThreads = 3;
+  int numberOfThreads = 8;
 
   exp->algorithmNameList_.assign(algorithmNameList_, end(algorithmNameList_));
   exp->problemList_.assign(problemList_, end(problemList_));
