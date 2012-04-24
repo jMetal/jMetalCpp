@@ -294,3 +294,46 @@ SolutionSet * MetricsUtil::readNonDominatedSolutionSet(string path) {
   return solutionSet;
 
 } // readNonDominatedSolutionSet
+
+
+/**
+ * Reads a set of non dominated solutions from a file
+ * and store it in a existing non dominated solution set
+ * @param path The path of the file containing the data
+ * @return A solution set
+ */
+void MetricsUtil::readNonDominatedSolutionSet(string path, NonDominatedSolutionList * solutionSet) {
+
+  std::ifstream in(path.c_str());
+  if( !in ) {
+    cout << "Error trying to read non dominated solutions file: "
+        << path << endl;
+    exit(-1);
+  } // if
+
+  string line;
+
+  while( getline(in, line ) ) {
+
+    vector<double> list;
+    istringstream iss(line);
+    while (iss) {
+      string token;
+      iss >> token;
+      if (token.compare("")!=0) {
+        //cout << "Substring: " << token << endl;
+        list.push_back(atof(token.c_str()));
+      } // if
+    } // while
+
+    Solution * solution = new Solution(list.size());
+    for (int i=0; i<list.size(); i++) {
+      solution->setObjective(i,list[i]);
+    } //for
+    solutionSet->add(solution);
+
+  } // while
+
+  in.close();
+
+} // readNonDominatedSolutionSet

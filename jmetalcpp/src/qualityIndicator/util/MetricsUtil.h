@@ -52,6 +52,7 @@ public:
 	    vector<double> maximumValue, vector<double> minimumValue);
 	vector< vector<double> > invertedFront(vector< vector<double> > front);
 	SolutionSet * readNonDominatedSolutionSet(string path);
+	void readNonDominatedSolutionSet(string path, NonDominatedSolutionList * solutionSet);
 };
 
 #endif /* __METRICSUTIL__ */

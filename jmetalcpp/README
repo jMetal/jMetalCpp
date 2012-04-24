@@ -24,8 +24,12 @@ TABLE OF CONTENTS
 =======================================================================================
 
 jMetalCpp has been developed in Unix machines (Ubuntu and MacOS X) as well as in
-Windows (Cygwin) using the G++ compiler. The make utility has been used to compile the
+Windows (MinGW) using the G++ compiler. The make utility has been used to compile the
 software package.
+
+To execute the multithread experiments in Windows, you will need the POSIX Thread
+library, normally implemented as a dynamic link library (DLL) called pthreadGC2.dll.
+This file is included in the MinGW distribution.
 
 =======================================================================================
 

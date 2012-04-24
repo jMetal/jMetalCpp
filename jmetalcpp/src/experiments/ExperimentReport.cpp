@@ -50,6 +50,11 @@ ExperimentReport::ExperimentReport() {
 
 void ExperimentReport::generateQualityIndicators() {
 
+
+  if ((!isSingleObjective_) && (paretoFrontDirectory_.empty())) {
+    generateReferenceFronts();
+  }
+
   // TODO: Check if it is possible to use QualityIndicator class instead each independent class.
   // Problem: knowing number of objectives of each problem
 
@@ -75,49 +80,57 @@ void ExperimentReport::generateQualityIndicators() {
 
             string referenceFrontDirectory = experimentBaseDirectory_ + "/referenceFronts";
 
-            if (FileUtils::existsPath(referenceFrontDirectory.c_str()) != 1) {
-              FileUtils::createDirectory(referenceFrontDirectory);
-              cout << "Creating " << referenceFrontDirectory << endl;
-            }
+//            if (FileUtils::existsPath(referenceFrontDirectory.c_str()) != 1) {
+//              FileUtils::createDirectory(referenceFrontDirectory);
+//              cout << "Creating " << referenceFrontDirectory << endl;
+//            }
 
             paretoFrontPath = referenceFrontDirectory + "/" + problemList_[problemIndex] + ".rf";
 
-            // if referenceFrontPath doesn't exist, create one
-            int res = FileUtils::existsPath(paretoFrontPath.c_str());
-            cout << "Checking: " << paretoFrontPath << endl;
-            cout << "ExperimentReport: res= " << res << endl;
-
-            if (res!=2) {
-
-              cout << "CREANDO FRENTE DE REFERENCIA" << endl;
-
-              MetricsUtil * metricsUtils = new MetricsUtil();
-              for (int numRun=0; numRun<independentRuns_; numRun++) {
-
-                stringstream outputParetoFrontFilePath;
-                outputParetoFrontFilePath << problemDirectory << "/FUN." << numRun;
-                string solutionFrontFile = outputParetoFrontFilePath.str();
-                string qualityIndicatorFile = problemDirectory;
-                double value;
-
-                vector< vector<double> > solutionFront =
-                    metricsUtils->readFront(solutionFrontFile);
-                std::fstream out(paretoFrontPath.c_str(), std::ios::out | std::ios::app);
-                  for (int i=0; i<solutionFront.size(); i++) {
-                    for (int j=0; j<solutionFront[i].size(); j++) {
-                      if (j!=0) {
-                        out << " ";
-                      } // if
-                      out << solutionFront[i][j];
-                    } // for
-                    out << endl;
-                  } // for
-                  out.close();
-
-              } // for
-              delete metricsUtils;
-
-            } //if
+//            // if referenceFrontPath doesn't exist, create one
+//            int res = FileUtils::existsPath(paretoFrontPath.c_str());
+//            cout << "Checking: " << paretoFrontPath << endl;
+//            cout << "ExperimentReport: res= " << res << endl;
+//
+//            if (res!=2) {
+//
+//              cout << "CREANDO FRENTE DE REFERENCIA" << endl;
+//
+//              MetricsUtil * metricsUtils = new MetricsUtil();
+//              NonDominatedSolutionList * solutionSet = new NonDominatedSolutionList();
+//              for (int numRun=0; numRun<independentRuns_; numRun++) {
+//
+//                stringstream outputParetoFrontFilePath;
+//                outputParetoFrontFilePath << problemDirectory << "/FUN." << numRun;
+//                string solutionFrontFile = outputParetoFrontFilePath.str();
+//                string qualityIndicatorFile = problemDirectory;
+//                double value;
+//
+//                metricsUtils->readNonDominatedSolutionSet(solutionFrontFile, solutionSet);
+//
+////                vector< vector<double> > solutionFront =
+////                    metricsUtils->readFront(solutionFrontFile);
+////                std::fstream out(paretoFrontPath.c_str(), std::ios::out | std::ios::app);
+////                  for (int i=0; i<solutionFront.size(); i++) {
+////                    for (int j=0; j<solutionFront[i].size(); j++) {
+////                      if (j!=0) {
+////                        out << " ";
+////                      } // if
+////                      out << solutionFront[i][j];
+////                    } // for
+////                    out << endl;
+////                  } // for
+////                  out.close();
+//
+//              } // for
+//
+//              solutionSet->printObjectivesToFile(paretoFrontPath);
+//              //system("PAUSE");
+//
+//              delete solutionSet;
+//              delete metricsUtils;
+//
+//            } //if
 
           } else {
 
@@ -167,11 +180,15 @@ void ExperimentReport::generateQualityIndicators() {
               if (indicatorList_[indicatorIndex].compare("HV")==0) {
 
                 Hypervolume * indicators = new Hypervolume();
+                cout << "Hypervolume created..." << endl;
                 vector< vector<double> > solutionFront =
                     indicators->utils_->readFront(solutionFrontFile);
+                cout << "Solution front read..." << endl;
                 vector< vector<double> > trueFront =
                     indicators->utils_->readFront(paretoFrontPath);
+                cout << "True front read..." << endl;
                 value = indicators->hypervolume(solutionFront, trueFront, trueFront[0].size());
+                cout << "Value calculated..." << endl;
                 delete indicators;
                 qualityIndicatorFile = qualityIndicatorFile + "/HV";
               }
@@ -222,6 +239,51 @@ void ExperimentReport::generateQualityIndicators() {
       } // for
     } // for
   } // if
+} // generateQualityIndicators
+
+
+void ExperimentReport::generateReferenceFronts() {
+
+  string referenceFrontDirectory = experimentBaseDirectory_ + "/referenceFronts";
+
+  if (FileUtils::existsPath(referenceFrontDirectory.c_str()) != 1) {
+    FileUtils::createDirectory(referenceFrontDirectory);
+    cout << "Creating " << referenceFrontDirectory << endl;
+  }
+
+  for (int problemIndex=0; problemIndex<problemList_.size(); problemIndex++) {
+
+    string paretoFrontPath = referenceFrontDirectory + "/" + problemList_[problemIndex] + ".rf";
+
+    MetricsUtil * metricsUtils = new MetricsUtil();
+    NonDominatedSolutionList * solutionSet = new NonDominatedSolutionList();
+    for (int algorithmIndex=0; algorithmIndex<algorithmNameList_.size(); algorithmIndex++) {
+
+      string problemDirectory = experimentBaseDirectory_ + "/data/" + algorithmNameList_[algorithmIndex] +
+          "/" + problemList_[problemIndex];
+
+      for (int numRun=0; numRun<independentRuns_; numRun++) {
+
+
+        stringstream outputParetoFrontFilePath;
+        outputParetoFrontFilePath << problemDirectory << "/FUN." << numRun;
+        string solutionFrontFile = outputParetoFrontFilePath.str();
+        string qualityIndicatorFile = problemDirectory;
+        double value;
+
+        metricsUtils->readNonDominatedSolutionSet(solutionFrontFile, solutionSet);
+
+      } // for
+    } // for
+
+    solutionSet->printObjectivesToFile(paretoFrontPath);
+    //system("PAUSE");
+
+    delete solutionSet;
+    delete metricsUtils;
+
+  } // for
+
 } // generateQualityIndicators
 
 
