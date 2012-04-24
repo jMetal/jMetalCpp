@@ -206,7 +206,6 @@ void RWilcoxon::generateScripts(vector<string> problems, string prefix, Experime
             "indicator<-\"" + experiment->indicatorList_[indicator] + "\"";
     out << output << endl;
 
-
     out << "\n# Step 1.  Writes the latex header" << endl;
     out << "latexHeader()" << endl << endl;;
     //out << output << endl;
