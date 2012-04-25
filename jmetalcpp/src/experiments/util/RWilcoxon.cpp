@@ -250,18 +250,20 @@ void RWilcoxon::generateScripts(vector<string> problems, string prefix, Experime
       problemList += problems[i] + " ";
     }
     // The tabular environment and the latexTableFirstLine variable must be redefined
+    stringstream ssLatexTableFirstLine;
     latexTabularAlignment = "| l | ";
-    latexTableFirstLine = "\\\\hline \\\\multicolumn{1}{|c|}{}";
+    ssLatexTableFirstLine << "\\\\hline \\\\multicolumn{1}{|c|}{}";
     for (int i = 1; i < experiment->algorithmNameList_.size(); i++) {
       for (int j = 0; j < problems.size(); j++) {
         latexTabularAlignment += "p{0.15cm}  ";
         //latexTabularAlignment += "c ";
       } // for
-      latexTableFirstLine += " & \\\\multicolumn{" + problems.size();
-      latexTableFirstLine += "}{c|}{" + experiment->algorithmNameList_[i] + "}";
+      ssLatexTableFirstLine << " & \\\\multicolumn{" << problems.size() << "}{c|}{"
+          << experiment->algorithmNameList_[i] << "}";
       latexTabularAlignment += " | " ;
     } // for
-    latexTableFirstLine += " \\\\\\\\";
+    ssLatexTableFirstLine << " \\\\\\\\";
+    latexTableFirstLine = ssLatexTableFirstLine.str();
 
     tabularString = "tabularString <-c(\""+ latexTabularAlignment + "\") ";
     latexTableFirstLine = "latexTableFirstLine <-c(\""+ latexTableFirstLine + "\") ";
