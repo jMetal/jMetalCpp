@@ -42,6 +42,7 @@ ExperimentReport::ExperimentReport() {
   indicatorMinimize_["SPREAD"] = true;
   indicatorMinimize_["GD"] = true;
   indicatorMinimize_["IGD"] = true;
+  indicatorMinimize_["FIT"] = true;
 
   isSingleObjective_ = false;
 
