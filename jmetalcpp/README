@@ -7,20 +7,39 @@
 =======================================================================================
 TABLE OF CONTENTS
 =======================================================================================
-0. Requirements
-1. Installing jMetalCpp
-2. Executing jMetalCpp
-3. Choosing a problem
-4. Configuring a problem
-5. Calculating quality indicators (NEW)
-6. Advanced: Building a Experiment (NEW)
-  6.1. Executing a experiment (NEW)
-  6.2. Generating reports from a experiment (NEW) 
+0. Updates (NEW)
+1. Requirements
+2. Installing jMetalCpp
+3. Executing jMetalCpp
+4. Choosing a problem
+5. Configuring a problem
+6. Calculating quality indicators
+7. Advanced: Building a Experiment
+  7.1. Executing a experiment
+  7.2. Generating reports from a experiment
 =======================================================================================
 
 
 =======================================================================================
-0. Requirements
+0. Updates (NEW)
+=======================================================================================
+
+Version 1.0.1:
+	- Fixed a bug that prevented the last Wilcoxon table being generated correctly.
+	- Changed FIT quality indicator to be minimized instead of being maximized.
+	
+Version 1.0: 
+	- Added quality indicators.
+	- Added experiments.
+	
+Version 0.1:
+	- First version.
+
+=======================================================================================
+
+
+=======================================================================================
+1. Requirements
 =======================================================================================
 
 jMetalCpp has been developed in Unix machines (Ubuntu and MacOS X) as well as in
@@ -35,7 +54,7 @@ This file is included in the MinGW distribution.
 
 
 =======================================================================================
-1. Installing jMetalCpp
+2. Installing jMetalCpp
 =======================================================================================
 
 Copy the compressed file to the location where you want to install jMetal and
@@ -48,7 +67,7 @@ Then, compile the code with the following command:
 
 
 =======================================================================================	
-2. Executing jMetal
+3. Executing jMetal
 =======================================================================================
 
 All the binaries are in the 'bin' folder. Enter the folder to execute jMetal.
@@ -82,7 +101,7 @@ GDE3 simply type the following command:
 
 
 =======================================================================================
-3. Choosing a problem
+4. Choosing a problem
 =======================================================================================
 
 If you execute an algorithm like before, a default problem will be used for each
@@ -130,7 +149,7 @@ The list of single-objective problems currently is composed of:
 
 
 =======================================================================================
-4. Configuring a problem
+5. Configuring a problem
 =======================================================================================
 
 When you select a problem to solve, you can configure some problem parameters passing
@@ -180,7 +199,7 @@ and two objectives, the following command must be executed:
 
 
 =======================================================================================
-5. Calculating quality indicators (NEW)
+6. Calculating quality indicators
 =======================================================================================
 
 To assess the performance of multi-objective metaheuristics, quality indicators are
@@ -219,7 +238,7 @@ containing the Pareto fronts is.
 
 
 =======================================================================================
-6. Advanced: Building a Experiment (NEW)
+7. Advanced: Building a Experiment
 =======================================================================================
 
 Since this version of jMetalCpp, it is possible to create experimental studies. An
@@ -249,7 +268,7 @@ commented previously.
 
 
 =======================================================================================
-  6.1. Executing a experiment (NEW)
+  7.1. Executing a experiment
 =======================================================================================
 
 To execute the 'execution part' of a experiment, you only need to execute the
@@ -342,7 +361,7 @@ variant of the algorithm.
 
 
 =======================================================================================
-  6.2. Generating reports from a experiment (NEW) 
+  7.2. Generating reports from a experiment 
 =======================================================================================
 
 To execute the 'report part' of a experiment, you only need to execute the
