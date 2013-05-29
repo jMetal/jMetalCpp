@@ -9,19 +9,21 @@ INCS +=  -I. -I../core -I../util -I../problems -I../util/comparators \
 	-I../metaheuristics/nsgaII -I../operators/crossover -I../operators/mutation \
 	-I../operators/selection -I../metaheuristics/gGA -I../metaheuristics/ssGA \
 	-I../metaheuristics/gde3 -I../metaheuristics/de -I../metaheuristics/smpso \
-	-I../metaheuristics/pso -I../util/archive -I../metaheuristics/paes -I../experiments \
-	-I../experiments/util -I../experiments/settings -I../qualityIndicator/util \
-	-I../qualityIndicator
+	-I../metaheuristics/pso -I../util/archive -I../metaheuristics/paes \
+	-I../metaheuristics/moead -I../experiments -I../experiments/util \
+	-I../experiments/settings -I../qualityIndicator/util -I../qualityIndicator
 
 #EXECS = NSGAII_main PAES_main gGA_main autodock DE_main GDE3_main
 #DEPS = ../libjmetal.a ../metaheuristics/libmetaheuristics.a 
 EXECS = NSGAII_main NSGAIIbin_main gGA_main gGAbin_main ssGA_main GDE3_main \
-	DE_main SMPSO_main PSO_main PAES_main StandardStudyExecution StandardStudyReportPF \
-	StandardStudyReportRF StandardStudyExecutionSO StandardStudyReportSO
+	DE_main SMPSO_main PSO_main PAES_main MOEAD_main StandardStudyExecution \
+	StandardStudyReportPF StandardStudyReportRF StandardStudyExecutionSO \
+	StandardStudyReportSO
 WINEXECS = NSGAII_main.exe NSGAIIbin_main.exe NSGAII_main.exe gGA_main.exe \
-	gGAbin_main.exe ssGA_main.exe GDE3_main.exe DE_main.exe SMPSO_main.exe PSO_main.exe \
-	PAES_main.exe StandardStudyExecution.exe StandardStudyReportPF.exe \
-	StandardStudyReportRF.exe StandardStudyExecutionSO.exe StandardStudyReportSO.exe
+	gGAbin_main.exe ssGA_main.exe GDE3_main.exe DE_main.exe SMPSO_main.exe \
+	PSO_main.exe PAES_main.exe MOEAD_main.exe StandardStudyExecution.exe \
+	StandardStudyReportPF.exe StandardStudyReportRF.exe \
+	StandardStudyExecutionSO.exe StandardStudyReportSO.exe
 DEPS = ../libjmetal.a
 
 BIN_DIRECTORY = ../../bin
@@ -55,6 +57,10 @@ GDE3_main: GDE3_main.cpp $(DEPS)
 PAES_main: PAES_main.cpp $(DEPS)
 	$(CPP) PAES_main.cpp ../libjmetal.a -o PAES_main $(INCS) $(LIBS)
 	cp PAES_main $(BIN_DIRECTORY)
+	
+MOEAD_main: MOEAD_main.cpp $(DEPS)
+	$(CPP) MOEAD_main.cpp ../libjmetal.a -o MOEAD_main $(INCS) $(LIBS)
+	cp MOEAD_main $(BIN_DIRECTORY)
 
 gGA_main: gGA_main.cpp $(DEPS) 
 	$(CPP) gGA_main.cpp ../libjmetal.a -o gGA_main $(INCS) $(LIBS)
