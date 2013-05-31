@@ -1,14 +1,15 @@
 CPP  = g++
 CC   = gcc
 OBJ  = nsgaII/NSGAII.o gGA/gGA.o ssGA/ssGA.o smpso/SMPSO.o gde3/GDE3.o de/DE.o \
-	pso/PSO.o paes/paes.o moead/MOEAD.o moead/UtilsMOEAD.o
+	   pso/PSO.o paes/paes.o moead/MOEAD.o moead/UtilsMOEAD.o \
+	   smsemoa/SMSEMOA.o
 LIB  = libmetaheuristics.a
 
 LIBS +=  -lm 
 INCS +=  -I. -I../core -InsgaII -IgGA -IssGA -Ismpso -Ipso -Igde3 -Ide -Ipaes \
-	-Imoead -I../util -I../util/archive -I../util/comparators \
+	-Imoead -Ismsemoa -I../util -I../util/archive -I../util/comparators \
 	-I../util/wrapper -I../encodings/solutionType -I../encodings/variable \
-	-I../operators/selection
+	-I../operators/selection -I../qualityIndicator/util -I../qualityIndicator
 
 #CXXFLAGS += $(INCS) -g 
 CXXFLAGS += $(INCS) -O3 

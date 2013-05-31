@@ -1,6 +1,7 @@
 CPP  = g++
 CC   = gcc
 
+
 LIBS +=  
 #INCS +=  -I. -I../core -I../util -I../util/comparators -I../operators -I../metaheuristics -I../problems \
 	-I../encodings/solutionType -I../encodings/variable
@@ -9,21 +10,22 @@ INCS +=  -I. -I../core -I../util -I../problems -I../util/comparators \
 	-I../metaheuristics/nsgaII -I../operators/crossover -I../operators/mutation \
 	-I../operators/selection -I../metaheuristics/gGA -I../metaheuristics/ssGA \
 	-I../metaheuristics/gde3 -I../metaheuristics/de -I../metaheuristics/smpso \
-	-I../metaheuristics/pso -I../util/archive -I../metaheuristics/paes \
+	-I../metaheuristics/pso -I../util/archive -I../metaheuristics/paes -I../metaheuristics/smsemoa \
 	-I../metaheuristics/moead -I../experiments -I../experiments/util \
-	-I../experiments/settings -I../qualityIndicator/util -I../qualityIndicator
+	-I../experiments/settings -I../qualityIndicator/util -I../qualityIndicator 
+	
 
 #EXECS = NSGAII_main PAES_main gGA_main autodock DE_main GDE3_main
 #DEPS = ../libjmetal.a ../metaheuristics/libmetaheuristics.a 
 EXECS = NSGAII_main NSGAIIbin_main gGA_main gGAbin_main ssGA_main GDE3_main \
 	DE_main SMPSO_main PSO_main PAES_main MOEAD_main StandardStudyExecution \
 	StandardStudyReportPF StandardStudyReportRF StandardStudyExecutionSO \
-	StandardStudyReportSO
+	StandardStudyReportSO SMSEMOA_main
 WINEXECS = NSGAII_main.exe NSGAIIbin_main.exe NSGAII_main.exe gGA_main.exe \
 	gGAbin_main.exe ssGA_main.exe GDE3_main.exe DE_main.exe SMPSO_main.exe \
 	PSO_main.exe PAES_main.exe MOEAD_main.exe StandardStudyExecution.exe \
 	StandardStudyReportPF.exe StandardStudyReportRF.exe \
-	StandardStudyExecutionSO.exe StandardStudyReportSO.exe
+	StandardStudyExecutionSO.exe StandardStudyReportSO.exe SMSEMOA_main.exe
 DEPS = ../libjmetal.a
 
 BIN_DIRECTORY = ../../bin
@@ -85,7 +87,8 @@ SMPSO_main: SMPSO_main.cpp $(DEPS)
 PSO_main: PSO_main.cpp $(DEPS)
 	$(CPP) PSO_main.cpp ../libjmetal.a -o PSO_main $(INCS) $(LIBS)
 	cp PSO_main $(BIN_DIRECTORY)
-	
+
+
 #NSGAIIStudy: ../experiments/NSGAIIStudy.cpp $(DEPS)
 #	$(CPP) ../experiments/NSGAIIStudy.cpp ../libjmetal.a -o NSGAIIStudy $(INCS) $(LIBS)
 #	cp NSGAIIStudy $(BIN_DIRECTORY)
@@ -110,5 +113,10 @@ StandardStudyReportSO: ../experiments/StandardStudyReportSO.cpp $(DEPS)
 	$(CPP) ../experiments/StandardStudyReportSO.cpp ../libjmetal.a -o StandardStudyReportSO $(INCS) $(LIBS)
 	cp StandardStudyReportSO $(BIN_DIRECTORY)
 
+
+SMSEMOA_main: MOEAD_main.cpp $(DEPS)
+	$(CPP) SMSEMOA_main.cpp ../libjmetal.a -o SMSEMOA_main $(INCS) $(LIBS)
+	cp SMSEMOA_main $(BIN_DIRECTORY)
+	
 #.cpp.o: $(DEPS)
 #	$(CPP) $< $(DEPS) -o NSGAII_main $(INCS) $(LIBS)
