@@ -81,14 +81,15 @@ int main(int argc, char ** argv) {
       "ZDT1", "ZDT2", "ZDT3", "ZDT4", "ZDT6"};
 
   // Directory where the execution results will be stored:
-  exp->experimentBaseDirectory_ = "C:/jMetal/pruebas/jmetal-cpp/" +
+  //exp->experimentBaseDirectory_ = "C:/jMetal/pruebas/jmetal-cpp/" +
+  exp->experimentBaseDirectory_ = "jMetal/pruebas/jmetal-cpp/" +
                                  exp->experimentName_;
 
   // Number of independent runs of each algorithm for each problem:
   exp->independentRuns_ = 20;
 
   // Number of threads to be used to execute the experiment
-  int numberOfThreads = 3;
+  int numberOfThreads = 8;
 
   exp->algorithmNameList_.assign(algorithmNameList_, end(algorithmNameList_));
   exp->problemList_.assign(problemList_, end(problemList_));
