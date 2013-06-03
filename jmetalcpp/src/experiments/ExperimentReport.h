@@ -55,6 +55,7 @@ class ExperimentReport : public Experiment {
 
 private:
 
+  void generateReferenceFronts();
   void calculateStatistics(vector<double> vector_, map<string, double> * values);
   void printHeaderLatexCommands(string fileName);
   void printEndLatexCommands(string fileName);

@@ -62,9 +62,7 @@ int FileUtils::createDirectory(string path) {
 
         #ifdef WINDOWS
         res = mkdir(path2.c_str());
-        #endif
-
-        #ifdef linux
+        #else
         res = mkdir(path2.c_str() , S_IRWXU | S_IRWXG | S_IRWXO);
         #endif
 
