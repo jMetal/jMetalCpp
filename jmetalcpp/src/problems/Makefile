@@ -3,7 +3,9 @@ CC   = gcc
 OBJ  = Griewank.o Sphere.o Kursawe.o Fonseca.o Schaffer.o \
 ZDT1.o ZDT2.o ZDT3.o ZDT4.o \
 ZDT5.o ZDT6.o DTLZ1.o DTLZ2.o DTLZ3.o DTLZ4.o OneMax.o DTLZ5.o \
-ProblemFactory.o DTLZ6.o DTLZ7.o LZ09.o LZ09_F1.o LZ09_F2.o
+ProblemFactory.o DTLZ6.o DTLZ7.o LZ09.o LZ09_F1.o LZ09_F2.o \
+LZ09_F3.o LZ09_F4.o LZ09_F5.o LZ09_F6.o LZ09_F7.o LZ09_F8.o \
+LZ09_F9.o
 LIBNAME= libproblems.a
 
 LIBS +=  

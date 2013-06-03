@@ -1,7 +1,7 @@
 //  ProblemFactory.h
 //
 //  Author:
-//       Esteban López <esteban@lcc.uma.es>
+//       Esteban Lï¿½pez <esteban@lcc.uma.es>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -35,6 +35,15 @@
 #include <Fonseca.h>
 #include <Griewank.h>
 #include <Kursawe.h>
+#include <LZ09_F1.h>
+#include <LZ09_F2.h>
+#include <LZ09_F3.h>
+#include <LZ09_F4.h>
+#include <LZ09_F5.h>
+#include <LZ09_F6.h>
+#include <LZ09_F7.h>
+#include <LZ09_F8.h>
+#include <LZ09_F9.h>
 #include <OneMax.h>
 #include <Schaffer.h>
 #include <Sphere.h>
