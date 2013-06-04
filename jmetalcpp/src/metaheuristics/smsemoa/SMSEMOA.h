@@ -26,7 +26,6 @@
 #include <Problem.h>
 #include <SolutionSet.h>
 #include <PseudoRandom.h>
-
 #include <QualityIndicator.h>
 #include <MetricsUtil.h>
 #include <Hypervolume.h>

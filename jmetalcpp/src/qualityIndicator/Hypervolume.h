@@ -1,7 +1,7 @@
 //  Hypervolume.h
 //
 //  Author:
-//       Esteban López <esteban@lcc.uma.es>
+//       Esteban Lï¿½pez <esteban@lcc.uma.es>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -42,16 +42,16 @@ class Hypervolume {
 
 private:
 
-  bool dominates(vector<double> point1, vector<double> point2, int noObjectives);
-  void swap(vector< vector<double> > * front, int i, int j);
-  int filterNondominatedSet(vector< vector<double> > * front, int noPoints,
+  bool dominates(double * point1, double * point2, int noObjectives);
+  void swap(double** front, int i, int j);
+  int filterNondominatedSet(double** front, int noPoints,
       int noObjectives);
-  double surfaceUnchangedTo(vector< vector<double> > front, int noPoints,
+  double surfaceUnchangedTo(double ** front, int noPoints,
       int objective);
-  int reduceNondominatedSet(vector< vector<double> > * front, int noPoints,
+  int reduceNondominatedSet(double** front, int noPoints,
       int objective, double threshold);
-  vector< vector<double> > mergeFronts(vector< vector<double> > front1,
-      vector< vector<double> > front2);
+  double** mergeFronts(double** front1, int  sizeFront1,
+			double** front2 , int  sizeFront2,  int  noObjectives);
 
 public:
 
@@ -60,8 +60,9 @@ public:
   Hypervolume();
   ~Hypervolume();
 
-  double calculateHypervolume(vector< vector<double> > * front, int noPoints,
+  double calculateHypervolume(double** front, int noPoints,
       int noObjectives);
+
   double hypervolume(vector< vector<double> > paretoFront,
       vector< vector<double> > paretoTrueFront, int numberOfObjectives);
 

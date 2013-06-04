@@ -1,7 +1,7 @@
 //  Hypervolume.cpp
 //
 //  Author:
-//       Esteban López <esteban@lcc.uma.es>
+//       Esteban Lï¿½pez <esteban@lcc.uma.es>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -27,7 +27,7 @@
  */
 Hypervolume::Hypervolume() {
   utils_ = new MetricsUtil();
-} // Hypervolume
+} // Hypervolume2
 
 
 /**
@@ -42,7 +42,7 @@ Hypervolume::~Hypervolume() {
  * returns true if 'point1' dominates 'points2' with respect to the
  * to the first 'noObjectives' objectives
  */
-bool Hypervolume::dominates(vector<double> point1, vector<double> point2,
+bool Hypervolume::dominates(double* point1, double* point2,
     int noObjectives) {
 
   int i;
@@ -59,13 +59,11 @@ bool Hypervolume::dominates(vector<double> point1, vector<double> point2,
 } // dominates
 
 
-void Hypervolume::swap(vector< vector<double> > * front, int i, int j) {
+void Hypervolume::swap(double** front, int i, int j) {
 
-  vector<double> temp;
-
-  temp = front->at(i);
-  front->at(i) = front->at(j);
-  front->at(j) = temp;
+  double* temp = front[i];
+  front[i] = front[j];
+  front[j] = temp;
 
 } // swap
 
@@ -76,7 +74,7 @@ void Hypervolume::swap(vector< vector<double> > * front, int i, int j) {
  * considered; 'front' is resorted, such that 'front[0..n-1]' contains
  * the nondominated points; n is returned
  */
-int Hypervolume::filterNondominatedSet(vector< vector<double> > * front,
+int Hypervolume::filterNondominatedSet(double** front,
     int noPoints, int noObjectives) {
 
   int i, j;
@@ -88,11 +86,11 @@ int Hypervolume::filterNondominatedSet(vector< vector<double> > * front,
   while (i < n) {
     j = i + 1;
     while (j < n) {
-      if (dominates(front->at(i), front->at(j), noObjectives)) {
+      if (dominates(front[i], front[j], noObjectives)) {
         /* remove point 'j' */
         n--;
         swap(front, j, n);
-      } else if (dominates(front->at(j), front->at(i), noObjectives)) {
+      } else if (dominates(front[j], front[i], noObjectives)) {
         /* remove point 'i'; ensure that the point copied to index 'i'
            is considered in the next outer loop (thus, decrement i) */
         n--;
@@ -115,7 +113,7 @@ int Hypervolume::filterNondominatedSet(vector< vector<double> > * front,
  * calculate next value regarding dimension 'objective'; consider
  * points referenced in 'front[0..noPoints-1]'
  */
-double Hypervolume::surfaceUnchangedTo(vector< vector<double> > front,
+double Hypervolume::surfaceUnchangedTo(double** front,
     int noPoints, int objective) {
 
   int i;
@@ -145,7 +143,7 @@ double Hypervolume::surfaceUnchangedTo(vector< vector<double> > front,
  * 'front[0..noPoints-1]' are considered; 'front' is resorted, such that
  * 'front[0..n-1]' contains the remaining points; 'n' is returned
  */
-int Hypervolume::reduceNondominatedSet(vector< vector<double> > * front,
+int Hypervolume::reduceNondominatedSet(double** front,
     int noPoints, int objective, double threshold) {
 
   int n;
@@ -153,7 +151,7 @@ int Hypervolume::reduceNondominatedSet(vector< vector<double> > * front,
 
   n = noPoints;
   for (i = 0; i < n; i++) {
-    if (front->at(i)[objective] <= threshold) {
+    if (front[i][objective] <= threshold) {
       n--;
       swap(front, i, n);
     } // if
@@ -164,7 +162,7 @@ int Hypervolume::reduceNondominatedSet(vector< vector<double> > * front,
 } // ReduceNondominatedSet
 
 
-double Hypervolume::calculateHypervolume(vector< vector<double> > * front,
+double Hypervolume::calculateHypervolume(double** front,
     int noPoints, int noObjectives){
 
   int n;
@@ -185,14 +183,14 @@ double Hypervolume::calculateHypervolume(vector< vector<double> > * front,
         cout << "run-time error" << endl;
         exit(-1);
       } // if
-      tempVolume = front->at(0)[0];
+      tempVolume = front[0][0];
     } else {
       tempVolume = calculateHypervolume(front,
                                         noNondominatedPoints,
                                         noObjectives - 1);
     } // if
 
-    tempDistance = surfaceUnchangedTo(*front, n, noObjectives - 1);
+    tempDistance = surfaceUnchangedTo(front, n, noObjectives - 1);
     volume += tempVolume * (tempDistance - distance);
     distance = tempDistance;
     n = reduceNondominatedSet(front, n, noObjectives - 1, distance);
@@ -200,29 +198,41 @@ double Hypervolume::calculateHypervolume(vector< vector<double> > * front,
 
   return volume;
 
-} // calculateHypervolume
+} // calculateHypervolume2
 
 
 /*
  * merge two fronts
  */
-vector< vector<double> > Hypervolume::mergeFronts(vector< vector<double> > front1,
-    vector< vector<double> > front2) {
+double** Hypervolume::mergeFronts(double** front1, int  sizeFront1,
+		double** front2, int  sizeFront2,  int  noObjectives) {
 
-  int i, j;
-  int noPoints;
-  vector< vector<double> > frontPtr;
+	int  i, j;
+	int  noPoints = sizeFront1 + sizeFront2;
+	double** frontPtr =0;
 
-  for (i = 0; i < front1.size(); i++) {
-    frontPtr.push_back(front1[i]);
-  }
-  for (i = 0; i < front2.size(); i++) {
-    frontPtr.push_back(front2[i]);
-  }
+	/* allocate memory */
+	frontPtr =new double*[noPoints];
+	for (int y=0; y< noPoints; ++y)
+		frontPtr[y] = new double[noObjectives];
 
-  return frontPtr;
+	/* copy points */
+	noPoints = 0;
+	for (i = 0; i < sizeFront1; i++) {
+	   for (j = 0; j < noObjectives; j++)
+	        frontPtr[noPoints][j] = front1[i][j];
+	    noPoints++;
+	}
+	for (i = 0; i < sizeFront2; i++) {
+	   for (j = 0; j < noObjectives; j++)
+	        frontPtr[noPoints][j] = front2[i][j];
+	   noPoints++;
+	}
+
+ return frontPtr;
 
 } // mergeFronts
+
 
 
 /**
@@ -268,7 +278,22 @@ double Hypervolume::hypervolume(vector< vector<double> > paretoFront,
   //metric by Zitzler is for maximization problems
   invertedFront = utils_->invertedFront(normalizedFront);
 
+  /*Makes a copy of invertedFront in pointer of pointer format*/
+  double ** invertedFront2 = new double*[invertedFront.size()];
+  for (int i = 0; i < invertedFront.size(); i++) {
+	    invertedFront2[i] = new double[invertedFront[i].size()];
+ 	 	for (int j = 0; j < invertedFront[i].size(); j++)
+ 	 		invertedFront2[i][j] = invertedFront[i][j];
+  }
+
   // STEP4. The hypervolume (control is passed to java version of Zitzler code)
-  return this->calculateHypervolume(&invertedFront,invertedFront.size(),numberOfObjectives);
+  double hv=this->calculateHypervolume(invertedFront2,invertedFront.size(),numberOfObjectives);
+
+  for( int y = 0 ; y < invertedFront.size() ; y++ )
+	  delete [] invertedFront2[y] ;
+  delete [] invertedFront2;
+
+
+  return hv;
 
 }// hypervolume

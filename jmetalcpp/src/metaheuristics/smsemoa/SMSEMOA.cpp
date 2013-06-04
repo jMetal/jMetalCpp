@@ -21,7 +21,6 @@
 
 #include <SMSEMOA.h>
 
-
 /*
  * This class implements the MOEA/D algorithm.
  */
@@ -61,7 +60,7 @@ SolutionSet * SMSEMOA::execute() {
 
   SolutionSet * population;
   SolutionSet * offspringPopulation;
-  SolutionSet * union_;
+  SolutionSet * unionSolution;
 
   Operator * mutationOperator;
   Operator * crossoverOperator;
@@ -73,7 +72,6 @@ SolutionSet * SMSEMOA::execute() {
   offset = *(double *) getInputParameter("offset");
 
   //indicators = (QualityIndicator*) getInputParameter("indicators");
-
 
   //Initialize the variables
   population = new SolutionSet(populationSize);
@@ -103,13 +101,11 @@ SolutionSet * SMSEMOA::execute() {
    while (evaluations < maxEvaluations) {
 
 	   // Create the offSpring solutionSet
-	   offspringPopulation = new SolutionSet(populationSize);
-	   parents = new Solution*[2];
+	   offspringPopulation = new SolutionSet(1);
 
-       /** POR AHORA SE ASUME QUE OPERADOR SELECCION RETORNA DOS SOLUCIONES ***/
+       /*Selection Operator must return two individuals*/
 	   parents = (Solution **) (selectionOperator->execute(population));
 
-	   offSpring = new Solution*[2];
 	   offSpring = (Solution **) (crossoverOperator->execute(parents));
 
 	   mutationOperator->execute(offSpring[0]);
@@ -121,19 +117,18 @@ SolutionSet * SMSEMOA::execute() {
        offspringPopulation->add(offSpring[0]);
 
        evaluations++;
-       cout << "Evaluaciones " << evaluations << endl;
-
+       cout << "Evaluations " << evaluations << endl;
 
        delete offSpring[1];
-       delete[] offSpring; //Borra el vector, los elementos son copia de CRUCE
-       delete[] parents; //Borra el vector, los elementos son Soluciones de Population
+       delete[] offSpring;
+       delete[] parents;
 
        // Create the solutionSet union of solutionSet and offSpring
-       union_ = population->join(offspringPopulation);
+       unionSolution = population->join(offspringPopulation);
        delete offspringPopulation;
 
        // Ranking the union (non-dominated sorting)
-       Ranking * ranking = new Ranking(union_);
+       Ranking * ranking = new Ranking(unionSolution);
 
        // ensure crowding distance values are up to date
        // (may be important for parent selection)
@@ -148,8 +143,8 @@ SolutionSet * SMSEMOA::execute() {
     	   int numberOfObjectives = problem_->getNumberOfObjectives();
 
            // STEP 1. Obtain the maximum and minimum values of the Pareto front
-           vector<double> maximumValues = utils_->getMaximumValues(union_->writeObjectivesToMatrix(), numberOfObjectives);
-           vector<double> minimumValues = utils_->getMinimumValues(union_->writeObjectivesToMatrix(), numberOfObjectives);
+           vector<double> maximumValues = utils_->getMaximumValues(unionSolution->writeObjectivesToMatrix(), numberOfObjectives);
+           vector<double> minimumValues = utils_->getMinimumValues(unionSolution->writeObjectivesToMatrix(), numberOfObjectives);
 
            // STEP 2. Get the normalized front
            vector <vector<double> > normalizedFront = utils_->getNormalizedFront(frontValues, maximumValues, minimumValues);
@@ -179,7 +174,7 @@ SolutionSet * SMSEMOA::execute() {
 
             CrowdingDistanceComparator *cd = new CrowdingDistanceComparator();
 			lastFront->sort(cd);
-			delete cd;  /************OJO****************/
+			delete cd;
          }
 
 
@@ -188,21 +183,21 @@ SolutionSet * SMSEMOA::execute() {
        for (int i=0;i<population->size();i++) {
           delete population->get(i);
         }
-       population->clear();
+        population->clear();
 
 
-       for (int i = 0; i < ranking->getNumberOfSubfronts() - 1; i++) {
+        for (int i = 0; i < ranking->getNumberOfSubfronts() - 1; i++) {
              front = ranking->getSubfront(i);
              for (int j = 0; j < front->size(); j++)
             	   population->add(new Solution(front->get(j)));
-
         }
 	    for (int i = 0; i < lastFront->size() - 1; i++)
               population->add(new Solution(lastFront->get(i)));
 
 
 	    delete ranking;
-	    delete union_;
+	    delete unionSolution;
+
 
 	    // This piece of code shows how to use the indicator object into the code
         // of SMS-EMOA. In particular, it finds the number of evaluations required
@@ -236,24 +231,24 @@ vector<double> SMSEMOA::hvContributions(vector< vector<double> > front){
 	 int numberOfObjectives = problem_->getNumberOfObjectives();
 
 	 vector<double> contributions;
-	 vector< vector<double> > frontSubset;
-
 	 double hv;
 
-	 vector< vector<double> > frontCopy;
-	 vector< vector<double> > totalFront;
+	 double** frontSubset;
 
+	 vector< vector<double> > frontCopy;
+
+	 double** totalFront = new double*[front.size()];
  	 for (int i = 0; i < front.size(); i++) {
  		frontCopy.push_back(vector<double>());
- 		totalFront.push_back(vector<double>());
+ 		totalFront[i] = new double[front[i].size()];
 	 	for (int j = 0; j < front[i].size(); j++) {
 	 		frontCopy[i].push_back(front[i][j]);
-	 		totalFront[i].push_back(front[i][j]);
+	 		totalFront[i][j] = front[i][j];
 	 	}
 	 }
 
-     double totalVolume = hv_->calculateHypervolume(&totalFront, totalFront.size(), numberOfObjectives);
 
+     double totalVolume = hv_->calculateHypervolume(totalFront, front.size(), numberOfObjectives);
 
 	 for (int i = 0; i < front.size(); i++) {
 
@@ -263,25 +258,34 @@ vector<double> SMSEMOA::hvContributions(vector< vector<double> > front){
 		 }
 		 frontCopy.erase(frontCopy.begin() + i);
 
-
-		 frontSubset.erase( frontSubset.begin(), frontSubset.end() );
+		 /*Makes a copy in pointer of pointer format*/
+		 frontSubset = new double*[frontCopy.size()];
 		 for (int f = 0; f < frontCopy.size(); f++) {
-				frontSubset.push_back(vector<double>());
-		 	 	for (int c = 0; c < frontCopy[f].size(); c++) {
-		 	 		frontSubset[f].push_back(frontCopy[f][c]);
-		 	 	}
+			   frontSubset[f] = new double[frontCopy[f].size()];
+			   for (int c = 0; c < frontCopy[f].size(); c++) {
+		 	 		frontSubset[f][c]=frontCopy[f][c];
+		 	   }
 		  }
 
+
          // STEP4. The hypervolume
-		 hv = hv_->calculateHypervolume(&frontSubset, frontSubset.size(), numberOfObjectives);
+		 hv = hv_->calculateHypervolume(frontSubset, frontCopy.size(), numberOfObjectives);
 	     contributions.push_back(totalVolume - hv);
 
          // put point back position i
 	     frontCopy.insert(frontCopy.begin() + i , evaluatedPoint);
 
 
+	     for( int y = 0 ; y < frontCopy.size()-1 ; y++ )
+	     	delete [] frontSubset[y] ;
+	     delete [] frontSubset;
+
 
 	  }
+
+	  for( int y = 0 ; y < front.size() ; y++ )
+		  delete [] totalFront[y] ;
+      delete [] totalFront;
 
 	  return contributions;
 
