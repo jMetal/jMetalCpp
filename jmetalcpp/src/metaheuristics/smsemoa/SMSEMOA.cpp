@@ -103,13 +103,13 @@ SolutionSet * SMSEMOA::execute() {
    while (evaluations < maxEvaluations) {
 
 	   // Create the offSpring solutionSet
-	   offspringPopulation = new SolutionSet(populationSize);
-	   parents = new Solution*[2];
+	   offspringPopulation = new SolutionSet(1);
+	   //parents = new Solution*[2];
 
        /** POR AHORA SE ASUME QUE OPERADOR SELECCION RETORNA DOS SOLUCIONES ***/
 	   parents = (Solution **) (selectionOperator->execute(population));
 
-	   offSpring = new Solution*[2];
+	   //offSpring = new Solution*[2];
 	   offSpring = (Solution **) (crossoverOperator->execute(parents));
 
 	   mutationOperator->execute(offSpring[0]);
@@ -121,12 +121,12 @@ SolutionSet * SMSEMOA::execute() {
        offspringPopulation->add(offSpring[0]);
 
        evaluations++;
-       cout << "Evaluaciones " << evaluations << endl;
+       cout << "Evaluaciones.... " << evaluations << endl;
 
 
        delete offSpring[1];
-       delete[] offSpring; //Borra el vector, los elementos son copia de CRUCE
-       delete[] parents; //Borra el vector, los elementos son Soluciones de Population
+       //delete[] offSpring; //Borra el vector, los elementos son copia de CRUCE
+       //delete[] parents; //Borra el vector, los elementos son Soluciones de Population
 
        // Create the solutionSet union of solutionSet and offSpring
        union_ = population->join(offspringPopulation);
@@ -140,6 +140,8 @@ SolutionSet * SMSEMOA::execute() {
        for (int j = 0; j < population->size(); j++){
           population->get(j)->setCrowdingDistance(0.0);
        }
+
+       cout << "front 0 size: " << ranking->getSubfront(0)->size()  << endl ;
 
        SolutionSet *lastFront = ranking->getSubfront(ranking->getNumberOfSubfronts() - 1);
        if (lastFront->size() > 1) {
@@ -160,6 +162,7 @@ SolutionSet * SMSEMOA::execute() {
                  offsets.push_back(offset / (maximumValues[i] - minimumValues[i]));
            }
 
+           
            // STEP 3. Inverse the pareto front. This is needed because the original
            //metric by Zitzler is for maximization problems
            vector <vector<double> > invertedFront = utils_->invertedFront(normalizedFront);
@@ -169,7 +172,7 @@ SolutionSet * SMSEMOA::execute() {
             	 invertedFront[i][j] = invertedFront[i][j] + offsets[j];
               }
            }
-
+           
             // calculate contributions and sort
            vector<double> contributions = hvContributions(invertedFront);
             for (int i = 0; i < contributions.size(); i++) {
@@ -225,6 +228,7 @@ SolutionSet * SMSEMOA::execute() {
        result->add(new Solution(ranking->getSubfront(0)->get(i)));
    }
 
+    
    delete ranking;
    delete population;
 
@@ -251,9 +255,11 @@ vector<double> SMSEMOA::hvContributions(vector< vector<double> > front){
 	 		totalFront[i].push_back(front[i][j]);
 	 	}
 	 }
+    cout << "3" << endl;
+    
+    double totalVolume = hv_->calculateHypervolume(&totalFront, totalFront.size(), numberOfObjectives);
 
-     double totalVolume = hv_->calculateHypervolume(&totalFront, totalFront.size(), numberOfObjectives);
-
+    cout << "4" << endl;
 
 	 for (int i = 0; i < front.size(); i++) {
 
@@ -282,6 +288,7 @@ vector<double> SMSEMOA::hvContributions(vector< vector<double> > front){
 
 
 	  }
+    cout << "5" << endl;
 
 	  return contributions;
 
