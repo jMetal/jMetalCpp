@@ -1,7 +1,7 @@
 //  StandardStudyReportSO.cpp
 //
 //  Author:
-//       Esteban López <esteban@lcc.uma.es>
+//       Esteban LÃ³pez-Camacho <esteban@lcc.uma.es>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -88,7 +88,7 @@ int main(int argc, char ** argv) {
   // Configure the R scripts to be generated
   int rows = 3 ;
   int columns = 2 ;
-  string prefix = "SO"; // ¿Qué poner aquí?
+  string prefix = "SO"; // ï¿½Quï¿½ poner aquï¿½?
   const char * problemsValues[] = {
       "Sphere", "Griewank"};
   vector<string> problems (problemsValues, end(problemsValues));

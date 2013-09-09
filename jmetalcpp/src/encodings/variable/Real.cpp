@@ -2,7 +2,7 @@
 //
 //  Author:
 //       Juan J. Durillo <durillo@lcc.uma.es>
-//       Esteban López <esteban@lcc.uma.es>
+//       Esteban LÃ³pez-Camacho <esteban@lcc.uma.es>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //

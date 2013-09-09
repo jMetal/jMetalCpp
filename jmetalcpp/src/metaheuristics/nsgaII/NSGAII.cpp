@@ -1,7 +1,7 @@
 //  NSGAII.cpp
 //
 //  Author:
-//       Esteban López <esteban@lcc.uma.es>
+//       Esteban LÃ³pez-Camacho <esteban@lcc.uma.es>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -87,7 +87,7 @@ SolutionSet * NSGAII::execute() {
   crossoverOperator = operators_["crossover"];
   selectionOperator = operators_["selection"];
 
-  cout << "Comienza la inicializacion de la poblacion con tamaño " << populationSize << endl;
+  cout << "Comienza la inicializacion de la poblacion con tamaï¿½o " << populationSize << endl;
 
   // Create the initial solutionSet
   Solution * newSolution;
@@ -101,7 +101,7 @@ SolutionSet * NSGAII::execute() {
 //    cout << "Solution constantes evaluadas" << endl;
     evaluations++;
     population->add(newSolution);
-//    cout << "Solution añadida a la poblacion" << endl;
+//    cout << "Solution aï¿½adida a la poblacion" << endl;
   } //for
 
   cout << "NSGAII: Poblacion inicializada con size = " << population->size() << endl;
@@ -154,12 +154,12 @@ SolutionSet * NSGAII::execute() {
     delete offspringPopulation;
 
 //    cout << "NSGAII: unionSolution con size = " << unionSolution->size() << endl;
-//    cout << "NSGAII: Ejecutada unión..." << endl;
+//    cout << "NSGAII: Ejecutada uniï¿½n..." << endl;
 
     // Ranking the union
     Ranking * ranking = new Ranking(unionSolution);
 
-//    cout << "NSGAII: Inicializado ranking con tamaño = " << ranking->getNumberOfSubfronts() << endl;
+//    cout << "NSGAII: Inicializado ranking con tamaï¿½o = " << ranking->getNumberOfSubfronts() << endl;
 
     int remain = populationSize;
     int index = 0;
@@ -172,7 +172,7 @@ SolutionSet * NSGAII::execute() {
     // Obtain the next front
     front = ranking->getSubfront(index);
 
-//    cout << "NSGAII: Obtenido frente de pareto con tamaño " << front->size() << endl;
+//    cout << "NSGAII: Obtenido frente de pareto con tamaï¿½o " << front->size() << endl;
 //    cout << "NSGAII: remain = " << remain << endl;
 
     while ((remain > 0) && (remain >= front->size())) {
@@ -184,7 +184,7 @@ SolutionSet * NSGAII::execute() {
       //Add the individuals of this front
       for (int k = 0; k < front->size(); k++) {
         population->add(new Solution(front->get(k)));
-//        cout << "NSGAII: Añadido frente(" << k << ") a la poblacion con tamaño " << population->size() << endl;
+//        cout << "NSGAII: Aï¿½adido frente(" << k << ") a la poblacion con tamaï¿½o " << population->size() << endl;
       } // for
 
       //Decrement remain
@@ -197,7 +197,7 @@ SolutionSet * NSGAII::execute() {
       if (remain > 0) {
 //        cout << "NSGAII: index = " << index << endl;
         front = ranking->getSubfront(index);
-//        cout << "NSGAII: Obtenido frente de pareto con tamaño " << front->size() << endl;
+//        cout << "NSGAII: Obtenido frente de pareto con tamaï¿½o " << front->size() << endl;
       } // if
     } // while
 

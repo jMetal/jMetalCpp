@@ -1,7 +1,7 @@
 //  ExperimentReport.cpp
 //
 //  Author:
-//       Esteban López <esteban@lcc.uma.es>
+//       Esteban LÃ³pez-Camacho <esteban@lcc.uma.es>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -108,7 +108,7 @@ void ExperimentReport::generateQualityIndicators() {
             for (int numRun=0; numRun<independentRuns_; numRun++) {
 
               stringstream outputParetoFrontFilePath;
-              outputParetoFrontFilePath << problemDirectory << "/FUN." << numRun;
+              outputParetoFrontFilePath << problemDirectory << "/FUN_" << numRun;
               string solutionFrontFile = outputParetoFrontFilePath.str();
               string qualityIndicatorFile = problemDirectory;
               double value;
@@ -200,7 +200,7 @@ void ExperimentReport::generateReferenceFronts() {
 
 
         stringstream outputParetoFrontFilePath;
-        outputParetoFrontFilePath << problemDirectory << "/FUN." << numRun;
+        outputParetoFrontFilePath << problemDirectory << "/FUN_" << numRun;
         string solutionFrontFile = outputParetoFrontFilePath.str();
         string qualityIndicatorFile = problemDirectory;
         double value;
