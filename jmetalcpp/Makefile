@@ -1,46 +1,114 @@
 #
-# TODO:
+# jMetalCpp Makefile
 #
- 
-CC := g++ # This is the main compiler
+#   Author:
+#     Esteban Lopez <esteban@lcc.uma.es>
+#
+# Instructions:
+#    - "make all" to compile everything
+#    - Use "spike" target to quick developing and compiling. MOEAD_main example
+#      is included.
+#
+
+
+# This is the main compiler
+CC := g++
 # CC := clang --analyze # and comment out the linker last line for sanity
-SRCDIR := src
-BUILDDIR := build
-LIBDIR := lib
-TARGET := bin/runner
 
-INC_DIRS := ${shell find include/* -type d -print}
-
+# Source files extension
 SRCEXT := cpp
-SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
-OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
-CFLAGS := -O3 # -g # -Wall
-LIB := -lpthread -lm
-INC := $(patsubst %,-I %/.,$(INC_DIRS))
 
+# Source directory
+SRCDIR := src
+
+# Build directory
+BUILDDIR := build
+
+# Library directory
+LIBDIR := lib
+
+# Binaries directory
+BINDIR := bin
+
+
+# Header files directories
+HEADER_DIRS := $(shell find $(SRCDIR)/* -type d -print)
+
+# Main files directories
+MAIN_DIRS := $(shell find $(SRCDIR) -type d -name main)
+
+# Main source files
+MAIN_FILES := $(shell find $(MAIN_DIRS) -type f -name *.$(SRCEXT))
+
+# Binary files
+BINARIES := $(patsubst main/%.$(SRCEXT),$(BINDIR)/%,$(MAIN_FILES))
+
+# All source files (including main source files)
+SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
+
+# Source files needed to generate the library
+LIB_SOURCES := $(filter-out $(MAIN_FILES), $(SOURCES))
+
+# Object files
+OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(LIB_SOURCES:.$(SRCEXT)=.o))
+
+#BINARIES := $(patsubst $(MAIN_DIRS)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
+
+# Flags
+CFLAGS := -O3 # -g # -Wall
+
+# Include flags when compiling
+INC := $(patsubst %,-I %/.,$(HEADER_DIRS))
+
+
+# Library name
 LIBNAME := libjmetal.a
 
-$(TARGET): $(OBJECTS)
-	@echo " Linking..."
-	#@echo " $(CC) $^ -o $(TARGET) $(LIB)"; $(CC) $^ -o $(TARGET) $(LIB)
-	ar -r $(LIBDIR)/$(LIBNAME) $^
-	ranlib $(LIBDIR)/$(LIBNAME) 
+# Library path
+LIB := $(LIBDIR)/$(LIBNAME)
 
+
+# All rule
+all: $(LIB) mains
+
+# Main files rule
+mains : $(patsubst $(SRCDIR)%.$(SRCEXT), $(BINDIR)%, $(MAIN_FILES))
+
+# Generic binary file rule
+$(BINDIR)/% : $(patsubst $(BINDIR)%, $(SRCDIR)%.cpp, $(BINDIR)/%) $(LIB)
+	@echo "Compiling $(patsubst $(BINDIR)%, $(SRCDIR)%.cpp, $@)"
+	@mkdir -p $(BINDIR)
+	@mkdir -p $(dir $@)
+	@echo "$(CC) $(patsubst $(BINDIR)%, $(SRCDIR)%.cpp, $@) $(DEPS) -o $@ $(INC) $(LIB)"; $(CC) $(patsubst $(BINDIR)%, $(SRCDIR)%.cpp, $@) $(DEPS) -o $@ $(INC) $(LIB)
+
+# Library rule
+$(LIB): $(OBJECTS)
+	@echo "Creating library..."
+	ar -r $(LIB) $^
+	ranlib $(LIB)
+
+# Generic object file rule
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(BUILDDIR)
 	@mkdir -p $(dir $@)
+	@echo "Compiling $<"
 	@echo " $(CC) $(CFLAGS) $(INC) -c -o $@ $<"; $(CC) $(CFLAGS) $(INC) -c -o $@ $<
 
+# Clean rule
 clean:
 	@echo " Cleaning..."; 
-	@echo " $(RM) -r $(BUILDDIR) $(TARGET)"; $(RM) -r $(BUILDDIR) $(TARGET)
+	@echo " $(RM) -r $(BUILDDIR) $(BINDIR) $(LIB)"; $(RM) -r $(BUILDDIR) $(BINDIR) $(LIB)
 
 # Tests
-tester:
-	$(CC) $(CFLAGS) test/tester.cpp $(INC) $(LIB) -o bin/tester
+tester: 
 
-# Spikes
-ticket:
-	$(CC) $(CFLAGS) spikes/ticket.cpp $(INC) $(LIB) -o bin/ticket
+# Spikes (MOEAD_main quick developing and compiling example)
+spikes : $(BINDIR)/main/MOEAD_main
+	
+$(BINDIR)/main/MOEAD_main : $(SRCDIR)/main/MOEAD_main.$(SRCEXT) $(LIB)
+	@echo "Compiling $(SRCDIR)/main/MOEAD_main.$(SRCEXT)"
+	@mkdir -p $(BINDIR)
+	@mkdir -p $(dir $(BINDIR)/main/MOEAD_main)
+	@echo "$(CC) $(SRCDIR)/main/MOEAD_main.$(SRCEXT) $(DEPS) -o $(BINDIR)/main/MOEAD_main $(INC) $(LIB)"; $(CC) $(SRCDIR)/main/MOEAD_main.$(SRCEXT) $(DEPS) -o $(BINDIR)/main/MOEAD_main $(INC) $(LIB)
 
 .PHONY: clean
