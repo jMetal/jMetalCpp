@@ -10,4 +10,5 @@ jmetalcpp/bin/*
 
 # Ignore IDE configuration dirs and files
 jmetalcpp/nbproject/
+nbproject/
 .project
