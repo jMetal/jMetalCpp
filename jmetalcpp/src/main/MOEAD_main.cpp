@@ -70,7 +70,7 @@ int main(int argc, char ** argv) {
   cout << "MOEAD_main: MOEAD algorithm initialized." << endl;
 
   // Algorithm parameters
-  int populationSizeValue = 300;
+  int populationSizeValue = 500;
   int maxEvaluationsValue = 150000;
   algorithm->setInputParameter("populationSize",&populationSizeValue);
   algorithm->setInputParameter("maxEvaluations",&maxEvaluationsValue);
@@ -81,7 +81,8 @@ int main(int argc, char ** argv) {
   // of CS & EE, University of Essex, 02/2009.
   // http://dces.essex.ac.uk/staff/qzhang/MOEAcompetition/CEC09final/code/ZhangMOEADcode/moead0305.rar
   string dataDirectoryValue =
-          "/Users/antonio/Softw/pruebas/data/MOEAD_parameters/Weight";
+          "/cygdrive/c/Docking/MOEAD/Weight";
+          //"/Users/antonio/Softw/pruebas/data/MOEAD_parameters/Weight";
   algorithm->setInputParameter("dataDirectory", &dataDirectoryValue);
 
   // Crossover operator

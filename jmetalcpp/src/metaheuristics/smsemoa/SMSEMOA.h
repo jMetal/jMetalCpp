@@ -1,9 +1,9 @@
-//  NSGAIIStudy.h
+//  SMSEMOA.h
 //
 //  Author:
-//       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Cristian Zambrano V. <cristian_uteq@hotmail.com>
 //
-//  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
+//  Copyright (c) 2013 Antonio J. Nebro, Juan J. Durillo
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Lesser General Public License as published by
@@ -18,28 +18,36 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef __NSGAIISTUDY__
-#define __NSGAIISTUDY__
 
-#include <Experiment.h>
-#include <NSGAII_Settings.h>
-#include <Settings.h>
-#include <string>
+#ifndef SMSEMOA_H_
+#define SMSEMOA_H_
 
-/**
- * Class implementing an example of experiment using NSGA-II as base algorithm.
- * The experiment consisting in studying the effect of the crossover probability
- * in NSGA-II.
- */
+#include <Algorithm.h>
+#include <Problem.h>
+#include <SolutionSet.h>
+#include <PseudoRandom.h>
 
-class NSGAIIStudy : public Experiment {
+#include <QualityIndicator.h>
+#include <MetricsUtil.h>
+#include <Hypervolume.h>
+#include <Ranking.h>
+#include <CrowdingDistanceComparator.h>
+
+class SMSEMOA : public Algorithm {
+
+private:
+
+  MetricsUtil * utils_;
+  Hypervolume * hv_;
+
+  vector<double> hvContributions(vector< vector<double> > front);
+
 
 public:
-  void algorithmSettings(string problemName, int problemIndex, Algorithm ** algorithm);
-  Algorithm * algorithmSettings(string problemName);
-
+  SMSEMOA(Problem * problem);
+  ~SMSEMOA();
+  SolutionSet * execute();
 };
 
 
-
-#endif /* __NSGAIISTUDY__ */
+#endif /* SMSEMOA_H_ */

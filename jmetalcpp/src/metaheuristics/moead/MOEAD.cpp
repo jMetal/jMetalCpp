@@ -154,51 +154,51 @@ void MOEAD::initUniformWeight() {
       lambda_[n][0] = a;
       lambda_[n][1] = 1 - a;
     } // for
-  } // ifvoid
-  // TODO: Implementar la parte de lectura de ficheros
-  /*
+  } // if
   else {
+    ostringstream os;
+    os << dataDirectory_ + "/" << "W" << problem_->getNumberOfObjectives() << "D_"
+        << populationSize_ << ".dat";
     string dataFileName;
-    dataFileName = "W" + problem_->getNumberOfObjectives() + "D_" +
-            populationSize_ + ".dat";
-    try {
-      // Open the file
-      ifstream infile(dataDirectory_ + "/" + dataFileName, ios::in);
-      // TODO: DELETE FileInputStream fis = new FileInputStream(dataDirectory_ + "/" + dataFileName);
-      // TODO: DELETE InputStreamReader isr = new InputStreamReader(fis);
-      // TODO: DELETE BufferedReader br = new BufferedReader(isr);
-      
-      int numberOfObjectives = 0;
-      int i = 0;
-      int j = 0;
-      //TODO: DELETE String aux = br.readLine();
-      string aux;
-      // TODO: DELETE while (aux != null) {
-      while (getline(infile, aux)) {
-        StringTokenizer st = new StringTokenizer(aux);
-        j = 0;
-        numberOfObjectives = st.countTokens();
-        while (st.hasMoreTokens()) {
-          double value = (new Double(st.nextToken())).doubleValue();
+    dataFileName = os.str();
+    
+    // Open the file
+    std::ifstream in(dataFileName.c_str());
+    if( !in ) {
+      cout << "initUniformWeight: failed when reading from file: : " <<
+          dataFileName << endl;
+      exit(-1);
+    } // if
+
+    //int numberOfObjectives = 0;
+    int i = 0;
+    int j = 0;
+    string aux;
+    while (getline(in, aux)) {
+      istringstream iss(aux);
+      j = 0;
+      // TODO: Check if number of tokens per line is equal to number of
+      //       objectives
+      lambda_[i] = new double[problem_->getNumberOfObjectives()];
+      while (iss) {
+        string token;
+        iss >> token;
+        if (token.compare("")!=0) {
+          double value = atof(token.c_str());
           lambda_[i][j] = value;
-          //System.out.println("lambda["+i+","+j+"] = " + value) ;
+          //cout << "lambda[" << i << "," << j << "] = " << value << endl;
           j++;
-        }
-        aux = br.readLine();
-        i++;
-      }
-      br.close();
-    } catch (Exception e) {
-      System.out.println("initUniformWeight: failed when reading for file: " + dataDirectory_ + "/" + dataFileName);
-      e.printStackTrace();
-    }
+        } // if
+      } // while
+      i++;
+    } // while
+    in.close();
   } // else
-  */
 } // initUniformWeight
 
 
 /**
- * 
+ * initNeighborhood
  */
 void MOEAD::initNeighborhood() {
   double * x = new double[populationSize_];
@@ -233,7 +233,7 @@ void MOEAD::initNeighborhood() {
 
 
 /**
- * 
+ * initPopulation
  */
 void MOEAD::initPopulation() {
   for (int i = 0; i < populationSize_; i++) {
@@ -247,7 +247,7 @@ void MOEAD::initPopulation() {
 
 
 /**
- * 
+ * initIdealPoint
  */
 void MOEAD::initIdealPoint() {
   for (int i = 0; i < problem_->getNumberOfObjectives(); i++) {
@@ -264,7 +264,7 @@ void MOEAD::initIdealPoint() {
 
 
 /**
- * 
+ * matingSelection
  */
 void MOEAD::matingSelection(vector<int> &list, int cid, int size, int type) {
   
@@ -379,7 +379,7 @@ void MOEAD::updateProblem(Solution * indiv, int id, int type) {
 
 
 /**
- * 
+ * fitnessFunction
  */
 double MOEAD::fitnessFunction(Solution * individual, double * lambda) {
   double fitness;

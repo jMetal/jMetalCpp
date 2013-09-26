@@ -1,12 +1,13 @@
 # Ignore the build and lib dirs
-build
-lib/*
+jmetalcpp/build
+jmetalcpp/lib/*
 
 # Ignore any executables
-bin/*
+jmetalcpp/bin/*
 
 # Ignore Mac specific files
 .DS_Store
 
-# Ignore IDE configuration dirs
-/nbproject/
+# Ignore IDE configuration dirs and files
+jmetalcpp/nbproject/
+.project
