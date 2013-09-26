@@ -24,6 +24,9 @@ TABLE OF CONTENTS
 0. Updates (NEW)
 =======================================================================================
 
+Version 1.1:
+
+
 Version 1.0.1:
 	- Fixed a bug that prevented the last Wilcoxon table being generated correctly.
 	- Changed FIT quality indicator to be minimized instead of being maximized.
