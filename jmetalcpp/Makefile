@@ -84,6 +84,7 @@ $(BINDIR)/% : $(patsubst $(BINDIR)%, $(SRCDIR)%.cpp, $(BINDIR)/%) $(LIB)
 # Library rule
 $(LIB): $(OBJECTS)
 	@echo "Creating library..."
+	@mkdir -p $(LIBDIR)
 	ar -r $(LIB) $^
 	ranlib $(LIB)
 

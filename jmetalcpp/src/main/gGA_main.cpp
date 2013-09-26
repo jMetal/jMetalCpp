@@ -46,7 +46,7 @@ int main(int argc, char ** argv) {
     // strcpy(defaultProblem, "Sphere");
     cout << "No problem selected." << endl;
     cout << "Default problem will be used: Sphere" << endl;
-    problem = ProblemFactory::getProblem("Sphere");
+    problem = ProblemFactory::getProblem(const_cast<char *>("Sphere"));
   }
 
 	algorithm = new gGA(problem);

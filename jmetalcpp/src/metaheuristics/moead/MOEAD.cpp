@@ -186,7 +186,7 @@ void MOEAD::initUniformWeight() {
         if (token.compare("")!=0) {
           double value = atof(token.c_str());
           lambda_[i][j] = value;
-          cout << "lambda[" << i << "," << j << "] = " << value << endl;
+          //cout << "lambda[" << i << "," << j << "] = " << value << endl;
           j++;
         } // if
       } // while

@@ -56,7 +56,7 @@ int main(int argc, char ** argv) {
     cout << "Default problem will be used: Kursawe" << endl;
 		// char * defaultProblem;
 		// strcpy(defaultProblem, "Kursawe");
-    problem = ProblemFactory::getProblem("Kursawe");
+    problem = ProblemFactory::getProblem(const_cast<char *>("Kursawe"));
   }
 
   cout << "SMPSO_main: Number of objectives: " << problem->getNumberOfObjectives() << endl;

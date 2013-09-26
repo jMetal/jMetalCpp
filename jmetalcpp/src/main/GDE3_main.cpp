@@ -50,7 +50,7 @@ int main(int argc, char ** argv) {
     cout << "Default problem will be used: Fonseca" << endl;
     // char * defaultProblem;
     // strcpy(defaultProblem, "Fonseca");
-    problem = ProblemFactory::getProblem("Fonseca");
+    problem = ProblemFactory::getProblem(const_cast<char *>("Fonseca"));
   }
 
   algorithm = new GDE3(problem);
