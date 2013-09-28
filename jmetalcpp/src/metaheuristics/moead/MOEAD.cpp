@@ -43,7 +43,6 @@ SolutionSet * MOEAD::execute() {
   maxEvaluations = *(int *) getInputParameter("maxEvaluations");
   populationSize_ = *(int *) getInputParameter("populationSize");
   dataDirectory_ = * (string *) getInputParameter("dataDirectory");
-  cout << "POPSIZE: " <<  populationSize_ << endl;
   
   population_ = new SolutionSet(populationSize_);
   //indArray_ = new Solution*[problem_->getNumberOfObjectives()];
