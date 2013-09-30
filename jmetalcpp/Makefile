@@ -104,7 +104,11 @@ clean:
 tester: 
 
 # Spikes (MOEAD_main quick developing and compiling example)
-spikes : $(BINDIR)/main/MOEAD_main
+spikes : spike/cmaes/CMAES.o
+	
+spike/cmaes/CMAES.o: spike/cmaes/CMAES.cpp
+	@echo "Compiling $<"
+	@echo " $(CC) $(CFLAGS) $(INC) -Ispike/cmaes/ -c -o $@ $<"; $(CC) $(CFLAGS) $(INC) -Ispike/cmaes/ -c -o $@ $<
 	
 $(BINDIR)/main/MOEAD_main : $(SRCDIR)/main/MOEAD_main.$(SRCEXT) $(LIB)
 	@echo "Compiling $(SRCDIR)/main/MOEAD_main.$(SRCEXT)"
