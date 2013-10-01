@@ -69,7 +69,7 @@ LIB := $(LIBDIR)/$(LIBNAME)
 
 
 # All rule
-all: $(LIB) mains
+all: library mains
 
 # Main files rule
 mains : $(patsubst $(SRCDIR)%.$(SRCEXT), $(BINDIR)%, $(MAIN_FILES))
@@ -82,6 +82,8 @@ $(BINDIR)/% : $(patsubst $(BINDIR)%, $(SRCDIR)%.cpp, $(BINDIR)/%) $(LIB)
 	@echo "$(CC) $(patsubst $(BINDIR)%, $(SRCDIR)%.cpp, $@) $(DEPS) -o $@ $(INC) $(LIB)"; $(CC) $(patsubst $(BINDIR)%, $(SRCDIR)%.cpp, $@) $(DEPS) -o $@ $(INC) $(LIB)
 
 # Library rule
+library : $(LIB)
+
 $(LIB): $(OBJECTS)
 	@echo "Creating library..."
 	@mkdir -p $(LIBDIR)
@@ -104,12 +106,8 @@ clean:
 tester: 
 
 # Spikes (MOEAD_main quick developing and compiling example)
-spikes : spike/cmaes/CMAES.o
-	
-spike/cmaes/CMAES.o: spike/cmaes/CMAES.cpp
-	@echo "Compiling $<"
-	@echo " $(CC) $(CFLAGS) $(INC) -Ispike/cmaes/ -c -o $@ $<"; $(CC) $(CFLAGS) $(INC) -Ispike/cmaes/ -c -o $@ $<
-	
+spikes : $(BINDIR)/main/MOEAD_main
+
 $(BINDIR)/main/MOEAD_main : $(SRCDIR)/main/MOEAD_main.$(SRCEXT) $(LIB)
 	@echo "Compiling $(SRCDIR)/main/MOEAD_main.$(SRCEXT)"
 	@mkdir -p $(BINDIR)

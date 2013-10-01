@@ -39,7 +39,7 @@ SolutionSet * CMAES::execute() {
   
   //int populationSize;
   int maxEvaluations;
-  int evaluations;
+  //int evaluations;
   
   SolutionSet * population;
   
@@ -49,7 +49,8 @@ SolutionSet * CMAES::execute() {
   
   //Initialize the variables
   //population = new SolutionSet(populationSize);
-  evaluations = 0;
+  counteval = 0;
+  countiter = 0;
 
   // ESTO ES EL PROBLEMA DE JMETALCPP
   //IObjectiveFunction fitfun = new Rosenbrock();
@@ -67,6 +68,8 @@ SolutionSet * CMAES::execute() {
 //  cma.setInitialX(0.05); // in each dimension, also setTypicalX can be used
 //  cma.setInitialStandardDeviation(0.2); // also a mandatory setting 
 //  cma.options.stopFitness = 1e-14;       // optional setting
+  
+  sp = new CMAParameters();
 
   // initialize cma and get fitness array to fill in later
   double * fitness = init();  // new double[cma.parameters.getPopulationSize()];
@@ -244,6 +247,7 @@ double * CMAES::init() {
   };
 
   /* interpret missing option value */
+  diagonalCovarianceMatrix = 0;
 //  if (options.diagonalCovarianceMatrix < 0) // necessary for hello world message
 //    options.diagonalCovarianceMatrix = 1 * 150 * N / sp.lambda; // cave: duplication below
 
@@ -266,15 +270,18 @@ double * CMAES::init() {
   artmp = new double[problem_->getNumberOfVariables()];
 
 
-//  fit.deltaFitHist = new double[5];
-//  fit.idxDeltaFitHist = -1;
-//  for (i = 0; i < fit.deltaFitHist.length; ++i)
-//    fit.deltaFitHist[i] = 1.;
-//
-//  // code to be duplicated in reSizeLambda
-//  fit.fitness = new IntDouble[sp.getLambda()];   // including penalties, used yet
-//  fit.raw = new IntDouble[sp.getLambda()];       // raw function values
-//  fit.history = new double[10+30*N/sp.getLambda()];	
+  fit = new FitnessCollector();
+  //fit->deltaFitHist = new double[5];
+  fit->idxDeltaFitHist = -1;
+  for (i = 0; i < 5; i++) {
+    fit->deltaFitHist[i] = 1.;
+  }
+
+  // code to be duplicated in reSizeLambda
+  fit->fitness = new IntDouble*[populationSize_];   // including penalties, used yet
+  fit->raw = new IntDouble*[populationSize_];       // raw function values
+  fit->historyLength = 10+30*problem_->getNumberOfVariables()/populationSize_;
+  fit->history = new double[fit->historyLength];	
 
   arx = new double*[populationSize_];
   for (i = 0; i < populationSize_; i++) {
@@ -314,8 +321,8 @@ double * CMAES::init() {
   }
 //  maxsqrtdiagC = Math.sqrt(math.max(math.diag(C)));
 //  minsqrtdiagC = Math.sqrt(math.min(math.diag(C)));
-//  countCupdatesSinceEigenupdate = 0;
-//  iniphase = false; // obsolete
+  countCupdatesSinceEigenupdate = 0;
+  iniphase = false; // obsolete
 
   /* Some consistency check */
   for (i = 0; i < problem_->getNumberOfVariables(); i++) {
@@ -363,7 +370,7 @@ SolutionSet * CMAES::samplePopulation() {
 
   // NECESARIO CONTAR LAS ITERACIONES?? Y EL JODIDO STATE?
 //  if (state != 1) {
-//    countiter++;
+    countiter++;
 //  }
 //  state = 1; // can be repeatedly called without problem
   idxRecentOffspring = populationSize_ - 1; // not really necessary at the moment
@@ -490,7 +497,7 @@ double * CMAES::genoPhenoTransformation(double * popx, double * popy) {
   
 }
 
-void CMAES::updateDistribution() {
+void CMAES::updateDistribution(SolutionSet * pop) {
 //  if (state == 3) {
 //    error("updateDistribution() was already called");
 //  }
@@ -499,19 +506,23 @@ void CMAES::updateDistribution() {
 //        + "!=" + "lambda=" + sp.getLambda());
 
   /* pass input argument */
-  for (int i = 0; i < sp.getLambda(); ++i) {
-      fit.raw[i].val = functionValues[i];
-      fit.raw[i].i = i;
+  for (int i = 0; i < populationSize_; i++) {
+    fit->raw[i]->setVal(pop->get(i)->getObjective(0));
+    //fit->raw[i]->setVal(functionValues[i]);
+    fit->raw[i]->setI(i);
   }
 
-  counteval += sp.getLambda();
-  recentFunctionValue = math.min(fit.raw).val;
-  recentMaxFunctionValue = math.max(fit.raw).val;
-  recentMinFunctionValue = math.min(fit.raw).val;
-  updateDistribution2();
-}
-
-void CMAES::updateDistribution2() {
+  counteval += populationSize_;
+  //recentFunctionValue = math.min(fit.raw).val;
+  recentFunctionValue = fit->minRaw(populationSize_)->getVal();
+  //recentMaxFunctionValue = math.max(fit.raw).val;
+  recentMaxFunctionValue = fit->maxRaw(populationSize_)->getVal();
+  //recentMinFunctionValue = math.min(fit.raw).val;
+  recentMinFunctionValue = recentFunctionValue;
+//  updateDistribution2();
+//}
+//
+//void CMAES::updateDistribution2() {
         
   int i, j, k, iNk, hsig;
   double sum;
@@ -522,83 +533,91 @@ void CMAES::updateDistribution2() {
 //  }
 
   /* sort function values */
-  Arrays.sort(fit.raw, fit.raw[0]);
+  UtilsCMAES::minFastSort(fit->raw, populationSize_);
+  //Arrays.sort(fit.raw, fit.raw[0]);
 
-  for (iNk = 0; iNk < sp.getLambda(); ++iNk) {
-    fit.fitness[iNk].val = fit.raw[iNk].val; // superfluous at time
-    fit.fitness[iNk].i = fit.raw[iNk].i;
+  for (iNk = 0; iNk < populationSize_; iNk++) {
+    fit->fitness[iNk]->setVal(fit->raw[iNk]->getVal()); // superfluous at time
+    fit->fitness[iNk]->setI(fit->raw[iNk]->getI());
   }
 
   /* update fitness history */ 
-  for (i = fit.history.length - 1; i > 0; --i)
-      fit.history[i] = fit.history[i - 1];
-  fit.history[0] = fit.raw[0].val;
+  for (i = fit->historyLength - 1; i > 0; i--) {
+    fit->history[i] = fit->history[i - 1];
+  }
+  fit->history[0] = fit->raw[0]->getVal();
 
   /* save/update bestever-value */
-  updateBestEver(arx[fit.raw[0].i], fit.raw[0].val, 
-      counteval - sp.getLambda() + fit.raw[0].i + 1);
+//  updateBestEver(arx[fit->raw[0]->getI()], fit->raw[0]->getVal(), 
+//      counteval - populationSize_ + fit->raw[0]->getI() + 1);
 
   /* re-calculate diagonal flag */
-  flgdiag = (options.diagonalCovarianceMatrix == 1 || options.diagonalCovarianceMatrix >= countiter); 
-  if (options.diagonalCovarianceMatrix == -1) // options might have been re-read
-    flgdiag = (countiter <= 1 * 150 * N / sp.lambda);  // CAVE: duplication of "default"
+  flgdiag = (diagonalCovarianceMatrix == 1);// || diagonalCovarianceMatrix >= countiter); 
+//  if (options.diagonalCovarianceMatrix == -1) // options might have been re-read
+//    flgdiag = (countiter <= 1 * 150 * N / sp.lambda);  // CAVE: duplication of "default"
 
   /* calculate xmean and BDz~N(0,C) */
-  for (i = 0; i < N; ++i) {
-      xold[i] = xmean[i];
-      xmean[i] = 0.;
-      for (iNk = 0; iNk < sp.getMu(); ++iNk)
-          xmean[i] += sp.getWeights()[iNk] * arx[fit.fitness[iNk].i][i];
-      BDz[i] = Math.sqrt(sp.getMueff()) * (xmean[i] - xold[i]) / sigma;
+  for (i = 0; i < problem_->getNumberOfVariables(); i++) {
+    xold[i] = xmean[i];
+    xmean[i] = 0.;
+    for (iNk = 0; iNk < sp->getMu(); iNk++) {
+      xmean[i] += sp->getWeights()[iNk] * arx[fit->fitness[iNk]->getI()][i];
+    }
+    BDz[i] = sqrt(sp->getMueff()) * (xmean[i] - xold[i]) / sigma;
   }
-
+  
   /* cumulation for sigma (ps) using B*z */
   if (flgdiag) {
     /* given B=I we have B*z = z = D^-1 BDz  */
-    for (i = 0; i < N; ++i) {
-      ps[i] = (1. - sp.getCs()) * ps[i]
-                                     + Math.sqrt(sp.getCs() * (2. - sp.getCs())) 
-                                     * BDz[i] / diagD[i];
+    for (i = 0; i < problem_->getNumberOfVariables(); i++) {
+      ps[i] = (1. - sp->getCs()) * ps[i]
+          + sqrt(sp->getCs() * (2. - sp->getCs())) 
+          * BDz[i] / diagD[i];
     }
   } else {
     /* calculate z := D^(-1) * B^(-1) * BDz into artmp, we could have stored z instead */
-    for (i = 0; i < N; ++i) {
-      for (j = 0, sum = 0.; j < N; ++j)
+    for (i = 0; i < problem_->getNumberOfVariables(); i++) {
+      for (j = 0, sum = 0.; j < problem_->getNumberOfVariables(); j++) {
         sum += B[j][i] * BDz[j];
+      }
       artmp[i] = sum / diagD[i];
     }
     /* cumulation for sigma (ps) using B*z */
-    for (i = 0; i < N; ++i) {
-      for (j = 0, sum = 0.; j < N; ++j)
+    for (i = 0; i < problem_->getNumberOfVariables(); i++) {
+      for (j = 0, sum = 0.; j < problem_->getNumberOfVariables(); j++) {
         sum += B[i][j] * artmp[j];
-      ps[i] = (1. - sp.getCs()) * ps[i]
-                                     + Math.sqrt(sp.getCs() * (2. - sp.getCs())) * sum;
+      }
+      ps[i] = (1. - sp->getCs()) * ps[i]
+          + sqrt(sp->getCs() * (2. - sp->getCs())) * sum;
     }
   }
 
   /* calculate norm(ps)^2 */
   psxps = 0;
-  for (i = 0; i < N; ++i)
-      psxps += ps[i] * ps[i];
+  for (i = 0; i < problem_->getNumberOfVariables(); i++) {
+    psxps += ps[i] * ps[i];
+  }
 
   /* cumulation for covariance matrix (pc) using B*D*z~N(0,C) */
   hsig = 0;
-  if (Math.sqrt(psxps)
-          / Math.sqrt(1. - Math.pow(1. - sp.getCs(), 2. * countiter))
-          / sp.chiN < 1.4 + 2. / (N + 1.)) {
-      hsig = 1;
+  if (sqrt(psxps)
+        / sqrt(1. - pow(1. - sp->getCs(), 2. * countiter))
+        / sp->getChiN() < 1.4 + 2. / (problem_->getNumberOfVariables() + 1.)) {
+    hsig = 1;
   }
-  for (i = 0; i < N; ++i) {
-      pc[i] = (1. - sp.getCc()) * pc[i] + hsig
-      * Math.sqrt(sp.getCc() * (2. - sp.getCc())) * BDz[i];
+  for (i = 0; i < problem_->getNumberOfVariables(); i++) {
+    pc[i] = (1. - sp->getCc()) * pc[i] + hsig
+      * sqrt(sp->getCc() * (2. - sp->getCc())) * BDz[i];
   }
 
   /* stop initial phase, not in use anymore as hsig does the job */
-  if (iniphase
-      && countiter > Math.min(1 / sp.getCs(), 1 + N / sp.getMucov()))
-    if (psxps / sp.getDamps()
-        / (1. - Math.pow((1. - sp.getCs()), countiter)) < N * 1.05)
+  if (iniphase && countiter > min(1 / sp->getCs(), 1 + problem_->getNumberOfVariables() / sp->getMucov())) {
+    if (psxps / sp->getDamps()
+            / (1. - pow((1. - sp->getCs()), countiter))
+            < problem_->getNumberOfVariables() * 1.05) {
       iniphase = false;
+    }
+  }
 
   /* this, it is harmful in a dynamic environment
    * remove momentum in ps, if ps is large and fitness is getting worse */
@@ -616,39 +635,48 @@ void CMAES::updateDistribution2() {
 //        }
 
   /* update of C */
-  if (sp.getCcov() > 0 && iniphase == false) {
-
-      ++countCupdatesSinceEigenupdate;
-
-      /* update covariance matrix */
-      for (i = 0; i < N; ++i)
-          for (j = (flgdiag ? i : 0); 
-               j <= i; ++j) {
-              C[i][j] = (1 - sp.getCcov(flgdiag))
-              * C[i][j]
-                     + sp.getCcov()
-                     * (1. / sp.getMucov())
-                     * (pc[i] * pc[j] + (1 - hsig) * sp.getCc()
-                             * (2. - sp.getCc()) * C[i][j]);
-              for (k = 0; k < sp.getMu(); ++k) { /*
-              * additional rank mu
-              * update
-              */
-                  C[i][j] += sp.getCcov() * (1 - 1. / sp.getMucov())
-                  * sp.getWeights()[k]
-                                    * (arx[fit.fitness[k].i][i] - xold[i])
-                                    * (arx[fit.fitness[k].i][j] - xold[j]) / sigma
-                                    / sigma;
-              }
-          }
-      maxsqrtdiagC = Math.sqrt(math.max(math.diag(C)));
-      minsqrtdiagC = Math.sqrt(math.min(math.diag(C)));
+  if (sp->getCcov() > 0 && iniphase == false) {
+  
+    countCupdatesSinceEigenupdate++;
+    
+    /* update covariance matrix */
+    for (i = 0; i < problem_->getNumberOfVariables(); i++) {
+      for (j = (flgdiag ? i : 0); j <= i; j++) {
+        C[i][j] = (1 - sp->getCcov(flgdiag))
+                * C[i][j]
+                + sp->getCcov()
+                * (1. / sp->getMucov())
+                * (pc[i] * pc[j] + (1 - hsig) * sp->getCc()
+                * (2. - sp->getCc()) * C[i][j]);
+        for (k = 0; k < sp->getMu(); k++) {
+          /*
+           * additional rank mu
+           * update
+           */
+          C[i][j] += sp->getCcov() * (1 - 1. / sp->getMucov())
+                * sp->getWeights()[k]
+                * (arx[fit->fitness[k]->getI()][i] - xold[i])
+                * (arx[fit->fitness[k]->getI()][j] - xold[j]) / sigma
+                / sigma;
+        }
+      }
+    }
+//    maxsqrtdiagC = sqrt(max(math.diag(C)));
+//    minsqrtdiagC = sqrt(min(math.diag(C)));
   } // update of C
 
   /* update of sigma */
-  sigma *= Math.exp(((Math.sqrt(psxps) / sp.chiN) - 1) * sp.getCs()
-          / sp.getDamps());
+  sigma *= exp(((sqrt(psxps) / sp->getChiN()) - 1) * sp->getCs()
+          / sp->getDamps());
 
-  state = 3;
+//  state = 3;
 
 } // updateDistribution()
+
+//void CMAES::updateBestEver(double * x, double fitness, int eval) {
+//    if (fitness < bestever_fit || Double.isNaN(bestever_fit)) {  // countiter == 1 not needed anymore
+//        bestever_fit = fitness;
+//        bestever_eval = eval;
+//        bestever_x = assignNew(x, bestever_x); // save (hopefully) efficient assignment
+//    }
+//}

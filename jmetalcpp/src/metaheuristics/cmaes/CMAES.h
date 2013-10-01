@@ -25,7 +25,15 @@
 #include <Problem.h>
 #include <SolutionSet.h>
 
+#include <FitnessCollector.h>
+#include <IntDouble.h>
+#include <UtilsCMAES.h>
+#include <CMAParameters.h>
+
 #include <PseudoRandom.h>
+
+#include<math.h>
+
 
 /**
  * This class implements the CMA-ES algorithm.
@@ -44,6 +52,11 @@ class CMAES : public Algorithm {
      */
     SolutionSet * population_;
 //    double ** population_;
+    
+    FitnessCollector * fit;
+    
+    int counteval;
+    int countiter;
     
 //    int N;
 //    long seed = System.currentTimeMillis();
@@ -79,8 +92,8 @@ class CMAES : public Algorithm {
     double * startsigma;
     double maxstartsigma;
     double minstartsigma;
-//    
-//    boolean iniphase;
+    
+    bool iniphase;
 // 
 //    /**
 //     * state (postconditions):
@@ -100,11 +113,11 @@ class CMAES : public Algorithm {
 //    final int PARALLEL_MODE = 2;
 //
 //    
-//    long countCupdatesSinceEigenupdate;
+    int countCupdatesSinceEigenupdate;
     
-//    double recentFunctionValue; 
-//    double recentMaxFunctionValue;
-//    double recentMinFunctionValue;
+    double recentFunctionValue; 
+    double recentMaxFunctionValue;
+    double recentMinFunctionValue;
     int idxRecentOffspring; 
 //    
     double ** arx;
@@ -116,6 +129,12 @@ class CMAES : public Algorithm {
     double * BDz;
     double * artmp;
     
+    // OPTIONS:
+    int diagonalCovarianceMatrix;
+    
+    // PARAMETERS:
+    CMAParameters * sp;
+    
     double * init();
     SolutionSet * samplePopulation();
 //    double ** samplePopulation();
@@ -125,13 +144,14 @@ class CMAES : public Algorithm {
 //    double ** genoPhenoTransformation(double ** popx, double ** popy);
     SolutionSet * genoPhenoTransformation(double ** popx, SolutionSet * popy);
     double * genoPhenoTransformation(double * popx, double * popy);
+    
+    void updateDistribution(SolutionSet * pop);
+    void updateBestEver(double * x, double fitness, int eval);
 
   public:
     CMAES(Problem * problem);
     SolutionSet * execute();
     
-    
-  
 };
 
 #endif /* __CMAES__ */
