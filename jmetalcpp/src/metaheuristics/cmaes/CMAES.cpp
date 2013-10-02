@@ -51,6 +51,8 @@ SolutionSet * CMAES::execute() {
   //population = new SolutionSet(populationSize);
   counteval = 0;
   countiter = 0;
+  
+  Comparator * comparator = new ObjectiveComparator(0) ;
 
   // ESTO ES EL PROBLEMA DE JMETALCPP
   //IObjectiveFunction fitfun = new Rosenbrock();
@@ -79,6 +81,7 @@ SolutionSet * CMAES::execute() {
 //
 //  // iteration loop
 //  while(cma.stopConditions.getNumber() == 0) {
+  while (counteval < maxEvaluations) {
 //
     // --- core iteration step ---
     SolutionSet * pop = samplePopulation(); // get a new population of solutions
@@ -94,6 +97,7 @@ SolutionSet * CMAES::execute() {
       problem_->evaluate(pop->get(i));
     }
 //    cma.updateDistribution(fitness);         // pass fitness array to update search distribution
+    updateDistribution();
 //          // --- end core iteration step ---
 //
 //    // output to files and console 
@@ -103,7 +107,19 @@ SolutionSet * CMAES::execute() {
 //      cma.printlnAnnotation(); // might write file as well
 //    if (cma.getCountIter() % outmod == 1)
 //      cma.println(); 
-//  }
+  }
+  
+  population_->sort(comparator) ;
+  
+  delete comparator;
+
+  SolutionSet * resultPopulation  = new SolutionSet(1) ;
+  resultPopulation->add(new Solution(population->get(0))) ;
+  delete population;
+
+  return resultPopulation ;
+  
+  
 //  // evaluate mean value as it is the best estimator for the optimum
 //  cma.setFitnessOfMeanX(fitfun.valueOf(cma.getMeanX())); // updates the best ever solution 
 //
@@ -422,49 +438,51 @@ SolutionSet * CMAES::samplePopulation() {
   }
 
   // I am desperately missing a const/readonly/visible qualifier. 
-  return population_ = genoPhenoTransformation(arx, population_);
+//  return population_ = genoPhenoTransformation(arx, population_);
+  return genoPhenoTransformation(arx);
 
 } // CMAES::samplePopulation()
 
-//Solution * CMAES::resampleSingle(int index) {
-//  int i,j;
-//  double sum;
-////  if (state != 1)
-////    error("call samplePopulation before calling resampleSingle(int index)");
-//
-//  /* sample the distribution */
-//  /* generate scaled random vector (D * z) */
-//  if (flgdiag) {
-//    for (i = 0; i < problem_->getNumberOfVariables(); i++) {
-//      arx[index][i] = xmean[i] + sigma * diagD[i] * PseudoRandom::randDouble(-1, 1);
-//    }
-//  } else {
-//    for (i = 0; i < problem_->getNumberOfVariables(); i++) {
-//      artmp[i] = diagD[i] * PseudoRandom::randDouble(-1, 1);
-//    }
-//    
-//    /* add mutation (sigma * B * (D*z)) */
-//    for (i = 0; i < problem_->getNumberOfVariables(); i++) {
-//      for (j = 0, sum = 0; j < problem_->getNumberOfVariables(); j++) {
-//        sum += B[i][j] * artmp[j];
-//      }
-//      arx[index][i] = xmean[i] + sigma * sum;
-//    }
-//  }
-//  return population_[index] = genoPhenoTransformation(arx[index], population_[index]);
-//} // resampleSingle
+Solution * CMAES::resampleSingle(int index) {
+  int i,j;
+  double sum;
+//  if (state != 1)
+//    error("call samplePopulation before calling resampleSingle(int index)");
 
-SolutionSet * CMAES::genoPhenoTransformation(double ** popx, SolutionSet * popy) {
+  /* sample the distribution */
+  /* generate scaled random vector (D * z) */
+  if (flgdiag) {
+    for (i = 0; i < problem_->getNumberOfVariables(); i++) {
+      arx[index][i] = xmean[i] + sigma * diagD[i] * PseudoRandom::randDouble(-1, 1);
+    }
+  } else {
+    for (i = 0; i < problem_->getNumberOfVariables(); i++) {
+      artmp[i] = diagD[i] * PseudoRandom::randDouble(-1, 1);
+    }
+    
+    /* add mutation (sigma * B * (D*z)) */
+    for (i = 0; i < problem_->getNumberOfVariables(); i++) {
+      for (j = 0, sum = 0; j < problem_->getNumberOfVariables(); j++) {
+        sum += B[i][j] * artmp[j];
+      }
+      arx[index][i] = xmean[i] + sigma * sum;
+    }
+  }
+//  return population_[index] = genoPhenoTransformation(arx[index], population_[index]);
+  return genoPhenoTransformation(arx[index], index);
+} // resampleSingle
+
+SolutionSet * CMAES::genoPhenoTransformation(double ** popx) {
 
 //  for (int i = 0; i < populationSize_; i++) {
 //    delete [] popy;
 //  }
 //  delete popy;
   
-  delete popy;
+  delete population_;
   
 //  double ** res = new double*[populationSize_];
-  SolutionSet * res = new SolutionSet(populationSize_);
+  population_ = new SolutionSet(populationSize_);
   for (int i = 0; i < populationSize_; i++) {
     Solution * solution = new Solution(problem_);
 //    res[i] = new double[problem_->getNumberOfVariables()];
@@ -472,13 +490,13 @@ SolutionSet * CMAES::genoPhenoTransformation(double ** popx, SolutionSet * popy)
       solution->getDecisionVariables()[j]->setValue(popx[i][j]);
 //      res[i][j] = popx[i][j];
     }
-    res->add(solution);
+    population_->add(solution);
   }
-  return res;
+  return population_;
   
 }
 
-double * CMAES::genoPhenoTransformation(double * popx, double * popy) {
+Solution * CMAES::genoPhenoTransformation(double * popx, int index) {
 //  if (popy == NULL || popy == popx) || popy.length != popx.length) 
 //    popy = new double[popx.length][];
 //  
@@ -487,17 +505,20 @@ double * CMAES::genoPhenoTransformation(double * popx, double * popy) {
 //    
 //  return popy;
   
-  delete popy;
+  delete population_->get(index);
   
-  double * res = new double[problem_->getNumberOfVariables()];
+//  double * res = new double[problem_->getNumberOfVariables()];
+  Solution * solution = new Solution(problem_);
   for (int i = 0; i < problem_->getNumberOfVariables(); i++) {
-    res[i] = popx[i];
+//    res[i] = popx[i];
+    solution->getDecisionVariables()[i]->setValue(popx[i]);
   }
-  return res;
+  population_->replace(index,solution);
+  return solution;
   
 }
 
-void CMAES::updateDistribution(SolutionSet * pop) {
+void CMAES::updateDistribution() {
 //  if (state == 3) {
 //    error("updateDistribution() was already called");
 //  }
@@ -507,7 +528,7 @@ void CMAES::updateDistribution(SolutionSet * pop) {
 
   /* pass input argument */
   for (int i = 0; i < populationSize_; i++) {
-    fit->raw[i]->setVal(pop->get(i)->getObjective(0));
+    fit->raw[i]->setVal(population_->get(i)->getObjective(0));
     //fit->raw[i]->setVal(functionValues[i]);
     fit->raw[i]->setI(i);
   }

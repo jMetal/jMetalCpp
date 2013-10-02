@@ -24,6 +24,8 @@
 #include <Algorithm.h>
 #include <Problem.h>
 #include <SolutionSet.h>
+#include <Comparator.h>
+#include <ObjectiveComparator.h>
 
 #include <FitnessCollector.h>
 #include <IntDouble.h>
@@ -142,10 +144,14 @@ class CMAES : public Algorithm {
 //    double * resampleSingle(int index);
     
 //    double ** genoPhenoTransformation(double ** popx, double ** popy);
-    SolutionSet * genoPhenoTransformation(double ** popx, SolutionSet * popy);
-    double * genoPhenoTransformation(double * popx, double * popy);
+//    SolutionSet * genoPhenoTransformation(double ** popx, SolutionSet * popy);
+    SolutionSet * genoPhenoTransformation(double ** popx);
+//    double * genoPhenoTransformation(double * popx, double * popy);
+    Solution * genoPhenoTransformation(double * popx, int index);
     
-    void updateDistribution(SolutionSet * pop);
+    Solution * resampleSingle(int index);
+    
+    void updateDistribution();
     void updateBestEver(double * x, double fitness, int eval);
 
   public:
