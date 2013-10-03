@@ -27,6 +27,14 @@
  * @param d double value
  * @param i unique integer value, useful after sorting
  */
+IntDouble::IntDouble() { } // IntDouble
+
+
+/**
+ * Constructor
+ * @param d double value
+ * @param i unique integer value, useful after sorting
+ */
 IntDouble::IntDouble(double d, int i) {
   val_ = d;
   i_ = i;

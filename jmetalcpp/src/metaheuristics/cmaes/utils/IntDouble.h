@@ -31,6 +31,7 @@ private:
     
 public:
   
+  IntDouble();
   IntDouble(double d, int i);
   double getVal();
   void setVal(double d);

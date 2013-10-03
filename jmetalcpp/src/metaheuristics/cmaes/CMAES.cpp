@@ -53,6 +53,8 @@ SolutionSet * CMAES::execute() {
   countiter = 0;
   
   Comparator * comparator = new ObjectiveComparator(0) ;
+  
+  cout << "PUA" << endl;
 
   // ESTO ES EL PROBLEMA DE JMETALCPP
   //IObjectiveFunction fitfun = new Rosenbrock();
@@ -71,7 +73,9 @@ SolutionSet * CMAES::execute() {
 //  cma.setInitialStandardDeviation(0.2); // also a mandatory setting 
 //  cma.options.stopFitness = 1e-14;       // optional setting
   
-  sp = new CMAParameters();
+  sp = new CMAParameters(problem_->getNumberOfVariables(), populationSize_);
+  
+  cout << "PUA2" << endl;
 
   // initialize cma and get fitness array to fill in later
   double * fitness = init();  // new double[cma.parameters.getPopulationSize()];
@@ -83,8 +87,12 @@ SolutionSet * CMAES::execute() {
 //  while(cma.stopConditions.getNumber() == 0) {
   while (counteval < maxEvaluations) {
 //
+    cout << "PUA3" << endl;
     // --- core iteration step ---
     SolutionSet * pop = samplePopulation(); // get a new population of solutions
+    
+    cout << "PUA4" << endl;
+    
     for(int i = 0; i < pop->size(); i++) {    // for each candidate solution i
             // a simple way to handle constraints that define a convex feasible domain  
             // (like box constraints, i.e. variable boundaries) via "blind re-sampling" 
@@ -96,6 +104,9 @@ SolutionSet * CMAES::execute() {
 //      fitness[i] = fitfun.valueOf(pop[i]); // fitfun.valueOf() is to be minimized
       problem_->evaluate(pop->get(i));
     }
+    
+    cout << "PUA5" << endl;
+    
 //    cma.updateDistribution(fitness);         // pass fitness array to update search distribution
     updateDistribution();
 //          // --- end core iteration step ---
@@ -108,6 +119,8 @@ SolutionSet * CMAES::execute() {
 //    if (cma.getCountIter() % outmod == 1)
 //      cma.println(); 
   }
+  
+  cout << "PUA6" << endl;
   
   population_->sort(comparator) ;
   
@@ -157,6 +170,8 @@ double * CMAES::init() {
     diagD[i] = 1;
   }
   
+  cout << "INIT1" << endl;
+  
   /* expand Boundaries */
 //  LBound = expandToDimension(LBound, problem_->getNumberOfVariables());
 //  if (LBound == NULL) {
@@ -165,6 +180,8 @@ double * CMAES::init() {
     LBound[i] = std::numeric_limits<double>::min();
   }
 //  }
+  
+  cout << "INIT2" << endl;
 
 //  UBound = expandToDimension(UBound, problem_->getNumberOfVariables());
 //  if (UBound == NULL) {
@@ -173,6 +190,8 @@ double * CMAES::init() {
     UBound[i] = std::numeric_limits<double>::max();
   }
 //  }
+  
+  cout << "INIT3" << endl;
 
   /* Initialization of sigmas */
 //  if (startsigma != NULL) { // 
@@ -216,6 +235,8 @@ double * CMAES::init() {
     }
   }
   axisratio = maxstartsigma / minstartsigma; // axis parallel distribution
+  
+  cout << "INIT4" << endl;
 
   /* expand typicalX, might still be null afterwards */
 //  typicalX = expandToDimension(typicalX, problem_->getNumberOfVariables());
@@ -226,9 +247,21 @@ double * CMAES::init() {
     /* set via typicalX */
 //    if (typicalX != NULL) {
 //      xmean = typicalX.clone(); //TODO: REVISAR
+  xmean = new double[problem_->getNumberOfVariables()];
   for (i = 0; i < problem_->getNumberOfVariables(); i++) {
-    xmean[i] += sigma*diagD[i] * PseudoRandom::randDouble(-1, 1);
+    
+//    cout << "RANDOM=" << PseudoRandom::randDouble(-1, 1) << endl;
+//    cout << "i=" << i << endl;
+//    cout << "xmean[i]=" << xmean[i] << endl;
+//    cout << "sigma=" << sigma << endl;
+//    cout << "diagD[i]=" << diagD[i] << endl;
+//    
+//    xmean[i] += sigma*diagD[i] * PseudoRandom::randDouble(-1, 1);
+    xmean[i] = PseudoRandom::randDouble();
   }
+  
+  cout << "INIT5" << endl;
+  
 //      /* set via boundaries, is depriciated */
 //    } else if (math.max(UBound) < Double.MAX_VALUE
 //        && math.min(LBound) > -Double.MAX_VALUE) {
@@ -295,7 +328,13 @@ double * CMAES::init() {
 
   // code to be duplicated in reSizeLambda
   fit->fitness = new IntDouble*[populationSize_];   // including penalties, used yet
+  for (i = 0; i < populationSize_; i++) {
+    fit->fitness[i] = new IntDouble();
+  }
   fit->raw = new IntDouble*[populationSize_];       // raw function values
+  for (i = 0; i < populationSize_; i++) {
+    fit->raw[i] = new IntDouble();
+  }
   fit->historyLength = 10+30*problem_->getNumberOfVariables()/populationSize_;
   fit->history = new double[fit->historyLength];	
 
@@ -526,12 +565,16 @@ void CMAES::updateDistribution() {
 //    error("argument double[] funcionValues.length=" + functionValues.length 
 //        + "!=" + "lambda=" + sp.getLambda());
 
+  cout << "UPDATE1" << endl;
+  
   /* pass input argument */
   for (int i = 0; i < populationSize_; i++) {
     fit->raw[i]->setVal(population_->get(i)->getObjective(0));
     //fit->raw[i]->setVal(functionValues[i]);
     fit->raw[i]->setI(i);
   }
+  
+  cout << "UPDATE2" << endl;
 
   counteval += populationSize_;
   //recentFunctionValue = math.min(fit.raw).val;
@@ -544,6 +587,8 @@ void CMAES::updateDistribution() {
 //}
 //
 //void CMAES::updateDistribution2() {
+  
+  cout << "UPDATE3" << endl;
         
   int i, j, k, iNk, hsig;
   double sum;
@@ -552,21 +597,37 @@ void CMAES::updateDistribution() {
 //  if (state == 3) {
 //      error("updateDistribution() was already called");
 //  }
+  
+//  cout << "BEFORE:" << endl;
+//  for (int idx = 0; idx < populationSize_; idx++) {
+//    cout << (idx+1) << "[" << fit->raw[idx]->getVal() << "," << fit->raw[idx]->getI() << "]" << endl;
+//  }
 
   /* sort function values */
   UtilsCMAES::minFastSort(fit->raw, populationSize_);
   //Arrays.sort(fit.raw, fit.raw[0]);
+  
+//  cout << "AFTER:" << endl;
+//  for (int idx = 0; idx < populationSize_; idx++) {
+//    cout << (idx+1) << "[" << fit->raw[idx]->getVal() << "," << fit->raw[idx]->getI() << "]" << endl;
+//  }
+  
+  cout << "UPDATE3b" << endl;
 
   for (iNk = 0; iNk < populationSize_; iNk++) {
     fit->fitness[iNk]->setVal(fit->raw[iNk]->getVal()); // superfluous at time
     fit->fitness[iNk]->setI(fit->raw[iNk]->getI());
   }
+  
+  cout << "UPDATE4" << endl;
 
   /* update fitness history */ 
   for (i = fit->historyLength - 1; i > 0; i--) {
     fit->history[i] = fit->history[i - 1];
   }
   fit->history[0] = fit->raw[0]->getVal();
+  
+  cout << "UPDATE5" << endl;
 
   /* save/update bestever-value */
 //  updateBestEver(arx[fit->raw[0]->getI()], fit->raw[0]->getVal(), 
@@ -576,6 +637,8 @@ void CMAES::updateDistribution() {
   flgdiag = (diagonalCovarianceMatrix == 1);// || diagonalCovarianceMatrix >= countiter); 
 //  if (options.diagonalCovarianceMatrix == -1) // options might have been re-read
 //    flgdiag = (countiter <= 1 * 150 * N / sp.lambda);  // CAVE: duplication of "default"
+  
+  cout << "UPDATE6" << endl;
 
   /* calculate xmean and BDz~N(0,C) */
   for (i = 0; i < problem_->getNumberOfVariables(); i++) {
@@ -586,6 +649,8 @@ void CMAES::updateDistribution() {
     }
     BDz[i] = sqrt(sp->getMueff()) * (xmean[i] - xold[i]) / sigma;
   }
+  
+  cout << "UPDATE7" << endl;
   
   /* cumulation for sigma (ps) using B*z */
   if (flgdiag) {
@@ -612,12 +677,16 @@ void CMAES::updateDistribution() {
           + sqrt(sp->getCs() * (2. - sp->getCs())) * sum;
     }
   }
+  
+  cout << "UPDATE8" << endl;
 
   /* calculate norm(ps)^2 */
   psxps = 0;
   for (i = 0; i < problem_->getNumberOfVariables(); i++) {
     psxps += ps[i] * ps[i];
   }
+  
+  cout << "UPDATE9" << endl;
 
   /* cumulation for covariance matrix (pc) using B*D*z~N(0,C) */
   hsig = 0;
@@ -630,6 +699,8 @@ void CMAES::updateDistribution() {
     pc[i] = (1. - sp->getCc()) * pc[i] + hsig
       * sqrt(sp->getCc() * (2. - sp->getCc())) * BDz[i];
   }
+  
+  cout << "UPDATE10" << endl;
 
   /* stop initial phase, not in use anymore as hsig does the job */
   if (iniphase && countiter > min(1 / sp->getCs(), 1 + problem_->getNumberOfVariables() / sp->getMucov())) {
@@ -639,6 +710,8 @@ void CMAES::updateDistribution() {
       iniphase = false;
     }
   }
+  
+  cout << "UPDATE11" << endl;
 
   /* this, it is harmful in a dynamic environment
    * remove momentum in ps, if ps is large and fitness is getting worse */
@@ -654,6 +727,8 @@ void CMAES::updateDistribution() {
 //        		ps[i] *= tfac;
 //        	psxps *= tfac * tfac;
 //        }
+  
+  cout << "UPDATE12" << endl;
 
   /* update of C */
   if (sp->getCcov() > 0 && iniphase == false) {
@@ -685,10 +760,14 @@ void CMAES::updateDistribution() {
 //    maxsqrtdiagC = sqrt(max(math.diag(C)));
 //    minsqrtdiagC = sqrt(min(math.diag(C)));
   } // update of C
+  
+  cout << "UPDATE13" << endl;
 
   /* update of sigma */
   sigma *= exp(((sqrt(psxps) / sp->getChiN()) - 1) * sp->getCs()
           / sp->getDamps());
+  
+  cout << "UPDATE14" << endl;
 
 //  state = 3;
 

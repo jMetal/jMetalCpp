@@ -21,6 +21,8 @@
 #ifndef __CMA_PARAMETERS__
 #define __CMA_PARAMETERS__
 
+#include <math.h>
+
 class CMAParameters {
   
 private:
@@ -40,10 +42,14 @@ private:
 	double ccovsep;      /* <- ccov */
 
 	double chiN;
+  
+  void setDefaults(int N, int lambda);
+  void setWeights(int mu);
+  void setWeights(double * w, int weightsLength);
     
 public:
   
-  CMAParameters();
+  CMAParameters(int N, int lambda);
   int getMu();
   double * getWeights();
   double getMucov();

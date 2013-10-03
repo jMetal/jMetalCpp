@@ -106,12 +106,12 @@ clean:
 tester: 
 
 # Spikes (MOEAD_main quick developing and compiling example)
-spikes : $(BINDIR)/main/MOEAD_main
+spikes : $(BINDIR)/main/CMAES_main
 
-$(BINDIR)/main/MOEAD_main : $(SRCDIR)/main/MOEAD_main.$(SRCEXT) $(LIB)
-	@echo "Compiling $(SRCDIR)/main/MOEAD_main.$(SRCEXT)"
+$(BINDIR)/main/MOEAD_main : $(SRCDIR)/main/CMAES_main.$(SRCEXT) $(LIB)
+	@echo "Compiling $(SRCDIR)/main/CMAES_main.$(SRCEXT)"
 	@mkdir -p $(BINDIR)
-	@mkdir -p $(dir $(BINDIR)/main/MOEAD_main)
-	@echo "$(CC) $(SRCDIR)/main/MOEAD_main.$(SRCEXT) $(DEPS) -o $(BINDIR)/main/MOEAD_main $(INC) $(LIB)"; $(CC) $(SRCDIR)/main/MOEAD_main.$(SRCEXT) $(DEPS) -o $(BINDIR)/main/MOEAD_main $(INC) $(LIB)
+	@mkdir -p $(dir $(BINDIR)/main/CMAES_main)
+	@echo "$(CC) $(SRCDIR)/main/CMAES_main.$(SRCEXT) $(DEPS) -o $(BINDIR)/main/CMAES_main $(INC) $(LIB)"; $(CC) $(SRCDIR)/main/CMAES_main.$(SRCEXT) $(DEPS) -o $(BINDIR)/main/CMAES_main $(INC) $(LIB)
 
 .PHONY: clean
