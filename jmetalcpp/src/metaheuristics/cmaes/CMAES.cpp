@@ -41,7 +41,7 @@ SolutionSet * CMAES::execute() {
   int maxEvaluations;
   //int evaluations;
   
-  SolutionSet * population;
+  //SolutionSet * population;
   
   //Read the parameters
   populationSize_ = *(int *) getInputParameter("populationSize");
@@ -54,7 +54,7 @@ SolutionSet * CMAES::execute() {
   
   Comparator * comparator = new ObjectiveComparator(0) ;
   
-  cout << "PUA" << endl;
+//  cout << "PUA" << endl;
 
   // ESTO ES EL PROBLEMA DE JMETALCPP
   //IObjectiveFunction fitfun = new Rosenbrock();
@@ -75,7 +75,7 @@ SolutionSet * CMAES::execute() {
   
   sp = new CMAParameters(problem_->getNumberOfVariables(), populationSize_);
   
-  cout << "PUA2" << endl;
+//  cout << "PUA2" << endl;
 
   // initialize cma and get fitness array to fill in later
   double * fitness = init();  // new double[cma.parameters.getPopulationSize()];
@@ -87,11 +87,11 @@ SolutionSet * CMAES::execute() {
 //  while(cma.stopConditions.getNumber() == 0) {
   while (counteval < maxEvaluations) {
 //
-    cout << "PUA3" << endl;
+//    cout << "PUA3" << endl;
     // --- core iteration step ---
     SolutionSet * pop = samplePopulation(); // get a new population of solutions
     
-    cout << "PUA4" << endl;
+//    cout << "PUA4" << endl;
     
     for(int i = 0; i < pop->size(); i++) {    // for each candidate solution i
             // a simple way to handle constraints that define a convex feasible domain  
@@ -105,10 +105,15 @@ SolutionSet * CMAES::execute() {
       problem_->evaluate(pop->get(i));
     }
     
-    cout << "PUA5" << endl;
+//    cout << "PUA5" << endl;
     
 //    cma.updateDistribution(fitness);         // pass fitness array to update search distribution
     updateDistribution();
+    
+    Solution * sol = population_->best(comparator) ;
+    double value = sol->getObjective(0);
+    cout << counteval << " : " << value << endl;
+    
 //          // --- end core iteration step ---
 //
 //    // output to files and console 
@@ -120,15 +125,19 @@ SolutionSet * CMAES::execute() {
 //      cma.println(); 
   }
   
-  cout << "PUA6" << endl;
+//  cout << "PUA6" << endl;
+  
+//  cout << "pop size: " << population_->size() << endl;
   
   population_->sort(comparator) ;
+  
+//  cout << "PUA7" << endl;
   
   delete comparator;
 
   SolutionSet * resultPopulation  = new SolutionSet(1) ;
-  resultPopulation->add(new Solution(population->get(0))) ;
-  delete population;
+  resultPopulation->add(new Solution(population_->get(0))) ;
+  delete population_;
 
   return resultPopulation ;
   
@@ -170,7 +179,7 @@ double * CMAES::init() {
     diagD[i] = 1;
   }
   
-  cout << "INIT1" << endl;
+//  cout << "INIT1" << endl;
   
   /* expand Boundaries */
 //  LBound = expandToDimension(LBound, problem_->getNumberOfVariables());
@@ -181,7 +190,7 @@ double * CMAES::init() {
   }
 //  }
   
-  cout << "INIT2" << endl;
+//  cout << "INIT2" << endl;
 
 //  UBound = expandToDimension(UBound, problem_->getNumberOfVariables());
 //  if (UBound == NULL) {
@@ -191,7 +200,7 @@ double * CMAES::init() {
   }
 //  }
   
-  cout << "INIT3" << endl;
+//  cout << "INIT3" << endl;
 
   /* Initialization of sigmas */
 //  if (startsigma != NULL) { // 
@@ -236,7 +245,7 @@ double * CMAES::init() {
   }
   axisratio = maxstartsigma / minstartsigma; // axis parallel distribution
   
-  cout << "INIT4" << endl;
+//  cout << "INIT4" << endl;
 
   /* expand typicalX, might still be null afterwards */
 //  typicalX = expandToDimension(typicalX, problem_->getNumberOfVariables());
@@ -260,7 +269,7 @@ double * CMAES::init() {
     xmean[i] = PseudoRandom::randDouble();
   }
   
-  cout << "INIT5" << endl;
+//  cout << "INIT5" << endl;
   
 //      /* set via boundaries, is depriciated */
 //    } else if (math.max(UBound) < Double.MAX_VALUE
@@ -565,7 +574,7 @@ void CMAES::updateDistribution() {
 //    error("argument double[] funcionValues.length=" + functionValues.length 
 //        + "!=" + "lambda=" + sp.getLambda());
 
-  cout << "UPDATE1" << endl;
+//  cout << "UPDATE1" << endl;
   
   /* pass input argument */
   for (int i = 0; i < populationSize_; i++) {
@@ -574,7 +583,7 @@ void CMAES::updateDistribution() {
     fit->raw[i]->setI(i);
   }
   
-  cout << "UPDATE2" << endl;
+//  cout << "UPDATE2" << endl;
 
   counteval += populationSize_;
   //recentFunctionValue = math.min(fit.raw).val;
@@ -588,7 +597,7 @@ void CMAES::updateDistribution() {
 //
 //void CMAES::updateDistribution2() {
   
-  cout << "UPDATE3" << endl;
+//  cout << "UPDATE3" << endl;
         
   int i, j, k, iNk, hsig;
   double sum;
@@ -612,14 +621,14 @@ void CMAES::updateDistribution() {
 //    cout << (idx+1) << "[" << fit->raw[idx]->getVal() << "," << fit->raw[idx]->getI() << "]" << endl;
 //  }
   
-  cout << "UPDATE3b" << endl;
+//  cout << "UPDATE3b" << endl;
 
   for (iNk = 0; iNk < populationSize_; iNk++) {
     fit->fitness[iNk]->setVal(fit->raw[iNk]->getVal()); // superfluous at time
     fit->fitness[iNk]->setI(fit->raw[iNk]->getI());
   }
   
-  cout << "UPDATE4" << endl;
+//  cout << "UPDATE4" << endl;
 
   /* update fitness history */ 
   for (i = fit->historyLength - 1; i > 0; i--) {
@@ -627,7 +636,7 @@ void CMAES::updateDistribution() {
   }
   fit->history[0] = fit->raw[0]->getVal();
   
-  cout << "UPDATE5" << endl;
+//  cout << "UPDATE5" << endl;
 
   /* save/update bestever-value */
 //  updateBestEver(arx[fit->raw[0]->getI()], fit->raw[0]->getVal(), 
@@ -638,7 +647,7 @@ void CMAES::updateDistribution() {
 //  if (options.diagonalCovarianceMatrix == -1) // options might have been re-read
 //    flgdiag = (countiter <= 1 * 150 * N / sp.lambda);  // CAVE: duplication of "default"
   
-  cout << "UPDATE6" << endl;
+//  cout << "UPDATE6" << endl;
 
   /* calculate xmean and BDz~N(0,C) */
   for (i = 0; i < problem_->getNumberOfVariables(); i++) {
@@ -650,7 +659,7 @@ void CMAES::updateDistribution() {
     BDz[i] = sqrt(sp->getMueff()) * (xmean[i] - xold[i]) / sigma;
   }
   
-  cout << "UPDATE7" << endl;
+//  cout << "UPDATE7" << endl;
   
   /* cumulation for sigma (ps) using B*z */
   if (flgdiag) {
@@ -678,7 +687,7 @@ void CMAES::updateDistribution() {
     }
   }
   
-  cout << "UPDATE8" << endl;
+//  cout << "UPDATE8" << endl;
 
   /* calculate norm(ps)^2 */
   psxps = 0;
@@ -686,7 +695,7 @@ void CMAES::updateDistribution() {
     psxps += ps[i] * ps[i];
   }
   
-  cout << "UPDATE9" << endl;
+//  cout << "UPDATE9" << endl;
 
   /* cumulation for covariance matrix (pc) using B*D*z~N(0,C) */
   hsig = 0;
@@ -700,7 +709,7 @@ void CMAES::updateDistribution() {
       * sqrt(sp->getCc() * (2. - sp->getCc())) * BDz[i];
   }
   
-  cout << "UPDATE10" << endl;
+//  cout << "UPDATE10" << endl;
 
   /* stop initial phase, not in use anymore as hsig does the job */
   if (iniphase && countiter > min(1 / sp->getCs(), 1 + problem_->getNumberOfVariables() / sp->getMucov())) {
@@ -711,7 +720,7 @@ void CMAES::updateDistribution() {
     }
   }
   
-  cout << "UPDATE11" << endl;
+//  cout << "UPDATE11" << endl;
 
   /* this, it is harmful in a dynamic environment
    * remove momentum in ps, if ps is large and fitness is getting worse */
@@ -728,7 +737,7 @@ void CMAES::updateDistribution() {
 //        	psxps *= tfac * tfac;
 //        }
   
-  cout << "UPDATE12" << endl;
+//  cout << "UPDATE12" << endl;
 
   /* update of C */
   if (sp->getCcov() > 0 && iniphase == false) {
@@ -761,13 +770,13 @@ void CMAES::updateDistribution() {
 //    minsqrtdiagC = sqrt(min(math.diag(C)));
   } // update of C
   
-  cout << "UPDATE13" << endl;
+//  cout << "UPDATE13" << endl;
 
   /* update of sigma */
   sigma *= exp(((sqrt(psxps) / sp->getChiN()) - 1) * sp->getCs()
           / sp->getDamps());
   
-  cout << "UPDATE14" << endl;
+//  cout << "UPDATE14" << endl;
 
 //  state = 3;
 

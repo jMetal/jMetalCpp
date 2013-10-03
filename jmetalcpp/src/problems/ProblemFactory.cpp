@@ -264,6 +264,18 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv) {
       cerr << "Incorrect number of arguments for OneMax problem." << endl;
       exit(-1);
     }
+    
+  } else if (strcmp(name, "Rosenbrock")==0) { // Rosenbrock
+		if (argc==0)
+			return new Rosenbrock("Real");
+		else if (argc==1)
+			return new Rosenbrock(argv[0]);
+		else if (argc==2)
+		  return new Rosenbrock(argv[0], atoi(argv[1]));
+		else {
+			cerr << "Incorrect number of arguments for Rosenbrock problem." << endl;
+			exit(-1);
+		}
 
   } else if (strcmp(name, "Schaffer")==0) { // Schaffer
     if (argc==0)

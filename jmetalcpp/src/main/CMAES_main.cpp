@@ -49,7 +49,7 @@ int main(int argc, char ** argv) {
 
 	// Algorithm parameters
   int populationSizeValue = 100;
-  int maxEvaluationsValue = 100;
+  int maxEvaluationsValue = 1000000;
   algorithm->setInputParameter("populationSize",&populationSizeValue);
   algorithm->setInputParameter("maxEvaluations",&maxEvaluationsValue);
 
