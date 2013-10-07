@@ -265,6 +265,18 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv) {
       exit(-1);
     }
     
+  } else if (strcmp(name, "Rastrigin")==0) { // Rastrigin
+		if (argc==0)
+			return new Rastrigin("Real");
+		else if (argc==1)
+			return new Rastrigin(argv[0]);
+		else if (argc==2)
+		  return new Rastrigin(argv[0], atoi(argv[1]));
+		else {
+			cerr << "Incorrect number of arguments for Rastrigin problem." << endl;
+			exit(-1);
+		}
+    
   } else if (strcmp(name, "Rosenbrock")==0) { // Rosenbrock
 		if (argc==0)
 			return new Rosenbrock("Real");

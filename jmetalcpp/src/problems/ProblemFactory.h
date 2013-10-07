@@ -45,6 +45,7 @@
 #include <LZ09_F8.h>
 #include <LZ09_F9.h>
 #include <OneMax.h>
+#include <Rastrigin.h>
 #include <Rosenbrock.h>
 #include <Schaffer.h>
 #include <Sphere.h>

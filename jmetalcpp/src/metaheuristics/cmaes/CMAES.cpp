@@ -97,9 +97,11 @@ SolutionSet * CMAES::execute() {
             // a simple way to handle constraints that define a convex feasible domain  
             // (like box constraints, i.e. variable boundaries) via "blind re-sampling" 
                                                    // assumes that the feasible domain is convex, the optimum is  
-//      while (!fitfun.isFeasible(pop[i]))     //   not located on (or very close to) the domain boundary,  
-//        pop[i] = cma.resampleSingle(i);    //   initialX is feasible and initialStandardDeviations are  
+      while (!isFeasible(pop->get(i))) {     //   not located on (or very close to) the domain boundary,  
+        cout << "REMAP" << endl;
+        resampleSingle(i); //   initialX is feasible and initialStandardDeviations are  
                                                      //   sufficiently small to prevent quasi-infinite looping here
+      }
               // compute fitness/objective value	
 //      fitness[i] = fitfun.valueOf(pop[i]); // fitfun.valueOf() is to be minimized
       problem_->evaluate(pop->get(i));
@@ -186,7 +188,8 @@ double * CMAES::init() {
 //  if (LBound == NULL) {
   LBound = new double[problem_->getNumberOfVariables()];
   for (i = 0; i < problem_->getNumberOfVariables(); i++) {
-    LBound[i] = std::numeric_limits<double>::min();
+    //LBound[i] = std::numeric_limits<double>::min();
+    LBound[i] = problem_->getLowerLimit(i);
   }
 //  }
   
@@ -196,7 +199,8 @@ double * CMAES::init() {
 //  if (UBound == NULL) {
   UBound = new double[problem_->getNumberOfVariables()];
   for (i = 0; i < problem_->getNumberOfVariables(); i++) {
-    UBound[i] = std::numeric_limits<double>::max();
+    //UBound[i] = std::numeric_limits<double>::max();
+    UBound[i] = problem_->getUpperLimit(i);
   }
 //  }
   
@@ -256,35 +260,31 @@ double * CMAES::init() {
     /* set via typicalX */
 //    if (typicalX != NULL) {
 //      xmean = typicalX.clone(); //TODO: REVISAR
-  xmean = new double[problem_->getNumberOfVariables()];
-  for (i = 0; i < problem_->getNumberOfVariables(); i++) {
-    
-//    cout << "RANDOM=" << PseudoRandom::randDouble(-1, 1) << endl;
-//    cout << "i=" << i << endl;
-//    cout << "xmean[i]=" << xmean[i] << endl;
-//    cout << "sigma=" << sigma << endl;
-//    cout << "diagD[i]=" << diagD[i] << endl;
-//    
+ bool useLimits = true;
+  
+  if (useLimits==false) {
+  
+    xmean = new double[problem_->getNumberOfVariables()];
+    for (i = 0; i < problem_->getNumberOfVariables(); i++) {
 //    xmean[i] += sigma*diagD[i] * PseudoRandom::randDouble(-1, 1);
-    xmean[i] = PseudoRandom::randDouble();
-  }
-  
-//  cout << "INIT5" << endl;
-  
+      xmean[i] = PseudoRandom::randDouble();
+    } 
 //      /* set via boundaries, is depriciated */
-//    } else if (math.max(UBound) < Double.MAX_VALUE
+//  } else if (math.max(UBound) < Double.MAX_VALUE
 //        && math.min(LBound) > -Double.MAX_VALUE) {
+  } else {
 //      error("no initial search point (solution) X or typical X specified");
-//      xmean = new double[problem_->getNumberOfVariables()];
-//      for (i = 0; i < problem_->getNumberOfVariables(); ++i) { /* TODO: reconsider this algorithm to set X0 */
-//        double offset = sigma*diagD[i];
-//        double range = (UBound[i] - LBound[i] - 2*sigma*diagD[i]); 
-//        if (offset > 0.4 * (UBound[i] - LBound[i])) {
-//          offset = 0.4 * (UBound[i] - LBound[i]);
-//          range = 0.2 * (UBound[i] - LBound[i]);
-//        }
-//        xmean[i] = LBound[i] + offset + rand.nextDouble() * range;
-//      }
+    xmean = new double[problem_->getNumberOfVariables()];
+      for (i = 0; i < problem_->getNumberOfVariables(); i++) { /* TODO: reconsider this algorithm to set X0 */
+        double offset = sigma*diagD[i];
+        double range = (UBound[i] - LBound[i] - 2*sigma*diagD[i]); 
+        if (offset > 0.4 * (UBound[i] - LBound[i])) {
+          offset = 0.4 * (UBound[i] - LBound[i]);
+          range = 0.2 * (UBound[i] - LBound[i]);
+        }
+        xmean[i] = LBound[i] + offset + PseudoRandom::randDouble() * range;
+      }
+  }
 //    } else {
 //      error("no initial search point (solution) X or typical X specified");
 //      xmean = new double[problem_->getNumberOfVariables()];
@@ -789,3 +789,17 @@ void CMAES::updateDistribution() {
 //        bestever_x = assignNew(x, bestever_x); // save (hopefully) efficient assignment
 //    }
 //}
+
+bool CMAES::isFeasible(Solution * sol) {
+  bool res = true;
+  Variable ** variables = sol->getDecisionVariables();
+  
+  for (int i = 0; i < sol->getNumberOfVariables(); i++) {
+    Variable * v = variables[i];
+    if ((v->getValue() < v->getLowerBound()) || (v->getValue() > v->getUpperBound())) {
+      res = false;
+      i = sol->getNumberOfVariables();
+    }
+  }
+  return res;
+}

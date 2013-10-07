@@ -153,6 +153,8 @@ class CMAES : public Algorithm {
     
     void updateDistribution();
     void updateBestEver(double * x, double fitness, int eval);
+    
+    bool isFeasible(Solution * sol);
 
   public:
     CMAES(Problem * problem);
