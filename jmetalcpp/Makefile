@@ -55,7 +55,7 @@ OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(LIB_SOURCES:.$(SRCEXT)=.o))
 #BINARIES := $(patsubst $(MAIN_DIRS)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 
 # Flags
-CFLAGS := -O3 # -g # -Wall
+CFLAGS := -O3 -std=c++11 # -g # -Wall
 
 # Include flags when compiling
 INC := $(patsubst %,-I %/.,$(HEADER_DIRS))
@@ -66,6 +66,13 @@ LIBNAME := libjmetal.a
 
 # Library path
 LIB := $(LIBDIR)/$(LIBNAME)
+
+
+# Dependencies needed when generating executables	
+MAIN_DEPS := $(LIB)
+
+# Libraries needed when generating executables
+MAIN_LIBS := -pthread -lm
 
 
 # All rule
@@ -79,7 +86,7 @@ $(BINDIR)/% : $(patsubst $(BINDIR)%, $(SRCDIR)%.cpp, $(BINDIR)/%) $(LIB)
 	@echo "Compiling $(patsubst $(BINDIR)%, $(SRCDIR)%.cpp, $@)"
 	@mkdir -p $(BINDIR)
 	@mkdir -p $(dir $@)
-	@echo "$(CC) $(patsubst $(BINDIR)%, $(SRCDIR)%.cpp, $@) $(DEPS) -o $@ $(INC) $(LIB)"; $(CC) $(patsubst $(BINDIR)%, $(SRCDIR)%.cpp, $@) $(DEPS) -o $@ $(INC) $(LIB)
+	@echo "$(CC) $(CFLAGS) $(patsubst $(BINDIR)%, $(SRCDIR)%.cpp, $@) $(MAIN_DEPS) -o $@ $(INC) $(MAIN_LIBS)"; $(CC) $(CFLAGS) $(patsubst $(BINDIR)%, $(SRCDIR)%.cpp, $@) $(MAIN_DEPS) -o $@ $(INC) $(MAIN_LIBS)
 
 # Library rule
 library : $(LIB)

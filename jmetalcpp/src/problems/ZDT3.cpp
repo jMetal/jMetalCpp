@@ -97,6 +97,6 @@ double ZDT3::evalG(XReal * x) {
 
 double ZDT3::evalH(double f, double g) {
 	double h = 0.0 ;
-	h = 1.0 - sqrt(f/g) - (f/g)*sin(10.0*M_PI*f);
+	h = 1.0 - sqrt(f/g) - (f/g)*sin(10.0*3.141596*f);
 	return h ;
 }

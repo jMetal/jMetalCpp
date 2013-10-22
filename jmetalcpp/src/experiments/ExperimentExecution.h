@@ -24,7 +24,9 @@
 #include <vector>
 #include <string>
 #include <map>
-#include <pthread.h>
+#include <mutex>
+#include <thread>
+//#include <pthread.h>
 #include <Settings.h>
 #include <Algorithm.h>
 #include <RunExperiment.h>

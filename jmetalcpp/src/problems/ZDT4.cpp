@@ -92,7 +92,7 @@ double ZDT4::evalG(XReal * x) {
 	double g = 0.0 ;
 	for (int i = 1; i < x->getNumberOfDecisionVariables(); i++)
 		g += pow(x->getValue(i), 2.0) -
-		     10.0 * cos(4.0 * M_PI * x->getValue(i));
+		     10.0 * cos(4.0 * 3.141596 * x->getValue(i));
 
 	double c = 1.0 + 10.0 * (numberOfVariables_ - 1) ;
 	return g + c;

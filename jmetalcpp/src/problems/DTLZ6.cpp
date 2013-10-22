@@ -85,9 +85,9 @@ void DTLZ6::evaluate(Solution *solution) {
   for (int i = numberOfVariables_ - k; i < numberOfVariables_; i++)
     g += pow(x_[i],0.1);
 
-  double t = M_PI  / (4.0 * (1.0 + g));
+  double t = 3.141596  / (4.0 * (1.0 + g));
 
-  theta_[0] = x_[0] * M_PI / 2.0;
+  theta_[0] = x_[0] * 3.141596 / 2.0;
   for (int i = 1; i < (numberOfObjectives_-1); i++)
     theta_[i] = t * (1.0 + 2.0 * g * x_[i]);
 

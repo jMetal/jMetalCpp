@@ -88,10 +88,10 @@ void DTLZ4::evaluate(Solution *solution) {
 
   for (int i = 0; i < numberOfObjectives_; i++) {
     for (int j = 0; j < numberOfObjectives_ - (i + 1); j++)
-      fx_[i] *= cos(pow(x_[j],alpha)*(M_PI/2.0));
+      fx_[i] *= cos(pow(x_[j],alpha)*(3.141596/2.0));
       if (i != 0){
         int aux = numberOfObjectives_ - (i + 1);
-        fx_[i] *= sin(pow(x_[aux],alpha)*(M_PI/2.0));
+        fx_[i] *= sin(pow(x_[aux],alpha)*(3.141596/2.0));
       } //if
   } // for
 

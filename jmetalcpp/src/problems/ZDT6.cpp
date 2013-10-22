@@ -74,7 +74,7 @@ void ZDT6::evaluate(Solution *solution) {
 	XReal * x = new XReal(solution);
 
 	double x1 = x->getValue(0) ;
-	fx_[0] = 1.0 - exp(-4.0*x1) * pow(sin(6.0*M_PI*x1), 6.0) ;
+	fx_[0] = 1.0 - exp(-4.0*x1) * pow(sin(6.0*3.141596*x1), 6.0) ;
   double g = evalG(x) ;
   double h = evalH(fx_[0], g) ;
 	fx_[1] = h * g ;

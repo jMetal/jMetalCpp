@@ -83,7 +83,7 @@ void DTLZ1::evaluate(Solution *solution) {
   double g = 0.0 ;
 
   for (int i = numberOfVariables_ - k; i < numberOfVariables_; i++)
-    g += (x_[i] - 0.5)*(x_[i] - 0.5) - cos(20.0 * M_PI * (x_[i] - 0.5));
+    g += (x_[i] - 0.5)*(x_[i] - 0.5) - cos(20.0 * 3.141596 * (x_[i] - 0.5));
 
   g = 100 * (k + g);
   for (int i = 0; i < numberOfObjectives_; i++)

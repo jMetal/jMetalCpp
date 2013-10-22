@@ -32,7 +32,7 @@
  */
 RunExperiment::RunExperiment(ExperimentExecution * experiment, map<string, void *> map,
     int id, int numberOfThreads, int numberOfProblems, int threadIndex,
-    pthread_mutex_t * mutex) {
+    mutex * mtx) {
 
   threadIndex_ = threadIndex;
 
@@ -42,7 +42,7 @@ RunExperiment::RunExperiment(ExperimentExecution * experiment, map<string, void 
   numberOfThreads_ = numberOfThreads;
   numberOfProblems_ = numberOfProblems;
 
-  mutex_ = mutex;
+  mutex_ = mtx;
 
   int partitions = numberOfProblems / numberOfThreads;
 
@@ -83,11 +83,12 @@ void RunExperiment::run() {
   while (!end) {
 
     // WAIT MUTEX
-    int result = pthread_mutex_lock(mutex_) ;
-    if (result != 0) {
-      cerr << "RUNEXPERIMENT[" << threadIndex_ << "]: ERROR LOCKING THE MUTEX" << endl;
-      exit(-1) ;
-    }
+//    int result = pthread_mutex_lock(mutex_) ;
+//    if (result != 0) {
+//      cerr << "RUNEXPERIMENT[" << threadIndex_ << "]: ERROR LOCKING THE MUTEX" << endl;
+//      exit(-1) ;
+//    }
+    mutex_->lock();
 
     int experimentIndividualListIndex = experiment_->experimentIndividualListIndex_;
     //  cout << "Thread[" << threadIndex_ << "] experimentIndividualListIndex = " <<
@@ -107,11 +108,12 @@ void RunExperiment::run() {
     }
 
     // SIGNAL MUTEX
-    result = pthread_mutex_unlock(mutex_) ;
-    if (result != 0) {
-      cerr << "RUNEXPERIMENT[" << threadIndex_ << "]: ERROR UNLOCKING THE MUTEX" << endl;
-      exit(-1) ;
-    }
+//    result = pthread_mutex_unlock(mutex_) ;
+//    if (result != 0) {
+//      cerr << "RUNEXPERIMENT[" << threadIndex_ << "]: ERROR UNLOCKING THE MUTEX" << endl;
+//      exit(-1) ;
+//    }
+    mutex_->unlock();
 
     if (!end) {
 
