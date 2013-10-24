@@ -49,6 +49,8 @@
 #include <Rosenbrock.h>
 #include <Schaffer.h>
 #include <Sphere.h>
+#include <Srinivas.h>
+#include <Tanaka.h>
 #include <ZDT1.h>
 #include <ZDT2.h>
 #include <ZDT3.h>

@@ -310,6 +310,26 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv) {
 			cerr << "Incorrect number of arguments for Sphere problem." << endl;
 			exit(-1);
 		}
+    
+  } else if (strcmp(name, "Srinivas")==0) { // Srinivas
+		if (argc==0)
+			return new Srinivas("Real");
+		else if (argc==1)
+			return new Srinivas(argv[0]);
+		else {
+			cerr << "Incorrect number of arguments for Srinivas problem." << endl;
+			exit(-1);
+		}
+    
+   } else if (strcmp(name, "Tanaka")==0) { // Tanaka
+		if (argc==0)
+			return new Tanaka("Real");
+		else if (argc==1)
+			return new Tanaka(argv[0]);
+		else {
+			cerr << "Incorrect number of arguments for Tanaka problem." << endl;
+			exit(-1);
+		}
 
 	} else if (strcmp(name, "ZDT1")==0) { // ZDT1
 		if (argc==0)

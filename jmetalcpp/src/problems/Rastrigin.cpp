@@ -45,14 +45,13 @@ Rastrigin::Rastrigin(string solutionType, int numberOfVariables) {
 		exit(-1) ;
 	}
 	
-	int i ;
-    for (i = 0; i < numberOfVariables_; i++) {
-    	lowerLimit_[i] = -5.12;
-    	upperLimit_[i] =  5.12;
-    }
+  for (int i = 0; i < numberOfVariables_; i++) {
+    lowerLimit_[i] = -5.12;
+    upperLimit_[i] =  5.12;
+  }
 
-    // TODO: Solution type initialization
-    solutionType_ = new RealSolutionType(this);	
+  // TODO: Solution type initialization
+  solutionType_ = new RealSolutionType(this);	
 } // Rastrigin
 
 
