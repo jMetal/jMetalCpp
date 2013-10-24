@@ -77,12 +77,12 @@ int main(int argc, char ** argv) {
 
   // List of algorithm names to be used in the experiment
   // (please, refer to the README to check the possible values):
-  const char * algorithmNameList_[] = {
+  vector<string> algorithmNameList_ {
       "gGA", "ssGA", "DE", "PSO"};
 
   // List of problem names to be used in the experiment
   // (please, refer to the README to check the possible values):
-  const char * problemList_[] = {
+  vector<string> problemList_ {
       "Sphere", "Griewank"};
 
   // Directory where the execution results will be stored:
@@ -95,8 +95,8 @@ int main(int argc, char ** argv) {
   // Number of threads to be used to execute the experiment
   int numberOfThreads = 3;
 
-  exp->algorithmNameList_.assign(algorithmNameList_, end(algorithmNameList_));
-  exp->problemList_.assign(problemList_, end(problemList_));
+  exp->algorithmNameList_ = algorithmNameList_;
+  exp->problemList_ = problemList_;
   int numberOfAlgorithms = exp->algorithmNameList_.size();
   exp->isSingleObjective_ = true;
 

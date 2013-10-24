@@ -37,15 +37,15 @@ int main(int argc, char ** argv) {
 
   // List of algorithm names to be analyzed in the experiment
   // (please, refer to the README to check the possible values):
-  const char * algorithmNameList_[] = {
+  vector<string> algorithmNameList_ {
       "gGA", "ssGA", "DE", "PSO"};
-  exp->algorithmNameList_.assign(algorithmNameList_, end(algorithmNameList_));
+  exp->algorithmNameList_ = algorithmNameList_;
 
   // List of problem names to be analyzed in the experiment
   // (please, refer to the README to check the possible values):
-  const char * problemList_[] = {
+  vector<string> problemList_ {
       "Sphere", "Griewank"};
-  exp->problemList_.assign(problemList_, end(problemList_));
+  exp->problemList_ = problemList_;
 
 //  // List of optimal pareto front files to be used when calculating quality
 //  // indicators. It's not necessary to define this variable when not knowing
@@ -56,9 +56,9 @@ int main(int argc, char ** argv) {
 
   // List of quality indicator names to be calculated in the reports
   // (please, refer to the README to check the possible values):
-  const char * indicatorList_[] = {
+  vector<string> indicatorList_ {
       "FIT"};
-  exp->indicatorList_.assign(indicatorList_, end(indicatorList_));
+  exp->indicatorList_ = indicatorList_;
 
   // Directory from where the execution results will be readed:
   exp->experimentBaseDirectory_ = "C:/jMetal/pruebas/jmetal-cpp/" +
@@ -88,10 +88,10 @@ int main(int argc, char ** argv) {
   // Configure the R scripts to be generated
   int rows = 3 ;
   int columns = 2 ;
-  string prefix = "SO"; // �Qu� poner aqu�?
-  const char * problemsValues[] = {
+  string prefix = "SO";
+  vector<string> problemsValues {
       "Sphere", "Griewank"};
-  vector<string> problems (problemsValues, end(problemsValues));
+  vector<string> problems = problemsValues;
 
   bool notch;
   exp->generateRBoxplotScripts(rows, columns, problems, prefix, notch = false, exp);
