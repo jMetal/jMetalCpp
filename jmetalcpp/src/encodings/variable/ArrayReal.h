@@ -24,6 +24,7 @@
 #include <Variable.h>
 #include <Problem.h>
 #include <PseudoRandom.h>
+#include <sstream>
 
 /**
  * Class implementing a decision variable representing an array of real values.

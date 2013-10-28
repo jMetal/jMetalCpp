@@ -167,10 +167,10 @@ double ArrayReal::getUpperBound() {
  * @return The string
  */
 string ArrayReal::toString(){
-  std::ostringstream s;
+  std::ostringstream ss;
   for (int i = 0; i < (size_ - 1); i ++) {
-    s << array_[i] << " ";
+    ss << array_[i] << " ";
   }
-  s << array_[size_ -1];
-  return s.str();
+  ss << array_[size_ -1];
+  return ss.str();
 } // toString

@@ -148,7 +148,7 @@ void BinaryReal::setUpperBound(double upperBound) {
  * @return the string.
  */
 string BinaryReal::toString() {
-  string string_ = "";
-  string_ += value_;
-  return string_;
+  std::ostringstream ss;
+   ss << value_;
+  return ss.str();
 } // toString

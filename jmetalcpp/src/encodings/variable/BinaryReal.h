@@ -25,6 +25,7 @@
 #include <Binary.h>
 #include <PseudoRandom.h>
 #include <math.h>
+#include <sstream>
 
 /**
  * This class extends the Binary class to represent a Real variable encoded by
