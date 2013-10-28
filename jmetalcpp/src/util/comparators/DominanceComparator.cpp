@@ -48,15 +48,17 @@ int DominanceComparator::compare(void * o1, void * o2) {
   dominate2 = 0 ;
 
   int flag; //stores the result of the comparison
-/*
+  
   if (one->getOverallConstraintViolation()!=
       two->getOverallConstraintViolation() &&
      (one->getOverallConstraintViolation() < 0) ||
      (two->getOverallConstraintViolation() < 0)){
+    overallConstraintViolationComparator_ = new OverallConstraintViolationComparator();
     int returnValue = overallConstraintViolationComparator_->compare(one,two);
+    delete overallConstraintViolationComparator_;
     return returnValue;
   }
-*/
+  
   // Equal number of violated constraints. Applying a dominance Test then
   double value1, value2;
   for (int i = 0; i < one->getNumberOfObjectives(); i++) {

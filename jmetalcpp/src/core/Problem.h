@@ -65,7 +65,7 @@ public:
   double getUpperLimit(int i);
   virtual void evaluate(Solution * solution) = 0;
   int getNumberOfConstraints();
-  void evaluateConstraints(Solution * solution);
+  virtual void evaluateConstraints(Solution * solution);
   int getPrecision(int var);
   int * getPrecision();
   void setPrecision(int * precision);

@@ -117,6 +117,8 @@ void Tanaka::evaluateConstraints(Solution *solution) {
     }
   }
   
+  delete [] constraint;
+  
   solution->setOverallConstraintViolation(total);    
   solution->setNumberOfViolatedConstraints(number);
   

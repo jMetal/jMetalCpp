@@ -79,7 +79,7 @@ $(BINDIR)/% : $(patsubst $(BINDIR)%, $(SRCDIR)%.cpp, $(BINDIR)/%) $(LIB)
 	@echo "Compiling $(patsubst $(BINDIR)%, $(SRCDIR)%.cpp, $@)"
 	@mkdir -p $(BINDIR)
 	@mkdir -p $(dir $@)
-	@echo "$(CC) $(patsubst $(BINDIR)%, $(SRCDIR)%.cpp, $@) $(DEPS) -o $@ $(INC) $(LIB)"; $(CC) $(patsubst $(BINDIR)%, $(SRCDIR)%.cpp, $@) $(DEPS) -o $@ $(INC) $(LIB)
+	@echo "$(CC) $(CFLAGS) $(patsubst $(BINDIR)%, $(SRCDIR)%.cpp, $@) $(DEPS) -o $@ $(INC) $(LIB)"; $(CC) $(CFLAGS) $(patsubst $(BINDIR)%, $(SRCDIR)%.cpp, $@) $(DEPS) -o $@ $(INC) $(LIB)
 
 # Library rule
 library : $(LIB)

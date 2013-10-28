@@ -25,6 +25,7 @@
 
 #include <Solution.h>
 #include <Comparator.h>
+#include <OverallConstraintViolationComparator.h>
 
 /**
  * This class implements a <code>Comparator</code> (a method for comparing
