@@ -38,6 +38,8 @@ private:
   Comparator * overallConstraintViolationComparator_;
 
 public:
+  DominanceComparator();
+  ~DominanceComparator();
   int compare(void *one, void *two);
 };
 

@@ -24,6 +24,21 @@
 #include <RankComparator.h>
 #include <CrowdingComparator.h>
 
+/**
+ * Constructor
+ */
+CrowdingComparator::CrowdingComparator() : Comparator() {
+  comparator = new RankComparator();
+} // CrowdingComparator
+
+
+/**
+ * Destructor
+ */
+CrowdingComparator::~CrowdingComparator() {
+  delete comparator;
+} // ~CrowdingComparator
+
 
 /**
  * Compare two solutions.
@@ -39,9 +54,7 @@ int CrowdingComparator::compare(void *o1, void *o2) {
   else if (o2 == NULL)
     return -1;
 
-  comparator = new RankComparator();
   int flagComparatorRank = comparator->compare(o1,o2);
-  delete comparator;
 
   if (flagComparatorRank != 0)
     return flagComparatorRank;

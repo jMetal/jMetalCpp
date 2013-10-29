@@ -36,6 +36,8 @@ private:
   Comparator * comparator;
 
 public:
+  CrowdingComparator();
+  ~CrowdingComparator();
   int compare(void * o1, void * o2);
 
 };

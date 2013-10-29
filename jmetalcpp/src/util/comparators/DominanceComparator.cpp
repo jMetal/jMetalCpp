@@ -30,6 +30,31 @@
     non dominated only if: !compare(one,two) = false and !compare(two,one)
 **/
 
+
+/**
+ * Constructor
+ */
+DominanceComparator::DominanceComparator() : Comparator() {
+  overallConstraintViolationComparator_ = new OverallConstraintViolationComparator();
+} // DominanceComparator
+
+
+/**
+ * Destructor
+ */
+DominanceComparator::~DominanceComparator() {
+  cout << "DESTRUYENDOOOOO" << endl;
+  delete overallConstraintViolationComparator_;
+} // ~DominanceComparator
+
+
+/**
+ * Compare two solutions.
+ * @param o1 Object representing the first <code>Solution</code>.
+ * @param o2 Object representing the second <code>Solution</code>.
+ * @return -1, or 0, or 1 if o1 is less than, equal, or greater than o2,
+ * respectively.
+**/
 int DominanceComparator::compare(void * o1, void * o2) {
 
   if (o1==NULL)
@@ -53,9 +78,7 @@ int DominanceComparator::compare(void * o1, void * o2) {
       two->getOverallConstraintViolation() &&
      (one->getOverallConstraintViolation() < 0) ||
      (two->getOverallConstraintViolation() < 0)){
-    overallConstraintViolationComparator_ = new OverallConstraintViolationComparator();
     int returnValue = overallConstraintViolationComparator_->compare(one,two);
-    delete overallConstraintViolationComparator_;
     return returnValue;
   }
   

@@ -22,3 +22,9 @@
 
 #include <Comparator.h>
 
+
+/**
+ * Destructor
+ */
+Comparator::~Comparator() { } // ~Comparator
+
