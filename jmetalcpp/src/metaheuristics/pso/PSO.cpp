@@ -42,7 +42,7 @@ PSO::PSO(Problem *problem) : Algorithm(problem) {
   C2Max_ = 1.5;
   C2Min_ = 1.5;
   WMax_ = 0.9;
-  WMin_ = 0.1;
+  WMin_ = 0.9;
   ChVel1_ = 1.0;
   ChVel2_ = 1.0;
 
@@ -174,11 +174,6 @@ void PSO::computeSpeed(int iter, int miter) {
 
     //int bestIndividual = findBestSolution_->execute(particles_) ;
 
-    C1Max_ = 2.5;
-    C1Min_ = 1.5;
-    C2Max_ = 2.5;
-    C2Min_ = 1.5;
-
     r1 = PseudoRandom::randDouble(r1Min_, r1Max_);
     r2 = PseudoRandom::randDouble(r2Min_, r2Max_);
     C1 = PseudoRandom::randDouble(C1Min_, C1Max_);
@@ -186,16 +181,9 @@ void PSO::computeSpeed(int iter, int miter) {
     //W =  PseudoRandom.randDouble(WMin_, WMax_);
     //
 
-    WMax_ = 0.9;
-    WMin_ = 0.9;
-    ChVel1_ = 1.0;
-    ChVel2_ = 1.0;
-
-    C1 = 2.5;
-    C2 = 1.5;
-
     wmax = WMax_;
     wmin = WMin_;
+    
 /*
     for (int var = 0; var < particle.size(); var++) {
       //Computing the velocity of this particle
@@ -210,9 +198,7 @@ void PSO::computeSpeed(int iter, int miter) {
         i);
     }
 */
-    C1 = 1.5;
-    C2 = 1.5;
-    double W = 0.9;
+    
     for (int var = 0; var < particle->size(); var++) {
       //Computing the velocity of this particle
       speed_[i][var] = inertiaWeight(iter, miter, wmax, wmin) * speed_[i][var] +
