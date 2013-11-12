@@ -128,6 +128,7 @@ private:
   void computeNewPositions();
   void mopsoMutation(int actualIteration, int totalIterations);
   void initParams();
+  void setAlgParams();
   void deleteParams();
 
 public:

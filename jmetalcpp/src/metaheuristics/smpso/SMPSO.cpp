@@ -54,7 +54,9 @@ void SMPSO::initParams() {
   swarmSize_ = *(int *) getInputParameter("swarmSize");
   archiveSize_ = *(int *) getInputParameter("archiveSize");
   maxIterations_ = *(int *) getInputParameter("maxIterations");
-
+  
+  setAlgParams();
+  
   // TODO: indicators_ = (QualityIndicator) getInputParameter("indicators");
 
   polynomialMutation_ = operators_["mutation"] ;
@@ -86,6 +88,41 @@ void SMPSO::initParams() {
     deltaMin_[i] = -deltaMax_[i];
   } // for
 } // initParams
+  
+/**
+ * Read all user input parameters
+ * Possible params: r1Max, r1Min, r2Max, r2Min, C1Max, C1Min, C2Max, C2Min,
+ *   WMax, Wmin, ChVel1, ChVel2
+ */
+void SMPSO::setAlgParams() {
+  
+  void * r1MaxPtr   = getInputParameter("r1Max");
+  void * r1MinPtr   = getInputParameter("r1Min");
+  void * r2MaxPtr   = getInputParameter("r2Max");
+  void * r2MinPtr   = getInputParameter("r2Min");
+  void * C1MaxPtr   = getInputParameter("C1Min");
+  void * C1MinPtr   = getInputParameter("C1Max");
+  void * C2MaxPtr   = getInputParameter("C2Max");
+  void * C2MinPtr   = getInputParameter("C2Min");
+  void * WMaxPtr    = getInputParameter("WMax");
+  void * WMinPtr    = getInputParameter("WMin");
+  void * ChVel1Ptr  = getInputParameter("ChVel1");
+  void * ChVel2Ptr  = getInputParameter("ChVel2");
+  
+  if (r1MaxPtr != NULL) r1Max_ = * (double *) r1MaxPtr;
+  if (r1MinPtr != NULL) r1Min_ = * (double *) r1MinPtr;
+  if (r2MaxPtr != NULL) r2Max_ = * (double *) r2MaxPtr;
+  if (r2MinPtr != NULL) r2Min_ = * (double *) r2MinPtr;
+  if (C1MaxPtr != NULL) C1Max_ = * (double *) C1MaxPtr;
+  if (C1MinPtr != NULL) C1Min_ = * (double *) C1MinPtr;
+  if (C2MaxPtr != NULL) C2Max_ = * (double *) C2MaxPtr;
+  if (C2MinPtr != NULL) C2Min_ = * (double *) C2MinPtr;
+  if (WMaxPtr != NULL) WMax_ = * (double *) WMaxPtr;
+  if (WMinPtr != NULL) WMin_ = * (double *) WMinPtr;
+  if (ChVel1Ptr != NULL) ChVel1_ = * (double *) ChVel1Ptr;
+  if (ChVel2Ptr != NULL) ChVel2_ = * (double *) ChVel2Ptr;
+
+} // setAlgParams
 
 
 /**
@@ -316,6 +353,7 @@ SolutionSet * SMPSO::execute() {
     for (int i = 0; i < particles_->size(); i++) {
       Solution * particle = particles_->get(i);
       problem_->evaluate(particle);
+      problem_->evaluateConstraints(particle);
     }
 
     //Update the archive
