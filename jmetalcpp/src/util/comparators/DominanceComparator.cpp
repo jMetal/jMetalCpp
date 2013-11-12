@@ -43,7 +43,6 @@ DominanceComparator::DominanceComparator() : Comparator() {
  * Destructor
  */
 DominanceComparator::~DominanceComparator() {
-  cout << "DESTRUYENDOOOOO" << endl;
   delete overallConstraintViolationComparator_;
 } // ~DominanceComparator
 

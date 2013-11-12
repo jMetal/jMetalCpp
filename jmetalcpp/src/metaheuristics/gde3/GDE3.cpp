@@ -65,22 +65,14 @@ SolutionSet * GDE3::execute() {
   populationSize = *(int *) getInputParameter("populationSize");
   maxIterations  = *(int *) getInputParameter("maxIterations");
 
-//  cout << "GDE3: populationSize = " << populationSize << endl;
-//  cout << "GDE3: maxIterations = " << maxIterations << endl;
-
   //Initialize the variables
   population  = new SolutionSet(populationSize);
   evaluations = 0;
   iterations  = 0;
 
-//  cout << "GDE3: Poblacion inicializada con maxsize = " << population->getMaxSize() << endl;
-//  cout << "GDE3: Poblacion inicializada con size = " << population->size() << endl;
-
   //Read the operators
   crossoverOperator = operators_["crossover"];
   selectionOperator = operators_["selection"];
-
-//  cout << "GDE3: Problema: " << problem_->getName() << endl;
 
   // Create the initial solutionSet
   Solution * newSolution;
@@ -91,8 +83,6 @@ SolutionSet * GDE3::execute() {
     evaluations++;
     population->add(newSolution);
   } //for
-
-//  cout << "GDE3: Comienzan las generaciones." << endl;
 
   // Generations ...
   while (iterations < maxIterations) {
