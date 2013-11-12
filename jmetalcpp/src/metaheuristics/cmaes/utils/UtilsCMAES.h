@@ -22,7 +22,10 @@
 #define __UTILS_CMAES__
 
 
-#include <IntDouble.h>
+#include <string>
+#include <iostream>
+#include <sstream>
+#include <math.h>
 
 
 using namespace std;
@@ -36,7 +39,11 @@ using namespace std;
 class UtilsCMAES {
     
 public:
-  static void minFastSort(IntDouble ** x, int size);
+  static void tred2 (int n, double ** V, double * d, double * e);
+  static void tql2 (int n, double * d, double * e, double ** V);
+  static int checkEigenSystem (int N, double ** C, double * diag, double ** Q);
+  static double hypot (double a, double b);
+  static void minFastSort (double * x, int * idx, int size);
   
 };
 

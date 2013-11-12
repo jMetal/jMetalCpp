@@ -27,14 +27,11 @@
 #include <Comparator.h>
 #include <ObjectiveComparator.h>
 
-#include <FitnessCollector.h>
-#include <IntDouble.h>
 #include <UtilsCMAES.h>
-#include <CMAParameters.h>
 
 #include <PseudoRandom.h>
 
-#include<math.h>
+#include <math.h>
 
 
 /**
@@ -48,118 +45,62 @@ class CMAES : public Algorithm {
     /**
      * Stores the population size
      */
-    int populationSize_;
-    /**
-     * Stores the population
-     */
-    SolutionSet * population_;
-//    double ** population_;
-    
-    FitnessCollector * fit;
+    int populationSize;
     
     int counteval;
-    int countiter;
+    int maxEvaluations;
     
-//    int N;
-//    long seed = System.currentTimeMillis();
-//    Random rand = new Random(seed); // Note: it also Serializable
-//
-//    final MyMath math = new MyMath();
-    double axisratio; 
-//    long counteval;
-//    long countiter;
-//
-//    long bestever_eval; // C style, TODO:  better make use of class CMASolution?
-//    double[] bestever_x;
-//    double bestever_fit = Double.NaN; 
-//    // CMASolution bestever; // used as output variable
-//
     double sigma;
- //   double * typicalX; // eventually used to set initialX
-//    double[] initialX; // set in the end of init()
-    double * LBound;
-    double * UBound;    // bounds
+    
     double * xmean;
-//    double xmean_fit = Double.NaN;
+    double * xold;
+    
+    /*
+     * Strategy parameter setting: Selection
+     */
+    int mu;
+    double * weights;
+    double mueff;
+    
+    /*
+     * Strategy parameter setting: Adaptation
+     */
+    double cc;
+    double cs;
+    double c1;
+    double cmu;
+    double damps;
+    
+    /*
+     * Dynamic (internal) strategy parameters and constants
+     */
     double * pc;
     double * ps;
-    double ** C;
-//    double maxsqrtdiagC;
-//    double minsqrtdiagC;
     double ** B;
     double * diagD;
-    bool flgdiag; // 0 == full covariance matrix
-//    
-    /* init information */
-    double * startsigma;
-    double maxstartsigma;
-    double minstartsigma;
+    double ** C;
+    double ** invsqrtC;
+    int eigeneval;
+    double chiN;
     
-    bool iniphase;
-// 
-//    /**
-//     * state (postconditions):
-//     *  -1 not yet initialized
-//     *   0 initialized init()
-//     *   0.5 reSizePopulation
-//     *   1 samplePopulation, sampleSingle, reSampleSingle
-//     *   2.5 updateSingle
-//     *   3 updateDistribution
-//     */
-//    double state = -1;
-//    long citerlastwritten = 0;
-//    long countwritten = 0;
-//    int lockDimension = 0;
-//    int mode = 0;
-//    final int SINGLE_MODE = 1; // not in use anymore, keep for later developements?
-//    final int PARALLEL_MODE = 2;
-//
-//    
-    int countCupdatesSinceEigenupdate;
-    
-    double recentFunctionValue; 
-    double recentMaxFunctionValue;
-    double recentMinFunctionValue;
-    int idxRecentOffspring; 
-//    
     double ** arx;
-//    SolutionSet * arx;
-//    /** recent population, no idea whether this is useful to be public */
-//    public double[][] population; // returned not as a copy
-    double * xold;
-//    
-    double * BDz;
-    double * artmp;
+    SolutionSet * population_;
+    Solution * bestSolutionEver;
     
-    // OPTIONS:
-    int diagonalCovarianceMatrix;
-    
-    // PARAMETERS:
-    CMAParameters * sp;
-    
-    double * init();
+    void init();
     SolutionSet * samplePopulation();
-//    double ** samplePopulation();
-    
-//    double * resampleSingle(int index);
-    
-//    double ** genoPhenoTransformation(double ** popx, double ** popy);
-//    SolutionSet * genoPhenoTransformation(double ** popx, SolutionSet * popy);
     SolutionSet * genoPhenoTransformation(double ** popx);
-//    double * genoPhenoTransformation(double * popx, double * popy);
-    Solution * genoPhenoTransformation(double * popx, int index);
-    
-    Solution * resampleSingle(int index);
-    
+    Solution * genoPhenoTransformation(double * x);
+    bool isFeasible(Solution * solution);
+    Solution * resampleSingle(int iNk);
+    void storeBest(Comparator * comparator);
     void updateDistribution();
-    void updateBestEver(double * x, double fitness, int eval);
+    void deleteParams();
     
-    bool isFeasible(Solution * sol);
-
   public:
     CMAES(Problem * problem);
     SolutionSet * execute();
-    
+
 };
 
 #endif /* __CMAES__ */

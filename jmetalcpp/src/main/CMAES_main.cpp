@@ -48,10 +48,12 @@ int main(int argc, char ** argv) {
 	cout << "CMA-ES algorithm initialized." << endl;
 
 	// Algorithm parameters
-  int populationSizeValue = 100;
+  int populationSizeValue = 20;
   int maxEvaluationsValue = 1000000;
   algorithm->setInputParameter("populationSize",&populationSizeValue);
   algorithm->setInputParameter("maxEvaluations",&maxEvaluationsValue);
+  
+  cout << "POPULATION SIZE : " << populationSizeValue << endl;
 
 	// Add the indicator object to the algorithm
 	//algorithm->setInputParameter("indicators", indicators) ;
