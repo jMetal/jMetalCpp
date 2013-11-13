@@ -94,9 +94,12 @@ void CMAES::init() {
   int N = problem_->getNumberOfVariables();
   
   // objective variables initial point
+  default_random_engine generator;
+  normal_distribution<double> distribution(0.0,1.0);
   xmean = new double[N];
   for (int i = 0; i < N; i++) {
-    xmean[i] = PseudoRandom::randDouble(0, 1);
+    //xmean[i] = PseudoRandom::randDouble(0, 1);
+    xmean[i] = distribution(generator);
   }
   
   // coordinate wise standard deviation (step size)
@@ -206,6 +209,9 @@ void CMAES::init() {
 
 SolutionSet * CMAES::samplePopulation() {
   
+  default_random_engine generator;
+  normal_distribution<double> distribution(0.0,1.0);
+  
   int N = problem_->getNumberOfVariables();
   double * artmp = new double[N];
   double sum;
@@ -213,8 +219,8 @@ SolutionSet * CMAES::samplePopulation() {
   for (int iNk = 0; iNk < populationSize; iNk++) {
     
     for (int i = 0; i < N; i++) {
-      //TODO: Check the correctness of this random (http://en.wikipedia.org/wiki/CMA-ES)
-      artmp[i] = diagD[i] * PseudoRandom::randDouble(-2, 2);
+      //artmp[i] = diagD[i] * PseudoRandom::randDouble(-2, 2);
+      artmp[i] = diagD[i] * distribution(generator);
     }
     for (int i = 0; i < N; i++) {
       sum = 0.0;

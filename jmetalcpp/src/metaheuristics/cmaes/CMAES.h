@@ -29,9 +29,8 @@
 
 #include <UtilsCMAES.h>
 
-#include <PseudoRandom.h>
-
 #include <math.h>
+#include <random>
 
 
 /**
