@@ -72,12 +72,12 @@ int main(int argc, char ** argv) {
 
   // List of algorithm names to be used in the experiment
   // (please, refer to the README to check the possible values):
-  const char * algorithmNameList_[] = {
+  vector<string> algorithmNameList_ {
       "NSGAII", "SMPSO", "GDE3"};
 
   // List of problem names to be used in the experiment
   // (please, refer to the README to check the possible values):
-  const char * problemList_[] = {
+  vector<string> problemList_ {
       "ZDT1", "ZDT2", "ZDT3", "ZDT4", "ZDT6"};
 
   // Directory where the execution results will be stored:
@@ -90,9 +90,9 @@ int main(int argc, char ** argv) {
 
   // Number of threads to be used to execute the experiment
   int numberOfThreads = 8;
-
-  exp->algorithmNameList_.assign(algorithmNameList_, end(algorithmNameList_));
-  exp->problemList_.assign(problemList_, end(problemList_));
+  
+  exp->algorithmNameList_ = algorithmNameList_;
+  exp->problemList_ = problemList_;
   int numberOfAlgorithms = exp->algorithmNameList_.size();
 
   cout << "Experiment (" << exp->experimentName_ << ") is starting." << endl;

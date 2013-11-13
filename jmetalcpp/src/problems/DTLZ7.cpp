@@ -20,6 +20,8 @@
 
 #include <DTLZ7.h>
 
+const double DTLZ7::PI = 3.141592653589793;
+
 DTLZ7::DTLZ7(string solutionType, int numberOfVariables, int numberOfObjectives) {
 	numberOfVariables_   = numberOfVariables;
 	numberOfObjectives_  = numberOfObjectives;
@@ -91,7 +93,7 @@ void DTLZ7::evaluate(Solution *solution) {
 
   double h = 0.0 ;
   for (int i = 0; i < numberOfObjectives_ - 1; i++){
-    h+=(fx_[i]/(1.0+g))*(1 + sin(3.0*M_PI*fx_[i])) ;
+    h+=(fx_[i]/(1.0+g))*(1 + sin(3.0*PI*fx_[i])) ;
   } //for
 
   h = numberOfObjectives_ - h ;

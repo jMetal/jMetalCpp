@@ -6,7 +6,7 @@
 #
 # Instructions:
 #    - "make all" to compile everything
-#    - Use "spike" target to quick developing and compiling. MOEAD_main example
+#    - Use "spike" target to quick developing and compiling. CMAES_main example
 #      is included.
 #
 
@@ -55,7 +55,7 @@ OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(LIB_SOURCES:.$(SRCEXT)=.o))
 #BINARIES := $(patsubst $(MAIN_DIRS)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 
 # Flags
-CFLAGS := -O3 # -g # -Wall
+CFLAGS := -O3 -std=c++11 # -g # -Wall
 
 # Include flags when compiling
 INC := $(patsubst %,-I %/.,$(HEADER_DIRS))
@@ -66,6 +66,13 @@ LIBNAME := libjmetal.a
 
 # Library path
 LIB := $(LIBDIR)/$(LIBNAME)
+
+
+# Dependencies needed when generating executables	
+MAIN_DEPS := $(LIB)
+
+# Libraries needed when generating executables
+MAIN_LIBS := -lm #-pthread
 
 
 # All rule
@@ -79,7 +86,7 @@ $(BINDIR)/% : $(patsubst $(BINDIR)%, $(SRCDIR)%.cpp, $(BINDIR)/%) $(LIB)
 	@echo "Compiling $(patsubst $(BINDIR)%, $(SRCDIR)%.cpp, $@)"
 	@mkdir -p $(BINDIR)
 	@mkdir -p $(dir $@)
-	@echo "$(CC) $(CFLAGS) $(patsubst $(BINDIR)%, $(SRCDIR)%.cpp, $@) $(DEPS) -o $@ $(INC) $(LIB)"; $(CC) $(CFLAGS) $(patsubst $(BINDIR)%, $(SRCDIR)%.cpp, $@) $(DEPS) -o $@ $(INC) $(LIB)
+	@echo "$(CC) $(CFLAGS) $(patsubst $(BINDIR)%, $(SRCDIR)%.cpp, $@) $(MAIN_DEPS) -o $@ $(INC) $(MAIN_LIBS)"; $(CC) $(CFLAGS) $(patsubst $(BINDIR)%, $(SRCDIR)%.cpp, $@) $(MAIN_DEPS) -o $@ $(INC) $(MAIN_LIBS)
 
 # Library rule
 library : $(LIB)
@@ -105,13 +112,12 @@ clean:
 # Tests
 tester: 
 
-# Spikes (MOEAD_main quick developing and compiling example)
-spikes : $(BINDIR)/main/CMAES_main
+# Spikes (CMAES_main quick developing and compiling example)
+spikes : CMAES_main_spike
 
-$(BINDIR)/main/MOEAD_main : $(SRCDIR)/main/CMAES_main.$(SRCEXT) $(LIB)
-	@echo "Compiling $(SRCDIR)/main/CMAES_main.$(SRCEXT)"
-	@mkdir -p $(BINDIR)
-	@mkdir -p $(dir $(BINDIR)/main/CMAES_main)
-	@echo "$(CC) $(SRCDIR)/main/CMAES_main.$(SRCEXT) $(DEPS) -o $(BINDIR)/main/CMAES_main $(INC) $(LIB)"; $(CC) $(SRCDIR)/main/CMAES_main.$(SRCEXT) $(DEPS) -o $(BINDIR)/main/CMAES_main $(INC) $(LIB)
+CMAES_main_spike : $(SRCDIR)/main/CMAES_main.$(SRCEXT) $(LIB)
+	@echo "Compiling spike $(SRCDIR)/main/CMAES_main.$(SRCEXT)"
+	@mkdir -p $(BINDIR)/spike
+	@echo "$(CC) $(CFLAGS) $(SRCDIR)/main/CMAES_main.$(SRCEXT) $(MAIN_DEPS) -o $(BINDIR)/spike/CMAES_main $(INC) $(MAIN_LIBS)"; $(CC) $(CFLAGS) $(SRCDIR)/main/CMAES_main.$(SRCEXT) $(MAIN_DEPS) -o $(BINDIR)/spike/CMAES_main $(INC) $(MAIN_LIBS)
 
 .PHONY: clean

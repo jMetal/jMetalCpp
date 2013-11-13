@@ -38,6 +38,7 @@ public:
 private:
 	double * fx_ ;
   double * x_  ;
+  static const double PI ;
 };
 
 #endif /* __DTLZ4_H__ */

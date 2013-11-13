@@ -20,6 +20,8 @@
 
 #include <ZDT6.h>
 
+const double ZDT6::PI = 3.141592653589793;
+
 ZDT6::ZDT6(string solutionType, int numberOfVariables) {
 	numberOfVariables_   = numberOfVariables;
 	numberOfObjectives_  = 2;
@@ -74,7 +76,7 @@ void ZDT6::evaluate(Solution *solution) {
 	XReal * x = new XReal(solution);
 
 	double x1 = x->getValue(0) ;
-	fx_[0] = 1.0 - exp(-4.0*x1) * pow(sin(6.0*M_PI*x1), 6.0) ;
+	fx_[0] = 1.0 - exp(-4.0*x1) * pow(sin(6.0*PI*x1), 6.0) ;
   double g = evalG(x) ;
   double h = evalH(fx_[0], g) ;
 	fx_[1] = h * g ;

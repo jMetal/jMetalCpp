@@ -36,11 +36,11 @@ private:
 	double evalG(XReal *x) ;
 	double evalH(double f, double g) ;
 	double * fx_ ;
+  static const double PI ;
 
 public:
 	ZDT3(string solutionType, int numberOfVariables = 30);
 	void evaluate(Solution *solution);
-
 	virtual ~ZDT3();
 };
 

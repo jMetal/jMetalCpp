@@ -20,6 +20,8 @@
 
 #include <DTLZ5.h>
 
+const double DTLZ5::PI = 3.141592653589793;
+
 DTLZ5::DTLZ5(string solutionType, int numberOfVariables, int numberOfObjectives) {
 	numberOfVariables_   = numberOfVariables;
 	numberOfObjectives_  = numberOfObjectives;
@@ -85,9 +87,9 @@ void DTLZ5::evaluate(Solution *solution) {
   for (int i = numberOfVariables_ - k; i < numberOfVariables_; i++)
     g += (x_[i] - 0.5)*(x_[i] - 0.5);
 
-  double t = M_PI  / (4.0 * (1.0 + g));
+  double t = PI / (4.0 * (1.0 + g));
 
-  theta_[0] = x_[0] * M_PI / 2.0;
+  theta_[0] = x_[0] * PI / 2.0;
   for (int i = 1; i < (numberOfObjectives_-1); i++)
     theta_[i] = t * (1.0 + 2.0 * g * x_[i]);
 

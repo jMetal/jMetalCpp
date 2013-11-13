@@ -25,6 +25,7 @@
 #include <map>
 #include <vector>
 #include <iostream>
+#include <mutex>
 #include <stdlib.h>
 #include <stddef.h>
 #include <sys/stat.h>
@@ -50,14 +51,14 @@ public:
 
   RunExperiment(ExperimentExecution * experiment, map<string, void *> map, int id,
         int numberOfThreads, int numberOfProblems, int threadIndex,
-        pthread_mutex_t * mutex);
+        mutex * mtx);
   void run();
 
 private:
 
   int threadIndex_;
 
-  pthread_mutex_t * mutex_;
+  mutex * mutex_;
 
   string experimentName_;
   vector<string> algorithmNameList_; // List of the names of the algorithms to

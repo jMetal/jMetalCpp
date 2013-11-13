@@ -20,6 +20,8 @@
 
 #include <ZDT3.h>
 
+const double ZDT3::PI = 3.141592653589793;
+
 ZDT3::ZDT3(string solutionType, int numberOfVariables) {
 	numberOfVariables_   = numberOfVariables;
 	numberOfObjectives_  = 2;
@@ -97,6 +99,6 @@ double ZDT3::evalG(XReal * x) {
 
 double ZDT3::evalH(double f, double g) {
 	double h = 0.0 ;
-	h = 1.0 - sqrt(f/g) - (f/g)*sin(10.0*M_PI*f);
+	h = 1.0 - sqrt(f/g) - (f/g)*sin(10.0*PI*f);
 	return h ;
 }

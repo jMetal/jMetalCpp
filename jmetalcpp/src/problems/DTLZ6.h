@@ -39,6 +39,7 @@ private:
 	double * fx_ ;
   double * x_  ;
   double * theta_ ;
+  static const double PI ;
 };
 
 #endif /* __DTLZ6_H__ */

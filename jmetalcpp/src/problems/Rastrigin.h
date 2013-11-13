@@ -37,6 +37,10 @@ public:
 	Rastrigin(string solutionType, int numberOfVariables = 10);
 	~Rastrigin();
 	void evaluate(Solution *solution);
+  
+private:
+  static const double PI;
+  
 };
 
 #endif /* __RASTRIGIN__ */

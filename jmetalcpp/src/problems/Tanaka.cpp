@@ -21,6 +21,8 @@
 
 #include <Tanaka.h>
 
+const double Tanaka::PI = 3.141592653589793;
+
 /**
  * Constructor.
  * Creates a new instance of the Tanaka problem.
@@ -46,7 +48,7 @@ Tanaka::Tanaka(string solutionType) {
 	
   for (int var = 0; var < numberOfVariables_; var++){
     lowerLimit_[var] = 10e-5;
-    upperLimit_[var] = M_PI;
+    upperLimit_[var] = PI;
   } // for
   
   if (solutionType.compare("BinaryReal")==0) {

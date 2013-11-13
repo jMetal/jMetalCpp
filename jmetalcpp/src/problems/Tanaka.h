@@ -23,7 +23,7 @@
 #define __TANAKA__
 
 #include <Problem.h>
-#include <math.h>
+#include <cmath>
 #include <RealSolutionType.h>
 #include <BinaryRealSolutionType.h>
 #include <Solution.h>
@@ -38,12 +38,16 @@ using namespace std;
   * @brief Class representing problem Tanaka
  **/
 class Tanaka : public Problem {
+
+private:
+  static const double PI;
    
 public:
 	Tanaka(string solutionType);
 	~Tanaka();
 	void evaluate(Solution *solution);
   void evaluateConstraints(Solution * solution);
+  
 };
 
 #endif /* __TANAKA__ */

@@ -21,6 +21,8 @@
 
 #include <Rastrigin.h>
 
+const double Rastrigin::PI = 3.141592653589793;
+
 /**
  * Constructor.
  * Creates a new instance of the Rastrigin problem.
@@ -92,7 +94,7 @@ void Rastrigin::evaluate(Solution *solution) {
   // First function
   double result = 0.0 ;
   double a = 10.0 ;
-  double w = 2*3.141596 ;
+  double w = 2*PI ;
   
   for (int i = 0; i < numberOfVariables_; i++) {
     result += x[i]*x[i] - a*cos(w*x[i]) ;

@@ -20,6 +20,8 @@
 
 #include <DTLZ4.h>
 
+const double DTLZ4::PI = 3.141592653589793;
+
 DTLZ4::DTLZ4(string solutionType, int numberOfVariables, int numberOfObjectives) {
 	numberOfVariables_   = numberOfVariables;
 	numberOfObjectives_  = numberOfObjectives;
@@ -88,10 +90,10 @@ void DTLZ4::evaluate(Solution *solution) {
 
   for (int i = 0; i < numberOfObjectives_; i++) {
     for (int j = 0; j < numberOfObjectives_ - (i + 1); j++)
-      fx_[i] *= cos(pow(x_[j],alpha)*(M_PI/2.0));
+      fx_[i] *= cos(pow(x_[j],alpha)*(PI/2.0));
       if (i != 0){
         int aux = numberOfObjectives_ - (i + 1);
-        fx_[i] *= sin(pow(x_[aux],alpha)*(M_PI/2.0));
+        fx_[i] *= sin(pow(x_[aux],alpha)*(PI/2.0));
       } //if
   } // for
 

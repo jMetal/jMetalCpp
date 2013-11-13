@@ -25,7 +25,7 @@
 void* executeRun(void* ctx) {
   RunExperiment* cptr = (RunExperiment*)ctx;
   cptr->run();
-  pthread_exit(0);
+  //pthread_exit(0);
 } // executeRun
 
 
@@ -68,9 +68,8 @@ void ExperimentExecution::runExperiment(int numberOfThreads) {
   map_["outputParetoFrontFile"] = &outputParetoFrontFile_;
   map_["outputParetoSetFile"] = &outputParetoSetFile_;
 
-  cout << "Inicializando lista de tareas..." << endl;
-
-  cout << "algorithmNameList_.size() = " << algorithmNameList_.size() << endl;
+  cout << "Initializing task list..." << endl;
+  //cout << "algorithmNameList_.size() = " << algorithmNameList_.size() << endl;
 
   experimentIndividualListSize_ =
       problemList_.size() * algorithmNameList_.size() * independentRuns_;
@@ -89,35 +88,41 @@ void ExperimentExecution::runExperiment(int numberOfThreads) {
 
   int result;
 
-  pthread_mutex_t mutex;
-  result = pthread_mutex_init(&mutex, NULL) ;
-  if (result != 0) {
-    perror("ERROR INITIALIZING THE MUTEX");
-    exit(-1) ;
-  }
-  else
-    cout << "------- MUTEX OK ------" << endl ;
+  //pthread_mutex_t mutex;
+  mutex mtx;
+  //result = pthread_mutex_init(&mutex, NULL) ;
+//  if (result != 0) {
+//    perror("ERROR WHILE INITIALIZING THE MUTEX");
+//    exit(-1) ;
+//  }
+//  else
+//    cout << "------- MUTEX OK ------" << endl ;
 
-  pthread_t * p = new pthread_t[numberOfThreads];
+  //pthread_t * p = new pthread_t[numberOfThreads];
+  //thread * p = new thread[numberOfThreads];
+  vector<thread> threads;
   RunExperiment ** experiments_ = new RunExperiment*[numberOfThreads];
   for (int i = 0; i < numberOfThreads; i++) {
     experiments_[i] = new RunExperiment(this, map_, i, numberOfThreads,
-        problemList_.size(), i, &mutex);
-    result = pthread_create(&p[i], NULL, executeRun, experiments_[i]);
-    if (result != 0) {
-      perror("ERROR CREATING THREADS");
-      exit(-1) ;
-    }
+        problemList_.size(), i, &mtx);
+//    result = pthread_create(&p[i], NULL, executeRun, experiments_[i]);
+//    if (result != 0) {
+//      perror("ERROR WHILE CREATING THREADS");
+//      exit(-1) ;
+//    }
+    threads.push_back(thread(executeRun, experiments_[i]));
   }
 
-  for (int i = 0; i < numberOfThreads; i++) {
-    result = pthread_join(p[i], NULL) ;
-    cout << "Join con el thread " << i << endl;
-    if (result != 0) {
-      perror("ERROR MAKING THREAD JOIN");
-      exit(-1) ;
-    }
-  }
+//  for (int i = 0; i < numberOfThreads; i++) {
+//    result = pthread_join(p[i], NULL) ;
+//    cout << "Joined thread number " << (i+1) << "." <<endl;
+//    if (result != 0) {
+//      perror("ERROR WHILE MAKING THREAD JOIN");
+//      exit(-1) ;
+//    }
+//    p[i]->join();
+//  }
+  for (auto& th : threads) th.join();
 
   cout << "All the threads have finished." << endl;
 
@@ -126,7 +131,7 @@ void ExperimentExecution::runExperiment(int numberOfThreads) {
   }
 
   delete [] algorithmSettingsList_;
-  delete [] p;
+//  delete [] p;
 
   for (int i=0; i < numberOfThreads; i++)
     delete experiments_[i];

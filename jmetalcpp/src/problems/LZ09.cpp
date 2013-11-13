@@ -49,33 +49,33 @@ void LZ09::alphaFunction(double *alpha, vector<double> * x, int dim, int type) {
 		if (type == 23) {
 			alpha[0] = x->at(0);
 			alpha[1] = 1 - sqrt(alpha[0]) - alpha[0]
-			           * sin(10 * alpha[0] * alpha[0] * M_PI);
+			           * sin(10 * alpha[0] * alpha[0] * 3.141596);
 		}
 
 		if (type == 24) {
 			alpha[0] = x->at(0);
-			alpha[1] = 1 - x->at(0) - 0.05 * sin(4 * M_PI * x->at(0));
+			alpha[1] = 1 - x->at(0) - 0.05 * sin(4 * 3.141596 * x->at(0));
 		}
 	} else {
 		if (type == 31) {
-			alpha[0] = cos(x->at(0) * M_PI / 2) * cos(x->at(1) * M_PI / 2);
-			alpha[1] = cos(x->at(0) * M_PI / 2) * sin(x->at(1) * M_PI / 2);
-			alpha[2] = sin(x->at(0) * M_PI / 2);
+			alpha[0] = cos(x->at(0) * 3.141596 / 2) * cos(x->at(1) * 3.141596 / 2);
+			alpha[1] = cos(x->at(0) * 3.141596 / 2) * sin(x->at(1) * 3.141596 / 2);
+			alpha[2] = sin(x->at(0) * 3.141596 / 2);
 		}
 
 		if (type == 32) {
-			alpha[0] = 1 - cos(x->at(0) * M_PI / 2)
-			* cos(x->at(1) * M_PI / 2);
-			alpha[1] = 1 - cos(x->at(0) * M_PI / 2)
-			* sin(x->at(1) * M_PI / 2);
-			alpha[2] = 1 - sin(x->at(0) * M_PI / 2);
+			alpha[0] = 1 - cos(x->at(0) * 3.141596 / 2)
+			* cos(x->at(1) * 3.141596 / 2);
+			alpha[1] = 1 - cos(x->at(0) * 3.141596 / 2)
+			* sin(x->at(1) * 3.141596 / 2);
+			alpha[2] = 1 - sin(x->at(0) * 3.141596 / 2);
 		}
 
 		if (type == 33) {
 			alpha[0] = x->at(0);
 			alpha[1] = x->at(1);
 			alpha[2] = 3
-			- (sin(3 * M_PI * x->at(0)) + sin(3 * M_PI * x->at(1))) - 2
+			- (sin(3 * 3.141596 * x->at(0)) + sin(3 * 3.141596 * x->at(1))) - 2
 			* (x->at(0) + x->at(1));
 		}
 
@@ -122,7 +122,7 @@ double LZ09::betaFunction(vector<double> * x, int type) {
 		double sum = 0, xx;
 		for (int i = 0; i < dim; i++) {
 			xx = 2 * x->at(i);
-			sum += (xx * xx - cos(4 * M_PI * xx) + 1);
+			sum += (xx * xx - cos(4 * 3.141596 * xx) + 1);
 		}
 		beta = 2.0 * sum / dim;
 	}
@@ -132,7 +132,7 @@ double LZ09::betaFunction(vector<double> * x, int type) {
 		for (int i = 0; i < dim; i++) {
 			xx = 2 * x->at(i);
 			sum += xx * xx;
-			prod *= cos(10 * M_PI * xx / sqrt(i + 1));
+			prod *= cos(10 * 3.141596 * xx / sqrt(i + 1));
 		}
 		beta = 2.0 * (sum - 2 * prod + 2) / dim;
 	}
@@ -151,13 +151,13 @@ double LZ09::psfunc2(double x, double t1, int dim, int type, int css) {
 	}
 
 	if(type==22){
-		double theta = 6*M_PI*t1 + dim*M_PI/nvar_;
+		double theta = 6*3.141596*t1 + dim*3.141596/nvar_;
 		double xy    = 2*(x - 0.5);
 		beta = xy - sin(theta);
 	}
 
 	if(type==23){
-		double theta = 6*M_PI*t1 + dim*M_PI/nvar_;
+		double theta = 6*3.141596*t1 + dim*3.141596/nvar_;
 		double ra    = 0.8*t1;
 		double xy    = 2*(x - 0.5);
 		if(css==1)
@@ -168,7 +168,7 @@ double LZ09::psfunc2(double x, double t1, int dim, int type, int css) {
 	}
 
 	if(type==24){
-		double theta = 6*M_PI*t1 + dim*M_PI/nvar_;
+		double theta = 6*3.141596*t1 + dim*3.141596/nvar_;
 		double xy    = 2*(x - 0.5);
 		double ra    = 0.8*t1;
 		if(css==1)
@@ -180,8 +180,8 @@ double LZ09::psfunc2(double x, double t1, int dim, int type, int css) {
 
 	if(type==25){
 		double rho   = 0.8;
-		double phi   = M_PI*t1;
-		double theta = 6*M_PI*t1 + dim*M_PI/nvar_;
+		double phi   = 3.141596*t1;
+		double theta = 6*3.141596*t1 + dim*3.141596/nvar_;
 		double xy    = 2*(x - 0.5);
 		if(css==1)
 			beta = xy - rho*sin(phi)*sin(theta);
@@ -192,7 +192,7 @@ double LZ09::psfunc2(double x, double t1, int dim, int type, int css) {
 	}
 
 	if(type==26){
-		double theta = 6*M_PI*t1 + dim*M_PI/nvar_;
+		double theta = 6*3.141596*t1 + dim*3.141596/nvar_;
 		double ra    = 0.3*t1*(t1*cos(4*theta) + 2);
 		double xy    = 2*(x - 0.5);
 		if(css==1)
@@ -220,7 +220,7 @@ double LZ09::psfunc3(double x, double t1, double t2, int dim, int type){
 	}
 
 	if(type==32){
-		double theta = 2*M_PI*t1 + dim*M_PI/nvar_;
+		double theta = 2*3.141596*t1 + dim*3.141596/nvar_;
 		double xy    = 4*(x - 0.5);
 		beta = xy - 2*t2*sin(theta);
 	}
