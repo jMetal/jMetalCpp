@@ -26,6 +26,7 @@
 #include <BinaryTournament2.h>
 #include <iostream>
 #include <NSGAII.h>
+#include <ssNSGAII.h>
 #include <ProblemFactory.h>
 #include <string.h>
 #include <time.h>
@@ -72,6 +73,7 @@ int main(int argc, char ** argv) {
 	//indicators = null ;
 
 	algorithm = new NSGAII(problem);
+  //algorithm = new ssNSGAII(problem);
 
 	cout << "NGSAII algorithm initialized." << endl;
 

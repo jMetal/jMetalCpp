@@ -1,4 +1,4 @@
-//  NSGAII.cpp
+//  ssNSGAII.cpp
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
@@ -19,11 +19,11 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include <NSGAII.h>
+#include <ssNSGAII.h>
 
 
 /*
- * This class implements the NSGA-II algorithm.
+ * This class implements a steady-state version of NSGA-II.
  */
 
 
@@ -31,16 +31,16 @@
  * Constructor
  * @param problem Problem to solve
  */
-NSGAII::NSGAII(Problem *problem) : Algorithm(problem) {
-} // NSGAII
+ssNSGAII::ssNSGAII(Problem *problem) : Algorithm(problem) {
+} // ssNSGAII
 
 
 /*
- * Runs the NSGA-II algorithm.
+ * Runs the ssNSGA-II algorithm.
  * @return a <code>SolutionSet</code> that is a set of non dominated solutions
  * as a result of the algorithm execution
  */
-SolutionSet * NSGAII::execute() {
+SolutionSet * ssNSGAII::execute() {
 
   int populationSize;
   int maxEvaluations;
@@ -88,33 +88,30 @@ SolutionSet * NSGAII::execute() {
   
   // Generations
   while (evaluations < maxEvaluations) {
-
+    
     // Create the offSpring solutionSet
     offspringPopulation = new SolutionSet(populationSize);
     Solution ** parents = new Solution*[2];
-
-    for (int i = 0; i < (populationSize / 2); i++) {
-      if (evaluations < maxEvaluations) {
-        //obtain parents
-        parents[0] = (Solution *) (selectionOperator->execute(population));
-        parents[1] = (Solution *) (selectionOperator->execute(population));
-        
-        Solution ** offSpring = (Solution **) (crossoverOperator->execute(parents));
-        
-        mutationOperator->execute(offSpring[0]);
-        mutationOperator->execute(offSpring[1]);
-        
-        problem_->evaluate(offSpring[0]);
-        problem_->evaluateConstraints(offSpring[0]);
-        problem_->evaluate(offSpring[1]);
-        problem_->evaluateConstraints(offSpring[1]);
-        offspringPopulation->add(offSpring[0]);
-        offspringPopulation->add(offSpring[1]);
-        evaluations += 2;
-        delete[] offSpring;
-      } // if
-    } // for
-
+    
+    //obtain parents
+    parents[0] = (Solution *) (selectionOperator->execute(population));
+    parents[1] = (Solution *) (selectionOperator->execute(population));
+    
+    // crossover
+    Solution ** offSpring = (Solution **) (crossoverOperator->execute(parents));
+    
+    // mutation
+    mutationOperator->execute(offSpring[0]);
+    
+    // evaluation
+    problem_->evaluate(offSpring[0]);
+    problem_->evaluateConstraints(offSpring[0]);
+    
+    // insert child into the offspring population
+    offspringPopulation->add(offSpring[0]);
+    
+    evaluations ++;
+    delete[] offSpring;
     delete[] parents;
     
     // Create the solutionSet union of solutionSet and offSpring
@@ -123,7 +120,7 @@ SolutionSet * NSGAII::execute() {
 
     // Ranking the union
     Ranking * ranking = new Ranking(unionSolution);
-    
+
     int remain = populationSize;
     int index = 0;
     SolutionSet * front = NULL;
@@ -138,21 +135,19 @@ SolutionSet * NSGAII::execute() {
     while ((remain > 0) && (remain >= front->size())) {
       //Assign crowding distance to individuals
       distance->crowdingDistanceAssignment(front, problem_->getNumberOfObjectives());
-
       //Add the individuals of this front
       for (int k = 0; k < front->size(); k++) {
         population->add(new Solution(front->get(k)));
       } // for
-
+      
       //Decrement remain
       remain = remain - front->size();
-
+      
       //Obtain the next front
       index++;
       if (remain > 0) {
         front = ranking->getSubfront(index);
       } // if
-      
     } // while
 
     // Remain is less than front(index).size, insert only the best one
