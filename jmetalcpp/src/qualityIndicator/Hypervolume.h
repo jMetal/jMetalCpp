@@ -42,26 +42,23 @@ class Hypervolume {
 
 private:
 
-  bool dominates(vector<double> point1, vector<double> point2, int noObjectives);
-  void swap(vector< vector<double> > * front, int i, int j);
-  int filterNondominatedSet(vector< vector<double> > * front, int noPoints,
-      int noObjectives);
-  double surfaceUnchangedTo(vector< vector<double> > front, int noPoints,
-      int objective);
-  int reduceNondominatedSet(vector< vector<double> > * front, int noPoints,
-      int objective, double threshold);
-  vector< vector<double> > mergeFronts(vector< vector<double> > front1,
-      vector< vector<double> > front2);
+  bool dominates(double * point1, double * point2, int noObjectives);
+  void swap(double** front, int i, int j);
+  int filterNondominatedSet(double** front, int noPoints, int noObjectives);
+  double surfaceUnchangedTo(double ** front, int noPoints, int objective);
+  int reduceNondominatedSet(double** front, int noPoints, int objective,
+      double threshold);
+  double** mergeFronts(double** front1, int sizeFront1, double** front2,
+      int sizeFront2, int noObjectives);
 
 public:
-
+  
   MetricsUtil * utils_;
 
   Hypervolume();
   ~Hypervolume();
 
-  double calculateHypervolume(vector< vector<double> > * front, int noPoints,
-      int noObjectives);
+  double calculateHypervolume(double** front, int noPoints, int noObjectives);
   double hypervolume(vector< vector<double> > paretoFront,
       vector< vector<double> > paretoTrueFront, int numberOfObjectives);
 
