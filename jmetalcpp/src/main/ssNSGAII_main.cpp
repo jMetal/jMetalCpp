@@ -1,4 +1,4 @@
-//  NSGAII_main.cpp
+//  ssNSGAII_main.cpp
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
@@ -25,27 +25,21 @@
 #include <PolynomialMutation.h>
 #include <BinaryTournament2.h>
 #include <iostream>
-#include <NSGAII.h>
+#include <ssNSGAII.h>
 #include <ProblemFactory.h>
 #include <string.h>
 #include <time.h>
 
 
 /**
- * Class implementing the NSGA-II algorithm.
- * This implementation of NSGA-II makes use of a QualityIndicator object
+ * Class implementing the steady-state version of the NSGA-II algorithm.
+ * This implementation of ssNSGA-II makes use of a QualityIndicator object
  *  to obtained the convergence speed of the algorithm. This version is used
  *  in the paper:
- *     A.J. Nebro, J.J. Durillo, C.A. Coello Coello, F. Luna, E. Alba
- *     "A Study of Convergence Speed in Multi-Objective Metaheuristics."
- *     To be presented in: PPSN'08. Dortmund. September 2008.
- *
- *   Besides the classic NSGA-II, a steady-state version (ssNSGAII) is also
- *   included (See: J.J. Durillo, A.J. Nebro, F. Luna and E. Alba
- *                  "On the Effect of the Steady-State Selection Scheme in
- *                  Multi-Objective Genetic Algorithms"
- *                  5th International Conference, EMO 2009, pp: 183-197.
- *                  April 2009)
+ *     J.J. Durillo, A.J. Nebro, F. Luna and E. Alba
+ *     "On the Effect of the Steady-State Selection Scheme in Multi-Objective
+ *     Genetic Algorithms" 5th International Conference, EMO 2009, pp: 183-197.
+ *     April 2009)
  */
 int main(int argc, char ** argv) {
 
@@ -62,8 +56,6 @@ int main(int argc, char ** argv) {
   } else {
     cout << "No problem selected." << endl;
     cout << "Default problem will be used: Fonseca" << endl;
-//  char * defaultProblem;
-//  strcpy(defaultProblem, "Fonseca");
     problem = ProblemFactory::getProblem(const_cast<char *>("Fonseca"));
   }
 
@@ -71,9 +63,9 @@ int main(int argc, char ** argv) {
 	//QualityIndicator indicators ; // Object to get quality indicators
 	//indicators = null ;
 
-	algorithm = new NSGAII(problem);
+	algorithm = new ssNSGAII(problem);
 
-	cout << "NGSAII algorithm initialized." << endl;
+	cout << "ssNGSAII algorithm initialized." << endl;
 
   // Algorithm parameters
   int populationSize = 100;
