@@ -59,21 +59,17 @@ int main(int argc, char ** argv) {
 
   if (argc>=2) {
     problem = ProblemFactory::getProblem(argc, argv);
+    cout << "Selected problem: " << problem->getName() << endl;
   } else {
     cout << "No problem selected." << endl;
     cout << "Default problem will be used: Fonseca" << endl;
-//  char * defaultProblem;
-//  strcpy(defaultProblem, "Fonseca");
     problem = ProblemFactory::getProblem(const_cast<char *>("Fonseca"));
   }
-
-  //TODO: Quality Indicators
-	//QualityIndicator indicators ; // Object to get quality indicators
-	//indicators = null ;
+  
+//  QualityIndicator * indicators ; // Object to get quality indicators
+//	indicators = NULL ;
 
 	algorithm = new NSGAII(problem);
-
-	cout << "NGSAII algorithm initialized." << endl;
 
   // Algorithm parameters
   int populationSize = 100;
@@ -107,7 +103,7 @@ int main(int argc, char ** argv) {
 	algorithm->addOperator("selection",selection);
 
 	// Add the indicator object to the algorithm
-	//algorithm->setInputParameter("indicators", indicators) ;
+//	algorithm->setInputParameter("indicators", indicators) ;
 
 	// Execute the Algorithm
 	t_ini = clock();
@@ -122,6 +118,18 @@ int main(int argc, char ** argv) {
 	population->printVariablesToFile("VAR");
 	cout << "Objectives values have been written to file FUN" << endl;
 	population->printObjectivesToFile("FUN");
+  
+//  if (indicators != NULL) {
+//    cout << "Quality indicators" << endl;
+//    cout << "Hypervolume: " << indicators->getHypervolume(population) << endl;
+//    cout << "GD         : " << indicators->getGD(population) << endl;
+//    cout << "IGD        : " << indicators->getIGD(population) << endl;
+//    cout << "Spread     : " << indicators->getSpread(population) << endl;
+//    cout << "Epsilon    : " << indicators->getEpsilon(population) << endl;
+//    
+//    int evaluations = *(int *) algorithm->getOutputParameter("evaluations");;
+//    cout << "Speed      : " << evaluations << " evaluations" << endl;
+//  } // if
 
   delete selection;
   delete mutation;

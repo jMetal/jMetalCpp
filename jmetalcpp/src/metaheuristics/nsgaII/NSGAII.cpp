@@ -46,7 +46,7 @@ SolutionSet * NSGAII::execute() {
   int maxEvaluations;
   int evaluations;
 
-  // TODO: QualityIndicator indicators; // QualityIndicator object
+//  QualityIndicator * indicators; // QualityIndicator object
   int requiredEvaluations; // Use in the example of use of the
                            // indicators object (see below)
 
@@ -63,7 +63,7 @@ SolutionSet * NSGAII::execute() {
   //Read the parameters
   populationSize = *(int *) getInputParameter("populationSize");
   maxEvaluations = *(int *) getInputParameter("maxEvaluations");
-  // TODO: indicators = (QualityIndicator) getInputParameter("indicators");
+//  indicators = (QualityIndicator *) getInputParameter("indicators");
 
   //Initialize the variables
   population = new SolutionSet(populationSize);
@@ -175,11 +175,9 @@ SolutionSet * NSGAII::execute() {
     // of NSGA-II. In particular, it finds the number of evaluations required
     // by the algorithm to obtain a Pareto front with a hypervolume higher
     // than the hypervolume of the true Pareto front.
-// TODO:
-//    if ((indicators != NULL) &&
-//      (requiredEvaluations == 0)) {
-//      double HV = indicators.getHypervolume(population);
-//      if (HV >= (0.98 * indicators.getTrueParetoFrontHypervolume())) {
+//    if ((indicators != NULL) && (requiredEvaluations == 0)) {
+//      double HV = indicators->getHypervolume(population);
+//      if (HV >= (0.98 * indicators->getTrueParetoFrontHypervolume())) {
 //        requiredEvaluations = evaluations;
 //      } // if
 //    } // if
@@ -189,8 +187,7 @@ SolutionSet * NSGAII::execute() {
   delete distance;
 
   // Return as output parameter the required evaluations
-  // TODO:
-  //setOutputParameter("evaluations", requiredEvaluations);
+//  setOutputParameter("evaluations", &requiredEvaluations);
 
   // Return the first non-dominated front
   Ranking * ranking = new Ranking(population);

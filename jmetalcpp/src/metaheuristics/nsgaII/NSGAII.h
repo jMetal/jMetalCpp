@@ -36,11 +36,6 @@
 
 class NSGAII : public Algorithm {
 
-private:
-  int populationSize_;
-  int maxEvaluations_;
-  //QualityIndicator *indicators_;
-
 public:
   NSGAII(Problem * problem);
   SolutionSet * execute();
