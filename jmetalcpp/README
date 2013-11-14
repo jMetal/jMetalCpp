@@ -24,19 +24,20 @@ TABLE OF CONTENTS
 0. Updates (NEW)
 =======================================================================================
 
-Version 1.1:
-
+Version 1.5:
+  - Added new algorithms: SMS-EMOA, ssNSGA-II, MOEA/D and CMA-ES.
+  - Changed POSIX threads to C++11 built-in threads.
 
 Version 1.0.1:
-	- Fixed a bug that prevented the last Wilcoxon table being generated correctly.
-	- Changed FIT quality indicator to be minimized instead of being maximized.
+  - Fixed a bug that prevented the last Wilcoxon table being generated correctly.
+  - Changed FIT quality indicator to be minimized instead of being maximized.
 	
 Version 1.0: 
-	- Added quality indicators.
-	- Added experiments.
+  - Added quality indicators.
+  - Added experiments.
 	
 Version 0.1:
-	- First version.
+  - First version.
 
 =======================================================================================
 
@@ -64,7 +65,7 @@ Copy the compressed file to the location where you want to install jMetal and
 unzip it.
 
 Then, compile the code with the following command:
-	% make
+  % make
 
 =======================================================================================
 
@@ -73,32 +74,37 @@ Then, compile the code with the following command:
 3. Executing jMetal
 =======================================================================================
 
-All the binaries are in the 'bin' folder. Enter the folder to execute jMetal.
+All the main binaries are in the subfolder 'main included in the 'bin' folder. Enter
+this folder to execute jMetal.
 	
-	% cd bin
+  % cd bin
+  % cd main
 
 The following multi-objective metaheuristics are provided in this version of jMetal:
 
-	Algorithm                                   Command
-	---------------------------------------------------------
-	NSGA-II                                     NSGAII_main
-	GDE3                                        GDE3_main
-	SMPSO                                       SMPSO_main
-	PAES (NEW)                                  PAES_main			
+  Algorithm                                   Command
+  ---------------------------------------------------------
+  NSGA-II                                     NSGAII_main
+  ssNSGA-II (NEW)                             ssNSGAII_main
+  GDE3                                        GDE3_main
+  SMPSO                                       SMPSO_main
+  PAES                                        PAES_main
+  MOEA/D (NEW)                                MOEAD_main
+  CMA-ES (NEW)                                CMAES_main
 	
 Additionally, we include single-objective variants of these techniques:
 
-	Algorithm                                   Command
-	---------------------------------------------------------
-	DE (Differential Evolution)                 DE_main
-	gGA (Generational Genetic Algorithm)        gGA_main
-	PSO (Particle Swarm Optimization)           PSO_main
-	ssGA (Steady-state Genetic Algorithm)       ssGA_main
+  Algorithm                                   Command
+  ---------------------------------------------------------
+  DE (Differential Evolution)                 DE_main
+  gGA (Generational Genetic Algorithm)        gGA_main
+  PSO (Particle Swarm Optimization)           PSO_main
+  ssGA (Steady-state Genetic Algorithm)       ssGA_main
 	
 To execute one metaheuristic just use its associated command. For example, to execute
 GDE3 simply type the following command:
 	
-	% ./GDE3_main
+  % ./GDE3_main
 
 =======================================================================================
 
@@ -112,41 +118,45 @@ algorithm. You can specify what problem to solve by passing it as a parameter. F
 example, if you desire to execute the Generational Genetic Algorithm to solve the
 Sphere problem, you need to execute the following command:
 	
-	% ./gGA_main Sphere
+  % ./gGA_main Sphere
 	
 The following multi-objective problems are currently included:
-	- Fonseca
-	- Kursawe
-	- OneMax
-	- Schaffer
-	- Sphere
-	- DTLZ1
-	- DTLZ2
-	- DTLZ3
-	- DTLZ4
-	- DTLZ5
-	- DTLZ6
-	- DTLZ7
-	- ZDT1
-	- ZDT2
-	- ZDT3
-	- ZDT4
-	- ZDT5
-	- ZDT6
-	- LZ09_F1 (NEW. To be tested)
-	- LZ09_F2 (NEW. To be tested)
-	- LZ09_F3 (NEW. To be tested)
-	- LZ09_F4 (NEW. To be tested)
-	- LZ09_F5 (NEW. To be tested)
-	- LZ09_F6 (NEW. To be tested)
-	- LZ09_F7 (NEW. To be tested)
-	- LZ09_F8 (NEW. To be tested)
-	- LZ09_F9 (NEW. To be tested)
+  - Fonseca
+  - Kursawe
+  - OneMax
+  - Schaffer
+  - Sphere
+  - Srinivas (NEW)
+  - Tanaka (NEW)
+  - DTLZ1
+  - DTLZ2
+  - DTLZ3
+  - DTLZ4
+  - DTLZ5
+  - DTLZ6
+  - DTLZ7
+  - ZDT1
+  - ZDT2
+  - ZDT3
+  - ZDT4
+  - ZDT5
+  - ZDT6
+  - LZ09_F1 (To be tested)
+  - LZ09_F2 (To be tested)
+  - LZ09_F3 (To be tested)
+  - LZ09_F4 (To be tested)
+  - LZ09_F5 (To be tested)
+  - LZ09_F6 (To be tested)
+  - LZ09_F7 (To be tested)
+  - LZ09_F8 (To be tested)
+  - LZ09_F9 (To be tested)
 	
 The list of single-objective problems currently is composed of:
-    - Sphere
-    - OneMax
-    - Griewank (NEW)
+  - Griewank
+  - OneMax
+  - Rastrigin (NEW)
+  - Rosenbrock (NEW)
+  - Sphere
 
 =======================================================================================
 
@@ -164,10 +174,15 @@ The following parameters can be configured when going to solve a problem:
  Problem        Parameter 1         Parameter 2             Parameter 3
 --------------------------------------------------------------------------------------
  Fonseca        Solution type
+ Griewank       Solution type       Number of variables
  Kursawe        Solution type       Number of variables
  OneMax         Number of bits      Number of strings
+ Rastrigin      Solution type       Number of variables
+ Rosenbrock     Solution type       Number of variables
  Shaffer        Solution type
  Sphere         Solution type       Number of variables
+ Srinivas       Solution type
+ Tanaka       Solution type
  DTLZ1          Solution type       Number of variables     Number of objectives
  DTLZ2          Solution type       Number of variables     Number of objectives
  DTLZ3          Solution type       Number of variables     Number of objectives
@@ -210,29 +225,36 @@ needed to evaluate the quality of the obtained Pareto front approximations.
 
 The following quality indicators are provided in this version of jMetal:
 
-	Quality Indicator                     Command
-	---------------------------------------------------------------------
-	Hypervolume                           Hypervolume
-	Spread                                Spread
-	Epsilon                               Epsilon
-	Generational Distance                 GenerationalDistance
-	Inverted Generational Distance        InvertedGenerationalDistance
+  Quality Indicator                     Command
+  ---------------------------------------------------------------------
+  Hypervolume                           Hypervolume
+  Spread                                Spread
+  Epsilon                               Epsilon
+  Generational Distance                 GenerationalDistance
+  Inverted Generational Distance        InvertedGenerationalDistance
 	
 This quality indicators require to know the true Pareto front of the problems. In the
 case of the included benchmark problems, their Pareto fronts can be downloaded from
 http://jmetal.sourceforge.net/problems.html
 
-To calculate a quality indicator you will to execute the following command:
+The quality indicator binaries are included in 'bin/qualityIndicator/main'.
+Enter this folder to execute any indicator.
+	
+  % cd bin
+  % cd qualityIndicator
+  % cd main
 
-	% ./<QualityIndicatorCommand> <SolutionFrontFile> <TrueFrontFile>
-		<numberOfObjectives>
+To calculate a quality indicator you have to execute the following command:
+
+  % ./<QualityIndicatorCommand> <SolutionFrontFile> <TrueFrontFile>
+    <numberOfObjectives>
 
 For example, if you need to calculate the hypervolume indicator on the FUN file
 obtained by a metaheuristic when trying to solve the ZDT1 problem, you have to execute
 the following command:
 
-	% ./Hypervolume /home/username/jmetalcpp-test/FUN
-		/home/username/jmetalcpp-test/ZDT1.pf 2
+  % ./Hypervolume /home/username/jmetalcpp-test/FUN
+    /home/username/jmetalcpp-test/ZDT1.pf 2
 		
 Remember to change the file paths to whatever the actual location of the files
 containing the Pareto fronts is.
@@ -280,14 +302,14 @@ experiments to be used as templates. Feel free to edit these experiments or crea
 ones. Remember that after editing the code, you will have to compile the code again.
 
 The two provided experiments are:
-	- StandardStudyExecution
-	- StandardStudyExecutionSO
+  - StandardStudyExecution
+  - StandardStudyExecutionSO
 	
 The first one is a multi-objective experiment. The second one is a single-objective
 one. In order to execute a experiment, you only have to enter its corresponding
 command. For example:
 
-	% ./StandardStudyExecution
+  % ./StandardStudyExecution
 	
 Before executing the experiments, it is important to change some parameters in the code
 accordingly to your needs and to your system configuration. Thus, you need to indicate
@@ -297,59 +319,59 @@ files. You will have to edit the corresponding .cpp files located in the
 
 In each .cpp file, you can specify the following parameters:
 
-	- experimentName:
-		Self-explanatory. It will be used to create a folder when to store the
-		results.
-		
-	- algorithmNameList:
-		List of algorithms to be executed for each problem in the experiment.
-		
-	- problemList:
-		List of problems that will be resolved in the experiment.
-		
-	- independentRuns:
-		Number of times that each problem will be executed for each algorithm.
-		
-	- numberOfThreads:
-		Number of threads that will be used to execute the algorithms concurrently.
-		
-	- experimentBaseDirectory:
-		Directory path where all the experiments result will be	stored. Inside this
-		folder, the following structure will be created:
-		
-			- <experimentalBaseDirectory/experimentName>
-				|-data
-					|- <algorithm_1>
-					|	|- <problem_1>
-					|	|	Result files from problem 1 using algorithm 1.
-					|	|	(FUN.1, FUN.2, ..., FUN.X, VAR.1, VAR.2, ..., VAR.X)
-					|	|- <problem_2>
-					|	|	Result files from problem 2 using algorithm 1.
-					|	|	(FUN.1, FUN.2, ..., FUN.X, VAR.1, VAR.2, ..., VAR.X)	
-					|	|- ...
-					|	|- <problem_n>
-					|		Result files from problem n using algorithm 1.
-					|		(FUN.1, FUN.2, ..., FUN.X, VAR.1, VAR.2, ..., VAR.X)
-					|
-					|- <algorithm_2>
-					|	|- <problem_1>
-					|	|	Result files from problem 1 using algorithm 2.
-					|	|- <problem_2>
-					|	|	Result files from problem 2 using algorithm 2.
-					|	|- ...
-					|	|- <problem_n>
-					|		Result files from problem n using algorithm 2.
-					|
-					|- ...
-					|
-					|- <algorithm_m>
-						|- <problem_1>
-						|	Result files from problem 1 using algorithm m.
-						|- <problem_2>
-						|	Result files from problem 2 using algorithm m.	
-						|- ...
-						|- <problem_n>
-							Result files from problem n using algorithm m.
+  - experimentName:
+    Self-explanatory. It will be used to create a folder when to store the
+    results.
+    
+  - algorithmNameList:
+    List of algorithms to be executed for each problem in the experiment.
+    
+  - problemList:
+    List of problems that will be resolved in the experiment.
+    
+  - independentRuns:
+    Number of times that each problem will be executed for each algorithm.
+    
+  - numberOfThreads:
+    Number of threads that will be used to execute the algorithms concurrently.
+    
+  - experimentBaseDirectory:
+    Directory path where all the experiments result will be	stored. Inside this
+    folder, the following structure will be created:
+    
+    - <experimentalBaseDirectory/experimentName>
+        |-data
+          |- <algorithm_1>
+          |	|- <problem_1>
+          |	|	Result files from problem 1 using algorithm 1.
+          |	|	(FUN.1, FUN.2, ..., FUN.X, VAR.1, VAR.2, ..., VAR.X)
+          |	|- <problem_2>
+          |	|	Result files from problem 2 using algorithm 1.
+          |	|	(FUN.1, FUN.2, ..., FUN.X, VAR.1, VAR.2, ..., VAR.X)	
+          |	|- ...
+          |	|- <problem_n>
+          |   Result files from problem n using algorithm 1.
+					|   (FUN.1, FUN.2, ..., FUN.X, VAR.1, VAR.2, ..., VAR.X)
+          |
+          |- <algorithm_2>
+          |	|- <problem_1>
+          |	|	Result files from problem 1 using algorithm 2.
+          |	|- <problem_2>
+          |	|	Result files from problem 2 using algorithm 2.
+          |	|- ...
+          |	|- <problem_n>
+          |		Result files from problem n using algorithm 2.
+          |
+          |- ...
+          |
+          |- <algorithm_m>
+            |- <problem_1>
+            |	Result files from problem 1 using algorithm m.
+            |- <problem_2>
+            |	Result files from problem 2 using algorithm m.	
+            |- ...
+            |- <problem_n>
+              Result files from problem n using algorithm m.
 							
 Each algorithm used in the execution must be properly configured. This is done in the
 algorithmSettings method in each .cpp file. For each algorithm (NSGAII, GDE3, gGA...),
@@ -376,9 +398,9 @@ create new ones from them. Remember that after editing the code, you will have t
 compile the code again.
 
 The three provided experiments are:
-	- StandardStudyReportPF
-	- StandardStudyReportRF
-	- StandardStudyReportSO
+  - StandardStudyReportPF
+  - StandardStudyReportRF
+  - StandardStudyReportSO
 
 The experiments in the Java version of jMetal assume that you known in advance the true
 Pareto front of the solved problems, and this assumption is considered in the
@@ -394,46 +416,46 @@ StandardStudyReportSO generates the reports for a single-objective experiment.
 In order to execute an experiment report, you only need to enter its corresponding
 command. For example:
 
-	% ./StandardStudyReportPF
+  % ./StandardStudyReportPF
 	
 As before, the experiment report programs must be properly configured before running
 them. It is very important that the list of parameters enumerated in the following do
 match with the ones included in the execution part which was previously run:
 
-	- experimentName:
-		Self-explanatory. It will be used to know the folder from where to read the
-		execution results.
-		
-	- algorithmNameList:
-		List of algorithms which were executed for each problem in the experiment
-		execution part.
-		
-	- problemList:
-		List of problems which were resolved in the experiment execution part.
-		
-	- independentRuns:
-		Number of times that each problem were executed for each algorithm in the
-		execution part.
-		
-	- experimentBaseDirectory:
-		Directory path where all the experiments result were stored.
-	
-	- indicatorList:
-		List of quality indicators that will be calculated in the reports. When doing
-		a experiment about single-objective algorithms, the only possible value is
-		"FIT".
-		
-	- paretoFrontFile:
-		List of optimal pareto front files that will be used to calculate the
-		quality indicators. Only necessary if the optimal pareto fronts are known and
-		if the experiment is about multi-objective algorithms.
-		
-	- paretoFrontDirectory:
-		Directory path when the optimal pareto fronts are stored. Only necessary when
-		going to use known optimal pareto fronts. If it is a single-objective
-		experiment, this parameter is not used. If it is a multi-objective experiment
-		and this parameter is not especified, reference pareto fronts will be
-		generated to calculate the quality indicators.
+  - experimentName:
+    Self-explanatory. It will be used to know the folder from where to read the
+    execution results.
+    
+  - algorithmNameList:
+    List of algorithms which were executed for each problem in the experiment
+    execution part.
+    
+  - problemList:
+    List of problems which were resolved in the experiment execution part.
+    
+  - independentRuns:
+    Number of times that each problem were executed for each algorithm in the
+    execution part.
+    
+  - experimentBaseDirectory:
+    Directory path where all the experiments result were stored.
+    
+  - indicatorList:
+    List of quality indicators that will be calculated in the reports. When doing
+    a experiment about single-objective algorithms, the only possible value is
+    "FIT".
+    
+  - paretoFrontFile:
+    List of optimal pareto front files that will be used to calculate the
+    quality indicators. Only necessary if the optimal pareto fronts are known and
+    if the experiment is about multi-objective algorithms.
+    
+  - paretoFrontDirectory:
+    Directory path when the optimal pareto fronts are stored. Only necessary when
+    going to use known optimal pareto fronts. If it is a single-objective
+    experiment, this parameter is not used. If it is a multi-objective experiment
+    and this parameter is not especified, reference pareto fronts will be
+    generated to calculate the quality indicators.
 
  In case of executing the StandardStudyReportRF program, a directory
  <experimentalBaseDirectory/experimentName/referenceFronts> will contain the obtained
