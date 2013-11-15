@@ -182,7 +182,7 @@ The following parameters can be configured when going to solve a problem:
  Shaffer        Solution type
  Sphere         Solution type       Number of variables
  Srinivas       Solution type
- Tanaka       Solution type
+ Tanaka         Solution type
  DTLZ1          Solution type       Number of variables     Number of objectives
  DTLZ2          Solution type       Number of variables     Number of objectives
  DTLZ3          Solution type       Number of variables     Number of objectives

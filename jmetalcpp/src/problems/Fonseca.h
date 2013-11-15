@@ -24,6 +24,8 @@
 
 #include <Problem.h>
 #include <math.h>
+#include <ArrayRealSolutionType.h>
+#include <BinaryRealSolutionType.h>
 #include <RealSolutionType.h>
 #include <Solution.h>
 

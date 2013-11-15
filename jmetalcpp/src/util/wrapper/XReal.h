@@ -24,7 +24,7 @@
 #define XREAL_H_
 
 #include <Solution.h>
-#include <BinarySolutionType.h>
+#include <BinaryRealSolutionType.h>
 #include <RealSolutionType.h>
 #include <ArrayRealSolutionType.h>
 #include <ArrayReal.h>
@@ -48,10 +48,6 @@ public:
 private:
   Solution * solution_;
   SolutionType * type_;
-  //TODO: Intentar hacer esto de otra manera:
-  RealSolutionType * realSolutionType;
-  BinarySolutionType * binarySolutionType;
-  ArrayRealSolutionType * arrayRealSolutionType;
 
 };
 

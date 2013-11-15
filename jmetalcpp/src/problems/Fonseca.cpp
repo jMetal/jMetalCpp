@@ -28,6 +28,7 @@ Fonseca::Fonseca(string solutionType) {
   numberOfVariables_   = 3;
   numberOfObjectives_  = 2;
   numberOfConstraints_ = 0;
+  problemName_         = "Fonseca";
 	
   lowerLimit_ = new double[numberOfVariables_];
 	if (lowerLimit_ == NULL) {
@@ -45,8 +46,18 @@ Fonseca::Fonseca(string solutionType) {
     upperLimit_[i] =  4.0;
   } // for
 
-    // TO-DO: Solution type initialization    		
-  solutionType_ = new RealSolutionType(this);	
+  if (solutionType.compare("BinaryReal") == 0) {
+    cout << "Tipo seleccionado BinaryReal" << endl;
+    solutionType_ = new BinaryRealSolutionType(this) ;
+  } else if (solutionType.compare("Real") == 0) {
+    solutionType_ = new RealSolutionType(this) ;
+    cout << "Tipo seleccionado Real" << endl;
+  } else if (solutionType.compare("ArrayReal") == 0) {
+    solutionType_ = new ArrayRealSolutionType(this) ;
+  } else {
+    cout << "Error: solution type " << solutionType << " invalid" << endl;
+    exit(-1) ;
+  }	
 } // Fonseca
 
 

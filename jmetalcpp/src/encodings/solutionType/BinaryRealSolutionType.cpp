@@ -36,7 +36,6 @@ BinaryRealSolutionType::BinaryRealSolutionType(Problem *problem)
  * @param decisionVariables
  */
 Variable ** BinaryRealSolutionType::createVariables() {
-  int i;
 
   Variable **variables = new Variable*[problem_->getNumberOfVariables()]; //malloc(sizeof(Real) * problem->getNumberOfVariables());
 
