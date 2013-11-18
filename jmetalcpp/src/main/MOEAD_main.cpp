@@ -64,7 +64,7 @@ int main(int argc, char ** argv) {
   algorithm = new MOEAD(problem);
 
   // Algorithm parameters
-  int populationSizeValue = 500;
+  int populationSizeValue = 300;
   int maxEvaluationsValue = 150000;
   algorithm->setInputParameter("populationSize",&populationSizeValue);
   algorithm->setInputParameter("maxEvaluations",&maxEvaluationsValue);
