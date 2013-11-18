@@ -26,6 +26,7 @@ TABLE OF CONTENTS
 
 Version 1.5:
   - Added new algorithms: SMS-EMOA, ssNSGA-II, MOEA/D and CMA-ES.
+  - Added new problems: Srinivas, Tanaka, Rastrigin and Rosenbrock.
   - Changed POSIX threads to C++11 built-in threads.
 
 Version 1.0.1:
@@ -90,7 +91,6 @@ The following multi-objective metaheuristics are provided in this version of jMe
   PAES                                        PAES_main
   SMS-EMOA (NEW)                              SMSEMOA_main
   MOEA/D (NEW)                                MOEAD_main
-  CMA-ES (NEW)                                CMAES_main
 	
 Additionally, we include single-objective variants of these techniques:
 
@@ -100,6 +100,7 @@ Additionally, we include single-objective variants of these techniques:
   gGA (Generational Genetic Algorithm)        gGA_main
   PSO (Particle Swarm Optimization)           PSO_main
   ssGA (Steady-state Genetic Algorithm)       ssGA_main
+  CMA-ES (NEW)                                CMAES_main
 	
 To execute one metaheuristic just use its associated command. For example, to execute
 GDE3 simply type the following command:
@@ -141,15 +142,15 @@ The following multi-objective problems are currently included:
   - ZDT4
   - ZDT5
   - ZDT6
-  - LZ09_F1 (To be tested)
-  - LZ09_F2 (To be tested)
-  - LZ09_F3 (To be tested)
-  - LZ09_F4 (To be tested)
-  - LZ09_F5 (To be tested)
-  - LZ09_F6 (To be tested)
-  - LZ09_F7 (To be tested)
-  - LZ09_F8 (To be tested)
-  - LZ09_F9 (To be tested)
+  - LZ09_F1
+  - LZ09_F2
+  - LZ09_F3
+  - LZ09_F4
+  - LZ09_F5
+  - LZ09_F6
+  - LZ09_F7
+  - LZ09_F8
+  - LZ09_F9
 	
 The list of single-objective problems currently is composed of:
   - Griewank
