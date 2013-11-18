@@ -99,4 +99,9 @@ void LZ09_F9::evaluate(Solution * solution) {
 
   for (int i = 0; i < numberOfObjectives_; i++)
     solution->setObjective(i, y->at(i));
+  
+  delete x;
+  delete y;
+  delete vars;
+  
 }
