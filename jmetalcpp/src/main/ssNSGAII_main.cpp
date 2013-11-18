@@ -53,6 +53,7 @@ int main(int argc, char ** argv) {
 
   if (argc>=2) {
     problem = ProblemFactory::getProblem(argc, argv);
+    cout << "Selected problem: " << problem->getName() << endl;
   } else {
     cout << "No problem selected." << endl;
     cout << "Default problem will be used: Fonseca" << endl;
@@ -64,8 +65,6 @@ int main(int argc, char ** argv) {
 	//indicators = null ;
 
 	algorithm = new ssNSGAII(problem);
-
-	cout << "ssNGSAII algorithm initialized." << endl;
 
   // Algorithm parameters
   int populationSize = 100;

@@ -35,9 +35,8 @@ int main(int argc, char ** argv) {
 
   if (argc>=2) {
     problem = ProblemFactory::getProblem(argc, argv);
+    cout << "Selected problem: " << problem->getName() << endl;
   } else {
-    // char * defaultProblem;
-    // strcpy(defaultProblem, "Sphere");
     cout << "No problem selected." << endl;
     cout << "Default problem will be used: Sphere" << endl;
     problem = ProblemFactory::getProblem(const_cast<char *>("Sphere"));
@@ -45,15 +44,11 @@ int main(int argc, char ** argv) {
 
 	algorithm = new CMAES(problem);
 
-	cout << "CMA-ES algorithm initialized." << endl;
-
 	// Algorithm parameters
   int populationSizeValue = 20;
   int maxEvaluationsValue = 1000000;
   algorithm->setInputParameter("populationSize",&populationSizeValue);
   algorithm->setInputParameter("maxEvaluations",&maxEvaluationsValue);
-  
-  cout << "POPULATION SIZE : " << populationSizeValue << endl;
 
 	// Add the indicator object to the algorithm
 	//algorithm->setInputParameter("indicators", indicators) ;

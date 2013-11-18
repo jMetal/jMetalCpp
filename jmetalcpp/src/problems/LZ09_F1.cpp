@@ -28,7 +28,7 @@ LZ09_F1::LZ09_F1(string solutionType, int ptype, int dtype, int ltype) {
   numberOfObjectives_ = 2;
   numberOfConstraints_= 0;
   problemName_        = "LZ09_F1";
-
+  
 	 LZ09_  = new LZ09(numberOfVariables_,
 			               numberOfObjectives_,
 			               ptype,
@@ -53,7 +53,7 @@ LZ09_F1::LZ09_F1(string solutionType, int ptype, int dtype, int ltype) {
 			lowerLimit_[i] = 0.0;
 			upperLimit_[i] = 1.0;
 		}
-
+    
 		if (solutionType.compare("BinaryReal") == 0)
 			solutionType_ = new BinaryRealSolutionType(this) ;
 		else if (solutionType.compare("Real") == 0) {
@@ -65,7 +65,7 @@ LZ09_F1::LZ09_F1(string solutionType, int ptype, int dtype, int ltype) {
 			cout << "LZ09_F1::LZ09_F1: solution type " << solutionType << " invalid" << endl;
 			exit(-1) ;
 		}
-
+      
 		fx_ = new double[numberOfObjectives_] ;
 	  x_ = new double[numberOfVariables_];
 } // LZ09_F1::LZ09_F1
@@ -82,13 +82,15 @@ LZ09_F1::~LZ09_F1 () {
 
 void LZ09_F1::evaluate(Solution * solution) {
 	XReal * vars = new XReal(solution);
-
+  
   vector<double> * x = new vector<double>(numberOfVariables_) ;
   vector<double> * y = new vector<double>(numberOfObjectives_);
 
   for (int i = 0; i < numberOfVariables_; i++) {
   	x->at(i) = vars->getValue(i);
-  	y->at(i) = 0.0 ;
+  } // for
+  for (int i = 0; i < numberOfObjectives_; i++) {
+    y->at(i) = 0.0 ;
   } // for
 
   LZ09_->objective(x, y) ;

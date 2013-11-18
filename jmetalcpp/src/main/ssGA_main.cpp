@@ -45,14 +45,10 @@ int main(int argc, char ** argv) {
   } else {
     cout << "No problem selected." << endl;
     cout << "Default problem will be used: Sphere" << endl;
-//    char * defaultProblem;
-//    strcpy(defaultProblem, "Fonseca");
     problem = ProblemFactory::getProblem(const_cast<char *>("Sphere"));
   }
 
   algorithm = new ssGA(problem); // Steady-state GA
-
-  cout << "Steady-state genetic algorithm initialized." << endl;
 
   // Algorithm parameters
   int populationSize = 100;

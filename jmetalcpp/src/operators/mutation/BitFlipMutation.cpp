@@ -31,8 +31,6 @@ BitFlipMutation::BitFlipMutation(map<string, void *> parameters)
   mutationProbability_ = 0.0 ;
   if (parameters["probability"] != NULL)
     mutationProbability_ = *(double *) parameters["probability"];
-
-  cout << "bitflipmutation -> prob: " << mutationProbability_ << endl ;
 } // BitFlipMutation
 
 

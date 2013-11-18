@@ -144,8 +144,7 @@ SolutionSet * DE::execute() {
   SolutionSet * resultPopulation = new SolutionSet(1);
   resultPopulation->add(new Solution(population->get(0)));
   delete population;
-
-  cout << "DE: Evaluations: " << evaluations << endl;
+  
   return resultPopulation;
 
 } // execute

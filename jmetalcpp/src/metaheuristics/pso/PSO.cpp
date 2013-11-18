@@ -343,7 +343,6 @@ SolutionSet * PSO::execute() {
   int * bestIndexPtr = (int *)findBestSolution_->execute(particles_);
   int bestIndex = *bestIndexPtr;
   delete bestIndexPtr;
-  cout << "Best index = " << bestIndex << endl;
   Solution * s = particles_->get(bestIndex);
   resultPopulation->add(new Solution(s));
 

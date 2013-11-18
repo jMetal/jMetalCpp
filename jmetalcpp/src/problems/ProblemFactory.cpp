@@ -191,7 +191,15 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv) {
 			exit(-1);
 		}
   } else if (strcmp(name, "LZ09_F1")==0) { // LZ09_F1
-    if (argc==4)
+    if (argc==0)
+			return new LZ09_F1("Real");
+		else if (argc==1)
+			return new LZ09_F1(argv[0]);
+		else if (argc==2)
+		  return new LZ09_F1(argv[0], atoi(argv[1]));
+    else if (argc==3)
+		  return new LZ09_F1(argv[0], atoi(argv[1]), atoi(argv[2]));
+    else if (argc==4)
       return new LZ09_F1(argv[0], atoi(argv[1]), atoi(argv[2]), atoi(argv[3]));
     else {
       cerr << "Incorrect number of arguments for LZ09_F1 problem." << endl;

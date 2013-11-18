@@ -46,20 +46,14 @@ int main(int argc, char ** argv) {
 
   if (argc>=2) {
     problem = ProblemFactory::getProblem(argc, argv);
+    cout << "Selected problem: " << problem->getName() << endl;
   } else {
     cout << "No problem selected." << endl;
     cout << "Default problem will be used: Sphere" << endl;
-    // char * defaultProblem;
-    // strcpy(defaultProblem, "Fonseca");
     problem = ProblemFactory::getProblem(const_cast<char *>("Sphere"));
   }
 
-  cout << "DE_main: Number of objectives: " << problem->getNumberOfObjectives() << endl;
-  cout << "DE_main: Problem: " << problem->getName() << endl;
-
   algorithm = new DE(problem);
-
-  cout << "DE_main: Differential evolution initialized." << endl;
 
   // Algorithm parameters
   int populationSizeValue = 100;

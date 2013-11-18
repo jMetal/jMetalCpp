@@ -49,7 +49,7 @@ ZDT6::ZDT6(string solutionType, int numberOfVariables) {
 		solutionType_ = new BinaryRealSolutionType(this) ;
 	else if (solutionType.compare("Real") == 0) {
 		solutionType_ = new RealSolutionType(this) ;
-		cout << "Tipo seleccionado Real" << endl;
+		//cout << "Tipo seleccionado Real" << endl;
 	}
 	else if (solutionType.compare("ArrayReal") == 0)
 		solutionType_ = new ArrayRealSolutionType(this) ;

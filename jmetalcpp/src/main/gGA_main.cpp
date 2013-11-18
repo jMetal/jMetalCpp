@@ -41,17 +41,14 @@ int main(int argc, char ** argv) {
 
   if (argc>=2) {
     problem = ProblemFactory::getProblem(argc, argv);
+    cout << "Selected problem: " << problem->getName() << endl;
   } else {
-    // char * defaultProblem;
-    // strcpy(defaultProblem, "Sphere");
     cout << "No problem selected." << endl;
     cout << "Default problem will be used: Sphere" << endl;
     problem = ProblemFactory::getProblem(const_cast<char *>("Sphere"));
   }
 
 	algorithm = new gGA(problem);
-
-	cout << "Generational genetic algorithm initialized." << endl;
 
 	// Algorithm parameters
   int populationSizeValue = 100;

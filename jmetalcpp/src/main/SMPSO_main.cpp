@@ -51,20 +51,14 @@ int main(int argc, char ** argv) {
 
   if (argc>=2) {
     problem = ProblemFactory::getProblem(argc, argv);
+    cout << "Selected problem: " << problem->getName() << endl;
   } else {
     cout << "No problem selected." << endl;
     cout << "Default problem will be used: Kursawe" << endl;
-		// char * defaultProblem;
-		// strcpy(defaultProblem, "Kursawe");
     problem = ProblemFactory::getProblem(const_cast<char *>("Kursawe"));
   }
 
-  cout << "SMPSO_main: Number of objectives: " << problem->getNumberOfObjectives() << endl;
-  cout << "SMPSO_main: Problem: " << problem->getName() << endl;
-
   algorithm = new SMPSO(problem);
-
-  cout << "SMPSO_main: SMPSO algorithm initialized." << endl;
 
   // Algorithm parameters
   int swarmSizeValue = 100;

@@ -64,8 +64,6 @@ SBXCrossover::~SBXCrossover() { } // ~SBXCrossover
 **/
 Solution ** SBXCrossover::doCrossover(double probability, Solution *parent1, Solution *parent2) {
   
-  cout << "c1" << endl;
-  
   Solution** offSpring = new Solution*[2];
   
   if (offSpring == NULL) {
@@ -88,24 +86,18 @@ Solution ** SBXCrossover::doCrossover(double probability, Solution *parent1, Sol
   double c1, c2;
   double alpha, beta, betaq;
   double valueX1,valueX2;
-  cout << "c2" << endl;
   XReal * x1 = new XReal(parent1) ;
   XReal * x2 = new XReal(parent2) ;
   XReal * offs1 = new XReal(offSpring[0]) ;
   XReal * offs2 = new XReal(offSpring[1]) ;
   
-  cout << "c3" << endl;
-
   int numberOfVariables = x1->getNumberOfDecisionVariables();
-  
-  cout << "c4" << endl;
-    
+   
   if (PseudoRandom::randDouble() <= probability){
     for (i=0; i<numberOfVariables; i++){
       valueX1 = x1->getValue(i);
       valueX2 = x2->getValue(i);
-      //cout << "Values : " << valueX1 << " " << valueX2 << endl;
-      cout << "c4a" << endl;
+      
       if (PseudoRandom::randDouble()<=0.5 ){
         if (fabs(valueX1- valueX2) > EPS){
           
@@ -125,9 +117,6 @@ Solution ** SBXCrossover::doCrossover(double probability, Solution *parent1, Sol
           
           beta = 1.0 + (2.0*(y1-yL)/(y2-y1));
           alpha = 2.0 - pow(beta,-(distributionIndex_+1.0));
-
-          //cout << "alpha y beta " << alpha << " " << beta << endl;
-          cout << "c4b" << endl;
             
           if (rand <= (1.0/alpha)){
             betaq = pow ((rand*alpha),(1.0/(distributionIndex_+1.0)));
@@ -158,9 +147,6 @@ Solution ** SBXCrossover::doCrossover(double probability, Solution *parent1, Sol
           
           if (c2>yu)
             c2=yu;                        
-            
-          //cout << "nuevo valor " << c2 << endl;
-          cout << "c4c" << endl;
 
           if (PseudoRandom::randDouble()<=0.5) {
             offs1->setValue(i,c2);
@@ -177,11 +163,8 @@ Solution ** SBXCrossover::doCrossover(double probability, Solution *parent1, Sol
         offs1->setValue(i,valueX2);
         offs2->setValue(i,valueX1);
       } // if
-      cout << "c4d" << endl;
     } // if
   } // if
-  
-  cout << "c5" << endl;
 
   delete x1;
   delete x2;

@@ -64,8 +64,6 @@ SolutionSet * NSGAII::execute() {
   populationSize = *(int *) getInputParameter("populationSize");
   maxEvaluations = *(int *) getInputParameter("maxEvaluations");
 //  indicators = (QualityIndicator *) getInputParameter("indicators");
-  
-  cout << "0" << endl;
 
   //Initialize the variables
   population = new SolutionSet(populationSize);
@@ -78,8 +76,6 @@ SolutionSet * NSGAII::execute() {
   crossoverOperator = operators_["crossover"];
   selectionOperator = operators_["selection"];
   
-  cout << "1" << endl;
-  
   // Create the initial solutionSet
   Solution * newSolution;
   for (int i = 0; i < populationSize; i++) {
@@ -90,16 +86,12 @@ SolutionSet * NSGAII::execute() {
     population->add(newSolution);
   } //for
   
-  cout << "2" << endl;
-  
   // Generations
   while (evaluations < maxEvaluations) {
 
     // Create the offSpring solutionSet
     offspringPopulation = new SolutionSet(populationSize);
     Solution ** parents = new Solution*[2];
-    
-    cout << "3" << endl;
 
     for (int i = 0; i < (populationSize / 2); i++) {
       if (evaluations < maxEvaluations) {
@@ -107,16 +99,10 @@ SolutionSet * NSGAII::execute() {
         parents[0] = (Solution *) (selectionOperator->execute(population));
         parents[1] = (Solution *) (selectionOperator->execute(population));
         
-        cout << "3a" << endl;
-        
         Solution ** offSpring = (Solution **) (crossoverOperator->execute(parents));
-        
-        cout << "3b" << endl;
         
         mutationOperator->execute(offSpring[0]);
         mutationOperator->execute(offSpring[1]);
-        
-        cout << "3c" << endl;
         
         problem_->evaluate(offSpring[0]);
         problem_->evaluateConstraints(offSpring[0]);
@@ -127,12 +113,8 @@ SolutionSet * NSGAII::execute() {
         evaluations += 2;
         delete[] offSpring;
         
-        cout << "4" << endl;
-        
       } // if
     } // for
-    
-    cout << "5" << endl;
 
     delete[] parents;
     

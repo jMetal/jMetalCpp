@@ -50,9 +50,8 @@ jMetalCpp has been developed in Unix machines (Ubuntu and MacOS X) as well as in
 Windows (MinGW) using the G++ compiler. The make utility has been used to compile the
 software package.
 
-To execute the multithread experiments in Windows, you will need the POSIX Thread
-library, normally implemented as a dynamic link library (DLL) called pthreadGC2.dll.
-This file is included in the MinGW distribution.
+From version 1.5, it is mandatory to use a C++ compilator with C++11 support. This is
+needed to use the C++11 threads library.
 
 =======================================================================================
 
@@ -89,6 +88,7 @@ The following multi-objective metaheuristics are provided in this version of jMe
   GDE3                                        GDE3_main
   SMPSO                                       SMPSO_main
   PAES                                        PAES_main
+  SMS-EMOA (NEW)                              SMSEMOA_main
   MOEA/D (NEW)                                MOEAD_main
   CMA-ES (NEW)                                CMAES_main
 	
@@ -190,6 +190,15 @@ The following parameters can be configured when going to solve a problem:
  DTLZ5          Solution type       Number of variables     Number of objectives
  DTLZ6          Solution type       Number of variables     Number of objectives
  DTLZ7          Solution type       Number of variables     Number of objectives
+ LZ09_F1        Solution type
+ LZ09_F2        Solution type
+ LZ09_F3        Solution type
+ LZ09_F4        Solution type
+ LZ09_F5        Solution type
+ LZ09_F6        Solution type
+ LZ09_F7        Solution type
+ LZ09_F8        Solution type
+ LZ09_F9        Solution type
  ZDT1           Solution type       Number of variables
  ZDT2           Solution type       Number of variables
  ZDT3           Solution type       Number of variables

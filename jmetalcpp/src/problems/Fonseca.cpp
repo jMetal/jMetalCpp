@@ -47,11 +47,11 @@ Fonseca::Fonseca(string solutionType) {
   } // for
 
   if (solutionType.compare("BinaryReal") == 0) {
-    cout << "Tipo seleccionado BinaryReal" << endl;
+    //cout << "Selected solution type: BinaryReal" << endl;
     solutionType_ = new BinaryRealSolutionType(this) ;
   } else if (solutionType.compare("Real") == 0) {
     solutionType_ = new RealSolutionType(this) ;
-    cout << "Tipo seleccionado Real" << endl;
+    //cout << "Selected solution type: Real" << endl;
   } else if (solutionType.compare("ArrayReal") == 0) {
     solutionType_ = new ArrayRealSolutionType(this) ;
   } else {

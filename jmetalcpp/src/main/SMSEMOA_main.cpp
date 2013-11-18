@@ -44,22 +44,18 @@ int main(int argc, char ** argv) {
 
   if (argc>=2) {
     problem = ProblemFactory::getProblem(argc, argv);
+    cout << "Selected problem: " << problem->getName() << endl;
   } else {
     cout << "No problem selected." << endl;
     cout << "Default problem will be used: Fonseca" << endl;
     problem = ProblemFactory::getProblem(const_cast<char *>("Fonseca"));
   }
 
-  cout << "SMSEMOA: Number of objectives: " << problem->getNumberOfObjectives() << endl;
-  cout << "SMSEMOA: Problem: " << problem->getName() << endl;
-
   //TODO: Quality Indicators
   //QualityIndicator indicators ; // Object to get quality indicators
   //indicators = null ;
 
   algorithm = new SMSEMOA(problem);
-
-  cout << "SMSEMOA algorithm initialized." << endl;
 
   // Algorithm parameters
   int populationSize = 100;
@@ -110,18 +106,14 @@ int main(int argc, char ** argv) {
 	// Result messages
 	cout << "Total execution time: " << secs << "s" << endl;
 	cout << "Variables values have been written to file VAR" << endl;
-
 	population->printVariablesToFile("VAR");
-
 	cout << "Objectives values have been written to file FUN" << endl;
-
 	population->printObjectivesToFile("FUN");
 
 	delete mutation;
 	delete crossover;
 	delete selection;
-    delete population;
+  delete population;
 	delete algorithm;
-	
 
 } // main

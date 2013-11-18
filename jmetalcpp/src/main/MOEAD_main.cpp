@@ -54,20 +54,14 @@ int main(int argc, char ** argv) {
 
   if (argc>=2) {
     problem = ProblemFactory::getProblem(argc, argv);
+    cout << "Selected problem: " << problem->getName() << endl;
   } else {
     cout << "No problem selected." << endl;
     cout << "Default problem will be used: Kursawe" << endl;
-		// char * defaultProblem;
-		// strcpy(defaultProblem, "Kursawe");
     problem = ProblemFactory::getProblem(const_cast<char *>("Kursawe"));
   }
 
-  cout << "MOEAD_main: Number of objectives: " << problem->getNumberOfObjectives() << endl;
-  cout << "MOEAD_main: Problem: " << problem->getName() << endl;
-
   algorithm = new MOEAD(problem);
-
-  cout << "MOEAD_main: MOEAD algorithm initialized." << endl;
 
   // Algorithm parameters
   int populationSizeValue = 500;
