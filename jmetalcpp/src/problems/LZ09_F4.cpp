@@ -90,7 +90,9 @@ void LZ09_F4::evaluate(Solution * solution) {
 
   for (int i = 0; i < numberOfVariables_; i++) {
   	x->at(i) = vars->getValue(i);
-  	y->at(i) = 0.0 ;
+  } // for
+  for (int i = 0; i < numberOfObjectives_; i++) {
+    y->at(i) = 0.0 ;
   } // for
 
   LZ09_->objective(x, y) ;

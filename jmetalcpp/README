@@ -8,7 +8,7 @@
 TABLE OF CONTENTS
 =======================================================================================
 0. Updates (NEW)
-1. Requirements
+1. Requirements (UPDATED)
 2. Installing jMetalCpp
 3. Executing jMetalCpp
 4. Choosing a problem
@@ -43,7 +43,7 @@ Version 0.1:
 
 
 =======================================================================================
-1. Requirements
+1. Requirements (UPDATED)
 =======================================================================================
 
 jMetalCpp has been developed in Unix machines (Ubuntu and MacOS X) as well as in
