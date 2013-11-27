@@ -111,6 +111,7 @@ SolutionSet * ssNSGAII::execute() {
     offspringPopulation->add(offSpring[0]);
     
     evaluations ++;
+    delete offSpring[1];
     delete[] offSpring;
     delete[] parents;
     
