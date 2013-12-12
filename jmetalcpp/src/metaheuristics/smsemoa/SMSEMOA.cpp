@@ -272,14 +272,14 @@ vector<double> SMSEMOA::hvContributions(vector< vector<double> > front){
     frontCopy.insert(frontCopy.begin() + i , evaluatedPoint);
     
     for( int y = 0 ; y < frontCopy.size()-1 ; y++ ) {
-      delete frontSubset[y] ;
+      delete [] frontSubset[y] ;
     }
     delete [] frontSubset;
     
   }
   
   for( int y = 0 ; y < front.size() ; y++ ) {
-    delete totalFront[y] ;
+    delete [] totalFront[y] ;
   }
   delete [] totalFront;
   
