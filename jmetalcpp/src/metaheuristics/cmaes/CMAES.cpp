@@ -62,9 +62,8 @@ SolutionSet * CMAES::execute() {
         population_->replace(i, resampleSingle(i));
       }
       problem_->evaluate(population_->get(i));
-      
-      counteval += populationSize;
     }
+    counteval += populationSize;
     
     storeBest(comparator);
     //cout << counteval << ": " << bestSolutionEver->getObjective(0) << endl;
@@ -92,14 +91,16 @@ void CMAES::init() {
   
   // number of objective variables/problem dimension
   int N = problem_->getNumberOfVariables();
-  
+
   // objective variables initial point
   default_random_engine generator;
-  normal_distribution<double> distribution(0.0,1.0);
   xmean = new double[N];
   for (int i = 0; i < N; i++) {
-    //xmean[i] = PseudoRandom::randDouble(0, 1);
+    double stddev = (problem_->getUpperLimit(i) - problem_->getLowerLimit(i)) /2;
+    double mean = problem_->getLowerLimit(i) + stddev;
+    normal_distribution<double> distribution(mean,stddev/2);
     xmean[i] = distribution(generator);
+    //xmean[i] = PseudoRandom::randDouble(0, 1);
   }
   
   // coordinate wise standard deviation (step size)
