@@ -107,7 +107,7 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 # Clean rule
 clean:
 	@echo " Cleaning..."; 
-	@echo " $(RM) -r $(BUILDDIR) $(BINDIR) $(LIB)"; $(RM) -r $(BUILDDIR) $(BINDIR) $(LIB)
+	@echo " $(RM) -r $(BUILDDIR) $(BINDIR) $(LIBDIR)"; $(RM) -r $(BUILDDIR) $(BINDIR) $(LIBDIR)
 
 # Tests
 tester: 
