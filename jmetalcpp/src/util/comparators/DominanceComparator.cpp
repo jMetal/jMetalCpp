@@ -75,8 +75,8 @@ int DominanceComparator::compare(void * o1, void * o2) {
   
   if (one->getOverallConstraintViolation()!=
       two->getOverallConstraintViolation() &&
-     (one->getOverallConstraintViolation() < 0) ||
-     (two->getOverallConstraintViolation() < 0)){
+     ((one->getOverallConstraintViolation() < 0) ||
+     (two->getOverallConstraintViolation() < 0))){
     int returnValue = overallConstraintViolationComparator_->compare(one,two);
     return returnValue;
   }

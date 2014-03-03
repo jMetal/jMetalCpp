@@ -32,6 +32,11 @@ SolutionType::SolutionType(Problem *problem) {
   problem_ = problem;
 }
 
+/**
+ * Destructor
+ */
+SolutionType::~SolutionType() { }
+
 
 /**
  * Copies the decision variables

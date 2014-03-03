@@ -39,7 +39,7 @@ class Algorithm {
 
 public:
   Algorithm(Problem *problem);
-  ~Algorithm();
+  virtual ~Algorithm();
   virtual SolutionSet * execute() = 0; // this launch the execution
                                        // of an algorithm
   void addOperator(string name, Operator *operator_);

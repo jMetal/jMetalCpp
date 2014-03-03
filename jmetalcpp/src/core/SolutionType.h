@@ -44,6 +44,7 @@ protected:
 
 public:
   SolutionType(Problem *problem);
+  virtual ~SolutionType();
   virtual Variable **createVariables() = 0;
   Variable **copyVariables(Variable **vars);
 

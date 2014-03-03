@@ -99,12 +99,14 @@ double ArrayReal::getValue(int index) {
   if ((index >= 0) && (index < size_))
     return array_[index] ;
   else {
-    cout << "ArrayReal.getValue: index value (" << index << ") invalid" << endl;
+    cerr << "ArrayReal.getValue: index value (" << index << ") invalid" << endl;
+    exit(-1);
   } // if
 } // getValue
 
 double ArrayReal::getValue() {
-  cout << "ERROR: ArrayReal::getValue() without index" << endl;
+  cerr << "ERROR: ArrayReal::getValue() without index" << endl;
+  exit(-1);
 } // getValue
 
 
@@ -135,12 +137,14 @@ double ArrayReal::getLowerBound(int index) {
   if ((index >= 0) && (index < size_))
     return problem_->getLowerLimit(index) ;
   else {
-    cout << "ArrayReal.getValue: index value (" << index << ") invalid" << endl;
+    cerr << "ArrayReal.getValue: index value (" << index << ") invalid" << endl;
+    exit(-1);
   } // if
 } // getLowerBound
 
 double ArrayReal::getLowerBound() {
-  cout << "ERROR: ArrayReal::getLowerBound() without index" << endl;
+  cerr << "ERROR: ArrayReal::getLowerBound() without index" << endl;
+  exit(-1);
 } // getLowerBound
 
 
@@ -153,12 +157,14 @@ double ArrayReal::getUpperBound(int index) {
   if ((index >= 0) && (index < size_))
     return problem_->getUpperLimit(index);
   else {
-    cout << "ArrayReal.getValue: index value (" << index << ") invalid" << endl;
+    cerr << "ArrayReal.getValue: index value (" << index << ") invalid" << endl;
+    exit(-1);
   } // if
 } // getLowerBound
 
 double ArrayReal::getUpperBound() {
-  cout << "ERROR: ArrayReal::getUpperBound() without index" << endl;
+  cerr << "ERROR: ArrayReal::getUpperBound() without index" << endl;
+  exit(-1);
 } // getUpperBound
 
 
