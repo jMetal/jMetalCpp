@@ -111,7 +111,7 @@ void PSO::deleteParams() {
 
 // Adaptive inertia
 double PSO::inertiaWeight(int iter, int miter, double wmax, double wmin) {
-  //return wmax; // - (((wmax-wmin)*(double)iter)/(double)miter);
+  //return wmax;
   return wmax - (((wmax-wmin)*(double)iter)/(double)miter);
 } // inertiaWeight
 
@@ -135,7 +135,6 @@ double PSO::velocityConstriction(double v, double * deltaMax,
 
   return v;
   /*
-  cout << "v: " << v << "\tdmax: " << dmax << "\tdmin: " << dmin << endl;
   double result;
 
   double dmax = deltaMax[variableIndex];
@@ -176,35 +175,31 @@ void PSO::computeSpeed(int iter, int miter) {
 
     r1 = PseudoRandom::randDouble(r1Min_, r1Max_);
     r2 = PseudoRandom::randDouble(r2Min_, r2Max_);
-    C1 = PseudoRandom::randDouble(C1Min_, C1Max_);
-    C2 = PseudoRandom::randDouble(C2Min_, C2Max_);
+    //C1 = PseudoRandom::randDouble(C1Min_, C1Max_);
+    //C2 = PseudoRandom::randDouble(C2Min_, C2Max_);
+    C1 = 2.05;
+    C2 = 2.05;
     //W =  PseudoRandom.randDouble(WMin_, WMax_);
-    //
 
     wmax = WMax_;
     wmin = WMin_;
     
-/*
-    for (int var = 0; var < particle.size(); var++) {
+    for (int var = 0; var < particle->size(); var++) {
       //Computing the velocity of this particle
-      speed_[i][var] = velocityConstriction(constrictionCoefficient(C1, C2) *
-        (inertiaWeight(iter, miter, wmax, wmin) *
-        speed_[i][var] +
-        C1 * r1 * (bestParticle.getValue(var) - particle.getValue(var)) +
-        C2 * r2 * (bestGlobal.getValue(var) -
-        particle.getValue(var))), deltaMax_,
-        deltaMin_, //[var],
-        var,
-        i);
+      speed_[i][var] = constrictionCoefficient(C1, C2) *
+        (speed_[i][var] +
+        C1 * r1 * (bestParticle->getValue(var) - particle->getValue(var)) +
+        C2 * r2 * (bestGlobal->getValue(var) - particle->getValue(var)));
     }
-*/
-    
+
+    /*
     for (int var = 0; var < particle->size(); var++) {
       //Computing the velocity of this particle
       speed_[i][var] = inertiaWeight(iter, miter, wmax, wmin) * speed_[i][var] +
         C1 * r1 * (bestParticle->getValue(var) - particle->getValue(var)) +
         C2 * r2 * (bestGlobal->getValue(var) - particle->getValue(var)) ;
     }
+    */
 
     delete particle;
     delete bestParticle;
@@ -260,7 +255,7 @@ void PSO::mopsoMutation(int actualIteration, int totalIterations) {
 
 
 /**
- * Runs of the SMPSO algorithm.
+ * Runs of the PSO algorithm.
  * @return a <code>SolutionSet</code> that is a set of non dominated solutions
  * as a result of the algorithm execution
  */
