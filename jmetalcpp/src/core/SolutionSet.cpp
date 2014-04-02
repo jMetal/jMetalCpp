@@ -1,9 +1,9 @@
 //  SolutionSet.cpp
 //
 //  Author:
+//       Esteban López-Camacho <esteban@lcc.uma.es>
 //       Antonio J. Nebro <antonio@lcc.uma.es>
 //       Juan J. Durillo <durillo@lcc.uma.es>
-//       Esteban López-Camacho <esteban@lcc.uma.es>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -360,3 +360,9 @@ vector <vector<double> > SolutionSet::writeObjectivesToMatrix() {
   return objectives;
 } // writeObjectivesMatrix
 
+
+void SolutionSet::printObjectives() {
+  for (int i = 0; i < solutionsList_.size(); i++) {
+    cout << solutionsList_.at(i) << endl;
+  }
+}
