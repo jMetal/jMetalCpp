@@ -363,6 +363,6 @@ vector <vector<double> > SolutionSet::writeObjectivesToMatrix() {
 
 void SolutionSet::printObjectives() {
   for (int i = 0; i < solutionsList_.size(); i++) {
-    cout << solutionsList_.at(i) << endl;
+    cout << solutionsList_.at(i)->toString() << endl;
   }
 }
