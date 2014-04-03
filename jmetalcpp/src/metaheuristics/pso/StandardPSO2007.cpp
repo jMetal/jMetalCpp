@@ -173,6 +173,7 @@ SolutionSet * StandardPSO2007::execute() {
   //-> Step2. Initialize the speed_ of each particle
   for (int i = 0; i < swarmSize_; i++) {
     XReal * particle = new XReal(swarm_->get(i))  ;
+    speed_[i] = new double[problem_->getNumberOfVariables()];
     for (int j = 0; j < problem_->getNumberOfVariables(); j++) {
       speed_[i][j] = (PseudoRandom::randDouble(particle->getLowerBound(j),particle->getUpperBound(j))
               - particle->getValue(j))/2.0 ;
