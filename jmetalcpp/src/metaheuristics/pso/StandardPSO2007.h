@@ -63,6 +63,7 @@ private:
   double C_;
 
   void initParams();
+  void deleteParams();
   Solution * getNeighborBest(int i);
   void computeSpeed();
   void computeNewPositions();
@@ -73,6 +74,7 @@ public:
   double getC();
 
   StandardPSO2007(Problem * problem);
+  ~StandardPSO2007();
   SolutionSet * execute();
 
 }; // StandardPSO2007

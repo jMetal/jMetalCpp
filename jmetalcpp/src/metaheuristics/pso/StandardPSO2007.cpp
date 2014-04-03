@@ -47,6 +47,15 @@ StandardPSO2007::StandardPSO2007(Problem * problem) : Algorithm(problem) {
 } // StandardPSO2007
 
 
+/**
+ * Destructor
+ */
+StandardPSO2007::~StandardPSO2007() {
+  delete comparator_;
+  delete findBestSolution_;
+}
+
+
 double StandardPSO2007::getW() {
   return W_;
 } // getW
@@ -58,7 +67,7 @@ double StandardPSO2007::getC() {
 
 
 /**
- * Initialize all parameter of the algorithm
+ * Initialize all parameters of the algorithm
  */
 void StandardPSO2007::initParams() {
   swarmSize_ = *(int *) getInputParameter("swarmSize");
@@ -77,6 +86,16 @@ void StandardPSO2007::initParams() {
   speed_ = new double*[swarmSize_];
 } // initParams
 
+
+/**
+ * Delete all parameters of the algorithm
+ */
+void StandardPSO2007::deleteParams() {
+  delete swarm_;
+  delete [] localBest_;
+  delete [] neighborhoodBest_;
+  delete [] speed_;
+}
 
 
 Solution * StandardPSO2007::getNeighborBest(int i) {
@@ -119,6 +138,11 @@ void StandardPSO2007::computeSpeed() {
                   r1 * (localBest->getValue(var) - particle->getValue(var)) ;
       }
     }
+
+    delete particle;
+    delete localBest;
+    delete neighborhoodBest;
+
   }
 } // computeSpeed
 
@@ -127,13 +151,13 @@ void StandardPSO2007::computeSpeed() {
  * Update the position of each particle
  */
 void StandardPSO2007::computeNewPositions() {
+  //TODO: Check particle need
   for (int i = 0; i < swarmSize_; i++) {
     //Variable[] particle = swarm_.get(i).getDecisionVariables();
     XReal * particle = new XReal(swarm_->get(i)) ;
     //particle.move(speed_[i]);
     for (int var = 0; var < particle->size(); var++) {
       particle->setValue(var, particle->getValue(var) +  speed_[i][var]) ;
-
       if (particle->getValue(var) < problem_->getLowerLimit(var)) {
         particle->setValue(var, problem_->getLowerLimit(var));
         speed_[i][var] = 0;
@@ -142,8 +166,8 @@ void StandardPSO2007::computeNewPositions() {
         particle->setValue(var, problem_->getUpperLimit(var));
         speed_[i][var] = 0;
       }
-
     }
+    delete particle;
   }
 } // computeNewPositions
 
@@ -178,6 +202,7 @@ SolutionSet * StandardPSO2007::execute() {
       speed_[i][j] = (PseudoRandom::randDouble(particle->getLowerBound(j),particle->getUpperBound(j))
               - particle->getValue(j))/2.0 ;
     }
+    delete particle;
   }
 
   //-> Step 6. Initialize the memory of each particle
@@ -228,6 +253,7 @@ SolutionSet * StandardPSO2007::execute() {
     for (int i = 0; i < swarm_->size(); i++) {
       if ((swarm_->get(i)->getObjective(0) < localBest_[i]->getObjective(0))) {
         Solution * particle = new Solution(swarm_->get(i));
+        delete localBest_[i];
         localBest_[i] = particle;
       } // if
     }
@@ -253,7 +279,19 @@ SolutionSet * StandardPSO2007::execute() {
 
   // Return a population with the best individual
   SolutionSet * resultPopulation = new SolutionSet(1) ;
-  resultPopulation->add(swarm_->get(* (int *)findBestSolution_->execute(swarm_))) ;
+  int * bestSolutionIdx = (int *) findBestSolution_->execute(swarm_);
+  resultPopulation->add(new Solution(swarm_->get(* bestSolutionIdx))) ;
+  delete bestSolutionIdx;
+
+  // Free memory
+  for (int i = 0; i < swarmSize_; i++) {
+    delete [] speed_[i];
+  }
+  for (int i = 0; i < swarm_->size(); i++) {
+    delete localBest_[i];
+  }
+  delete neighborhood_;
+  deleteParams();
 
   return resultPopulation ;
 } // execute
