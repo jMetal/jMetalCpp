@@ -1,4 +1,4 @@
-//  StandardPSO2011.cpp
+//  StandardPSO2007.cpp
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
@@ -24,7 +24,7 @@
 
 
 /**
- * Class implementing a Stantard PSO 2011 algorithm
+ * Class implementing a Standard PSO 2007 algorithm
  */
 
 
@@ -53,7 +53,7 @@ StandardPSO2007::StandardPSO2007(Problem * problem) : Algorithm(problem) {
 StandardPSO2007::~StandardPSO2007() {
   delete comparator_;
   delete findBestSolution_;
-}
+} // ~StandardPSO2007
 
 
 double StandardPSO2007::getW() {
@@ -95,7 +95,7 @@ void StandardPSO2007::deleteParams() {
   delete [] localBest_;
   delete [] neighborhoodBest_;
   delete [] speed_;
-}
+} // deleteParams
 
 
 Solution * StandardPSO2007::getNeighborBest(int i) {
@@ -151,7 +151,6 @@ void StandardPSO2007::computeSpeed() {
  * Update the position of each particle
  */
 void StandardPSO2007::computeNewPositions() {
-  //TODO: Check particle need
   for (int i = 0; i < swarmSize_; i++) {
     //Variable[] particle = swarm_.get(i).getDecisionVariables();
     XReal * particle = new XReal(swarm_->get(i)) ;
