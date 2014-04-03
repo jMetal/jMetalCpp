@@ -18,7 +18,7 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef __ZDT15_H__
+#ifndef __ZDT5_H__
 #define __ZDT5_H__
 
 #include <Problem.h>
