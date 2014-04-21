@@ -67,7 +67,7 @@ void * PolynomialMutation::doMutation(double probability, Solution *solution) {
       delta1 = (y-yl)/(yu-yl);
       delta2 = (yu-y)/(yu-yl);
       rnd = PseudoRandom::randDouble();
-      mut_pow = 1.0/(eta_m_+1.0);
+      mut_pow = 1.0/(distributionIndex_+1.0);
       if (rnd <= 0.5) {
         xy     = 1.0-delta1;
         val    = 2.0*rnd+(1.0-2.0*rnd)*(pow(xy,(eta_m_+1.0)));
