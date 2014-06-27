@@ -22,7 +22,7 @@
 #include <SMSEMOA.h>
 
 /*
- * This class implements the MOEA/D algorithm.
+ * This class implements the SMS-EMOA algorithm.
  */
 
 
@@ -41,7 +41,7 @@ SMSEMOA::SMSEMOA(Problem *problem) : Algorithm(problem) {
 SMSEMOA::~SMSEMOA() {
   delete utils_;
   delete hv_;
-} // ~Hypervolume
+} // ~SMSEMOA
 
 
 /**
