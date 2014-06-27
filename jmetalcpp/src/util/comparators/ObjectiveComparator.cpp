@@ -28,8 +28,18 @@
  */
 ObjectiveComparator::ObjectiveComparator(int nObj) {
   this->nObj = nObj;
+  ascendingOrder_ = true;
 } // ObjectiveComparator
 
+/**
+ * Constructor.
+ * @param nObj The index of the objective to compare
+ * @param descendingOrder TRUE if use a descending order, FALSE otherwise
+ */
+ObjectiveComparator::ObjectiveComparator(int nObj, bool descendingOrder) {
+  this->nObj = nObj;
+  ascendingOrder_ = !descendingOrder;
+} // ObjectiveComparator
 
 /**
  * Compare two solutions.
@@ -46,12 +56,22 @@ int ObjectiveComparator::compare(void *o1, void *o2) {
 
   double objetive1 = ((Solution *) o1)->getObjective(this->nObj);
   double objetive2 = ((Solution *) o2)->getObjective(this->nObj);
-  if (objetive1 < objetive2) {
-    return -1;
-  } else if (objetive1 > objetive2) {
-    return 1;
+  if (ascendingOrder_) {
+    if (objetive1 < objetive2) {
+      return -1;
+    } else if (objetive1 > objetive2) {
+      return 1;
+    } else {
+      return 0;
+    }
   } else {
-    return 0;
+    if (objetive1 < objetive2) {
+      return 1;
+    } else if (objetive1 > objetive2) {
+      return -1;
+    } else {
+      return 0;
+    }
   }
-} // compare
 
+} // compare
