@@ -51,8 +51,6 @@ double FastHypervolume::computeHypervolume(SolutionSet* solutionSet) {
   if (solutionSet->size() == 0) {
     hv = 0.0;
   } else {
-    numberOfObjectives_ = solutionSet->get(0)->getNumberOfObjectives();
-    referencePoint_ = new Solution(numberOfObjectives_);
     updateReferencePoint(solutionSet);
     if (numberOfObjectives_ == 2) {
       Comparator * comparator =
@@ -68,7 +66,6 @@ double FastHypervolume::computeHypervolume(SolutionSet* solutionSet) {
       */
       cerr << "Fast Hypervolume only works with two objectives for now." << endl;
     }
-    delete referencePoint_;
   }
 
   return hv;
@@ -125,6 +122,9 @@ void FastHypervolume::computeHVContributions(SolutionSet * solutionSet) {
   double * contributions = new double[solutionSet->size()];
   double solutionSetHV = 0;
 
+  numberOfObjectives_ = solutionSet->get(0)->getNumberOfObjectives();
+  referencePoint_ = new Solution(numberOfObjectives_);
+
   solutionSetHV = computeHypervolume(solutionSet);
 
   for (int i = 0; i < solutionSet->size(); i++) {
@@ -150,4 +150,7 @@ void FastHypervolume::computeHVContributions(SolutionSet * solutionSet) {
   for (int i = 0; i < solutionSet->size(); i++) {
     solutionSet->get(i)->setCrowdingDistance(contributions[i]);
   }
+
+  delete [] contributions;
+  delete referencePoint_;
 } // computeHVContributions

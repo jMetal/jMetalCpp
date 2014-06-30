@@ -101,7 +101,7 @@ SolutionSet * FastSMSEMOA::execute() {
   while (evaluations < maxEvaluations) {
 
     // select parents
-    offspringPopulation = new SolutionSet(populationSize);
+    offspringPopulation = new SolutionSet(1);
     /*
     LinkedList<Solution> selectedParents = new LinkedList<Solution>();
     Solution[] parents = new Solution[0];
@@ -135,8 +135,13 @@ SolutionSet * FastSMSEMOA::execute() {
 
     evaluations++;
 
+    delete offSpring[1];
+    delete[] offSpring;
+    delete[] parents;
+
     // Create the solutionSet union of solutionSet and offSpring
     unionSolution = population->join(offspringPopulation);
+    delete offspringPopulation;
 
     // Ranking the union (non-dominated sorting)
     Ranking * ranking = new Ranking(unionSolution);
@@ -157,16 +162,22 @@ SolutionSet * FastSMSEMOA::execute() {
 
     // all but the worst are carried over to the survivor population
     SolutionSet * front = NULL;
+    for (int i=0;i<population->size();i++) {
+      delete population->get(i);
+    }
     population->clear();
     for (int i = 0; i < ranking->getNumberOfSubfronts() - 1; i++) {
       front = ranking->getSubfront(i);
       for (int j = 0; j < front->size(); j++) {
-        population->add(front->get(j));
+        population->add(new Solution(front->get(j)));
       }
     }
     for (int i = 0; i < lastFront->size() - 1; i++) {
-      population->add(lastFront->get(i));
+      population->add(new Solution(lastFront->get(i)));
     }
+
+    delete unionSolution;
+    delete ranking;
 
     // This piece of code shows how to use the indicator object into the code
     // of SMS-EMOA. In particular, it finds the number of evaluations required
@@ -194,6 +205,7 @@ SolutionSet * FastSMSEMOA::execute() {
   }
   delete ranking;
   delete population;
+  delete fastHypervolume;
 
   return result;
 
