@@ -63,25 +63,25 @@ bool NonDominatedSolutionList::add(Solution * solution) {
   int i = 0;
   Solution * aux; //Store an solution temporally
 
-  if (solution->getDecisionVariables() != NULL) {
-    while (i < solutionsList_.size()) {
-      aux = solutionsList_[i];
-      int flag = dominance_->compare(solution,aux);
+  while (i < solutionsList_.size()) {
+    aux = solutionsList_[i];
+    int flag = dominance_->compare(solution,aux);
 
-      if (flag == -1) {  // A solution in the list is dominated by the new one
-        delete aux;
-        solutionsList_.erase(solutionsList_.begin()+i);
-      } else if (flag == 0) { // Non-dominated solutions
-       flag = equal_->compare(solution,aux);
-       if (flag == 0) {
-         return false;   // The new solution is in the list
-       }
-       i++;
-      } else if (flag == 1) { // The new solution is dominated
-        return false;
+    if (flag == -1) {  // A solution in the list is dominated by the new one
+      delete aux;
+      solutionsList_.erase(solutionsList_.begin()+i);
+    } else if (flag == 0) { // Non-dominated solutions
+      /*
+      flag = equal_->compare(solution,aux);
+      if (flag == 0) {
+        return false;   // The new solution is in the list
       }
-    } // while
-  } // if
+      */
+      i++;
+    } else if (flag == 1) { // The new solution is dominated
+      return false;
+    }
+  } // while
 
   //At this point, the solution is inserted into the list
   solutionsList_.push_back(solution);
