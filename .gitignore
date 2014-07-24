@@ -14,3 +14,7 @@ nbproject/
 .project
 .cproject
 .settings
+*.pbxproj
+*.xcworkspacedata
+*.xcuserstate
+*.xcsettings
