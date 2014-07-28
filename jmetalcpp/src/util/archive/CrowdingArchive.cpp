@@ -3,7 +3,7 @@
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
 //
-//  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
+//  Copyright (c) 2014 Antonio J. Nebro
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Lesser General Public License as published by
@@ -18,15 +18,12 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
 #include <CrowdingArchive.h>
-
 
 /**
  * This class implements a bounded archive based on crowding distances (as
  * defined in NSGA-II).
  */
-
 
 /**
  * Constructor.
@@ -36,28 +33,26 @@
 CrowdingArchive::CrowdingArchive(int maxSize, int numberOfObjectives)
 : Archive(maxSize) {
 
-  maxSize_          = maxSize;
-  objectives_       = numberOfObjectives;
-  dominance_        = new DominanceComparator();
-  equals_           = new EqualSolutions();
-  crowdingDistance_ = new CrowdingDistanceComparator();
-  distance_         = new Distance();
+  this->maxSize          = maxSize;
+  this->objectives       = numberOfObjectives;
+  this ->dominance       = new DominanceComparator();
+  this->equals           = new EqualSolutions();
+  this->crowdingDistance = new CrowdingDistanceComparator();
+  this->distance         = new Distance();
 
 } // CrowdingArchive
-
 
 /**
  * Destructor.
  */
 CrowdingArchive::~CrowdingArchive() {
 
-  delete dominance_;
-  delete equals_;
-  delete crowdingDistance_;
-  delete distance_;
+  delete dominance;
+  delete equals;
+  delete crowdingDistance;
+  delete distance;
 
 } // ~CrowdingArchive
-
 
 /**
  * Adds a <code>Solution</code> to the archive. If the <code>Solution</code>
@@ -70,14 +65,14 @@ CrowdingArchive::~CrowdingArchive() {
  * @return true if the <code>Solution</code> has been inserted, false
  * otherwise.
  */
-bool CrowdingArchive::add(Solution * solution){
+bool CrowdingArchive::add(Solution *solution){
   int flag = 0;
   int i = 0;
   Solution * aux; //Store an solution temporally
   while (i < solutionsList_.size()){
     aux = solutionsList_[i];
 
-    flag = dominance_->compare(solution,aux);
+    flag = dominance->compare(solution,aux);
     if (flag == 1) {               // The solution to add is dominated
       return false;                // Discard the new solution
     } else if (flag == -1) {       // A solution in the archive is dominated
@@ -85,7 +80,7 @@ bool CrowdingArchive::add(Solution * solution){
       delete aux;
       solutionsList_.erase (solutionsList_.begin()+i);
     } else {
-        if (equals_->compare(aux,solution)==0) {
+        if (equals->compare(aux,solution)==0) {
           // There is an equal solution in the population
           return false; // Discard the new solution
         }  // if
@@ -93,12 +88,17 @@ bool CrowdingArchive::add(Solution * solution){
     }
   }
   // Insert the solution into the archive
+  bool res = true;
   solutionsList_.push_back(solution);
-  if (size() > maxSize_) { // The archive is full
-    distance_->crowdingDistanceAssignment(this,objectives_);
-    int indexWorst_ = indexWorst(crowdingDistance_);
-    delete solutionsList_[indexWorst_];
+  if (size() > maxSize) { // The archive is full
+    distance->crowdingDistanceAssignment(this,objectives);
+    int indexWorst_ = indexWorst(crowdingDistance);
+    if (solution == solutionsList_[indexWorst_]) {
+      res = false;
+    } else {
+      delete solutionsList_[indexWorst_];
+    }
     remove(indexWorst_);
   }
-  return true;
+  return res;
 } // add
