@@ -3,7 +3,7 @@
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
 //
-//  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
+//  Copyright (c) 2014 Antonio J. Nebro
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Lesser General Public License as published by
@@ -33,14 +33,15 @@
 class NonDominatedSolutionList : public SolutionSet {
 
 private:
-  Comparator * dominance_;
-  Comparator * equal_;
+  Comparator * dominance;
+  Comparator * equal;
 
 public:
   NonDominatedSolutionList();
-  NonDominatedSolutionList(Comparator * dominance);
+  NonDominatedSolutionList(Comparator *dominance);
+  ~NonDominatedSolutionList();
 
-  bool add(Solution * solution);
+  bool add(Solution *solution);
 
 }; // NonDominatedSolutionList
 
