@@ -15,6 +15,7 @@ nbproject/
 .cproject
 .settings
 *.pbxproj
+*.xcodeproj
 *.xcworkspacedata
 *.xcuserstate
 *.xcsettings
