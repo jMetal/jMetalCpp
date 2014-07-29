@@ -37,6 +37,7 @@ Solution::Solution () {
   type_ = NULL;
   variable_ = NULL;
   objective_ = NULL;
+  rank_ = 0;
 } //Solution
 
 
@@ -57,6 +58,7 @@ Solution::Solution (int numberOfObjectives) {
     cout << "ERROR GRAVE: Impossible to reserve memory for storing objectives in class Solution" << endl;
     exit(-1);
   }
+  rank_ = 0;
 }
 
 
@@ -86,6 +88,7 @@ Solution::Solution (Problem *problem) {
   crowdingDistance_ = 0.0;
   distanceToSolutionSet_ = std::numeric_limits<double>::max();
   variable_ = type_->createVariables();
+  rank_ = 0;
 } // Solution
 
 
@@ -106,6 +109,7 @@ Solution::Solution (Problem * problem, Variable ** variables) {
   crowdingDistance_ = 0.0;
   distanceToSolutionSet_ = std::numeric_limits<double>::max();
   variable_ = variables;
+  rank_ = 0;
 } // Solution
 
 
