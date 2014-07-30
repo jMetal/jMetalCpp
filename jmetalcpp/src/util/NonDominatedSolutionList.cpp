@@ -3,7 +3,7 @@
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
 //
-//  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
+//  Copyright (c) 2014 Antonio J. Nebro
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Lesser General Public License as published by
@@ -30,8 +30,8 @@
 NonDominatedSolutionList::NonDominatedSolutionList()
 : SolutionSet() {
 
-  dominance_ = new DominanceComparator();
-  equal_ = new SolutionComparator();
+  dominance = new DominanceComparator();
+  equal = new SolutionComparator();
 
 } // NonDominatedList
 
@@ -42,13 +42,24 @@ NonDominatedSolutionList::NonDominatedSolutionList()
  * comparator object.
  * @param dominance The comparator for dominance checking.
  */
-NonDominatedSolutionList::NonDominatedSolutionList(Comparator * dominance)
+NonDominatedSolutionList::NonDominatedSolutionList(Comparator *dominance)
 : SolutionSet() {
 
-  dominance_ = dominance;
-  equal_ = new SolutionComparator();
+  this->dominance = dominance;
+  this->equal     = new SolutionComparator();
 
 } // NonDominatedList
+
+
+/**
+ * Destructor.
+ */
+NonDominatedSolutionList::~NonDominatedSolutionList() {
+
+  delete dominance;
+  delete equal;
+
+} // ~NonDominatedSolutionList
 
 
 /** Inserts a solution in the list
@@ -58,7 +69,7 @@ NonDominatedSolutionList::NonDominatedSolutionList(Comparator * dominance)
  * The decision variables can be null if the solution is read from a file; in
  * that case, the domination tests are omitted
  */
-bool NonDominatedSolutionList::add(Solution * solution) {
+bool NonDominatedSolutionList::add(Solution *solution) {
 
   int i = 0;
   Solution * aux; //Store an solution temporally
@@ -66,13 +77,13 @@ bool NonDominatedSolutionList::add(Solution * solution) {
   if (solution->getDecisionVariables() != NULL) {
     while (i < solutionsList_.size()) {
       aux = solutionsList_[i];
-      int flag = dominance_->compare(solution,aux);
+      int flag = dominance->compare(solution,aux);
 
       if (flag == -1) {  // A solution in the list is dominated by the new one
         delete aux;
         solutionsList_.erase(solutionsList_.begin()+i);
       } else if (flag == 0) { // Non-dominated solutions
-       flag = equal_->compare(solution,aux);
+       flag = equal->compare(solution,aux);
        if (flag == 0) {
          return false;   // The new solution is in the list
        }

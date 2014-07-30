@@ -1,4 +1,4 @@
-//  NonDominatedSolutionList.h
+//  FastSMSEMOA.h
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
@@ -18,31 +18,34 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef __NONDOMINATEDSOLUTIONLIST__
-#define __NONDOMINATEDSOLUTIONLIST__
 
-#include <Comparator.h>
-#include <DominanceComparator.h>
-#include <SolutionComparator.h>
+#ifndef _FAST_SMSEMOA_H_
+#define _FAST_SMSEMOA_H_
+
+#include <Algorithm.h>
+#include <Problem.h>
 #include <SolutionSet.h>
+#include <QualityIndicator.h>
+#include <MetricsUtil.h>
+#include <FastHypervolume.h>
+#include <Ranking.h>
+#include <CrowdingDistanceComparator.h>
 
-/**
- * This class implements an unbound list of non-dominated solutions
- */
-
-class NonDominatedSolutionList : public SolutionSet {
+class FastSMSEMOA : public Algorithm {
 
 private:
-  Comparator * dominance;
-  Comparator * equal;
+
+  MetricsUtil * utils_;
+  Hypervolume * hv_;
+
+  vector<double> hvContributions(vector< vector<double> > front);
+
 
 public:
-  NonDominatedSolutionList();
-  NonDominatedSolutionList(Comparator *dominance);
-  ~NonDominatedSolutionList();
+  FastSMSEMOA(Problem * problem);
+  ~FastSMSEMOA();
+  SolutionSet * execute();
+};
 
-  bool add(Solution *solution);
 
-}; // NonDominatedSolutionList
-
-#endif /* __NONDOMINATEDSOLUTIONLIST__ */
+#endif /* _FAST_SMSEMOA_H_ */

@@ -1,4 +1,4 @@
-//  CrowdingArchive.cpp
+//  FastHypervolumeArchive.cpp
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
@@ -18,57 +18,62 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include <CrowdingArchive.h>
+
+#include <FastHypervolumeArchive.h>
+
 
 /**
- * This class implements a bounded archive based on crowding distances (as
- * defined in NSGA-II).
+ * This class implements a bounded archive based on the hypervolume quality indicator
  */
+
 
 /**
  * Constructor.
  * @param maxSize The maximum size of the archive.
  * @param numberOfObjectives The number of objectives.
  */
-CrowdingArchive::CrowdingArchive(int maxSize, int numberOfObjectives)
+FastHypervolumeArchive::FastHypervolumeArchive(int maxSize, int numberOfObjectives)
 : Archive(maxSize) {
+  this->maxSize         = maxSize;
+  this->objectives      = numberOfObjectives;
+  this->dominance       = new DominanceComparator();
+  this->equals          = new EqualSolutions();
+  this->referencePoint  = new Solution(objectives) ;
+  for (int i = 0; i < objectives; i++) {
+    referencePoint->setObjective(i, std::numeric_limits<double>::max());
+  }
+  crowdingDistance_ = new CrowdingComparator();
+} // FastHypervolumeArchive
 
-  this->maxSize          = maxSize;
-  this->objectives       = numberOfObjectives;
-  this->dominance        = new DominanceComparator();
-  this->equals           = new EqualSolutions();
-  this->crowdingDistance = new CrowdingDistanceComparator();
-  this->distance         = new Distance();
-
-} // CrowdingArchive
 
 /**
  * Destructor.
  */
-CrowdingArchive::~CrowdingArchive() {
-
+FastHypervolumeArchive::~FastHypervolumeArchive() {
+  cout << "DELETING FASTHYPERVOLUMEARCHIVE" << endl;
   delete dominance;
   delete equals;
-  delete crowdingDistance;
-  delete distance;
+  delete referencePoint;
+  delete crowdingDistance_;
+} // ~FastHypervolumeArchive
 
-} // ~CrowdingArchive
 
 /**
  * Adds a <code>Solution</code> to the archive. If the <code>Solution</code>
  * is dominated by any member of the archive, then it is discarded. If the
  * <code>Solution</code> dominates some members of the archive, these are
  * removed. If the archive is full and the <code>Solution</code> has to be
- * inserted, the solutions are sorted by crowding distance and the one having
- * the minimum crowding distance value.
+ * inserted, the solution contributing the least to the HV of the solution set
+ * is discarded.
  * @param solution The <code>Solution</code>
  * @return true if the <code>Solution</code> has been inserted, false
  * otherwise.
  */
-bool CrowdingArchive::add(Solution *solution){
+bool FastHypervolumeArchive::add(Solution *solution){
   int flag = 0;
   int i = 0;
-  Solution * aux; //Store an solution temporally
+  Solution *aux; //Store an solution temporally
+
   while (i < solutionsList_.size()){
     aux = solutionsList_[i];
 
@@ -78,21 +83,21 @@ bool CrowdingArchive::add(Solution *solution){
     } else if (flag == -1) {       // A solution in the archive is dominated
       // Remove it from the population
       delete aux;
-      solutionsList_.erase (solutionsList_.begin()+i);
+      solutionsList_.erase(solutionsList_.begin() + i);
     } else {
-        if (equals->compare(aux,solution)==0) {
-          // There is an equal solution in the population
-          return false; // Discard the new solution
-        }  // if
-        i++;
+      if (equals->compare(aux,solution)==0) {
+        // There is an equal solution in the population
+        return false; // Discard the new solution
+      }  // if
+      i++;
     }
   }
   // Insert the solution into the archive
   bool res = true;
   solutionsList_.push_back(solution);
   if (size() > maxSize) { // The archive is full
-    distance->crowdingDistanceAssignment(this,objectives);
-    int indexWorst_ = indexWorst(crowdingDistance);
+    computeHVContribution();
+    int indexWorst_ = indexWorst(crowdingDistance_);
     if (solution == solutionsList_[indexWorst_]) {
       res = false;
     } else {
@@ -102,3 +107,15 @@ bool CrowdingArchive::add(Solution *solution){
   }
   return res;
 } // add
+
+
+/**
+ * This method forces to compute the contribution of each solution
+ */
+void FastHypervolumeArchive::computeHVContribution() {
+  if (size() > 2) { // The contribution can be updated
+    FastHypervolume *fastHV = new FastHypervolume();
+    fastHV->computeHVContributions(this);
+    delete fastHV;
+  }
+} // computeHVContribution

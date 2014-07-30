@@ -32,9 +32,11 @@ class ObjectiveComparator : public Comparator {
 
 private:
   int nObj;
+  bool ascendingOrder_;
 
 public:
   ObjectiveComparator(int nObj);
+  ObjectiveComparator(int nObj, bool descendingOrder);
   int compare(void * o1, void * o2);
 
 };

@@ -69,6 +69,18 @@ bool SolutionSet::add(Solution * solution) {
 
 
 /**
+ * Inserts a new solution into the SolutionSet in a specific position.
+ * @param index The position where to store the solution
+ * @param solution The <code>Solution</code> to store
+ * @return True If the <code>Solution</code> has been inserted, false
+ * otherwise.
+ */
+bool SolutionSet::add(int index, Solution * solution) {
+  solutionsList_.insert(solutionsList_.begin()+index, solution);
+  return true;
+}
+
+/**
  * Returns the ith solution in the set.
  * @param i Position of the solution to obtain.
  * @return The <code>Solution</code> at the position i.

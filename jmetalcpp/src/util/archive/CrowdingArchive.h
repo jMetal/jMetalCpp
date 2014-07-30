@@ -3,7 +3,7 @@
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
 //
-//  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
+//  Copyright (c) 2014 Antonio J. Nebro
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Lesser General Public License as published by
@@ -18,8 +18,8 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef __CROWDINGARCHIVE__
-#define __CROWDINGARCHIVE__
+#ifndef __CROWDING_ARCHIVE__
+#define __CROWDING_ARCHIVE__
 
 #include <Archive.h>
 #include <Comparator.h>
@@ -36,19 +36,18 @@
 class CrowdingArchive : public Archive {
 
 private:
-  int maxSize_;
-  int objectives_;
-  Comparator * dominance_;
-  Comparator * equals_;
-  Comparator * crowdingDistance_;
-  Distance * distance_;
+  int maxSize;
+  int objectives;
+  Comparator *dominance;
+  Comparator *equals;
+  Comparator *crowdingDistance;
+  Distance *distance;
 
 public:
   CrowdingArchive(int maxSize, int numberOfObjectives);
   ~CrowdingArchive();
-  bool add(Solution * solution);
+  bool add(Solution *solution);
 
 };
 
-
-#endif
+#endif /* _CROWDING_ARCHIVE_ */

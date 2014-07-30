@@ -1,4 +1,4 @@
-//  NonDominatedSolutionList.h
+//  FastHypervolume.h
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
@@ -18,31 +18,41 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef __NONDOMINATEDSOLUTIONLIST__
-#define __NONDOMINATEDSOLUTIONLIST__
+#ifndef __FAST_HYPERVOLUME__
+#define __FAST_HYPERVOLUME__
 
-#include <Comparator.h>
-#include <DominanceComparator.h>
-#include <SolutionComparator.h>
-#include <SolutionSet.h>
+#include <MetricsUtil.h>
+#include <ObjectiveComparator.h>
+//#include <iostream>
+//#include <cstdlib>
+#include <math.h>
 
-/**
- * This class implements an unbound list of non-dominated solutions
- */
+using namespace std;
 
-class NonDominatedSolutionList : public SolutionSet {
+class FastHypervolume {
 
 private:
-  Comparator * dominance;
-  Comparator * equal;
+
+  Solution * referencePoint_;
+  int numberOfObjectives_;
+  double offset_ = 20.0;
+
+  void updateReferencePoint(SolutionSet * solutionSet);
+  double get2DHV(SolutionSet * solutionSet);
+  double computeHypervolume(SolutionSet * solutionSet);
+
+  // double computeSolutionHVContribution(SolutionSet * solutionSet,
+  //     int solutionIndex, double solutionSetHV);
 
 public:
-  NonDominatedSolutionList();
-  NonDominatedSolutionList(Comparator *dominance);
-  ~NonDominatedSolutionList();
 
-  bool add(Solution *solution);
+  FastHypervolume();
+  FastHypervolume(double offset);
+  ~FastHypervolume();
 
-}; // NonDominatedSolutionList
 
-#endif /* __NONDOMINATEDSOLUTIONLIST__ */
+  void computeHVContributions(SolutionSet * solutionSet);
+
+};
+
+#endif /* __HYPERVOLUME__ */

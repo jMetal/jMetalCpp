@@ -55,6 +55,7 @@ public:
   ~SolutionSet();
 
   bool add(Solution * solution);
+  bool add(int index, Solution * solution);
   Solution *get(int index);
   int getMaxSize();
   void sort(Comparator * comparator);
