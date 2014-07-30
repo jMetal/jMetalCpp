@@ -51,35 +51,35 @@ SMPSOhv::SMPSOhv(Problem *problem) : Algorithm(problem) {
  * Initialize all parameter of the algorithm
  */
 void SMPSOhv::initParams() {
-    swarmSize     = *(int *) getInputParameter("swarmSize");
-    archiveSize   = *(int *) getInputParameter("archiveSize");
-    maxIterations = *(int *) getInputParameter("maxIterations");
+  swarmSize     = *(int *) getInputParameter("swarmSize");
+  archiveSize   = *(int *) getInputParameter("archiveSize");
+  maxIterations = *(int *) getInputParameter("maxIterations");
 
-    //indicators = *(QualityIndicator *) getInputParameter("indicators");
+  //indicators = *(QualityIndicator *) getInputParameter("indicators");
 
-    polynomialMutation = operators_["mutation"] ;
+  polynomialMutation = operators_["mutation"] ;
 
-    iteration = 0;
+  iteration = 0;
 
-    particles     = new SolutionSet(swarmSize);
-    best          = new Solution*[swarmSize];
-    leaders       = new FastHypervolumeArchive(archiveSize,problem_->getNumberOfObjectives());
+  particles     = new SolutionSet(swarmSize);
+  best          = new Solution*[swarmSize];
+  leaders       = new FastHypervolumeArchive(archiveSize,problem_->getNumberOfObjectives());
 
-    // Create the dominator for equadless and dominance
-    dominance          = new DominanceComparator();
-    crowdingDistanceComparator = new CrowdingDistanceComparator();
-    distance           = new Distance();
+  // Create the dominator for equadless and dominance
+  dominance          = new DominanceComparator();
+  crowdingDistanceComparator = new CrowdingDistanceComparator();
+  distance           = new Distance();
 
-    // Create the speed_ vector
-    speed = new double*[swarmSize];
+  // Create the speed_ vector
+  speed = new double*[swarmSize];
 
-    deltaMax = new double[problem_->getNumberOfVariables()];
-    deltaMin = new double[problem_->getNumberOfVariables()];
-    for (int i = 0; i < problem_->getNumberOfVariables(); i++) {
-      deltaMax[i] = (problem_->getUpperLimit(i) -
-              problem_->getLowerLimit(i)) / 2.0;
-      deltaMin[i] = -deltaMax[i];
-    } // for
+  deltaMax = new double[problem_->getNumberOfVariables()];
+  deltaMin = new double[problem_->getNumberOfVariables()];
+  for (int i = 0; i < problem_->getNumberOfVariables(); i++) {
+    deltaMax[i] = (problem_->getUpperLimit(i) -
+            problem_->getLowerLimit(i)) / 2.0;
+    deltaMin[i] = -deltaMax[i];
+  } // for
 } // initParams
 
 

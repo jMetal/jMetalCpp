@@ -40,27 +40,27 @@ OMOPSO::OMOPSO(Problem *problem) : Algorithm(problem) {
  */
 void OMOPSO::initParams() {
     
-    particlesSize = *(int *) getInputParameter("swarmSize");
-    archiveSize   = *(int *) getInputParameter("archiveSize");
-    maxIterations = *(int *) getInputParameter("maxIterations");
-    
-    iteration = 0;
+  particlesSize = *(int *) getInputParameter("swarmSize");
+  archiveSize   = *(int *) getInputParameter("archiveSize");
+  maxIterations = *(int *) getInputParameter("maxIterations");
 
-    particles     = new SolutionSet(particlesSize);
-    best          = new Solution*[particlesSize];
-    leaders       = new CrowdingArchive(archiveSize,problem_->getNumberOfObjectives());
-    eArchive      = new NonDominatedSolutionList(new EpsilonDominanceComparator(eta));
-    
-    uniformMutation = operators_["uniformMutation"] ;
-    nonUniformMutation = operators_["nonUniformMutation"] ;
-    
-    // Create the dominator for equadless and dominance
-    dominance          = new DominanceComparator();
-    crowdingDistanceComparator = new CrowdingDistanceComparator();
-    distance           = new Distance();
-    
-    // Create the speed_ vector
-    speed = new double*[particlesSize];
+  iteration = 0;
+
+  particles     = new SolutionSet(particlesSize);
+  best          = new Solution*[particlesSize];
+  leaders       = new CrowdingArchive(archiveSize,problem_->getNumberOfObjectives());
+  eArchive      = new NonDominatedSolutionList(new EpsilonDominanceComparator(eta));
+
+  uniformMutation = operators_["uniformMutation"] ;
+  nonUniformMutation = operators_["nonUniformMutation"] ;
+
+  // Create the dominator for equadless and dominance
+  dominance          = new DominanceComparator();
+  crowdingDistanceComparator = new CrowdingDistanceComparator();
+  distance           = new Distance();
+
+  // Create the speed_ vector
+  speed = new double*[particlesSize];
 
 } // initParams
 

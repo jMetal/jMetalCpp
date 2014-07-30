@@ -39,145 +39,145 @@ class SMPSOhv : public Algorithm {
 
 private:
 
-    /**
-     * Stores the number of particles used
-     */
-    int swarmSize;
+  /**
+   * Stores the number of particles used
+   */
+  int swarmSize;
 
-    /**
-     * Stores the maximum size for the archive
-     */
-    int archiveSize;
+  /**
+   * Stores the maximum size for the archive
+   */
+  int archiveSize;
 
-    /**
-     * Stores the maximum number of iteration_
-     */
-    int maxIterations;
+  /**
+   * Stores the maximum number of iteration_
+   */
+  int maxIterations;
 
-    /**
-     * Stores the current number of iteration_
-     */
-    int iteration;
+  /**
+   * Stores the current number of iteration_
+   */
+  int iteration;
 
-    /**
-     * Stores the particles
-     */
-    SolutionSet *particles;
+  /**
+   * Stores the particles
+   */
+  SolutionSet *particles;
 
-    /**
-     * Stores the best solutions founds so far for each particles
-     */
-    Solution **best;
+  /**
+   * Stores the best solutions founds so far for each particles
+   */
+  Solution **best;
 
-    /**
-     * Stores the leaders
-     */
-    FastHypervolumeArchive *leaders;
+  /**
+   * Stores the leaders
+   */
+  FastHypervolumeArchive *leaders;
 
-    /**
-     * Stores the speed of each particle
-     */
-    double **speed;
+  /**
+   * Stores the speed of each particle
+   */
+  double **speed;
 
-    /**
-     * Stores a comparator for checking dominance
-     */
-    Comparator *dominance;
+  /**
+   * Stores a comparator for checking dominance
+   */
+  Comparator *dominance;
 
-    /**
-     * Stores a comparator for crowding checking
-     */
-    Comparator *crowdingDistanceComparator;
+  /**
+   * Stores a comparator for crowding checking
+   */
+  Comparator *crowdingDistanceComparator;
 
-    /**
-     * Stores a <code>Distance</code> object
-     */
-    Distance *distance;
+  /**
+   * Stores a <code>Distance</code> object
+   */
+  Distance *distance;
 
-    /**
-     * Stores a operator for polynomial mutations
-     */
-    Operator *polynomialMutation;
+  /**
+   * Stores a operator for polynomial mutations
+   */
+  Operator *polynomialMutation;
 
-    //QualityIndicator *indicators; // QualityIndicator object
+  //QualityIndicator *indicators; // QualityIndicator object
 
-    double r1Max;
-    double r1Min;
-    double r2Max;
-    double r2Min;
-    double C1Max;
-    double C1Min;
-    double C2Max;
-    double C2Min;
-    double WMax;
-    double WMin;
-    double ChVel1;
-    double ChVel2;
+  double r1Max;
+  double r1Min;
+  double r2Max;
+  double r2Min;
+  double C1Max;
+  double C1Min;
+  double C2Max;
+  double C2Min;
+  double WMax;
+  double WMin;
+  double ChVel1;
+  double ChVel2;
 
-    double trueHypervolume;
-    Hypervolume *hy;
-    SolutionSet *trueFront;
-    double *deltaMax;
-    double *deltaMin;
-    bool success;
+  double trueHypervolume;
+  Hypervolume *hy;
+  SolutionSet *trueFront;
+  double *deltaMax;
+  double *deltaMin;
+  bool success;
 
-    /**
-     * Initialize all parameter of the algorithm
-     */
-    void initParams();
+  /**
+   * Initialize all parameter of the algorithm
+   */
+  void initParams();
 
-    /**
-     * Free all the memory reserved by the algorithm
-     */
-    void deleteParams();
+  /**
+   * Free all the memory reserved by the algorithm
+   */
+  void deleteParams();
 
-    /**
-     * Adaptive inertia
-     */
-    double inertiaWeight(int iter, int miter, double wma, double wmin);
+  /**
+   * Adaptive inertia
+   */
+  double inertiaWeight(int iter, int miter, double wma, double wmin);
 
-    /**
-     * constriction coefficient (M. Clerc)
-     */
-    double constrictionCoefficient(double c1, double c2);
+  /**
+   * constriction coefficient (M. Clerc)
+   */
+  double constrictionCoefficient(double c1, double c2);
 
-    /**
-     * velocity bounds
-     */
-    double velocityConstriction(double v, double *deltaMax,
-          double *deltaMin, int variableIndex,
-          int particleIndex);
+  /**
+   * velocity bounds
+   */
+  double velocityConstriction(double v, double *deltaMax,
+        double *deltaMin, int variableIndex,
+        int particleIndex);
 
-    /**
-     * Update the speed of each particle
-     */
-    void computeSpeed(int iter, int miter);
+  /**
+   * Update the speed of each particle
+   */
+  void computeSpeed(int iter, int miter);
 
-    /**
-     * Update the position of each particle
-     */
-    void computeNewPositions();
+  /**
+   * Update the position of each particle
+   */
+  void computeNewPositions();
 
-    /**
-     * Apply a mutation operator to some particles in the swarm
-     */
-    void mopsoMutation(int actualIteration, int totalIterations);
+  /**
+   * Apply a mutation operator to some particles in the swarm
+   */
+  void mopsoMutation(int actualIteration, int totalIterations);
 
 public:
 
-    /**
-     * Constructor.
-     * @param problem Problem to solve
-     */
-    SMPSOhv(Problem *problem);
+  /**
+   * Constructor.
+   * @param problem Problem to solve
+   */
+  SMPSOhv(Problem *problem);
 
-    /**
-     * Runs of the SMPSO algorithm.
-     * @return a <code>SolutionSet</code> that is a set of non dominated solutions
-     * as a result of the algorithm execution
-     * @throws JMException
-     */
-    SolutionSet *execute();
+  /**
+   * Runs of the SMPSO algorithm.
+   * @return a <code>SolutionSet</code> that is a set of non dominated solutions
+   * as a result of the algorithm execution
+   * @throws JMException
+   */
+  SolutionSet *execute();
 
 };
 
