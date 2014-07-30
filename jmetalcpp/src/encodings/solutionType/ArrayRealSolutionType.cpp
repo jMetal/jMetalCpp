@@ -33,7 +33,6 @@ ArrayRealSolutionType::ArrayRealSolutionType(Problem * problem)
 
 /**
  * Creates the variables of the solution
- * @param decisionVariables
  */
 Variable ** ArrayRealSolutionType::createVariables() {
   int i;
@@ -44,9 +43,7 @@ Variable ** ArrayRealSolutionType::createVariables() {
     exit(-1);
   }
    
-  for (i = 0; i < problem_->getNumberOfVariables(); i++) {
-    variables[0] = new ArrayReal(problem_->getNumberOfVariables(),problem_);
-  }
+  variables[0] = new ArrayReal(problem_->getNumberOfVariables(),problem_);
 
   return variables;
 } // createVariables
