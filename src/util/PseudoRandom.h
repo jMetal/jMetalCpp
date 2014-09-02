@@ -1,8 +1,9 @@
 //  PseudoRandom.h
 //
 //  Author:
-//       Juan J. Durillo <durillo@lcc.uma.es>
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Antonio J. Nebro <antonio@lcc.uma.es>
+//       Juan J. Durillo <durillo@lcc.uma.es>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -24,6 +25,7 @@
 
 #include <iostream>
 #include <RandomGenerator.h>
+#include <math.h>
 
 /**
  * This file is aimed at defining the interface for the random generator. 
@@ -41,6 +43,8 @@ public:
   static double randDouble();//    static int randInt();
   static int randInt(int minBound, int maxBound);
   static double randDouble(double minBound, double maxBound);
+  static double randNormal(double mean, double standardDeviation);
+  static double * randSphere(int dimension);
 };
 
 

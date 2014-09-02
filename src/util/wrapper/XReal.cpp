@@ -165,3 +165,8 @@ int XReal::size() {
   }
   return 0 ;
 } // size
+
+
+Solution * XReal::getSolution() {
+  return solution_;
+} // getSolution

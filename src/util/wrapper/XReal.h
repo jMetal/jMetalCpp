@@ -44,6 +44,7 @@ public:
   double getUpperBound(int index);
   int getNumberOfDecisionVariables();
   int size();
+  Solution * getSolution();
 
 private:
   Solution * solution_;
