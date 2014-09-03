@@ -36,6 +36,7 @@ protected:
 public:
   TestFunc(int dimension, double bias);
   TestFunc(int dimension, double bias, string func_name);
+  virtual ~TestFunc();
   virtual double f(double * x) = 0;
   int dimension();
   double bias();

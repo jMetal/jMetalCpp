@@ -41,11 +41,11 @@ Problem * ProblemFactory::getProblem(int argc, char ** argv) {
   if (argc==2) {
     return getProblem(argv[1], 0, NULL);
   } else if (argc>2) {
-    char ** argv2 = new char*[argc-2];
+    char * argv1 = argv[1];
     for (int i=0; i<argc-2; i++) {
-      argv2[i] = argv[i+2];
+      argv[i] = argv[i+2];
     }
-    return getProblem(argv[1], argc-2, argv2);
+    return getProblem(argv1, argc-2, argv);
   } else {
     cerr << "Too few arguments to build a problem.";
     exit(-1);

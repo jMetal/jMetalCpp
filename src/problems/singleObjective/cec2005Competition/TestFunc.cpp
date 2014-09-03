@@ -37,6 +37,12 @@ TestFunc::TestFunc(int dimension, double bias, string func_name) {
   m_func_name = func_name;
 } // TestFunc
 
+/**
+ * Destructor
+ */
+TestFunc::~TestFunc() {
+} // ~TestFunc
+
 int TestFunc::dimension() {
   return (m_dimension);
 } // dimension

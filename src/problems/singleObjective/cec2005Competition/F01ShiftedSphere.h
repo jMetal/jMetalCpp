@@ -43,7 +43,7 @@ private:
 public:
 
   F01ShiftedSphere(int dimension, double bias);
-  F01ShiftedSphere(int dimension, double bias, string func_name);
+  F01ShiftedSphere(int dimension, double bias, string file_data);
   ~F01ShiftedSphere();
 
   double f (double * x);

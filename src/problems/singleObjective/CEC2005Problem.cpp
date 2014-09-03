@@ -39,6 +39,7 @@ CEC2005Problem::CEC2005Problem(string solutionType, int problemID, int numberOfV
 
   Benchmark * cec2005ProblemFactory = new Benchmark() ;
   testFunction_ = cec2005ProblemFactory->testFunctionFactory(problemID, numberOfVariables) ;
+  delete cec2005ProblemFactory;
 
   upperLimit_ = new double[numberOfVariables_];
   lowerLimit_ = new double[numberOfVariables_];
@@ -114,6 +115,7 @@ CEC2005Problem::~CEC2005Problem() {
   delete [] lowerLimit_ ;
   delete [] upperLimit_ ;
   delete solutionType_ ;
+  delete testFunction_;
 } // ~CEC2005Problem
 
 
@@ -131,6 +133,8 @@ void CEC2005Problem::evaluate(Solution *solution) {
 
   double result ;
   result = testFunction_->f(x) ;
+
+  delete [] x;
 
   solution->setObjective(0, result);
 
