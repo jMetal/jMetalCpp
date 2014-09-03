@@ -68,6 +68,9 @@ TestFunc * Benchmark::testFunctionFactory(int func_num, int dimension) {
     case 1:
       return new F01ShiftedSphere(dimension, m_biases[func_num-1]);
       break;
+    case 2:
+      return new F02ShiftedSchwefel(dimension, m_biases[func_num-1]);
+      break;
     default:
       cerr << "Incorrect number of function. Expected an integer between " <<
           "1 and 25." << endl;
@@ -75,6 +78,9 @@ TestFunc * Benchmark::testFunctionFactory(int func_num, int dimension) {
   }
 }
 
+/**
+ * Sphere function
+ */
 double Benchmark::sphere(double * x, int length) {
    double sum = 0.0;
    for (int i = 0; i <length; i++) {
@@ -83,7 +89,24 @@ double Benchmark::sphere(double * x, int length) {
    return sum;
 }
 
+/**
+ * Schwefel's problem 1.2
+ */
+double Benchmark::schwefel_102(double * x, int length) {
+  double prev_sum, curr_sum, outer_sum;
+  curr_sum = x[0];
+  outer_sum = (curr_sum * curr_sum);
+  for (int i = 1 ; i < length ; i++) {
+    prev_sum = curr_sum;
+    curr_sum = prev_sum + x[i];
+    outer_sum += (curr_sum * curr_sum);
+  }
+  return (outer_sum);
+}
 
+/**
+ * Shift
+ */
 void Benchmark::shift(double * results, double * x, double * o, int length) {
   for (int i = 0; i < length; i++) {
     results[i] = x[i] - o[i];

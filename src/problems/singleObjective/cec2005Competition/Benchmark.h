@@ -29,6 +29,7 @@
 #include <string>
 
 #include <F01ShiftedSphere.h>
+#include <F02ShiftedSchwefel.h>
 #include <TestFunc.h>
 
 using namespace std;
@@ -60,6 +61,7 @@ public:
 
   // Basic functions
   static double sphere(double * x, int length);
+  static double schwefel_102(double * x, int length);
 
   // Elementary operations
   static void shift(double * results, double * x, double * o, int length);
