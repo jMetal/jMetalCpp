@@ -71,6 +71,9 @@ TestFunc * Benchmark::testFunctionFactory(int func_num, int dimension) {
     case 2:
       return new F02ShiftedSchwefel(dimension, m_biases[func_num-1]);
       break;
+    case 3:
+      return new F03ShiftedRotatedHighCondElliptic(dimension, m_biases[func_num-1]);
+      break;
     default:
       cerr << "Incorrect number of function. Expected an integer between " <<
           "1 and 25." << endl;
@@ -113,6 +116,26 @@ void Benchmark::shift(double * results, double * x, double * o, int length) {
   }
 }
 
+/**
+ * Rotate
+ */
+void Benchmark::rotate(double * results, double * x, double ** matrix, int length) {
+  xA(results, x, matrix, length);
+}
+
+/**
+ * (1xD) row vector * (DxD) matrix = (1xD) row vector
+ */
+void Benchmark::xA(double * result, double * x, double ** A, int length) {
+  for (int i = 0 ; i < length ; i ++) {
+    result[i] = 0.0;
+    for (int j = 0 ; j < length ; j ++) {
+      result[i] += (x[j] * A[j][i]);
+    }
+  }
+}
+
+
 void Benchmark::loadRowVectorFromFile(string file, int columns, double * row) {
 
   // Open the file
@@ -140,7 +163,6 @@ void Benchmark::loadRowVector(ifstream& in, int columns, double * row) {
       string stToken;
       iss >> stToken;
       if (stToken.compare("")!=0) {
-        double value = atof(stToken.c_str());
         row[i] = atof(stToken.c_str());
       } else {
         cerr << "Benchmark::loadRowVector: unexpected format encountered when " <<
@@ -152,5 +174,26 @@ void Benchmark::loadRowVector(ifstream& in, int columns, double * row) {
     cerr << "Benchmark::loadRowVector: unexpected format encountered when " <<
         "reading from file (zero lines found)." << endl;
     exit(-1);
+  }
+}
+
+void Benchmark::loadMatrixFromFile(string file, int rows, int columns, double ** matrix) {
+  // Open the file
+  ifstream in(file.c_str());
+  if( !in ) {
+    cerr << "Benchmark::loadRowVectorFromFile: failed when reading from file : " <<
+    file << endl;
+    exit(-1);
+  } else {
+
+    loadMatrix(in, rows, columns, matrix);
+    in.close();
+
+  }
+}
+
+void Benchmark::loadMatrix(ifstream& in, int rows, int columns, double ** matrix) {
+  for (int i=0; i<rows; i++) {
+    loadRowVector(in, columns, matrix[i]);
   }
 }

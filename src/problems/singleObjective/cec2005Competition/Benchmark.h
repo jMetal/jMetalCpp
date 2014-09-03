@@ -30,6 +30,7 @@
 
 #include <F01ShiftedSphere.h>
 #include <F02ShiftedSchwefel.h>
+#include <F03ShiftedRotatedHighCondElliptic.h>
 #include <TestFunc.h>
 
 using namespace std;
@@ -65,10 +66,16 @@ public:
 
   // Elementary operations
   static void shift(double * results, double * x, double * o, int length);
+  static void rotate(double * results, double * x, double ** matrix, int length);
+
+  // Matrix & vector operations
+  static void xA(double * result, double * x, double ** A, int length);
 
   // Utility functions for loading data from given text files
   static void loadRowVectorFromFile(string file, int columns, double * row);
   static void loadRowVector(ifstream& brSrc, int columns, double * row);
+  static void loadMatrixFromFile(string file, int rows, int columns, double ** matrix);
+  static void loadMatrix(ifstream& brSrc, int rows, int columns, double ** matrix);
 
 }; // Benchmark
 
