@@ -62,6 +62,22 @@ Problem * ProblemFactory::getProblem(int argc, char ** argv) {
  */
 Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv) {
 
+  if (strcmp(name, "CEC2005")==0) { // CEC2005 Problems
+    if (argc==1)
+      return new CEC2005Problem("Real", atoi(argv[0]));
+    else if (argc==2)
+      return new CEC2005Problem(argv[0], atoi(argv[1]));
+    else if (argc==3)
+      return new CEC2005Problem(argv[0], atoi(argv[1]), atoi(argv[2]));
+    else {
+      cerr << "Incorrect number of arguments for CEC2005 problem." << endl;
+      cerr << "Use one of this:" << endl;
+      cerr << "\tCEC2005 NUMBER_OF_CEC2005_PROBLEM" << endl;
+      cerr << "\tCEC2005 SOLUTION_TYPE NUMBER_OF_CEC2005_PROBLEM " << endl;
+      cerr << "\tCEC2005 SOLUTION_TYPE NUMBER_OF_CEC2005_PROBLEM NUMBER_OF_VARIABLES" << endl;
+      exit(-1);
+    }
+  }
   if (strcmp(name, "DTLZ1")==0) { // DTLZ1
     if (argc==0)
       return new DTLZ1("Real");
