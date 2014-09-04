@@ -25,12 +25,14 @@
 #include <iostream>
 #include <Math.h>
 #include <fstream>
+#include <random>
 #include <sstream>
 #include <string>
 
 #include <F01ShiftedSphere.h>
 #include <F02ShiftedSchwefel.h>
 #include <F03ShiftedRotatedHighCondElliptic.h>
+#include <F04ShiftedSchwefelNoise.h>
 #include <TestFunc.h>
 
 using namespace std;
@@ -47,6 +49,8 @@ private:
   // Specifiy the number of dimensions here if you need more.
   static const int MAX_SUPPORT_DIM;
 
+
+
   // Class variables
   double * m_iSqrt;
 
@@ -57,6 +61,10 @@ public:
   Benchmark();
   Benchmark(string file_bias);
   ~Benchmark();
+
+  // Random number generator
+  static mt19937 e2;
+  static normal_distribution<double> dist;
 
   TestFunc * testFunctionFactory(int func_num, int dimension);
 

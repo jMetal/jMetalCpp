@@ -60,6 +60,22 @@ Benchmark::~Benchmark() {
   delete [] m_iSqrt;
 }
 
+/*
+double Benchmark::randomNextGaussian() {
+  return randomGaussian(e2);
+}
+*/
+/*
+std::mt19937 Benchmark::e2(Benchmark::rd());
+normal_distribution<double> Benchmark::randomGaussian(0,1);
+*/
+/**
+ * Random number generator
+ * If you want to plan a specific seed, do it here
+ */
+mt19937 Benchmark::e2 {std::random_device{}()};
+normal_distribution<double> Benchmark::dist (0,1);
+
 /**
  * Use this function to manufacture new test function objects.
  */
@@ -73,6 +89,9 @@ TestFunc * Benchmark::testFunctionFactory(int func_num, int dimension) {
       break;
     case 3:
       return new F03ShiftedRotatedHighCondElliptic(dimension, m_biases[func_num-1]);
+      break;
+    case 4:
+      return new F04ShiftedSchwefelNoise(dimension, m_biases[func_num-1]);
       break;
     default:
       cerr << "Incorrect number of function. Expected an integer between " <<
