@@ -32,6 +32,7 @@ const int Benchmark::NUM_TEST_FUNC = 25;
 // Hence, a maximum supported number of dimensions should be specified.
 // Specifiy the number of dimensions here if you need more.
 const int Benchmark::MAX_SUPPORT_DIM = 100;
+const double Benchmark::PIx2 = 3.141592653589793 * 2.0;
 
 /*
  * Default constructor
@@ -43,13 +44,7 @@ Benchmark::Benchmark() : Benchmark(DEFAULT_FILE_BIAS) {}
  */
 Benchmark::Benchmark(string file_bias) {
   m_biases = new double[NUM_TEST_FUNC];
-  // m_iSqrt = new double[MAX_SUPPORT_DIM];
-
   loadRowVectorFromFile(file_bias, NUM_TEST_FUNC, m_biases);
-
-  // for (int i = 0 ; i < MAX_SUPPORT_DIM ; i ++) {
-  //   m_iSqrt[i] = sqrt(((double )i) + 1.0);
-  // }
 }
 
 /*
@@ -57,18 +52,8 @@ Benchmark::Benchmark(string file_bias) {
  */
 Benchmark::~Benchmark() {
   delete [] m_biases;
-  // delete [] m_iSqrt;
 }
 
-/*
-double Benchmark::randomNextGaussian() {
-  return randomGaussian(e2);
-}
-*/
-/*
-std::mt19937 Benchmark::e2(Benchmark::rd());
-normal_distribution<double> Benchmark::randomGaussian(0,1);
-*/
 /**
  * Random number generator
  * If you want to plan a specific seed, do it here
@@ -101,6 +86,12 @@ TestFunc * Benchmark::testFunctionFactory(int func_num, int dimension) {
       break;
     case 7:
       return new F07ShiftedRotatedGriewank(dimension, m_biases[func_num-1]);
+      break;
+    case 8:
+      return new F08ShiftedRotatedAckleyGlobalOptBound(dimension, m_biases[func_num-1]);
+      break;
+    case 9:
+      return new F09ShiftedRastrigin(dimension, m_biases[func_num-1]);
       break;
 
     default:
@@ -161,6 +152,30 @@ double Benchmark::griewank(double * x, int length) {
     product *= cos(x[i] / m_iSqrt);
   }
   return (sum - product + 1.0);
+}
+
+/**
+ * Ackley's function
+ */
+double Benchmark::ackley(double * x, int length) {
+  double sum1 = 0.0;
+  double sum2 = 0.0;
+  for (int i = 0 ; i < length ; i ++) {
+    sum1 += (x[i] * x[i]);
+    sum2 += (cos(PIx2 * x[i]));
+  }
+  return (-20.0 * exp(-0.2 * sqrt(sum1 / ((double )length))) - exp(sum2 / ((double )length)) + 20.0 + exp(1));
+}
+
+/**
+ * Rastrigin's function
+ */
+double Benchmark::rastrigin(double * x, int length) {
+  double sum = 0.0;
+  for (int i = 0 ; i < length ; i ++) {
+    sum += (x[i] * x[i]) - (10.0 * cos(PIx2 * x[i])) + 10.0;
+  }
+  return sum;
 }
 
 /**

@@ -36,6 +36,8 @@
 #include <F05SchwefelGlobalOptBound.h>
 #include <F06ShiftedRosenbrock.h>
 #include <F07ShiftedRotatedGriewank.h>
+#include <F08ShiftedRotatedAckleyGlobalOptBound.h>
+#include <F09ShiftedRastrigin.h>
 #include <TestFunc.h>
 
 using namespace std;
@@ -51,11 +53,7 @@ private:
   // Hence, a maximum supported number of dimensions should be specified.
   // Specifiy the number of dimensions here if you need more.
   static const int MAX_SUPPORT_DIM;
-
-
-
-  // Class variables
-  // static double * m_iSqrt;
+  static const double PIx2;
 
   // Instance variables
   double * m_biases;
@@ -76,6 +74,8 @@ public:
   static double schwefel_102(double * x, int length);
   static double rosenbrock(double * x, int length);
   static double griewank(double * x, int length);
+  static double ackley(double * x, int length);
+  static double rastrigin(double * x, int length);
 
   // Elementary operations
   static void shift(double * results, double * x, double * o, int length);
