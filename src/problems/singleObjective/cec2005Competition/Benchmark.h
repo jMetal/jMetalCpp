@@ -34,6 +34,7 @@
 #include <F03ShiftedRotatedHighCondElliptic.h>
 #include <F04ShiftedSchwefelNoise.h>
 #include <F05SchwefelGlobalOptBound.h>
+#include <F06ShiftedRosenbrock.h>
 #include <TestFunc.h>
 
 using namespace std;
@@ -72,6 +73,7 @@ public:
   // Basic functions
   static double sphere(double * x, int length);
   static double schwefel_102(double * x, int length);
+  static double rosenbrock(double * x, int length);
 
   // Elementary operations
   static void shift(double * results, double * x, double * o, int length);

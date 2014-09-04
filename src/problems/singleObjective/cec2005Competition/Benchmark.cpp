@@ -96,6 +96,9 @@ TestFunc * Benchmark::testFunctionFactory(int func_num, int dimension) {
     case 5:
       return new F05SchwefelGlobalOptBound(dimension, m_biases[func_num-1]);
       break;
+    case 6:
+      return new F06ShiftedRosenbrock(dimension, m_biases[func_num-1]);
+      break;
 
     default:
       cerr << "Incorrect number of function. Expected an integer between " <<
@@ -128,6 +131,19 @@ double Benchmark::schwefel_102(double * x, int length) {
     outer_sum += (curr_sum * curr_sum);
   }
   return (outer_sum);
+}
+
+/**
+ * Rosenbrock's function
+ */
+double Benchmark::rosenbrock(double * x, int length) {
+  double sum = 0.0;
+  for (int i = 0 ; i < (length-1) ; i ++) {
+    double temp1 = (x[i] * x[i]) - x[i+1];
+    double temp2 = x[i] - 1.0;
+    sum += (100.0 * temp1 * temp1) + (temp2 * temp2);
+  }
+  return (sum);
 }
 
 /**
