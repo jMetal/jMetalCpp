@@ -35,6 +35,7 @@
 #include <F04ShiftedSchwefelNoise.h>
 #include <F05SchwefelGlobalOptBound.h>
 #include <F06ShiftedRosenbrock.h>
+#include <F07ShiftedRotatedGriewank.h>
 #include <TestFunc.h>
 
 using namespace std;
@@ -54,7 +55,7 @@ private:
 
 
   // Class variables
-  double * m_iSqrt;
+  // static double * m_iSqrt;
 
   // Instance variables
   double * m_biases;
@@ -74,6 +75,7 @@ public:
   static double sphere(double * x, int length);
   static double schwefel_102(double * x, int length);
   static double rosenbrock(double * x, int length);
+  static double griewank(double * x, int length);
 
   // Elementary operations
   static void shift(double * results, double * x, double * o, int length);

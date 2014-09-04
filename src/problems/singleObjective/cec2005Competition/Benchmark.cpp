@@ -43,13 +43,13 @@ Benchmark::Benchmark() : Benchmark(DEFAULT_FILE_BIAS) {}
  */
 Benchmark::Benchmark(string file_bias) {
   m_biases = new double[NUM_TEST_FUNC];
-  m_iSqrt = new double[MAX_SUPPORT_DIM];
+  // m_iSqrt = new double[MAX_SUPPORT_DIM];
 
   loadRowVectorFromFile(file_bias, NUM_TEST_FUNC, m_biases);
 
-  for (int i = 0 ; i < MAX_SUPPORT_DIM ; i ++) {
-    m_iSqrt[i] = sqrt(((double )i) + 1.0);
-  }
+  // for (int i = 0 ; i < MAX_SUPPORT_DIM ; i ++) {
+  //   m_iSqrt[i] = sqrt(((double )i) + 1.0);
+  // }
 }
 
 /*
@@ -57,7 +57,7 @@ Benchmark::Benchmark(string file_bias) {
  */
 Benchmark::~Benchmark() {
   delete [] m_biases;
-  delete [] m_iSqrt;
+  // delete [] m_iSqrt;
 }
 
 /*
@@ -98,6 +98,9 @@ TestFunc * Benchmark::testFunctionFactory(int func_num, int dimension) {
       break;
     case 6:
       return new F06ShiftedRosenbrock(dimension, m_biases[func_num-1]);
+      break;
+    case 7:
+      return new F07ShiftedRotatedGriewank(dimension, m_biases[func_num-1]);
       break;
 
     default:
@@ -144,6 +147,20 @@ double Benchmark::rosenbrock(double * x, int length) {
     sum += (100.0 * temp1 * temp1) + (temp2 * temp2);
   }
   return (sum);
+}
+
+/**
+ * Griewank's function
+ */
+double Benchmark::griewank(double * x, int length) {
+  double sum = 0.0;
+  double product = 1.0;
+  for (int i = 0 ; i < length ; i ++) {
+    sum += ((x[i] * x[i]) / 4000.0);
+    double m_iSqrt = sqrt(((double )i) + 1.0);
+    product *= cos(x[i] / m_iSqrt);
+  }
+  return (sum - product + 1.0);
 }
 
 /**
