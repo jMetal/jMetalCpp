@@ -33,6 +33,7 @@
 #include <F02ShiftedSchwefel.h>
 #include <F03ShiftedRotatedHighCondElliptic.h>
 #include <F04ShiftedSchwefelNoise.h>
+#include <F05SchwefelGlobalOptBound.h>
 #include <TestFunc.h>
 
 using namespace std;
@@ -78,6 +79,7 @@ public:
 
   // Matrix & vector operations
   static void xA(double * result, double * x, double ** A, int length);
+  static void Ax(double * result, double ** A, double * x, int length);
 
   // Utility functions for loading data from given text files
   static void loadRowVectorFromFile(string file, int columns, double * row);

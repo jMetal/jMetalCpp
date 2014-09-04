@@ -93,6 +93,10 @@ TestFunc * Benchmark::testFunctionFactory(int func_num, int dimension) {
     case 4:
       return new F04ShiftedSchwefelNoise(dimension, m_biases[func_num-1]);
       break;
+    case 5:
+      return new F05SchwefelGlobalOptBound(dimension, m_biases[func_num-1]);
+      break;
+
     default:
       cerr << "Incorrect number of function. Expected an integer between " <<
           "1 and 25." << endl;
@@ -153,6 +157,19 @@ void Benchmark::xA(double * result, double * x, double ** A, int length) {
     }
   }
 }
+
+/**
+ * (DxD) matrix * (Dx1) column vector = (Dx1) column vector
+ */
+void Benchmark::Ax(double * result, double ** A, double * x, int length) {
+  for (int i = 0 ; i < length ; i++) {
+    result[i] = 0.0;
+    for (int j = 0 ; j < length ; j++) {
+      result[i] += (A[i][j] * x[j]);
+    }
+  }
+}
+
 
 
 void Benchmark::loadRowVectorFromFile(string file, int columns, double * row) {
