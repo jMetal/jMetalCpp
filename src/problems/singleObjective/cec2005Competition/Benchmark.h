@@ -38,6 +38,11 @@
 #include <F07ShiftedRotatedGriewank.h>
 #include <F08ShiftedRotatedAckleyGlobalOptBound.h>
 #include <F09ShiftedRastrigin.h>
+#include <F10ShiftedRotatedRastrigin.h>
+#include <F11ShiftedRotatedWeierstrass.h>
+#include <F12Schwefel.h>
+#include <F13ShiftedExpandedGriewankRosenbrock.h>
+#include <F14ShiftedRotatedExpandedScaffer.h>
 #include <TestFunc.h>
 
 using namespace std;
@@ -73,9 +78,16 @@ public:
   static double sphere(double * x, int length);
   static double schwefel_102(double * x, int length);
   static double rosenbrock(double * x, int length);
+  static double F2(double x, double y);
   static double griewank(double * x, int length);
+  static double F8(double x);
   static double ackley(double * x, int length);
   static double rastrigin(double * x, int length);
+  static double weierstrass(double * x, int length);
+  static double weierstrass(double * x, int length, double a, double b, int Kmax);
+  static double F8F2(double * x, int length);
+  static double ScafferF6(double x, double y);
+  static double EScafferF6(double * x, int length);
 
   // Elementary operations
   static void shift(double * results, double * x, double * o, int length);

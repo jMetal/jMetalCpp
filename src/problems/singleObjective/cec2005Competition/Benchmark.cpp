@@ -93,6 +93,21 @@ TestFunc * Benchmark::testFunctionFactory(int func_num, int dimension) {
     case 9:
       return new F09ShiftedRastrigin(dimension, m_biases[func_num-1]);
       break;
+    case 10:
+      return new F10ShiftedRotatedRastrigin(dimension, m_biases[func_num-1]);
+      break;
+    case 11:
+      return new F11ShiftedRotatedWeierstrass(dimension, m_biases[func_num-1]);
+      break;
+    case 12:
+      return new F12Schwefel(dimension, m_biases[func_num-1]);
+      break;
+    case 13:
+      return new F13ShiftedExpandedGriewankRosenbrock(dimension, m_biases[func_num-1]);
+      break;
+    case 14:
+      return new F14ShiftedRotatedExpandedScaffer(dimension, m_biases[func_num-1]);
+      break;
 
     default:
       cerr << "Incorrect number of function. Expected an integer between " <<
@@ -141,6 +156,15 @@ double Benchmark::rosenbrock(double * x, int length) {
 }
 
 /**
+ * F2: Rosenbrock's Function -- 2D version
+ */
+double Benchmark::F2(double x, double y) {
+  double temp1 = (x * x) - y;
+  double temp2 = x - 1.0;
+  return ((100.0 * temp1 * temp1) + (temp2 * temp2));
+}
+
+/**
  * Griewank's function
  */
 double Benchmark::griewank(double * x, int length) {
@@ -152,6 +176,13 @@ double Benchmark::griewank(double * x, int length) {
     product *= cos(x[i] / m_iSqrt);
   }
   return (sum - product + 1.0);
+}
+
+/**
+ * F8: Griewank's Function -- 1D version
+ */
+double Benchmark::F8(double x) {
+  return (((x * x) / 4000.0) - cos(x) + 1.0);
 }
 
 /**
@@ -185,6 +216,65 @@ void Benchmark::shift(double * results, double * x, double * o, int length) {
   for (int i = 0; i < length; i++) {
     results[i] = x[i] - o[i];
   }
+}
+
+
+/**
+ * Weierstrass function
+ */
+double Benchmark::weierstrass(double * x, int length) {
+  return (weierstrass(x, length, 0.5, 3.0, 20));
+}
+
+double Benchmark::weierstrass(double * x, int length, double a, double b, int Kmax) {
+
+  double sum1 = 0.0;
+  for (int i = 0; i < length; i++) {
+    for (int k = 0; k <= Kmax; k++) {
+      sum1 += pow(a, k) * cos(PIx2 * pow(b, k) * (x[i] + 0.5));
+    }
+  }
+
+  double sum2 = 0.0;
+  for (int k = 0; k <= Kmax; k++) {
+    sum2 += pow(a, k) * cos(PIx2 * pow(b, k) * (0.5));
+  }
+
+  return (sum1 - sum2*((double )(length)));
+}
+
+/**
+ * F8F2
+ */
+double Benchmark::F8F2(double * x, int length) {
+  double sum = 0.0;
+  for (int i = 1; i < length; i++) {
+    sum += F8(F2(x[i-1], x[i]));
+  }
+  sum += F8(F2(x[length-1], x[0]));
+  return sum;
+}
+
+/**
+ * Scaffer's F6 function
+ */
+double Benchmark::ScafferF6(double x, double y) {
+  double temp1 = x*x + y*y;
+  double temp2 = sin(sqrt(temp1));
+  double temp3 = 1.0 + 0.001 * temp1;
+  return (0.5 + ((temp2 * temp2 - 0.5)/(temp3 * temp3)));
+}
+
+/**
+ * Expanded Scaffer's F6 function
+ */
+double Benchmark::EScafferF6(double * x, int length) {
+  double sum = 0.0;
+  for (int i = 1; i < length; i++) {
+    sum += ScafferF6(x[i-1], x[i]);
+  }
+  sum += ScafferF6(x[length-1], x[0]);
+  return (sum);
 }
 
 /**
@@ -266,7 +356,7 @@ void Benchmark::loadMatrixFromFile(string file, int rows, int columns, double **
   ifstream in(file.c_str());
   if( !in ) {
     cerr << "Benchmark::loadRowVectorFromFile: failed when reading from file : " <<
-    file << endl;
+        file << endl;
     exit(-1);
   } else {
 
