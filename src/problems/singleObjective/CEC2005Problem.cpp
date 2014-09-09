@@ -35,11 +35,13 @@ CEC2005Problem::CEC2005Problem(string solutionType, int problemID, int numberOfV
   numberOfVariables_   = numberOfVariables ;
   numberOfObjectives_  = 1;
   numberOfConstraints_ = 0;
-  problemName_         = "CEC2005";
 
   Benchmark * cec2005ProblemFactory = new Benchmark() ;
   testFunction_ = cec2005ProblemFactory->testFunctionFactory(problemID, numberOfVariables) ;
   delete cec2005ProblemFactory;
+
+  problemName_ = "CEC2005: " + testFunction_->name();
+
 
   upperLimit_ = new double[numberOfVariables_];
   lowerLimit_ = new double[numberOfVariables_];

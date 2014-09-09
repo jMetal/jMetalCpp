@@ -43,6 +43,8 @@
 #include <F12Schwefel.h>
 #include <F13ShiftedExpandedGriewankRosenbrock.h>
 #include <F14ShiftedRotatedExpandedScaffer.h>
+#include <F15HybridComposition1.h>
+#include <HCJob.h>
 #include <TestFunc.h>
 
 using namespace std;
@@ -88,6 +90,7 @@ public:
   static double F8F2(double * x, int length);
   static double ScafferF6(double x, double y);
   static double EScafferF6(double * x, int length);
+  static double hybrid_composition(double * x, HCJob * job, int length);
 
   // Elementary operations
   static void shift(double * results, double * x, double * o, int length);

@@ -108,6 +108,9 @@ TestFunc * Benchmark::testFunctionFactory(int func_num, int dimension) {
     case 14:
       return new F14ShiftedRotatedExpandedScaffer(dimension, m_biases[func_num-1]);
       break;
+    case 15:
+      return new F15HybridComposition1(dimension, m_biases[func_num-1]);
+      break;
 
     default:
       cerr << "Incorrect number of function. Expected an integer between " <<
@@ -276,6 +279,59 @@ double Benchmark::EScafferF6(double * x, int length) {
   sum += ScafferF6(x[length-1], x[0]);
   return (sum);
 }
+
+/**
+ * Hybrid composition
+ */
+double Benchmark::hybrid_composition(double* x, HCJob* job, int length) {
+
+  int num_func = job->num_func;
+  int num_dim = job->num_dim;
+
+  // Get the raw weights
+  double wMax = -numeric_limits<double>::max();
+  for (int i=0; i<num_func; i++) {
+    double sumSqr = 0.0;
+    shift(job->z[i], x, job->o[i], length);
+    for (int j=0; j<num_dim; j++) {
+      sumSqr += (job->z[i][j] * job->z[i][j]);
+    }
+    job->w[i] = exp(-1.0 * sumSqr / (2.0 * num_dim * job->sigma[i] * job->sigma[i]));
+    if (wMax < job->w[i])
+      wMax = job->w[i];
+  }
+
+  // Modify the weights
+  double wSum = 0.0;
+  double w1mMaxPow = 1.0 - pow(wMax, 10.0);
+  for (int i=0; i<num_func; i++) {
+    if (job->w[i] != wMax) {
+      job->w[i] *= w1mMaxPow;
+    }
+    wSum += job->w[i];
+  }
+
+  // Normalize the weights
+  for (int i=0; i<num_func; i++) {
+    job->w[i] /= wSum;
+  }
+
+  double sumF = 0.0;
+  for (int i=0; i<num_func; i++) {
+    for (int j=0; j<num_dim; j++) {
+      job->z[i][j] /= job->lambda[i];
+    }
+    rotate(job->zM[i], job->z[i], job->M[i], length);
+    sumF +=
+      job->w[i] *
+      (
+        job->C * job->basic_func(i, job->zM[i], length) / job->fmax[i] +
+          job->biases[i]
+      );
+  }
+  return sumF;
+}
+
 
 /**
  * Rotate
