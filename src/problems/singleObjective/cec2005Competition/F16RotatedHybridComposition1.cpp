@@ -1,4 +1,4 @@
-//  F15HybridComposition1.cpp
+//  F16RotatedHybridComposition1.cpp
 //
 //  Authors:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
@@ -20,26 +20,27 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include <F15HybridComposition1.h>
+#include <F16RotatedHybridComposition1.h>
 
 // Fixed (class) parameters
-const string F15HybridComposition1::FUNCTION_NAME = "Hybrid Composition Function 1";
+const string F16RotatedHybridComposition1::FUNCTION_NAME = "Rotated Hybrid Composition Function 1";
 // TODO: Cambiar ruta
-const string F15HybridComposition1::DEFAULT_FILE_DATA = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/hybrid_func1_data.txt";
+const string F16RotatedHybridComposition1::DEFAULT_FILE_DATA = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/hybrid_func1_data.txt";
+const string F16RotatedHybridComposition1::DEFAULT_FILE_MX_PREFIX = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/hybrid_func1_M_D";
+const string F16RotatedHybridComposition1::DEFAULT_FILE_MX_SUFFIX = ".txt";
 
-
-const double F15HybridComposition1::m_sigma[NUM_FUNC] = {
+const double F16RotatedHybridComposition1::m_sigma[NUM_FUNC] = {
   1.0,  1.0,  1.0,  1.0,  1.0,
   1.0,  1.0,  1.0,  1.0,  1.0
 };
 
-const double F15HybridComposition1::m_lambda[NUM_FUNC] = {
+const double F16RotatedHybridComposition1::m_lambda[NUM_FUNC] = {
   1.0,        1.0,        10.0,       10.0,
   5.0/60.0,   5.0/60.0,   5.0/32.0,   5.0/32.0,
   5.0/100.0,  5.0/100.0
 };
 
-const double F15HybridComposition1::m_func_biases[NUM_FUNC] = {
+const double F16RotatedHybridComposition1::m_func_biases[NUM_FUNC] = {
   0.0,    100.0,  200.0,  300.0,  400.0,
   500.0,  600.0,  700.0,  800.0,  900.0
 };
@@ -48,15 +49,15 @@ const double F15HybridComposition1::m_func_biases[NUM_FUNC] = {
 /**
  * Constructor.
  */
-F15HybridComposition1::F15HybridComposition1(int dimension, double bias)
-    : F15HybridComposition1(dimension, bias, DEFAULT_FILE_DATA) {
-} // F15HybridComposition1
+F16RotatedHybridComposition1::F16RotatedHybridComposition1(int dimension, double bias)
+    : F16RotatedHybridComposition1(dimension, bias, DEFAULT_FILE_DATA, getFileMxName(DEFAULT_FILE_MX_PREFIX, dimension, DEFAULT_FILE_MX_SUFFIX)) {
+} // F16RotatedHybridComposition1
 
 
 /**
  * Constructor
  */
-F15HybridComposition1::F15HybridComposition1(int dimension, double bias, string file_data)
+F16RotatedHybridComposition1::F16RotatedHybridComposition1(int dimension, double bias, string file_data, string file_m)
     : TestFunc(dimension, bias, FUNCTION_NAME) {
 
   // Note: dimension starts from 0
@@ -75,23 +76,16 @@ F15HybridComposition1::F15HybridComposition1(int dimension, double bias, string 
     m_o[i]  = new double[m_dimension];
     m_z[i]  = new double[m_dimension];
     m_zM[i] = new double[m_dimension];
+    m_M[i] = new double*[m_dimension];
+    for (int j=0; j<m_dimension; j++) {
+      m_M[i][j] = new double[m_dimension];
+    }
   }
 
   // Load the shifted global optimum
   Benchmark::loadMatrixFromFile(file_data, NUM_FUNC, m_dimension, m_o);
-  // Generate identity matrices
-  for (int i = 0 ; i < NUM_FUNC ; i ++) {
-    m_M[i] = new double*[m_dimension];
-    for (int j = 0 ; j < m_dimension ; j ++) {
-      m_M[i][j] = new double[m_dimension];
-      for (int k = 0 ; k < m_dimension ; k ++) {
-        m_M[i][j][k] = 0.0;
-      }
-    }
-    for (int j = 0 ; j < m_dimension ; j ++) {
-      m_M[i][j][j] = 1.0;
-    }
-  }
+  // Load the matrix
+  Benchmark::loadNMatrixFromFile(file_m, NUM_FUNC, m_dimension, m_dimension, m_M);
 
   // Initialize the hybrid composition job object
   theJob = new MyHCJob(NUM_FUNC);
@@ -118,13 +112,13 @@ F15HybridComposition1::F15HybridComposition1(int dimension, double bias, string 
   }
   theJob->fmax = m_fmax;
 
-} // F15HybridComposition1
+} // F16RotatedHybridComposition1
 
 
 /**
  * Destructor
  */
-F15HybridComposition1::~F15HybridComposition1() {
+F16RotatedHybridComposition1::~F16RotatedHybridComposition1() {
 
   for (int i=0; i<NUM_FUNC; i++) {
     delete [] m_o[i];
@@ -151,12 +145,12 @@ F15HybridComposition1::~F15HybridComposition1() {
 
   delete theJob;
 
-} // ~F15HybridComposition1
+} // ~F16RotatedHybridComposition1
 
-F15HybridComposition1::MyHCJob::MyHCJob(int numFunc)
+F16RotatedHybridComposition1::MyHCJob::MyHCJob(int numFunc)
     : HCJob(numFunc) { }
 
-double F15HybridComposition1::MyHCJob::basic_func(int func_no, double* x, int length) {
+double F16RotatedHybridComposition1::MyHCJob::basic_func(int func_no, double* x, int length) {
   double result = 0.0;
   switch(func_no) {
     case 0:
@@ -190,7 +184,7 @@ double F15HybridComposition1::MyHCJob::basic_func(int func_no, double* x, int le
 /**
  * Function body
  */
-double F15HybridComposition1::f(double * x) {
+double F16RotatedHybridComposition1::f(double * x) {
   double result = 0.0;
 
   result = Benchmark::hybrid_composition(x, theJob, m_dimension);
@@ -198,4 +192,11 @@ double F15HybridComposition1::f(double * x) {
   result += m_bias;
 
   return result;
+}
+
+
+string F16RotatedHybridComposition1::getFileMxName(string prefix, int dimension, string suffix) {
+  std::stringstream sstm;
+  sstm << prefix << dimension << suffix;
+  return sstm.str();
 }

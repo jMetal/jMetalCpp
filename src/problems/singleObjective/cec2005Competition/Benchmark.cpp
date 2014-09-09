@@ -111,6 +111,9 @@ TestFunc * Benchmark::testFunctionFactory(int func_num, int dimension) {
     case 15:
       return new F15HybridComposition1(dimension, m_biases[func_num-1]);
       break;
+    case 16:
+      return new F16RotatedHybridComposition1(dimension, m_biases[func_num-1]);
+      break;
 
     default:
       cerr << "Incorrect number of function. Expected an integer between " <<
@@ -404,6 +407,20 @@ void Benchmark::loadRowVector(ifstream& in, int columns, double * row) {
     cerr << "Benchmark::loadRowVector: unexpected format encountered when " <<
         "reading from file (zero lines found)." << endl;
     exit(-1);
+  }
+}
+
+void Benchmark::loadNMatrixFromFile(string file, int N, int rows, int columns, double*** matrix) {
+  ifstream in(file.c_str());
+  if (!in) {
+    cerr << "Benchmark::loadNMatrixFromFile: failed when reading from file : " <<
+        file << endl;
+    exit(-1);
+  } else {
+    for (int i=0; i<N; i++) {
+      loadMatrix(in, rows, columns, matrix[i]);
+    }
+    in.close();
   }
 }
 

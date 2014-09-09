@@ -44,6 +44,7 @@
 #include <F13ShiftedExpandedGriewankRosenbrock.h>
 #include <F14ShiftedRotatedExpandedScaffer.h>
 #include <F15HybridComposition1.h>
+#include <F16RotatedHybridComposition1.h>
 #include <HCJob.h>
 #include <TestFunc.h>
 
@@ -103,6 +104,7 @@ public:
   // Utility functions for loading data from given text files
   static void loadRowVectorFromFile(string file, int columns, double * row);
   static void loadRowVector(ifstream& brSrc, int columns, double * row);
+  static void loadNMatrixFromFile(string file, int N, int rows, int columns, double*** matrix);
   static void loadMatrixFromFile(string file, int rows, int columns, double ** matrix);
   static void loadMatrix(ifstream& brSrc, int rows, int columns, double ** matrix);
 
