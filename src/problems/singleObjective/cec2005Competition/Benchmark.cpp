@@ -114,6 +114,12 @@ TestFunc * Benchmark::testFunctionFactory(int func_num, int dimension) {
     case 16:
       return new F16RotatedHybridComposition1(dimension, m_biases[func_num-1]);
       break;
+    case 17:
+      return new F17RotatedHybridComposition1Noise(dimension, m_biases[func_num-1]);
+      break;
+    case 18:
+      return new F18RotatedHybridComposition2(dimension, m_biases[func_num-1]);
+      break;
 
     default:
       cerr << "Incorrect number of function. Expected an integer between " <<

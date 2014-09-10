@@ -45,6 +45,8 @@
 #include <F14ShiftedRotatedExpandedScaffer.h>
 #include <F15HybridComposition1.h>
 #include <F16RotatedHybridComposition1.h>
+#include <F17RotatedHybridComposition1Noise.h>
+#include <F18RotatedHybridComposition2.h>
 #include <HCJob.h>
 #include <TestFunc.h>
 
