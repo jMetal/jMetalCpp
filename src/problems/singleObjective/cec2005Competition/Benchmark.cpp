@@ -120,6 +120,9 @@ TestFunc * Benchmark::testFunctionFactory(int func_num, int dimension) {
     case 18:
       return new F18RotatedHybridComposition2(dimension, m_biases[func_num-1]);
       break;
+    case 19:
+      return new F19RotatedHybridComposition2NarrowBasinGlobalOpt(dimension, m_biases[func_num-1]);
+      break;
 
     default:
       cerr << "Incorrect number of function. Expected an integer between " <<

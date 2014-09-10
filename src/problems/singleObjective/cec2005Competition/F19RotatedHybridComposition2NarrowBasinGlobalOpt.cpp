@@ -1,4 +1,4 @@
-//  F18RotatedHybridComposition2.cpp
+//  F19RotatedHybridComposition2NarrowBasinGlobalOpt.cpp
 //
 //  Authors:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
@@ -20,26 +20,26 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#include <F18RotatedHybridComposition2.h>
+#include <F19RotatedHybridComposition2NarrowBasinGlobalOpt.h>
 
 // Fixed (class) parameters
-const string F18RotatedHybridComposition2::FUNCTION_NAME = "Rotated Hybrid Composition Function 2";
+const string F19RotatedHybridComposition2NarrowBasinGlobalOpt::FUNCTION_NAME = "Rotated Hybrid Composition Function 2 with narrow basin global optimum";
 // TODO: Cambiar ruta
-const string F18RotatedHybridComposition2::DEFAULT_FILE_DATA = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/hybrid_func2_data.txt";
-const string F18RotatedHybridComposition2::DEFAULT_FILE_MX_PREFIX = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/hybrid_func2_M_D";
-const string F18RotatedHybridComposition2::DEFAULT_FILE_MX_SUFFIX = ".txt";
+const string F19RotatedHybridComposition2NarrowBasinGlobalOpt::DEFAULT_FILE_DATA = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/hybrid_func2_data.txt";
+const string F19RotatedHybridComposition2NarrowBasinGlobalOpt::DEFAULT_FILE_MX_PREFIX = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/hybrid_func2_M_D";
+const string F19RotatedHybridComposition2NarrowBasinGlobalOpt::DEFAULT_FILE_MX_SUFFIX = ".txt";
 
-const double F18RotatedHybridComposition2::m_sigma[NUM_FUNC] = {
+const double F19RotatedHybridComposition2NarrowBasinGlobalOpt::m_sigma[NUM_FUNC] = {
   1.0,  2.0,  1.5,  1.5,  1.0,  1.0,
   1.5,  1.5,  2.0,  2.0
 };
 
-const double F18RotatedHybridComposition2::m_lambda[NUM_FUNC] = {
+const double F19RotatedHybridComposition2NarrowBasinGlobalOpt::m_lambda[NUM_FUNC] = {
   2.0*5.0/32.0, 5.0/32.0,   2.0*1,    1.0,            2.0*5.0/100.0,
   5.0/100.0,    2.0*10.0,   10.0,     2.0*5.0/60.0,   5.0/60.0
 };
 
-const double F18RotatedHybridComposition2::m_func_biases[NUM_FUNC] = {
+const double F19RotatedHybridComposition2NarrowBasinGlobalOpt::m_func_biases[NUM_FUNC] = {
   0.0,    100.0,  200.0,  300.0,  400.0,
   500.0,  600.0,  700.0,  800.0,  900.0
 };
@@ -48,15 +48,15 @@ const double F18RotatedHybridComposition2::m_func_biases[NUM_FUNC] = {
 /**
  * Constructor.
  */
-F18RotatedHybridComposition2::F18RotatedHybridComposition2(int dimension, double bias)
-    : F18RotatedHybridComposition2(dimension, bias, DEFAULT_FILE_DATA, getFileMxName(DEFAULT_FILE_MX_PREFIX, dimension, DEFAULT_FILE_MX_SUFFIX)) {
-} // F18RotatedHybridComposition2
+F19RotatedHybridComposition2NarrowBasinGlobalOpt::F19RotatedHybridComposition2NarrowBasinGlobalOpt(int dimension, double bias)
+    : F19RotatedHybridComposition2NarrowBasinGlobalOpt(dimension, bias, DEFAULT_FILE_DATA, getFileMxName(DEFAULT_FILE_MX_PREFIX, dimension, DEFAULT_FILE_MX_SUFFIX)) {
+} // F19RotatedHybridComposition2NarrowBasinGlobalOpt
 
 
 /**
  * Constructor
  */
-F18RotatedHybridComposition2::F18RotatedHybridComposition2(int dimension, double bias, string file_data, string file_m)
+F19RotatedHybridComposition2NarrowBasinGlobalOpt::F19RotatedHybridComposition2NarrowBasinGlobalOpt(int dimension, double bias, string file_data, string file_m)
     : TestFunc(dimension, bias, FUNCTION_NAME) {
 
   // Note: dimension starts from 0
@@ -114,13 +114,13 @@ F18RotatedHybridComposition2::F18RotatedHybridComposition2(int dimension, double
   }
   theJob->fmax = m_fmax;
 
-} // F18RotatedHybridComposition2
+} // F19RotatedHybridComposition2NarrowBasinGlobalOpt
 
 
 /**
  * Destructor
  */
-F18RotatedHybridComposition2::~F18RotatedHybridComposition2() {
+F19RotatedHybridComposition2NarrowBasinGlobalOpt::~F19RotatedHybridComposition2NarrowBasinGlobalOpt() {
 
   for (int i=0; i<NUM_FUNC; i++) {
     delete [] m_o[i];
@@ -147,12 +147,12 @@ F18RotatedHybridComposition2::~F18RotatedHybridComposition2() {
 
   delete theJob;
 
-} // ~F18RotatedHybridComposition2
+} // ~F19RotatedHybridComposition2NarrowBasinGlobalOpt
 
-F18RotatedHybridComposition2::MyHCJob::MyHCJob(int numFunc)
+F19RotatedHybridComposition2NarrowBasinGlobalOpt::MyHCJob::MyHCJob(int numFunc)
     : HCJob(numFunc) { }
 
-double F18RotatedHybridComposition2::MyHCJob::basic_func(int func_no, double* x, int length) {
+double F19RotatedHybridComposition2NarrowBasinGlobalOpt::MyHCJob::basic_func(int func_no, double* x, int length) {
   double result = 0.0;
   switch(func_no) {
     case 0:
@@ -186,7 +186,7 @@ double F18RotatedHybridComposition2::MyHCJob::basic_func(int func_no, double* x,
 /**
  * Function body
  */
-double F18RotatedHybridComposition2::f(double * x) {
+double F19RotatedHybridComposition2NarrowBasinGlobalOpt::f(double * x) {
   double result = 0.0;
 
   result = Benchmark::hybrid_composition(x, theJob, m_dimension);
@@ -197,7 +197,7 @@ double F18RotatedHybridComposition2::f(double * x) {
 }
 
 
-string F18RotatedHybridComposition2::getFileMxName(string prefix, int dimension, string suffix) {
+string F19RotatedHybridComposition2NarrowBasinGlobalOpt::getFileMxName(string prefix, int dimension, string suffix) {
   std::stringstream sstm;
   sstm << prefix << dimension << suffix;
   return sstm.str();

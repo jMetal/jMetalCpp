@@ -47,6 +47,7 @@
 #include <F16RotatedHybridComposition1.h>
 #include <F17RotatedHybridComposition1Noise.h>
 #include <F18RotatedHybridComposition2.h>
+#include <F19RotatedHybridComposition2NarrowBasinGlobalOpt.h>
 #include <HCJob.h>
 #include <TestFunc.h>
 
