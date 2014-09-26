@@ -1,9 +1,9 @@
-//  XReal.h
+//  PseudoRandom.h
 //
 //  Author:
+//       Esteban López-Camacho <esteban@lcc.uma.es>
 //       Antonio J. Nebro <antonio@lcc.uma.es>
 //       Juan J. Durillo <durillo@lcc.uma.es>
-//       Esteban López-Camacho <esteban@lcc.uma.es>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -20,35 +20,32 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef XREAL_H_
-#define XREAL_H_
+#ifndef _PseudoRandom_h
+#define _PseudoRandom_h
 
-#include <Solution.h>
-#include <BinaryRealSolutionType.h>
-#include <RealSolutionType.h>
-#include <ArrayRealSolutionType.h>
-#include <ArrayReal.h>
+#include <iostream>
+#include <RandomGenerator.h>
+#include <math.h>
 
 /**
- * This class allows to apply a SBX crossover operator using two parent
- * solutions.
-**/
-class XReal {
+ * This file is aimed at defining the interface for the random generator. 
+ * The idea is that all the random numbers will be generated using a single
+ * random generator which will be accesible throug this interface.
+ **/
+
+class PseudoRandom {
+//private:
+public:
+  static RandomGenerator * randomGenerator_;
+  PseudoRandom();
 
 public:
-  XReal();
-  XReal(Solution * solution);
-  double getValue(int index);
-  void setValue(int index, double value);
-  double getLowerBound(int index);
-  double getUpperBound(int index);
-  int getNumberOfDecisionVariables();
-  int size();
-
-private:
-  Solution * solution_;
-  SolutionType * type_;
-
+  static double randDouble();//    static int randInt();
+  static int randInt(int minBound, int maxBound);
+  static double randDouble(double minBound, double maxBound);
+  static double randNormal(double mean, double standardDeviation);
+  static double * randSphere(int dimension);
 };
 
-#endif /* XREAL_H_ */
+
+#endif

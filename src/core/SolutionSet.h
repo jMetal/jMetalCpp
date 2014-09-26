@@ -1,9 +1,9 @@
 //  SolutionSet.h
 //
 //  Author:
+//       Esteban López-Camacho <esteban@lcc.uma.es>
 //       Antonio J. Nebro <antonio@lcc.uma.es>
 //       Juan J. Durillo <durillo@lcc.uma.es>
-//       Esteban López-Camacho <esteban@lcc.uma.es>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -76,6 +76,7 @@ public:
   void replace(int position, Solution * solution);
   void replace(int position, Solution * solution, bool del);
   vector <vector<double> > writeObjectivesToMatrix();
+  void printObjectives();
 
   //void reset() ;
   //string toString();
