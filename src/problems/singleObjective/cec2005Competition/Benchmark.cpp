@@ -102,9 +102,11 @@ TestFunc * Benchmark::testFunctionFactory(int func_num, int dimension) {
     case 12:
       return new F12Schwefel(dimension, m_biases[func_num-1]);
       break;
+      /*
     case 13:
       return new F13ShiftedExpandedGriewankRosenbrock(dimension, m_biases[func_num-1]);
       break;
+      */
     case 14:
       return new F14ShiftedRotatedExpandedScaffer(dimension, m_biases[func_num-1]);
       break;
@@ -122,6 +124,12 @@ TestFunc * Benchmark::testFunctionFactory(int func_num, int dimension) {
       break;
     case 19:
       return new F19RotatedHybridComposition2NarrowBasinGlobalOpt(dimension, m_biases[func_num-1]);
+      break;
+    case 20:
+      return new F20RotatedHybridComposition2GlobalOptBound(dimension, m_biases[func_num-1]);
+      break;
+    case 21:
+      return new F21RotatedHybridComposition3(dimension, m_biases[func_num-1]);
       break;
 
     default:

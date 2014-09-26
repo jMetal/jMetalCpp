@@ -55,7 +55,7 @@ OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(LIB_SOURCES:.$(SRCEXT)=.o))
 #BINARIES := $(patsubst $(MAIN_DIRS)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 
 # Flags
-CFLAGS := -O3 -std=c++11 # -g # -Wall
+CFLAGS := -O3 -std=c++11 -g # -Wall
 
 # Include flags when compiling
 INC := $(patsubst %,-I %/.,$(HEADER_DIRS))
@@ -113,7 +113,19 @@ clean:
 tester: 
 
 # Spikes (CMAES_main quick developing and compiling example)
-spikes : CMAES_main_spike
+spikes : SMPSO_main_spike gGA_main_spike
+
+SMPSO_main_spike: $(SRCDIR)/main/SMPSO_main.$(SRCEXT) $(LIB)
+	@echo "Compiling spike $(SRCDIR)/main/SMPSO_main.$(SRCEXT)"
+	@mkdir -p $(BINDIR)/spike
+	@echo "$(CC) $(CFLAGS) $(SRCDIR)/main/SMPSO_main.$(SRCEXT) $(MAIN_DEPS) -o $(BINDIR)/spike/SMPSO_main $(INC) $(MAIN_LIBS)"; $(CC) $(CFLAGS) $(SRCDIR)/main/SMPSO_main.$(SRCEXT) $(MAIN_DEPS) -o $(BINDIR)/spike/SMPSO_main $(INC) $(MAIN_LIBS)
+
+gGA_main_spike: $(SRCDIR)/main/gGA_main.$(SRCEXT) $(LIB)
+	@echo "Compiling spike $(SRCDIR)/main/gGA_main.$(SRCEXT)"
+	@mkdir -p $(BINDIR)/spike
+	@echo "$(CC) $(CFLAGS) $(SRCDIR)/main/gGA_main.$(SRCEXT) $(MAIN_DEPS) -o $(BINDIR)/spike/gGA_main $(INC) $(MAIN_LIBS)"; $(CC) $(CFLAGS) $(SRCDIR)/main/gGA_main.$(SRCEXT) $(MAIN_DEPS) -o $(BINDIR)/spike/gGA_main $(INC) $(MAIN_LIBS)
+
+
 
 CMAES_main_spike : $(SRCDIR)/main/CMAES_main.$(SRCEXT) $(LIB)
 	@echo "Compiling spike $(SRCDIR)/main/CMAES_main.$(SRCEXT)"
