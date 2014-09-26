@@ -25,6 +25,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <CEC2005Problem.h>
 #include <DTLZ1.h>
 #include <DTLZ2.h>
 #include <DTLZ3.h>

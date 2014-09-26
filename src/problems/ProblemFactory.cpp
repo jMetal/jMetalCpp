@@ -41,11 +41,11 @@ Problem * ProblemFactory::getProblem(int argc, char ** argv) {
   if (argc==2) {
     return getProblem(argv[1], 0, NULL);
   } else if (argc>2) {
-    char ** argv2 = new char*[argc-2];
+    char * argv1 = argv[1];
     for (int i=0; i<argc-2; i++) {
-      argv2[i] = argv[i+2];
+      argv[i] = argv[i+2];
     }
-    return getProblem(argv[1], argc-2, argv2);
+    return getProblem(argv1, argc-2, argv);
   } else {
     cerr << "Too few arguments to build a problem.";
     exit(-1);
@@ -62,6 +62,22 @@ Problem * ProblemFactory::getProblem(int argc, char ** argv) {
  */
 Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv) {
 
+  if (strcmp(name, "CEC2005")==0) { // CEC2005 Problems
+    if (argc==1)
+      return new CEC2005Problem("Real", atoi(argv[0]));
+    else if (argc==2)
+      return new CEC2005Problem(argv[0], atoi(argv[1]));
+    else if (argc==3)
+      return new CEC2005Problem(argv[0], atoi(argv[1]), atoi(argv[2]));
+    else {
+      cerr << "Incorrect number of arguments for CEC2005 problem." << endl;
+      cerr << "Use one of this:" << endl;
+      cerr << "\tCEC2005 NUMBER_OF_CEC2005_PROBLEM" << endl;
+      cerr << "\tCEC2005 SOLUTION_TYPE NUMBER_OF_CEC2005_PROBLEM " << endl;
+      cerr << "\tCEC2005 SOLUTION_TYPE NUMBER_OF_CEC2005_PROBLEM NUMBER_OF_VARIABLES" << endl;
+      exit(-1);
+    }
+  }
   if (strcmp(name, "DTLZ1")==0) { // DTLZ1
     if (argc==0)
       return new DTLZ1("Real");
