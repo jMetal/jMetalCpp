@@ -25,8 +25,8 @@
 // Fixed (class) parameters
 const string F20RotatedHybridComposition2GlobalOptBound::FUNCTION_NAME = "Rotated Hybrid Composition Function 2 with Global Optimum on the Bounds";
 // TODO: Cambiar ruta
-const string F20RotatedHybridComposition2GlobalOptBound::DEFAULT_FILE_DATA = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/hybrid_func2_data.txt";
-const string F20RotatedHybridComposition2GlobalOptBound::DEFAULT_FILE_MX_PREFIX = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/hybrid_func2_M_D";
+const string F20RotatedHybridComposition2GlobalOptBound::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/hybrid_func2_data.txt";
+const string F20RotatedHybridComposition2GlobalOptBound::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/hybrid_func2_M_D";
 const string F20RotatedHybridComposition2GlobalOptBound::DEFAULT_FILE_MX_SUFFIX = ".txt";
 
 const double F20RotatedHybridComposition2GlobalOptBound::m_sigma[NUM_FUNC] = {

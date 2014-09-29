@@ -25,7 +25,7 @@
 // Fixed (class) parameters
 const string F09ShiftedRastrigin::FUNCTION_NAME = "Shifted Rastrigin's Function";
 // TODO: Cambiar ruta
-const string F09ShiftedRastrigin::DEFAULT_FILE_DATA = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/rastrigin_func_data.txt";
+const string F09ShiftedRastrigin::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/rastrigin_func_data.txt";
 
 
 /**

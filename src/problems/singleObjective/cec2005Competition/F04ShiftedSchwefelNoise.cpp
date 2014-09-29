@@ -25,7 +25,7 @@
 // Fixed (class) parameters
 const string F04ShiftedSchwefelNoise::FUNCTION_NAME = "Shifted Schwefel's Problem 1.2 with Noise in Fitness";
 // TODO: Cambiar ruta
-const string F04ShiftedSchwefelNoise::DEFAULT_FILE_DATA = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/schwefel_102_data.txt";
+const string F04ShiftedSchwefelNoise::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/schwefel_102_data.txt";
 
 
 /**

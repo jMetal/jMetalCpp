@@ -25,8 +25,8 @@
 // Fixed (class) parameters
 const string F19RotatedHybridComposition2NarrowBasinGlobalOpt::FUNCTION_NAME = "Rotated Hybrid Composition Function 2 with narrow basin global optimum";
 // TODO: Cambiar ruta
-const string F19RotatedHybridComposition2NarrowBasinGlobalOpt::DEFAULT_FILE_DATA = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/hybrid_func2_data.txt";
-const string F19RotatedHybridComposition2NarrowBasinGlobalOpt::DEFAULT_FILE_MX_PREFIX = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/hybrid_func2_M_D";
+const string F19RotatedHybridComposition2NarrowBasinGlobalOpt::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/hybrid_func2_data.txt";
+const string F19RotatedHybridComposition2NarrowBasinGlobalOpt::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/hybrid_func2_M_D";
 const string F19RotatedHybridComposition2NarrowBasinGlobalOpt::DEFAULT_FILE_MX_SUFFIX = ".txt";
 
 const double F19RotatedHybridComposition2NarrowBasinGlobalOpt::m_sigma[NUM_FUNC] = {

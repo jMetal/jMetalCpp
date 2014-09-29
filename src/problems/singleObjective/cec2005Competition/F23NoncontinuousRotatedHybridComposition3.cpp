@@ -25,8 +25,8 @@
 // Fixed (class) parameters
 const string F23NoncontinuousRotatedHybridComposition3::FUNCTION_NAME = "Non-Continuous Rotated Hybrid Composition Function 3";
 // TODO: Cambiar ruta
-const string F23NoncontinuousRotatedHybridComposition3::DEFAULT_FILE_DATA = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/hybrid_func3_data.txt";
-const string F23NoncontinuousRotatedHybridComposition3::DEFAULT_FILE_MX_PREFIX = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/hybrid_func3_M_D";
+const string F23NoncontinuousRotatedHybridComposition3::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/hybrid_func3_data.txt";
+const string F23NoncontinuousRotatedHybridComposition3::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/hybrid_func3_M_D";
 const string F23NoncontinuousRotatedHybridComposition3::DEFAULT_FILE_MX_SUFFIX = ".txt";
 
 const double F23NoncontinuousRotatedHybridComposition3::m_sigma[NUM_FUNC] = {

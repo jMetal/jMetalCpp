@@ -25,7 +25,7 @@
 // Fixed (class) parameters
 const string F15HybridComposition1::FUNCTION_NAME = "Hybrid Composition Function 1";
 // TODO: Cambiar ruta
-const string F15HybridComposition1::DEFAULT_FILE_DATA = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/hybrid_func1_data.txt";
+const string F15HybridComposition1::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/hybrid_func1_data.txt";
 
 
 const double F15HybridComposition1::m_sigma[NUM_FUNC] = {

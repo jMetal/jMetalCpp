@@ -25,8 +25,8 @@
 // Fixed (class) parameters
 const string F25RotatedHybridComposition4Bound::FUNCTION_NAME = "Rotated Hybrid Composition Function 4 without bounds";
 // TODO: Cambiar ruta
-const string F25RotatedHybridComposition4Bound::DEFAULT_FILE_DATA = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/hybrid_func4_data.txt";
-const string F25RotatedHybridComposition4Bound::DEFAULT_FILE_MX_PREFIX = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/hybrid_func4_M_D";
+const string F25RotatedHybridComposition4Bound::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/hybrid_func4_data.txt";
+const string F25RotatedHybridComposition4Bound::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/hybrid_func4_M_D";
 const string F25RotatedHybridComposition4Bound::DEFAULT_FILE_MX_SUFFIX = ".txt";
 
 const double F25RotatedHybridComposition4Bound::m_sigma[NUM_FUNC] = {

@@ -25,7 +25,7 @@
 // Fixed (class) parameters
 const string F05SchwefelGlobalOptBound::FUNCTION_NAME = "Schwefel's Problem 2.6 with Global Optimum on Bounds";
 // TODO: Cambiar ruta
-const string F05SchwefelGlobalOptBound::DEFAULT_FILE_DATA = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/schwefel_206_data.txt";
+const string F05SchwefelGlobalOptBound::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/schwefel_206_data.txt";
 
 
 /**

@@ -25,7 +25,7 @@
 // Fixed (class) parameters
 const string F01ShiftedSphere::FUNCTION_NAME = "Shifted Sphere Function";
 // TODO: Cambiar ruta
-const string F01ShiftedSphere::DEFAULT_FILE_DATA = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/sphere_func_data.txt";
+const string F01ShiftedSphere::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/sphere_func_data.txt";
 
 
 /**

@@ -25,8 +25,8 @@
 // Fixed (class) parameters
 const string F18RotatedHybridComposition2::FUNCTION_NAME = "Rotated Hybrid Composition Function 2";
 // TODO: Cambiar ruta
-const string F18RotatedHybridComposition2::DEFAULT_FILE_DATA = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/hybrid_func2_data.txt";
-const string F18RotatedHybridComposition2::DEFAULT_FILE_MX_PREFIX = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/hybrid_func2_M_D";
+const string F18RotatedHybridComposition2::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/hybrid_func2_data.txt";
+const string F18RotatedHybridComposition2::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/hybrid_func2_M_D";
 const string F18RotatedHybridComposition2::DEFAULT_FILE_MX_SUFFIX = ".txt";
 
 const double F18RotatedHybridComposition2::m_sigma[NUM_FUNC] = {

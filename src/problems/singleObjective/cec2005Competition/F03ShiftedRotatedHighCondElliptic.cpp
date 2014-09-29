@@ -25,8 +25,8 @@
 // Fixed (class) parameters
 const string F03ShiftedRotatedHighCondElliptic::FUNCTION_NAME = "Shifted Rotated High Conditioned Elliptic Function";
 // TODO: Cambiar ruta
-const string F03ShiftedRotatedHighCondElliptic::DEFAULT_FILE_DATA = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/high_cond_elliptic_rot_data.txt";
-const string F03ShiftedRotatedHighCondElliptic::DEFAULT_FILE_MX_PREFIX = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/Elliptic_M_D";
+const string F03ShiftedRotatedHighCondElliptic::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/high_cond_elliptic_rot_data.txt";
+const string F03ShiftedRotatedHighCondElliptic::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/Elliptic_M_D";
 const string F03ShiftedRotatedHighCondElliptic::DEFAULT_FILE_MX_SUFFIX = ".txt";
 
 

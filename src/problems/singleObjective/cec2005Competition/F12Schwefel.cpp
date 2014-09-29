@@ -25,7 +25,7 @@
 // Fixed (class) parameters
 const string F12Schwefel::FUNCTION_NAME = "Schwefel's Problem 2.13";
 // TODO: Cambiar ruta
-const string F12Schwefel::DEFAULT_FILE_DATA = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/schwefel_213_data.txt";
+const string F12Schwefel::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/schwefel_213_data.txt";
 
 
 /**

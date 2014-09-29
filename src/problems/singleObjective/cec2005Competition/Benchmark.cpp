@@ -23,7 +23,7 @@
 
 //TODO: Cambiar ruta
 //const string Benchmark::DEFAULT_FILE_BIAS = Configuration.cec2005SupportDataDirectory + "/fbias_data.txt";
-const string Benchmark::DEFAULT_FILE_BIAS = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/fbias_data.txt";
+const string Benchmark::DEFAULT_FILE_BIAS = "../../data/cec2005CompetitionResources/supportData/fbias_data.txt";
 
 
 const int Benchmark::NUM_TEST_FUNC = 25;

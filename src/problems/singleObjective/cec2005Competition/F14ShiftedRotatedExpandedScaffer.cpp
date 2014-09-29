@@ -25,8 +25,8 @@
 // Fixed (class) parameters
 const string F14ShiftedRotatedExpandedScaffer::FUNCTION_NAME = "Shifted Rotated Expanded Scaffer's F6 Function";
 // TODO: Cambiar ruta
-const string F14ShiftedRotatedExpandedScaffer::DEFAULT_FILE_DATA = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/E_ScafferF6_func_data.txt";
-const string F14ShiftedRotatedExpandedScaffer::DEFAULT_FILE_MX_PREFIX = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/E_ScafferF6_M_D";
+const string F14ShiftedRotatedExpandedScaffer::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/E_ScafferF6_func_data.txt";
+const string F14ShiftedRotatedExpandedScaffer::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/E_ScafferF6_M_D";
 const string F14ShiftedRotatedExpandedScaffer::DEFAULT_FILE_MX_SUFFIX = ".txt";
 
 

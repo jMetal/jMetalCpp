@@ -25,8 +25,8 @@
 // Fixed (class) parameters
 const string F08ShiftedRotatedAckleyGlobalOptBound::FUNCTION_NAME = "Shifted Rotated Ackley's Function with Global Optimum on Bounds";
 // TODO: Cambiar ruta
-const string F08ShiftedRotatedAckleyGlobalOptBound::DEFAULT_FILE_DATA = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/ackley_func_data.txt";
-const string F08ShiftedRotatedAckleyGlobalOptBound::DEFAULT_FILE_MX_PREFIX = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/ackley_M_D";
+const string F08ShiftedRotatedAckleyGlobalOptBound::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/ackley_func_data.txt";
+const string F08ShiftedRotatedAckleyGlobalOptBound::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/ackley_M_D";
 const string F08ShiftedRotatedAckleyGlobalOptBound::DEFAULT_FILE_MX_SUFFIX = ".txt";
 
 

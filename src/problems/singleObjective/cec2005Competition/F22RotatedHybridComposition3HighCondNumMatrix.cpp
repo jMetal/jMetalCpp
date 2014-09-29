@@ -25,8 +25,8 @@
 // Fixed (class) parameters
 const string F22RotatedHybridComposition3HighCondNumMatrix::FUNCTION_NAME = "Rotated Hybrid Composition Function 3 with High Condition Number Matrix";
 // TODO: Cambiar ruta
-const string F22RotatedHybridComposition3HighCondNumMatrix::DEFAULT_FILE_DATA = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/hybrid_func3_data.txt";
-const string F22RotatedHybridComposition3HighCondNumMatrix::DEFAULT_FILE_MX_PREFIX = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/hybrid_func3_HM_D";
+const string F22RotatedHybridComposition3HighCondNumMatrix::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/hybrid_func3_data.txt";
+const string F22RotatedHybridComposition3HighCondNumMatrix::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/hybrid_func3_HM_D";
 const string F22RotatedHybridComposition3HighCondNumMatrix::DEFAULT_FILE_MX_SUFFIX = ".txt";
 
 const double F22RotatedHybridComposition3HighCondNumMatrix::m_sigma[NUM_FUNC] = {

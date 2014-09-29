@@ -25,8 +25,8 @@
 // Fixed (class) parameters
 const string F11ShiftedRotatedWeierstrass::FUNCTION_NAME = "Shifted Rotated Weierstrass Function";
 // TODO: Cambiar ruta
-const string F11ShiftedRotatedWeierstrass::DEFAULT_FILE_DATA = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/weierstrass_data.txt";
-const string F11ShiftedRotatedWeierstrass::DEFAULT_FILE_MX_PREFIX = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/weierstrass_M_D";
+const string F11ShiftedRotatedWeierstrass::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/weierstrass_data.txt";
+const string F11ShiftedRotatedWeierstrass::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/weierstrass_M_D";
 const string F11ShiftedRotatedWeierstrass::DEFAULT_FILE_MX_SUFFIX = ".txt";
 
 const int F11ShiftedRotatedWeierstrass::Kmax = 20;

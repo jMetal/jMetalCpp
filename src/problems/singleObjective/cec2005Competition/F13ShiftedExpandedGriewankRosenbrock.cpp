@@ -25,7 +25,7 @@
 // Fixed (class) parameters
 const string F13ShiftedExpandedGriewankRosenbrock::FUNCTION_NAME = "Shifted Expanded Griewank's plus Rosenbrock's Function";
 // TODO: Cambiar ruta
-const string F13ShiftedExpandedGriewankRosenbrock::DEFAULT_FILE_DATA = "/Users/esteban/Documents/git/jmetalcpp/data/cec2005CompetitionResources/supportData/EF8F2_func_data.txt";
+const string F13ShiftedExpandedGriewankRosenbrock::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/EF8F2_func_data.txt";
 
 
 /**
