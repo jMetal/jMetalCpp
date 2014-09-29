@@ -52,6 +52,8 @@
 #include <F21RotatedHybridComposition3.h>
 #include <F22RotatedHybridComposition3HighCondNumMatrix.h>
 #include <F23NoncontinuousRotatedHybridComposition3.h>
+#include <F24RotatedHybridComposition4.h>
+#include <F25RotatedHybridComposition4Bound.h>
 #include <HCJob.h>
 #include <TestFunc.h>
 
@@ -90,6 +92,7 @@ public:
 
   // Basic functions
   static double sphere(double * x, int length);
+  static double sphere_noise(double * x, int length);
   static double schwefel_102(double * x, int length);
   static double rosenbrock(double * x, int length);
   static double F2(double x, double y);
@@ -98,12 +101,16 @@ public:
   static double ackley(double * x, int length);
   static double myRound(double x);
   static double myXRound(double x, double o);
+  static double myXRound(double x);
   static double rastrigin(double * x, int length);
+  static double rastriginNonCont(double * x, int length);
   static double weierstrass(double * x, int length);
   static double weierstrass(double * x, int length, double a, double b, int Kmax);
   static double F8F2(double * x, int length);
   static double ScafferF6(double x, double y);
   static double EScafferF6(double * x, int length);
+  static double EScafferF6NonCont(double * x, int length);
+  static double elliptic(double* x, int length);
   static double hybrid_composition(double * x, HCJob * job, int length);
 
   // Elementary operations

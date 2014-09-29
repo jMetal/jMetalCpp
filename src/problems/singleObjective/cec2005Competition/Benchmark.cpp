@@ -135,6 +135,12 @@ TestFunc * Benchmark::testFunctionFactory(int func_num, int dimension) {
     case 23:
       return new F23NoncontinuousRotatedHybridComposition3(dimension, m_biases[func_num-1]);
       break;
+    case 24:
+      return new F24RotatedHybridComposition4(dimension, m_biases[func_num-1]);
+      break;
+    case 25:
+      return new F25RotatedHybridComposition4Bound(dimension, m_biases[func_num-1]);
+      break;
 
     default:
       cerr << "Incorrect number of function. Expected an integer between " <<
@@ -152,6 +158,21 @@ double Benchmark::sphere(double * x, int length) {
      sum += x[i] * x[i];
    }
    return sum;
+}
+
+/**
+ * Sphere function with noise
+ */
+double Benchmark::sphere_noise(double * x, int length) {
+  double sum = 0.0;
+  for (int i = 0; i < length; i++) {
+    sum += x[i] * x[i];
+  }
+  // NOISE
+  // Comment the next line to remove the noise
+  sum *= (1.0 + 0.1 * fabs(dist(e2)));
+
+  return (sum);
 }
 
 /**
@@ -236,6 +257,10 @@ double Benchmark::myRound(double x) {
 double Benchmark::myXRound(double x, double o) {
   return ((fabs(x - o) < 0.5) ? x : (myRound(2.0 * x) / 2.0));
 }
+// 2. "o" is not provided
+double Benchmark::myXRound(double x) {
+  return ((fabs(x) < 0.5) ? x : (myRound(2.0 * x) / 2.0));
+}
 
 /**
  * Rastrigin's function
@@ -247,6 +272,20 @@ double Benchmark::rastrigin(double * x, int length) {
   }
   return sum;
 }
+
+/**
+ * Non-Continuous Rastrigin's function
+ */
+double Benchmark::rastriginNonCont(double * x, int length) {
+  double sum = 0.0;
+  double currX;
+  for (int i = 0; i < length; i++) {
+    currX = myXRound(x[i]);
+    sum += (currX * currX) - (10.0 * cos(PIx2 * currX)) + 10.0;
+  }
+  return (sum);
+}
+
 
 /**
  * Shift
@@ -313,6 +352,36 @@ double Benchmark::EScafferF6(double * x, int length) {
     sum += ScafferF6(x[i-1], x[i]);
   }
   sum += ScafferF6(x[length-1], x[0]);
+  return (sum);
+}
+
+/**
+ * Non-Continuous Expanded Scaffer's F6 function
+ */
+double Benchmark::EScafferF6NonCont(double * x, int length) {
+  double sum = 0.0;
+  double prevX, currX;
+  currX = myXRound(x[0]);
+  for (int i = 1; i < length; i++) {
+    prevX = currX;
+    currX = myXRound(x[i]);
+    sum += ScafferF6(prevX, currX);
+  }
+  prevX = currX;
+  currX = myXRound(x[0]);
+  sum += ScafferF6(prevX, currX);
+  return (sum);
+}
+
+/**
+ * Elliptic
+ */
+double Benchmark::elliptic(double * x, int length) {
+  double sum = 0.0;
+  double a = 1e6;
+  for (int i = 0; i < length; i++) {
+    sum += pow(a, (((double )i)/((double )(length-1)))) * x[i] * x[i];
+  }
   return (sum);
 }
 
