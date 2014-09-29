@@ -12,7 +12,7 @@ TABLE OF CONTENTS
 2. Installing jMetalCpp
 3. Executing jMetalCpp
 4. Choosing a problem
-5. Configuring a problem
+5. Configuring a problem (UPDATED)
 6. Calculating quality indicators
 7. Advanced: Building a Experiment
   7.1. Executing a experiment
@@ -23,6 +23,10 @@ TABLE OF CONTENTS
 =======================================================================================
 0. Updates (NEW)
 =======================================================================================
+
+Version 1.6:
+  - Added new algorithms: OMOPSO, PAES, SMPSOhv, StandardPSO2007 and StandardPSO2011
+  - Added CEC 2005 problems
 
 Version 1.5:
   - Added new algorithms: SMS-EMOA, ssNSGA-II, MOEA/D and CMA-ES.
@@ -48,7 +52,7 @@ Version 0.1:
 =======================================================================================
 
 jMetalCpp has been developed in Unix machines (Ubuntu and MacOS X) as well as in
-Windows (MinGW) using the G++ compiler. The make utility has been used to compile the
+Windows making use of Cygwin. The make utility has been used to compile the
 software package.
 
 From version 1.5, it is mandatory to use a C++ compilator with C++11 support. This is
@@ -85,12 +89,14 @@ The following multi-objective metaheuristics are provided in this version of jMe
   Algorithm                                   Command
   ---------------------------------------------------------
   NSGA-II                                     NSGAII_main
-  ssNSGA-II (NEW)                             ssNSGAII_main
+  ssNSGA-II                                   ssNSGAII_main
   GDE3                                        GDE3_main
   SMPSO                                       SMPSO_main
-  PAES                                        PAES_main
-  SMS-EMOA (NEW)                              SMSEMOA_main
-  MOEA/D (NEW)                                MOEAD_main
+  SMPSOhv (NEW)                               SMPSOhv_main
+  OMOPSO (NEW)                                OMOPSO_main
+  PAES (NEW)                                  PAES_main
+  SMS-EMOA                                    SMSEMOA_main
+  MOEA/D                                      MOEAD_main
 	
 Additionally, we include single-objective variants of these techniques:
 
@@ -99,8 +105,10 @@ Additionally, we include single-objective variants of these techniques:
   DE (Differential Evolution)                 DE_main
   gGA (Generational Genetic Algorithm)        gGA_main
   PSO (Particle Swarm Optimization)           PSO_main
+  PSO (Standard 2007) (NEW)                   StandardPSO2007_main
+  PSO (Standard 2011) (NEW)                   StandardPSO2011_main
   ssGA (Steady-state Genetic Algorithm)       ssGA_main
-  CMA-ES (NEW)                                CMAES_main
+  CMA-ES                                      CMAES_main
 	
 To execute one metaheuristic just use its associated command. For example, to execute
 GDE3 simply type the following command:
@@ -127,8 +135,8 @@ The following multi-objective problems are currently included:
   - OneMax
   - Schaffer
   - Sphere
-  - Srinivas (NEW)
-  - Tanaka (NEW)
+  - Srinivas
+  - Tanaka
   - DTLZ1
   - DTLZ2
   - DTLZ3
@@ -155,15 +163,16 @@ The following multi-objective problems are currently included:
 The list of single-objective problems currently is composed of:
   - Griewank
   - OneMax
-  - Rastrigin (NEW)
-  - Rosenbrock (NEW)
+  - Rastrigin
+  - Rosenbrock
   - Sphere
+  - CEC2005
 
 =======================================================================================
 
 
 =======================================================================================
-5. Configuring a problem
+5. Configuring a problem (UPDATED)
 =======================================================================================
 
 When you select a problem to solve, you can configure some problem parameters passing
@@ -222,6 +231,23 @@ If you intend to modify the default parameters of the DTLZ5 problem with ten var
 and two objectives, the following command must be executed:
 
 	%./SMPSO_main DTLZ5 Real 10 2
+	
+The CEC 2005 problems are an exception, as the order of the parameters change if you
+are setting one, two or the three of them.
+
+ Problem        Parameter 1         Parameter 2             Parameter 3
+--------------------------------------------------------------------------------------
+ CEC2005        Problem number
+ CEC2005        Solution type       Problem number
+ CEC2005        Solution type       Problem number          Number of variables
+ 
+ The <problem number> variable accepts values from 1 to 25. The default values for
+ <Solution type> and <Number of variables> are "Real" and 10.
+ Examples:
+ 
+ 	%./gGA_main CEC2005 1
+ 	%./gGA_main CEC2005 Real 1
+ 	%./gGA_main CEC2005 Real 1 20
 
 =======================================================================================
 
