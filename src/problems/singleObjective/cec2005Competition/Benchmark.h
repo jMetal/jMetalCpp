@@ -41,7 +41,7 @@
 #include <F10ShiftedRotatedRastrigin.h>
 #include <F11ShiftedRotatedWeierstrass.h>
 #include <F12Schwefel.h>
-//#include <F13ShiftedExpandedGriewankRosenbrock.h>
+#include <F13ShiftedExpandedGriewankRosenbrock.h>
 #include <F14ShiftedRotatedExpandedScaffer.h>
 #include <F15HybridComposition1.h>
 #include <F16RotatedHybridComposition1.h>
@@ -50,10 +50,16 @@
 #include <F19RotatedHybridComposition2NarrowBasinGlobalOpt.h>
 #include <F20RotatedHybridComposition2GlobalOptBound.h>
 #include <F21RotatedHybridComposition3.h>
+#include <F22RotatedHybridComposition3HighCondNumMatrix.h>
+#include <F23NoncontinuousRotatedHybridComposition3.h>
 #include <HCJob.h>
 #include <TestFunc.h>
 
 using namespace std;
+
+template <typename T> int sgn(T val) {
+    return (T(0) < val) - (val < T(0));
+}
 
 class Benchmark {
 
@@ -90,6 +96,8 @@ public:
   static double griewank(double * x, int length);
   static double F8(double x);
   static double ackley(double * x, int length);
+  static double myRound(double x);
+  static double myXRound(double x, double o);
   static double rastrigin(double * x, int length);
   static double weierstrass(double * x, int length);
   static double weierstrass(double * x, int length, double a, double b, int Kmax);

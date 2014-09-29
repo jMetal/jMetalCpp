@@ -102,11 +102,9 @@ TestFunc * Benchmark::testFunctionFactory(int func_num, int dimension) {
     case 12:
       return new F12Schwefel(dimension, m_biases[func_num-1]);
       break;
-      /*
     case 13:
       return new F13ShiftedExpandedGriewankRosenbrock(dimension, m_biases[func_num-1]);
       break;
-      */
     case 14:
       return new F14ShiftedRotatedExpandedScaffer(dimension, m_biases[func_num-1]);
       break;
@@ -130,6 +128,12 @@ TestFunc * Benchmark::testFunctionFactory(int func_num, int dimension) {
       break;
     case 21:
       return new F21RotatedHybridComposition3(dimension, m_biases[func_num-1]);
+      break;
+    case 22:
+      return new F22RotatedHybridComposition3HighCondNumMatrix(dimension, m_biases[func_num-1]);
+      break;
+    case 23:
+      return new F23NoncontinuousRotatedHybridComposition3(dimension, m_biases[func_num-1]);
       break;
 
     default:
@@ -219,6 +223,18 @@ double Benchmark::ackley(double * x, int length) {
     sum2 += (cos(PIx2 * x[i]));
   }
   return (-20.0 * exp(-0.2 * sqrt(sum1 / ((double )length))) - exp(sum2 / ((double )length)) + 20.0 + exp(1));
+}
+
+/**
+ * Round function
+ */
+// 0. Use the Matlab version for rounding numbers
+double Benchmark::myRound(double x) {
+  return (sgn(x) * round(fabs(x)));
+}
+// 1. "o" is provided
+double Benchmark::myXRound(double x, double o) {
+  return ((fabs(x - o) < 0.5) ? x : (myRound(2.0 * x) / 2.0));
 }
 
 /**
