@@ -27,6 +27,7 @@
 #include <PseudoRandom.h>
 
 #include <vector>
+#include <algorithm>
 //#include <list>
 
 using namespace std;
