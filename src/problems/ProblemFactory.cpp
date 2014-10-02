@@ -233,7 +233,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv) {
     else if (argc==4)
       return new LZ09_F2(argv[0], atoi(argv[1]), atoi(argv[2]), atoi(argv[3]));
     else {
-      cerr << "Incorrect number of arguments for LZ09_F1 problem." << endl;
+      cerr << "Incorrect number of arguments for LZ09_F2 problem." << endl;
       exit(-1);
     }
   } else if (strcmp(name, "LZ09_F3")==0) { // LZ09_F3
@@ -248,7 +248,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv) {
     else if (argc==4)
       return new LZ09_F3(argv[0], atoi(argv[1]), atoi(argv[2]), atoi(argv[3]));
     else {
-      cerr << "Incorrect number of arguments for LZ09_F1 problem." << endl;
+      cerr << "Incorrect number of arguments for LZ09_F3 problem." << endl;
       exit(-1);
     }
   } else if (strcmp(name, "LZ09_F4")==0) { // LZ09_F4
@@ -263,7 +263,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv) {
     else if (argc==4)
       return new LZ09_F4(argv[0], atoi(argv[1]), atoi(argv[2]), atoi(argv[3]));
     else {
-      cerr << "Incorrect number of arguments for LZ09_F1 problem." << endl;
+      cerr << "Incorrect number of arguments for LZ09_F4 problem." << endl;
       exit(-1);
     }
   } else if (strcmp(name, "LZ09_F5")==0) { // LZ09_F5
@@ -278,7 +278,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv) {
     else if (argc==4)
       return new LZ09_F5(argv[0], atoi(argv[1]), atoi(argv[2]), atoi(argv[3]));
     else {
-      cerr << "Incorrect number of arguments for LZ09_F1 problem." << endl;
+      cerr << "Incorrect number of arguments for LZ09_F5 problem." << endl;
       exit(-1);
     }
   } else if (strcmp(name, "LZ09_F6")==0) { // LZ09_F6
@@ -293,7 +293,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv) {
     else if (argc==4)
       return new LZ09_F6(argv[0], atoi(argv[1]), atoi(argv[2]), atoi(argv[3]));
     else {
-      cerr << "Incorrect number of arguments for LZ09_F1 problem." << endl;
+      cerr << "Incorrect number of arguments for LZ09_F6 problem." << endl;
       exit(-1);
     }
   } else if (strcmp(name, "LZ09_F7")==0) { // LZ09_F7
@@ -308,7 +308,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv) {
     else if (argc==4)
       return new LZ09_F7(argv[0], atoi(argv[1]), atoi(argv[2]), atoi(argv[3]));
     else {
-      cerr << "Incorrect number of arguments for LZ09_F1 problem." << endl;
+      cerr << "Incorrect number of arguments for LZ09_F7 problem." << endl;
       exit(-1);
     }
   } else if (strcmp(name, "LZ09_F8")==0) { // LZ09_F8
@@ -323,7 +323,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv) {
     else if (argc==4)
       return new LZ09_F8(argv[0], atoi(argv[1]), atoi(argv[2]), atoi(argv[3]));
     else {
-      cerr << "Incorrect number of arguments for LZ09_F1 problem." << endl;
+      cerr << "Incorrect number of arguments for LZ09_F8 problem." << endl;
       exit(-1);
     }
   } else if (strcmp(name, "LZ09_F9")==0) { // LZ09_F9
@@ -338,9 +338,10 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv) {
     else if (argc==4)
       return new LZ09_F9(argv[0], atoi(argv[1]), atoi(argv[2]), atoi(argv[3]));
     else {
-      cerr << "Incorrect number of arguments for LZ09_F1 problem." << endl;
+      cerr << "Incorrect number of arguments for LZ09_F9 problem." << endl;
       exit(-1);
     }
+
   } else if (strcmp(name, "OneMax")==0) { // OneMax
     if (argc==0)
       return new OneMax(400);
