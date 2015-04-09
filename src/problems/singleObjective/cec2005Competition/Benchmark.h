@@ -23,7 +23,7 @@
 #define __BENCHMARK__
 
 #include <iostream>
-#include <Math.h>
+#include <math.h>
 #include <fstream>
 #include <random>
 #include <sstream>
