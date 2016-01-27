@@ -37,6 +37,9 @@
 
 
 class MOCHC : public Algorithm {
+
+	bool equalsIndividuals(Solution &s1, Solution & s2);
+	bool exist(Solution &s1, SolutionSet &set2);
 	bool equals(SolutionSet& set1, SolutionSet& set2);
 	int hammingDistance(Solution &sol1, Solution& sol2);
 	SolutionSet *rankingAndCrowdingSelection(SolutionSet *sol,int size);

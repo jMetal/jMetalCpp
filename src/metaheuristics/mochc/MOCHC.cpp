@@ -20,22 +20,40 @@
 //
 #include <MOCHC.h>
 
-bool MOCHC::equals(SolutionSet & set1, SolutionSet & set2) {
-	for (int i = 0; i < set1.size(); i++) {
-		for (int j = 0; j < set2.size(); j++) {
-			Solution *s1 = set1.get(i);
-			Solution *s2 = set2.get(j);
-			for (int var = 0; var < s1->getNumberOfVariables(); var++) {
-				Binary *b1, *b2;
-				b1 = (Binary *)s1->getDecisionVariables()[var];
-				b2 = (Binary *)s2->getDecisionVariables()[var];
-				for (int bit = 0; bit < b1->getNumberOfBits(); bit++) {
-					if (b1->getIth(bit)!=b2->getIth(bit)) {
-						return false;
-					}
-				}
+bool MOCHC::equalsIndividuals(Solution & s1, Solution & s2) {
+	
+	for (int var = 0; var < s1.getNumberOfVariables(); var++) {
+		Binary *b1, *b2;
+		b1 = (Binary *)s1.getDecisionVariables()[var];
+		b2 = (Binary *)s2.getDecisionVariables()[var];
+		bool found = true;
+		for (int bit = 0; bit < b1->getNumberOfBits(); bit++) {		
+			if (b1->getIth(bit)!=b2->getIth(bit)) {
+				return false;
 			}
 		}
+	}					
+					
+	return true;
+}
+
+bool MOCHC::exist(Solution & s1, SolutionSet & set2) {
+	for (int i = 0; i < set2.size(); i++) {
+		if (equalsIndividuals(s1,*set2.get(i)))
+			return true;
+	}
+	return false;
+}
+
+
+bool MOCHC::equals(SolutionSet & set1, SolutionSet & set2) {
+
+	if (set1.size() != set2.size())
+		return false;
+
+	for (int i = 0; i < set1.size(); i++) {
+		if (!exist(*set1.get(i),set2))
+			return false;
 	}
 	return true;
 } // returns the equal
@@ -157,6 +175,8 @@ SolutionSet *MOCHC::execute() {
 	size += binaryVar->getNumberOfBits();
   } 
   minimumDistance = (int) std::floor(initialConvergenceCount*size);
+  std::cout << minimumDistance << std::endl;
+  std::cout << convergenceValue << std::endl;
 
   // Create the initial solutionSet
   Solution * newSolution;
@@ -195,6 +215,7 @@ SolutionSet *MOCHC::execute() {
 	newPopulation = rankingAndCrowdingSelection(join,populationSize);
 	delete join;
         if (equals(*population,*newPopulation)) {
+		std::cout << "populations are equals" << std::endl;
 		minimumDistance--;
 	}   
 
