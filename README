@@ -7,12 +7,12 @@
 =======================================================================================
 TABLE OF CONTENTS
 =======================================================================================
-0. Updates (NEW)
-1. Requirements (UPDATED)
+0. Updates
+1. Requirements
 2. Installing jMetalCpp
 3. Executing jMetalCpp
 4. Choosing a problem
-5. Configuring a problem (UPDATED)
+5. Configuring a problem
 6. Calculating quality indicators
 7. Advanced: Building a Experiment
   7.1. Executing a experiment
@@ -21,8 +21,12 @@ TABLE OF CONTENTS
 
 
 =======================================================================================
-0. Updates (NEW)
+0. Updates
 =======================================================================================
+
+Version 1.7:
+  - Added a new algorithm: MOCH
+  Expect new algorithms soon...
 
 Version 1.6:
   - Added new algorithms: OMOPSO, PAES, SMPSOhv, StandardPSO2007 and StandardPSO2011
@@ -48,7 +52,7 @@ Version 0.1:
 
 
 =======================================================================================
-1. Requirements (UPDATED)
+1. Requirements
 =======================================================================================
 
 jMetalCpp has been developed in Unix machines (Ubuntu and MacOS X) as well as in
@@ -172,7 +176,7 @@ The list of single-objective problems currently is composed of:
 
 
 =======================================================================================
-5. Configuring a problem (UPDATED)
+5. Configuring a problem
 =======================================================================================
 
 When you select a problem to solve, you can configure some problem parameters passing
