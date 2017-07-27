@@ -27,7 +27,7 @@
  */
 Binary::Binary()
 {
-    bits_ = NULL ;
+    bits_ = nullptr ;
     numberOfBits_ = -1 ;
 } //Binary
 

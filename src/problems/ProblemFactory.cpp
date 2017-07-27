@@ -28,7 +28,7 @@
  */
 Problem * ProblemFactory::getProblem(char * name)
 {
-    return getProblem(name, 0, NULL);
+    return getProblem(name, 0, nullptr);
 }
 
 
@@ -42,7 +42,7 @@ Problem * ProblemFactory::getProblem(int argc, char ** argv)
 {
     if (argc==2)
     {
-        return getProblem(argv[1], 0, NULL);
+        return getProblem(argv[1], 0, nullptr);
     }
     else if (argc>2)
     {

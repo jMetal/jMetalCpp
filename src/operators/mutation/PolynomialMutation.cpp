@@ -35,11 +35,11 @@ const double PolynomialMutation::eta_m_ = ETA_M_DEFAULT_;
 PolynomialMutation::PolynomialMutation(map<string, void *> parameters)
     : Mutation(parameters)
 {
-    // TODO: mutationProbability_ = NULL;
+    // TODO: mutationProbability_ = nullptr;
     distributionIndex_ = eta_m_;
-    if (parameters["probability"] != NULL)
+    if (parameters["probability"] != nullptr)
         mutationProbability_ = *(double *) parameters["probability"];
-    if (parameters["distributionIndex"] != NULL)
+    if (parameters["distributionIndex"] != nullptr)
         distributionIndex_ = *(double *) parameters["distributionIndex"];
 } // PolynomialMutation
 

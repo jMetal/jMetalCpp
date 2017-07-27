@@ -36,11 +36,11 @@ const string UniformMutation::VALID_TYPES[] = {"Real", "ArrayReal"};
 UniformMutation::UniformMutation(map<string, void *> parameters)
     : Mutation(parameters)
 {
-    if (parameters["probability"] != NULL)
+    if (parameters["probability"] != nullptr)
     {
         mutationProbability_ = *(double *) parameters["probability"];
     }
-    if (parameters["perturbation"] != NULL)
+    if (parameters["perturbation"] != nullptr)
     {
         perturbation_ = *(double *) parameters["perturbation"];
     }

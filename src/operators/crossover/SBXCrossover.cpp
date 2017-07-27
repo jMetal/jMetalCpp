@@ -41,11 +41,11 @@ const double SBXCrossover::ETA_C_DEFAULT_ = 20.0;
 SBXCrossover::SBXCrossover(map<string, void *> parameters)
     : Crossover(parameters)
 {
-    //TODO: crossoverProbability_ = NULL;
+    //TODO: crossoverProbability_ = nullptr;
     distributionIndex_ = ETA_C_DEFAULT_;
-    if (parameters["probability"] != NULL)
+    if (parameters["probability"] != nullptr)
         crossoverProbability_ = *(double *)parameters["probability"];
-    if (parameters["distributionIndex"] != NULL)
+    if (parameters["distributionIndex"] != nullptr)
         distributionIndex_ = *(double *)parameters["distributionIndex"];
 } // SBXCrossover
 
@@ -68,7 +68,7 @@ Solution ** SBXCrossover::doCrossover(double probability, Solution *parent1, Sol
 
     Solution** offSpring = new Solution*[2];
 
-    if (offSpring == NULL)
+    if (offSpring == nullptr)
     {
         cout << "Error grave: Impossible reserve memory for allocating new solutions when performing SBXCrossover " << endl;
         exit(-1);

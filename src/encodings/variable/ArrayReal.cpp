@@ -27,9 +27,9 @@
  */
 ArrayReal::ArrayReal()
 {
-    problem_ = NULL;
+    problem_ = nullptr;
     size_   = 0;
-    array_ = NULL;
+    array_ = nullptr;
 } // Constructor
 
 

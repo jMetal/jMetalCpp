@@ -52,9 +52,9 @@ CrowdingComparator::~CrowdingComparator()
 int CrowdingComparator::compare(void *o1, void *o2)
 {
 
-    if (o1 == NULL)
+    if (o1 == nullptr)
         return 1;
-    else if (o2 == NULL)
+    else if (o2 == nullptr)
         return -1;
 
     int flagComparatorRank = comparator->compare(o1,o2);

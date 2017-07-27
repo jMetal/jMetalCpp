@@ -36,14 +36,14 @@ Griewank::Griewank(string solutionType, int numberOfVariables)
     problemName_ 				 = "Griewank";
 
     lowerLimit_ = new double[numberOfVariables_];
-    if (lowerLimit_ == NULL)
+    if (lowerLimit_ == nullptr)
     {
         cout << "Griewank::Griewank. Error reserving memory for storing the array of lower limits" << endl;
         exit(-1) ;
     }	// if
 
     upperLimit_ = new double[numberOfVariables_];
-    if (upperLimit_ == NULL)
+    if (upperLimit_ == nullptr)
     {
         cout << "Griewank::Griewank. Error reserving memory for storing the array of upper limits" << endl;
         exit(-1) ;

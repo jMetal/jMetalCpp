@@ -31,8 +31,8 @@ HUXCrossover::HUXCrossover(map<string, void *> parameters)
     : Crossover(parameters)
 {
     crossoverProbability_ = 0.0 ;
-    //TODO: crossoverProbability_ = NULL;
-    if (parameters["probability"] != NULL)
+    //TODO: crossoverProbability_ = nullptr;
+    if (parameters["probability"] != nullptr)
         crossoverProbability_ = *(double *)parameters["probability"];
 } // SinglePointCrossover
 
@@ -49,7 +49,7 @@ Solution ** HUXCrossover::doCrossover(double probability, Solution *parent1, Sol
 
     Solution** offSpring = new Solution*[2];
 
-    if (offSpring == NULL)
+    if (offSpring == nullptr)
     {
         cout << "Error grave: Impossible reserve memory for allocating new solutions when performing SinglePointCrossover " << endl;
         exit(-1);

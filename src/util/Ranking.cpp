@@ -49,7 +49,7 @@ Ranking::Ranking (SolutionSet * solutionSet)
     // dominateMe[i] contains the number of solutions dominating i
     int * dominateMe = new int[solutionSet_->size()];
 
-    if (dominateMe == NULL)
+    if (dominateMe == nullptr)
     {
         cout << "Fatal Problem: Cannot reserve memory in class Ranking" << endl;
         exit(-1);
@@ -128,7 +128,7 @@ Ranking::Ranking (SolutionSet * solutionSet)
     } // while
 
     ranking_ = new SolutionSet*[i];
-    if (ranking_ == NULL)
+    if (ranking_ == nullptr)
     {
         cout << "Fatal Error: Impossible to reserve memory in Ranking" << endl;
         exit(-1);

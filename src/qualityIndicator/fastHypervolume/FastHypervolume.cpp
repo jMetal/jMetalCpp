@@ -27,7 +27,7 @@
  */
 FastHypervolume::FastHypervolume()
 {
-    referencePoint_ = NULL;
+    referencePoint_ = nullptr;
     numberOfObjectives_ = 0;
 } // FastHypervolume
 
@@ -37,7 +37,7 @@ FastHypervolume::FastHypervolume()
  */
 FastHypervolume::FastHypervolume(double offset)
 {
-    referencePoint_ = NULL;
+    referencePoint_ = nullptr;
     numberOfObjectives_ = 0;
     offset_ = offset;
 } // FastHypervolume

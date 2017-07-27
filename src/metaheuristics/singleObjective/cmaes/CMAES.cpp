@@ -33,7 +33,7 @@
  */
 CMAES::CMAES(Problem *problem) : Algorithm(problem)
 {
-    bestSolutionEver = NULL;
+    bestSolutionEver = nullptr;
 } // CMAES
 
 
@@ -333,11 +333,11 @@ void CMAES::storeBest(Comparator * comparator)
 {
 
     Solution * bestInPopulation = new Solution(population_->best(comparator));
-    if ((bestSolutionEver == NULL) ||
+    if ((bestSolutionEver == nullptr) ||
             (bestSolutionEver->getObjective(0)
              > bestInPopulation->getObjective(0)))
     {
-        if (bestSolutionEver != NULL)
+        if (bestSolutionEver != nullptr)
         {
             delete bestSolutionEver;
         }

@@ -32,13 +32,13 @@ Fonseca::Fonseca(string solutionType)
     problemName_         = "Fonseca";
 
     lowerLimit_ = new double[numberOfVariables_];
-    if (lowerLimit_ == NULL)
+    if (lowerLimit_ == nullptr)
     {
         cout << "Fonseca::Fonseca. Error reserving memory for storing the array of lower limits" << endl;
     } // if
 
     upperLimit_ = new double[numberOfVariables_];
-    if (upperLimit_ == NULL)
+    if (upperLimit_ == nullptr)
     {
         cout << "Fonseca::Fonseca. Error reserving memory for storing the array of upper limits" << endl;
         exit(-1) ;
@@ -93,14 +93,14 @@ void Fonseca::evaluate(Solution *solution)
     Variable **variables = solution->getDecisionVariables();
 
     fx = new double[numberOfObjectives_];
-    if (fx == NULL)
+    if (fx == nullptr)
     {
         cout << "Fonseca::evaluate: Error reserving memory for the function values array" << endl;
         exit(-1);
     } // if
 
     x = new double[numberOfVariables_];
-    if (x == NULL)
+    if (x == nullptr)
     {
         cout << "Fonseca::evaluate: Error reserving memory for the variable values array" << endl;
         exit(-1);

@@ -35,7 +35,7 @@
 BinaryTournament::BinaryTournament(map<string, void *> parameters)
     : Selection(parameters)
 {
-    if (parameters["comparator"] != NULL)
+    if (parameters["comparator"] != nullptr)
         comparator_ = (Comparator *) parameters["comparator"];
     else
         comparator_ = new DominanceComparator();

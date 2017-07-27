@@ -141,7 +141,7 @@ SolutionSet * GDE3::execute()
 
         int remain = populationSize;
         int index  = 0;
-        SolutionSet * front = NULL;
+        SolutionSet * front = nullptr;
         for (int i = 0; i < populationSize; i++)
         {
             delete population->get(i);

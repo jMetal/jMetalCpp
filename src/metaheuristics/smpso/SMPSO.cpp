@@ -113,18 +113,18 @@ void SMPSO::setAlgParams()
     void * ChVel1Ptr  = getInputParameter("ChVel1");
     void * ChVel2Ptr  = getInputParameter("ChVel2");
 
-    if (r1MaxPtr != NULL) r1Max_ = * (double *) r1MaxPtr;
-    if (r1MinPtr != NULL) r1Min_ = * (double *) r1MinPtr;
-    if (r2MaxPtr != NULL) r2Max_ = * (double *) r2MaxPtr;
-    if (r2MinPtr != NULL) r2Min_ = * (double *) r2MinPtr;
-    if (C1MaxPtr != NULL) C1Max_ = * (double *) C1MaxPtr;
-    if (C1MinPtr != NULL) C1Min_ = * (double *) C1MinPtr;
-    if (C2MaxPtr != NULL) C2Max_ = * (double *) C2MaxPtr;
-    if (C2MinPtr != NULL) C2Min_ = * (double *) C2MinPtr;
-    if (WMaxPtr != NULL) WMax_ = * (double *) WMaxPtr;
-    if (WMinPtr != NULL) WMin_ = * (double *) WMinPtr;
-    if (ChVel1Ptr != NULL) ChVel1_ = * (double *) ChVel1Ptr;
-    if (ChVel2Ptr != NULL) ChVel2_ = * (double *) ChVel2Ptr;
+    if (r1MaxPtr != nullptr) r1Max_ = * (double *) r1MaxPtr;
+    if (r1MinPtr != nullptr) r1Min_ = * (double *) r1MinPtr;
+    if (r2MaxPtr != nullptr) r2Max_ = * (double *) r2MaxPtr;
+    if (r2MinPtr != nullptr) r2Min_ = * (double *) r2MinPtr;
+    if (C1MaxPtr != nullptr) C1Max_ = * (double *) C1MaxPtr;
+    if (C1MinPtr != nullptr) C1Min_ = * (double *) C1MinPtr;
+    if (C2MaxPtr != nullptr) C2Max_ = * (double *) C2MaxPtr;
+    if (C2MinPtr != nullptr) C2Min_ = * (double *) C2MinPtr;
+    if (WMaxPtr != nullptr) WMax_ = * (double *) WMaxPtr;
+    if (WMinPtr != nullptr) WMin_ = * (double *) WMinPtr;
+    if (ChVel1Ptr != nullptr) ChVel1_ = * (double *) ChVel1Ptr;
+    if (ChVel2Ptr != nullptr) ChVel2_ = * (double *) ChVel2Ptr;
 
 } // setAlgParams
 

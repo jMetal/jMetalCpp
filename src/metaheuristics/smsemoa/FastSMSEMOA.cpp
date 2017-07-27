@@ -167,7 +167,7 @@ SolutionSet * FastSMSEMOA::execute()
         delete cd;
 
         // all but the worst are carried over to the survivor population
-        SolutionSet * front = NULL;
+        SolutionSet * front = nullptr;
         for (int i=0; i<population->size(); i++)
         {
             delete population->get(i);

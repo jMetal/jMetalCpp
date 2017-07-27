@@ -287,7 +287,7 @@ SolutionSet * PSO::execute()
     initParams();
 
     success_ = false;
-    globalBest_ =  NULL;
+    globalBest_ =  nullptr;
 
     //->Step 1 (and 3) Create the initial population and evaluate
     for (int i = 0; i < particlesSize_; i++)
@@ -296,9 +296,9 @@ SolutionSet * PSO::execute()
         problem_->evaluate(particle);
         evaluations_ ++;
         particles_->add(particle);
-        if ((globalBest_ == NULL) || (particle->getObjective(0) < globalBest_->getObjective(0)))
+        if ((globalBest_ == nullptr) || (particle->getObjective(0) < globalBest_->getObjective(0)))
         {
-            if (globalBest_!= NULL)
+            if (globalBest_!= nullptr)
             {
                 delete globalBest_;
             }

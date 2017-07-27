@@ -34,8 +34,8 @@
 BestSolutionSelection::BestSolutionSelection(map<string, void *> parameters)
     : Selection(parameters)
 {
-    comparator_ = NULL;
-    if (parameters["comparator"] != NULL)
+    comparator_ = nullptr;
+    if (parameters["comparator"] != nullptr)
     {
         comparator_ = (Comparator *) parameters["comparator"];
     }
@@ -54,7 +54,7 @@ void * BestSolutionSelection::execute(void * object)
 
     if (solutionSet->size() == 0)
     {
-        return NULL;
+        return nullptr;
     }
 
     int bestSolution = 0;

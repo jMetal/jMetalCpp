@@ -73,19 +73,19 @@ DifferentialEvolutionCrossover::DifferentialEvolutionCrossover(map<string, void 
     K_  = DEFAULT_K   ;
     DE_Variant_ = DEFAULT_DE_VARIANT ;
 
-    if (parameters["CR"] != NULL)
+    if (parameters["CR"] != nullptr)
     {
         CR_ = *(double *) parameters["CR"];
     }
-    if (parameters["F"] != NULL)
+    if (parameters["F"] != nullptr)
     {
         F_ = *(double *) parameters["F"];
     }
-    if (parameters["K"] != NULL)
+    if (parameters["K"] != nullptr)
     {
         K_ = *(double *) parameters["K"];
     }
-    if (parameters["DE_VARIANT"] != NULL)
+    if (parameters["DE_VARIANT"] != nullptr)
     {
         DE_Variant_ = *(string *) parameters["DE_VARIANT"];
     }

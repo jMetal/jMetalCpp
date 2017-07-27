@@ -36,15 +36,15 @@ const string NonUniformMutation::VALID_TYPES[] = {"Real", "ArrayReal"};
 NonUniformMutation::NonUniformMutation(map<string, void *> parameters)
     : Mutation(parameters)
 {
-    if (parameters["probability"] != NULL)
+    if (parameters["probability"] != nullptr)
     {
         mutationProbability_ = *(double *) parameters["probability"];
     }
-    if (parameters["perturbation"] != NULL)
+    if (parameters["perturbation"] != nullptr)
     {
         perturbation_ = *(double *) parameters["perturbation"];
     }
-    if (parameters["maxIterations"] != NULL)
+    if (parameters["maxIterations"] != nullptr)
     {
         maxIterations_ = *(int *) parameters["maxIterations"];
     }
@@ -120,7 +120,7 @@ void *NonUniformMutation::execute(void *object)
 {
     Solution *solution = (Solution *)object;
     // TODO: VALID_TYPES?
-    if (getParameter("currentIteration") != NULL)
+    if (getParameter("currentIteration") != nullptr)
     {
         currentIteration_ = *(int *) getParameter("currentIteration") ;
     }

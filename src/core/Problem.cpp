@@ -32,7 +32,7 @@ const int Problem::DEFAULT_PRECISSION = 16;
  */
 Problem::Problem()
 {
-    solutionType_ = NULL;
+    solutionType_ = nullptr;
 } // Problem
 
 
@@ -99,7 +99,7 @@ void Problem::setNumberOfObjectives(int numberOfObjectives)
  */
 double Problem::getLowerLimit(int i)
 {
-    if ((lowerLimit_ == NULL) || (i >= numberOfVariables_))
+    if ((lowerLimit_ == nullptr) || (i >= numberOfVariables_))
     {
         cout << "Error: lower limits have been not initialized or accessing to a variable out of range" << endl;
         // exit(-1);
@@ -115,7 +115,7 @@ double Problem::getLowerLimit(int i)
  */
 double Problem::getUpperLimit(int i)
 {
-    if ((upperLimit_ == NULL) || (i >= numberOfVariables_))
+    if ((upperLimit_ == nullptr) || (i >= numberOfVariables_))
     {
         cout << "Error: upper limits have been not initialized or accessing to a variable out of range" << endl;
         //exit(-1);
@@ -185,7 +185,7 @@ void Problem::setPrecision(int * precision)
  */
 int Problem::getLength(int var)
 {
-    if (length_ == NULL)
+    if (length_ == nullptr)
     {
         return DEFAULT_PRECISSION;
     }

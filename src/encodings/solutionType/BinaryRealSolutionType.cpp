@@ -42,7 +42,7 @@ Variable ** BinaryRealSolutionType::createVariables()
 
     for (int var = 0; var < problem_->getNumberOfVariables(); var++)
     {
-        if (problem_->getPrecision() == NULL)
+        if (problem_->getPrecision() == nullptr)
         {
             int * precision = new int[problem_->getNumberOfVariables()] ;
             for (int i = 0; i < problem_->getNumberOfVariables(); i++)

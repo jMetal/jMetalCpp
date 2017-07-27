@@ -30,7 +30,7 @@ BitFlipMutation::BitFlipMutation(map<string, void *> parameters)
     : Mutation(parameters)
 {
     mutationProbability_ = 0.0 ;
-    if (parameters["probability"] != NULL)
+    if (parameters["probability"] != nullptr)
         mutationProbability_ = *(double *) parameters["probability"];
 } // BitFlipMutation
 

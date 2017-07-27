@@ -48,9 +48,9 @@ EpsilonObjectiveComparator::EpsilonObjectiveComparator(int nObj, double eta) : C
 int EpsilonObjectiveComparator::compare(void *o1, void *o2)
 {
 
-    if (o1==NULL)
+    if (o1==nullptr)
         return 1;
-    else if (o2 == NULL)
+    else if (o2 == nullptr)
         return -1;
 
     double objetive1 = ((Solution *) o1)->getObjective(objective_);

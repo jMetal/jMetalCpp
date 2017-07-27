@@ -97,7 +97,7 @@ void ExperimentExecution::runExperiment(int numberOfThreads)
 
     //pthread_mutex_t mutex;
     mutex mtx;
-    //result = pthread_mutex_init(&mutex, NULL) ;
+    //result = pthread_mutex_init(&mutex, nullptr) ;
 //  if (result != 0) {
 //    perror("ERROR WHILE INITIALIZING THE MUTEX");
 //    exit(-1) ;
@@ -113,7 +113,7 @@ void ExperimentExecution::runExperiment(int numberOfThreads)
     {
         experiments_[i] = new RunExperiment(this, map_, i, numberOfThreads,
                                             problemList_.size(), i, &mtx);
-//    result = pthread_create(&p[i], NULL, executeRun, experiments_[i]);
+//    result = pthread_create(&p[i], nullptr, executeRun, experiments_[i]);
 //    if (result != 0) {
 //      perror("ERROR WHILE CREATING THREADS");
 //      exit(-1) ;
@@ -122,7 +122,7 @@ void ExperimentExecution::runExperiment(int numberOfThreads)
     }
 
 //  for (int i = 0; i < numberOfThreads; i++) {
-//    result = pthread_join(p[i], NULL) ;
+//    result = pthread_join(p[i], nullptr) ;
 //    cout << "Joined thread number " << (i+1) << "." <<endl;
 //    if (result != 0) {
 //      perror("ERROR WHILE MAKING THREAD JOIN");

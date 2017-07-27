@@ -41,7 +41,7 @@ BinaryTournament2::BinaryTournament2(map<string, void *> parameters)
     index_ = 0;
     a_ = new int[1]; // Initialized as dummy
     dominance_ = new DominanceComparator();
-    if (dominance_ == NULL)
+    if (dominance_ == nullptr)
     {
         cout << "BinaryTournament::BinaryTournament: error creating comparator" ;
         cout << endl ;

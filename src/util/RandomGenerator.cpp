@@ -33,7 +33,7 @@ using  namespace std;
 
 RandomGenerator::RandomGenerator()
 {
-    srand(time(NULL));
+    srand(time(nullptr));
     //srand(0);
     //cout << (unsigned)time(0) << endl;
     seed_ = ((double) rand() / (double) (RAND_MAX ));

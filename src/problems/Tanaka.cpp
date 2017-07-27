@@ -36,14 +36,14 @@ Tanaka::Tanaka(string solutionType)
     problemName_ 				 = "Tanaka";
 
     lowerLimit_ = new double[numberOfVariables_];
-    if (lowerLimit_ == NULL)
+    if (lowerLimit_ == nullptr)
     {
         cout << "Tanaka::Tanaka. Error reserving memory for storing the array of lower limits" << endl;
         exit(-1) ;
     }
 
     upperLimit_ = new double[numberOfVariables_];
-    if (upperLimit_ == NULL)
+    if (upperLimit_ == nullptr)
     {
         cout << "Tanaka::Tanaka. Error reserving memory for storing the array of upper limits" << endl;
         exit(-1) ;
@@ -92,7 +92,7 @@ void Tanaka::evaluate(Solution *solution)
     Variable **variables = solution->getDecisionVariables();
 
     double * fx = new double[numberOfObjectives_];
-    if (fx == NULL)
+    if (fx == nullptr)
     {
         cout << "Tanaka::evaluate: Error reserving memory while evaluating the problem" << endl;
         exit(-1);

@@ -44,14 +44,14 @@ Kursawe::Kursawe(string solutionType, int numberOfVariables)
     problemName_         = "Kursawe";
 
     lowerLimit_ = new double[numberOfVariables_];
-    if (lowerLimit_ == NULL)
+    if (lowerLimit_ == nullptr)
     {
         cout << "Impossible to reserve memory for storing the variable lower limits" << endl;
         exit(-1);
     }
 
     upperLimit_ = new double[numberOfVariables_];
-    if (upperLimit_ == NULL)
+    if (upperLimit_ == nullptr)
     {
         cout << "Impossible to reserve memory for storing the variable lower limits" << endl;
         exit(-1);
@@ -102,7 +102,7 @@ void Kursawe::evaluate(Solution *solution)
 
     double aux, xi, xj;                          // auxiliary variables
     double * fx = new double[2];                 // function values
-    if (fx == NULL)
+    if (fx == nullptr)
     {
         cout << "Error grave: Impossible to reserve memory while evaluating the problem" << endl;
         exit(-1);

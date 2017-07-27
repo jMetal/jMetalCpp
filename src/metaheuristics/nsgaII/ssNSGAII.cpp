@@ -128,7 +128,7 @@ SolutionSet * ssNSGAII::execute()
 
         int remain = populationSize;
         int index = 0;
-        SolutionSet * front = NULL;
+        SolutionSet * front = nullptr;
         for (int i=0; i<population->size(); i++)
         {
             delete population->get(i);
@@ -182,7 +182,7 @@ SolutionSet * ssNSGAII::execute()
         // by the algorithm to obtain a Pareto front with a hypervolume higher
         // than the hypervolume of the true Pareto front.
 // TODO:
-//    if ((indicators != NULL) &&
+//    if ((indicators != nullptr) &&
 //      (requiredEvaluations == 0)) {
 //      double HV = indicators.getHypervolume(population);
 //      if (HV >= (0.98 * indicators.getTrueParetoFrontHypervolume())) {

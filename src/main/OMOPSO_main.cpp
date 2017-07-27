@@ -50,7 +50,7 @@ int main(int argc, char ** argv)
 
     map<string, void *> parameters; // Operator parameters
 
-    indicators = NULL;
+    indicators = nullptr;
 
     if (argc>=2)
     {
@@ -106,7 +106,7 @@ int main(int argc, char ** argv)
     cout << "Objectives values have been written to file FUN" << endl;
     population->printObjectivesToFile("FUN");
 
-    if (indicators != NULL)
+    if (indicators != nullptr)
     {
         cout << "Quality indicators" << endl ;
         cout << "Hypervolume: " << indicators->getHypervolume(population) << endl;

@@ -30,19 +30,19 @@ using namespace std;
  * random generator which will be accesible throug this interface.
  **/
 
-RandomGenerator * PseudoRandom::randomGenerator_ = NULL ;
+RandomGenerator * PseudoRandom::randomGenerator_ = nullptr ;
 
 PseudoRandom::PseudoRandom()
 {
-    //randomGenerator_ = NULL ;
-    if (PseudoRandom::randomGenerator_ == NULL)
+    //randomGenerator_ = nullptr ;
+    if (PseudoRandom::randomGenerator_ == nullptr)
     {
         PseudoRandom::randomGenerator_ = new RandomGenerator();
     }
 }
 
 //static int PseudoRandom::randInt() {
-//    if (randomGenerator_ == NULL) {
+//    if (randomGenerator_ == nullptr) {
 //        new PseudoRandom();
 //    }
 //    return randomGenerator_->rando
@@ -50,7 +50,7 @@ PseudoRandom::PseudoRandom()
 
 double PseudoRandom::randDouble()
 {
-    if (PseudoRandom::randomGenerator_ == NULL)
+    if (PseudoRandom::randomGenerator_ == nullptr)
     {
         PseudoRandom::randomGenerator_ = new RandomGenerator();
     }
@@ -59,7 +59,7 @@ double PseudoRandom::randDouble()
 
 int PseudoRandom::randInt(int minBound, int maxBound)
 {
-    if (PseudoRandom::randomGenerator_ == NULL)
+    if (PseudoRandom::randomGenerator_ == nullptr)
     {
         PseudoRandom::randomGenerator_ = new RandomGenerator();
     }
@@ -68,7 +68,7 @@ int PseudoRandom::randInt(int minBound, int maxBound)
 
 double PseudoRandom::randDouble(double minBound, double maxBound)
 {
-    if (PseudoRandom::randomGenerator_ == NULL)
+    if (PseudoRandom::randomGenerator_ == nullptr)
     {
         PseudoRandom::randomGenerator_ = new RandomGenerator();
     }

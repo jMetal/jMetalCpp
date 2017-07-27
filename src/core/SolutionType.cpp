@@ -50,7 +50,7 @@ Variable ** SolutionType::copyVariables(Variable **vars)
     int var;
     Variable ** variables = new Variable*[numberOfVar];
 
-    if (variables == NULL)
+    if (variables == nullptr)
     {
         cout << "Error grave: Impossible to reserve memory for allocating a copy of variables" << endl;
         exit(-1);

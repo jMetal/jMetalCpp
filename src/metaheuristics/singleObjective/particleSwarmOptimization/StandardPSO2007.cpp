@@ -106,11 +106,11 @@ void StandardPSO2007::deleteParams()
 
 Solution * StandardPSO2007::getNeighborBest(int i)
 {
-    Solution * bestLocalBestSolution = NULL ;
+    Solution * bestLocalBestSolution = nullptr ;
 
     for (int index : neighborhood_->getNeighbors(i))
     {
-        if ((bestLocalBestSolution == NULL) || (bestLocalBestSolution->getObjective(0) > localBest_[index]->getObjective(0)))
+        if ((bestLocalBestSolution == nullptr) || (bestLocalBestSolution->getObjective(0) > localBest_[index]->getObjective(0)))
         {
             bestLocalBestSolution = localBest_[index] ;
         }

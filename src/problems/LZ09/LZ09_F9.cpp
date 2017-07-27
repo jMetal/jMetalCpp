@@ -37,7 +37,7 @@ LZ09_F9::LZ09_F9(string solutionType, int ptype, int dtype, int ltype)
                       ltype) ;
 
     lowerLimit_ = new double[numberOfVariables_];
-    if (lowerLimit_ == NULL)
+    if (lowerLimit_ == nullptr)
     {
         cout << "LZ09_F9::LZ09_F9: Error reserving memory for storing the "
              << "variable lower limits" << endl;
@@ -45,7 +45,7 @@ LZ09_F9::LZ09_F9(string solutionType, int ptype, int dtype, int ltype)
     }
 
     upperLimit_ = new double[numberOfVariables_];
-    if (upperLimit_ == NULL)
+    if (upperLimit_ == nullptr)
     {
         cout << "LZ09_F9::LZ09_F9: Error reserving  memory for storing the "
              << "variable lower limits" << endl;

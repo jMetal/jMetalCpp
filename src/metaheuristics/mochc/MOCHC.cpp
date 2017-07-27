@@ -91,7 +91,7 @@ SolutionSet *MOCHC::rankingAndCrowdingSelection(SolutionSet * pop, int size)
     Distance * distance = new Distance();
     int remain = size;
     int index = 0;
-    SolutionSet * front = NULL;
+    SolutionSet * front = nullptr;
 
     // Obtain the next front
     front = ranking->getSubfront(index);

@@ -133,7 +133,7 @@ SolutionSet * NSGAII::execute()
 
         int remain = populationSize;
         int index = 0;
-        SolutionSet * front = NULL;
+        SolutionSet * front = nullptr;
         for (int i=0; i<population->size(); i++)
         {
             delete population->get(i);
@@ -188,7 +188,7 @@ SolutionSet * NSGAII::execute()
         // of NSGA-II. In particular, it finds the number of evaluations required
         // by the algorithm to obtain a Pareto front with a hypervolume higher
         // than the hypervolume of the true Pareto front.
-//    if ((indicators != NULL) && (requiredEvaluations == 0)) {
+//    if ((indicators != nullptr) && (requiredEvaluations == 0)) {
 //      double HV = indicators->getHypervolume(population);
 //      if (HV >= (0.98 * indicators->getTrueParetoFrontHypervolume())) {
 //        requiredEvaluations = evaluations;

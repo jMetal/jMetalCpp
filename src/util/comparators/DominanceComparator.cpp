@@ -59,9 +59,9 @@ DominanceComparator::~DominanceComparator()
 int DominanceComparator::compare(void * o1, void * o2)
 {
 
-    if (o1==NULL)
+    if (o1==nullptr)
         return 1;
-    else if (o2 == NULL)
+    else if (o2 == nullptr)
         return -1;
 
     Solution * one = (Solution *) o1;

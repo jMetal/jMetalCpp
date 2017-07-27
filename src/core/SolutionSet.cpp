@@ -120,7 +120,7 @@ int SolutionSet::getMaxSize()
  */
 void SolutionSet::sort(Comparator * comparator)
 {
-    if (comparator == NULL)
+    if (comparator == nullptr)
     {
         cout << "Error. No criterium for compare exist" << endl;
         exit(-1);
@@ -184,7 +184,7 @@ Solution * SolutionSet::best(Comparator * comparator)
     int indexBest = this->indexBest(comparator);
     if (indexBest < 0)
     {
-        return NULL;
+        return nullptr;
     }
     else
     {
@@ -236,7 +236,7 @@ Solution * SolutionSet::worst(Comparator * comparator)
     int index = indexWorst(comparator);
     if (index < 0)
     {
-        return NULL;
+        return nullptr;
     }
     else
     {

@@ -30,14 +30,14 @@ ZDT3::ZDT3(string solutionType, int numberOfVariables)
     problemName_ 				 = "ZDT3";
 
     lowerLimit_ = new double[numberOfVariables_];//(double *)malloc(sizeof(double)*numberOfVariables);
-    if (lowerLimit_ == NULL)
+    if (lowerLimit_ == nullptr)
     {
         cout << "Impossible to reserve memory for storing the variable lower limits" << endl;
         exit(-1);
     }
 
     upperLimit_ = new double[numberOfVariables_];//(double *)malloc(sizeof(double)*numberOfVariables);
-    if (upperLimit_ == NULL)
+    if (upperLimit_ == nullptr)
     {
         cout << "Impossible to reserve memory for storing the variable lower limits" << endl;
         exit(-1);

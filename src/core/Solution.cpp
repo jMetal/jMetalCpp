@@ -29,15 +29,15 @@
  */
 Solution::Solution ()
 {
-    problem_ = NULL;
+    problem_ = nullptr;
     marked_ = false;
     overallConstraintViolation_ = 0.0;
     numberOfViolatedConstraints_ = 0;
     numberOfVariables_ = 0;
     numberOfObjectives_ = 0;
-    type_ = NULL;
-    variable_ = NULL;
-    objective_ = NULL;
+    type_ = nullptr;
+    variable_ = nullptr;
+    objective_ = nullptr;
     rank_ = 0;
 } //Solution
 
@@ -54,9 +54,9 @@ Solution::Solution (int numberOfObjectives)
     overallConstraintViolation_ = 0.0;
     numberOfObjectives_ = numberOfObjectives;
     numberOfVariables_ = 0;
-    variable_ = NULL;
+    variable_ = nullptr;
     objective_ = new double[numberOfObjectives_];
-    if (objective_ == NULL)
+    if (objective_ == nullptr)
     {
         cout << "ERROR GRAVE: Impossible to reserve memory for storing objectives in class Solution" << endl;
         exit(-1);
@@ -80,7 +80,7 @@ Solution::Solution (Problem *problem)
 
     // creating the objective vector
     objective_ = new double[numberOfObjectives_];
-    if (objective_ == NULL)
+    if (objective_ == nullptr)
     {
         cout << "ERROR GRAVE: Impossible to reserve memory for storing objectives in class Solution" << endl;
         exit(-1);
@@ -132,7 +132,7 @@ Solution::Solution (Solution *solution)
 
     // creating the objective vector
     objective_ = new double[numberOfObjectives_];
-    if (objective_ == NULL)
+    if (objective_ == nullptr)
     {
         cout << "ERROR GRAVE: Impossible to reserve memory for storing objectives in class Solution" << endl;
         exit(-1);
@@ -171,7 +171,7 @@ Solution::Solution (Solution *solution)
 Solution::~Solution()
 {
     delete[]objective_ ;
-    if (variable_ != NULL)
+    if (variable_ != nullptr)
         for (int i = 0; i < numberOfVariables_; i++)
             delete variable_[i] ;
     delete [] variable_ ;

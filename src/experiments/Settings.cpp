@@ -47,6 +47,6 @@ Settings::~Settings() { /* do nothing */ }
  */
 Algorithm * Settings::configure(map<string, void *> settings)
 {
-    return NULL ;
+    return nullptr ;
 } // configure
 

@@ -74,7 +74,7 @@ void RunExperiment::run()
     cout << "Experiment directory: " << experimentBaseDirectory_ << endl;
     cout << "Number of threads: " << numberOfThreads_ << endl;
 
-    SolutionSet * resultFront = NULL;
+    SolutionSet * resultFront = nullptr;
 
     int problemIndex = -1;
     int algorithmIndex = -1;
