@@ -9,6 +9,13 @@ macro(LIST_APPEND var)
     set_property(GLOBAL APPEND PROPERTY SOURCE_LIST "${var}")
 endmacro(LIST_APPEND)
 
+define_property(GLOBAL PROPERTY HEADER_LIST BRIEF_DOCS "Global list of header code" FULL_DOCS "Global list of header code")
+set_property(GLOBAL PROPERTY HEADER_LIST "")
+
+macro(LIST_APPEND_HEADER var)
+    set_property(GLOBAL APPEND PROPERTY HEADER_LIST "${var}")
+endmacro(LIST_APPEND_HEADER)
+
 include_directories(
 	${PROJECT_SOURCE_DIR}/src
 	${PROJECT_SOURCE_DIR}/src/core
@@ -56,4 +63,5 @@ include_directories(
     )
 add_subdirectory(${PROJECT_SOURCE_DIR}/src)
 get_property(my_source_list GLOBAL PROPERTY SOURCE_LIST)
-add_library(${PROJECT_NAME} SHARED ${my_source_list})
+get_property(my_header_list GLOBAL PROPERTY HEADER_LIST)
+add_library(${PROJECT_NAME} ${my_source_list} ${my_header_list})
