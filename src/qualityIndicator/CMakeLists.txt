@@ -1,3 +1,6 @@
+file(GLOB SOURCES "*.cpp" "*.h")
+ListToString(SOURCES ";" ${SOURCES})
+LIST_APPEND("${SOURCES}")
 add_subdirectory(fastHypervolume)
 add_subdirectory(main)
 add_subdirectory(util)

@@ -2,6 +2,17 @@ cmake_minimum_required(VERSION 3.6)
 project(jMetalCpp)
 set(CMAKE_CXX_STANDARD 11)
 
+function (ListToString result delim)
+    list(GET ARGV 2 temp)
+    math(EXPR N "${ARGC}-1")
+    foreach(IDX RANGE 3 ${N})
+        list(GET ARGV ${IDX} STR)
+        set(temp "${temp}${delim}${STR}")
+    endforeach()
+    set(${result} "${temp}" PARENT_SCOPE)
+endfunction(ListToString)
+
+
 define_property(GLOBAL PROPERTY SOURCE_LIST BRIEF_DOCS "Global list of source code" FULL_DOCS "Global list of source code")
 set_property(GLOBAL PROPERTY SOURCE_LIST "")
 

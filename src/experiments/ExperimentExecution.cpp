@@ -27,6 +27,7 @@ void* executeRun(void* ctx)
     RunExperiment* cptr = (RunExperiment*)ctx;
     cptr->run();
     //pthread_exit(0);
+	return nullptr;
 } // executeRun
 
 

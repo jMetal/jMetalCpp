@@ -1,4 +1,3 @@
-file(GLOB SOURCES *.cpp)
-LIST_APPEND(${SOURCES})
-#file(GLOB HEADERS *.h)
-#LIST_APPEND_HEADER(${HEADERS})
+file(GLOB SOURCES "*.cpp" "*.h")
+ListToString(SOURCES ";" ${SOURCES})
+LIST_APPEND("${SOURCES}")

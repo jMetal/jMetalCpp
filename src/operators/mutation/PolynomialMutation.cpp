@@ -94,7 +94,7 @@ void * PolynomialMutation::doMutation(double probability, Solution *solution)
     } // for
 
     delete x;
-
+	return nullptr;
 } // doMutation
 
 
