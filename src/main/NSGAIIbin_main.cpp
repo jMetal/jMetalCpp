@@ -56,7 +56,7 @@ int main(int argc, char ** argv) {
     strcpy(argv[0], "200");
     argv[1] = new char[1];
     strcpy(argv[1], "2");
-    char * problemName = new char[6];
+    char * problemName = new char[7];
     strcpy(problemName, "OneMax");
 
     problem = ProblemFactory::getProblem(problemName, 2, argv);
@@ -64,7 +64,7 @@ int main(int argc, char ** argv) {
     delete argv[0];
     delete argv[1];
     delete [] argv;
-    delete problemName;
+    delete [] problemName;
 
   }
 

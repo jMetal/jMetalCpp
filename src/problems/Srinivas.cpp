@@ -129,6 +129,6 @@ void Srinivas::evaluateConstraints(Solution *solution) {
   
   solution->setOverallConstraintViolation(total);    
   solution->setNumberOfViolatedConstraints(number);
-  
+  delete [] constraint;
 } // evaluateConstraints
 

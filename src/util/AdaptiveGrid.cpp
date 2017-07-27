@@ -176,7 +176,10 @@ int AdaptiveGrid::location(Solution * solution){
 
       if ((solution->getObjective(obj) > upperLimits_[obj])
           || (solution->getObjective(obj) < lowerLimits_[obj]))
+      {
+        delete [] position;
         return -1;
+      }
       else if (solution->getObjective(obj) ==lowerLimits_[obj])
         position[obj] = 0;
       else if (solution->getObjective(obj) ==upperLimits_[obj])
@@ -202,6 +205,7 @@ int AdaptiveGrid::location(Solution * solution){
     for (int obj = 0; obj < objectives_; obj++) {
        location += position[obj] * (int)pow(2.0,obj * bisections_);
      }
+    delete [] position;
     return location;
  } //location
 

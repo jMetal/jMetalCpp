@@ -54,6 +54,7 @@ void * BitFlipMutation::doMutation(double probability, Solution *solution) {
       if (PseudoRandom::randDouble() <= mutationProbability_)
         variable->flip(j) ;
   }
+  return nullptr;
 } // doMutation
 
 

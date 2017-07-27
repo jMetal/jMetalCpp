@@ -47,7 +47,7 @@ FastHypervolume::~FastHypervolume() {
 } // ~FastHypervolume
 
 double FastHypervolume::computeHypervolume(SolutionSet* solutionSet) {
-  double hv;
+  double hv = 0.0;
   if (solutionSet->size() == 0) {
     hv = 0.0;
   } else {

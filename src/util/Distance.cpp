@@ -49,7 +49,7 @@ double ** Distance::distanceMatrix(SolutionSet * solutionSet) {
 
   //The matrix of distances
   int size = solutionSet->size();
-  double ** distance;// = new double [size][size];
+  double ** distance = nullptr;// = new double [size][size];
   for (int i = 0; i < solutionSet->size(); i++){
     distance[i] = new double[size];
   }
