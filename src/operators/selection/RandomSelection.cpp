@@ -32,7 +32,8 @@
  * Constructor
  * Creates a new RandomSelection operator using a BinaryTournamentComparator
  */
-RandomSelection::RandomSelection(map<string, void *> parameters): Selection(parameters) {
+RandomSelection::RandomSelection(map<string, void *> parameters): Selection(parameters)
+{
 } // RandomSelection
 
 
@@ -47,20 +48,22 @@ RandomSelection::~RandomSelection() { } // ~RandomSelection
  * @param object Object representing a SolutionSet.
  * @return an object representing an array with the selected parents
  */
-void * RandomSelection::execute(void * object) {
+void * RandomSelection::execute(void * object)
+{
 
-  SolutionSet * population = (SolutionSet *) object;
-  int pos1 = PseudoRandom::randInt(0,population->size()-1);
-  int pos2 = PseudoRandom::randInt(0,population->size()-1);
+    SolutionSet * population = (SolutionSet *) object;
+    int pos1 = PseudoRandom::randInt(0,population->size()-1);
+    int pos2 = PseudoRandom::randInt(0,population->size()-1);
 
 
-  while ((pos1 == pos2)  && (population->size()>1) ) {
-     pos2 = PseudoRandom::randInt(0,population->size()-1);
-  }
+    while ((pos1 == pos2)  && (population->size()>1) )
+    {
+        pos2 = PseudoRandom::randInt(0,population->size()-1);
+    }
 
-  Solution ** parents = new Solution*[2];
-  parents[0] = population->get(pos1);
-  parents[1] = population->get(pos2);
-  return parents;
+    Solution ** parents = new Solution*[2];
+    parents[0] = population->get(pos1);
+    parents[1] = population->get(pos2);
+    return parents;
 
 } // execute

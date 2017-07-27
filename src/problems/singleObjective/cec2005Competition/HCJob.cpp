@@ -25,17 +25,19 @@
 /**
  * Constructor.
  */
-HCJob::HCJob(int numFunc) {
-  sigma = new double[numFunc];
-  biases = new double[numFunc];
-  lambda = new double[numFunc];
+HCJob::HCJob(int numFunc)
+{
+    sigma = new double[numFunc];
+    biases = new double[numFunc];
+    lambda = new double[numFunc];
 } // HCJob
 
 /**
  * Destructor
  */
-HCJob::~HCJob() {
-  delete [] sigma;
-  delete [] biases;
-  delete [] lambda;
+HCJob::~HCJob()
+{
+    delete [] sigma;
+    delete [] biases;
+    delete [] lambda;
 }

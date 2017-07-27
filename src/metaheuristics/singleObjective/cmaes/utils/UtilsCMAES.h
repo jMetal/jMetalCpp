@@ -36,15 +36,16 @@ using namespace std;
  */
 
 
-class UtilsCMAES {
-    
+class UtilsCMAES
+{
+
 public:
-  static void tred2 (int n, double ** V, double * d, double * e);
-  static void tql2 (int n, double * d, double * e, double ** V);
-  static int checkEigenSystem (int N, double ** C, double * diag, double ** Q);
-  static double hypot (double a, double b);
-  static void minFastSort (double * x, int * idx, int size);
-  
+    static void tred2 (int n, double ** V, double * d, double * e);
+    static void tql2 (int n, double * d, double * e, double ** V);
+    static int checkEigenSystem (int N, double ** C, double * diag, double ** Q);
+    static double hypot (double a, double b);
+    static void minFastSort (double * x, int * idx, int size);
+
 };
 
 

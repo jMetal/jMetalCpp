@@ -30,7 +30,8 @@
 /**
  * Constructor.
  */
-Archive::Archive(int size) : SolutionSet(size) {
-  //do nothing.
+Archive::Archive(int size) : SolutionSet(size)
+{
+    //do nothing.
 } // Archive
 

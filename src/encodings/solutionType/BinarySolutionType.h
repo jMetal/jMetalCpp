@@ -27,12 +27,13 @@
 /**
  * This class is aimed at defining a Type encoding a Real solution
 **/
-class BinarySolutionType : public SolutionType {
+class BinarySolutionType : public SolutionType
+{
 
 public:
-  BinarySolutionType(Problem *problem);
-  Variable **createVariables();
-	
+    BinarySolutionType(Problem *problem);
+    Variable **createVariables();
+
 };
 
 #endif

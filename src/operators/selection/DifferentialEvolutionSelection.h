@@ -30,11 +30,12 @@
  * Class implementing the selection operator used in DE: three different solutions
  * are returned from a population.
  */
-class DifferentialEvolutionSelection : public Selection {
+class DifferentialEvolutionSelection : public Selection
+{
 
 public:
-  DifferentialEvolutionSelection(map<string, void *> parameters);
-  void *execute(void *);
+    DifferentialEvolutionSelection(map<string, void *> parameters);
+    void *execute(void *);
 
 };
 

@@ -25,74 +25,90 @@
  * Constructor
  * Creates a new instance of FastHypervolume
  */
-FastHypervolume::FastHypervolume() {
-  referencePoint_ = NULL;
-  numberOfObjectives_ = 0;
+FastHypervolume::FastHypervolume()
+{
+    referencePoint_ = NULL;
+    numberOfObjectives_ = 0;
 } // FastHypervolume
 
 /**
  * Constructor
  * Creates a new instance of FastHypervolume
  */
-FastHypervolume::FastHypervolume(double offset) {
-  referencePoint_ = NULL;
-  numberOfObjectives_ = 0;
-  offset_ = offset;
+FastHypervolume::FastHypervolume(double offset)
+{
+    referencePoint_ = NULL;
+    numberOfObjectives_ = 0;
+    offset_ = offset;
 } // FastHypervolume
 
 /**
  * Destructor
  */
-FastHypervolume::~FastHypervolume() {
+FastHypervolume::~FastHypervolume()
+{
 } // ~FastHypervolume
 
-double FastHypervolume::computeHypervolume(SolutionSet* solutionSet) {
-  double hv = 0.0;
-  if (solutionSet->size() == 0) {
-    hv = 0.0;
-  } else {
-    updateReferencePoint(solutionSet);
-    if (numberOfObjectives_ == 2) {
-      Comparator * comparator =
-          new ObjectiveComparator(numberOfObjectives_ - 1, true);
-      solutionSet->sort(comparator);
-      delete comparator;
-      hv = get2DHV(solutionSet);
-    } else {
-      /*
-      updateReferencePoint(solutionSet);
-      Front front = new Front(solutionSet.size(), numberOfObjectives_, solutionSet);
-      hv = new WFGHV(numberOfObjectives_, solutionSet.size(), referencePoint_).getHV(front);
-      */
-      cerr << "Fast Hypervolume only works with two objectives for now." << endl;
+double FastHypervolume::computeHypervolume(SolutionSet* solutionSet)
+{
+    double hv = 0.0;
+    if (solutionSet->size() == 0)
+    {
+        hv = 0.0;
     }
-  }
+    else
+    {
+        updateReferencePoint(solutionSet);
+        if (numberOfObjectives_ == 2)
+        {
+            Comparator * comparator =
+                new ObjectiveComparator(numberOfObjectives_ - 1, true);
+            solutionSet->sort(comparator);
+            delete comparator;
+            hv = get2DHV(solutionSet);
+        }
+        else
+        {
+            /*
+            updateReferencePoint(solutionSet);
+            Front front = new Front(solutionSet.size(), numberOfObjectives_, solutionSet);
+            hv = new WFGHV(numberOfObjectives_, solutionSet.size(), referencePoint_).getHV(front);
+            */
+            cerr << "Fast Hypervolume only works with two objectives for now." << endl;
+        }
+    }
 
-  return hv;
+    return hv;
 } // computeHypervolume
 
 /**
  * Updates the reference point
  */
-void FastHypervolume::updateReferencePoint(SolutionSet * solutionSet) {
-  double * maxObjectives = new double[numberOfObjectives_];
-  for (int i = 0; i < numberOfObjectives_; i++) {
-    maxObjectives[i] = 0;
-  }
-
-  for (int i = 0; i < solutionSet->size(); i++) {
-    for (int j = 0; j < numberOfObjectives_; j++) {
-      if (maxObjectives[j] < solutionSet->get(i)->getObjective(j)) {
-        maxObjectives[j] = solutionSet->get(i)->getObjective(j);
-      }
+void FastHypervolume::updateReferencePoint(SolutionSet * solutionSet)
+{
+    double * maxObjectives = new double[numberOfObjectives_];
+    for (int i = 0; i < numberOfObjectives_; i++)
+    {
+        maxObjectives[i] = 0;
     }
-  }
 
-  for (int i = 0; i < referencePoint_->getNumberOfObjectives(); i++) {
-    referencePoint_->setObjective(i, maxObjectives[i] + offset_);
-  }
+    for (int i = 0; i < solutionSet->size(); i++)
+    {
+        for (int j = 0; j < numberOfObjectives_; j++)
+        {
+            if (maxObjectives[j] < solutionSet->get(i)->getObjective(j))
+            {
+                maxObjectives[j] = solutionSet->get(i)->getObjective(j);
+            }
+        }
+    }
 
-  delete [] maxObjectives;
+    for (int i = 0; i < referencePoint_->getNumberOfObjectives(); i++)
+    {
+        referencePoint_->setObjective(i, maxObjectives[i] + offset_);
+    }
+
+    delete [] maxObjectives;
 } // updateReferencePoint
 
 /**
@@ -102,55 +118,64 @@ void FastHypervolume::updateReferencePoint(SolutionSet * solutionSet) {
  *
  * @return
  */
-double FastHypervolume::get2DHV(SolutionSet * solutionSet) {
-  double hv = 0.0;
-  if (solutionSet->size() > 0) {
-    hv = fabs((solutionSet->get(0)->getObjective(0) - referencePoint_->getObjective(0)) *
-      (solutionSet->get(0)->getObjective(1) - referencePoint_->getObjective(1)));
+double FastHypervolume::get2DHV(SolutionSet * solutionSet)
+{
+    double hv = 0.0;
+    if (solutionSet->size() > 0)
+    {
+        hv = fabs((solutionSet->get(0)->getObjective(0) - referencePoint_->getObjective(0)) *
+                  (solutionSet->get(0)->getObjective(1) - referencePoint_->getObjective(1)));
 
-    for (int i = 1; i < solutionSet->size(); i++) {
-      double tmp =
-        fabs((solutionSet->get(i)->getObjective(0) - referencePoint_->getObjective(0)) *
-          (solutionSet->get(i)->getObjective(1) - solutionSet->get(i-1)->getObjective(1)));
-      hv += tmp;
+        for (int i = 1; i < solutionSet->size(); i++)
+        {
+            double tmp =
+                fabs((solutionSet->get(i)->getObjective(0) - referencePoint_->getObjective(0)) *
+                     (solutionSet->get(i)->getObjective(1) - solutionSet->get(i-1)->getObjective(1)));
+            hv += tmp;
+        }
     }
-  }
-  return hv;
+    return hv;
 } // get2DHV
 
-void FastHypervolume::computeHVContributions(SolutionSet * solutionSet) {
-  double * contributions = new double[solutionSet->size()];
-  double solutionSetHV = 0;
+void FastHypervolume::computeHVContributions(SolutionSet * solutionSet)
+{
+    double * contributions = new double[solutionSet->size()];
+    double solutionSetHV = 0;
 
-  numberOfObjectives_ = solutionSet->get(0)->getNumberOfObjectives();
-  referencePoint_ = new Solution(numberOfObjectives_);
+    numberOfObjectives_ = solutionSet->get(0)->getNumberOfObjectives();
+    referencePoint_ = new Solution(numberOfObjectives_);
 
-  solutionSetHV = computeHypervolume(solutionSet);
+    solutionSetHV = computeHypervolume(solutionSet);
 
-  for (int i = 0; i < solutionSet->size(); i++) {
-    Solution * currentPoint = solutionSet->get(i);
-    solutionSet->remove(i);
+    for (int i = 0; i < solutionSet->size(); i++)
+    {
+        Solution * currentPoint = solutionSet->get(i);
+        solutionSet->remove(i);
 
-    if (numberOfObjectives_ == 2) {
-      //updateReferencePoint(solutionSet);
-      //solutionSet.sort(new ObjectiveComparator(numberOfObjectives_-1, true));
-      contributions[i] = solutionSetHV - get2DHV(solutionSet);
-    } else {
-      /*
-      Front front = new Front(solutionSet.size(), numberOfObjectives_, solutionSet);
-      double hv =
-        new WFGHV(numberOfObjectives_, solutionSet.size(), referencePoint_).getHV(front);
-      contributions[i] = solutionSetHV - hv;
-      */
-      cerr << "Fast Hypervolume only works with two objectives for now." << endl;
+        if (numberOfObjectives_ == 2)
+        {
+            //updateReferencePoint(solutionSet);
+            //solutionSet.sort(new ObjectiveComparator(numberOfObjectives_-1, true));
+            contributions[i] = solutionSetHV - get2DHV(solutionSet);
+        }
+        else
+        {
+            /*
+            Front front = new Front(solutionSet.size(), numberOfObjectives_, solutionSet);
+            double hv =
+              new WFGHV(numberOfObjectives_, solutionSet.size(), referencePoint_).getHV(front);
+            contributions[i] = solutionSetHV - hv;
+            */
+            cerr << "Fast Hypervolume only works with two objectives for now." << endl;
+        }
+        solutionSet->add(i, currentPoint);
     }
-    solutionSet->add(i, currentPoint);
-  }
 
-  for (int i = 0; i < solutionSet->size(); i++) {
-    solutionSet->get(i)->setCrowdingDistance(contributions[i]);
-  }
+    for (int i = 0; i < solutionSet->size(); i++)
+    {
+        solutionSet->get(i)->setCrowdingDistance(contributions[i]);
+    }
 
-  delete [] contributions;
-  delete referencePoint_;
+    delete [] contributions;
+    delete referencePoint_;
 } // computeHVContributions

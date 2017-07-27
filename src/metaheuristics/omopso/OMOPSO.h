@@ -34,130 +34,131 @@
 /**
  * This class implements an asynchronous version of OMOPSO algorithm
  */
-class OMOPSO : public Algorithm {
-    
+class OMOPSO : public Algorithm
+{
+
 private:
-    
-  /**
-   * Stores the number of particles used
-   */
-  int particlesSize;
 
-  /**
-   * Stores the maximum size for the archive
-   */
-  int archiveSize;
+    /**
+     * Stores the number of particles used
+     */
+    int particlesSize;
 
-  /**
-   * Stores the maximum number of iteration_
-   */
-  int maxIterations;
+    /**
+     * Stores the maximum size for the archive
+     */
+    int archiveSize;
 
-  /**
-   * Stores the current number of iteration_
-   */
-  int iteration;
+    /**
+     * Stores the maximum number of iteration_
+     */
+    int maxIterations;
 
-  /**
-   * Stores the perturbation used by the non-uniform mutation
-   */
-  double perturbation;
+    /**
+     * Stores the current number of iteration_
+     */
+    int iteration;
 
-  /**
-   * Stores the particles
-   */
-  SolutionSet *particles;
+    /**
+     * Stores the perturbation used by the non-uniform mutation
+     */
+    double perturbation;
 
-  /**
-   * Stores the best solutions founds so far for each particles
-   */
-  Solution **best;
+    /**
+     * Stores the particles
+     */
+    SolutionSet *particles;
 
-  /**
-   * Stores the leaders
-   */
-  CrowdingArchive *leaders;
+    /**
+     * Stores the best solutions founds so far for each particles
+     */
+    Solution **best;
 
-  /**
-   * Stores the epsilon-archive
-   */
-  NonDominatedSolutionList *eArchive;
+    /**
+     * Stores the leaders
+     */
+    CrowdingArchive *leaders;
 
-  /**
-   * Stores the speed of each particle
-   */
-  double **speed;
+    /**
+     * Stores the epsilon-archive
+     */
+    NonDominatedSolutionList *eArchive;
 
-  /**
-   * Stores a comparator for checking dominance
-   */
-  Comparator *dominance;
+    /**
+     * Stores the speed of each particle
+     */
+    double **speed;
 
-  /**
-   * Stores a comparator for crowding checking
-   */
-  Comparator *crowdingDistanceComparator;
+    /**
+     * Stores a comparator for checking dominance
+     */
+    Comparator *dominance;
 
-  /**
-   * Stores a <code>Distance</code> object
-   */
-  Distance *distance;
+    /**
+     * Stores a comparator for crowding checking
+     */
+    Comparator *crowdingDistanceComparator;
 
-  /**
-   * Stores a operator for uniform mutations
-   */
-  Operator *uniformMutation;
+    /**
+     * Stores a <code>Distance</code> object
+     */
+    Distance *distance;
 
-  /**
-   * Stores a operator for non uniform mutations
-   */
-  Operator *nonUniformMutation;
+    /**
+     * Stores a operator for uniform mutations
+     */
+    Operator *uniformMutation;
 
-  /**
-   * eta_ value
-   */
-  double eta = 0.0075;
+    /**
+     * Stores a operator for non uniform mutations
+     */
+    Operator *nonUniformMutation;
 
-  /**
-   * Initialize all parameter of the algorithm
-   */
-  void initParams();
+    /**
+     * eta_ value
+     */
+    double eta = 0.0075;
 
-  /**
-   * Free all the memory reserved by the algorithm
-   */
-  void deleteParams();
+    /**
+     * Initialize all parameter of the algorithm
+     */
+    void initParams();
 
-  /**
-   * Update the speed of each particle
-   */
-  void computeSpeed();
+    /**
+     * Free all the memory reserved by the algorithm
+     */
+    void deleteParams();
 
-  /**
-   * Update the position of each particle
-   */
-  void computeNewPositions();
+    /**
+     * Update the speed of each particle
+     */
+    void computeSpeed();
 
-  /**
-   * Apply a mutation operator to some particles in the swarm
-   */
-  void mopsoMutation(int actualIteration, int totalIterations);
-    
+    /**
+     * Update the position of each particle
+     */
+    void computeNewPositions();
+
+    /**
+     * Apply a mutation operator to some particles in the swarm
+     */
+    void mopsoMutation(int actualIteration, int totalIterations);
+
 public:
-    
-  /**
-   * Constructor
-   * @param problem Problem to solve
-   */
-  OMOPSO(Problem *problem);
 
-  /**
-   * Runs of the SMPSO algorithm.
-   * @return a <code>SolutionSet</code> that is a set of non dominated solutions
-   * as a result of the algorithm execution
-   */
-  SolutionSet *execute();
-    
+    /**
+     * Constructor
+     * @param problem Problem to solve
+     */
+    OMOPSO(Problem *problem);
+
+    /**
+     * Runs of the SMPSO algorithm.
+     * @return a <code>SolutionSet</code> that is a set of non dominated solutions
+     * as a result of the algorithm execution
+     */
+    SolutionSet *execute();
+
 };
 
 #endif /* OMOPSO_H_ */

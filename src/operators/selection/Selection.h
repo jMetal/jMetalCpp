@@ -29,11 +29,12 @@
   * @class Selection
   * @brief This class is aimed at representing a Selection operator
 **/
-class Selection : public Operator {
+class Selection : public Operator
+{
 
 public:
-  Selection (map<string, void *> parameters);
-  virtual ~Selection() = 0;
+    Selection (map<string, void *> parameters);
+    virtual ~Selection() = 0;
 };
 
 #endif

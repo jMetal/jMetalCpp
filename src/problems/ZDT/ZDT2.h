@@ -30,17 +30,18 @@
 #include <Solution.h>
 
 
-class ZDT2 : public Problem{
+class ZDT2 : public Problem
+{
 private:
-	double evalG(XReal *x) ;
-	double evalH(double f, double g) ;
-	double * fx_ ;
+    double evalG(XReal *x) ;
+    double evalH(double f, double g) ;
+    double * fx_ ;
 
 public:
-	ZDT2(string solutionType, int numberOfVariables = 30);
-	void evaluate(Solution *solution);
+    ZDT2(string solutionType, int numberOfVariables = 30);
+    void evaluate(Solution *solution);
 
-	virtual ~ZDT2();
+    virtual ~ZDT2();
 };
 
 #endif /* __ZDT2_H__ */

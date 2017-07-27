@@ -28,10 +28,11 @@
  * a Pareto dominance comparator.
  */
 NonDominatedSolutionList::NonDominatedSolutionList()
-: SolutionSet() {
+    : SolutionSet()
+{
 
-  dominance = new DominanceComparator();
-  equal = new SolutionComparator();
+    dominance = new DominanceComparator();
+    equal = new SolutionComparator();
 
 } // NonDominatedList
 
@@ -43,10 +44,11 @@ NonDominatedSolutionList::NonDominatedSolutionList()
  * @param dominance The comparator for dominance checking.
  */
 NonDominatedSolutionList::NonDominatedSolutionList(Comparator *dominance)
-: SolutionSet() {
+    : SolutionSet()
+{
 
-  this->dominance = dominance;
-  this->equal     = new SolutionComparator();
+    this->dominance = dominance;
+    this->equal     = new SolutionComparator();
 
 } // NonDominatedList
 
@@ -54,10 +56,11 @@ NonDominatedSolutionList::NonDominatedSolutionList(Comparator *dominance)
 /**
  * Destructor.
  */
-NonDominatedSolutionList::~NonDominatedSolutionList() {
+NonDominatedSolutionList::~NonDominatedSolutionList()
+{
 
-  delete dominance;
-  delete equal;
+    delete dominance;
+    delete equal;
 
 } // ~NonDominatedSolutionList
 
@@ -69,33 +72,40 @@ NonDominatedSolutionList::~NonDominatedSolutionList() {
  * The decision variables can be null if the solution is read from a file; in
  * that case, the domination tests are omitted
  */
-bool NonDominatedSolutionList::add(Solution *solution) {
+bool NonDominatedSolutionList::add(Solution *solution)
+{
 
-  int i = 0;
-  Solution * aux; //Store an solution temporally
+    int i = 0;
+    Solution * aux; //Store an solution temporally
 
-  while (i < solutionsList_.size()) {
-    aux = solutionsList_[i];
-    int flag = dominance->compare(solution,aux);
+    while (i < solutionsList_.size())
+    {
+        aux = solutionsList_[i];
+        int flag = dominance->compare(solution,aux);
 
-    if (flag == -1) {  // A solution in the list is dominated by the new one
-      delete aux;
-      solutionsList_.erase(solutionsList_.begin()+i);
-    } else if (flag == 0) { // Non-dominated solutions
-      /*
-      flag = equal_->compare(solution,aux);
-      if (flag == 0) {
-        return false;   // The new solution is in the list
-      }
-      */
-      i++;
-    } else if (flag == 1) { // The new solution is dominated
-      return false;
-    }
-  } // while
+        if (flag == -1)    // A solution in the list is dominated by the new one
+        {
+            delete aux;
+            solutionsList_.erase(solutionsList_.begin()+i);
+        }
+        else if (flag == 0)     // Non-dominated solutions
+        {
+            /*
+            flag = equal_->compare(solution,aux);
+            if (flag == 0) {
+              return false;   // The new solution is in the list
+            }
+            */
+            i++;
+        }
+        else if (flag == 1)     // The new solution is dominated
+        {
+            return false;
+        }
+    } // while
 
-  //At this point, the solution is inserted into the list
-  solutionsList_.push_back(solution);
+    //At this point, the solution is inserted into the list
+    solutionsList_.push_back(solution);
 
-  return true;
+    return true;
 } // add

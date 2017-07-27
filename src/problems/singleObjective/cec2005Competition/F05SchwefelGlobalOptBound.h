@@ -25,30 +25,31 @@
 #include <Benchmark.h>
 #include <TestFunc.h>
 
-class F05SchwefelGlobalOptBound : public TestFunc {
+class F05SchwefelGlobalOptBound : public TestFunc
+{
 
 private:
 
-  // Fixed (class) parameters
-  static const string FUNCTION_NAME;
-  static const string DEFAULT_FILE_DATA;
+    // Fixed (class) parameters
+    static const string FUNCTION_NAME;
+    static const string DEFAULT_FILE_DATA;
 
-  // Shifted global optimum
-  double * m_o;
-  double ** m_A;
+    // Shifted global optimum
+    double * m_o;
+    double ** m_A;
 
-  // In order to avoid excessive memory allocation,
-  // a fixed memory buffer is allocated for each function object.
-  double * m_B;
-  double * m_z;
+    // In order to avoid excessive memory allocation,
+    // a fixed memory buffer is allocated for each function object.
+    double * m_B;
+    double * m_z;
 
 public:
 
-  F05SchwefelGlobalOptBound(int dimension, double bias);
-  F05SchwefelGlobalOptBound(int dimension, double bias, string file_data);
-  ~F05SchwefelGlobalOptBound();
+    F05SchwefelGlobalOptBound(int dimension, double bias);
+    F05SchwefelGlobalOptBound(int dimension, double bias, string file_data);
+    ~F05SchwefelGlobalOptBound();
 
-  double f (double * x);
+    double f (double * x);
 
 }; // F05SchwefelGlobalOptBound
 

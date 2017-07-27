@@ -2,7 +2,7 @@
 //
 //  Authors:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
-// 
+//
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
 //  This program is free software: you can redistribute it and/or modify
@@ -14,7 +14,7 @@
 //  but WITHOUT ANY WARRANTY; without even the implied warranty of
 //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //  GNU Lesser General Public License for more details.
-// 
+//
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -31,12 +31,13 @@
   * @class Griewank
   * @brief Class representing problem Griewank
  **/
-class Griewank : public Problem {
-   
+class Griewank : public Problem
+{
+
 public:
-  Griewank(string solutionType, int numberOfVariables = 10);
-	~Griewank();
-	void evaluate(Solution *solution);
+    Griewank(string solutionType, int numberOfVariables = 10);
+    ~Griewank();
+    void evaluate(Solution *solution);
 };
 
 #endif /* __GRIEWANK__ */

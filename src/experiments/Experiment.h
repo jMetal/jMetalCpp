@@ -33,22 +33,23 @@ using namespace std;
  * Abstract class representing jMetal experiments
  */
 
-class Experiment {
+class Experiment
+{
 
 public:
 
-  string experimentName_;
-  vector<string> algorithmNameList_; // List of the names of the algorithms to
-                                     // be executed
-  vector<string> problemList_; // List of problems to be solved
-  string experimentBaseDirectory_; // Directory to store the results
-  int independentRuns_; // Number of independent runs per algorithm
-  bool isSingleObjective_; // If this experiment is a singleObjective one or not
+    string experimentName_;
+    vector<string> algorithmNameList_; // List of the names of the algorithms to
+    // be executed
+    vector<string> problemList_; // List of problems to be solved
+    string experimentBaseDirectory_; // Directory to store the results
+    int independentRuns_; // Number of independent runs per algorithm
+    bool isSingleObjective_; // If this experiment is a singleObjective one or not
 
-  Experiment();
+    Experiment();
 
-  void checkExperimentDirectory();
-  void resetFile(string file);
+    void checkExperimentDirectory();
+    void resetFile(string file);
 
 };
 

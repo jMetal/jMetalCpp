@@ -29,10 +29,11 @@
  * <code>Solution</code> objects) based on the overall constraint violation of
  * the solucions, as in NSGA-II.
  */
-class OverallConstraintViolationComparator : public Comparator {
+class OverallConstraintViolationComparator : public Comparator
+{
 
 public:
-  int compare(void * o1, void * o2);
+    int compare(void * o1, void * o2);
 
 };
 

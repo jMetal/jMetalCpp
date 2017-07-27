@@ -48,87 +48,91 @@
  *                  5th International Conference, EMO 2009, pp: 183-197.
  *                  April 2009)
  */
-int main(int argc, char ** argv) {
+int main(int argc, char ** argv)
+{
 
-	clock_t t_ini, t_fin;
-  
-  Problem   * problem   ; // The problem to solve
-  Algorithm * algorithm ; // The algorithm to use
-  HUXCrossover  * crossover ; // Crossover operator
-  BitFlipMutation  * mutation  ; // Mutation operator
-  BinaryTournament  * selection ; // Selection operator
+    clock_t t_ini, t_fin;
 
-  if (argc>=2) {
-    problem = ProblemFactory::getProblem(argc, argv);
-    cout << "Selected problem: " << problem->getName() << endl;
-  } else {
-    cout << "No problem selected." << endl;
-    cout << "Default problem will be used: Fonseca" << endl;
-    problem = ProblemFactory::getProblem(const_cast<char *>("ZDT5"));
-  }
-  
+    Problem   * problem   ; // The problem to solve
+    Algorithm * algorithm ; // The algorithm to use
+    HUXCrossover  * crossover ; // Crossover operator
+    BitFlipMutation  * mutation  ; // Mutation operator
+    BinaryTournament  * selection ; // Selection operator
+
+    if (argc>=2)
+    {
+        problem = ProblemFactory::getProblem(argc, argv);
+        cout << "Selected problem: " << problem->getName() << endl;
+    }
+    else
+    {
+        cout << "No problem selected." << endl;
+        cout << "Default problem will be used: Fonseca" << endl;
+        problem = ProblemFactory::getProblem(const_cast<char *>("ZDT5"));
+    }
+
 //  QualityIndicator * indicators ; // Object to get quality indicators
 //	indicators = NULL ;
 
-	algorithm = new MOCHC(problem);
+    algorithm = new MOCHC(problem);
 
-  // Algorithm parameters
-  int populationSize = 100;
-  int maxEvaluations = 25000;
-  double initialConvergenceCount = 0.25;
-  double preservedPopulation = 0.05;
-  int convergenceValue = 3;
-  algorithm->setInputParameter("populationSize",&populationSize);
-  algorithm->setInputParameter("maxEvaluations",&maxEvaluations);
-  algorithm->setInputParameter("initialConvergenceCount",&initialConvergenceCount);
-  algorithm->setInputParameter("preservedPopulation",&preservedPopulation);
-  algorithm->setInputParameter("convergenceValue",&convergenceValue);
+    // Algorithm parameters
+    int populationSize = 100;
+    int maxEvaluations = 25000;
+    double initialConvergenceCount = 0.25;
+    double preservedPopulation = 0.05;
+    int convergenceValue = 3;
+    algorithm->setInputParameter("populationSize",&populationSize);
+    algorithm->setInputParameter("maxEvaluations",&maxEvaluations);
+    algorithm->setInputParameter("initialConvergenceCount",&initialConvergenceCount);
+    algorithm->setInputParameter("preservedPopulation",&preservedPopulation);
+    algorithm->setInputParameter("convergenceValue",&convergenceValue);
 
-	// Mutation and Crossover for Real codification
-	map<string, void *> parameters;
+    // Mutation and Crossover for Real codification
+    map<string, void *> parameters;
 
-  double crossoverProbability = 1.0;
-  double crossoverDistributionIndex = 20.0;
-  parameters["probability"] =  &crossoverProbability;
-  crossover = new HUXCrossover(parameters);
+    double crossoverProbability = 1.0;
+    double crossoverDistributionIndex = 20.0;
+    parameters["probability"] =  &crossoverProbability;
+    crossover = new HUXCrossover(parameters);
 
-	parameters.clear();
-	 double mutationProbability = 0.35;
-	  parameters["probability"] = &mutationProbability;
+    parameters.clear();
+    double mutationProbability = 0.35;
+    parameters["probability"] = &mutationProbability;
 
-	  mutation = new BitFlipMutation(parameters);
+    mutation = new BitFlipMutation(parameters);
 
-		// Selection Operator
-	parameters.clear();
-	selection = new BinaryTournament(parameters);
+    // Selection Operator
+    parameters.clear();
+    selection = new BinaryTournament(parameters);
 
-	// Add the operators to the algorithm
-	algorithm->addOperator("crossover",crossover);
-	algorithm->addOperator("mutation",mutation);
-	algorithm->addOperator("parentSelection",selection);
+    // Add the operators to the algorithm
+    algorithm->addOperator("crossover",crossover);
+    algorithm->addOperator("mutation",mutation);
+    algorithm->addOperator("parentSelection",selection);
 
-	// Add the indicator object to the algorithm
+    // Add the indicator object to the algorithm
 //	algorithm->setInputParameter("indicators", indicators) ;
 
-	// Execute the Algorithm
-	t_ini = clock();
-	SolutionSet * population = algorithm->execute();
-	t_fin = clock();
-	double secs = (double) (t_fin - t_ini);
-	secs = secs / CLOCKS_PER_SEC;
+    // Execute the Algorithm
+    t_ini = clock();
+    SolutionSet * population = algorithm->execute();
+    t_fin = clock();
+    double secs = (double) (t_fin - t_ini);
+    secs = secs / CLOCKS_PER_SEC;
 
-	// Result messages
-	cout << "Total execution time: " << secs << "s" << endl;
-	cout << "Variables values have been written to file VAR" << endl;
-	population->printVariablesToFile("VAR");
-	cout << "Objectives values have been written to file FUN" << endl;
-	population->printObjectivesToFile("FUN");
-  
+    // Result messages
+    cout << "Total execution time: " << secs << "s" << endl;
+    cout << "Variables values have been written to file VAR" << endl;
+    population->printVariablesToFile("VAR");
+    cout << "Objectives values have been written to file FUN" << endl;
+    population->printObjectivesToFile("FUN");
 
-  delete selection;
-  delete mutation;
-  delete crossover;
-  delete population;
-  delete algorithm;
+
+    delete selection;
+    delete mutation;
+    delete crossover;
+    delete population;
+    delete algorithm;
 
 } // main

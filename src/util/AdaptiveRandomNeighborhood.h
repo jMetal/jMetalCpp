@@ -35,23 +35,24 @@ using namespace std;
 /**
  * Class representing an adaptive random neighborhood
  */
-class AdaptiveRandomNeighborhood {
+class AdaptiveRandomNeighborhood
+{
 
 private:
 
-  SolutionSet * solutionSet_;
-  vector<vector<int>> list_;
-  int numberOfRandomNeighbours_;
+    SolutionSet * solutionSet_;
+    vector<vector<int>> list_;
+    int numberOfRandomNeighbours_;
 
 public:
 
-  AdaptiveRandomNeighborhood(SolutionSet * solutionSet, int numberOfRandomNeighbours);
-  vector<int> getNeighbors(int i);
-  int getNumberOfRandomNeighbours();
-  SolutionSet * getBestFitnessSolutionInNeighborhood(Comparator * comparator);
-  vector<vector<int>> getNeighborhood();
-  void recompute();
-  //string toString();
+    AdaptiveRandomNeighborhood(SolutionSet * solutionSet, int numberOfRandomNeighbours);
+    vector<int> getNeighbors(int i);
+    int getNumberOfRandomNeighbours();
+    SolutionSet * getBestFitnessSolutionInNeighborhood(Comparator * comparator);
+    vector<vector<int>> getNeighborhood();
+    void recompute();
+    //string toString();
 
 }; // AdaptiveRandomNeighborhood
 

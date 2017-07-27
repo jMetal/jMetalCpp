@@ -27,26 +27,27 @@
 #include <PolynomialMutation.h>
 #include <BinaryTournament2.h>
 
-class gGA_Settings : public Settings {
+class gGA_Settings : public Settings
+{
 private:
-	int populationSize_                 ;
-	int maxEvaluations_                 ;
-	double mutationProbability_         ;
-	double crossoverProbability_        ;
-	double mutationDistributionIndex_   ;
-	double crossoverDistributionIndex_  ;
+    int populationSize_                 ;
+    int maxEvaluations_                 ;
+    double mutationProbability_         ;
+    double crossoverProbability_        ;
+    double mutationDistributionIndex_   ;
+    double crossoverDistributionIndex_  ;
 
-  Algorithm * algorithm ;
-  Operator  * crossover ; // Crossover operator
-  Operator  * mutation  ; // Mutation operator
-  Operator  * selection ; // Selection operator
+    Algorithm * algorithm ;
+    Operator  * crossover ; // Crossover operator
+    Operator  * mutation  ; // Mutation operator
+    Operator  * selection ; // Selection operator
 
 public:
-  gGA_Settings() ;
-  gGA_Settings(string problemName) ;
-	~gGA_Settings() ;
+    gGA_Settings() ;
+    gGA_Settings(string problemName) ;
+    ~gGA_Settings() ;
 
-  Algorithm * configure() ;
+    Algorithm * configure() ;
 }; // gGA_Settings
 
 #endif // __GGA_SETTINGS__

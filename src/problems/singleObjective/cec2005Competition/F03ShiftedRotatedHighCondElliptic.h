@@ -25,36 +25,37 @@
 #include <Benchmark.h>
 #include <TestFunc.h>
 
-class F03ShiftedRotatedHighCondElliptic : public TestFunc {
+class F03ShiftedRotatedHighCondElliptic : public TestFunc
+{
 
 private:
 
-  // Fixed (class) parameters
-  static const string FUNCTION_NAME;
-  static const string DEFAULT_FILE_DATA;
-  static const string DEFAULT_FILE_MX_PREFIX;
-  static const string DEFAULT_FILE_MX_SUFFIX;
+    // Fixed (class) parameters
+    static const string FUNCTION_NAME;
+    static const string DEFAULT_FILE_DATA;
+    static const string DEFAULT_FILE_MX_PREFIX;
+    static const string DEFAULT_FILE_MX_SUFFIX;
 
-  // Shifted global optimum
-  double * m_o;
-  double ** m_matrix;
+    // Shifted global optimum
+    double * m_o;
+    double ** m_matrix;
 
-  // In order to avoid excessive memory allocation,
-  // a fixed memory buffer is allocated for each function object.
-  double * m_z;
-  double * m_zM;
+    // In order to avoid excessive memory allocation,
+    // a fixed memory buffer is allocated for each function object.
+    double * m_z;
+    double * m_zM;
 
-  double constant;
+    double constant;
 
-  string getFileMxName(string prefix, int dimension, string suffix);
+    string getFileMxName(string prefix, int dimension, string suffix);
 
 public:
 
-  F03ShiftedRotatedHighCondElliptic(int dimension, double bias);
-  F03ShiftedRotatedHighCondElliptic(int dimension, double bias, string file_data, string file_m);
-  ~F03ShiftedRotatedHighCondElliptic();
+    F03ShiftedRotatedHighCondElliptic(int dimension, double bias);
+    F03ShiftedRotatedHighCondElliptic(int dimension, double bias, string file_data, string file_m);
+    ~F03ShiftedRotatedHighCondElliptic();
 
-  double f (double * x);
+    double f (double * x);
 
 }; // F03ShiftedRotatedHighCondElliptic
 

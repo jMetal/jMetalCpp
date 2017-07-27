@@ -27,21 +27,22 @@
 
 using namespace std;
 
-class LZ09 {
+class LZ09
+{
 private:
-	int nvar_  ;
-	int nobj_  ;
-	int ltype_ ;
-  int dtype_ ;
-  int ptype_ ;
+    int nvar_  ;
+    int nobj_  ;
+    int ltype_ ;
+    int dtype_ ;
+    int ptype_ ;
 
 public:
-  LZ09 (int nvar, int nobj, int ptype, int dtype, int ltype) ;
-	void alphaFunction(double *alpha, vector<double> *x, int dim, int type) ;
-	double betaFunction(vector<double> * x, int type) ;
-	double psfunc2(double x, double t1, int dim, int type, int css) ;
-	double psfunc3(double x, double t1, double t2, int dim, int type) ;
-	void objective(vector<double> * x_var, vector <double> * y_obj) ;
+    LZ09 (int nvar, int nobj, int ptype, int dtype, int ltype) ;
+    void alphaFunction(double *alpha, vector<double> *x, int dim, int type) ;
+    double betaFunction(vector<double> * x, int type) ;
+    double psfunc2(double x, double t1, int dim, int type, int css) ;
+    double psfunc3(double x, double t1, double t2, int dim, int type) ;
+    void objective(vector<double> * x_var, vector <double> * y_obj) ;
 
 };
 

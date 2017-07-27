@@ -23,72 +23,76 @@
 /**
  * Default constructor
  */
-ssGA_Settings::ssGA_Settings () : Settings() {
+ssGA_Settings::ssGA_Settings () : Settings()
+{
 } // ssGA_Settings
 
 /**
  * Destructor
  */
-ssGA_Settings::~ssGA_Settings () {
-  delete algorithm ;
-  delete crossover ; // Crossover operator
-  delete mutation  ; // Mutation operator
-  delete selection ; // Selection operator
+ssGA_Settings::~ssGA_Settings ()
+{
+    delete algorithm ;
+    delete crossover ; // Crossover operator
+    delete mutation  ; // Mutation operator
+    delete selection ; // Selection operator
 } // ~ssGA_Settings
 
 /**
  * Constructor
  */
-ssGA_Settings::ssGA_Settings(string problemName) {
-	problemName_ = problemName ;
+ssGA_Settings::ssGA_Settings(string problemName)
+{
+    problemName_ = problemName ;
 
-  problem_ = ProblemFactory::getProblem((char *) problemName_.c_str());
+    problem_ = ProblemFactory::getProblem((char *) problemName_.c_str());
 
-  // Algorithm parameters
-  populationSize_ = 100;
-  maxEvaluations_ = 25000;
-  mutationProbability_         = 1.0/problem_->getNumberOfVariables() ;
-  crossoverProbability_        = 0.9   ;
-  mutationDistributionIndex_   = 20.0  ;
-  crossoverDistributionIndex_  = 20.0  ;
+    // Algorithm parameters
+    populationSize_ = 100;
+    maxEvaluations_ = 25000;
+    mutationProbability_         = 1.0/problem_->getNumberOfVariables() ;
+    crossoverProbability_        = 0.9   ;
+    mutationDistributionIndex_   = 20.0  ;
+    crossoverDistributionIndex_  = 20.0  ;
 } // ssGA_Settings
 
 /**
  * Configure method
  */
-Algorithm * ssGA_Settings::configure() {
+Algorithm * ssGA_Settings::configure()
+{
 
-	algorithm = new ssGA(problem_);
-  algorithm->setInputParameter("populationSize",&populationSize_);
-  algorithm->setInputParameter("maxEvaluations",&maxEvaluations_);
+    algorithm = new ssGA(problem_);
+    algorithm->setInputParameter("populationSize",&populationSize_);
+    algorithm->setInputParameter("maxEvaluations",&maxEvaluations_);
 
-	// Mutation and Crossover for Real codification
-	map<string, void *> parameters;
+    // Mutation and Crossover for Real codification
+    map<string, void *> parameters;
 
-  double crossoverProbability = crossoverProbability_;
-  double crossoverDistributionIndex = crossoverDistributionIndex_ ;
-  parameters["probability"] =  &crossoverProbability;
-  parameters["distributionIndex"] = &crossoverDistributionIndex;
-  crossover = new SBXCrossover(parameters);
+    double crossoverProbability = crossoverProbability_;
+    double crossoverDistributionIndex = crossoverDistributionIndex_ ;
+    parameters["probability"] =  &crossoverProbability;
+    parameters["distributionIndex"] = &crossoverDistributionIndex;
+    crossover = new SBXCrossover(parameters);
 
-	parameters.clear();
-  double mutationProbability = mutationProbability_;
-  double mutationDistributionIndex = mutationDistributionIndex_;
-  parameters["probability"] = &mutationProbability;
-  parameters["distributionIndex"] = &mutationDistributionIndex;
-  mutation = new PolynomialMutation(parameters);
+    parameters.clear();
+    double mutationProbability = mutationProbability_;
+    double mutationDistributionIndex = mutationDistributionIndex_;
+    parameters["probability"] = &mutationProbability;
+    parameters["distributionIndex"] = &mutationDistributionIndex;
+    mutation = new PolynomialMutation(parameters);
 
-	// Selection Operator
-	parameters.clear();
-	selection = new BinaryTournament(parameters);
+    // Selection Operator
+    parameters.clear();
+    selection = new BinaryTournament(parameters);
 
-	// Add the operators to the algorithm
-	algorithm->addOperator("crossover",crossover);
-	algorithm->addOperator("mutation",mutation);
-	algorithm->addOperator("selection",selection);
+    // Add the operators to the algorithm
+    algorithm->addOperator("crossover",crossover);
+    algorithm->addOperator("mutation",mutation);
+    algorithm->addOperator("selection",selection);
 
-	cout << "ssGA algorithm initialized." << endl;
+    cout << "ssGA algorithm initialized." << endl;
 
-	return algorithm ;
+    return algorithm ;
 } // configure
 

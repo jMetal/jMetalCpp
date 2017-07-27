@@ -39,20 +39,21 @@ using namespace std;
   * @brief This class provides some utilities to compute quality indicators
 **/
 
-class MetricsUtil {
+class MetricsUtil
+{
 
 public:
-	vector< vector<double> > readFront(string path);
-	vector<double> getMaximumValues(vector< vector<double> > front, int noObjectives);
-	vector<double> getMinimumValues(vector< vector<double> > front, int noObjectives);
-	double distance(vector<double> a, vector<double> b);
-	double distanceToClosedPoint(vector<double> point, vector< vector<double> > front);
-	double distanceToNearestPoint(vector<double> point, vector< vector<double> > front);
-	vector< vector<double> > getNormalizedFront(vector< vector<double> > front,
-	    vector<double> maximumValue, vector<double> minimumValue);
-	vector< vector<double> > invertedFront(vector< vector<double> > front);
-	SolutionSet * readNonDominatedSolutionSet(string path);
-	void readNonDominatedSolutionSet(string path, NonDominatedSolutionList * solutionSet);
+    vector< vector<double> > readFront(string path);
+    vector<double> getMaximumValues(vector< vector<double> > front, int noObjectives);
+    vector<double> getMinimumValues(vector< vector<double> > front, int noObjectives);
+    double distance(vector<double> a, vector<double> b);
+    double distanceToClosedPoint(vector<double> point, vector< vector<double> > front);
+    double distanceToNearestPoint(vector<double> point, vector< vector<double> > front);
+    vector< vector<double> > getNormalizedFront(vector< vector<double> > front,
+            vector<double> maximumValue, vector<double> minimumValue);
+    vector< vector<double> > invertedFront(vector< vector<double> > front);
+    SolutionSet * readNonDominatedSolutionSet(string path);
+    void readNonDominatedSolutionSet(string path, NonDominatedSolutionList * solutionSet);
 };
 
 #endif /* __METRICSUTIL__ */

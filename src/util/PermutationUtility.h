@@ -23,10 +23,11 @@
 
 #include <PseudoRandom.h>
 
-class PermutationUtility {
+class PermutationUtility
+{
 
 public:
-  int * intPermutation(int length);
+    int * intPermutation(int length);
 
 };
 

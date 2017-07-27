@@ -30,71 +30,75 @@
 #include <iostream>
 #include <time.h>
 
-int main(int argc, char ** argv) {
+int main(int argc, char ** argv)
+{
 
-  clock_t t_ini, t_fin;
+    clock_t t_ini, t_fin;
 
-  Problem   * problem   ; // The problem to solve
-  Algorithm * algorithm ; // The algorithm to use
-  Operator  * crossover ; // Crossover operator
-  Operator  * selection ; // Selection operator
+    Problem   * problem   ; // The problem to solve
+    Algorithm * algorithm ; // The algorithm to use
+    Operator  * crossover ; // Crossover operator
+    Operator  * selection ; // Selection operator
 
-  map<string, void *> parameters;
-  
-  //TODO: QualityIndicator * indicators;
+    map<string, void *> parameters;
 
-  if (argc>=2) {
-    problem = ProblemFactory::getProblem(argc, argv);
-    cout << "Selected problem: " << problem->getName() << endl;
-  } else {
-    cout << "No problem selected." << endl;
-    cout << "Default problem will be used: Fonseca" << endl;
-    problem = ProblemFactory::getProblem(const_cast<char *>("Fonseca"));
-  }
+    //TODO: QualityIndicator * indicators;
 
-  algorithm = new GDE3(problem);
+    if (argc>=2)
+    {
+        problem = ProblemFactory::getProblem(argc, argv);
+        cout << "Selected problem: " << problem->getName() << endl;
+    }
+    else
+    {
+        cout << "No problem selected." << endl;
+        cout << "Default problem will be used: Fonseca" << endl;
+        problem = ProblemFactory::getProblem(const_cast<char *>("Fonseca"));
+    }
 
-  // Algorithm parameters
-  int populationSizeValue = 100;
-  int maxIterationsValue = 250;
-  algorithm->setInputParameter("populationSize",&populationSizeValue);
-  algorithm->setInputParameter("maxIterations",&maxIterationsValue);
+    algorithm = new GDE3(problem);
 
-  // Crossover operator
-  double crParameter = 0.5;
-  double fParameter  = 0.5;
-  parameters["CR"] =  &crParameter;
-  parameters["F"] = &fParameter;
-  crossover = new DifferentialEvolutionCrossover(parameters);
+    // Algorithm parameters
+    int populationSizeValue = 100;
+    int maxIterationsValue = 250;
+    algorithm->setInputParameter("populationSize",&populationSizeValue);
+    algorithm->setInputParameter("maxIterations",&maxIterationsValue);
 
-  // Selection operator
-  parameters.clear();
-  selection = new DifferentialEvolutionSelection(parameters) ;
+    // Crossover operator
+    double crParameter = 0.5;
+    double fParameter  = 0.5;
+    parameters["CR"] =  &crParameter;
+    parameters["F"] = &fParameter;
+    crossover = new DifferentialEvolutionCrossover(parameters);
 
-  // Add the operators to the algorithm
-  algorithm->addOperator("crossover",crossover);
-  algorithm->addOperator("selection",selection);
+    // Selection operator
+    parameters.clear();
+    selection = new DifferentialEvolutionSelection(parameters) ;
 
-  // Add the indicator object to the algorithm
-  //algorithm->setInputParameter("indicators", indicators) ;
+    // Add the operators to the algorithm
+    algorithm->addOperator("crossover",crossover);
+    algorithm->addOperator("selection",selection);
 
-  // Execute the Algorithm
-  t_ini = clock();
-  SolutionSet * population = algorithm->execute();
-  t_fin = clock();
-  double secs = (double) (t_fin - t_ini);
-  secs = secs / CLOCKS_PER_SEC;
+    // Add the indicator object to the algorithm
+    //algorithm->setInputParameter("indicators", indicators) ;
 
-  // Result messages
-  cout << "Total execution time: " << secs << "s" << endl;
-  cout << "Variables values have been written to file VAR" << endl;
-  population->printVariablesToFile("VAR");
-  cout << "Objectives values have been written to file FUN" << endl;
-  population->printObjectivesToFile("FUN");
+    // Execute the Algorithm
+    t_ini = clock();
+    SolutionSet * population = algorithm->execute();
+    t_fin = clock();
+    double secs = (double) (t_fin - t_ini);
+    secs = secs / CLOCKS_PER_SEC;
 
-  delete selection;
-  delete crossover;
-  delete population;
-  delete algorithm;
+    // Result messages
+    cout << "Total execution time: " << secs << "s" << endl;
+    cout << "Variables values have been written to file VAR" << endl;
+    population->printVariablesToFile("VAR");
+    cout << "Objectives values have been written to file FUN" << endl;
+    population->printObjectivesToFile("FUN");
+
+    delete selection;
+    delete crossover;
+    delete population;
+    delete algorithm;
 
 } // main

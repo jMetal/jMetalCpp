@@ -28,17 +28,18 @@
 
 using namespace std;
 
-class Fitness {
+class Fitness
+{
 
 private:
 
 public:
 
-  MetricsUtil * utils_; // stores a reference to  qualityIndicatorUtils
+    MetricsUtil * utils_; // stores a reference to  qualityIndicatorUtils
 
-  Fitness();
-  ~Fitness();
-  void fitness(vector <vector<double> > a, string file);
+    Fitness();
+    ~Fitness();
+    void fitness(vector <vector<double> > a, string file);
 
 }; // Fitness
 

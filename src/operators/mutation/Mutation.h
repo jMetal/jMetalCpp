@@ -29,11 +29,12 @@
  * @class Mutation
  * @brief This class is aimed at representing a Mutation operator
 **/
-class Mutation : public Operator{
+class Mutation : public Operator
+{
 
 public:
-  Mutation(map<string, void *> parameters);
-  virtual ~Mutation() = 0;
+    Mutation(map<string, void *> parameters);
+    virtual ~Mutation() = 0;
 
 };
 

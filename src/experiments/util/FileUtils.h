@@ -19,9 +19,9 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #ifdef WIN32
- #define WINDOWS
+#define WINDOWS
 #elif WIN64
- #define WINDOWS
+#define WINDOWS
 #endif
 
 #ifndef __FILEUTILS__
@@ -32,17 +32,18 @@
 #include <sys/stat.h>
 
 #ifdef WINDOWS
-  #include <dir.h>
+//#include <dir.h>
 #endif
 
 using namespace std;
 
-class FileUtils {
+class FileUtils
+{
 
 public:
 
-  static int existsPath(const char* path);
-  static int createDirectory(string path);
+    static int existsPath(const char* path);
+    static int createDirectory(string path);
 
 }; //FileUtils
 

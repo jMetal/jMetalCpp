@@ -29,16 +29,17 @@
 #include <XReal.h>
 #include <Solution.h>
 
-class DTLZ3 : public Problem {
+class DTLZ3 : public Problem
+{
 public:
-	DTLZ3(string solutionType, int numberOfVariables = 12, int numberOfObjectives = 3);
-	void evaluate(Solution *solution);
+    DTLZ3(string solutionType, int numberOfVariables = 12, int numberOfObjectives = 3);
+    void evaluate(Solution *solution);
 
-	virtual ~DTLZ3();
+    virtual ~DTLZ3();
 private:
-	double * fx_ ;
-  double * x_  ;
-  static const double PI ;
+    double * fx_ ;
+    double * x_  ;
+    static const double PI ;
 };
 
 #endif /* __DTLZ3_H__ */

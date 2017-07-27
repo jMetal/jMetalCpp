@@ -34,16 +34,17 @@
   * @brief This class implements a steady-state version of NSGA-II.
 **/
 
-class ssNSGAII : public Algorithm {
+class ssNSGAII : public Algorithm
+{
 
 private:
-  int populationSize_;
-  int maxEvaluations_;
-  //QualityIndicator *indicators_;
+    int populationSize_;
+    int maxEvaluations_;
+    //QualityIndicator *indicators_;
 
 public:
-  ssNSGAII(Problem * problem);
-  SolutionSet * execute();
+    ssNSGAII(Problem * problem);
+    SolutionSet * execute();
 
 };
 

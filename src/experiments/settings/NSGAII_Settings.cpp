@@ -24,72 +24,76 @@
 /**
  * Default constructor
  */
-NSGAII_Settings::NSGAII_Settings () : Settings() {
+NSGAII_Settings::NSGAII_Settings () : Settings()
+{
 } // NSGAII_Settings
 
 /**
  * Destructor
  */
-NSGAII_Settings::~NSGAII_Settings () {
-  delete algorithm ;
-  delete crossover ; // Crossover operator
-  delete mutation  ; // Mutation operator
-  delete selection ; // Selection operator
+NSGAII_Settings::~NSGAII_Settings ()
+{
+    delete algorithm ;
+    delete crossover ; // Crossover operator
+    delete mutation  ; // Mutation operator
+    delete selection ; // Selection operator
 } // ~NSGAII_Settings
 
 /**
  * Constructor
  */
-NSGAII_Settings::NSGAII_Settings(string problemName) {
-	problemName_ = problemName ;
+NSGAII_Settings::NSGAII_Settings(string problemName)
+{
+    problemName_ = problemName ;
 
-  problem_ = ProblemFactory::getProblem((char *) problemName_.c_str());
+    problem_ = ProblemFactory::getProblem((char *) problemName_.c_str());
 
-  // Algorithm parameters
-  populationSize_ = 100;
-  maxEvaluations_ = 25000;
-  mutationProbability_         = 1.0/problem_->getNumberOfVariables() ;
-  crossoverProbability_        = 0.9   ;
-  mutationDistributionIndex_   = 20.0  ;
-  crossoverDistributionIndex_  = 20.0  ;
+    // Algorithm parameters
+    populationSize_ = 100;
+    maxEvaluations_ = 25000;
+    mutationProbability_         = 1.0/problem_->getNumberOfVariables() ;
+    crossoverProbability_        = 0.9   ;
+    mutationDistributionIndex_   = 20.0  ;
+    crossoverDistributionIndex_  = 20.0  ;
 } // NSGAII_Settings
 
 /**
  * Configure method
  */
-Algorithm * NSGAII_Settings::configure() {
+Algorithm * NSGAII_Settings::configure()
+{
 
-	algorithm = new NSGAII(problem_);
-  algorithm->setInputParameter("populationSize",&populationSize_);
-  algorithm->setInputParameter("maxEvaluations",&maxEvaluations_);
+    algorithm = new NSGAII(problem_);
+    algorithm->setInputParameter("populationSize",&populationSize_);
+    algorithm->setInputParameter("maxEvaluations",&maxEvaluations_);
 
-	// Mutation and Crossover for Real codification
-	map<string, void *> parameters;
+    // Mutation and Crossover for Real codification
+    map<string, void *> parameters;
 
-  double crossoverProbability = crossoverProbability_;
-  double crossoverDistributionIndex = crossoverDistributionIndex_ ;
-  parameters["probability"] =  &crossoverProbability;
-  parameters["distributionIndex"] = &crossoverDistributionIndex;
-  crossover = new SBXCrossover(parameters);
+    double crossoverProbability = crossoverProbability_;
+    double crossoverDistributionIndex = crossoverDistributionIndex_ ;
+    parameters["probability"] =  &crossoverProbability;
+    parameters["distributionIndex"] = &crossoverDistributionIndex;
+    crossover = new SBXCrossover(parameters);
 
-	parameters.clear();
-  double mutationProbability = mutationProbability_;
-  double mutationDistributionIndex = mutationDistributionIndex_;
-  parameters["probability"] = &mutationProbability;
-  parameters["distributionIndex"] = &mutationDistributionIndex;
-  mutation = new PolynomialMutation(parameters);
+    parameters.clear();
+    double mutationProbability = mutationProbability_;
+    double mutationDistributionIndex = mutationDistributionIndex_;
+    parameters["probability"] = &mutationProbability;
+    parameters["distributionIndex"] = &mutationDistributionIndex;
+    mutation = new PolynomialMutation(parameters);
 
-	// Selection Operator
-	parameters.clear();
-	selection = new BinaryTournament2(parameters);
+    // Selection Operator
+    parameters.clear();
+    selection = new BinaryTournament2(parameters);
 
-	// Add the operators to the algorithm
-	algorithm->addOperator("crossover",crossover);
-	algorithm->addOperator("mutation",mutation);
-	algorithm->addOperator("selection",selection);
+    // Add the operators to the algorithm
+    algorithm->addOperator("crossover",crossover);
+    algorithm->addOperator("mutation",mutation);
+    algorithm->addOperator("selection",selection);
 
-	cout << "NGSAII algorithm initialized." << endl;
+    cout << "NGSAII algorithm initialized." << endl;
 
-	return algorithm ;
+    return algorithm ;
 } // configure
 

@@ -33,22 +33,23 @@
  * This class allows to apply a SBX crossover operator using two parent
  * solutions.
 **/
-class XReal {
+class XReal
+{
 
 public:
-  XReal();
-  XReal(Solution * solution);
-  double getValue(int index);
-  void setValue(int index, double value);
-  double getLowerBound(int index);
-  double getUpperBound(int index);
-  int getNumberOfDecisionVariables();
-  int size();
-  Solution * getSolution();
+    XReal();
+    XReal(Solution * solution);
+    double getValue(int index);
+    void setValue(int index, double value);
+    double getLowerBound(int index);
+    double getUpperBound(int index);
+    int getNumberOfDecisionVariables();
+    int size();
+    Solution * getSolution();
 
 private:
-  Solution * solution_;
-  SolutionType * type_;
+    Solution * solution_;
+    SolutionType * type_;
 
 };
 

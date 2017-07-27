@@ -28,10 +28,11 @@
  * This class implements a <code>Comparator</code> (a method for comparing
  * <code>Solution</code> objects) based on the rank of the solutions.
  */
-class RankComparator : public Comparator {
+class RankComparator : public Comparator
+{
 
 public:
-  int compare(void * o1, void * o2);
+    int compare(void * o1, void * o2);
 
 };
 

@@ -31,21 +31,22 @@
 #include <CrowdingComparator.h>
 #include <cmath>
 #include <iostream>
-// Juanjo: I am following the same sintax as in the other algorithms. 
+// Juanjo: I am following the same sintax as in the other algorithms.
 // however, I would never ever program like this in C++
 // I would recommend to use something as MOCHC(Problem &)
 
 
-class MOCHC : public Algorithm {
+class MOCHC : public Algorithm
+{
 
-	bool equalsIndividuals(Solution &s1, Solution & s2);
-	bool exist(Solution &s1, SolutionSet &set2);
-	bool equals(SolutionSet& set1, SolutionSet& set2);
-	int hammingDistance(Solution &sol1, Solution& sol2);
-	SolutionSet *rankingAndCrowdingSelection(SolutionSet *sol,int size);
+    bool equalsIndividuals(Solution &s1, Solution & s2);
+    bool exist(Solution &s1, SolutionSet &set2);
+    bool equals(SolutionSet& set1, SolutionSet& set2);
+    int hammingDistance(Solution &sol1, Solution& sol2);
+    SolutionSet *rankingAndCrowdingSelection(SolutionSet *sol,int size);
 
 public:
-	MOCHC(Problem * problem) : Algorithm(problem){};
-	SolutionSet *execute();
+    MOCHC(Problem * problem) : Algorithm(problem) {};
+    SolutionSet *execute();
 };
 

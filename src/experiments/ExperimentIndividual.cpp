@@ -23,29 +23,33 @@
 /**
  * Constructor
  */
-ExperimentIndividual::ExperimentIndividual(int algorithmIndex, int problemIndex, int numRun) {
-  algorithmIndex_ = algorithmIndex;
-  problemIndex_ = problemIndex;
-  numRun_ = numRun;
+ExperimentIndividual::ExperimentIndividual(int algorithmIndex, int problemIndex, int numRun)
+{
+    algorithmIndex_ = algorithmIndex;
+    problemIndex_ = problemIndex;
+    numRun_ = numRun;
 }
 
 /**
  * Return the algorithm index atribute
  */
-int ExperimentIndividual::getAlgorithmIndex() {
-  return algorithmIndex_;
+int ExperimentIndividual::getAlgorithmIndex()
+{
+    return algorithmIndex_;
 }
 
 /**
  * Return the problem index atribute
  */
-int ExperimentIndividual::getProblemIndex() {
-  return problemIndex_;
+int ExperimentIndividual::getProblemIndex()
+{
+    return problemIndex_;
 }
 
 /**
  * Return the algorithm index atribute
  */
-int ExperimentIndividual::getNumRun() {
-  return numRun_;
+int ExperimentIndividual::getNumRun()
+{
+    return numRun_;
 }

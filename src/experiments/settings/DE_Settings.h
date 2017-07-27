@@ -26,24 +26,25 @@
 #include <DifferentialEvolutionCrossover.h>
 #include <DifferentialEvolutionSelection.h>
 
-class DE_Settings : public Settings {
+class DE_Settings : public Settings
+{
 private:
-	int populationSize_        ;
-	int maxEvaluations_        ;
-	double crParameter_        ;
-  double fParameter_         ;
-  string deVariantParameter_ ;
+    int populationSize_        ;
+    int maxEvaluations_        ;
+    double crParameter_        ;
+    double fParameter_         ;
+    string deVariantParameter_ ;
 
-  Algorithm * algorithm ;
-  Operator  * crossover ; // Crossover operator
-  Operator  * selection ; // Selection operator
+    Algorithm * algorithm ;
+    Operator  * crossover ; // Crossover operator
+    Operator  * selection ; // Selection operator
 
 public:
-  DE_Settings() ;
-  DE_Settings(string problemName) ;
-	~DE_Settings() ;
+    DE_Settings() ;
+    DE_Settings(string problemName) ;
+    ~DE_Settings() ;
 
-  Algorithm * configure() ;
+    Algorithm * configure() ;
 }; // DE_Settings
 
 #endif // __DE_SETTINGS__

@@ -30,11 +30,12 @@
 /**
  * Class implementing a steady-state genetic algorithm
  */
-class ssGA : public Algorithm {
+class ssGA : public Algorithm
+{
 
 public:
-  ssGA(Problem * problem);
-  SolutionSet * execute();
+    ssGA(Problem * problem);
+    SolutionSet * execute();
 
 };
 

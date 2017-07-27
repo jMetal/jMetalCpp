@@ -25,24 +25,25 @@
 #include <SMPSO.h>
 #include <PolynomialMutation.h>
 
-class SMPSO_Settings : public Settings{
+class SMPSO_Settings : public Settings
+{
 
 private:
-  int    swarmSize_                 ;
-  int    maxIterations_             ;
-  int    archiveSize_               ;
-  double mutationDistributionIndex_ ;
-  double mutationProbability_       ;
+    int    swarmSize_                 ;
+    int    maxIterations_             ;
+    int    archiveSize_               ;
+    double mutationDistributionIndex_ ;
+    double mutationProbability_       ;
 
-  Algorithm * algorithm ;
-  Operator  * mutation  ; // Mutation operator
+    Algorithm * algorithm ;
+    Operator  * mutation  ; // Mutation operator
 
 public:
-  SMPSO_Settings() ;
-  SMPSO_Settings(string problemName) ;
-	~SMPSO_Settings() ;
+    SMPSO_Settings() ;
+    SMPSO_Settings(string problemName) ;
+    ~SMPSO_Settings() ;
 
-  Algorithm * configure() ;
+    Algorithm * configure() ;
 }; // SMPSO_Settings
 
 #endif // __SMPSO_SETTINGS__

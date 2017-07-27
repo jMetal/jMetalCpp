@@ -29,11 +29,12 @@
   * @class Crossover
   * @brief This class is aimed at representing a Crossover operator
 **/
-class Crossover : public Operator {
+class Crossover : public Operator
+{
 
 public:
-  Crossover(map<string, void *> parameters);
-  virtual ~Crossover() = 0;
+    Crossover(map<string, void *> parameters);
+    virtual ~Crossover() = 0;
 
 };
 

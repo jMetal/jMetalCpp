@@ -27,15 +27,17 @@
 /**
  * Constructor.
 **/
-Operator::Operator() {
+Operator::Operator()
+{
 } // Operator
 
 
 /**
  * Constructor.
 **/
-Operator::Operator(map<string , void*> parameters) {
-  parameters_ = parameters;
+Operator::Operator(map<string, void*> parameters)
+{
+    parameters_ = parameters;
 } // Operator
 
 
@@ -50,8 +52,9 @@ Operator::~Operator() { /* do nothing */ }
  * @param name The parameter name.
  * @param value Object representing the parameter.
 **/
-void Operator::setParameter(string name, void *value) {
-  parameters_[name] = value;
+void Operator::setParameter(string name, void *value)
+{
+    parameters_[name] = value;
 } // setParameter
 
 
@@ -60,7 +63,8 @@ void Operator::setParameter(string name, void *value) {
  * @param name The parameter name.
  * @return the parameter.
 **/
-void * Operator::getParameter(string name) {
-  return parameters_[name];
+void * Operator::getParameter(string name)
+{
+    return parameters_[name];
 }
 

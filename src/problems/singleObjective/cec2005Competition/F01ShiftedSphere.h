@@ -25,28 +25,29 @@
 #include <Benchmark.h>
 #include <TestFunc.h>
 
-class F01ShiftedSphere : public TestFunc {
+class F01ShiftedSphere : public TestFunc
+{
 
 private:
 
-  // Fixed (class) parameters
-  static const string FUNCTION_NAME;
-  static const string DEFAULT_FILE_DATA;
+    // Fixed (class) parameters
+    static const string FUNCTION_NAME;
+    static const string DEFAULT_FILE_DATA;
 
-  // Shifted global optimum
-  double * m_o;
+    // Shifted global optimum
+    double * m_o;
 
-  // In order to avoid excessive memory allocation,
-  // a fixed memory buffer is allocated for each function object.
-  double * m_z;
+    // In order to avoid excessive memory allocation,
+    // a fixed memory buffer is allocated for each function object.
+    double * m_z;
 
 public:
 
-  F01ShiftedSphere(int dimension, double bias);
-  F01ShiftedSphere(int dimension, double bias, string file_data);
-  ~F01ShiftedSphere();
+    F01ShiftedSphere(int dimension, double bias);
+    F01ShiftedSphere(int dimension, double bias, string file_data);
+    ~F01ShiftedSphere();
 
-  double f (double * x);
+    double f (double * x);
 
 }; // F01ShiftedSphere
 

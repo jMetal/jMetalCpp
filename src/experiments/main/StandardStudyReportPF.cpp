@@ -29,74 +29,80 @@
  */
 
 
-int main(int argc, char ** argv) {
-  StandardStudyReportPF * exp = new StandardStudyReportPF() ;
+int main(int argc, char ** argv)
+{
+    StandardStudyReportPF * exp = new StandardStudyReportPF() ;
 
-  // Name of the experiment:
-  exp->experimentName_ = "StandardStudy";
+    // Name of the experiment:
+    exp->experimentName_ = "StandardStudy";
 
-  // List of algorithm names to be analyzed in the experiment
-  // (please, refer to the README to check the possible values):
-  vector<string> algorithmNameList_ {
-      "NSGAII", "SMPSO", "GDE3"};
-  exp->algorithmNameList_ = algorithmNameList_;
+    // List of algorithm names to be analyzed in the experiment
+    // (please, refer to the README to check the possible values):
+    vector<string> algorithmNameList_
+    {
+        "NSGAII", "SMPSO", "GDE3"};
+    exp->algorithmNameList_ = algorithmNameList_;
 
-  // List of problem names to be analyzed in the experiment
-  // (please, refer to the README to check the possible values):
-  vector<string> problemList_ {
-      "ZDT1", "ZDT2", "ZDT3", "ZDT4", "ZDT6"};
-  exp->problemList_ = problemList_;
+    // List of problem names to be analyzed in the experiment
+    // (please, refer to the README to check the possible values):
+    vector<string> problemList_
+    {
+        "ZDT1", "ZDT2", "ZDT3", "ZDT4", "ZDT6"};
+    exp->problemList_ = problemList_;
 
-  // List of optimal pareto front files to be used when calculating quality
-  // indicators. It's not necessary to define this variable when not knowing
-  // or not wanting to use optimal pareto fronts.
-  vector<string> paretoFrontFile_ {
-      "ZDT1.pf", "ZDT2.pf", "ZDT3.pf", "ZDT4.pf", "ZDT6.pf"};
-  exp->paretoFrontFile_ = paretoFrontFile_;
+    // List of optimal pareto front files to be used when calculating quality
+    // indicators. It's not necessary to define this variable when not knowing
+    // or not wanting to use optimal pareto fronts.
+    vector<string> paretoFrontFile_
+    {
+        "ZDT1.pf", "ZDT2.pf", "ZDT3.pf", "ZDT4.pf", "ZDT6.pf"};
+    exp->paretoFrontFile_ = paretoFrontFile_;
 
-  // List of quality indicator names to be calculated in the reports
-  // (please, refer to the README to check the possible values):
-  vector<string> indicatorList_ {
-      "HV", "SPREAD", "EPSILON"};
-  exp->indicatorList_ = indicatorList_;
+    // List of quality indicator names to be calculated in the reports
+    // (please, refer to the README to check the possible values):
+    vector<string> indicatorList_
+    {
+        "HV", "SPREAD", "EPSILON"};
+    exp->indicatorList_ = indicatorList_;
 
-  // Directory from where the execution results will be readed:
-  exp->experimentBaseDirectory_ = "C:/jMetal/pruebas/jmetal-cpp/" +
-                                 exp->experimentName_;
+    // Directory from where the execution results will be readed:
+    exp->experimentBaseDirectory_ = "C:/jMetal/pruebas/jmetal-cpp/" +
+                                    exp->experimentName_;
 
-  // Directory from where the optimal pareto front files will be readed.
-  // Comment this following line to not use pareto fronts in order to
-  // calculate reference fronts.
-  exp->paretoFrontDirectory_ = "C:/jMetal/pruebas/data/paretoFronts";
+    // Directory from where the optimal pareto front files will be readed.
+    // Comment this following line to not use pareto fronts in order to
+    // calculate reference fronts.
+    exp->paretoFrontDirectory_ = "C:/jMetal/pruebas/data/paretoFronts";
 
 //  // Directory where the calculated references front files will be stored.
 //  // This line is not needed when you are using existing optimal pareto fronts.
 //  exp->referenceFrontDirectory_= "C:/antonio/Softw/pruebas/data/referenceFronts";
 
-  // Number of independent runs of each algorithm for each problem:
-  exp->independentRuns_ = 20;
+    // Number of independent runs of each algorithm for each problem:
+    exp->independentRuns_ = 20;
 
-  int numberOfAlgorithms = exp->algorithmNameList_.size();
+    int numberOfAlgorithms = exp->algorithmNameList_.size();
 
-  // Generate quality indicators
-  exp->generateQualityIndicators();
+    // Generate quality indicators
+    exp->generateQualityIndicators();
 
-  // Generate latex tables (comment this sentence is not desired)
-  exp->generateLatexTables();
+    // Generate latex tables (comment this sentence is not desired)
+    exp->generateLatexTables();
 
-  // Configure the R scripts to be generated
-  int rows = 3 ;
-  int columns = 2 ;
-  string prefix = "ZDT";
-  vector<string> problemsValues {
-      "ZDT1", "ZDT2", "ZDT3", "ZDT4", "ZDT6"};
-  vector<string> problems = problemsValues;
+    // Configure the R scripts to be generated
+    int rows = 3 ;
+    int columns = 2 ;
+    string prefix = "ZDT";
+    vector<string> problemsValues
+    {
+        "ZDT1", "ZDT2", "ZDT3", "ZDT4", "ZDT6"};
+    vector<string> problems = problemsValues;
 
-  bool notch;
-  exp->generateRBoxplotScripts(rows, columns, problems, prefix, notch = false, exp);
-  exp->generateRWilcoxonScripts(problems, prefix, exp);
+    bool notch;
+    exp->generateRBoxplotScripts(rows, columns, problems, prefix, notch = false, exp);
+    exp->generateRWilcoxonScripts(problems, prefix, exp);
 
-  delete exp;
+    delete exp;
 
 } // main
 

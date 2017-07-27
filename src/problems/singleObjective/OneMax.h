@@ -25,11 +25,12 @@
 #include <BinarySolutionType.h>
 #include <Solution.h>
 
-class OneMax : public Problem {
+class OneMax : public Problem
+{
 public:
-	OneMax(int numberOfBits, int numberOfStrings = 1);
-	~OneMax();
-  void evaluate(Solution *solution);
+    OneMax(int numberOfBits, int numberOfStrings = 1);
+    ~OneMax();
+    void evaluate(Solution *solution);
 
 };
 

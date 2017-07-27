@@ -31,10 +31,11 @@ class ExperimentReport;
  * rank-sum test
  */
 
-class RWilcoxon {
+class RWilcoxon
+{
 public:
-  static void generateScripts(vector<string> problems, string prefix,
-      ExperimentReport * experiment);
+    static void generateScripts(vector<string> problems, string prefix,
+                                ExperimentReport * experiment);
 
 }; // RWilcoxon
 

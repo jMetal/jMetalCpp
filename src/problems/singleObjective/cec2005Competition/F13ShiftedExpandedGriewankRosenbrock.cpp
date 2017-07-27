@@ -32,7 +32,8 @@ const string F13ShiftedExpandedGriewankRosenbrock::DEFAULT_FILE_DATA = "../../da
  * Constructor.
  */
 F13ShiftedExpandedGriewankRosenbrock::F13ShiftedExpandedGriewankRosenbrock(int dimension, double bias)
-    : F13ShiftedExpandedGriewankRosenbrock(dimension, bias, DEFAULT_FILE_DATA) {
+    : F13ShiftedExpandedGriewankRosenbrock(dimension, bias, DEFAULT_FILE_DATA)
+{
 } // F13ShiftedExpandedGriewankRosenbrock
 
 
@@ -40,20 +41,22 @@ F13ShiftedExpandedGriewankRosenbrock::F13ShiftedExpandedGriewankRosenbrock(int d
  * Constructor
  */
 F13ShiftedExpandedGriewankRosenbrock::F13ShiftedExpandedGriewankRosenbrock(int dimension, double bias, string file_data)
-    : TestFunc(dimension, bias, FUNCTION_NAME) {
+    : TestFunc(dimension, bias, FUNCTION_NAME)
+{
 
-  // Note: dimension starts from 0
-  m_o = new double[m_dimension];
-  m_z = new double[m_dimension];
+    // Note: dimension starts from 0
+    m_o = new double[m_dimension];
+    m_z = new double[m_dimension];
 
-  // Load the shifted global optimum
-  Benchmark::loadRowVectorFromFile(file_data, m_dimension, m_o);
+    // Load the shifted global optimum
+    Benchmark::loadRowVectorFromFile(file_data, m_dimension, m_o);
 
-  // z = x - o + 1 = x - (o - 1)
-  // Do the "(o - 1)" part first
-  for (int i = 0 ; i < m_dimension ; i++) {
-    m_o[i] -= 1.0;
-  }
+    // z = x - o + 1 = x - (o - 1)
+    // Do the "(o - 1)" part first
+    for (int i = 0 ; i < m_dimension ; i++)
+    {
+        m_o[i] -= 1.0;
+    }
 
 } // F13ShiftedExpandedGriewankRosenbrock
 
@@ -61,23 +64,25 @@ F13ShiftedExpandedGriewankRosenbrock::F13ShiftedExpandedGriewankRosenbrock(int d
 /**
  * Destructor
  */
-F13ShiftedExpandedGriewankRosenbrock::~F13ShiftedExpandedGriewankRosenbrock() {
-  delete [] m_o;
-  delete [] m_z;
+F13ShiftedExpandedGriewankRosenbrock::~F13ShiftedExpandedGriewankRosenbrock()
+{
+    delete [] m_o;
+    delete [] m_z;
 } // ~F13ShiftedExpandedGriewankRosenbrock
 
 
 /**
  * Function body
  */
-double F13ShiftedExpandedGriewankRosenbrock::f(double * x) {
-  double result = 0.0;
+double F13ShiftedExpandedGriewankRosenbrock::f(double * x)
+{
+    double result = 0.0;
 
-  Benchmark::shift(m_z, x, m_o, m_dimension);
+    Benchmark::shift(m_z, x, m_o, m_dimension);
 
-  result = Benchmark::F8F2(m_z, m_dimension);
+    result = Benchmark::F8F2(m_z, m_dimension);
 
-  result += m_bias;
+    result += m_bias;
 
-  return result;
+    return result;
 }

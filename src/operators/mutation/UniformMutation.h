@@ -29,43 +29,44 @@
 /**
  * This class implements a uniform mutation operator.
  */
-class UniformMutation : public Mutation {
+class UniformMutation : public Mutation
+{
 
 private:
 
-  /**
-   * Valid solution types to apply this operator.
-   */
-  static const string VALID_TYPES[];
+    /**
+     * Valid solution types to apply this operator.
+     */
+    static const string VALID_TYPES[];
 
-  /**
-   * Stores the value used in a uniform mutation operator.
-   */
-  double perturbation_;
+    /**
+     * Stores the value used in a uniform mutation operator.
+     */
+    double perturbation_;
 
-  double mutationProbability_;
+    double mutationProbability_;
 
-  /**
-   * Performs the operation.
-   * @param probability Mutation probability
-   * @param solution The solution to mutate
-   * @throws JMException
-   */
-  void doMutation(double probability, Solution *solution);
+    /**
+     * Performs the operation.
+     * @param probability Mutation probability
+     * @param solution The solution to mutate
+     * @throws JMException
+     */
+    void doMutation(double probability, Solution *solution);
 
 public:
 
-  /**
-   * Constructor.
-   * Creates a new uniform mutation operator instance.
-   */
-  UniformMutation(map<string, void *> parameters);
+    /**
+     * Constructor.
+     * Creates a new uniform mutation operator instance.
+     */
+    UniformMutation(map<string, void *> parameters);
 
-  /**
-   * Executes the operation
-   * @param object An object containing the solution to mutate
-   */
-  void *execute(void *);
+    /**
+     * Executes the operation
+     * @param object An object containing the solution to mutate
+     */
+    void *execute(void *);
 
 }; // UniformMutation
 

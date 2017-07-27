@@ -51,39 +51,40 @@ using namespace std;
  * Abstract class generating jMetal experiments reports
  */
 
-class ExperimentReport : public Experiment {
+class ExperimentReport : public Experiment
+{
 
 private:
 
-  void generateReferenceFronts();
-  void calculateStatistics(vector<double> vector_, map<string, double> * values);
-  void printHeaderLatexCommands(string fileName);
-  void printEndLatexCommands(string fileName);
-  void printMeanStdDev(string fileName, int indicator, double*** mean,
-      double*** stdDev);
-  void printMedianIQR(string fileName, int indicator, double*** median,
-      double*** IQR);
+    void generateReferenceFronts();
+    void calculateStatistics(vector<double> vector_, map<string, double> * values);
+    void printHeaderLatexCommands(string fileName);
+    void printEndLatexCommands(string fileName);
+    void printMeanStdDev(string fileName, int indicator, double*** mean,
+                         double*** stdDev);
+    void printMedianIQR(string fileName, int indicator, double*** median,
+                        double*** IQR);
 
 public:
 
-  vector<string> paretoFrontFile_; // List of the files containing the pareto
-                                   // fronts corresponding to the problems in
-                                   // problemList_
-  vector<string> indicatorList_; // List of the quality indicators to be applied
-  string latexDirectory_; // Directory to store the latex files
-  string paretoFrontDirectory_; // Directory containing the Pareto front files
-  map<string, bool> indicatorMinimize_; // To indicate whether an indicator
-                                        // is to be minimized. Hard-coded
-                                        // in the constructor
+    vector<string> paretoFrontFile_; // List of the files containing the pareto
+    // fronts corresponding to the problems in
+    // problemList_
+    vector<string> indicatorList_; // List of the quality indicators to be applied
+    string latexDirectory_; // Directory to store the latex files
+    string paretoFrontDirectory_; // Directory containing the Pareto front files
+    map<string, bool> indicatorMinimize_; // To indicate whether an indicator
+    // is to be minimized. Hard-coded
+    // in the constructor
 
-  ExperimentReport();
+    ExperimentReport();
 
-  void generateQualityIndicators();
-  void generateLatexTables();
-  void generateRBoxplotScripts(int rows, int cols, vector<string> problems,
-      string prefix, bool notch, ExperimentReport * experiment);
-  void generateRWilcoxonScripts(vector<string> problems, string prefix,
-      ExperimentReport * experiment);
+    void generateQualityIndicators();
+    void generateLatexTables();
+    void generateRBoxplotScripts(int rows, int cols, vector<string> problems,
+                                 string prefix, bool notch, ExperimentReport * experiment);
+    void generateRWilcoxonScripts(vector<string> problems, string prefix,
+                                  ExperimentReport * experiment);
 
 }; // ExperimentReport
 

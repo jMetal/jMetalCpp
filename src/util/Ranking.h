@@ -38,20 +38,21 @@
  * solutions, subset 1 contains the non-dominated solutions after removing those
  * belonging to subset 0, and so on.
  */
-class Ranking {
+class Ranking
+{
 
 private:
-  SolutionSet * solutionSet_;
-  SolutionSet ** ranking_;
-  int numberOfSubfronts_;
-  DominanceComparator * dominance_;
-  OverallConstraintViolationComparator * constraint_;
+    SolutionSet * solutionSet_;
+    SolutionSet ** ranking_;
+    int numberOfSubfronts_;
+    DominanceComparator * dominance_;
+    OverallConstraintViolationComparator * constraint_;
 
 public:
-  Ranking (SolutionSet * solutionSet);
-  ~Ranking();
-  SolutionSet * getSubfront(int rank);
-  int getNumberOfSubfronts();
+    Ranking (SolutionSet * solutionSet);
+    ~Ranking();
+    SolutionSet * getSubfront(int rank);
+    int getNumberOfSubfronts();
 
 };
 

@@ -39,41 +39,42 @@ using namespace std;
 
 class ExperimentExecution;
 
-class RunExperiment {
+class RunExperiment
+{
 
 public:
 
-  ExperimentExecution * experiment_;
-  int id_;
-  map<string, void *> map_;
-  int numberOfThreads_;
-  int numberOfProblems_;
+    ExperimentExecution * experiment_;
+    int id_;
+    map<string, void *> map_;
+    int numberOfThreads_;
+    int numberOfProblems_;
 
-  RunExperiment(ExperimentExecution * experiment, map<string, void *> map, int id,
-        int numberOfThreads, int numberOfProblems, int threadIndex,
-        mutex * mtx);
-  void run();
+    RunExperiment(ExperimentExecution * experiment, map<string, void *> map, int id,
+                  int numberOfThreads, int numberOfProblems, int threadIndex,
+                  mutex * mtx);
+    void run();
 
 private:
 
-  int threadIndex_;
+    int threadIndex_;
 
-  mutex * mutex_;
+    mutex * mutex_;
 
-  string experimentName_;
-  vector<string> algorithmNameList_; // List of the names of the algorithms to
-                                     // be executed
-  vector<string> problemList_; // List of problems to be solved
-  string experimentBaseDirectory_; // Directory to store the results
-  string latexDirectory_; // Directory to store the latex files
-  string rDirectory_; // Directory to store the generated R scripts
-  string paretoFrontDirectory_; // Directory containing the Pareto front files
-  string outputParetoFrontFile_; // Name of the file containing the output
-                                 // Pareto front
-  string outputParetoSetFile_; // Name of the file containing the output
-                               // Pareto set
-  int independentRuns_; // Number of independent runs per algorithm
-  // TODO: Settings[] algorithmSettings_; // Parameter settings of each algorithm
+    string experimentName_;
+    vector<string> algorithmNameList_; // List of the names of the algorithms to
+    // be executed
+    vector<string> problemList_; // List of problems to be solved
+    string experimentBaseDirectory_; // Directory to store the results
+    string latexDirectory_; // Directory to store the latex files
+    string rDirectory_; // Directory to store the generated R scripts
+    string paretoFrontDirectory_; // Directory containing the Pareto front files
+    string outputParetoFrontFile_; // Name of the file containing the output
+    // Pareto front
+    string outputParetoSetFile_; // Name of the file containing the output
+    // Pareto set
+    int independentRuns_; // Number of independent runs per algorithm
+    // TODO: Settings[] algorithmSettings_; // Parameter settings of each algorithm
 
 }; // RunExperiment
 

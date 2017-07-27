@@ -29,11 +29,12 @@ using namespace std;
  * This class provides methods for computing some statistics
  */
 
-class Statistics {
+class Statistics
+{
 
 public:
-  static double calculateMedian(vector<double> vector_, int first, int last);
-  static double calculateIQR(vector<double> vector_);
+    static double calculateMedian(vector<double> vector_, int first, int last);
+    static double calculateIQR(vector<double> vector_);
 
 };
 

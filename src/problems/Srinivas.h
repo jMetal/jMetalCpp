@@ -3,7 +3,7 @@
 //  Authors:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
 //       Antonio J. Nebro <antonio@lcc.uma.es>
-// 
+//
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
 //  This program is free software: you can redistribute it and/or modify
@@ -15,7 +15,7 @@
 //  but WITHOUT ANY WARRANTY; without even the implied warranty of
 //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //  GNU Lesser General Public License for more details.
-// 
+//
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -36,13 +36,14 @@ using namespace std;
   * @class Srinivas
   * @brief Class representing problem Srinivas
  **/
-class Srinivas : public Problem {
-   
+class Srinivas : public Problem
+{
+
 public:
-	Srinivas(string solutionType);
-	~Srinivas();
-	void evaluate(Solution *solution);
-  void evaluateConstraints(Solution * solution);
+    Srinivas(string solutionType);
+    ~Srinivas();
+    void evaluate(Solution *solution);
+    void evaluateConstraints(Solution * solution);
 };
 
 #endif /* __SRINIVAS__ */

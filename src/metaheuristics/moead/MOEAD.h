@@ -32,66 +32,67 @@
  * This class implements the MOEA/D algorithm.
  */
 
-class MOEAD : public Algorithm {
-    
+class MOEAD : public Algorithm
+{
+
 private:
 
-  /**
-   * Stores the population size
-   */
-  int populationSize_;
-  /**
-   * Stores the population
-   */
-  SolutionSet * population_;
-  /**
-   * Z vector (ideal point)
-   */
-  double * z_;
-  /**
-   * Lambda vectors
-   */
-  double ** lambda_;
-  /**
-   * T: neighbour size
-   */
-  int T_;
-  /**
-   * Neighborhood
-   */
-  int ** neighborhood_;
-  /**
-   * delta: probability that parent solutions are selected from neighbourhood
-   */
-  double delta_;
-  /**
-   * nr: maximal number of solutions replaced by each child solution
-   */
-  int nr_;
-  Solution ** indArray_;
-  string functionType_;
-  int evaluations_;
-  /**
-   * Operators
-   */
-  Operator * crossover_;
-  Operator * mutation_;
+    /**
+     * Stores the population size
+     */
+    int populationSize_;
+    /**
+     * Stores the population
+     */
+    SolutionSet * population_;
+    /**
+     * Z vector (ideal point)
+     */
+    double * z_;
+    /**
+     * Lambda vectors
+     */
+    double ** lambda_;
+    /**
+     * T: neighbour size
+     */
+    int T_;
+    /**
+     * Neighborhood
+     */
+    int ** neighborhood_;
+    /**
+     * delta: probability that parent solutions are selected from neighbourhood
+     */
+    double delta_;
+    /**
+     * nr: maximal number of solutions replaced by each child solution
+     */
+    int nr_;
+    Solution ** indArray_;
+    string functionType_;
+    int evaluations_;
+    /**
+     * Operators
+     */
+    Operator * crossover_;
+    Operator * mutation_;
 
-  string dataDirectory_;
-  
-  void initUniformWeight();
-  void initNeighborhood();
-  void initPopulation();
-  void initIdealPoint();
-  void matingSelection(vector<int> &list, int cid, int size, int type);
-  void updateReference(Solution * individual);
-  void updateProblem(Solution * indiv, int id, int type);
-  double fitnessFunction(Solution * individual, double * lambda);
-  void deleteParams();
+    string dataDirectory_;
+
+    void initUniformWeight();
+    void initNeighborhood();
+    void initPopulation();
+    void initIdealPoint();
+    void matingSelection(vector<int> &list, int cid, int size, int type);
+    void updateReference(Solution * individual);
+    void updateProblem(Solution * indiv, int id, int type);
+    double fitnessFunction(Solution * individual, double * lambda);
+    void deleteParams();
 
 public:
-  MOEAD(Problem * problem);
-  SolutionSet * execute();
+    MOEAD(Problem * problem);
+    SolutionSet * execute();
 };
 
 #endif /* __MOEAD__ */

@@ -32,66 +32,67 @@
 /**
  * This class implements a bounded archive based on the hypervolume quality indicator
  */
-class FastHypervolumeArchive : public Archive {
+class FastHypervolumeArchive : public Archive
+{
 
 private:
 
-  /**
-   * Stores the maximum size of the archive.
-   */
-  int maxSize;
+    /**
+     * Stores the maximum size of the archive.
+     */
+    int maxSize;
 
-  /**
-   * stores the number of the objectives.
-   */
-  int objectives;
+    /**
+     * stores the number of the objectives.
+     */
+    int objectives;
 
-  /**
-   * Stores a <code>Comparator</code> for dominance checking.
-   */
-  Comparator *dominance;
+    /**
+     * Stores a <code>Comparator</code> for dominance checking.
+     */
+    Comparator *dominance;
 
-  /**
-   * Stores a <code>Comparator</code> for equality checking (in the objective
-   * space).
-   */
-  Comparator *equals;
+    /**
+     * Stores a <code>Comparator</code> for equality checking (in the objective
+     * space).
+     */
+    Comparator *equals;
 
-  Comparator *crowdingDistance_;
+    Comparator *crowdingDistance_;
 
-  Solution *referencePoint;
+    Solution *referencePoint;
 
 public:
 
-  /**
-   * Constructor.
-   * @param maxSize The maximum size of the archive.
-   * @param numberOfObjectives The number of objectives.
-   */
-  FastHypervolumeArchive(int maxSize, int numberOfObjectives);
+    /**
+     * Constructor.
+     * @param maxSize The maximum size of the archive.
+     * @param numberOfObjectives The number of objectives.
+     */
+    FastHypervolumeArchive(int maxSize, int numberOfObjectives);
 
-  /**
-   * Destructor.
-   */
-  ~FastHypervolumeArchive();
+    /**
+     * Destructor.
+     */
+    ~FastHypervolumeArchive();
 
-  /**
-   * Adds a <code>Solution</code> to the archive. If the <code>Solution</code>
-   * is dominated by any member of the archive, then it is discarded. If the
-   * <code>Solution</code> dominates some members of the archive, these are
-   * removed. If the archive is full and the <code>Solution</code> has to be
-   * inserted, the solution contributing the least to the HV of the solution set
-   * is discarded.
-   * @param solution The <code>Solution</code>
-   * @return true if the <code>Solution</code> has been inserted, false
-   * otherwise.
-   */
-  bool add(Solution *solution);
+    /**
+     * Adds a <code>Solution</code> to the archive. If the <code>Solution</code>
+     * is dominated by any member of the archive, then it is discarded. If the
+     * <code>Solution</code> dominates some members of the archive, these are
+     * removed. If the archive is full and the <code>Solution</code> has to be
+     * inserted, the solution contributing the least to the HV of the solution set
+     * is discarded.
+     * @param solution The <code>Solution</code>
+     * @return true if the <code>Solution</code> has been inserted, false
+     * otherwise.
+     */
+    bool add(Solution *solution);
 
-  /**
-   * This method forces to compute the contribution of each solution
-   */
-  void computeHVContribution();
+    /**
+     * This method forces to compute the contribution of each solution
+     */
+    void computeHVContribution();
 
 };
 

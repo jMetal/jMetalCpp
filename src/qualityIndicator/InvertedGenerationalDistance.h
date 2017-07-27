@@ -36,19 +36,20 @@
  *            Inst. Technol. (1998)
  */
 
-class InvertedGenerationalDistance {
+class InvertedGenerationalDistance
+{
 
 private:
-  static const double pow_;
+    static const double pow_;
 
 public:
 
-  MetricsUtil * utils_;
+    MetricsUtil * utils_;
 
-  InvertedGenerationalDistance();
-  ~InvertedGenerationalDistance();
-  double invertedGenerationalDistance(vector< vector<double> > front,
-      vector< vector<double> > trueParetoFront, int numberOfObjectives);
+    InvertedGenerationalDistance();
+    ~InvertedGenerationalDistance();
+    double invertedGenerationalDistance(vector< vector<double> > front,
+                                        vector< vector<double> > trueParetoFront, int numberOfObjectives);
 
 };
 

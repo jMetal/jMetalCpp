@@ -20,7 +20,6 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
 #include <Algorithm.h>
 
 
@@ -28,16 +27,18 @@
  * Constructor
  * @param problem
 **/
-Algorithm::Algorithm(Problem *problem) {
-  problem_ = problem;
+Algorithm::Algorithm(Problem *problem)
+{
+    problem_ = problem;
 }
 
 
 /**
  * Destructor
  */
-Algorithm::~Algorithm() {
-  delete problem_;
+Algorithm::~Algorithm()
+{
+    delete problem_;
 } // ~Algorithm
 
 
@@ -48,8 +49,9 @@ Algorithm::~Algorithm() {
  * @param name The operator name
  * @param operator The operator
 **/
-void Algorithm::addOperator(string name, Operator * operator_) {
-  operators_[name] = operator_;
+void Algorithm::addOperator(string name, Operator * operator_)
+{
+    operators_[name] = operator_;
 }
 
 
@@ -60,8 +62,9 @@ void Algorithm::addOperator(string name, Operator * operator_) {
  * @param name The operator name
  * @return The operator if exists, null in another case.
 **/
-Operator * Algorithm::getOperator(string name) {
-  return operators_[name];
+Operator * Algorithm::getOperator(string name)
+{
+    return operators_[name];
 }
 
 
@@ -74,8 +77,9 @@ Operator * Algorithm::getOperator(string name) {
  * @param object Object that represent a parameter for the
  * algorithm.
 **/
-void Algorithm::setInputParameter(string name, void *value) {
-  inputParameters_[name] = value;
+void Algorithm::setInputParameter(string name, void *value)
+{
+    inputParameters_[name] = value;
 }
 
 
@@ -86,8 +90,9 @@ void Algorithm::setInputParameter(string name, void *value) {
  * @return Object representing the parameter or null if the parameter doesn't
  * exist or the name is wrong
 **/
-void * Algorithm::getInputParameter(string name) {
-  return inputParameters_[name];
+void * Algorithm::getInputParameter(string name)
+{
+    return inputParameters_[name];
 }
 
 
@@ -99,8 +104,9 @@ void * Algorithm::getInputParameter(string name) {
  * @param name The output parameter name
  * @param object Object representing the output parameter
 **/
-void Algorithm::setOutputParameter(string name, void *value) {
-  outputParameters_[name] = value;
+void Algorithm::setOutputParameter(string name, void *value)
+{
+    outputParameters_[name] = value;
 }
 
 
@@ -111,8 +117,9 @@ void Algorithm::setOutputParameter(string name, void *value) {
  * @return Object representing the output parameter, or null if the parameter
  * doesn't exist or the name is wrong.
 **/
-void * Algorithm::getOutputParameter(string name) {
-  return outputParameters_[name];
+void * Algorithm::getOutputParameter(string name)
+{
+    return outputParameters_[name];
 }
 
 
@@ -120,6 +127,7 @@ void * Algorithm::getOutputParameter(string name) {
  * Returns the problem to solve
  * @return Problem The problem to solve
 **/
-Problem * Algorithm::getProblem() {
-  return problem_;
+Problem * Algorithm::getProblem()
+{
+    return problem_;
 }

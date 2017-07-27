@@ -43,24 +43,25 @@
  *   - current-to-rand/1/bin (current-to-best/1/bin)
  *   - current-to-rand/1/exp (current-to-best/1/exp)
  */
-class DifferentialEvolutionCrossover : public Crossover {
+class DifferentialEvolutionCrossover : public Crossover
+{
 
 public:
-  DifferentialEvolutionCrossover(map<string, void *> parameters);
-  void *execute(void *);
+    DifferentialEvolutionCrossover(map<string, void *> parameters);
+    void *execute(void *);
 
 protected:
-  static const double DEFAULT_CR;
-  static const double DEFAULT_F;
-  static const double DEFAULT_K;
-  static const string DEFAULT_DE_VARIANT;
+    static const double DEFAULT_CR;
+    static const double DEFAULT_F;
+    static const double DEFAULT_K;
+    static const string DEFAULT_DE_VARIANT;
 
 private:
-  double CR_  ;
-  double F_   ;
-  double K_   ;
-  string DE_Variant_ ; // DE variant (rand/1/bin, rand/1/exp, etc.)
-  //TODO: A�adir VALID_TYPES;
+    double CR_  ;
+    double F_   ;
+    double K_   ;
+    string DE_Variant_ ; // DE variant (rand/1/bin, rand/1/exp, etc.)
+    //TODO: A�adir VALID_TYPES;
 
 };
 

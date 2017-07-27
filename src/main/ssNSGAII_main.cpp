@@ -41,83 +41,87 @@
  *     Genetic Algorithms" 5th International Conference, EMO 2009, pp: 183-197.
  *     April 2009)
  */
-int main(int argc, char ** argv) {
+int main(int argc, char ** argv)
+{
 
-	clock_t t_ini, t_fin;
-  
-  Problem   * problem   ; // The problem to solve
-  Algorithm * algorithm ; // The algorithm to use
-  Operator  * crossover ; // Crossover operator
-  Operator  * mutation  ; // Mutation operator
-  Operator  * selection ; // Selection operator
+    clock_t t_ini, t_fin;
 
-  if (argc>=2) {
-    problem = ProblemFactory::getProblem(argc, argv);
-    cout << "Selected problem: " << problem->getName() << endl;
-  } else {
-    cout << "No problem selected." << endl;
-    cout << "Default problem will be used: Fonseca" << endl;
-    problem = ProblemFactory::getProblem(const_cast<char *>("Fonseca"));
-  }
+    Problem   * problem   ; // The problem to solve
+    Algorithm * algorithm ; // The algorithm to use
+    Operator  * crossover ; // Crossover operator
+    Operator  * mutation  ; // Mutation operator
+    Operator  * selection ; // Selection operator
 
-  //TODO: Quality Indicators
-	//QualityIndicator indicators ; // Object to get quality indicators
-	//indicators = null ;
+    if (argc>=2)
+    {
+        problem = ProblemFactory::getProblem(argc, argv);
+        cout << "Selected problem: " << problem->getName() << endl;
+    }
+    else
+    {
+        cout << "No problem selected." << endl;
+        cout << "Default problem will be used: Fonseca" << endl;
+        problem = ProblemFactory::getProblem(const_cast<char *>("Fonseca"));
+    }
 
-	algorithm = new ssNSGAII(problem);
+    //TODO: Quality Indicators
+    //QualityIndicator indicators ; // Object to get quality indicators
+    //indicators = null ;
 
-  // Algorithm parameters
-  int populationSize = 100;
-  int maxEvaluations = 25000;
-  algorithm->setInputParameter("populationSize",&populationSize);
-  algorithm->setInputParameter("maxEvaluations",&maxEvaluations);
+    algorithm = new ssNSGAII(problem);
 
-	// Mutation and Crossover for Real codification
-	map<string, void *> parameters;
+    // Algorithm parameters
+    int populationSize = 100;
+    int maxEvaluations = 25000;
+    algorithm->setInputParameter("populationSize",&populationSize);
+    algorithm->setInputParameter("maxEvaluations",&maxEvaluations);
 
-  double crossoverProbability = 0.9;
-  double crossoverDistributionIndex = 20.0;
-  parameters["probability"] =  &crossoverProbability;
-  parameters["distributionIndex"] = &crossoverDistributionIndex;
-  crossover = new SBXCrossover(parameters);
+    // Mutation and Crossover for Real codification
+    map<string, void *> parameters;
 
-	parameters.clear();
-  double mutationProbability = 1.0/problem->getNumberOfVariables();
-  double mutationDistributionIndex = 20.0;
-  parameters["probability"] = &mutationProbability;
-  parameters["distributionIndex"] = &mutationDistributionIndex;
-  mutation = new PolynomialMutation(parameters);
+    double crossoverProbability = 0.9;
+    double crossoverDistributionIndex = 20.0;
+    parameters["probability"] =  &crossoverProbability;
+    parameters["distributionIndex"] = &crossoverDistributionIndex;
+    crossover = new SBXCrossover(parameters);
 
-	// Selection Operator
-	parameters.clear();
-	selection = new BinaryTournament2(parameters);
+    parameters.clear();
+    double mutationProbability = 1.0/problem->getNumberOfVariables();
+    double mutationDistributionIndex = 20.0;
+    parameters["probability"] = &mutationProbability;
+    parameters["distributionIndex"] = &mutationDistributionIndex;
+    mutation = new PolynomialMutation(parameters);
 
-	// Add the operators to the algorithm
-	algorithm->addOperator("crossover",crossover);
-	algorithm->addOperator("mutation",mutation);
-	algorithm->addOperator("selection",selection);
+    // Selection Operator
+    parameters.clear();
+    selection = new BinaryTournament2(parameters);
 
-	// Add the indicator object to the algorithm
-	//algorithm->setInputParameter("indicators", indicators) ;
+    // Add the operators to the algorithm
+    algorithm->addOperator("crossover",crossover);
+    algorithm->addOperator("mutation",mutation);
+    algorithm->addOperator("selection",selection);
 
-	// Execute the Algorithm
-	t_ini = clock();
-	SolutionSet * population = algorithm->execute();
-	t_fin = clock();
-	double secs = (double) (t_fin - t_ini);
-	secs = secs / CLOCKS_PER_SEC;
+    // Add the indicator object to the algorithm
+    //algorithm->setInputParameter("indicators", indicators) ;
 
-	// Result messages
-	cout << "Total execution time: " << secs << "s" << endl;
-	cout << "Variables values have been written to file VAR" << endl;
-	population->printVariablesToFile("VAR");
-	cout << "Objectives values have been written to file FUN" << endl;
-	population->printObjectivesToFile("FUN");
+    // Execute the Algorithm
+    t_ini = clock();
+    SolutionSet * population = algorithm->execute();
+    t_fin = clock();
+    double secs = (double) (t_fin - t_ini);
+    secs = secs / CLOCKS_PER_SEC;
 
-  delete selection;
-  delete mutation;
-  delete crossover;
-  delete population;
-  delete algorithm;
+    // Result messages
+    cout << "Total execution time: " << secs << "s" << endl;
+    cout << "Variables values have been written to file VAR" << endl;
+    population->printVariablesToFile("VAR");
+    cout << "Objectives values have been written to file FUN" << endl;
+    population->printObjectivesToFile("FUN");
+
+    delete selection;
+    delete mutation;
+    delete crossover;
+    delete population;
+    delete algorithm;
 
 } // main

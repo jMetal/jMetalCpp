@@ -26,21 +26,22 @@
 
 using namespace std;
 
-class TestFunc {
+class TestFunc
+{
 
 protected:
-  int m_dimension;
-  double m_bias;
-  string m_func_name;
+    int m_dimension;
+    double m_bias;
+    string m_func_name;
 
 public:
-  TestFunc(int dimension, double bias);
-  TestFunc(int dimension, double bias, string func_name);
-  virtual ~TestFunc();
-  virtual double f(double * x) = 0;
-  int dimension();
-  double bias();
-  string name();
+    TestFunc(int dimension, double bias);
+    TestFunc(int dimension, double bias, string func_name);
+    virtual ~TestFunc();
+    virtual double f(double * x) = 0;
+    int dimension();
+    double bias();
+    string name();
 
 }; // TestFunc
 

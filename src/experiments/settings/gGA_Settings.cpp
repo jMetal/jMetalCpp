@@ -23,72 +23,76 @@
 /**
  * Default constructor
  */
-gGA_Settings::gGA_Settings () : Settings() {
+gGA_Settings::gGA_Settings () : Settings()
+{
 } // gGA_Settings
 
 /**
  * Destructor
  */
-gGA_Settings::~gGA_Settings () {
-  delete algorithm ;
-  delete crossover ; // Crossover operator
-  delete mutation  ; // Mutation operator
-  delete selection ; // Selection operator
+gGA_Settings::~gGA_Settings ()
+{
+    delete algorithm ;
+    delete crossover ; // Crossover operator
+    delete mutation  ; // Mutation operator
+    delete selection ; // Selection operator
 } // ~gGA_Settings
 
 /**
  * Constructor
  */
-gGA_Settings::gGA_Settings(string problemName) {
-	problemName_ = problemName ;
+gGA_Settings::gGA_Settings(string problemName)
+{
+    problemName_ = problemName ;
 
-  problem_ = ProblemFactory::getProblem((char *) problemName_.c_str());
+    problem_ = ProblemFactory::getProblem((char *) problemName_.c_str());
 
-  // Algorithm parameters
-  populationSize_ = 100;
-  maxEvaluations_ = 25000;
-  mutationProbability_         = 1.0/problem_->getNumberOfVariables() ;
-  crossoverProbability_        = 0.9   ;
-  mutationDistributionIndex_   = 20.0  ;
-  crossoverDistributionIndex_  = 20.0  ;
+    // Algorithm parameters
+    populationSize_ = 100;
+    maxEvaluations_ = 25000;
+    mutationProbability_         = 1.0/problem_->getNumberOfVariables() ;
+    crossoverProbability_        = 0.9   ;
+    mutationDistributionIndex_   = 20.0  ;
+    crossoverDistributionIndex_  = 20.0  ;
 } // gGA_Settings
 
 /**
  * Configure method
  */
-Algorithm * gGA_Settings::configure() {
+Algorithm * gGA_Settings::configure()
+{
 
-	algorithm = new gGA(problem_);
-  algorithm->setInputParameter("populationSize",&populationSize_);
-  algorithm->setInputParameter("maxEvaluations",&maxEvaluations_);
+    algorithm = new gGA(problem_);
+    algorithm->setInputParameter("populationSize",&populationSize_);
+    algorithm->setInputParameter("maxEvaluations",&maxEvaluations_);
 
-	// Mutation and Crossover for Real codification
-	map<string, void *> parameters;
+    // Mutation and Crossover for Real codification
+    map<string, void *> parameters;
 
-  double crossoverProbability = crossoverProbability_;
-  double crossoverDistributionIndex = crossoverDistributionIndex_ ;
-  parameters["probability"] =  &crossoverProbability;
-  parameters["distributionIndex"] = &crossoverDistributionIndex;
-  crossover = new SBXCrossover(parameters);
+    double crossoverProbability = crossoverProbability_;
+    double crossoverDistributionIndex = crossoverDistributionIndex_ ;
+    parameters["probability"] =  &crossoverProbability;
+    parameters["distributionIndex"] = &crossoverDistributionIndex;
+    crossover = new SBXCrossover(parameters);
 
-	parameters.clear();
-  double mutationProbability = mutationProbability_;
-  double mutationDistributionIndex = mutationDistributionIndex_;
-  parameters["probability"] = &mutationProbability;
-  parameters["distributionIndex"] = &mutationDistributionIndex;
-  mutation = new PolynomialMutation(parameters);
+    parameters.clear();
+    double mutationProbability = mutationProbability_;
+    double mutationDistributionIndex = mutationDistributionIndex_;
+    parameters["probability"] = &mutationProbability;
+    parameters["distributionIndex"] = &mutationDistributionIndex;
+    mutation = new PolynomialMutation(parameters);
 
-	// Selection Operator
-	parameters.clear();
-	selection = new BinaryTournament2(parameters);
+    // Selection Operator
+    parameters.clear();
+    selection = new BinaryTournament2(parameters);
 
-	// Add the operators to the algorithm
-	algorithm->addOperator("crossover",crossover);
-	algorithm->addOperator("mutation",mutation);
-	algorithm->addOperator("selection",selection);
+    // Add the operators to the algorithm
+    algorithm->addOperator("crossover",crossover);
+    algorithm->addOperator("mutation",mutation);
+    algorithm->addOperator("selection",selection);
 
-	cout << "gGA algorithm initialized." << endl;
+    cout << "gGA algorithm initialized." << endl;
 
-	return algorithm ;
+    return algorithm ;
 } // configure
 

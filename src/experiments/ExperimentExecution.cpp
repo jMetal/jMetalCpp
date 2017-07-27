@@ -22,10 +22,11 @@
 #include <ExperimentExecution.h>
 
 
-void* executeRun(void* ctx) {
-  RunExperiment* cptr = (RunExperiment*)ctx;
-  cptr->run();
-  //pthread_exit(0);
+void* executeRun(void* ctx)
+{
+    RunExperiment* cptr = (RunExperiment*)ctx;
+    cptr->run();
+    //pthread_exit(0);
 } // executeRun
 
 
@@ -34,21 +35,22 @@ void* executeRun(void* ctx) {
  *
  * Contains default settings
  */
-ExperimentExecution::ExperimentExecution() {
+ExperimentExecution::ExperimentExecution()
+{
 
-  experimentName_ = "noName";
+    experimentName_ = "noName";
 
-  experimentBaseDirectory_ = "";
+    experimentBaseDirectory_ = "";
 
-  outputParetoFrontFile_ = "FUN";
-  outputParetoSetFile_ = "VAR";
+    outputParetoFrontFile_ = "FUN";
+    outputParetoSetFile_ = "VAR";
 
-  independentRuns_ = 0;
+    independentRuns_ = 0;
 
-  experimentIndividualListIndex_ = 0;
-  experimentIndividualListSize_ = -1;
+    experimentIndividualListIndex_ = 0;
+    experimentIndividualListSize_ = -1;
 
-  isSingleObjective_ = false;
+    isSingleObjective_ = false;
 
 } // ExperimentExecution
 
@@ -56,41 +58,45 @@ ExperimentExecution::ExperimentExecution() {
 /**
  * Runs the experiment
  */
-void ExperimentExecution::runExperiment(int numberOfThreads) {
+void ExperimentExecution::runExperiment(int numberOfThreads)
+{
 
-  checkExperimentDirectory();
+    checkExperimentDirectory();
 
-  map_["name"] = &experimentName_;
-  map_["experimentDirectory"] = &experimentBaseDirectory_;
-  map_["algorithmNameList"] = &algorithmNameList_;
-  map_["problemList"] = &problemList_;
-  map_["independentRuns"] = &independentRuns_;
-  map_["outputParetoFrontFile"] = &outputParetoFrontFile_;
-  map_["outputParetoSetFile"] = &outputParetoSetFile_;
+    map_["name"] = &experimentName_;
+    map_["experimentDirectory"] = &experimentBaseDirectory_;
+    map_["algorithmNameList"] = &algorithmNameList_;
+    map_["problemList"] = &problemList_;
+    map_["independentRuns"] = &independentRuns_;
+    map_["outputParetoFrontFile"] = &outputParetoFrontFile_;
+    map_["outputParetoSetFile"] = &outputParetoSetFile_;
 
-  cout << "Initializing task list..." << endl;
-  //cout << "algorithmNameList_.size() = " << algorithmNameList_.size() << endl;
+    cout << "Initializing task list..." << endl;
+    //cout << "algorithmNameList_.size() = " << algorithmNameList_.size() << endl;
 
-  experimentIndividualListSize_ =
-      problemList_.size() * algorithmNameList_.size() * independentRuns_;
-  for (int i=0; i<problemList_.size(); i++) {
-    for (int j=0; j<algorithmNameList_.size(); j++) {
-      for (int k=0; k<independentRuns_; k++) {
-        ExperimentIndividual * expInd = new ExperimentIndividual(j, i, k);
-        experimentIndividualList_.push_back(expInd);
-      }
+    experimentIndividualListSize_ =
+        problemList_.size() * algorithmNameList_.size() * independentRuns_;
+    for (int i=0; i<problemList_.size(); i++)
+    {
+        for (int j=0; j<algorithmNameList_.size(); j++)
+        {
+            for (int k=0; k<independentRuns_; k++)
+            {
+                ExperimentIndividual * expInd = new ExperimentIndividual(j, i, k);
+                experimentIndividualList_.push_back(expInd);
+            }
+        }
     }
-  }
 
-  algorithmSettingsList_ = new Settings*[experimentIndividualList_.size()];
+    algorithmSettingsList_ = new Settings*[experimentIndividualList_.size()];
 
-  cout << "Task list initialized." << endl;
+    cout << "Task list initialized." << endl;
 
-  int result;
+    int result;
 
-  //pthread_mutex_t mutex;
-  mutex mtx;
-  //result = pthread_mutex_init(&mutex, NULL) ;
+    //pthread_mutex_t mutex;
+    mutex mtx;
+    //result = pthread_mutex_init(&mutex, NULL) ;
 //  if (result != 0) {
 //    perror("ERROR WHILE INITIALIZING THE MUTEX");
 //    exit(-1) ;
@@ -98,20 +104,21 @@ void ExperimentExecution::runExperiment(int numberOfThreads) {
 //  else
 //    cout << "------- MUTEX OK ------" << endl ;
 
-  //pthread_t * p = new pthread_t[numberOfThreads];
-  //thread * p = new thread[numberOfThreads];
-  vector<thread> threads;
-  RunExperiment ** experiments_ = new RunExperiment*[numberOfThreads];
-  for (int i = 0; i < numberOfThreads; i++) {
-    experiments_[i] = new RunExperiment(this, map_, i, numberOfThreads,
-        problemList_.size(), i, &mtx);
+    //pthread_t * p = new pthread_t[numberOfThreads];
+    //thread * p = new thread[numberOfThreads];
+    vector<thread> threads;
+    RunExperiment ** experiments_ = new RunExperiment*[numberOfThreads];
+    for (int i = 0; i < numberOfThreads; i++)
+    {
+        experiments_[i] = new RunExperiment(this, map_, i, numberOfThreads,
+                                            problemList_.size(), i, &mtx);
 //    result = pthread_create(&p[i], NULL, executeRun, experiments_[i]);
 //    if (result != 0) {
 //      perror("ERROR WHILE CREATING THREADS");
 //      exit(-1) ;
 //    }
-    threads.push_back(thread(executeRun, experiments_[i]));
-  }
+        threads.push_back(thread(executeRun, experiments_[i]));
+    }
 
 //  for (int i = 0; i < numberOfThreads; i++) {
 //    result = pthread_join(p[i], NULL) ;
@@ -122,20 +129,21 @@ void ExperimentExecution::runExperiment(int numberOfThreads) {
 //    }
 //    p[i]->join();
 //  }
-  for (auto& th : threads) th.join();
+    for (auto& th : threads) th.join();
 
-  cout << "All the threads have finished." << endl;
+    cout << "All the threads have finished." << endl;
 
-  for (int i=0; i < experimentIndividualList_.size(); i++) {
-    delete experimentIndividualList_[i];
-  }
+    for (int i=0; i < experimentIndividualList_.size(); i++)
+    {
+        delete experimentIndividualList_[i];
+    }
 
-  delete [] algorithmSettingsList_;
+    delete [] algorithmSettingsList_;
 //  delete [] p;
 
-  for (int i=0; i < numberOfThreads; i++)
-    delete experiments_[i];
-  delete [] experiments_;
+    for (int i=0; i < numberOfThreads; i++)
+        delete experiments_[i];
+    delete [] experiments_;
 
 } // runExperiment
 
@@ -143,6 +151,7 @@ void ExperimentExecution::runExperiment(int numberOfThreads) {
 /**
  * Runs the experiment
  */
-void ExperimentExecution::runExperiment() {
-  runExperiment(1);
+void ExperimentExecution::runExperiment()
+{
+    runExperiment(1);
 } // runExperiment

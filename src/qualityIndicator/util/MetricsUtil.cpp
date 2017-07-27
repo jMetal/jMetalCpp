@@ -30,38 +30,43 @@ using namespace std;
  * @param path The path to the file that contains the pareto front
  * @return double [][] whit the pareto front
  **/
-vector< vector <double> > MetricsUtil::readFront(string path) {
+vector< vector <double> > MetricsUtil::readFront(string path)
+{
 
-  vector< vector <double> > front;
+    vector< vector <double> > front;
 
-  std::ifstream in(path.c_str());
-  if( !in ) {
-    cout << "Error trying to read Pareto Front file: " << path << endl;
-    exit(-1);
-  }
-
-  string line;
-  while( getline(in, line ) ) {
-
-    vector<double> list;
-
-    istringstream iss(line);
-
-    while (iss) {
-      string token;
-      iss >> token;
-      if (token.compare("")!=0) {
-        //cout << "Substring: " << token << endl;
-        list.push_back(atof(token.c_str()));
-      }
+    std::ifstream in(path.c_str());
+    if( !in )
+    {
+        cout << "Error trying to read Pareto Front file: " << path << endl;
+        exit(-1);
     }
-    front.push_back(list);
 
-  }
+    string line;
+    while( getline(in, line ) )
+    {
 
-  in.close();
+        vector<double> list;
 
-  return front;
+        istringstream iss(line);
+
+        while (iss)
+        {
+            string token;
+            iss >> token;
+            if (token.compare("")!=0)
+            {
+                //cout << "Substring: " << token << endl;
+                list.push_back(atof(token.c_str()));
+            }
+        }
+        front.push_back(list);
+
+    }
+
+    in.close();
+
+    return front;
 
 } // readFront
 
@@ -74,23 +79,28 @@ vector< vector <double> > MetricsUtil::readFront(string path) {
  *  for each objective
  **/
 vector<double> MetricsUtil::getMaximumValues(vector< vector<double> > front,
-    int noObjectives) {
+        int noObjectives)
+{
 
-  vector<double> maximumValue;
+    vector<double> maximumValue;
 
-	for (int i = 0; i < noObjectives; i++) {
-		maximumValue.push_back(-std::numeric_limits<double>::max());
-	}
+    for (int i = 0; i < noObjectives; i++)
+    {
+        maximumValue.push_back(-std::numeric_limits<double>::max());
+    }
 
-	for (int i =0; i < front.size(); i++ ) {
-		for (int j = 0; j < front[i].size(); j++) {
-			if (front[i][j] > maximumValue[j]) {
-				maximumValue[j] = front[i][j];
-			}
-		}
-	}
+    for (int i =0; i < front.size(); i++ )
+    {
+        for (int j = 0; j < front[i].size(); j++)
+        {
+            if (front[i][j] > maximumValue[j])
+            {
+                maximumValue[j] = front[i][j];
+            }
+        }
+    }
 
-	return maximumValue;
+    return maximumValue;
 
 } // getMaximumValues
 
@@ -103,23 +113,28 @@ vector<double> MetricsUtil::getMaximumValues(vector< vector<double> > front,
  *  for each objective
  **/
 vector<double> MetricsUtil::getMinimumValues(vector< vector<double> > front,
-    int noObjectives) {
+        int noObjectives)
+{
 
-  vector<double> minimumValue;
+    vector<double> minimumValue;
 
-  for (int i = 0; i < noObjectives; i++) {
-    minimumValue.push_back(std::numeric_limits<double>::max());
-  }
-
-  for (int i =0; i < front.size(); i++ ) {
-    for (int j = 0; j < front[i].size(); j++) {
-      if (front[i][j] < minimumValue[j]) {
-        minimumValue[j] = front[i][j];
-      }
+    for (int i = 0; i < noObjectives; i++)
+    {
+        minimumValue.push_back(std::numeric_limits<double>::max());
     }
-  }
 
-  return minimumValue;
+    for (int i =0; i < front.size(); i++ )
+    {
+        for (int j = 0; j < front[i].size(); j++)
+        {
+            if (front[i][j] < minimumValue[j])
+            {
+                minimumValue[j] = front[i][j];
+            }
+        }
+    }
+
+    return minimumValue;
 
 } // getMinimumValues
 
@@ -131,15 +146,17 @@ vector<double> MetricsUtil::getMinimumValues(vector< vector<double> > front,
  *  @param b A point
  *  @return The euclidean distance between the points
  **/
-double MetricsUtil::distance(vector<double> a, vector<double> b) {
+double MetricsUtil::distance(vector<double> a, vector<double> b)
+{
 
-  double distance = 0.0;
+    double distance = 0.0;
 
-  for (int i = 0; i < a.size(); i++) {
-    distance += pow(a[i]-b[i],2.0);
-  }
+    for (int i = 0; i < a.size(); i++)
+    {
+        distance += pow(a[i]-b[i],2.0);
+    }
 
-  return sqrt(distance);
+    return sqrt(distance);
 } // distance
 
 
@@ -152,18 +169,21 @@ double MetricsUtil::distance(vector<double> a, vector<double> b) {
  * @return The minimum distance between the point and the front
  **/
 double MetricsUtil::distanceToClosedPoint(vector<double> point,
-    vector< vector<double> > front) {
+        vector< vector<double> > front)
+{
 
-  double minDistance = distance(point,front[0]);
+    double minDistance = distance(point,front[0]);
 
-  for (int i = 1; i < front.size(); i++) {
-    double aux = distance(point,front[i]);
-    if (aux < minDistance) {
-      minDistance = aux;
+    for (int i = 1; i < front.size(); i++)
+    {
+        double aux = distance(point,front[i]);
+        if (aux < minDistance)
+        {
+            minDistance = aux;
+        }
     }
-  }
 
-  return minDistance;
+    return minDistance;
 
 } // distanceToClosedPoint
 
@@ -178,18 +198,21 @@ double MetricsUtil::distanceToClosedPoint(vector<double> point,
  * the front
  */
 double MetricsUtil::distanceToNearestPoint(vector<double> point,
-    vector< vector<double> > front) {
+        vector< vector<double> > front)
+{
 
-  double minDistance = std::numeric_limits<double>::max();
+    double minDistance = std::numeric_limits<double>::max();
 
-  for (int i = 0; i < front.size(); i++) {
-    double aux = distance(point,front[i]);
-    if ((aux < minDistance) && (aux > 0.0)) {
-      minDistance = aux;
+    for (int i = 0; i < front.size(); i++)
+    {
+        double aux = distance(point,front[i]);
+        if ((aux < minDistance) && (aux > 0.0))
+        {
+            minDistance = aux;
+        }
     }
-  }
 
-  return minDistance;
+    return minDistance;
 
 } // distanceToNearestPoint
 
@@ -204,21 +227,24 @@ double MetricsUtil::distanceToNearestPoint(vector<double> point,
  * @return the normalized pareto front
  **/
 vector< vector<double> > MetricsUtil::getNormalizedFront(vector< vector<double> > front,
-    vector<double> maximumValue, vector<double> minimumValue) {
+        vector<double> maximumValue, vector<double> minimumValue)
+{
 
-  vector< vector<double> > normalizedFront;
+    vector< vector<double> > normalizedFront;
 
-  for (int i = 0; i < front.size();i++) {
-    vector<double> list;
-    for (int j = 0; j < front[i].size(); j++) {
-      //normalizedFront[i][j] = (front[i][j] - minimumValue[j]) /
-      //                        (maximumValue[j] - minimumValue[j]);
-      list.push_back((front[i][j] - minimumValue[j]) / (maximumValue[j] - minimumValue[j]));
+    for (int i = 0; i < front.size(); i++)
+    {
+        vector<double> list;
+        for (int j = 0; j < front[i].size(); j++)
+        {
+            //normalizedFront[i][j] = (front[i][j] - minimumValue[j]) /
+            //                        (maximumValue[j] - minimumValue[j]);
+            list.push_back((front[i][j] - minimumValue[j]) / (maximumValue[j] - minimumValue[j]));
+        }
+        normalizedFront.push_back(list);
     }
-    normalizedFront.push_back(list);
-  }
 
-  return normalizedFront;
+    return normalizedFront;
 
 } // getNormalizedFront
 
@@ -229,25 +255,33 @@ vector< vector<double> > MetricsUtil::getNormalizedFront(vector< vector<double> 
  * @param front The pareto front to inverse
  * @return The inverted pareto front
  **/
-vector< vector<double> > MetricsUtil::invertedFront(vector< vector<double> > front) {
+vector< vector<double> > MetricsUtil::invertedFront(vector< vector<double> > front)
+{
 
-	vector< vector<double> > invertedFront;
+    vector< vector<double> > invertedFront;
 
-	for (int i = 0; i < front.size(); i++) {
-		vector<double> list;
-		for (int j = 0; j < front[i].size(); j++) {
-			if (front[i][j] <= 1.0 && front[i][j]>= 0.0) {
-				list.push_back(1.0 - front[i][j]);
-			} else if (front[i][j] > 1.0) {
-			  list.push_back(0.0);
-			} else if (front[i][j] < 0.0) {
-			  list.push_back(1.0);
-			}
-		}
-		invertedFront.push_back(list);
-	}
+    for (int i = 0; i < front.size(); i++)
+    {
+        vector<double> list;
+        for (int j = 0; j < front[i].size(); j++)
+        {
+            if (front[i][j] <= 1.0 && front[i][j]>= 0.0)
+            {
+                list.push_back(1.0 - front[i][j]);
+            }
+            else if (front[i][j] > 1.0)
+            {
+                list.push_back(0.0);
+            }
+            else if (front[i][j] < 0.0)
+            {
+                list.push_back(1.0);
+            }
+        }
+        invertedFront.push_back(list);
+    }
 
-	return invertedFront;
+    return invertedFront;
 
 } // invertedFront
 
@@ -257,41 +291,47 @@ vector< vector<double> > MetricsUtil::invertedFront(vector< vector<double> > fro
  * @param path The path of the file containing the data
  * @return A solution set
  */
-SolutionSet * MetricsUtil::readNonDominatedSolutionSet(string path) {
+SolutionSet * MetricsUtil::readNonDominatedSolutionSet(string path)
+{
 
-  std::ifstream in(path.c_str());
-  if( !in ) {
-    cout << "Error trying to read non dominated solutions file: "
-        << path << endl;
-    exit(-1);
-  } // if
+    std::ifstream in(path.c_str());
+    if( !in )
+    {
+        cout << "Error trying to read non dominated solutions file: "
+             << path << endl;
+        exit(-1);
+    } // if
 
-  NonDominatedSolutionList * solutionSet = new NonDominatedSolutionList();
-  string line;
+    NonDominatedSolutionList * solutionSet = new NonDominatedSolutionList();
+    string line;
 
-  while( getline(in, line ) ) {
+    while( getline(in, line ) )
+    {
 
-    vector<double> list;
-    istringstream iss(line);
-    while (iss) {
-      string token;
-      iss >> token;
-      if (token.compare("")!=0) {
-        //cout << "Substring: " << token << endl;
-        list.push_back(atof(token.c_str()));
-      } // if
+        vector<double> list;
+        istringstream iss(line);
+        while (iss)
+        {
+            string token;
+            iss >> token;
+            if (token.compare("")!=0)
+            {
+                //cout << "Substring: " << token << endl;
+                list.push_back(atof(token.c_str()));
+            } // if
+        } // while
+
+        Solution * solution = new Solution(list.size());
+        for (int i=0; i<list.size(); i++)
+        {
+            solution->setObjective(i,list[i]);
+        } //for
+        solutionSet->add(solution);
+
     } // while
 
-    Solution * solution = new Solution(list.size());
-    for (int i=0; i<list.size(); i++) {
-      solution->setObjective(i,list[i]);
-    } //for
-    solutionSet->add(solution);
-
-  } // while
-
-  in.close();
-  return solutionSet;
+    in.close();
+    return solutionSet;
 
 } // readNonDominatedSolutionSet
 
@@ -302,38 +342,44 @@ SolutionSet * MetricsUtil::readNonDominatedSolutionSet(string path) {
  * @param path The path of the file containing the data
  * @return A solution set
  */
-void MetricsUtil::readNonDominatedSolutionSet(string path, NonDominatedSolutionList * solutionSet) {
+void MetricsUtil::readNonDominatedSolutionSet(string path, NonDominatedSolutionList * solutionSet)
+{
 
-  std::ifstream in(path.c_str());
-  if( !in ) {
-    cout << "Error trying to read non dominated solutions file: "
-        << path << endl;
-    exit(-1);
-  } // if
+    std::ifstream in(path.c_str());
+    if( !in )
+    {
+        cout << "Error trying to read non dominated solutions file: "
+             << path << endl;
+        exit(-1);
+    } // if
 
-  string line;
+    string line;
 
-  while( getline(in, line ) ) {
+    while( getline(in, line ) )
+    {
 
-    vector<double> list;
-    istringstream iss(line);
-    while (iss) {
-      string token;
-      iss >> token;
-      if (token.compare("")!=0) {
-        //cout << "Substring: " << token << endl;
-        list.push_back(atof(token.c_str()));
-      } // if
+        vector<double> list;
+        istringstream iss(line);
+        while (iss)
+        {
+            string token;
+            iss >> token;
+            if (token.compare("")!=0)
+            {
+                //cout << "Substring: " << token << endl;
+                list.push_back(atof(token.c_str()));
+            } // if
+        } // while
+
+        Solution * solution = new Solution(list.size());
+        for (int i=0; i<list.size(); i++)
+        {
+            solution->setObjective(i,list[i]);
+        } //for
+        solutionSet->add(solution);
+
     } // while
 
-    Solution * solution = new Solution(list.size());
-    for (int i=0; i<list.size(); i++) {
-      solution->setObjective(i,list[i]);
-    } //for
-    solutionSet->add(solution);
-
-  } // while
-
-  in.close();
+    in.close();
 
 } // readNonDominatedSolutionSet

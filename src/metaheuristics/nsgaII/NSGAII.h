@@ -34,11 +34,12 @@
   * @brief This class implements the NSGA-II algorithm
 **/
 
-class NSGAII : public Algorithm {
+class NSGAII : public Algorithm
+{
 
 public:
-  NSGAII(Problem * problem);
-  SolutionSet * execute();
+    NSGAII(Problem * problem);
+    SolutionSet * execute();
 
 };
 

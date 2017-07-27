@@ -35,26 +35,27 @@
  *  The class declares an abstract method called <code>execute</code>, which
  *  defines the behavior of the algorithm.
 **/
-class Algorithm {
+class Algorithm
+{
 
 public:
-  Algorithm(Problem *problem);
-  virtual ~Algorithm();
-  virtual SolutionSet * execute() = 0; // this launch the execution
-                                       // of an algorithm
-  void addOperator(string name, Operator *operator_);
-  Operator * getOperator(string name);
-  void setInputParameter(string name, void *value);
-  void * getInputParameter(string name);
-  void setOutputParameter(string name, void *value);
-  void * getOutputParameter(string name);
-  Problem * getProblem();
+    Algorithm(Problem *problem);
+    virtual ~Algorithm();
+    virtual SolutionSet * execute() = 0; // this launch the execution
+    // of an algorithm
+    void addOperator(string name, Operator *operator_);
+    Operator * getOperator(string name);
+    void setInputParameter(string name, void *value);
+    void * getInputParameter(string name);
+    void setOutputParameter(string name, void *value);
+    void * getOutputParameter(string name);
+    Problem * getProblem();
 
 protected:
-  Problem *problem_;
-  map<string, Operator *> operators_;
-  map<string, void *> inputParameters_;
-  map<string, void *> outputParameters_;
+    Problem *problem_;
+    map<string, Operator *> operators_;
+    map<string, void *> inputParameters_;
+    map<string, void *> outputParameters_;
 
 }; // Algorithm
 

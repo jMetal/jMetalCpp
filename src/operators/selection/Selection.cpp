@@ -23,6 +23,6 @@
 #include <Selection.h>
 
 Selection::Selection(map<string, void *> parameters)
-: Operator(parameters) {}
+    : Operator(parameters) {}
 
 Selection::~Selection() { /* do nothing */ }

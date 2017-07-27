@@ -31,16 +31,17 @@
 #include <Solution.h>
 #include <LZ09.h>
 
-class LZ09_F4 : public Problem {
+class LZ09_F4 : public Problem
+{
 public:
-	LZ09_F4(string solutionType, int ptype=21, int dtype=1, int ltype=24);
-	void evaluate(Solution *solution);
+    LZ09_F4(string solutionType, int ptype=21, int dtype=1, int ltype=24);
+    void evaluate(Solution *solution);
 
-	virtual ~LZ09_F4();
+    virtual ~LZ09_F4();
 private:
-	LZ09 * LZ09_ ;
-	double * fx_ ;
-	double * x_  ;
+    LZ09 * LZ09_ ;
+    double * fx_ ;
+    double * x_  ;
 };
 
 #endif /* __LZ09_F4_H__ */

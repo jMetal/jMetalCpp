@@ -59,12 +59,13 @@
 #include <ZDT5.h>
 #include <ZDT6.h>
 
-class ProblemFactory {
+class ProblemFactory
+{
 
 public:
-  static Problem * getProblem(char * name);
-  static Problem * getProblem(int argc, char ** argv);
-  static Problem * getProblem(char * name, int argc, char ** argv);
+    static Problem * getProblem(char * name);
+    static Problem * getProblem(int argc, char ** argv);
+    static Problem * getProblem(char * name, int argc, char ** argv);
 };
 
 #endif // __PROBLEM_FACTORY__

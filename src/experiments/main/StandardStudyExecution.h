@@ -33,11 +33,12 @@
  * spread and additive epsilon indicators are used for performance assessment.
  */
 
-class StandardStudyExecution : public ExperimentExecution {
+class StandardStudyExecution : public ExperimentExecution
+{
 
 public:
-  Algorithm * algorithmSettings(string problemName, int algorithmId,
-      int experimentIndividualId);
+    Algorithm * algorithmSettings(string problemName, int algorithmId,
+                                  int experimentIndividualId);
 
 };
 

@@ -25,34 +25,35 @@
 #include <Benchmark.h>
 #include <TestFunc.h>
 
-class F10ShiftedRotatedRastrigin : public TestFunc {
+class F10ShiftedRotatedRastrigin : public TestFunc
+{
 
 private:
 
-  // Fixed (class) parameters
-  static const string FUNCTION_NAME;
-  static const string DEFAULT_FILE_DATA;
-  static const string DEFAULT_FILE_MX_PREFIX;
-  static const string DEFAULT_FILE_MX_SUFFIX;
+    // Fixed (class) parameters
+    static const string FUNCTION_NAME;
+    static const string DEFAULT_FILE_DATA;
+    static const string DEFAULT_FILE_MX_PREFIX;
+    static const string DEFAULT_FILE_MX_SUFFIX;
 
-  // Shifted global optimum
-  double * m_o;
-  double ** m_matrix;
+    // Shifted global optimum
+    double * m_o;
+    double ** m_matrix;
 
-  // In order to avoid excessive memory allocation,
-  // a fixed memory buffer is allocated for each function object.
-  double * m_z;
-  double * m_zM;
+    // In order to avoid excessive memory allocation,
+    // a fixed memory buffer is allocated for each function object.
+    double * m_z;
+    double * m_zM;
 
-  string getFileMxName(string prefix, int dimension, string suffix);
+    string getFileMxName(string prefix, int dimension, string suffix);
 
 public:
 
-  F10ShiftedRotatedRastrigin(int dimension, double bias);
-  F10ShiftedRotatedRastrigin(int dimension, double bias, string file_data, string file_m);
-  ~F10ShiftedRotatedRastrigin();
+    F10ShiftedRotatedRastrigin(int dimension, double bias);
+    F10ShiftedRotatedRastrigin(int dimension, double bias, string file_data, string file_m);
+    ~F10ShiftedRotatedRastrigin();
 
-  double f (double * x);
+    double f (double * x);
 
 }; // F10ShiftedRotatedRastrigin
 

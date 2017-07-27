@@ -35,18 +35,19 @@ using namespace std;
  * and it allow objects to be accessed by their names, which  are specified
  * by the string.
 **/
-class Operator {
+class Operator
+{
 
 protected:
-  map<string,void *> parameters_;
-    
+    map<string,void *> parameters_;
+
 public:
-  Operator ();
-  Operator (map<string, void*> parameters);
-  virtual ~Operator() = 0;
-  virtual void *execute(void *) = 0;
-  void setParameter(string name, void *value);
-  void *getParameter(string name);
+    Operator ();
+    Operator (map<string, void*> parameters);
+    virtual ~Operator() = 0;
+    virtual void *execute(void *) = 0;
+    void setParameter(string name, void *value);
+    void *getParameter(string name);
 
 }; // Operator
 

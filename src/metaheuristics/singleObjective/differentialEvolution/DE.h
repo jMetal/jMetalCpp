@@ -30,11 +30,12 @@
  * This class implements a differential evolution algorithm.
  */
 
-class DE : public Algorithm {
+class DE : public Algorithm
+{
 
 public:
-  DE(Problem * problem);
-  SolutionSet * execute();
+    DE(Problem * problem);
+    SolutionSet * execute();
 };
 
 #endif /* __DE__ */

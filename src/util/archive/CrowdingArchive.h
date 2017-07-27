@@ -33,20 +33,21 @@
  * This class implements a bounded archive based on crowding distances (as
  * defined in NSGA-II).
  */
-class CrowdingArchive : public Archive {
+class CrowdingArchive : public Archive
+{
 
 private:
-  int maxSize;
-  int objectives;
-  Comparator *dominance;
-  Comparator *equals;
-  Comparator *crowdingDistance;
-  Distance *distance;
+    int maxSize;
+    int objectives;
+    Comparator *dominance;
+    Comparator *equals;
+    Comparator *crowdingDistance;
+    Distance *distance;
 
 public:
-  CrowdingArchive(int maxSize, int numberOfObjectives);
-  ~CrowdingArchive();
-  bool add(Solution *solution);
+    CrowdingArchive(int maxSize, int numberOfObjectives);
+    ~CrowdingArchive();
+    bool add(Solution *solution);
 
 };
 

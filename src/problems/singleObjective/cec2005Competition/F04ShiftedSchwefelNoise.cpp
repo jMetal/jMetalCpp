@@ -32,7 +32,8 @@ const string F04ShiftedSchwefelNoise::DEFAULT_FILE_DATA = "../../data/cec2005Com
  * Constructor.
  */
 F04ShiftedSchwefelNoise::F04ShiftedSchwefelNoise(int dimension, double bias)
-    : F04ShiftedSchwefelNoise(dimension, bias, DEFAULT_FILE_DATA) {
+    : F04ShiftedSchwefelNoise(dimension, bias, DEFAULT_FILE_DATA)
+{
 } // F04ShiftedSchwefelNoise
 
 
@@ -40,14 +41,15 @@ F04ShiftedSchwefelNoise::F04ShiftedSchwefelNoise(int dimension, double bias)
  * Constructor
  */
 F04ShiftedSchwefelNoise::F04ShiftedSchwefelNoise(int dimension, double bias, string file_data)
-    : TestFunc(dimension, bias, FUNCTION_NAME) {
+    : TestFunc(dimension, bias, FUNCTION_NAME)
+{
 
-  // Note: dimension starts from 0
-  m_o = new double[m_dimension];
-  m_z = new double[m_dimension];
+    // Note: dimension starts from 0
+    m_o = new double[m_dimension];
+    m_z = new double[m_dimension];
 
-  // Load the shifted global optimum
-  Benchmark::loadRowVectorFromFile(file_data, m_dimension, m_o);
+    // Load the shifted global optimum
+    Benchmark::loadRowVectorFromFile(file_data, m_dimension, m_o);
 
 } // F04ShiftedSchwefelNoise
 
@@ -55,27 +57,29 @@ F04ShiftedSchwefelNoise::F04ShiftedSchwefelNoise(int dimension, double bias, str
 /**
  * Destructor
  */
-F04ShiftedSchwefelNoise::~F04ShiftedSchwefelNoise() {
-  delete [] m_o;
-  delete [] m_z;
+F04ShiftedSchwefelNoise::~F04ShiftedSchwefelNoise()
+{
+    delete [] m_o;
+    delete [] m_z;
 } // ~F04ShiftedSchwefelNoise
 
 
 /**
  * Function body
  */
-double F04ShiftedSchwefelNoise::f(double * x) {
-  double result = 0.0;
+double F04ShiftedSchwefelNoise::f(double * x)
+{
+    double result = 0.0;
 
-  Benchmark::shift(m_z, x, m_o, m_dimension);
+    Benchmark::shift(m_z, x, m_o, m_dimension);
 
-  result = Benchmark::schwefel_102(m_z, m_dimension);
+    result = Benchmark::schwefel_102(m_z, m_dimension);
 
-  // NOISE
-  // Comment the next line to remove the noise
-  result *= (1.0 + 0.4 * fabs(Benchmark::dist(Benchmark::e2)));
+    // NOISE
+    // Comment the next line to remove the noise
+    result *= (1.0 + 0.4 * fabs(Benchmark::dist(Benchmark::e2)));
 
-  result += m_bias;
+    result += m_bias;
 
-  return result;
+    return result;
 }

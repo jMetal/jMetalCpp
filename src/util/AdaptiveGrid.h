@@ -32,73 +32,74 @@
 /**
  * This class implements some utilities for calculating distances
  */
-class AdaptiveGrid {
+class AdaptiveGrid
+{
 
 private:
 
-	 /**
-	   * Number of bi-divisions of the objective space
-	   */
-	int bisections_;
+    /**
+      * Number of bi-divisions of the objective space
+      */
+    int bisections_;
 
-	/**
-	 * Objectives of the problem
-	 */
-	int objectives_;
+    /**
+     * Objectives of the problem
+     */
+    int objectives_;
 
-	/**
-	 * Number of solutions into a specific hypercube in the adaptative grid
-	 */
-	int * hypercubes_;
+    /**
+     * Number of solutions into a specific hypercube in the adaptative grid
+     */
+    int * hypercubes_;
 
-	int sizehypercubes_;
-	/**
-	 *
-	 * Grid lower bounds
-	 */
-	double * lowerLimits_;
+    int sizehypercubes_;
+    /**
+     *
+     * Grid lower bounds
+     */
+    double * lowerLimits_;
 
-	/**
-	 * Grid upper bounds
-	 */
-	double * upperLimits_;
+    /**
+     * Grid upper bounds
+     */
+    double * upperLimits_;
 
-	/**
-	 * Size of hypercube for each dimension
-	 */
-	double * divisionSize_;
+    /**
+     * Size of hypercube for each dimension
+     */
+    double * divisionSize_;
 
-	/**
-	 * Hypercube with maximum number of solutions
-	 */
-	int mostPopulated_;
+    /**
+     * Hypercube with maximum number of solutions
+     */
+    int mostPopulated_;
 
-	/**
-	 * Indicates when an hypercube has solutions
-	 */
-	int * occupied_;
+    /**
+     * Indicates when an hypercube has solutions
+     */
+    int * occupied_;
 
-	int occupiedsize_;
+    int occupiedsize_;
 
-	void updateLimits(SolutionSet * solutionSet);
+    void updateLimits(SolutionSet * solutionSet);
 
 public:
-	AdaptiveGrid(int bisections, int objetives);
+    AdaptiveGrid(int bisections, int objetives);
 
-	void addSolutionSet(SolutionSet * solutionSet);
-	void updateGrid(SolutionSet * solutionSet);
-	void updateGrid(Solution * solution, SolutionSet * solutionSet, int eval);
-	int location(Solution * solution);
-	int getMostPopulated();
-	int getLocationDensity(int location);
-	void removeSolution(int location);
-	void addSolution(int location);
-	int getBisections();
-	string toString();
-	int rouletteWheel();
-	int calculateOccupied();
-	int occupiedHypercubes();
-	int randomOccupiedHypercube();
+    void addSolutionSet(SolutionSet * solutionSet);
+    void updateGrid(SolutionSet * solutionSet);
+    void updateGrid(Solution * solution, SolutionSet * solutionSet, int eval);
+    int location(Solution * solution);
+    int getMostPopulated();
+    int getLocationDensity(int location);
+    void removeSolution(int location);
+    void addSolution(int location);
+    int getBisections();
+    string toString();
+    int rouletteWheel();
+    int calculateOccupied();
+    int occupiedHypercubes();
+    int randomOccupiedHypercube();
 };
 
 

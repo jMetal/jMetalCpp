@@ -32,7 +32,8 @@ const string F05SchwefelGlobalOptBound::DEFAULT_FILE_DATA = "../../data/cec2005C
  * Constructor.
  */
 F05SchwefelGlobalOptBound::F05SchwefelGlobalOptBound(int dimension, double bias)
-    : F05SchwefelGlobalOptBound(dimension, bias, DEFAULT_FILE_DATA) {
+    : F05SchwefelGlobalOptBound(dimension, bias, DEFAULT_FILE_DATA)
+{
 } // F05SchwefelGlobalOptBound
 
 
@@ -40,44 +41,56 @@ F05SchwefelGlobalOptBound::F05SchwefelGlobalOptBound(int dimension, double bias)
  * Constructor
  */
 F05SchwefelGlobalOptBound::F05SchwefelGlobalOptBound(int dimension, double bias, string file_data)
-    : TestFunc(dimension, bias, FUNCTION_NAME) {
+    : TestFunc(dimension, bias, FUNCTION_NAME)
+{
 
-  // Note: dimension starts from 0
-  m_o = new double[m_dimension];
-  m_A = new double*[m_dimension];
-  for (int i=0; i<m_dimension; i++) {
-    m_A[i] = new double[m_dimension];
-  }
-  m_B = new double[m_dimension];
-  m_z = new double[m_dimension];
-
-  double ** m_data = new double*[m_dimension+1];
-  for (int i=0; i<m_dimension+1; i++) {
-    m_data[i] = new double[m_dimension];
-  }
-
-  // Load the shifted global optimum
-  Benchmark::loadMatrixFromFile(file_data, m_dimension + 1, m_dimension, m_data);
-  for (int i = 0 ; i < m_dimension ; i ++) {
-    if ((i+1) <= ceil(m_dimension / 4.0)) {
-      m_o[i] = -100.0;
-    } else if ((i+1) >= floor((3.0 * m_dimension) / 4.0)) {
-      m_o[i] = 100.0;
-    } else {
-      m_o[i] = m_data[0][i];
+    // Note: dimension starts from 0
+    m_o = new double[m_dimension];
+    m_A = new double*[m_dimension];
+    for (int i=0; i<m_dimension; i++)
+    {
+        m_A[i] = new double[m_dimension];
     }
-  }
-  for (int i = 0 ; i < m_dimension ; i ++) {
-    for (int j = 0 ; j < m_dimension ; j ++) {
-      m_A[i][j] = m_data[i+1][j];
-    }
-  }
-  Benchmark::Ax(m_B, m_A, m_o, m_dimension);
+    m_B = new double[m_dimension];
+    m_z = new double[m_dimension];
 
-  for (int i=0; i<m_dimension+1; i++) {
-    delete [] m_data[i];
-  }
-  delete [] m_data;
+    double ** m_data = new double*[m_dimension+1];
+    for (int i=0; i<m_dimension+1; i++)
+    {
+        m_data[i] = new double[m_dimension];
+    }
+
+    // Load the shifted global optimum
+    Benchmark::loadMatrixFromFile(file_data, m_dimension + 1, m_dimension, m_data);
+    for (int i = 0 ; i < m_dimension ; i ++)
+    {
+        if ((i+1) <= ceil(m_dimension / 4.0))
+        {
+            m_o[i] = -100.0;
+        }
+        else if ((i+1) >= floor((3.0 * m_dimension) / 4.0))
+        {
+            m_o[i] = 100.0;
+        }
+        else
+        {
+            m_o[i] = m_data[0][i];
+        }
+    }
+    for (int i = 0 ; i < m_dimension ; i ++)
+    {
+        for (int j = 0 ; j < m_dimension ; j ++)
+        {
+            m_A[i][j] = m_data[i+1][j];
+        }
+    }
+    Benchmark::Ax(m_B, m_A, m_o, m_dimension);
+
+    for (int i=0; i<m_dimension+1; i++)
+    {
+        delete [] m_data[i];
+    }
+    delete [] m_data;
 
 } // F05SchwefelGlobalOptBound
 
@@ -85,31 +98,36 @@ F05SchwefelGlobalOptBound::F05SchwefelGlobalOptBound(int dimension, double bias,
 /**
  * Destructor
  */
-F05SchwefelGlobalOptBound::~F05SchwefelGlobalOptBound() {
-  delete [] m_o;
-  for (int i=0; i<m_dimension; i++) {
-    delete [] m_A[i];
-  }
-  delete [] m_A;
-  delete [] m_B;
-  delete [] m_z;
+F05SchwefelGlobalOptBound::~F05SchwefelGlobalOptBound()
+{
+    delete [] m_o;
+    for (int i=0; i<m_dimension; i++)
+    {
+        delete [] m_A[i];
+    }
+    delete [] m_A;
+    delete [] m_B;
+    delete [] m_z;
 } // ~F05SchwefelGlobalOptBound
 
 
 /**
  * Function body
  */
-double F05SchwefelGlobalOptBound::f(double * x) {
-  double max = -numeric_limits<double>::max();
+double F05SchwefelGlobalOptBound::f(double * x)
+{
+    double max = -numeric_limits<double>::max();
 
-  Benchmark::Ax(m_z, m_A, x, m_dimension);
+    Benchmark::Ax(m_z, m_A, x, m_dimension);
 
-  for (int i = 0 ; i < m_dimension ; i ++) {
-    double temp = fabs(m_z[i] - m_B[i]);
-    if (max < temp) {
-      max = temp;
+    for (int i = 0 ; i < m_dimension ; i ++)
+    {
+        double temp = fabs(m_z[i] - m_B[i]);
+        if (max < temp)
+        {
+            max = temp;
+        }
     }
-  }
 
-  return (max + m_bias);
+    return (max + m_bias);
 }

@@ -37,30 +37,31 @@
  * This class implements the CMA-ES algorithm.
  */
 
-class CMAES : public Algorithm {
+class CMAES : public Algorithm
+{
 
-  private:
-    
+private:
+
     /**
      * Stores the population size
      */
     int populationSize;
-    
+
     int counteval;
     int maxEvaluations;
-    
+
     double sigma;
-    
+
     double * xmean;
     double * xold;
-    
+
     /*
      * Strategy parameter setting: Selection
      */
     int mu;
     double * weights;
     double mueff;
-    
+
     /*
      * Strategy parameter setting: Adaptation
      */
@@ -69,7 +70,7 @@ class CMAES : public Algorithm {
     double c1;
     double cmu;
     double damps;
-    
+
     /*
      * Dynamic (internal) strategy parameters and constants
      */
@@ -81,11 +82,11 @@ class CMAES : public Algorithm {
     double ** invsqrtC;
     int eigeneval;
     double chiN;
-    
+
     double ** arx;
     SolutionSet * population_;
     Solution * bestSolutionEver;
-    
+
     void init();
     SolutionSet * samplePopulation();
     SolutionSet * genoPhenoTransformation(double ** popx);
@@ -95,8 +96,8 @@ class CMAES : public Algorithm {
     void storeBest(Comparator * comparator);
     void updateDistribution();
     void deleteParams();
-    
-  public:
+
+public:
     CMAES(Problem * problem);
     SolutionSet * execute();
 

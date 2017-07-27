@@ -28,16 +28,17 @@
  * This class implements a <code>Comparator</code> (a method for comparing
  * <code>Solution</code> objects) based on a objective values.
  */
-class ObjectiveComparator : public Comparator {
+class ObjectiveComparator : public Comparator
+{
 
 private:
-  int nObj;
-  bool ascendingOrder_;
+    int nObj;
+    bool ascendingOrder_;
 
 public:
-  ObjectiveComparator(int nObj);
-  ObjectiveComparator(int nObj, bool descendingOrder);
-  int compare(void * o1, void * o2);
+    ObjectiveComparator(int nObj);
+    ObjectiveComparator(int nObj, bool descendingOrder);
+    int compare(void * o1, void * o2);
 
 };
 

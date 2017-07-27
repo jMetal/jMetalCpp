@@ -29,23 +29,26 @@
  */
 
 
-int main(int argc, char ** argv) {
-  StandardStudyReportSO * exp = new StandardStudyReportSO() ;
+int main(int argc, char ** argv)
+{
+    StandardStudyReportSO * exp = new StandardStudyReportSO() ;
 
-  // Name of the experiment:
-  exp->experimentName_ = "StandardStudySO";
+    // Name of the experiment:
+    exp->experimentName_ = "StandardStudySO";
 
-  // List of algorithm names to be analyzed in the experiment
-  // (please, refer to the README to check the possible values):
-  vector<string> algorithmNameList_ {
-      "gGA", "ssGA", "DE", "PSO"};
-  exp->algorithmNameList_ = algorithmNameList_;
+    // List of algorithm names to be analyzed in the experiment
+    // (please, refer to the README to check the possible values):
+    vector<string> algorithmNameList_
+    {
+        "gGA", "ssGA", "DE", "PSO"};
+    exp->algorithmNameList_ = algorithmNameList_;
 
-  // List of problem names to be analyzed in the experiment
-  // (please, refer to the README to check the possible values):
-  vector<string> problemList_ {
-      "Sphere", "Griewank"};
-  exp->problemList_ = problemList_;
+    // List of problem names to be analyzed in the experiment
+    // (please, refer to the README to check the possible values):
+    vector<string> problemList_
+    {
+        "Sphere", "Griewank"};
+    exp->problemList_ = problemList_;
 
 //  // List of optimal pareto front files to be used when calculating quality
 //  // indicators. It's not necessary to define this variable when not knowing
@@ -54,15 +57,16 @@ int main(int argc, char ** argv) {
 //      "ZDT1.pf", "ZDT2.pf", "ZDT3.pf", "ZDT4.pf", "ZDT6.pf"};
 //  exp->paretoFrontFile_.assign(paretoFrontFile_, end(paretoFrontFile_));
 
-  // List of quality indicator names to be calculated in the reports
-  // (please, refer to the README to check the possible values):
-  vector<string> indicatorList_ {
-      "FIT"};
-  exp->indicatorList_ = indicatorList_;
+    // List of quality indicator names to be calculated in the reports
+    // (please, refer to the README to check the possible values):
+    vector<string> indicatorList_
+    {
+        "FIT"};
+    exp->indicatorList_ = indicatorList_;
 
-  // Directory from where the execution results will be readed:
-  exp->experimentBaseDirectory_ = "C:/jMetal/pruebas/jmetal-cpp/" +
-                                 exp->experimentName_;
+    // Directory from where the execution results will be readed:
+    exp->experimentBaseDirectory_ = "C:/jMetal/pruebas/jmetal-cpp/" +
+                                    exp->experimentName_;
 
 //  // Directory from where the optimal pareto front files will be readed.
 //  // Comment this following line to not use pareto fronts in order to
@@ -73,31 +77,32 @@ int main(int argc, char ** argv) {
 //  // This line is not needed when you are using existing optimal pareto fronts.
 //  exp->referenceFrontDirectory_= "C:/antonio/Softw/pruebas/data/referenceFronts";
 
-  // Number of independent runs of each algorithm for each problem:
-  exp->independentRuns_ = 20;
+    // Number of independent runs of each algorithm for each problem:
+    exp->independentRuns_ = 20;
 
-  int numberOfAlgorithms = exp->algorithmNameList_.size();
-  exp->isSingleObjective_ = true;
+    int numberOfAlgorithms = exp->algorithmNameList_.size();
+    exp->isSingleObjective_ = true;
 
-  // Generate quality indicators
-  exp->generateQualityIndicators();
+    // Generate quality indicators
+    exp->generateQualityIndicators();
 
-  // Generate latex tables (comment this sentence is not desired)
-  exp->generateLatexTables();
+    // Generate latex tables (comment this sentence is not desired)
+    exp->generateLatexTables();
 
-  // Configure the R scripts to be generated
-  int rows = 3 ;
-  int columns = 2 ;
-  string prefix = "SO";
-  vector<string> problemsValues {
-      "Sphere", "Griewank"};
-  vector<string> problems = problemsValues;
+    // Configure the R scripts to be generated
+    int rows = 3 ;
+    int columns = 2 ;
+    string prefix = "SO";
+    vector<string> problemsValues
+    {
+        "Sphere", "Griewank"};
+    vector<string> problems = problemsValues;
 
-  bool notch;
-  exp->generateRBoxplotScripts(rows, columns, problems, prefix, notch = false, exp);
-  exp->generateRWilcoxonScripts(problems, prefix, exp);
+    bool notch;
+    exp->generateRBoxplotScripts(rows, columns, problems, prefix, notch = false, exp);
+    exp->generateRWilcoxonScripts(problems, prefix, exp);
 
-  delete exp;
+    delete exp;
 
 } // main
 

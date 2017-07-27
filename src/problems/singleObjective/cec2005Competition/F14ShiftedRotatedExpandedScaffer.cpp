@@ -34,7 +34,8 @@ const string F14ShiftedRotatedExpandedScaffer::DEFAULT_FILE_MX_SUFFIX = ".txt";
  * Constructor.
  */
 F14ShiftedRotatedExpandedScaffer::F14ShiftedRotatedExpandedScaffer(int dimension, double bias)
-    : F14ShiftedRotatedExpandedScaffer(dimension, bias, DEFAULT_FILE_DATA, getFileMxName(DEFAULT_FILE_MX_PREFIX, dimension, DEFAULT_FILE_MX_SUFFIX)) {
+    : F14ShiftedRotatedExpandedScaffer(dimension, bias, DEFAULT_FILE_DATA, getFileMxName(DEFAULT_FILE_MX_PREFIX, dimension, DEFAULT_FILE_MX_SUFFIX))
+{
 } // F14ShiftedRotatedExpandedScaffer
 
 
@@ -42,21 +43,23 @@ F14ShiftedRotatedExpandedScaffer::F14ShiftedRotatedExpandedScaffer(int dimension
  * Constructor
  */
 F14ShiftedRotatedExpandedScaffer::F14ShiftedRotatedExpandedScaffer(int dimension, double bias, string file_data, string file_m)
-    : TestFunc(dimension, bias, FUNCTION_NAME) {
+    : TestFunc(dimension, bias, FUNCTION_NAME)
+{
 
-  // Note: dimension starts from 0
-  m_o = new double[m_dimension];
-  m_matrix = new double*[m_dimension];
-  for (int i=0; i<m_dimension; i++) {
-    m_matrix[i] = new double[m_dimension];
-  }
-  m_z = new double[m_dimension];
-  m_zM = new double[m_dimension];
+    // Note: dimension starts from 0
+    m_o = new double[m_dimension];
+    m_matrix = new double*[m_dimension];
+    for (int i=0; i<m_dimension; i++)
+    {
+        m_matrix[i] = new double[m_dimension];
+    }
+    m_z = new double[m_dimension];
+    m_zM = new double[m_dimension];
 
-  // Load the shifted global optimum
-  Benchmark::loadRowVectorFromFile(file_data, m_dimension, m_o);
-  // Load the matrix
-  Benchmark::loadMatrixFromFile(file_m, m_dimension, m_dimension, m_matrix);
+    // Load the shifted global optimum
+    Benchmark::loadRowVectorFromFile(file_data, m_dimension, m_o);
+    // Load the matrix
+    Benchmark::loadMatrixFromFile(file_m, m_dimension, m_dimension, m_matrix);
 
 } // F14ShiftedRotatedExpandedScaffer
 
@@ -64,36 +67,40 @@ F14ShiftedRotatedExpandedScaffer::F14ShiftedRotatedExpandedScaffer(int dimension
 /**
  * Destructor
  */
-F14ShiftedRotatedExpandedScaffer::~F14ShiftedRotatedExpandedScaffer() {
-  delete [] m_o;
-  for (int i=0; i<m_dimension; i++) {
-    delete [] m_matrix[i];
-  }
-  delete [] m_matrix;
-  delete [] m_z;
-  delete [] m_zM;
+F14ShiftedRotatedExpandedScaffer::~F14ShiftedRotatedExpandedScaffer()
+{
+    delete [] m_o;
+    for (int i=0; i<m_dimension; i++)
+    {
+        delete [] m_matrix[i];
+    }
+    delete [] m_matrix;
+    delete [] m_z;
+    delete [] m_zM;
 } // ~F14ShiftedRotatedExpandedScaffer
 
 
 /**
  * Function body
  */
-double F14ShiftedRotatedExpandedScaffer::f(double * x) {
-  double result = 0.0;
+double F14ShiftedRotatedExpandedScaffer::f(double * x)
+{
+    double result = 0.0;
 
-  Benchmark::shift(m_z, x, m_o, m_dimension);
-  Benchmark::rotate(m_zM, m_z, m_matrix, m_dimension);
+    Benchmark::shift(m_z, x, m_o, m_dimension);
+    Benchmark::rotate(m_zM, m_z, m_matrix, m_dimension);
 
-  result = Benchmark::EScafferF6(m_zM, m_dimension);
+    result = Benchmark::EScafferF6(m_zM, m_dimension);
 
-  result += m_bias;
+    result += m_bias;
 
-  return result;
+    return result;
 }
 
 
-string F14ShiftedRotatedExpandedScaffer::getFileMxName(string prefix, int dimension, string suffix) {
-  std::stringstream sstm;
-  sstm << prefix << dimension << suffix;
-  return sstm.str();
+string F14ShiftedRotatedExpandedScaffer::getFileMxName(string prefix, int dimension, string suffix)
+{
+    std::stringstream sstm;
+    sstm << prefix << dimension << suffix;
+    return sstm.str();
 }

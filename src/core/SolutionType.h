@@ -37,16 +37,17 @@ class Problem;
  * Advantages: Flexibility for defining different types of solutions
  * (mixing variable types, etc)
 **/
-class SolutionType {
+class SolutionType
+{
 
 protected:
-  Problem *problem_;
+    Problem *problem_;
 
 public:
-  SolutionType(Problem *problem);
-  virtual ~SolutionType();
-  virtual Variable **createVariables() = 0;
-  Variable **copyVariables(Variable **vars);
+    SolutionType(Problem *problem);
+    virtual ~SolutionType();
+    virtual Variable **createVariables() = 0;
+    Variable **copyVariables(Variable **vars);
 
 }; // SolutionType
 

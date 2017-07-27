@@ -59,74 +59,76 @@
 
 using namespace std;
 
-template <typename T> int sgn(T val) {
+template <typename T> int sgn(T val)
+{
     return (T(0) < val) - (val < T(0));
 }
 
-class Benchmark {
+class Benchmark
+{
 
 private:
-  static const string DEFAULT_FILE_BIAS;
+    static const string DEFAULT_FILE_BIAS;
 
-  static const int NUM_TEST_FUNC;
+    static const int NUM_TEST_FUNC;
 
-  // For certain functions, some essential data can be calculated beforehand.
-  // Hence, a maximum supported number of dimensions should be specified.
-  // Specifiy the number of dimensions here if you need more.
-  static const int MAX_SUPPORT_DIM;
-  static const double PIx2;
+    // For certain functions, some essential data can be calculated beforehand.
+    // Hence, a maximum supported number of dimensions should be specified.
+    // Specifiy the number of dimensions here if you need more.
+    static const int MAX_SUPPORT_DIM;
+    static const double PIx2;
 
-  // Instance variables
-  double * m_biases;
+    // Instance variables
+    double * m_biases;
 
 public:
-  Benchmark();
-  Benchmark(string file_bias);
-  ~Benchmark();
+    Benchmark();
+    Benchmark(string file_bias);
+    ~Benchmark();
 
-  // Random number generator
-  static mt19937 e2;
-  static normal_distribution<double> dist;
+    // Random number generator
+    static mt19937 e2;
+    static normal_distribution<double> dist;
 
-  TestFunc * testFunctionFactory(int func_num, int dimension);
+    TestFunc * testFunctionFactory(int func_num, int dimension);
 
-  // Basic functions
-  static double sphere(double * x, int length);
-  static double sphere_noise(double * x, int length);
-  static double schwefel_102(double * x, int length);
-  static double rosenbrock(double * x, int length);
-  static double F2(double x, double y);
-  static double griewank(double * x, int length);
-  static double F8(double x);
-  static double ackley(double * x, int length);
-  static double myRound(double x);
-  static double myXRound(double x, double o);
-  static double myXRound(double x);
-  static double rastrigin(double * x, int length);
-  static double rastriginNonCont(double * x, int length);
-  static double weierstrass(double * x, int length);
-  static double weierstrass(double * x, int length, double a, double b, int Kmax);
-  static double F8F2(double * x, int length);
-  static double ScafferF6(double x, double y);
-  static double EScafferF6(double * x, int length);
-  static double EScafferF6NonCont(double * x, int length);
-  static double elliptic(double* x, int length);
-  static double hybrid_composition(double * x, HCJob * job, int length);
+    // Basic functions
+    static double sphere(double * x, int length);
+    static double sphere_noise(double * x, int length);
+    static double schwefel_102(double * x, int length);
+    static double rosenbrock(double * x, int length);
+    static double F2(double x, double y);
+    static double griewank(double * x, int length);
+    static double F8(double x);
+    static double ackley(double * x, int length);
+    static double myRound(double x);
+    static double myXRound(double x, double o);
+    static double myXRound(double x);
+    static double rastrigin(double * x, int length);
+    static double rastriginNonCont(double * x, int length);
+    static double weierstrass(double * x, int length);
+    static double weierstrass(double * x, int length, double a, double b, int Kmax);
+    static double F8F2(double * x, int length);
+    static double ScafferF6(double x, double y);
+    static double EScafferF6(double * x, int length);
+    static double EScafferF6NonCont(double * x, int length);
+    static double elliptic(double* x, int length);
+    static double hybrid_composition(double * x, HCJob * job, int length);
 
-  // Elementary operations
-  static void shift(double * results, double * x, double * o, int length);
-  static void rotate(double * results, double * x, double ** matrix, int length);
+    // Elementary operations
+    static void shift(double * results, double * x, double * o, int length);
+    static void rotate(double * results, double * x, double ** matrix, int length);
 
-  // Matrix & vector operations
-  static void xA(double * result, double * x, double ** A, int length);
-  static void Ax(double * result, double ** A, double * x, int length);
+    // Matrix & vector operations
+    static void xA(double * result, double * x, double ** A, int length);
+    static void Ax(double * result, double ** A, double * x, int length);
 
-  // Utility functions for loading data from given text files
-  static void loadRowVectorFromFile(string file, int columns, double * row);
-  static void loadRowVector(ifstream& brSrc, int columns, double * row);
-  static void loadNMatrixFromFile(string file, int N, int rows, int columns, double*** matrix);
-  static void loadMatrixFromFile(string file, int rows, int columns, double ** matrix);
-  static void loadMatrix(ifstream& brSrc, int rows, int columns, double ** matrix);
+    // Utility functions for loading data from given text files
+    static void loadRowVectorFromFile(string file, int columns, double * row);
+    static void loadRowVector(ifstream& brSrc, int columns, double * row);
+    static void loadNMatrixFromFile(string file, int N, int rows, int columns, double*** matrix);
+    static void loadMatrixFromFile(string file, int rows, int columns, double ** matrix);
+    static void loadMatrix(ifstream& brSrc, int rows, int columns, double ** matrix);
 
 }; // Benchmark
 

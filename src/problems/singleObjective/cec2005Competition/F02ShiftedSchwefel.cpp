@@ -32,7 +32,8 @@ const string F02ShiftedSchwefel::DEFAULT_FILE_DATA = "../../data/cec2005Competit
  * Constructor.
  */
 F02ShiftedSchwefel::F02ShiftedSchwefel(int dimension, double bias)
-    : F02ShiftedSchwefel(dimension, bias, DEFAULT_FILE_DATA) {
+    : F02ShiftedSchwefel(dimension, bias, DEFAULT_FILE_DATA)
+{
 } // F02ShiftedSchwefel
 
 
@@ -40,14 +41,15 @@ F02ShiftedSchwefel::F02ShiftedSchwefel(int dimension, double bias)
  * Constructor
  */
 F02ShiftedSchwefel::F02ShiftedSchwefel(int dimension, double bias, string file_data)
-    : TestFunc(dimension, bias, FUNCTION_NAME) {
+    : TestFunc(dimension, bias, FUNCTION_NAME)
+{
 
-  // Note: dimension starts from 0
-  m_o = new double[m_dimension];
-  m_z = new double[m_dimension];
+    // Note: dimension starts from 0
+    m_o = new double[m_dimension];
+    m_z = new double[m_dimension];
 
-  // Load the shifted global optimum
-  Benchmark::loadRowVectorFromFile(file_data, m_dimension, m_o);
+    // Load the shifted global optimum
+    Benchmark::loadRowVectorFromFile(file_data, m_dimension, m_o);
 
 } // F02ShiftedSchwefel
 
@@ -55,23 +57,25 @@ F02ShiftedSchwefel::F02ShiftedSchwefel(int dimension, double bias, string file_d
 /**
  * Destructor
  */
-F02ShiftedSchwefel::~F02ShiftedSchwefel() {
-  delete [] m_o;
-  delete [] m_z;
+F02ShiftedSchwefel::~F02ShiftedSchwefel()
+{
+    delete [] m_o;
+    delete [] m_z;
 } // ~F02ShiftedSchwefel
 
 
 /**
  * Function body
  */
-double F02ShiftedSchwefel::f(double * x) {
-  double result = 0.0;
+double F02ShiftedSchwefel::f(double * x)
+{
+    double result = 0.0;
 
-  Benchmark::shift(m_z, x, m_o, m_dimension);
+    Benchmark::shift(m_z, x, m_o, m_dimension);
 
-  result = Benchmark::schwefel_102(m_z, m_dimension);
+    result = Benchmark::schwefel_102(m_z, m_dimension);
 
-  result += m_bias;
+    result += m_bias;
 
-  return result;
+    return result;
 }

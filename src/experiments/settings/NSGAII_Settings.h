@@ -28,26 +28,27 @@
 #include <PolynomialMutation.h>
 #include <BinaryTournament2.h>
 
-class NSGAII_Settings : public Settings{
+class NSGAII_Settings : public Settings
+{
 private:
-	int populationSize_                 ;
-	int maxEvaluations_                 ;
-	double mutationProbability_         ;
-	double crossoverProbability_        ;
-	double mutationDistributionIndex_   ;
-	double crossoverDistributionIndex_  ;
+    int populationSize_                 ;
+    int maxEvaluations_                 ;
+    double mutationProbability_         ;
+    double crossoverProbability_        ;
+    double mutationDistributionIndex_   ;
+    double crossoverDistributionIndex_  ;
 
-  Algorithm * algorithm ;
-  Operator  * crossover ; // Crossover operator
-  Operator  * mutation  ; // Mutation operator
-  Operator  * selection ; // Selection operator
+    Algorithm * algorithm ;
+    Operator  * crossover ; // Crossover operator
+    Operator  * mutation  ; // Mutation operator
+    Operator  * selection ; // Selection operator
 
 public:
-	NSGAII_Settings() ;
-	NSGAII_Settings(string problemName) ;
-	~NSGAII_Settings() ;
+    NSGAII_Settings() ;
+    NSGAII_Settings(string problemName) ;
+    ~NSGAII_Settings() ;
 
-  Algorithm * configure() ;
+    Algorithm * configure() ;
 }; // NSGAII_Settings
 
 #endif // __NSGAII_SETTINGS__

@@ -31,17 +31,18 @@
 #include <Solution.h>
 
 
-class ZDT4 : public Problem {
+class ZDT4 : public Problem
+{
 private:
-	double evalG(XReal *x) ;
-	double evalH(double f, double g) ;
-	double * fx_ ;
-  static const double PI ;
+    double evalG(XReal *x) ;
+    double evalH(double f, double g) ;
+    double * fx_ ;
+    static const double PI ;
 
 public:
-	ZDT4(string solutionType, int numberOfVariables = 10);
-	void evaluate(Solution *solution);
-	virtual ~ZDT4();
+    ZDT4(string solutionType, int numberOfVariables = 10);
+    void evaluate(Solution *solution);
+    virtual ~ZDT4();
 };
 
 #endif /* __ZDT4_H__ */

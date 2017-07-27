@@ -27,12 +27,13 @@
 #include <DominanceComparator.h>
 #include <AdaptiveGridArchive.h>
 
-class paes : public Algorithm {
+class paes : public Algorithm
+{
 
 public:
-	paes(Problem * problem);
-	Solution * test(Solution * solution,Solution * mutatedSolution,
-                      AdaptiveGridArchive * archive);
+    paes(Problem * problem);
+    Solution * test(Solution * solution,Solution * mutatedSolution,
+                    AdaptiveGridArchive * archive);
     SolutionSet * execute();
 };
 

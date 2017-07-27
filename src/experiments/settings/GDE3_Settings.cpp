@@ -25,34 +25,37 @@
 /**
  * Default constructor
  */
-GDE3_Settings::GDE3_Settings () : Settings() {
+GDE3_Settings::GDE3_Settings () : Settings()
+{
 } // GDE3_Settings
 
 
 /**
  * Destructor
  */
-GDE3_Settings::~GDE3_Settings () {
-  delete algorithm ;
-  delete crossover ; // Crossover operator
-  delete selection ; // Selection operator
+GDE3_Settings::~GDE3_Settings ()
+{
+    delete algorithm ;
+    delete crossover ; // Crossover operator
+    delete selection ; // Selection operator
 } // ~GDE3_Settings
 
 
 /**
  * Constructor
  */
-GDE3_Settings::GDE3_Settings(string problemName) {
+GDE3_Settings::GDE3_Settings(string problemName)
+{
 
-  problemName_ = problemName ;
+    problemName_ = problemName ;
 
-  problem_ = ProblemFactory::getProblem((char *) problemName_.c_str());
+    problem_ = ProblemFactory::getProblem((char *) problemName_.c_str());
 
-  // Default settings
-  CR_ = 0.5;
-  F_ = 0.5;
-  populationSize_ = 100;
-  maxIterations_ = 250;
+    // Default settings
+    CR_ = 0.5;
+    F_ = 0.5;
+    populationSize_ = 100;
+    maxIterations_ = 250;
 
 } // GDE3_Settings
 
@@ -60,32 +63,33 @@ GDE3_Settings::GDE3_Settings(string problemName) {
 /**
  * Configure method
  */
-Algorithm * GDE3_Settings::configure() {
+Algorithm * GDE3_Settings::configure()
+{
 
-	algorithm = new GDE3(problem_);
-  algorithm->setInputParameter("populationSize",&populationSize_);
-  algorithm->setInputParameter("maxIterations",&maxIterations_);
+    algorithm = new GDE3(problem_);
+    algorithm->setInputParameter("populationSize",&populationSize_);
+    algorithm->setInputParameter("maxIterations",&maxIterations_);
 
-	// Mutation and Crossover for Real codification
-	map<string, void *> parameters;
+    // Mutation and Crossover for Real codification
+    map<string, void *> parameters;
 
-  double CR = CR_;
-  double F = F_;
-  parameters["CR"] =  &CR;
-  parameters["F"] = &F;
-  crossover = new DifferentialEvolutionCrossover(parameters);
+    double CR = CR_;
+    double F = F_;
+    parameters["CR"] =  &CR;
+    parameters["F"] = &F;
+    crossover = new DifferentialEvolutionCrossover(parameters);
 
-	// Selection Operator
-	parameters.clear();
-	selection = new DifferentialEvolutionSelection(parameters);
+    // Selection Operator
+    parameters.clear();
+    selection = new DifferentialEvolutionSelection(parameters);
 
-	// Add the operators to the algorithm
-	algorithm->addOperator("crossover",crossover);
-	algorithm->addOperator("selection",selection);
+    // Add the operators to the algorithm
+    algorithm->addOperator("crossover",crossover);
+    algorithm->addOperator("selection",selection);
 
-	cout << "GDE3 algorithm initialized." << endl;
+    cout << "GDE3 algorithm initialized." << endl;
 
-	return algorithm ;
+    return algorithm ;
 
 } // configure
 

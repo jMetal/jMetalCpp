@@ -32,11 +32,13 @@
  * Constructor
  */
 WorstSolutionSelection::WorstSolutionSelection(map<string, void *> parameters)
-: Selection(parameters) {
-  comparator_ = NULL;
-  if (parameters["comparator"] != NULL) {
-    comparator_ = (Comparator *) parameters["comparator"];
-  }
+    : Selection(parameters)
+{
+    comparator_ = NULL;
+    if (parameters["comparator"] != NULL)
+    {
+        comparator_ = (Comparator *) parameters["comparator"];
+    }
 }
 
 
@@ -45,23 +47,27 @@ WorstSolutionSelection::WorstSolutionSelection(map<string, void *> parameters)
 * @param object Object representing a SolutionSet
 * @return the worst solution found
 */
-void * WorstSolutionSelection::execute(void * object) {
+void * WorstSolutionSelection::execute(void * object)
+{
 
-  SolutionSet * solutionSet = (SolutionSet *)object;
+    SolutionSet * solutionSet = (SolutionSet *)object;
 
-  if (solutionSet->size() == 0) {
-    return NULL;
-  }
-
-  int worstSolution = 0;
-
-  for (int i = 1; i < solutionSet->size(); i++) {
-    if (comparator_->compare(solutionSet->get(i), solutionSet->get(worstSolution)) > 0) {
-      worstSolution = i;
+    if (solutionSet->size() == 0)
+    {
+        return NULL;
     }
-  } // for
 
-  int * intPtr = new int(worstSolution);
-  return intPtr;
+    int worstSolution = 0;
+
+    for (int i = 1; i < solutionSet->size(); i++)
+    {
+        if (comparator_->compare(solutionSet->get(i), solutionSet->get(worstSolution)) > 0)
+        {
+            worstSolution = i;
+        }
+    } // for
+
+    int * intPtr = new int(worstSolution);
+    return intPtr;
 
 } // execute

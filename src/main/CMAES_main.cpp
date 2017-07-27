@@ -26,48 +26,52 @@
 #include <CMAES.h>
 #include <time.h>
 
-int main(int argc, char ** argv) {
+int main(int argc, char ** argv)
+{
 
-	clock_t t_ini, t_fin;
+    clock_t t_ini, t_fin;
 
-  Problem   * problem   ; // The problem to solve
-  Algorithm * algorithm ; // The algorithm to use
+    Problem   * problem   ; // The problem to solve
+    Algorithm * algorithm ; // The algorithm to use
 
-  if (argc>=2) {
-    problem = ProblemFactory::getProblem(argc, argv);
-    cout << "Selected problem: " << problem->getName() << endl;
-  } else {
-    cout << "No problem selected." << endl;
-    cout << "Default problem will be used: Sphere" << endl;
-    problem = ProblemFactory::getProblem(const_cast<char *>("Sphere"));
-  }
+    if (argc>=2)
+    {
+        problem = ProblemFactory::getProblem(argc, argv);
+        cout << "Selected problem: " << problem->getName() << endl;
+    }
+    else
+    {
+        cout << "No problem selected." << endl;
+        cout << "Default problem will be used: Sphere" << endl;
+        problem = ProblemFactory::getProblem(const_cast<char *>("Sphere"));
+    }
 
-	algorithm = new CMAES(problem);
+    algorithm = new CMAES(problem);
 
-	// Algorithm parameters
-  int populationSizeValue = 20;
-  int maxEvaluationsValue = 1000000;
-  algorithm->setInputParameter("populationSize",&populationSizeValue);
-  algorithm->setInputParameter("maxEvaluations",&maxEvaluationsValue);
+    // Algorithm parameters
+    int populationSizeValue = 20;
+    int maxEvaluationsValue = 1000000;
+    algorithm->setInputParameter("populationSize",&populationSizeValue);
+    algorithm->setInputParameter("maxEvaluations",&maxEvaluationsValue);
 
-	// Add the indicator object to the algorithm
-	//algorithm->setInputParameter("indicators", indicators) ;
+    // Add the indicator object to the algorithm
+    //algorithm->setInputParameter("indicators", indicators) ;
 
-	// Execute the Algorithm
-	t_ini = clock();
-	SolutionSet * population = algorithm->execute();
-	t_fin = clock();
-	double secs = (double) (t_fin - t_ini);
-	secs = secs / CLOCKS_PER_SEC;
+    // Execute the Algorithm
+    t_ini = clock();
+    SolutionSet * population = algorithm->execute();
+    t_fin = clock();
+    double secs = (double) (t_fin - t_ini);
+    secs = secs / CLOCKS_PER_SEC;
 
-	// Result messages
-	cout << "Total execution time: " << secs << "s" << endl;
-	cout << "Variables values have been written to file VAR" << endl;
-	population->printVariablesToFile("VAR");
-	cout << "Objectives values have been written to file FUN" << endl;
-	population->printObjectivesToFile("FUN");
-  
-  delete population;
-  delete algorithm;
+    // Result messages
+    cout << "Total execution time: " << secs << "s" << endl;
+    cout << "Variables values have been written to file VAR" << endl;
+    population->printVariablesToFile("VAR");
+    cout << "Objectives values have been written to file FUN" << endl;
+    population->printObjectivesToFile("FUN");
+
+    delete population;
+    delete algorithm;
 
 } // main

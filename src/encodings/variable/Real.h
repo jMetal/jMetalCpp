@@ -29,28 +29,29 @@
 /**
  * This class implements a Real value decision variable
  */
-class Real : public Variable {
+class Real : public Variable
+{
 
 public:
 
-  Real();
-  Real(double lowerBound, double upperBound);
-  Real(Variable * variable);
-  ~Real();
+    Real();
+    Real(double lowerBound, double upperBound);
+    Real(Variable * variable);
+    ~Real();
 
-  double getValue();
-  void setValue(double value);
-  Variable * deepCopy();
-  double getLowerBound();
-  double getUpperBound();
-  void setLowerBound(double bound);
-  void setUpperBound(double bound);
-  string toString() ;
+    double getValue();
+    void setValue(double value);
+    Variable * deepCopy();
+    double getLowerBound();
+    double getUpperBound();
+    void setLowerBound(double bound);
+    void setUpperBound(double bound);
+    string toString() ;
 
 private:
-  double value_;
-  double lowerBound_ ;
-  double upperBound_ ;
+    double value_;
+    double lowerBound_ ;
+    double upperBound_ ;
 };
 
 #endif

@@ -35,35 +35,36 @@
 
 using namespace std;
 
-class ExperimentExecution : public Experiment {
+class ExperimentExecution : public Experiment
+{
 
 private:
 
-  map<string, void *> map_; // Map used to send experiment parameters to threads
+    map<string, void *> map_; // Map used to send experiment parameters to threads
 
 public:
 
-  string outputParetoFrontFile_; // Name of the file containing the output
-                                 // Pareto front
-  string outputParetoSetFile_; // Name of the file containing the output Pareto
-                               // set
+    string outputParetoFrontFile_; // Name of the file containing the output
+    // Pareto front
+    string outputParetoSetFile_; // Name of the file containing the output Pareto
+    // set
 
-  vector<ExperimentIndividual*> experimentIndividualList_;
-  Settings ** algorithmSettingsList_;
-  int experimentIndividualListIndex_;
-  int experimentIndividualListSize_;
+    vector<ExperimentIndividual*> experimentIndividualList_;
+    Settings ** algorithmSettingsList_;
+    int experimentIndividualListIndex_;
+    int experimentIndividualListSize_;
 
-  ExperimentExecution();
+    ExperimentExecution();
 
-  void runExperiment(int numberOfThreads);
-  void runExperiment();
+    void runExperiment(int numberOfThreads);
+    void runExperiment();
 
-  // TODO: Check different algorithmSettings configurations
-  // virtual void algorithmSettings(string problemName, int problemId,
-  //      Algorithm ** algorithm) = 0;
-  // virtual Algorithm * algorithmSettings(string problemName) = 0;
-  virtual Algorithm * algorithmSettings(string problemName, int algorithmId,
-      int experimentIndividiualId) = 0;
+    // TODO: Check different algorithmSettings configurations
+    // virtual void algorithmSettings(string problemName, int problemId,
+    //      Algorithm ** algorithm) = 0;
+    // virtual Algorithm * algorithmSettings(string problemName) = 0;
+    virtual Algorithm * algorithmSettings(string problemName, int algorithmId,
+                                          int experimentIndividiualId) = 0;
 
 }; // ExperimentExecution
 

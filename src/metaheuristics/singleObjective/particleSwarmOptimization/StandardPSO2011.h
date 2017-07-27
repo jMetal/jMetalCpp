@@ -37,47 +37,48 @@
 /**
  * Class implementing a Standard PSO 2011 algorithm
  */
-class StandardPSO2011 : public Algorithm {
+class StandardPSO2011 : public Algorithm
+{
 
 private:
 
-  SolutionSet * swarm_;
-  int swarmSize_;
-  int maxIterations_;
-  int iteration_;
-  int numberOfParticlesToInform_ ; // Referred a K in the SPSO document
-  Solution ** localBest_;
-  Solution ** neighborhoodBest_;
-  double ** speed_;
-  AdaptiveRandomNeighborhood * neighborhood_ ;
+    SolutionSet * swarm_;
+    int swarmSize_;
+    int maxIterations_;
+    int iteration_;
+    int numberOfParticlesToInform_ ; // Referred a K in the SPSO document
+    Solution ** localBest_;
+    Solution ** neighborhoodBest_;
+    double ** speed_;
+    AdaptiveRandomNeighborhood * neighborhood_ ;
 
-  int evaluations_ ;
+    int evaluations_ ;
 
-  /**
-   * Comparator object
-   */
-  Comparator  * comparator_  ;
+    /**
+     * Comparator object
+     */
+    Comparator  * comparator_  ;
 
-  Operator * findBestSolution_ ;
+    Operator * findBestSolution_ ;
 
-  double W_;
-  double C_;
-  double ChVel_;
+    double W_;
+    double C_;
+    double ChVel_;
 
-  void initParams();
-  void deleteParams();
-  Solution * getNeighborBest(int i);
-  void computeSpeed();
-  void computeNewPositions();
+    void initParams();
+    void deleteParams();
+    Solution * getNeighborBest(int i);
+    void computeSpeed();
+    void computeNewPositions();
 
 public:
 
-  double getW();
-  double getC();
+    double getW();
+    double getC();
 
-  StandardPSO2011(Problem * problem);
-  ~StandardPSO2011();
-  SolutionSet * execute();
+    StandardPSO2011(Problem * problem);
+    ~StandardPSO2011();
+    SolutionSet * execute();
 
 }; // StandardPSO2011
 

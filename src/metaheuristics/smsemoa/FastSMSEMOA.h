@@ -31,20 +31,21 @@
 #include <Ranking.h>
 #include <CrowdingDistanceComparator.h>
 
-class FastSMSEMOA : public Algorithm {
+class FastSMSEMOA : public Algorithm
+{
 
 private:
 
-  MetricsUtil * utils_;
-  Hypervolume * hv_;
+    MetricsUtil * utils_;
+    Hypervolume * hv_;
 
-  vector<double> hvContributions(vector< vector<double> > front);
+    vector<double> hvContributions(vector< vector<double> > front);
 
 
 public:
-  FastSMSEMOA(Problem * problem);
-  ~FastSMSEMOA();
-  SolutionSet * execute();
+    FastSMSEMOA(Problem * problem);
+    ~FastSMSEMOA();
+    SolutionSet * execute();
 };
 
 

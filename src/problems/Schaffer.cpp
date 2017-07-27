@@ -26,27 +26,31 @@
  * Creates a new instance of the Schaffer problem.
  * @param solutionType The solution type must "Real", "BinaryReal, and "ArrayReal".
  */
-Schaffer::Schaffer(string solutionType) {
-	numberOfVariables_   = 1;
-	numberOfObjectives_  = 2;
-	numberOfConstraints_ = 0;
+Schaffer::Schaffer(string solutionType)
+{
+    numberOfVariables_   = 1;
+    numberOfObjectives_  = 2;
+    numberOfConstraints_ = 0;
 
-	lowerLimit_ = new double[numberOfVariables_];
-	if (lowerLimit_ == NULL) {
-		cout << "Schaffer::Schaffer. Error reserving memory for storing the array of lower limits" << endl;
-		exit(-1) ;
-	}
+    lowerLimit_ = new double[numberOfVariables_];
+    if (lowerLimit_ == NULL)
+    {
+        cout << "Schaffer::Schaffer. Error reserving memory for storing the array of lower limits" << endl;
+        exit(-1) ;
+    }
 
-	upperLimit_ = new double[numberOfVariables_];
-	if (upperLimit_ == NULL) {
-		cout << "Schaffer::Schaffer. Error reserving memory for storing the array of upper limits" << endl;
-		exit(-1) ;
-	}
+    upperLimit_ = new double[numberOfVariables_];
+    if (upperLimit_ == NULL)
+    {
+        cout << "Schaffer::Schaffer. Error reserving memory for storing the array of upper limits" << endl;
+        exit(-1) ;
+    }
 
-	int i ;
-    for (i = 0; i < numberOfVariables_; i++) {
-    	lowerLimit_[i] = -10000.0;
-    	upperLimit_[i] =  10000.0;
+    int i ;
+    for (i = 0; i < numberOfVariables_; i++)
+    {
+        lowerLimit_[i] = -10000.0;
+        upperLimit_[i] =  10000.0;
     }
 
     // TO-DO: Solution type initialization
@@ -57,10 +61,11 @@ Schaffer::Schaffer(string solutionType) {
 /**
  * Destructor
  */
-Schaffer::~Schaffer() {
-  delete [] lowerLimit_ ;
-  delete [] upperLimit_ ;
-  delete solutionType_ ;
+Schaffer::~Schaffer()
+{
+    delete [] lowerLimit_ ;
+    delete [] upperLimit_ ;
+    delete solutionType_ ;
 } // ~Schaffer
 
 
@@ -68,24 +73,26 @@ Schaffer::~Schaffer() {
  * Evaluates a solution
  * @param solution The solution to evaluate
  */
-void Schaffer::evaluate(Solution *solution) {
+void Schaffer::evaluate(Solution *solution)
+{
 
-	double *fx;
-	Variable **variables = solution->getDecisionVariables();
+    double *fx;
+    Variable **variables = solution->getDecisionVariables();
 
-	fx = new double[numberOfObjectives_];
-	if (fx == NULL) {
-		cout << "Schaffer::evaluate: Error reserving memory while evaluating the problem" << endl;
+    fx = new double[numberOfObjectives_];
+    if (fx == NULL)
+    {
+        cout << "Schaffer::evaluate: Error reserving memory while evaluating the problem" << endl;
         exit(-1);
-	}
+    }
 
-	fx[0] = variables[0]->getValue() *  variables[0]->getValue() ;
-	fx[1] = (variables[0]->getValue() - 2.0) * (variables[0]->getValue() - 2.0);
+    fx[0] = variables[0]->getValue() *  variables[0]->getValue() ;
+    fx[1] = (variables[0]->getValue() - 2.0) * (variables[0]->getValue() - 2.0);
 
-	solution->setObjective(0,fx[0]);
-	solution->setObjective(1,fx[1]);
+    solution->setObjective(0,fx[0]);
+    solution->setObjective(1,fx[1]);
 
-	delete [] fx;
+    delete [] fx;
 
 } // evaluate
 

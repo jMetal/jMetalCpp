@@ -23,14 +23,16 @@
 /**
  * Default constructor
  */
-Settings::Settings () {
+Settings::Settings ()
+{
 } // Settings
 
 /**
  * Constructor
  */
-Settings::Settings(char * problemName) {
-	problemName_ = problemName;
+Settings::Settings(char * problemName)
+{
+    problemName_ = problemName;
 } // Settings
 
 /**
@@ -43,7 +45,8 @@ Settings::~Settings() { /* do nothing */ }
  *
  * To be implemented. Missing the reflection features of Java here
  */
-Algorithm * Settings::configure(map<string, void *> settings) {
-	return NULL ;
+Algorithm * Settings::configure(map<string, void *> settings)
+{
+    return NULL ;
 } // configure
 

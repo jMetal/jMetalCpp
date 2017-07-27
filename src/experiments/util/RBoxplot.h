@@ -31,10 +31,11 @@ class ExperimentReport;
  * Class for generating results in form of boxplots
  */
 
-class RBoxplot {
+class RBoxplot
+{
 public:
-  static void generateScripts(int rows, int cols, vector<string> problems,
-      string prefix, bool notch, ExperimentReport * experiment);
+    static void generateScripts(int rows, int cols, vector<string> problems,
+                                string prefix, bool notch, ExperimentReport * experiment);
 };
 
 #endif /* __RBOXPLOT__ */
