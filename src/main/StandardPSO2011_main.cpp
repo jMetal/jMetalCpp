@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //       Antonio J. Nebro <antonio@lcc.uma.es>
 //
 //  Copyright (c) 2014 Antonio J. Nebro
