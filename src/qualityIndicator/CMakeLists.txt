@@ -1,0 +1,3 @@
+add_subdirectory(fastHypervolume)
+add_subdirectory(main)
+add_subdirectory(util)

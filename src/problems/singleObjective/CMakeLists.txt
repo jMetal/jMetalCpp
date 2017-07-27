@@ -1,0 +1,1 @@
+add_subdirectory(cec2005Competition)

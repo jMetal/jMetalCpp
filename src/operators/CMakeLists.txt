@@ -1,0 +1,3 @@
+add_subdirectory(crossover)
+add_subdirectory(mutation)
+add_subdirectory(selection)

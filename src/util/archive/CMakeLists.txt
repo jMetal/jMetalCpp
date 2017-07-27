@@ -1,0 +1,2 @@
+file(GLOB SOURCES *.cpp)
+LIST_APPEND(${SOURCES})
