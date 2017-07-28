@@ -36,7 +36,7 @@ private:
     Comparator * comparator_;
 
 public:
-    BestSolutionSelection(std::map<std::string, void *> parameters);
+    BestSolutionSelection(MapOfStringFunct parameters);
     void *execute(void *);
 
 };

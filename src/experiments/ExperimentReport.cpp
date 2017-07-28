@@ -110,8 +110,7 @@ void ExperimentReport::generateQualityIndicators()
                         std::string qualityIndicatorFile = problemDirectory;
 
                         Fitness * indicators = snew Fitness();
-                        std::vector< std::vector<double> > solutionFront =
-                            indicators->utils_->readFront(solutionFrontFile);
+						MatrixOfDouble solutionFront = indicators->utils_->readFront(solutionFrontFile);
                         qualityIndicatorFile = qualityIndicatorFile + "/FIT";
                         indicators->fitness(solutionFront, qualityIndicatorFile);
                         delete indicators;
@@ -135,9 +134,9 @@ void ExperimentReport::generateQualityIndicators()
                             {
 
                                 Hypervolume * indicators = snew Hypervolume();
-                                std::vector< std::vector<double> > solutionFront =
+                                MatrixOfDouble solutionFront =
                                     indicators->utils_->readFront(solutionFrontFile);
-                                std::vector< std::vector<double> > trueFront =
+                                MatrixOfDouble trueFront =
                                     indicators->utils_->readFront(paretoFrontPath);
                                 value = indicators->hypervolume(solutionFront, trueFront, trueFront[0].size());
                                 delete indicators;
@@ -146,9 +145,9 @@ void ExperimentReport::generateQualityIndicators()
                             if (indicatorList_[indicatorIndex].compare("SPREAD")==0)
                             {
                                 Spread * indicators = snew Spread();
-                                std::vector< std::vector<double> > solutionFront =
+                                MatrixOfDouble solutionFront =
                                     indicators->utils_->readFront(solutionFrontFile);
-                                std::vector< std::vector<double> > trueFront =
+                                MatrixOfDouble trueFront =
                                     indicators->utils_->readFront(paretoFrontPath);
                                 value = indicators->spread(solutionFront, trueFront, trueFront[0].size());
                                 delete indicators;
@@ -157,9 +156,9 @@ void ExperimentReport::generateQualityIndicators()
                             if (indicatorList_[indicatorIndex].compare("IGD")==0)
                             {
                                 InvertedGenerationalDistance * indicators = snew InvertedGenerationalDistance();
-                                std::vector< std::vector<double> > solutionFront =
+                                MatrixOfDouble solutionFront =
                                     indicators->utils_->readFront(solutionFrontFile);
-                                std::vector< std::vector<double> > trueFront =
+                                MatrixOfDouble trueFront =
                                     indicators->utils_->readFront(paretoFrontPath);
                                 value = indicators->invertedGenerationalDistance(solutionFront, trueFront, trueFront[0].size());
                                 delete indicators;
@@ -168,9 +167,9 @@ void ExperimentReport::generateQualityIndicators()
                             if (indicatorList_[indicatorIndex].compare("EPSILON")==0)
                             {
                                 Epsilon * indicators = snew Epsilon();
-                                std::vector< std::vector<double> > solutionFront =
+                                MatrixOfDouble solutionFront =
                                     indicators->utils_->readFront(solutionFrontFile);
-                                std::vector< std::vector<double> > trueFront =
+                                MatrixOfDouble trueFront =
                                     indicators->utils_->readFront(paretoFrontPath);
                                 value = indicators->epsilon(solutionFront, trueFront, trueFront[0].size());
                                 delete indicators;
@@ -251,15 +250,15 @@ void ExperimentReport::generateLatexTables()
     latexDirectory_ = experimentBaseDirectory_ + "/" + latexDirectory_;
     std::cout << "latex directory: " << latexDirectory_ << std::endl;
 
-    std::vector<double> *** data = snew std::vector<double>**[indicatorList_.size()];
+    VectorOfDouble *** data = snew VectorOfDouble**[indicatorList_.size()];
     for (int indicator = 0; indicator < indicatorList_.size(); indicator++)
     {
         // A data vector per problem
-        data[indicator] = snew std::vector<double>*[problemList_.size()];
+        data[indicator] = snew VectorOfDouble*[problemList_.size()];
 
         for (int problem = 0; problem < problemList_.size(); problem++)
         {
-            data[indicator][problem] = snew std::vector<double>[algorithmNameList_.size()];
+            data[indicator][problem] = snew VectorOfDouble[algorithmNameList_.size()];
 
             for (int algorithm = 0; algorithm < algorithmNameList_.size(); algorithm++)
             {
@@ -294,7 +293,7 @@ void ExperimentReport::generateLatexTables()
     double *** min;
     int *** numberOfValues;
 
-   std::map<std::string, double> statValues;
+	MapOfStringDouble statValues;
 
     statValues["mean"] =  0.0;
     statValues["median"] = 0.0;
@@ -425,7 +424,7 @@ void ExperimentReport::generateLatexTables()
 /**
  * Calculates statistical values from a vector of Double objects
  */
-void ExperimentReport::calculateStatistics(std::vector<double> vector,std::map<std::string, double> * values)
+void ExperimentReport::calculateStatistics(VectorOfDouble vector, MapOfStringDouble * values)
 {
     if (vector.size() > 0)
     {
@@ -788,7 +787,7 @@ void ExperimentReport::printMedianIQR(std::string fileName, int indicator, doubl
 /**
  * Invoking the generateScripts method on the RBoxplot class
  */
-void ExperimentReport::generateRBoxplotScripts (int rows, int cols, std::vector<std::string> problems,
+void ExperimentReport::generateRBoxplotScripts (int rows, int cols, VectorOfString problems,
         std::string prefix, bool notch, ExperimentReport * experiment)
 {
     RBoxplot::generateScripts(rows, cols, problems, prefix, notch, this);
@@ -798,7 +797,7 @@ void ExperimentReport::generateRBoxplotScripts (int rows, int cols, std::vector<
 /**
  * Invoking the generateScripts method on the RWilcoxon class
  */
-void ExperimentReport::generateRWilcoxonScripts(std::vector<std::string> problems, std::string prefix,
+void ExperimentReport::generateRWilcoxonScripts(VectorOfString problems, std::string prefix,
         ExperimentReport * experiment)
 {
     RWilcoxon::generateScripts(problems, prefix, this);

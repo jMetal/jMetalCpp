@@ -20,7 +20,9 @@
 
 
 #include <LexicoGraphicalComparator.h>
+#include "JMetalHeader.h"
 
+using namespace JMetal;
 
 /**
  * The compare method compare the objects o1 and o2.
@@ -30,9 +32,9 @@
  */
 int LexicoGraphicalComparator::compare(void * o1, void * o2)
 {
-    //Cast to std::vector<double> o1 and o2.
-    std::vector<double> pointOne = * (std::vector<double> *) o1;
-    std::vector<double> pointTwo = * (std::vector<double> *) o2;
+    //Cast to VectorOfDouble o1 and o2.
+    VectorOfDouble pointOne = * (VectorOfDouble *) o1;
+    VectorOfDouble pointTwo = * (VectorOfDouble *) o2;
 
     //To determine the first i, that pointOne[i] != pointTwo[i];
     int index = 0;

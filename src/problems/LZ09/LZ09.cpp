@@ -35,67 +35,67 @@ LZ09::LZ09(int nvar, int nobj, int ptype, int dtype, int ltype)
 /**
  * Alpha function
  */
-void LZ09::alphaFunction(double *alpha, std::vector<double> * x, int dim, int type)
+void LZ09::alphaFunction(double *alpha, VectorOfDouble * x, int dim, int type)
 {
     if (dim == 2)
     {
         if (type == 21)
         {
-            alpha[0] = x->at(0);
-            alpha[1] = 1 - sqrt(x->at(0));
+            alpha[0] = (*x)[0];
+            alpha[1] = 1 - sqrt((*x)[0]);
         }
 
         if (type == 22)
         {
-            alpha[0] = x->at(0);
-            alpha[1] = 1 - x->at(0) * x->at(0);
+            alpha[0] = (*x)[0];
+            alpha[1] = 1 - (*x)[0] * (*x)[0];
         }
 
         if (type == 23)
         {
-            alpha[0] = x->at(0);
+            alpha[0] = (*x)[0];
             alpha[1] = 1 - sqrt(alpha[0]) - alpha[0]
                        * sin(10 * alpha[0] * alpha[0] * 3.141596);
         }
 
         if (type == 24)
         {
-            alpha[0] = x->at(0);
-            alpha[1] = 1 - x->at(0) - 0.05 * sin(4 * 3.141596 * x->at(0));
+            alpha[0] = (*x)[0];
+            alpha[1] = 1 - (*x)[0] - 0.05 * sin(4 * 3.141596 * (*x)[0]);
         }
     }
     else
     {
         if (type == 31)
         {
-            alpha[0] = cos(x->at(0) * 3.141596 / 2) * cos(x->at(1) * 3.141596 / 2);
-            alpha[1] = cos(x->at(0) * 3.141596 / 2) * sin(x->at(1) * 3.141596 / 2);
-            alpha[2] = sin(x->at(0) * 3.141596 / 2);
+            alpha[0] = cos((*x)[0] * 3.141596 / 2) * cos(x->at(1) * 3.141596 / 2);
+            alpha[1] = cos((*x)[0] * 3.141596 / 2) * sin(x->at(1) * 3.141596 / 2);
+            alpha[2] = sin((*x)[0] * 3.141596 / 2);
         }
 
         if (type == 32)
         {
-            alpha[0] = 1 - cos(x->at(0) * 3.141596 / 2)
+            alpha[0] = 1 - cos((*x)[0] * 3.141596 / 2)
                        * cos(x->at(1) * 3.141596 / 2);
-            alpha[1] = 1 - cos(x->at(0) * 3.141596 / 2)
+            alpha[1] = 1 - cos((*x)[0] * 3.141596 / 2)
                        * sin(x->at(1) * 3.141596 / 2);
-            alpha[2] = 1 - sin(x->at(0) * 3.141596 / 2);
+            alpha[2] = 1 - sin((*x)[0] * 3.141596 / 2);
         }
 
         if (type == 33)
         {
-            alpha[0] = x->at(0);
+            alpha[0] = (*x)[0];
             alpha[1] = x->at(1);
             alpha[2] = 3
-                       - (sin(3 * 3.141596 * x->at(0)) + sin(3 * 3.141596 * x->at(1))) - 2
-                       * (x->at(0) + x->at(1));
+                       - (sin(3 * 3.141596 * (*x)[0]) + sin(3 * 3.141596 * x->at(1))) - 2
+                       * ((*x)[0] + x->at(1));
         }
 
         if (type == 34)
         {
-            alpha[0] = x->at(0) * x->at(1);
-            alpha[1] = x->at(0) * (1 - x->at(1));
-            alpha[2] = (1 - x->at(0));
+            alpha[0] = (*x)[0] * x->at(1);
+            alpha[1] = (*x)[0] * (1 - x->at(1));
+            alpha[2] = (1 - (*x)[0]);
         }
     }
 }
@@ -105,7 +105,7 @@ void LZ09::alphaFunction(double *alpha, std::vector<double> * x, int dim, int ty
  */
 
 
-double LZ09::betaFunction(std::vector<double> * x, int type)
+double LZ09::betaFunction(VectorOfDouble * x, int type)
 {
 
     double beta;
@@ -263,7 +263,7 @@ double LZ09::psfunc3(double x, double t1, double t2, int dim, int type)
     return beta;
 }
 
-void LZ09::objective(std::vector<double> *x_var, std::vector <double> *y_obj)
+void LZ09::objective(VectorOfDouble *x_var, std::vector <double> *y_obj)
 {
     // 2-objective case
     if(nobj_==2)

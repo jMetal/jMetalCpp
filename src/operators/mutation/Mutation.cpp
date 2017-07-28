@@ -22,7 +22,7 @@
 
 #include <Mutation.h>
 
-Mutation::Mutation(std::map<std::string, void *> parameters)
+Mutation::Mutation(MapOfStringFunct parameters)
     : Operator (parameters) {}
 
 Mutation::~Mutation() { /* do nothing */ }

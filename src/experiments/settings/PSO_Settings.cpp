@@ -70,7 +70,7 @@ Algorithm * PSO_Settings::configure()
     algorithm->setInputParameter("swarmSize", &swarmSize_);
     algorithm->setInputParameter("maxIterations", &maxIterations_);
 
-   std::map<std::string, void *> parameters;
+   MapOfStringFunct parameters;
 
     // Mutation operator
     double mutationProbability = mutationProbability_;

@@ -72,7 +72,7 @@ Algorithm * SMPSO_Settings::configure()
     algorithm->setInputParameter("maxIterations", &maxIterations_);
     algorithm->setInputParameter("archiveSize", &archiveSize_);
 
-   std::map<std::string, void *> parameters;
+   MapOfStringFunct parameters;
 
     double mutationProbability = mutationProbability_;
     double mutationDistributionIndex = mutationDistributionIndex_;

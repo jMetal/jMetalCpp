@@ -65,7 +65,7 @@ const std::string DifferentialEvolutionCrossover::DEFAULT_DE_VARIANT = "rand/1/b
 /**
  * Constructor
  */
-DifferentialEvolutionCrossover::DifferentialEvolutionCrossover(std::map<std::string, void *> parameters)
+DifferentialEvolutionCrossover::DifferentialEvolutionCrossover(MapOfStringFunct parameters)
     : Crossover(parameters)
 {
 

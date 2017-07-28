@@ -34,7 +34,7 @@ const std::string NonUniformMutation::VALID_TYPES[] = {"Real", "ArrayReal"};
  * Constructor
  * Creates a new instance of the non uniform mutation
  */
-NonUniformMutation::NonUniformMutation(std::map<std::string, void *> parameters)
+NonUniformMutation::NonUniformMutation(MapOfStringFunct parameters)
     : Mutation(parameters)
 {
     if (parameters["probability"] != nullptr)

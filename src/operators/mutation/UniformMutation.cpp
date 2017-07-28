@@ -33,7 +33,7 @@ const std::string UniformMutation::VALID_TYPES[] = {"Real", "ArrayReal"};
  * Constructor
  * Creates a new uniform mutation operator instance
  */
-UniformMutation::UniformMutation(std::map<std::string, void *> parameters)
+UniformMutation::UniformMutation(MapOfStringFunct parameters)
     : Mutation(parameters)
 {
     if (parameters["probability"] != nullptr)

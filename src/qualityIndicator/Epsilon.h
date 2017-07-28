@@ -24,6 +24,7 @@
 #include <MetricsUtil.h>
 #include <vector>
 
+
 /**
  * This class implements the unary epsilon additive indicator as proposed in
  * E. Zitzler, E. Thiele, L. Laummanns, M., Fonseca, C., and Grunert da Fonseca.
@@ -33,6 +34,8 @@
  * It can be used also as a command line program just by typing
  * $java jmetal.qualityIndicator.Epsilon <solutionFrontFile> <trueFrontFile> <numberOfOjbectives>
  */
+
+using namespace JMetal;
 
 class Epsilon
 {
@@ -54,7 +57,7 @@ public:
 
     Epsilon();
     ~Epsilon();
-    double epsilon(std::vector <std::vector<double> > b, std::vector< std::vector<double> > a, int dim);
+    double epsilon(MatrixOfDouble b, MatrixOfDouble a, int dim);
 
 }; // Epsilon
 

@@ -276,29 +276,29 @@ double**  Hypervolume::mergeFronts(double** front1, int sizeFront1,
  * @param paretoTrueFront The true pareto front
  * @param numberOfObjectives Number of objectives of the pareto front
  */
-double Hypervolume::hypervolume(std::vector< std::vector<double> > paretoFront,
-                                std::vector< std::vector<double> > paretoTrueFront, int numberOfObjectives)
+double Hypervolume::hypervolume(MatrixOfDouble paretoFront,
+                                MatrixOfDouble paretoTrueFront, int numberOfObjectives)
 {
 
     /**
      * Stores the maximum values of true pareto front.
      */
-    std::vector<double> maximumValues;
+    VectorOfDouble maximumValues;
 
     /**
      * Stores the minimum values of the true pareto front.
      */
-    std::vector<double> minimumValues;
+    VectorOfDouble minimumValues;
 
     /**
      * Stores the normalized front.
      */
-    std::vector< std::vector<double> > normalizedFront;
+    MatrixOfDouble normalizedFront;
 
     /**
      * Stores the inverted front. Needed for minimization problems
      */
-    std::vector< std::vector<double> > invertedFront;
+    MatrixOfDouble invertedFront;
 
     // STEP 1. Obtain the maximum and minimum values of the Pareto front
     maximumValues = utils_->getMaximumValues(paretoTrueFront, numberOfObjectives);

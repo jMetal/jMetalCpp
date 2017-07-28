@@ -49,7 +49,7 @@ PSO::PSO(Problem *problem) : Algorithm(problem)
     ChVel2_ = 1.0;
 
     comparator_ = new ObjectiveComparator(0); // Single objective comparator
-   std::map<std::string, void *> parameters; // Operator parameters
+   MapOfStringFunct parameters; // Operator parameters
 
     parameters["comparator"] = comparator_;
     findBestSolution_ = new BestSolutionSelection(parameters);

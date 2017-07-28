@@ -22,13 +22,12 @@
 #ifndef __EXPERIMENT__
 #define __EXPERIMENT__
 
-#include <string>
-#include <vector>
+#include "JMetalHeader.h"
 #include <FileUtils.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-
+using namespace JMetal;
 
 /**
  * Abstract class representing jMetal experiments
@@ -36,22 +35,17 @@
 
 class Experiment
 {
-
 public:
-
     std::string experimentName_;
-    std::vector<std::string> algorithmNameList_; // List of the names of the algorithms to
+    VectorOfString algorithmNameList_; // List of the names of the algorithms to
     // be executed
-    std::vector<std::string> problemList_; // List of problems to be solved
+    VectorOfString problemList_; // List of problems to be solved
     std::string experimentBaseDirectory_; // Directory to store the results
     int independentRuns_; // Number of independent runs per algorithm
     bool isSingleObjective_; // If this experiment is a singleObjective one or not
-
     Experiment();
-
     void checkExperimentDirectory();
     void resetFile(std::string file);
-
 };
 
 #endif /* __EXPERIMENT__ */

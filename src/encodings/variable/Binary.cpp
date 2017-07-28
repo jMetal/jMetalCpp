@@ -41,7 +41,7 @@ Binary::Binary(int numberOfBits)
 {
     numberOfBits_ = numberOfBits;
 
-    bits_ = snew std::vector<bool>(numberOfBits_, false) ;
+    bits_ = snew VectorOfBoolean(numberOfBits_, false) ;
 
     for (int i = 0; i < numberOfBits_; i++)
     {
@@ -64,7 +64,7 @@ Binary::Binary(int numberOfBits)
 Binary::Binary(Binary * variable)
 {
     numberOfBits_ = variable->getNumberOfBits();
-    bits_ = snew std::vector<bool>(numberOfBits_, false) ;
+    bits_ = snew VectorOfBoolean(numberOfBits_, false) ;
     for (int i = 0; i < numberOfBits_; i++)
     {
         (*bits_)[i] = (*variable->bits_)[i] ;
@@ -171,7 +171,7 @@ int Binary::hammingDistance(Binary * other)
  */
 std::string Binary::toString()
 {
-    std::vector<bool>::iterator it;
+    VectorOfBoolean::iterator it;
     std::string str = "" ;
     for(it = bits_->begin(); it != bits_->end(); it++)
     {
@@ -189,7 +189,7 @@ std::string Binary::toString()
 int Binary::cardinality()
 {
     int counter = 0 ;
-    std::vector<bool>::iterator it;
+    VectorOfBoolean::iterator it;
     for(it = bits_->begin(); it != bits_->end(); it++)
         if (*it == true)
             counter ++ ;

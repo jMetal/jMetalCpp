@@ -47,7 +47,7 @@ Fitness::~Fitness()
  * @param a. Solution front
  * @return the value of the epsilon indicator
  */
-void Fitness::fitness(std::vector <std::vector<double> > a, std::string file)
+void Fitness::fitness(std::vector <VectorOfDouble > a, std::string file)
 {
     std::fstream out(file.c_str(), std::ios::out | std::ios::app);
     for (int i=0; i<a.size(); i++)

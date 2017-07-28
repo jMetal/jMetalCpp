@@ -40,7 +40,7 @@ StandardPSO2007::StandardPSO2007(Problem * problem) : Algorithm(problem)
     C_ = 1.0/2.0 + log(2) ; //1.193;
 
     comparator_ = new ObjectiveComparator(0) ; // Single objective comparator
-   std::map<std::string, void *> parameters ; // Operator parameters
+   MapOfStringFunct parameters ; // Operator parameters
 
     parameters["comparator"] = comparator_;
     findBestSolution_ = new BestSolutionSelection(parameters) ;

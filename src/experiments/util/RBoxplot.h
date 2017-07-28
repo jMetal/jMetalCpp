@@ -22,9 +22,11 @@
 #ifndef __RBOXPLOT__
 #define __RBOXPLOT__
 
-#include <string>
+#include "JMetalHeader.h"
 #include <FileUtils.h>
 #include <ExperimentReport.h>
+
+using namespace JMetal;
 
 class ExperimentReport;
 
@@ -35,7 +37,7 @@ class ExperimentReport;
 class RBoxplot
 {
 public:
-    static void generateScripts(int rows, int cols, std::vector<std::string> problems,
+    static void generateScripts(int rows, int cols, VectorOfString problems,
                                 std::string prefix, bool notch, ExperimentReport * experiment);
 };
 

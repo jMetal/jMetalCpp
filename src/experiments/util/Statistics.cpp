@@ -31,7 +31,7 @@
  * @param last index of last position to consider in the vector
  * @return The median
  */
-double Statistics::calculateMedian(std::vector<double> vector_, int first, int last)
+double Statistics::calculateMedian(VectorOfDouble vector_, int first, int last)
 {
     double median = 0.0;
 
@@ -56,7 +56,7 @@ double Statistics::calculateMedian(std::vector<double> vector_, int first, int l
  * @param vector
  * @return The IQR
  */
-double Statistics::calculateIQR(std::vector<double> vector_)
+double Statistics::calculateIQR(VectorOfDouble vector_)
 {
     double q3 = 0.0;
     double q1 = 0.0;

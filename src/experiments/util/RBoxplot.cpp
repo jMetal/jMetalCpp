@@ -22,7 +22,7 @@
 
 #include <RBoxplot.h>
 
-void RBoxplot::generateScripts(int rows, int cols, std::vector<std::string> problems, std::string prefix,
+void RBoxplot::generateScripts(int rows, int cols, VectorOfString problems, std::string prefix,
                                bool notch, ExperimentReport * experiment)
 {
 

@@ -41,7 +41,7 @@ StandardPSO2011::StandardPSO2011(Problem * problem) : Algorithm(problem)
     ChVel_ = -0.5 ;
 
     comparator_ = new ObjectiveComparator(0) ; // Single objective comparator
-   std::map<std::string, void *> parameters ; // Operator parameters
+   MapOfStringFunct parameters ; // Operator parameters
 
     parameters["comparator"] = comparator_;
     findBestSolution_ = new BestSolutionSelection(parameters) ;

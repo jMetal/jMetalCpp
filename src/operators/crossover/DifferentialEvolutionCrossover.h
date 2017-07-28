@@ -48,7 +48,7 @@ class DifferentialEvolutionCrossover : public Crossover
 {
 
 public:
-    DifferentialEvolutionCrossover(std::map<std::string, void *> parameters);
+    DifferentialEvolutionCrossover(MapOfStringFunct parameters);
     void *execute(void *);
 
 protected:

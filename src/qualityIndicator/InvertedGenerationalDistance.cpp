@@ -52,29 +52,29 @@ InvertedGenerationalDistance::~InvertedGenerationalDistance()
  * @param trueParetoFront The true pareto front
  */
 double InvertedGenerationalDistance::invertedGenerationalDistance(
-    std::vector< std::vector<double> > front, std::vector< std::vector<double> > trueParetoFront,
+    MatrixOfDouble front, MatrixOfDouble trueParetoFront,
     int numberOfObjectives)
 {
 
     /**
      * Stores the maximum values of true pareto front.
      */
-    std::vector<double> maximumValue;
+    VectorOfDouble maximumValue;
 
     /**
      * Stores the minimum values of the true pareto front.
      */
-    std::vector<double> minimumValue;
+    VectorOfDouble minimumValue;
 
     /**
      * Stores the normalized front.
      */
-    std::vector< std::vector<double> > normalizedFront;
+    MatrixOfDouble normalizedFront;
 
     /**
      * Stores the normalized true Pareto front.
      */
-    std::vector< std::vector<double> > normalizedParetoFront ;
+    MatrixOfDouble normalizedParetoFront ;
 
     // STEP 1. Obtain the maximum and minimum values of the Pareto front
     maximumValue = utils_->getMaximumValues(trueParetoFront, numberOfObjectives);

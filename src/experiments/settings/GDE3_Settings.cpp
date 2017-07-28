@@ -72,7 +72,7 @@ Algorithm * GDE3_Settings::configure()
     algorithm->setInputParameter("maxIterations",&maxIterations_);
 
     // Mutation and Crossover for Real codification
-   std::map<std::string, void *> parameters;
+   MapOfStringFunct parameters;
 
     double CR = CR_;
     double F = F_;

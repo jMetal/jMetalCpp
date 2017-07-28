@@ -23,6 +23,7 @@
 #ifndef _FAST_SMSEMOA_H_
 #define _FAST_SMSEMOA_H_
 
+#include "JMetalHeader.h"
 #include <Algorithm.h>
 #include <Problem.h>
 #include <SolutionSet.h>
@@ -32,17 +33,14 @@
 #include <Ranking.h>
 #include <CrowdingDistanceComparator.h>
 
+using namespace JMetal;
+
 class FastSMSEMOA : public Algorithm
 {
-
-private:
-
-    MetricsUtil * utils_;
-    Hypervolume * hv_;
-
-    std::vector<double> hvContributions(std::vector< std::vector<double> > front);
-
-
+protected:
+    MetricsUtil * utils_ = nullptr;
+    Hypervolume * hv_ = nullptr;
+    VectorOfDouble hvContributions(MatrixOfDouble front);
 public:
     FastSMSEMOA(Problem * problem);
     ~FastSMSEMOA();

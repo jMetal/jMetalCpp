@@ -415,13 +415,13 @@ void SolutionSet::replace(int position, Solution *solution)
  * Copies the objectives of the solution set to a matrix
  * @return A matrix containing the objectives
  */
-std::vector <std::vector<double> > SolutionSet::writeObjectivesToMatrix()
+std::vector <VectorOfDouble > SolutionSet::writeObjectivesToMatrix()
 {
-    std::vector <std::vector<double> > objectives;
+    std::vector <VectorOfDouble > objectives;
     //objectives = snew double[size()][get(0).numberOfObjectives()];
     for (int i = 0; i < size(); i++)
     {
-        std::vector<double> list;
+        VectorOfDouble list;
         for (int j = 0; j < get(0)->getNumberOfObjectives(); j++)
         {
             list.push_back(get(i)->getObjective(j));

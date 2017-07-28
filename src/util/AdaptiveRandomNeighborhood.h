@@ -25,35 +25,24 @@
 #include <Solution.h>
 #include <SolutionSet.h>
 #include <PseudoRandom.h>
-
-#include <vector>
 #include <algorithm>
-//#include <list>
-
-
 
 /**
  * Class representing an adaptive random neighborhood
  */
 class AdaptiveRandomNeighborhood
 {
-
-private:
-
-    SolutionSet * solutionSet_;
-    std::vector<std::vector<int>> list_;
+protected:
+    SolutionSet * solutionSet_ = nullptr;
+	MatrixOfInteger list_;
     int numberOfRandomNeighbours_;
-
 public:
-
     AdaptiveRandomNeighborhood(SolutionSet * solutionSet, int numberOfRandomNeighbours);
-    std::vector<int> getNeighbors(int i);
+    VectorOfInteger getNeighbors(int i);
     int getNumberOfRandomNeighbours();
     SolutionSet * getBestFitnessSolutionInNeighborhood(Comparator * comparator);
-    std::vector<std::vector<int>> getNeighborhood();
+    MatrixOfInteger getNeighborhood();
     void recompute();
-    //std::string toString();
-
 }; // AdaptiveRandomNeighborhood
 
 #endif /* __ADAPTIVE_RANDOM_NEIGHBORHOOD__ */

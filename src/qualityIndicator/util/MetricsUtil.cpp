@@ -30,10 +30,10 @@
  * @param path The path to the file that contains the pareto front
  * @return double [][] whit the pareto front
  **/
-std::vector< std::vector <double> > MetricsUtil::readFront(std::string path)
+MatrixOfDouble MetricsUtil::readFront(std::string path)
 {
 
-    std::vector< std::vector <double> > front;
+    MatrixOfDouble front;
 
     std::ifstream in(path.c_str());
     if( !in )
@@ -46,7 +46,7 @@ std::vector< std::vector <double> > MetricsUtil::readFront(std::string path)
     while( getline(in, line ) )
     {
 
-        std::vector<double> list;
+        VectorOfDouble list;
 
         istringstream iss(line);
 
@@ -75,14 +75,14 @@ std::vector< std::vector <double> > MetricsUtil::readFront(std::string path)
  *  front
  *  @param front The pareto front
  *  @param noObjectives Number of objectives in the pareto front
- *  @return std::vector<double> A vector of noOjectives values with the maximum values
+ *  @return VectorOfDouble A vector of noOjectives values with the maximum values
  *  for each objective
  **/
-std::vector<double> MetricsUtil::getMaximumValues(std::vector< std::vector<double> > front,
+VectorOfDouble MetricsUtil::getMaximumValues(MatrixOfDouble front,
         int noObjectives)
 {
 
-    std::vector<double> maximumValue;
+    VectorOfDouble maximumValue;
 
     for (int i = 0; i < noObjectives; i++)
     {
@@ -109,14 +109,14 @@ std::vector<double> MetricsUtil::getMaximumValues(std::vector< std::vector<doubl
  *  front
  *  @param front The pareto front
  *  @param noObjectives Number of objectives in the pareto front
- *  @return std::vector<double> A vector of noOjectives values with the minimum values
+ *  @return VectorOfDouble A vector of noOjectives values with the minimum values
  *  for each objective
  **/
-std::vector<double> MetricsUtil::getMinimumValues(std::vector< std::vector<double> > front,
+VectorOfDouble MetricsUtil::getMinimumValues(MatrixOfDouble front,
         int noObjectives)
 {
 
-    std::vector<double> minimumValue;
+    VectorOfDouble minimumValue;
 
     for (int i = 0; i < noObjectives; i++)
     {
@@ -146,7 +146,7 @@ std::vector<double> MetricsUtil::getMinimumValues(std::vector< std::vector<doubl
  *  @param b A point
  *  @return The euclidean distance between the points
  **/
-double MetricsUtil::distance(std::vector<double> a, std::vector<double> b)
+double MetricsUtil::distance(VectorOfDouble a, VectorOfDouble b)
 {
 
     double distance = 0.0;
@@ -162,14 +162,14 @@ double MetricsUtil::distance(std::vector<double> a, std::vector<double> b)
 
 /**
  * Gets the distance between a point and the nearest one in
- * a given front (the front is given as <code>std::vector< std::vector<double> ></code>)
+ * a given front (the front is given as <code>MatrixOfDouble</code>)
  * @param point The point
  * @param front The front that contains the other points to calculate the
  * distances
  * @return The minimum distance between the point and the front
  **/
-double MetricsUtil::distanceToClosedPoint(std::vector<double> point,
-        std::vector< std::vector<double> > front)
+double MetricsUtil::distanceToClosedPoint(VectorOfDouble point,
+        MatrixOfDouble front)
 {
 
     double minDistance = distance(point,front[0]);
@@ -197,8 +197,8 @@ double MetricsUtil::distanceToClosedPoint(std::vector<double> point,
  * @return The minimun distances greater than zero between the point and
  * the front
  */
-double MetricsUtil::distanceToNearestPoint(std::vector<double> point,
-        std::vector< std::vector<double> > front)
+double MetricsUtil::distanceToNearestPoint(VectorOfDouble point,
+        MatrixOfDouble front)
 {
 
     double minDistance = std::numeric_limits<double>::max();
@@ -226,15 +226,15 @@ double MetricsUtil::distanceToNearestPoint(std::vector<double> point,
  * @param minimumValue The minimum values allowed
  * @return the normalized pareto front
  **/
-std::vector< std::vector<double> > MetricsUtil::getNormalizedFront(std::vector< std::vector<double> > front,
-        std::vector<double> maximumValue, std::vector<double> minimumValue)
+MatrixOfDouble MetricsUtil::getNormalizedFront(MatrixOfDouble front,
+        VectorOfDouble maximumValue, VectorOfDouble minimumValue)
 {
 
-    std::vector< std::vector<double> > normalizedFront;
+    MatrixOfDouble normalizedFront;
 
     for (int i = 0; i < front.size(); i++)
     {
-        std::vector<double> list;
+        VectorOfDouble list;
         for (int j = 0; j < front[i].size(); j++)
         {
             //normalizedFront[i][j] = (front[i][j] - minimumValue[j]) /
@@ -255,14 +255,14 @@ std::vector< std::vector<double> > MetricsUtil::getNormalizedFront(std::vector< 
  * @param front The pareto front to inverse
  * @return The inverted pareto front
  **/
-std::vector< std::vector<double> > MetricsUtil::invertedFront(std::vector< std::vector<double> > front)
+MatrixOfDouble MetricsUtil::invertedFront(MatrixOfDouble front)
 {
 
-    std::vector< std::vector<double> > invertedFront;
+    MatrixOfDouble invertedFront;
 
     for (int i = 0; i < front.size(); i++)
     {
-        std::vector<double> list;
+        VectorOfDouble list;
         for (int j = 0; j < front[i].size(); j++)
         {
             if (front[i][j] <= 1.0 && front[i][j]>= 0.0)
@@ -308,7 +308,7 @@ SolutionSet * MetricsUtil::readNonDominatedSolutionSet(std::string path)
     while( getline(in, line ) )
     {
 
-        std::vector<double> list;
+        VectorOfDouble list;
         istringstream iss(line);
         while (iss)
         {
@@ -358,7 +358,7 @@ void MetricsUtil::readNonDominatedSolutionSet(std::string path, NonDominatedSolu
     while( getline(in, line ) )
     {
 
-        std::vector<double> list;
+        VectorOfDouble list;
         istringstream iss(line);
         while (iss)
         {

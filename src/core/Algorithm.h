@@ -36,6 +36,9 @@
  *  The class declares an abstract method called <code>execute</code>, which
  *  defines the behavior of the algorithm.
 **/
+
+using namespace JMetal;
+
 class Algorithm
 {
 
@@ -53,10 +56,10 @@ public:
     Problem * getProblem();
 
 protected:
-    Problem *problem_;
-   std::map<std::string, Operator *> operators_;
-   std::map<std::string, void *> inputParameters_;
-   std::map<std::string, void *> outputParameters_;
+	Problem *problem_ = nullptr;
+	MapOfStringOperatorPtr operators_;
+	MapOfStringFunct inputParameters_;
+	MapOfStringFunct outputParameters_;
 
 }; // Algorithm
 

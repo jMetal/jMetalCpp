@@ -33,7 +33,7 @@ class Mutation : public Operator
 {
 
 public:
-    Mutation(std::map<std::string, void *> parameters);
+    Mutation(MapOfStringFunct parameters);
     virtual ~Mutation() = 0;
 
 };

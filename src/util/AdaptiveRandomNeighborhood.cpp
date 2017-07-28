@@ -42,7 +42,7 @@ AdaptiveRandomNeighborhood::AdaptiveRandomNeighborhood(SolutionSet * solutionSet
     for (int i = 0; i < solutionSet_->size(); i++)
     {
         //list_[i] = snew int []
-        std::vector<int> list_i;
+        VectorOfInteger list_i;
         list_i.push_back(i);
         list_.push_back(list_i);
     }
@@ -89,7 +89,7 @@ AdaptiveRandomNeighborhood::AdaptiveRandomNeighborhood(SolutionSet * solutionSet
 }
 
 
-std::vector<int> AdaptiveRandomNeighborhood::getNeighbors(int i)
+VectorOfInteger AdaptiveRandomNeighborhood::getNeighbors(int i)
 {
     if (i > list_.size())
     {
@@ -128,7 +128,7 @@ SolutionSet * AdaptiveRandomNeighborhood::getBestFitnessSolutionInNeighborhood(C
 }
 
 
-std::vector<std::vector<int>> AdaptiveRandomNeighborhood::getNeighborhood()
+MatrixOfInteger AdaptiveRandomNeighborhood::getNeighborhood()
 {
     return list_;
 }
@@ -141,7 +141,7 @@ void AdaptiveRandomNeighborhood::recompute()
     for (int i = 0; i < solutionSet_->size(); i++)
     {
         //list_[i] = snew int []
-        std::vector<int> list_i;
+        VectorOfInteger list_i;
         list_i.push_back(i);
         list_.push_back(list_i);
     }

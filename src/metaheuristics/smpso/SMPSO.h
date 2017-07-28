@@ -135,7 +135,7 @@ private:
 
 public:
     SMPSO(Problem * problem);
-    //TODO: SMPSO(Problem * problem, std::vector<double> variables, std::string trueParetoFront);
+    //TODO: SMPSO(Problem * problem, VectorOfDouble variables, std::string trueParetoFront);
     //TODO: SMPSO(Problem * problem, std::string trueParetoFront);
     SolutionSet * execute();
     //TODO: SolutionSet * getLeader();

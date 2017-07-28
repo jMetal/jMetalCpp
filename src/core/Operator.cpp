@@ -35,7 +35,7 @@ Operator::Operator()
 /**
  * Constructor.
 **/
-Operator::Operator(std::map<std::string, void*> parameters)
+Operator::Operator(MapOfStringFunct parameters)
 {
     parameters_ = parameters;
 } // Operator

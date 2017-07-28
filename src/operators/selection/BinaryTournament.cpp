@@ -32,7 +32,7 @@
  * Constructor
  * Creates a new Binary tournament operator using a BinaryTournamentComparator
  */
-BinaryTournament::BinaryTournament(std::map<std::string, void *> parameters)
+BinaryTournament::BinaryTournament(MapOfStringFunct parameters)
     : Selection(parameters)
 {
     if (parameters["comparator"] != nullptr)

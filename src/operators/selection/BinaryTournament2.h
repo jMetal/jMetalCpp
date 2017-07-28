@@ -42,7 +42,7 @@ private:
     int index_;
 
 public:
-    BinaryTournament2(std::map<std::string, void *> parameters);
+    BinaryTournament2(MapOfStringFunct parameters);
     ~BinaryTournament2();
     void *execute(void *);
 

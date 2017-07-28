@@ -149,18 +149,18 @@ SolutionSet * SMSEMOA::execute()
         if (lastFront->size() > 1)
         {
 
-            std::vector <std::vector<double> > frontValues = lastFront->writeObjectivesToMatrix();
+            std::vector <VectorOfDouble > frontValues = lastFront->writeObjectivesToMatrix();
             int numberOfObjectives = problem_->getNumberOfObjectives();
 
             // STEP 1. Obtain the maximum and minimum values of the Pareto front
-            std::vector<double> maximumValues = utils_->getMaximumValues(unionSolution->writeObjectivesToMatrix(), numberOfObjectives);
-            std::vector<double> minimumValues = utils_->getMinimumValues(unionSolution->writeObjectivesToMatrix(), numberOfObjectives);
+            VectorOfDouble maximumValues = utils_->getMaximumValues(unionSolution->writeObjectivesToMatrix(), numberOfObjectives);
+            VectorOfDouble minimumValues = utils_->getMinimumValues(unionSolution->writeObjectivesToMatrix(), numberOfObjectives);
 
             // STEP 2. Get the normalized front
-            std::vector <std::vector<double> > normalizedFront = utils_->getNormalizedFront(frontValues, maximumValues, minimumValues);
+            std::vector <VectorOfDouble > normalizedFront = utils_->getNormalizedFront(frontValues, maximumValues, minimumValues);
 
             // compute offsets for reference point in normalized space
-            std::vector<double> offsets;
+            VectorOfDouble offsets;
             for (int i = 0; i < maximumValues.size(); i++)
             {
                 offsets.push_back(offset / (maximumValues[i] - minimumValues[i]));
@@ -168,7 +168,7 @@ SolutionSet * SMSEMOA::execute()
 
             // STEP 3. Inverse the pareto front. This is needed because the original
             //metric by Zitzler is for maximization problems
-            std::vector <std::vector<double> > invertedFront = utils_->invertedFront(normalizedFront);
+            std::vector <VectorOfDouble > invertedFront = utils_->invertedFront(normalizedFront);
             // shift away from origin, so that boundary points also get a contribution > 0
             for (int i = 0; i < invertedFront.size(); i++)
             {
@@ -179,7 +179,7 @@ SolutionSet * SMSEMOA::execute()
             }
 
             // calculate contributions and sort
-            std::vector<double> contributions = hvContributions(invertedFront);
+            VectorOfDouble contributions = hvContributions(invertedFront);
             for (int i = 0; i < contributions.size(); i++)
             {
                 // contribution values are used analogously to crowding distance
@@ -238,22 +238,22 @@ SolutionSet * SMSEMOA::execute()
     return result;
 }
 
-std::vector<double> SMSEMOA::hvContributions(std::vector< std::vector<double> > front)
+VectorOfDouble SMSEMOA::hvContributions(MatrixOfDouble front)
 {
     int numberOfObjectives = problem_->getNumberOfObjectives();
 
-    std::vector<double> contributions;
+    VectorOfDouble contributions;
     double hv;
 
     double** frontSubset;
 
-    std::vector< std::vector<double> > frontCopy;
+    MatrixOfDouble frontCopy;
 
     double** totalFront = snew double*[front.size()];
 
     for (int i = 0; i < front.size(); i++)
     {
-        frontCopy.push_back(std::vector<double>());
+        frontCopy.push_back(VectorOfDouble());
         totalFront[i] = snew double[front[i].size()];
         for (int j = 0; j < front[i].size(); j++)
         {
@@ -267,7 +267,7 @@ std::vector<double> SMSEMOA::hvContributions(std::vector< std::vector<double> > 
     for (int i = 0; i < front.size(); i++)
     {
 
-        std::vector<double> evaluatedPoint;
+        VectorOfDouble evaluatedPoint;
         for (int j = 0; j < frontCopy[i].size(); j++)
         {
             evaluatedPoint.push_back(frontCopy[i][j]);

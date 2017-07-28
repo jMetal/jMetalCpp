@@ -37,7 +37,7 @@ private:
     Comparator * comparator_;
 
 public:
-    BinaryTournament(std::map<std::string, void *> parameters);
+    BinaryTournament(MapOfStringFunct parameters);
     ~BinaryTournament();
     void *execute(void *);
 

@@ -45,7 +45,7 @@ Settings::~Settings() { /* do nothing */ }
  *
  * To be implemented. Missing the reflection features of Java here
  */
-Algorithm * Settings::configure(std::map<std::string, void *> settings)
+Algorithm * Settings::configure(MapOfStringFunct settings)
 {
     return nullptr ;
 } // configure

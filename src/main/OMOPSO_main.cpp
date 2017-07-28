@@ -49,7 +49,7 @@ int main(int argc, char ** argv)
 
     QualityIndicator *indicators ; // Object to get quality indicators
 
-   std::map<std::string, void *> parameters; // Operator parameters
+   MapOfStringFunct parameters; // Operator parameters
 
     indicators = nullptr;
 

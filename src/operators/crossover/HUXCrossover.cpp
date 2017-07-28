@@ -27,7 +27,7 @@
  * Create a new SBX crossover operator whit a default
  * index given by <code>DEFAULT_INDEX_CROSSOVER</code>
  */
-HUXCrossover::HUXCrossover(std::map<std::string, void *> parameters)
+HUXCrossover::HUXCrossover(MapOfStringFunct parameters)
     : Crossover(parameters)
 {
     crossoverProbability_ = 0.0 ;

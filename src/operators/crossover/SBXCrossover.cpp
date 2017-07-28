@@ -38,7 +38,7 @@ const double SBXCrossover::ETA_C_DEFAULT_ = 20.0;
  * Create a new SBX crossover operator whit a default
  * index given by <code>DEFAULT_INDEX_CROSSOVER</code>
  */
-SBXCrossover::SBXCrossover(std::map<std::string, void *> parameters)
+SBXCrossover::SBXCrossover(MapOfStringFunct parameters)
     : Crossover(parameters)
 {
     //TODO: crossoverProbability_ = nullptr;

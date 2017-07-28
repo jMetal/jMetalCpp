@@ -32,7 +32,7 @@
  * Constructor
  * Creates a new RandomSelection operator using a BinaryTournamentComparator
  */
-RandomSelection::RandomSelection(std::map<std::string, void *> parameters): Selection(parameters)
+RandomSelection::RandomSelection(MapOfStringFunct parameters): Selection(parameters)
 {
 } // RandomSelection
 

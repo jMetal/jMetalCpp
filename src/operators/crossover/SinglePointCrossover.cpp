@@ -33,7 +33,7 @@
  * Create a new SBX crossover operator whit a default
  * index given by <code>DEFAULT_INDEX_CROSSOVER</code>
  */
-SinglePointCrossover::SinglePointCrossover(std::map<std::string, void *> parameters)
+SinglePointCrossover::SinglePointCrossover(MapOfStringFunct parameters)
     : Crossover(parameters)
 {
     crossoverProbability_ = 0.0 ;

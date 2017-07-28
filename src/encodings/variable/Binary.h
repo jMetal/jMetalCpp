@@ -23,11 +23,13 @@
 #ifndef Binary_h
 #define Binary_h
 
+#include "JMetalHeader.h"
 #include <Variable.h>
 #include <bitset>
-#include <vector>
 #include <PseudoRandom.h>
 #include <stdlib.h>
+
+using namespace JMetal;
 
 /**
  * This class implements a generic binary std::string variable.It can be used as
@@ -60,7 +62,7 @@ public:
     double getUpperBound();
 
 protected:
-    std::vector<bool> * bits_;
+    VectorOfBoolean * bits_ = nullptr;
     int numberOfBits_;
 };
 

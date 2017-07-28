@@ -22,9 +22,7 @@
 #ifndef __EXPERIMENT_REPORT__
 #define __EXPERIMENT_REPORT__
 
-#include <string>
-#include <map>
-#include <vector>
+#include "JMetalHeader.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -47,6 +45,7 @@
 #include <Experiment.h>
 
 
+using namespace JMetal;
 
 /**
  * Abstract class generating jMetal experiments reports
@@ -58,7 +57,7 @@ class ExperimentReport : public Experiment
 private:
 
     void generateReferenceFronts();
-    void calculateStatistics(std::vector<double> vector_,std::map<std::string, double> * values);
+    void calculateStatistics(VectorOfDouble vector_, MapOfStringDouble * values);
     void printHeaderLatexCommands(std::string fileName);
     void printEndLatexCommands(std::string fileName);
     void printMeanStdDev(std::string fileName, int indicator, double*** mean,
@@ -68,13 +67,13 @@ private:
 
 public:
 
-    std::vector<std::string> paretoFrontFile_; // List of the files containing the pareto
+    VectorOfString paretoFrontFile_; // List of the files containing the pareto
     // fronts corresponding to the problems in
     // problemList_
-    std::vector<std::string> indicatorList_; // List of the quality indicators to be applied
+    VectorOfString indicatorList_; // List of the quality indicators to be applied
     std::string latexDirectory_; // Directory to store the latex files
     std::string paretoFrontDirectory_; // Directory containing the Pareto front files
-   std::map<std::string, bool> indicatorMinimize_; // To indicate whether an indicator
+	MapOfStringBool indicatorMinimize_; // To indicate whether an indicator
     // is to be minimized. Hard-coded
     // in the constructor
 
@@ -82,9 +81,9 @@ public:
 
     void generateQualityIndicators();
     void generateLatexTables();
-    void generateRBoxplotScripts(int rows, int cols, std::vector<std::string> problems,
+    void generateRBoxplotScripts(int rows, int cols, VectorOfString problems,
                                  std::string prefix, bool notch, ExperimentReport * experiment);
-    void generateRWilcoxonScripts(std::vector<std::string> problems, std::string prefix,
+    void generateRWilcoxonScripts(VectorOfString problems, std::string prefix,
                                   ExperimentReport * experiment);
 
 }; // ExperimentReport

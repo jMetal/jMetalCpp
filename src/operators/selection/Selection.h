@@ -33,7 +33,7 @@ class Selection : public Operator
 {
 
 public:
-    Selection (std::map<std::string, void *> parameters);
+    Selection (MapOfStringFunct parameters);
     virtual ~Selection() = 0;
 };
 

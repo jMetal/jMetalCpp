@@ -57,7 +57,7 @@ SolutionSet * ssGA::execute()
     Comparator * comparator = new ObjectiveComparator(0); // Single objective comparator
 
     Operator * findWorstSolution;
-   std::map<std::string, void *> parameters; // Operator parameters
+   MapOfStringFunct parameters; // Operator parameters
     parameters["comparator"] = comparator;
 
     findWorstSolution = new WorstSolutionSelection(parameters) ;

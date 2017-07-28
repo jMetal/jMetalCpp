@@ -21,18 +21,17 @@
 #ifndef __METRICSUTIL__
 #define __METRICSUTIL__
 
+#include "JMetalHeader.h"
 #include <limits>
-#include <vector>
 #include <iostream>
 #include <cstdlib>
 #include <fstream>
 #include <sstream>
-#include <string>
 #include <math.h>
 #include <SolutionSet.h>
 #include <NonDominatedSolutionList.h>
 
-using namespace std;
+using namespace JMetal;
 
 /**
   * @class MetricsUtil
@@ -43,17 +42,17 @@ class MetricsUtil
 {
 
 public:
-    vector< vector<double> > readFront(string path);
-    vector<double> getMaximumValues(vector< vector<double> > front, int noObjectives);
-    vector<double> getMinimumValues(vector< vector<double> > front, int noObjectives);
-    double distance(vector<double> a, vector<double> b);
-    double distanceToClosedPoint(vector<double> point, vector< vector<double> > front);
-    double distanceToNearestPoint(vector<double> point, vector< vector<double> > front);
-    vector< vector<double> > getNormalizedFront(vector< vector<double> > front,
-            vector<double> maximumValue, vector<double> minimumValue);
-    vector< vector<double> > invertedFront(vector< vector<double> > front);
-    SolutionSet * readNonDominatedSolutionSet(string path);
-    void readNonDominatedSolutionSet(string path, NonDominatedSolutionList * solutionSet);
+    MatrixOfDouble readFront(std::string path);
+    VectorOfDouble getMaximumValues(MatrixOfDouble front, int noObjectives);
+    VectorOfDouble getMinimumValues(MatrixOfDouble front, int noObjectives);
+    double distance(VectorOfDouble a, VectorOfDouble b);
+    double distanceToClosedPoint(VectorOfDouble point, MatrixOfDouble front);
+    double distanceToNearestPoint(VectorOfDouble point, MatrixOfDouble front);
+    MatrixOfDouble getNormalizedFront(MatrixOfDouble front,
+            VectorOfDouble maximumValue, VectorOfDouble minimumValue);
+    MatrixOfDouble invertedFront(MatrixOfDouble front);
+    SolutionSet * readNonDominatedSolutionSet(std::string path);
+    void readNonDominatedSolutionSet(std::string path, NonDominatedSolutionList * solutionSet);
 };
 
 #endif /* __METRICSUTIL__ */

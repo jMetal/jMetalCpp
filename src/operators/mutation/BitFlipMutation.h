@@ -36,7 +36,7 @@ class BitFlipMutation : public Mutation
 {
 
 public:
-    BitFlipMutation(std::map<std::string, void *> parameters);
+    BitFlipMutation(MapOfStringFunct parameters);
     ~BitFlipMutation();
     void * execute(void *);
 

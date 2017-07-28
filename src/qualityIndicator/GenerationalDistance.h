@@ -48,8 +48,8 @@ public:
 
     GenerationalDistance();
     ~GenerationalDistance();
-    double generationalDistance(std::vector< std::vector<double> > front,
-                                std::vector< std::vector<double> > trueParetoFront, int numberOfObjectives);
+    double generationalDistance(MatrixOfDouble front,
+                                MatrixOfDouble trueParetoFront, int numberOfObjectives);
 
 };
 

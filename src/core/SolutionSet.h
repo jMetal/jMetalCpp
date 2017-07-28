@@ -23,6 +23,7 @@
 #ifndef __SOLUTION_SET__
 #define __SOLUTION_SET__
 
+#include "JMetalHeader.h"
 #include <string>
 #include <cstdlib>
 #include <iostream>
@@ -33,7 +34,7 @@
 #include <Solution.h>
 #include <Comparator.h>
 
-
+using namespace JMetal;
 
 //class Solution ;
 class Comparator;
@@ -46,7 +47,7 @@ class SolutionSet
 {
 
 protected:
-    std::vector<Solution*> solutionsList_;
+	VectorOfSolutionPtr solutionsList_;
     int capacity_;
 
 public:
@@ -76,7 +77,7 @@ public:
     SolutionSet * join(SolutionSet * another);
     void replace(int position, Solution * solution);
     void replace(int position, Solution * solution, bool del);
-    std::vector <std::vector<double> > writeObjectivesToMatrix();
+    std::vector <VectorOfDouble > writeObjectivesToMatrix();
     void printObjectives();
 
     //void reset() ;

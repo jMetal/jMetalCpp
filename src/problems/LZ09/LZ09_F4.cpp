@@ -93,8 +93,8 @@ void LZ09_F4::evaluate(Solution * solution)
 {
     XReal * vars = snew XReal(solution);
 
-    std::vector<double> * x = snew std::vector<double>(numberOfVariables_) ;
-    std::vector<double> * y = snew std::vector<double>(numberOfObjectives_);
+    VectorOfDouble * x = snew VectorOfDouble(numberOfVariables_) ;
+    VectorOfDouble * y = snew VectorOfDouble(numberOfObjectives_);
 
     for (int i = 0; i < numberOfVariables_; i++)
     {

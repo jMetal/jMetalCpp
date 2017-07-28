@@ -60,8 +60,8 @@ public:
     ~Hypervolume();
 
     double calculateHypervolume(double** front, int noPoints, int noObjectives);
-    double hypervolume(std::vector< std::vector<double> > paretoFront,
-                       std::vector< std::vector<double> > paretoTrueFront, int numberOfObjectives);
+    double hypervolume(MatrixOfDouble paretoFront,
+                       MatrixOfDouble paretoTrueFront, int numberOfObjectives);
 
 };
 

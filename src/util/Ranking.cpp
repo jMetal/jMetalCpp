@@ -56,10 +56,10 @@ Ranking::Ranking (SolutionSet * solutionSet)
     }
 
     // iDominate[k] contains the list of solutions dominated by k
-    std::vector<int> * iDominate = new std::vector<int>[solutionSet_->size()];
+    VectorOfInteger * iDominate = new VectorOfInteger[solutionSet_->size()];
 
     // front[i] contains the list of individuals belonging to the front i
-    std::vector<int> * front = new std::vector<int>[solutionSet_->size()+1];
+    VectorOfInteger * front = new VectorOfInteger[solutionSet_->size()+1];
 
     // flagDominate is an auxiliar variable
     int flagDominate;
@@ -109,7 +109,7 @@ Ranking::Ranking (SolutionSet * solutionSet)
 
     // Obtain the rest of fronts
     int i = 0;
-    std::vector<int>::iterator it1, it2;
+    VectorOfInteger::iterator it1, it2;
     while (front[i].size()!=0)
     {
         i++;

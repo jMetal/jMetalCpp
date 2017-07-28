@@ -22,8 +22,10 @@
 #ifndef __RWILCOXON__
 #define __RWILCOXON__
 
-#include <string>
+#include "JMetalHeader.h"
 #include <ExperimentReport.h>
+
+using namespace JMetal;
 
 class ExperimentReport;
 
@@ -35,7 +37,7 @@ class ExperimentReport;
 class RWilcoxon
 {
 public:
-    static void generateScripts(std::vector<std::string> problems, std::string prefix,
+    static void generateScripts(VectorOfString problems, std::string prefix,
                                 ExperimentReport * experiment);
 
 }; // RWilcoxon

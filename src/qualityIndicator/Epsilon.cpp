@@ -47,7 +47,7 @@ Epsilon::~Epsilon()
  * @param a. Solution front
  * @return the value of the epsilon indicator
  */
-double Epsilon::epsilon(std::vector <std::vector<double> > b, std::vector <std::vector<double> > a,
+double Epsilon::epsilon(MatrixOfDouble b, MatrixOfDouble a,
                         int dim)
 {
 

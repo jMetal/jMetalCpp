@@ -102,7 +102,7 @@ SolutionSet * MOEAD::execute()
             {
                 type = 2;   // whole population
             }
-            std::vector<int> p;
+            VectorOfInteger p;
             matingSelection(p, n, 2, type);
 
             // STEP 2.2. Reproduction
@@ -290,7 +290,7 @@ void MOEAD::initIdealPoint()
 /**
  * matingSelection
  */
-void MOEAD::matingSelection(std::vector<int> &list, int cid, int size, int type)
+void MOEAD::matingSelection(VectorOfInteger &list, int cid, int size, int type)
 {
 
     // list : the set of the indexes of selected mating parents

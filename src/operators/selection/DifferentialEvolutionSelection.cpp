@@ -32,7 +32,7 @@
 /**
  * Constructor
  */
-DifferentialEvolutionSelection::DifferentialEvolutionSelection(std::map<std::string, void *> parameters)
+DifferentialEvolutionSelection::DifferentialEvolutionSelection(MapOfStringFunct parameters)
     : Selection(parameters) {}
 
 

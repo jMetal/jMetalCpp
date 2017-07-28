@@ -68,7 +68,7 @@ Algorithm * NSGAII_Settings::configure()
     algorithm->setInputParameter("maxEvaluations",&maxEvaluations_);
 
     // Mutation and Crossover for Real codification
-   std::map<std::string, void *> parameters;
+   MapOfStringFunct parameters;
 
     double crossoverProbability = crossoverProbability_;
     double crossoverDistributionIndex = crossoverDistributionIndex_ ;

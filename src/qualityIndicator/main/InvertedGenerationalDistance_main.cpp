@@ -44,9 +44,9 @@ int main(int argc, char ** argv)
     InvertedGenerationalDistance * qualityIndicator =
         snew InvertedGenerationalDistance();
     //Read the front from the files
-    std::vector< std::vector<double> > solutionFront =
+    MatrixOfDouble solutionFront =
         qualityIndicator->utils_->readFront(argv[1]);
-    std::vector< std::vector<double> > trueFront =
+    MatrixOfDouble trueFront =
         qualityIndicator->utils_->readFront(argv[2]);
 
     //Obtain delta value

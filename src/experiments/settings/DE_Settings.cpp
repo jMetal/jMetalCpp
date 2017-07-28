@@ -66,7 +66,7 @@ Algorithm * DE_Settings::configure()
     algorithm->setInputParameter("populationSize",&populationSize_);
     algorithm->setInputParameter("maxEvaluations",&maxEvaluations_);
 
-   std::map<std::string, void *> parameters;
+   MapOfStringFunct parameters;
 
     // Crossover operator
     double crParameter = crParameter_;

@@ -39,7 +39,7 @@ public:
 
     Fitness();
     ~Fitness();
-    void fitness(std::vector <std::vector<double> > a, std::string file);
+    void fitness(std::vector <VectorOfDouble > a, std::string file);
 
 }; // Fitness
 

@@ -41,7 +41,7 @@ class ExperimentExecution : public Experiment
 
 private:
 
-   std::map<std::string, void *> map_; // Map used to send experiment parameters to threads
+   MapOfStringFunct map_; // Map used to send experiment parameters to threads
 
 public:
 

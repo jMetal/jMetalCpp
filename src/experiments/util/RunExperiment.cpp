@@ -31,7 +31,7 @@
 /**
  * Constructor
  */
-RunExperiment::RunExperiment(ExperimentExecution * experiment,std::map<std::string, void *> map,
+RunExperiment::RunExperiment(ExperimentExecution * experiment,MapOfStringFunct map,
                              int id, int numberOfThreads, int numberOfProblems, int threadIndex,
                              mutex * mtx)
 {
@@ -60,8 +60,8 @@ void RunExperiment::run()
     std::cout << experimentName << std::endl;
     experimentBaseDirectory_ = *(string*) map_["experimentDirectory"];
     std::cout << experimentBaseDirectory_ << std::endl;
-    algorithmNameList_ = *(std::vector<std::string>*) map_["algorithmNameList"];
-    problemList_ = *(std::vector<std::string>*) map_["problemList"];
+    algorithmNameList_ = *(VectorOfString*) map_["algorithmNameList"];
+    problemList_ = *(VectorOfString*) map_["problemList"];
     independentRuns_ = *(int*) map_["independentRuns"];
     std::cout << independentRuns_ << std::endl;
     outputParetoFrontFile_ = *(string*) map_["outputParetoFrontFile"];

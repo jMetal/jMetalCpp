@@ -85,7 +85,7 @@ private:
     void initNeighborhood();
     void initPopulation();
     void initIdealPoint();
-    void matingSelection(std::vector<int> &list, int cid, int size, int type);
+    void matingSelection(VectorOfInteger &list, int cid, int size, int type);
     void updateReference(Solution * individual);
     void updateProblem(Solution * indiv, int id, int type);
     double fitnessFunction(Solution * individual, double * lambda);

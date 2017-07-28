@@ -22,9 +22,9 @@
 #ifndef __STATISTICS__
 #define __STATISTICS__
 
-#include <vector>
+#include "JMetalHeader.h"
 
-using namespace std;
+using namespace JMetal;
 
 /**
  * This class provides methods for computing some statistics
@@ -34,8 +34,8 @@ class Statistics
 {
 
 public:
-    static double calculateMedian(vector<double> vector_, int first, int last);
-    static double calculateIQR(vector<double> vector_);
+    static double calculateMedian(VectorOfDouble vector_, int first, int last);
+    static double calculateIQR(VectorOfDouble vector_);
 
 };
 

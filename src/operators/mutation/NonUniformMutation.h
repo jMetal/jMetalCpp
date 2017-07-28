@@ -78,7 +78,7 @@ public:
      * Constructor.
      * Creates a new instance of the non uniform mutation
      */
-    NonUniformMutation(std::map<std::string, void *> parameters);
+    NonUniformMutation(MapOfStringFunct parameters);
 
     /**
      * Executes the operation

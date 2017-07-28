@@ -35,7 +35,7 @@
  * Creates a new instance of the Binary tournament operator (Deb's
  * NSGA-II implementation version)
  */
-BinaryTournament2::BinaryTournament2(std::map<std::string, void *> parameters)
+BinaryTournament2::BinaryTournament2(MapOfStringFunct parameters)
     : Selection(parameters)
 {
     index_ = 0;

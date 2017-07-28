@@ -47,11 +47,11 @@ public:
 
     ExperimentExecution * experiment_;
     int id_;
-   std::map<std::string, void *> map_;
+   MapOfStringFunct map_;
     int numberOfThreads_;
     int numberOfProblems_;
 
-    RunExperiment(ExperimentExecution * experiment,std::map<std::string, void *> map, int id,
+    RunExperiment(ExperimentExecution * experiment,MapOfStringFunct map, int id,
                   int numberOfThreads, int numberOfProblems, int threadIndex,
                   mutex * mtx);
     void run();
@@ -63,9 +63,9 @@ private:
     mutex * mutex_;
 
     std::string experimentName_;
-    std::vector<std::string> algorithmNameList_; // List of the names of the algorithms to
+    VectorOfString algorithmNameList_; // List of the names of the algorithms to
     // be executed
-    std::vector<std::string> problemList_; // List of problems to be solved
+    VectorOfString problemList_; // List of problems to be solved
     std::string experimentBaseDirectory_; // Directory to store the results
     std::string latexDirectory_; // Directory to store the latex files
     std::string rDirectory_; // Directory to store the generated R scripts
