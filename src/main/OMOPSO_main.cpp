@@ -39,19 +39,13 @@
  */
 int main(int argc, char ** argv)
 {
-
     clock_t t_ini, t_fin;
-
-    Problem   *problem;   // The problem to solve
-    Algorithm *algorithm; // The algorithm to use
-    Mutation  *uniformMutation;
-    Mutation  *nonUniformMutation;
-
-    QualityIndicator *indicators ; // Object to get quality indicators
-
-   MapOfStringFunct parameters; // Operator parameters
-
-    indicators = nullptr;
+    Problem   *problem = nullptr;   // The problem to solve
+    Algorithm *algorithm = nullptr; // The algorithm to use
+    Mutation  *uniformMutation = nullptr;
+    Mutation  *nonUniformMutation = nullptr;
+    QualityIndicator *indicators = nullptr; // Object to get quality indicators
+	MapOfStringFunct parameters; // Operator parameters
 
     if (argc>=2)
     {
@@ -64,9 +58,7 @@ int main(int argc, char ** argv)
         std::cout << "Default problem will be used: Kursawe" << std::endl;
         problem = ProblemFactory::getProblem(const_cast<char *>("Kursawe"));
     }
-
     algorithm = snew OMOPSO(problem);
-
     int maxIterations = 250;
     double perturbationIndex = 0.5;
     double mutationProbability = 1.0/problem->getNumberOfVariables();
@@ -77,22 +69,18 @@ int main(int argc, char ** argv)
     algorithm->setInputParameter("swarmSize",&swarmSize);
     algorithm->setInputParameter("archiveSize",&archiveSize);
     algorithm->setInputParameter("maxIterations",&maxIterations);
-
     parameters["probability"] =  &mutationProbability;
     parameters["perturbation"] = &perturbationIndex;
     uniformMutation = snew UniformMutation(parameters);
-
     parameters.clear();
     parameters["probability"] =  &mutationProbability;
     parameters["perturbation"] =  &perturbationIndex;
     parameters["maxIterations"] = &maxIterations;
     nonUniformMutation = snew NonUniformMutation(parameters);
 
-
     // Add the operators to the algorithm
     algorithm->addOperator("uniformMutation",uniformMutation);
     algorithm->addOperator("nonUniformMutation",nonUniformMutation);
-
     // Execute the Algorithm
     t_ini = clock();
     SolutionSet * population = algorithm->execute();
@@ -106,7 +94,6 @@ int main(int argc, char ** argv)
     population->printVariablesToFile("VAR");
     std::cout << "Objectives values have been written to file FUN" << std::endl;
     population->printObjectivesToFile("FUN");
-
     if (indicators != nullptr)
     {
         std::cout << "Quality indicators" << std::endl ;
@@ -121,5 +108,4 @@ int main(int argc, char ** argv)
     delete nonUniformMutation;
     delete population;
     delete algorithm;
-
 } // main
