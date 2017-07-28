@@ -45,8 +45,8 @@ F09ShiftedRastrigin::F09ShiftedRastrigin(int dimension, double bias, string file
 {
 
     // Note: dimension starts from 0
-    m_o = new double[m_dimension];
-    m_z = new double[m_dimension];
+    m_o = snew double[m_dimension];
+    m_z = snew double[m_dimension];
 
     // Load the shifted global optimum
     Benchmark::loadRowVectorFromFile(file_data, m_dimension, m_o);

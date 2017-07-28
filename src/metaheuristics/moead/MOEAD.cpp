@@ -47,7 +47,7 @@ SolutionSet * MOEAD::execute()
     populationSize_ = *(int *) getInputParameter("populationSize");
     dataDirectory_ = * (string *) getInputParameter("dataDirectory");
 
-    population_ = new SolutionSet(populationSize_);
+    population_ = snew SolutionSet(populationSize_);
     //indArray_ = new Solution*[problem_->getNumberOfObjectives()];
 
     T_ = 20;
@@ -58,11 +58,11 @@ SolutionSet * MOEAD::execute()
       delta_ = 0.9;
       nr_ = * (int *) (0.01 * populationSize_);
     */
-    neighborhood_ = new int*[populationSize_];
+    neighborhood_ = snew int*[populationSize_];
 
-    z_ = new double[problem_->getNumberOfObjectives()];
+    z_ = snew double[problem_->getNumberOfObjectives()];
     //lambda_ = new Vector(problem_->getNumberOfObjectives()) ;
-    lambda_ = new double*[populationSize_];
+    lambda_ = snew double*[populationSize_];
 
     crossover_ = operators_["crossover"];  // default: DE crossover
     mutation_ = operators_["mutation"];  // default: polynomial mutation
@@ -84,7 +84,7 @@ SolutionSet * MOEAD::execute()
     // STEP 2. Update
     do
     {
-        int * permutation = new int[populationSize_];
+        int * permutation = snew int[populationSize_];
         UtilsMOEAD::randomPermutation(permutation, populationSize_);
         for (int i = 0; i < populationSize_; i++)
         {
@@ -107,14 +107,14 @@ SolutionSet * MOEAD::execute()
 
             // STEP 2.2. Reproduction
             Solution * child;
-            Solution ** parents = new Solution*[3];
+            Solution ** parents = snew Solution*[3];
 
             parents[0] = population_->get(p[0]);
             parents[1] = population_->get(p[1]);
             parents[2] = population_->get(n);
 
             // Apply DE crossover
-            void ** object = new void*[2];
+            void ** object = snew void*[2];
             object[0] = population_->get(n);
             object[1] = parents;
             child = (Solution *) (crossover_->execute(object));
@@ -159,7 +159,7 @@ void MOEAD::initUniformWeight()
     {
         for (int n = 0; n < populationSize_; n++)
         {
-            lambda_[n] = new double[problem_->getNumberOfObjectives()];
+            lambda_[n] = snew double[problem_->getNumberOfObjectives()];
             double a = 1.0 * n / (populationSize_ - 1);
             lambda_[n][0] = a;
             lambda_[n][1] = 1 - a;
@@ -192,7 +192,7 @@ void MOEAD::initUniformWeight()
             j = 0;
             // TODO: Check if number of tokens per line is equal to number of
             //       objectives
-            lambda_[i] = new double[problem_->getNumberOfObjectives()];
+            lambda_[i] = snew double[problem_->getNumberOfObjectives()];
             while (iss)
             {
                 string token;
@@ -217,8 +217,8 @@ void MOEAD::initUniformWeight()
  */
 void MOEAD::initNeighborhood()
 {
-    double * x = new double[populationSize_];
-    int * idx = new int[populationSize_];
+    double * x = snew double[populationSize_];
+    int * idx = snew int[populationSize_];
 
     for (int i = 0; i < populationSize_; i++)
     {
@@ -237,7 +237,7 @@ void MOEAD::initNeighborhood()
         UtilsMOEAD::minFastSort(x, idx, populationSize_, T_);
         //minfastsort(x,idx,population.size(),niche);
 
-        neighborhood_[i] = new int[T_];
+        neighborhood_[i] = snew int[T_];
         for (int k = 0; k < T_; k++)
         {
             neighborhood_[i][k] = idx[k];
@@ -258,7 +258,7 @@ void MOEAD::initPopulation()
 {
     for (int i = 0; i < populationSize_; i++)
     {
-        Solution * newSolution = new Solution(problem_);
+        Solution * newSolution = snew Solution(problem_);
 
         problem_->evaluate(newSolution);
         evaluations_++;
@@ -376,7 +376,7 @@ void MOEAD::updateProblem(Solution * indiv, int id, int type)
         //size = population_.size();
         size = populationSize_;
     }
-    int * perm = new int[size];
+    int * perm = snew int[size];
 
     UtilsMOEAD::randomPermutation(perm, size);
 
@@ -403,7 +403,7 @@ void MOEAD::updateProblem(Solution * indiv, int id, int type)
         if (f2 < f1)
         {
             delete population_->get(k);
-            population_->replace(k, new Solution(indiv));
+            population_->replace(k, snew Solution(indiv));
             //population[k].indiv = indiv;
             time++;
         }

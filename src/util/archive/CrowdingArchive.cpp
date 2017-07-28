@@ -36,10 +36,10 @@ CrowdingArchive::CrowdingArchive(int maxSize, int numberOfObjectives)
 
     this->maxSize          = maxSize;
     this->objectives       = numberOfObjectives;
-    this->dominance        = new DominanceComparator();
-    this->equals           = new EqualSolutions();
-    this->crowdingDistance = new CrowdingDistanceComparator();
-    this->distance         = new Distance();
+    this->dominance        = snew DominanceComparator();
+    this->equals           = snew EqualSolutions();
+    this->crowdingDistance = snew CrowdingDistanceComparator();
+    this->distance         = snew Distance();
 
 } // CrowdingArchive
 

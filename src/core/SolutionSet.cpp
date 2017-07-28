@@ -418,7 +418,7 @@ void SolutionSet::replace(int position, Solution *solution)
 vector <vector<double> > SolutionSet::writeObjectivesToMatrix()
 {
     vector <vector<double> > objectives;
-    //objectives = new double[size()][get(0).numberOfObjectives()];
+    //objectives = snew double[size()][get(0).numberOfObjectives()];
     for (int i = 0; i < size(); i++)
     {
         vector<double> list;

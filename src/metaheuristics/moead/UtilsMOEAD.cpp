@@ -20,6 +20,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <UtilsMOEAD.h>
+#include "JMetalHeader.h"
 
 /**
  * Utilities methods to used by MOEA/D
@@ -62,7 +63,7 @@ void UtilsMOEAD::minFastSort(double * x, int * idx, int n, int m)
 
 void UtilsMOEAD::randomPermutation(int * perm, int size)
 {
-    int * index = new int[size];
+    int * index = snew int[size];
     bool * flag = new bool[size];
 
     for (int n = 0; n < size; n++)

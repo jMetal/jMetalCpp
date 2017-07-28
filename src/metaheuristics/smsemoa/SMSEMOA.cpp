@@ -249,12 +249,12 @@ vector<double> SMSEMOA::hvContributions(vector< vector<double> > front)
 
     vector< vector<double> > frontCopy;
 
-    double** totalFront = new double*[front.size()];
+    double** totalFront = snew double*[front.size()];
 
     for (int i = 0; i < front.size(); i++)
     {
         frontCopy.push_back(vector<double>());
-        totalFront[i] = new double[front[i].size()];
+        totalFront[i] = snew double[front[i].size()];
         for (int j = 0; j < front[i].size(); j++)
         {
             frontCopy[i].push_back(front[i][j]);
@@ -275,10 +275,10 @@ vector<double> SMSEMOA::hvContributions(vector< vector<double> > front)
         frontCopy.erase(frontCopy.begin() + i);
 
         /*Makes a copy in pointer of pointer format*/
-        frontSubset = new double*[frontCopy.size()];
+        frontSubset = snew double*[frontCopy.size()];
         for (int f = 0; f < frontCopy.size(); f++)
         {
-            frontSubset[f] = new double[frontCopy[f].size()];
+            frontSubset[f] = snew double[frontCopy[f].size()];
             for (int c = 0; c < frontCopy[f].size(); c++)
             {
                 frontSubset[f][c]=frontCopy[f][c];

@@ -67,7 +67,7 @@ void * WorstSolutionSelection::execute(void * object)
         }
     } // for
 
-    int * intPtr = new int(worstSolution);
+    int * intPtr = snew int(worstSolution);
     return intPtr;
 
 } // execute

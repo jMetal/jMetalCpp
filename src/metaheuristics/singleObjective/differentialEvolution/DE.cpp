@@ -56,7 +56,7 @@ SolutionSet * DE::execute()
     Operator * crossoverOperator;
 
     Comparator * comparator;
-    comparator = new ObjectiveComparator(0); // Single objective comparator
+    comparator = snew ObjectiveComparator(0); // Single objective comparator
 
     // Differential evolution parameters
     int r1;
@@ -74,14 +74,14 @@ SolutionSet * DE::execute()
     crossoverOperator = operators_["crossover"];
 
     //Initialize the variables
-    population  = new SolutionSet(populationSize);
+    population  = snew SolutionSet(populationSize);
     evaluations = 0;
 
     // Create the initial solutionSet
     Solution * newSolution;
     for (int i = 0; i < populationSize; i++)
     {
-        newSolution = new Solution(problem_);
+        newSolution = snew Solution(problem_);
         problem_->evaluate(newSolution);
         problem_->evaluateConstraints(newSolution);
         evaluations++;
@@ -94,7 +94,7 @@ SolutionSet * DE::execute()
     {
 
         // Create the offSpring solutionSet
-        offspringPopulation  = new SolutionSet(populationSize);
+        offspringPopulation  = snew SolutionSet(populationSize);
 
         //offspringPopulation.add(new Solution(population.get(0))) ;
 
@@ -102,7 +102,7 @@ SolutionSet * DE::execute()
         {
             // Obtain parents. Two parameters are required: the population and the
             //                 index of the current individual
-            void ** object1 = new void*[2];
+            void ** object1 = snew void*[2];
             object1[0] = population;
             object1[1] = &i;
             parent = (Solution **) (selectionOperator->execute(object1));
@@ -112,7 +112,7 @@ SolutionSet * DE::execute()
 
             // Crossover. Two parameters are required: the current individual and the
             //            array of parents
-            void ** object2 = new void*[2];
+            void ** object2 = snew void*[2];
             object2[0] = population->get(i);
             object2[1] = parent;
             child = (Solution *) (crossoverOperator->execute(object2));
@@ -125,7 +125,7 @@ SolutionSet * DE::execute()
 
             if (comparator->compare(population->get(i), child) < 0)
             {
-                offspringPopulation->add(new Solution(population->get(i)));
+                offspringPopulation->add(snew Solution(population->get(i)));
                 delete child;
             }
             else
@@ -152,8 +152,8 @@ SolutionSet * DE::execute()
     delete comparator;
 
     // Return a population with the best individual
-    SolutionSet * resultPopulation = new SolutionSet(1);
-    resultPopulation->add(new Solution(population->get(0)));
+    SolutionSet * resultPopulation = snew SolutionSet(1);
+    resultPopulation->add(snew Solution(population->get(0)));
     delete population;
 
     return resultPopulation;

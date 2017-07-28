@@ -112,7 +112,7 @@ double PseudoRandom::randNormal(double mean, double standardDeviation)
 double * PseudoRandom::randSphere(int dimension)
 {
     int D = dimension ;
-    double * x = new double[dimension] ;
+    double * x = snew double[dimension] ;
 
     double length = 0 ;
     for (int i = 0; i < dimension; i++)

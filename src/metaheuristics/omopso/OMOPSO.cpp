@@ -63,7 +63,7 @@ void OMOPSO::initParams()
     distance           = new Distance();
 
     // Create the speed_ vector
-    speed = new double*[particlesSize];
+    speed = snew double*[particlesSize];
 
 } // initParams
 
@@ -228,7 +228,7 @@ SolutionSet *OMOPSO::execute()
     //-> Step2. Initialize the speed of each particle to 0
     for (int i = 0; i < particlesSize; i++)
     {
-        speed[i] = new double[problem_->getNumberOfVariables()];
+        speed[i] = snew double[problem_->getNumberOfVariables()];
         for (int j = 0; j < problem_->getNumberOfVariables(); j++)
         {
             speed[i][j] = 0.0;

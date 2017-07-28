@@ -32,13 +32,13 @@ AdaptiveGrid::AdaptiveGrid(int bisections, int objetives)
 {
     bisections_ = bisections;
     objectives_  = objetives ;
-    lowerLimits_ = new double[objectives_];
-    upperLimits_ = new double[objectives_];
-    divisionSize_ = new double[objectives_];
+    lowerLimits_ = snew double[objectives_];
+    upperLimits_ = snew double[objectives_];
+    divisionSize_ = snew double[objectives_];
 
     sizehypercubes_ = (int)pow(2.0,bisections_*objectives_); // Size int *
 
-    hypercubes_ = new int[sizehypercubes_];
+    hypercubes_ = snew int[sizehypercubes_];
     for (int i = 0; i < sizehypercubes_; i++)
         hypercubes_[i] = 0;
 }//AdaptativeGrid
@@ -185,7 +185,7 @@ void AdaptiveGrid::updateGrid(Solution * solution, SolutionSet * solutionSet, in
 int AdaptiveGrid::location(Solution * solution)
 {
     //Create a int [] to store the range of each objetive
-    int * position = new int[objectives_];
+    int * position = snew int[objectives_];
 
     //Calculate the position for each objetive
     for (int obj = 0; obj < objectives_; obj++)
@@ -371,7 +371,7 @@ int AdaptiveGrid::calculateOccupied()
     } // for
 
     occupiedsize_ = total;
-    occupied_ = new int[occupiedsize_];
+    occupied_ = snew int[occupiedsize_];
 
     int base = 0;
     for (int i = 0; i < sizehypercubes_; i++)

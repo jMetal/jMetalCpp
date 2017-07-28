@@ -109,7 +109,7 @@ void ExperimentReport::generateQualityIndicators()
                         string solutionFrontFile = problemDirectory + "/FUN";
                         string qualityIndicatorFile = problemDirectory;
 
-                        Fitness * indicators = new Fitness();
+                        Fitness * indicators = snew Fitness();
                         vector< vector<double> > solutionFront =
                             indicators->utils_->readFront(solutionFrontFile);
                         qualityIndicatorFile = qualityIndicatorFile + "/FIT";
@@ -134,7 +134,7 @@ void ExperimentReport::generateQualityIndicators()
                             if (indicatorList_[indicatorIndex].compare("HV")==0)
                             {
 
-                                Hypervolume * indicators = new Hypervolume();
+                                Hypervolume * indicators = snew Hypervolume();
                                 vector< vector<double> > solutionFront =
                                     indicators->utils_->readFront(solutionFrontFile);
                                 vector< vector<double> > trueFront =
@@ -145,7 +145,7 @@ void ExperimentReport::generateQualityIndicators()
                             }
                             if (indicatorList_[indicatorIndex].compare("SPREAD")==0)
                             {
-                                Spread * indicators = new Spread();
+                                Spread * indicators = snew Spread();
                                 vector< vector<double> > solutionFront =
                                     indicators->utils_->readFront(solutionFrontFile);
                                 vector< vector<double> > trueFront =
@@ -156,7 +156,7 @@ void ExperimentReport::generateQualityIndicators()
                             }
                             if (indicatorList_[indicatorIndex].compare("IGD")==0)
                             {
-                                InvertedGenerationalDistance * indicators = new InvertedGenerationalDistance();
+                                InvertedGenerationalDistance * indicators = snew InvertedGenerationalDistance();
                                 vector< vector<double> > solutionFront =
                                     indicators->utils_->readFront(solutionFrontFile);
                                 vector< vector<double> > trueFront =
@@ -167,7 +167,7 @@ void ExperimentReport::generateQualityIndicators()
                             }
                             if (indicatorList_[indicatorIndex].compare("EPSILON")==0)
                             {
-                                Epsilon * indicators = new Epsilon();
+                                Epsilon * indicators = snew Epsilon();
                                 vector< vector<double> > solutionFront =
                                     indicators->utils_->readFront(solutionFrontFile);
                                 vector< vector<double> > trueFront =
@@ -213,8 +213,8 @@ void ExperimentReport::generateReferenceFronts()
 
         string paretoFrontPath = referenceFrontDirectory + "/" + problemList_[problemIndex] + ".rf";
 
-        MetricsUtil * metricsUtils = new MetricsUtil();
-        NonDominatedSolutionList * solutionSet = new NonDominatedSolutionList();
+        MetricsUtil * metricsUtils = snew MetricsUtil();
+        NonDominatedSolutionList * solutionSet = snew NonDominatedSolutionList();
         for (int algorithmIndex=0; algorithmIndex<algorithmNameList_.size(); algorithmIndex++)
         {
 
@@ -251,15 +251,15 @@ void ExperimentReport::generateLatexTables()
     latexDirectory_ = experimentBaseDirectory_ + "/" + latexDirectory_;
     cout << "latex directory: " << latexDirectory_ << endl;
 
-    vector<double> *** data = new vector<double>**[indicatorList_.size()];
+    vector<double> *** data = snew vector<double>**[indicatorList_.size()];
     for (int indicator = 0; indicator < indicatorList_.size(); indicator++)
     {
         // A data vector per problem
-        data[indicator] = new vector<double>*[problemList_.size()];
+        data[indicator] = snew vector<double>*[problemList_.size()];
 
         for (int problem = 0; problem < problemList_.size(); problem++)
         {
-            data[indicator][problem] = new vector<double>[algorithmNameList_.size()];
+            data[indicator][problem] = snew vector<double>[algorithmNameList_.size()];
 
             for (int algorithm = 0; algorithm < algorithmNameList_.size(); algorithm++)
             {
@@ -303,34 +303,34 @@ void ExperimentReport::generateLatexTables()
     statValues["max"] = 0.0;
     statValues["min"] = 0.0;
 
-    mean = new double**[indicatorList_.size()];
-    median = new double**[indicatorList_.size()];
-    stdDeviation = new double**[indicatorList_.size()];
-    iqr = new double**[indicatorList_.size()];
-    min = new double**[indicatorList_.size()];
-    max = new double**[indicatorList_.size()];
-    numberOfValues = new int**[indicatorList_.size()];
+    mean = snew double**[indicatorList_.size()];
+    median = snew double**[indicatorList_.size()];
+    stdDeviation = snew double**[indicatorList_.size()];
+    iqr = snew double**[indicatorList_.size()];
+    min = snew double**[indicatorList_.size()];
+    max = snew double**[indicatorList_.size()];
+    numberOfValues = snew int**[indicatorList_.size()];
 
     for (int indicator = 0; indicator < indicatorList_.size(); indicator++)
     {
         // A data vector per problem
-        mean[indicator] = new double*[problemList_.size()];
-        median[indicator] = new double*[problemList_.size()];
-        stdDeviation[indicator] = new double*[problemList_.size()];
-        iqr[indicator] = new double*[problemList_.size()];
-        min[indicator] = new double*[problemList_.size()];
-        max[indicator] = new double*[problemList_.size()];
-        numberOfValues[indicator] = new int*[problemList_.size()];
+        mean[indicator] = snew double*[problemList_.size()];
+        median[indicator] = snew double*[problemList_.size()];
+        stdDeviation[indicator] = snew double*[problemList_.size()];
+        iqr[indicator] = snew double*[problemList_.size()];
+        min[indicator] = snew double*[problemList_.size()];
+        max[indicator] = snew double*[problemList_.size()];
+        numberOfValues[indicator] = snew int*[problemList_.size()];
 
         for (int problem = 0; problem < problemList_.size(); problem++)
         {
-            mean[indicator][problem] = new double[algorithmNameList_.size()];
-            median[indicator][problem] = new double[algorithmNameList_.size()];
-            stdDeviation[indicator][problem] = new double[algorithmNameList_.size()];
-            iqr[indicator][problem] = new double[algorithmNameList_.size()];
-            min[indicator][problem] = new double[algorithmNameList_.size()];
-            max[indicator][problem] = new double[algorithmNameList_.size()];
-            numberOfValues[indicator][problem] = new int[algorithmNameList_.size()];
+            mean[indicator][problem] = snew double[algorithmNameList_.size()];
+            median[indicator][problem] = snew double[algorithmNameList_.size()];
+            stdDeviation[indicator][problem] = snew double[algorithmNameList_.size()];
+            iqr[indicator][problem] = snew double[algorithmNameList_.size()];
+            min[indicator][problem] = snew double[algorithmNameList_.size()];
+            max[indicator][problem] = snew double[algorithmNameList_.size()];
+            numberOfValues[indicator][problem] = snew int[algorithmNameList_.size()];
 
             for (int algorithm = 0; algorithm < algorithmNameList_.size(); algorithm++)
             {

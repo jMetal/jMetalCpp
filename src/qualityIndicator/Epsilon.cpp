@@ -28,7 +28,7 @@
  */
 Epsilon::Epsilon()
 {
-    utils_ = new MetricsUtil();
+    utils_ = snew MetricsUtil();
 } // Epsilon
 
 
@@ -123,7 +123,7 @@ double Epsilon::epsilon(vector <vector<double> > b, vector <vector<double> > a,
 void Epsilon::set_params()
 {
     int  i;
-    obj_ = new int[dim_];
+    obj_ = snew int[dim_];
     for (i = 0; i < dim_; i++)
     {
         obj_[i] = 0;

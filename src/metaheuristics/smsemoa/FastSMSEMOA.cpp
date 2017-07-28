@@ -34,8 +34,8 @@
  */
 FastSMSEMOA::FastSMSEMOA(Problem *problem) : Algorithm(problem)
 {
-    utils_ = new MetricsUtil();
-    hv_ = new Hypervolume();
+    utils_ = snew MetricsUtil();
+    hv_ = snew Hypervolume();
 } // FastSMSEMOA
 
 /**
@@ -79,12 +79,12 @@ SolutionSet * FastSMSEMOA::execute()
     offset = *(double *) getInputParameter("offset");
 
     //Initialize the variables
-    population = new SolutionSet(populationSize);
+    population = snew SolutionSet(populationSize);
     evaluations = 0;
 
     requiredEvaluations = 0;
 
-    fastHypervolume = new FastHypervolume(offset);
+    fastHypervolume = snew FastHypervolume(offset);
 
     //Read the operator
     mutationOperator = operators_["mutation"];
@@ -95,7 +95,7 @@ SolutionSet * FastSMSEMOA::execute()
     Solution * newSolution;
     for (int i = 0; i < populationSize; i++)
     {
-        newSolution = new Solution(problem_);
+        newSolution = snew Solution(problem_);
         problem_->evaluate(newSolution);
         problem_->evaluateConstraints(newSolution);
         evaluations++;
@@ -107,7 +107,7 @@ SolutionSet * FastSMSEMOA::execute()
     {
 
         // select parents
-        offspringPopulation = new SolutionSet(1);
+        offspringPopulation = snew SolutionSet(1);
         /*
         LinkedList<Solution> selectedParents = new LinkedList<Solution>();
         Solution[] parents = new Solution[0];
@@ -150,7 +150,7 @@ SolutionSet * FastSMSEMOA::execute()
         delete offspringPopulation;
 
         // Ranking the union (non-dominated sorting)
-        Ranking * ranking = new Ranking(unionSolution);
+        Ranking * ranking = snew Ranking(unionSolution);
 
         // ensure crowding distance values are up to date
         // (may be important for parent selection)
@@ -163,7 +163,7 @@ SolutionSet * FastSMSEMOA::execute()
 
         //FastHypervolume fastHypervolume = new FastHypervolume() ;
         fastHypervolume->computeHVContributions(lastFront);
-        CrowdingDistanceComparator * cd = new CrowdingDistanceComparator();
+        CrowdingDistanceComparator * cd = snew CrowdingDistanceComparator();
         lastFront->sort(cd);
         delete cd;
 
@@ -179,12 +179,12 @@ SolutionSet * FastSMSEMOA::execute()
             front = ranking->getSubfront(i);
             for (int j = 0; j < front->size(); j++)
             {
-                population->add(new Solution(front->get(j)));
+                population->add(snew Solution(front->get(j)));
             }
         }
         for (int i = 0; i < lastFront->size() - 1; i++)
         {
-            population->add(new Solution(lastFront->get(i)));
+            population->add(snew Solution(lastFront->get(i)));
         }
 
         delete unionSolution;
@@ -208,12 +208,12 @@ SolutionSet * FastSMSEMOA::execute()
     //setOutputParameter("evaluations", requiredEvaluations);
 
     // Return the first non-dominated front
-    Ranking * ranking = new Ranking(population);
+    Ranking * ranking = snew Ranking(population);
 
-    SolutionSet * result = new SolutionSet(ranking->getSubfront(0)->size());
+    SolutionSet * result = snew SolutionSet(ranking->getSubfront(0)->size());
     for (int i=0; i<ranking->getSubfront(0)->size(); i++)
     {
-        result->add(new Solution(ranking->getSubfront(0)->get(i)));
+        result->add(snew Solution(ranking->getSubfront(0)->get(i)));
     }
     delete ranking;
     delete population;

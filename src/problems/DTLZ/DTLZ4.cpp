@@ -29,14 +29,14 @@ DTLZ4::DTLZ4(string solutionType, int numberOfVariables, int numberOfObjectives)
     numberOfConstraints_ = 0;
     problemName_ 				 = "DTLZ4";
 
-    lowerLimit_ = new double[numberOfVariables_];//(double *)malloc(sizeof(double)*numberOfVariables);
+    lowerLimit_ = snew double[numberOfVariables_];//(double *)malloc(sizeof(double)*numberOfVariables);
     if (lowerLimit_ == nullptr)
     {
         cout << "Impossible to reserve memory for storing the variable lower limits" << endl;
         exit(-1);
     }
 
-    upperLimit_ = new double[numberOfVariables_];//(double *)malloc(sizeof(double)*numberOfVariables);
+    upperLimit_ = snew double[numberOfVariables_];//(double *)malloc(sizeof(double)*numberOfVariables);
     if (upperLimit_ == nullptr)
     {
         cout << "Impossible to reserve memory for storing the variable lower limits" << endl;
@@ -50,22 +50,22 @@ DTLZ4::DTLZ4(string solutionType, int numberOfVariables, int numberOfObjectives)
     }
 
     if (solutionType.compare("BinaryReal") == 0)
-        solutionType_ = new BinaryRealSolutionType(this) ;
+        solutionType_ = snew BinaryRealSolutionType(this) ;
     else if (solutionType.compare("Real") == 0)
     {
-        solutionType_ = new RealSolutionType(this) ;
+        solutionType_ = snew RealSolutionType(this) ;
         // cout << "Tipo seleccionado Real" << endl;
     }
     else if (solutionType.compare("ArrayReal") == 0)
-        solutionType_ = new ArrayRealSolutionType(this) ;
+        solutionType_ = snew ArrayRealSolutionType(this) ;
     else
     {
         cout << "Error: solution type " << solutionType << " invalid" << endl;
         exit(-1) ;
     }
 
-    fx_ = new double[numberOfObjectives_] ;
-    x_ = new double[numberOfVariables_];
+    fx_ = snew double[numberOfObjectives_] ;
+    x_ = snew double[numberOfVariables_];
 }
 
 DTLZ4::~DTLZ4()
@@ -81,7 +81,7 @@ DTLZ4::~DTLZ4()
  */
 void DTLZ4::evaluate(Solution *solution)
 {
-    XReal * vars = new XReal(solution);
+    XReal * vars = snew XReal(solution);
 
     int k = numberOfVariables_ - numberOfObjectives_ + 1;
     double alpha = 100.0;

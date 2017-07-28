@@ -29,7 +29,7 @@
  */
 CrowdingComparator::CrowdingComparator() : Comparator()
 {
-    comparator = new RankComparator();
+    comparator = snew RankComparator();
 } // CrowdingComparator
 
 

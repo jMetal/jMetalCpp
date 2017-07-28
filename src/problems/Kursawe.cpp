@@ -43,14 +43,14 @@ Kursawe::Kursawe(string solutionType, int numberOfVariables)
     numberOfConstraints_ = 0;
     problemName_         = "Kursawe";
 
-    lowerLimit_ = new double[numberOfVariables_];
+    lowerLimit_ = snew double[numberOfVariables_];
     if (lowerLimit_ == nullptr)
     {
         cout << "Impossible to reserve memory for storing the variable lower limits" << endl;
         exit(-1);
     }
 
-    upperLimit_ = new double[numberOfVariables_];
+    upperLimit_ = snew double[numberOfVariables_];
     if (upperLimit_ == nullptr)
     {
         cout << "Impossible to reserve memory for storing the variable lower limits" << endl;
@@ -64,14 +64,14 @@ Kursawe::Kursawe(string solutionType, int numberOfVariables)
     }
 
     if (solutionType.compare("BinaryReal") == 0)
-        solutionType_ = new BinaryRealSolutionType(this) ;
+        solutionType_ = snew BinaryRealSolutionType(this) ;
     else if (solutionType.compare("Real") == 0)
     {
-        solutionType_ = new RealSolutionType(this) ;
+        solutionType_ = snew RealSolutionType(this) ;
         //cout << "Tipo seleccionado Real" << endl;
     }
     else if (solutionType.compare("ArrayReal") == 0)
-        solutionType_ = new ArrayRealSolutionType(this) ;
+        solutionType_ = snew ArrayRealSolutionType(this) ;
     else
     {
         cout << "Error: solution type " << solutionType << " invalid" << endl;
@@ -98,17 +98,17 @@ Kursawe::~Kursawe()
 void Kursawe::evaluate(Solution *solution)
 {
 
-    XReal * vars = new XReal(solution);
+    XReal * vars = snew XReal(solution);
 
     double aux, xi, xj;                          // auxiliary variables
-    double * fx = new double[2];                 // function values
+    double * fx = snew double[2];                 // function values
     if (fx == nullptr)
     {
         cout << "Error grave: Impossible to reserve memory while evaluating the problem" << endl;
         exit(-1);
     }
 
-    double * x = new double[numberOfVariables_];
+    double * x = snew double[numberOfVariables_];
     for (int i = 0 ; i < numberOfVariables_; i++)
     {
         x[i] = vars->getValue(i) ;

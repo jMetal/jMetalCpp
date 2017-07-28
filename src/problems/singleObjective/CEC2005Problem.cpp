@@ -37,15 +37,15 @@ CEC2005Problem::CEC2005Problem(string solutionType, int problemID, int numberOfV
     numberOfObjectives_  = 1;
     numberOfConstraints_ = 0;
 
-    Benchmark * cec2005ProblemFactory = new Benchmark() ;
+    Benchmark * cec2005ProblemFactory = snew Benchmark() ;
     testFunction_ = cec2005ProblemFactory->testFunctionFactory(problemID, numberOfVariables) ;
     delete cec2005ProblemFactory;
 
     problemName_ = "CEC2005: " + testFunction_->name();
 
 
-    upperLimit_ = new double[numberOfVariables_];
-    lowerLimit_ = new double[numberOfVariables_];
+    upperLimit_ = snew double[numberOfVariables_];
+    lowerLimit_ = snew double[numberOfVariables_];
 
     double ulimit = 0 ;
     double llimit = 0 ;
@@ -107,9 +107,9 @@ CEC2005Problem::CEC2005Problem(string solutionType, int problemID, int numberOfV
     } // for
 
     if (solutionType.compare("BinaryReal") == 0)
-        solutionType_ = new BinaryRealSolutionType(this) ;
+        solutionType_ = snew BinaryRealSolutionType(this) ;
     else if (solutionType.compare("Real") == 0)
-        solutionType_ = new RealSolutionType(this) ;
+        solutionType_ = snew RealSolutionType(this) ;
     else
     {
         cout << "Error: solution type " << solutionType << " invalid" << endl;
@@ -138,7 +138,7 @@ CEC2005Problem::~CEC2005Problem()
 void CEC2005Problem::evaluate(Solution *solution)
 {
     Variable ** decisionVariables  = solution->getDecisionVariables();
-    double * x = new double[numberOfVariables_] ;
+    double * x = snew double[numberOfVariables_] ;
 
     for (int i = 0 ; i < numberOfVariables_; i++)
     {

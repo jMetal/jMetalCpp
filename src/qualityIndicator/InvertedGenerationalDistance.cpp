@@ -33,7 +33,7 @@ const double InvertedGenerationalDistance::pow_ = 2.0;
  */
 InvertedGenerationalDistance::InvertedGenerationalDistance()
 {
-    utils_ = new MetricsUtil();
+    utils_ = snew MetricsUtil();
 } // InvertedGenerationalDistance
 
 

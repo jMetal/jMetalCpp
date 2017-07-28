@@ -29,6 +29,7 @@
 #include <sstream>
 #include <string>
 
+#include "JMetalHeader.h"
 #include <F01ShiftedSphere.h>
 #include <F02ShiftedSchwefel.h>
 #include <F03ShiftedRotatedHighCondElliptic.h>

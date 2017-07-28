@@ -29,14 +29,14 @@ ZDT4::ZDT4(string solutionType, int numberOfVariables)
     numberOfConstraints_ = 0;
     problemName_ 				 = "ZDT4";
 
-    lowerLimit_ = new double[numberOfVariables_];//(double *)malloc(sizeof(double)*numberOfVariables);
+    lowerLimit_ = snew double[numberOfVariables_];//(double *)malloc(sizeof(double)*numberOfVariables);
     if (lowerLimit_ == nullptr)
     {
         cout << "Impossible to reserve memory for storing the variable lower limits" << endl;
         exit(-1);
     }
 
-    upperLimit_ = new double[numberOfVariables_];//(double *)malloc(sizeof(double)*numberOfVariables);
+    upperLimit_ = snew double[numberOfVariables_];//(double *)malloc(sizeof(double)*numberOfVariables);
     if (upperLimit_ == nullptr)
     {
         cout << "Impossible to reserve memory for storing the variable lower limits" << endl;
@@ -65,7 +65,7 @@ ZDT4::ZDT4(string solutionType, int numberOfVariables)
         cout << "Error: solution type " << solutionType << " invalid" << endl;
         exit(-1) ;
     }
-    fx_ = new double[numberOfObjectives_] ;
+    fx_ = snew double[numberOfObjectives_] ;
 }
 
 
@@ -84,7 +84,7 @@ ZDT4::~ZDT4()
 void ZDT4::evaluate(Solution *solution)
 {
     XReal * x = new XReal(solution);
-    double * fx = new double[numberOfObjectives_] ;
+    double * fx = snew double[numberOfObjectives_] ;
 
     fx_[0] = x->getValue(0) ;
     double g = evalG(x) ;

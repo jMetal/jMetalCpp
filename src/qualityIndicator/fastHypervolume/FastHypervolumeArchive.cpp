@@ -37,14 +37,14 @@ FastHypervolumeArchive::FastHypervolumeArchive(int maxSize, int numberOfObjectiv
 {
     this->maxSize         = maxSize;
     this->objectives      = numberOfObjectives;
-    this->dominance       = new DominanceComparator();
-    this->equals          = new EqualSolutions();
-    this->referencePoint  = new Solution(objectives) ;
+    this->dominance       = snew DominanceComparator();
+    this->equals          = snew EqualSolutions();
+    this->referencePoint  = snew Solution(objectives) ;
     for (int i = 0; i < objectives; i++)
     {
         referencePoint->setObjective(i, std::numeric_limits<double>::max());
     }
-    crowdingDistance_ = new CrowdingComparator();
+    crowdingDistance_ = snew CrowdingComparator();
 } // FastHypervolumeArchive
 
 
@@ -131,7 +131,7 @@ void FastHypervolumeArchive::computeHVContribution()
 {
     if (size() > 2)   // The contribution can be updated
     {
-        FastHypervolume *fastHV = new FastHypervolume();
+        FastHypervolume *fastHV = snew FastHypervolume();
         fastHV->computeHVContributions(this);
         delete fastHV;
     }

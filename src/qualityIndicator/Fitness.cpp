@@ -28,7 +28,7 @@
  */
 Fitness::Fitness()
 {
-    utils_ = new MetricsUtil();
+    utils_ = snew MetricsUtil();
 } // Fitness
 
 

@@ -74,10 +74,10 @@ void SMPSOhv::initParams()
     distance           = new Distance();
 
     // Create the speed_ vector
-    speed = new double*[swarmSize];
+    speed = snew double*[swarmSize];
 
-    deltaMax = new double[problem_->getNumberOfVariables()];
-    deltaMin = new double[problem_->getNumberOfVariables()];
+    deltaMax = snew double[problem_->getNumberOfVariables()];
+    deltaMin = snew double[problem_->getNumberOfVariables()];
     for (int i = 0; i < problem_->getNumberOfVariables(); i++)
     {
         deltaMax[i] = (problem_->getUpperLimit(i) -
@@ -300,7 +300,7 @@ SolutionSet *SMPSOhv::execute()
     //-> Step2. Initialize the speed of each particle to 0
     for (int i = 0; i < swarmSize; i++)
     {
-        speed[i] = new double[problem_->getNumberOfVariables()];
+        speed[i] = snew double[problem_->getNumberOfVariables()];
         for (int j = 0; j < problem_->getNumberOfVariables(); j++)
         {
             speed[i][j] = 0.0;

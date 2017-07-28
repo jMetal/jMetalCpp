@@ -67,7 +67,7 @@ GDE3_Settings::GDE3_Settings(string problemName)
 Algorithm * GDE3_Settings::configure()
 {
 
-    algorithm = new GDE3(problem_);
+    algorithm = snew GDE3(problem_);
     algorithm->setInputParameter("populationSize",&populationSize_);
     algorithm->setInputParameter("maxIterations",&maxIterations_);
 
@@ -78,11 +78,11 @@ Algorithm * GDE3_Settings::configure()
     double F = F_;
     parameters["CR"] =  &CR;
     parameters["F"] = &F;
-    crossover = new DifferentialEvolutionCrossover(parameters);
+    crossover = snew DifferentialEvolutionCrossover(parameters);
 
     // Selection Operator
     parameters.clear();
-    selection = new DifferentialEvolutionSelection(parameters);
+    selection = snew DifferentialEvolutionSelection(parameters);
 
     // Add the operators to the algorithm
     algorithm->addOperator("crossover",crossover);

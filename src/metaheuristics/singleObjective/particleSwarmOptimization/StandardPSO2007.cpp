@@ -89,7 +89,7 @@ void StandardPSO2007::initParams()
     neighborhoodBest_ = new Solution*[swarmSize_];
 
     // Create the speed_ vector
-    speed_ = new double*[swarmSize_];
+    speed_ = snew double*[swarmSize_];
 } // initParams
 
 
@@ -220,7 +220,7 @@ SolutionSet * StandardPSO2007::execute()
     for (int i = 0; i < swarmSize_; i++)
     {
         XReal * particle = new XReal(swarm_->get(i))  ;
-        speed_[i] = new double[problem_->getNumberOfVariables()];
+        speed_[i] = snew double[problem_->getNumberOfVariables()];
         for (int j = 0; j < problem_->getNumberOfVariables(); j++)
         {
             speed_[i][j] = (PseudoRandom::randDouble(particle->getLowerBound(j),particle->getUpperBound(j))

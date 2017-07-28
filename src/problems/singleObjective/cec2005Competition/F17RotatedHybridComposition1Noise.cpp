@@ -21,6 +21,7 @@
 
 
 #include <F17RotatedHybridComposition1Noise.h>
+#include "JMetalHeader.h"
 
 // Fixed (class) parameters
 const string F17RotatedHybridComposition1Noise::FUNCTION_NAME = "Rotated Hybrid Composition Function 1 with Noise in Fitness";
@@ -66,26 +67,26 @@ F17RotatedHybridComposition1Noise::F17RotatedHybridComposition1Noise(int dimensi
 {
 
     // Note: dimension starts from 0
-    m_o = new double*[NUM_FUNC];
-    m_M = new double**[NUM_FUNC];
+    m_o = snew double*[NUM_FUNC];
+    m_M = snew double**[NUM_FUNC];
 
-    m_testPoint = new double[m_dimension];
-    m_testPointM = new double[m_dimension];
-    m_fmax = new double[NUM_FUNC];
+    m_testPoint = snew double[m_dimension];
+    m_testPointM = snew double[m_dimension];
+    m_fmax = snew double[NUM_FUNC];
 
-    m_w  = new double[NUM_FUNC];
-    m_z  = new double*[NUM_FUNC];
-    m_zM = new double*[NUM_FUNC];
+    m_w  = snew double[NUM_FUNC];
+    m_z  = snew double*[NUM_FUNC];
+    m_zM = snew double*[NUM_FUNC];
 
     for (int i=0; i<NUM_FUNC; i++)
     {
-        m_o[i]  = new double[m_dimension];
-        m_z[i]  = new double[m_dimension];
-        m_zM[i] = new double[m_dimension];
-        m_M[i] = new double*[m_dimension];
+        m_o[i]  = snew double[m_dimension];
+        m_z[i]  = snew double[m_dimension];
+        m_zM[i] = snew double[m_dimension];
+        m_M[i] = snew double*[m_dimension];
         for (int j=0; j<m_dimension; j++)
         {
-            m_M[i][j] = new double[m_dimension];
+            m_M[i][j] = snew double[m_dimension];
         }
     }
 
@@ -95,7 +96,7 @@ F17RotatedHybridComposition1Noise::F17RotatedHybridComposition1Noise(int dimensi
     Benchmark::loadNMatrixFromFile(file_m, NUM_FUNC, m_dimension, m_dimension, m_M);
 
     // Initialize the hybrid composition job object
-    theJob = new MyHCJob(NUM_FUNC);
+    theJob = snew MyHCJob(NUM_FUNC);
     theJob->num_func = NUM_FUNC;
     theJob->num_dim = m_dimension;
     theJob->C = 2000.0;

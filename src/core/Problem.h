@@ -23,6 +23,7 @@
 #ifndef __PROBLEM__
 #define __PROBLEM__
 
+#include "JMetalHeader.h"
 #include <string>
 #include <iostream>
 #include <SolutionType.h>

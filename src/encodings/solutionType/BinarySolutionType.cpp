@@ -39,18 +39,18 @@ Variable **BinarySolutionType::createVariables()
 {
     //BinaryReal * binaryReal;
 
-    Variable **variables = new Variable*[problem_->getNumberOfVariables()]; //malloc(sizeof(Real) * problem->getNumberOfVariables());
+    Variable **variables = snew Variable*[problem_->getNumberOfVariables()]; //malloc(sizeof(Real) * problem->getNumberOfVariables());
 //  if (problem_->variableType_ ==  nullptr) {
 //    cout << "Error grave: Impossible to reserve memory for variable type" << endl;
 //    exit(-1);
 //  }
 
     for (int var = 0; var < problem_->getNumberOfVariables(); var++)
-        variables[var] = new Binary(problem_->getLength(var));
+        variables[var] = snew Binary(problem_->getLength(var));
     /*
     for (int var = 0; var < problem_->getNumberOfVariables(); var++) {
       if (problem_->getPrecision() == nullptr) {
-        int * precision = new int[problem_->getNumberOfVariables()] ;
+        int * precision = snew int[problem_->getNumberOfVariables()] ;
         for (int i = 0; i < problem_->getNumberOfVariables(); i++)
           precision[i] = BinaryReal::DEFAULT_PRECISION ;
         problem_->setPrecision(precision) ;

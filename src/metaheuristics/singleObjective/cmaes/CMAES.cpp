@@ -49,7 +49,7 @@ SolutionSet * CMAES::execute()
     //Initialize the variables
     counteval = 0;
 
-    Comparator * comparator = new ObjectiveComparator(0);
+    Comparator * comparator = snew ObjectiveComparator(0);
 
     init();
 
@@ -83,7 +83,7 @@ SolutionSet * CMAES::execute()
 
     delete comparator ;
 
-    SolutionSet * resultPopulation  = new SolutionSet(1) ;
+    SolutionSet * resultPopulation  = snew SolutionSet(1) ;
     resultPopulation->add(bestSolutionEver) ;
 
     return resultPopulation ;
@@ -101,7 +101,7 @@ void CMAES::init()
 
     // objective variables initial point
     default_random_engine generator;
-    xmean = new double[N];
+    xmean = snew double[N];
     for (int i = 0; i < N; i++)
     {
         double stddev = (problem_->getUpperLimit(i) - problem_->getLowerLimit(i)) /2;
@@ -125,7 +125,7 @@ void CMAES::init()
     mu = (int) floor(lambda/2);
 
     // muXone array for weighted recombination
-    weights = new double[mu];
+    weights = snew double[mu];
     double sum = 0;
     for (int i=0; i<mu; i++)
     {
@@ -169,27 +169,27 @@ void CMAES::init()
     /* Initialize dynamic (internal) strategy parameters and constants */
 
     // diagonal D defines the scaling
-    diagD = new double[N];
+    diagD = snew double[N];
 
     // evolution paths for C and sigma
-    pc = new double[N];
-    ps = new double[N];
+    pc = snew double[N];
+    ps = snew double[N];
 
     // B defines the coordinate system
-    B  = new double*[N];
+    B  = snew double*[N];
     // covariance matrix C
-    C  = new double*[N];
+    C  = snew double*[N];
     for (int i = 0; i < N; i++)
     {
-        B[i] = new double[N];
-        C[i] = new double[N];
+        B[i] = snew double[N];
+        C[i] = snew double[N];
     }
 
     // C^-1/2
-    invsqrtC = new double*[N];
+    invsqrtC = snew double*[N];
     for (int i = 0; i < N; i++)
     {
-        invsqrtC[i] = new double[N];
+        invsqrtC[i] = snew double[N];
         pc[i] = 0;
         ps[i] = 0;
         diagD[i] = 1;
@@ -214,11 +214,11 @@ void CMAES::init()
 
     /* non-settable parameters */
 
-    xold = new double[N];
-    arx = new double*[lambda];
+    xold = snew double[N];
+    arx = snew double*[lambda];
     for (int i = 0; i < lambda; i++)
     {
-        arx[i] = new double[N];
+        arx[i] = snew double[N];
     }
 
 } // init
@@ -231,7 +231,7 @@ SolutionSet * CMAES::samplePopulation()
     normal_distribution<double> distribution(0.0,1.0);
 
     int N = problem_->getNumberOfVariables();
-    double * artmp = new double[N];
+    double * artmp = snew double[N];
     double sum;
 
     for (int iNk = 0; iNk < populationSize; iNk++)
@@ -263,10 +263,10 @@ SolutionSet * CMAES::samplePopulation()
 SolutionSet * CMAES::genoPhenoTransformation(double ** popx)
 {
 
-    SolutionSet * population_ = new SolutionSet(populationSize);
+    SolutionSet * population_ = snew SolutionSet(populationSize);
     for (int i = 0; i < populationSize; i++)
     {
-        Solution * solution = new Solution(problem_);
+        Solution * solution = snew Solution(problem_);
         for (int j = 0; j < problem_->getNumberOfVariables(); j++)
         {
             solution->getDecisionVariables()[j]->setValue(popx[i][j]);
@@ -320,7 +320,7 @@ Solution * CMAES::resampleSingle(int iNk)
 Solution * CMAES::genoPhenoTransformation(double * x)
 {
 
-    Solution * solution = new Solution(problem_);
+    Solution * solution = snew Solution(problem_);
     for (int i = 0; i < problem_->getNumberOfVariables(); i++)
     {
         solution->getDecisionVariables()[i]->setValue(x[i]);
@@ -333,7 +333,7 @@ Solution * CMAES::genoPhenoTransformation(double * x)
 void CMAES::storeBest(Comparator * comparator)
 {
 
-    Solution * bestInPopulation = new Solution(population_->best(comparator));
+    Solution * bestInPopulation = snew Solution(population_->best(comparator));
     if ((bestSolutionEver == nullptr) ||
             (bestSolutionEver->getObjective(0)
              > bestInPopulation->getObjective(0)))
@@ -358,8 +358,8 @@ void CMAES::updateDistribution()
     int N = problem_->getNumberOfVariables();
     int lambda = populationSize;
 
-    double * arfitness = new double[lambda];
-    int * arindex = new int[lambda];
+    double * arfitness = snew double[lambda];
+    int * arindex = snew int[lambda];
 
     /* Sort by fitness and compute weighted mean into xmean */
 
@@ -385,7 +385,7 @@ void CMAES::updateDistribution()
 
     /* Cumulation: Update evolution paths */
 
-    double * artmp = new double[N];
+    double * artmp = snew double[N];
     for (int i = 0; i < N; i++)
     {
         artmp[i] = 0;
@@ -471,7 +471,7 @@ void CMAES::updateDistribution()
         }
 
         // eigen decomposition, B==normalized eigenvectors
-        double * offdiag = new double[N];
+        double * offdiag = snew double[N];
         UtilsCMAES::tred2(N, B, diagD, offdiag);
         UtilsCMAES::tql2(N, diagD, offdiag, B);
         if (UtilsCMAES::checkEigenSystem(N, C, diagD, B) > 0)   // for debugging
@@ -492,10 +492,10 @@ void CMAES::updateDistribution()
         // diagD is a vector of standard deviations now
 
         //invsqrtC = B * diag(D.^-1) * B';
-        double ** artmp2 = new double*[N];
+        double ** artmp2 = snew double*[N];
         for (int i = 0; i < N; i++)
         {
-            artmp2[i] = new double[N];
+            artmp2[i] = snew double[N];
             //double value = (xmean[i] - xold[i]) / sigma;
             for (int j = 0; j < N; j++)
             {

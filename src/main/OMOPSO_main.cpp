@@ -65,7 +65,7 @@ int main(int argc, char ** argv)
         problem = ProblemFactory::getProblem(const_cast<char *>("Kursawe"));
     }
 
-    algorithm = new OMOPSO(problem);
+    algorithm = snew OMOPSO(problem);
 
     int maxIterations = 250;
     double perturbationIndex = 0.5;
@@ -80,13 +80,13 @@ int main(int argc, char ** argv)
 
     parameters["probability"] =  &mutationProbability;
     parameters["perturbation"] = &perturbationIndex;
-    uniformMutation = new UniformMutation(parameters);
+    uniformMutation = snew UniformMutation(parameters);
 
     parameters.clear();
     parameters["probability"] =  &mutationProbability;
     parameters["perturbation"] =  &perturbationIndex;
     parameters["maxIterations"] = &maxIterations;
-    nonUniformMutation = new NonUniformMutation(parameters);
+    nonUniformMutation = snew NonUniformMutation(parameters);
 
 
     // Add the operators to the algorithm

@@ -30,13 +30,13 @@ LZ09_F5::LZ09_F5(string solutionType, int ptype, int dtype, int ltype)
     numberOfConstraints_= 0;
     problemName_        = "LZ09_F5";
 
-    LZ09_  = new LZ09(numberOfVariables_,
+    LZ09_  = snew LZ09(numberOfVariables_,
                       numberOfObjectives_,
                       ptype,
                       dtype,
                       ltype) ;
 
-    lowerLimit_ = new double[numberOfVariables_];
+    lowerLimit_ = snew double[numberOfVariables_];
     if (lowerLimit_ == nullptr)
     {
         cout << "LZ09_F5::LZ09_F5: Error reserving memory for storing the "
@@ -44,7 +44,7 @@ LZ09_F5::LZ09_F5(string solutionType, int ptype, int dtype, int ltype)
         exit(-1);
     }
 
-    upperLimit_ = new double[numberOfVariables_];
+    upperLimit_ = snew double[numberOfVariables_];
     if (upperLimit_ == nullptr)
     {
         cout << "LZ09_F5::LZ09_F5: Error reserving  memory for storing the "
@@ -61,21 +61,21 @@ LZ09_F5::LZ09_F5(string solutionType, int ptype, int dtype, int ltype)
     }
 
     if (solutionType.compare("BinaryReal") == 0)
-        solutionType_ = new BinaryRealSolutionType(this) ;
+        solutionType_ = snew BinaryRealSolutionType(this) ;
     else if (solutionType.compare("Real") == 0)
     {
-        solutionType_ = new RealSolutionType(this) ;
+        solutionType_ = snew RealSolutionType(this) ;
     }
     else if (solutionType.compare("ArrayReal") == 0)
-        solutionType_ = new ArrayRealSolutionType(this) ;
+        solutionType_ = snew ArrayRealSolutionType(this) ;
     else
     {
         cout << "LZ09_F5::LZ09_F5: solution type " << solutionType << " invalid" << endl;
         exit(-1) ;
     }
 
-    fx_ = new double[numberOfObjectives_] ;
-    x_ = new double[numberOfVariables_];
+    fx_ = snew double[numberOfObjectives_] ;
+    x_ = snew double[numberOfVariables_];
 } // LZ09_F5::LZ09_F5
 
 /**
@@ -91,10 +91,10 @@ LZ09_F5::~LZ09_F5 ()
 
 void LZ09_F5::evaluate(Solution * solution)
 {
-    XReal * vars = new XReal(solution);
+    XReal * vars = snew XReal(solution);
 
-    vector<double> * x = new vector<double>(numberOfVariables_) ;
-    vector<double> * y = new vector<double>(numberOfObjectives_);
+    vector<double> * x = snew vector<double>(numberOfVariables_) ;
+    vector<double> * y = snew vector<double>(numberOfObjectives_);
 
     for (int i = 0; i < numberOfVariables_; i++)
     {

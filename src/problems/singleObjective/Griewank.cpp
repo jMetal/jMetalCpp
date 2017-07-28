@@ -35,14 +35,14 @@ Griewank::Griewank(string solutionType, int numberOfVariables)
     numberOfConstraints_ = 0;
     problemName_ 				 = "Griewank";
 
-    lowerLimit_ = new double[numberOfVariables_];
+    lowerLimit_ = snew double[numberOfVariables_];
     if (lowerLimit_ == nullptr)
     {
         cout << "Griewank::Griewank. Error reserving memory for storing the array of lower limits" << endl;
         exit(-1) ;
     }	// if
 
-    upperLimit_ = new double[numberOfVariables_];
+    upperLimit_ = snew double[numberOfVariables_];
     if (upperLimit_ == nullptr)
     {
         cout << "Griewank::Griewank. Error reserving memory for storing the array of upper limits" << endl;
@@ -56,9 +56,9 @@ Griewank::Griewank(string solutionType, int numberOfVariables)
     } // for
 
     if (solutionType.compare("BinaryReal") == 0)
-        solutionType_ = new BinaryRealSolutionType(this) ;
+        solutionType_ = snew BinaryRealSolutionType(this) ;
     else if (solutionType.compare("Real") == 0)
-        solutionType_ = new RealSolutionType(this) ;
+        solutionType_ = snew RealSolutionType(this) ;
     else
     {
         cout << "Error: solution type " << solutionType << " invalid" << endl;

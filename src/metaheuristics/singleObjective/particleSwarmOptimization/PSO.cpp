@@ -77,10 +77,10 @@ void PSO::initParams()
     localBest_ = new Solution*[particlesSize_];
 
     // Create the speed_ vector
-    speed_ = new double*[particlesSize_];
+    speed_ = snew double*[particlesSize_];
 
-    deltaMax_ = new double[problem_->getNumberOfVariables()];
-    deltaMin_ = new double[problem_->getNumberOfVariables()];
+    deltaMax_ = snew double[problem_->getNumberOfVariables()];
+    deltaMin_ = snew double[problem_->getNumberOfVariables()];
     for (int i = 0; i < problem_->getNumberOfVariables(); i++)
     {
         deltaMax_[i] = (problem_->getUpperLimit(i) -
@@ -310,7 +310,7 @@ SolutionSet * PSO::execute()
     //-> Step2. Initialize the speed_ of each particle to 0
     for (int i = 0; i < particlesSize_; i++)
     {
-        speed_[i] = new double[problem_->getNumberOfVariables()];
+        speed_[i] = snew double[problem_->getNumberOfVariables()];
         for (int j = 0; j < problem_->getNumberOfVariables(); j++)
         {
             speed_[i][j] = 0.0;

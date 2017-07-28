@@ -41,7 +41,7 @@ int main(int argc, char ** argv)
     }
 
     //Create a new instance of the metric
-    Hypervolume * qualityIndicator = new Hypervolume();
+    Hypervolume * qualityIndicator = snew Hypervolume();
     //Read the front from the files
     vector< vector<double> > solutionFront =
         qualityIndicator->utils_->readFront(argv[1]);

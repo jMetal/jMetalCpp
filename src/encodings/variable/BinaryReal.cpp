@@ -112,7 +112,7 @@ void BinaryReal::setValue(double value)
  */
 Variable * BinaryReal::deepCopy()
 {
-    return new BinaryReal(this);
+    return snew BinaryReal(this);
 } //deepCopy
 
 

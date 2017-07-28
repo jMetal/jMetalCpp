@@ -31,13 +31,13 @@ Fonseca::Fonseca(string solutionType)
     numberOfConstraints_ = 0;
     problemName_         = "Fonseca";
 
-    lowerLimit_ = new double[numberOfVariables_];
+    lowerLimit_ = snew double[numberOfVariables_];
     if (lowerLimit_ == nullptr)
     {
         cout << "Fonseca::Fonseca. Error reserving memory for storing the array of lower limits" << endl;
     } // if
 
-    upperLimit_ = new double[numberOfVariables_];
+    upperLimit_ = snew double[numberOfVariables_];
     if (upperLimit_ == nullptr)
     {
         cout << "Fonseca::Fonseca. Error reserving memory for storing the array of upper limits" << endl;
@@ -53,16 +53,16 @@ Fonseca::Fonseca(string solutionType)
     if (solutionType.compare("BinaryReal") == 0)
     {
         //cout << "Selected solution type: BinaryReal" << endl;
-        solutionType_ = new BinaryRealSolutionType(this) ;
+        solutionType_ = snew BinaryRealSolutionType(this) ;
     }
     else if (solutionType.compare("Real") == 0)
     {
-        solutionType_ = new RealSolutionType(this) ;
+        solutionType_ = snew RealSolutionType(this) ;
         //cout << "Selected solution type: Real" << endl;
     }
     else if (solutionType.compare("ArrayReal") == 0)
     {
-        solutionType_ = new ArrayRealSolutionType(this) ;
+        solutionType_ = snew ArrayRealSolutionType(this) ;
     }
     else
     {
@@ -92,14 +92,14 @@ void Fonseca::evaluate(Solution *solution)
     double *x ;
     Variable **variables = solution->getDecisionVariables();
 
-    fx = new double[numberOfObjectives_];
+    fx = snew double[numberOfObjectives_];
     if (fx == nullptr)
     {
         cout << "Fonseca::evaluate: Error reserving memory for the function values array" << endl;
         exit(-1);
     } // if
 
-    x = new double[numberOfVariables_];
+    x = snew double[numberOfVariables_];
     if (x == nullptr)
     {
         cout << "Fonseca::evaluate: Error reserving memory for the variable values array" << endl;

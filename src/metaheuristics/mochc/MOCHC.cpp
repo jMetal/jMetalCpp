@@ -85,10 +85,10 @@ SolutionSet *MOCHC::rankingAndCrowdingSelection(SolutionSet * pop, int size)
 {
 
 
-    SolutionSet *result = new SolutionSet(size);
+    SolutionSet *result = snew SolutionSet(size);
     // Ranking the union
-    Ranking * ranking = new Ranking(pop);
-    Distance * distance = new Distance();
+    Ranking * ranking = snew Ranking(pop);
+    Distance * distance = snew Distance();
     int remain = size;
     int index = 0;
     SolutionSet * front = nullptr;
@@ -104,7 +104,7 @@ SolutionSet *MOCHC::rankingAndCrowdingSelection(SolutionSet * pop, int size)
         //Add the individuals of this front
         for (int k = 0; k < front->size(); k++)
         {
-            result->add(new Solution(front->get(k)));
+            result->add(snew Solution(front->get(k)));
         } // for
 
         //Decrement remain
@@ -123,12 +123,12 @@ SolutionSet *MOCHC::rankingAndCrowdingSelection(SolutionSet * pop, int size)
     if (remain > 0)    // front contains individuals to insert
     {
         distance->crowdingDistanceAssignment(front, problem_->getNumberOfObjectives());
-        Comparator * c = new CrowdingComparator();
+        Comparator * c = snew CrowdingComparator();
         front->sort(c);
         delete c;
         for (int k = 0; k < remain; k++)
         {
-            result->add(new Solution(front->get(k)));
+            result->add(snew Solution(front->get(k)));
         } // for
 
         remain = 0;
@@ -156,7 +156,7 @@ SolutionSet *MOCHC::execute()
     bool condition = false;
     SolutionSet *solutionSet, *offSpringPopulation, *newPopulation;
 
-    Comparator * crowdingComparator = new CrowdingComparator();
+    Comparator * crowdingComparator = snew CrowdingComparator();
 
     SolutionSet * population;
     SolutionSet * offspringPopulation;
@@ -184,7 +184,7 @@ SolutionSet *MOCHC::execute()
     evaluations = 0;
 
     // calculating the maximum problem sizes ....
-    Solution * sol = new Solution(problem_);
+    Solution * sol = snew Solution(problem_);
     int size = 0;
     for (int var = 0; var < problem_->getNumberOfVariables(); var++)
     {
@@ -198,10 +198,10 @@ SolutionSet *MOCHC::execute()
 
     // Create the initial solutionSet
     Solution * newSolution;
-    population = new SolutionSet(populationSize);
+    population = snew SolutionSet(populationSize);
     for (int i = 0; i < populationSize; i++)
     {
-        newSolution = new Solution(problem_);
+        newSolution = snew Solution(problem_);
         problem_->evaluate(newSolution);
         problem_->evaluateConstraints(newSolution);
         evaluations++;
@@ -211,8 +211,8 @@ SolutionSet *MOCHC::execute()
 
     while (!condition)
     {
-        offSpringPopulation = new SolutionSet(populationSize);
-        Solution **parents = new Solution*[2];
+        offSpringPopulation = snew SolutionSet(populationSize);
+        Solution **parents = snew Solution*[2];
 
         for (int i = 0; i < population->size()/2; i++)
         {
@@ -250,11 +250,11 @@ SolutionSet *MOCHC::execute()
             population->sort(crowdingComparator);
             for (int i = 0; i < preserve; i++)
             {
-                newPopulation->add(new Solution(population->get(i)));
+                newPopulation->add(snew Solution(population->get(i)));
             }
             for (int i = preserve; i < populationSize; i++)
             {
-                Solution * solution = new Solution(population->get(i));
+                Solution * solution = snew Solution(population->get(i));
                 cataclysmicMutation->execute(solution);
                 problem_->evaluate(solution);
                 problem_->evaluateConstraints(solution);

@@ -128,13 +128,13 @@ void * DifferentialEvolutionCrossover::execute(void *object)
 
     int jrand;
 
-    child = new Solution(current);
+    child = snew Solution(current);
 
-    XReal * xParent0 = new XReal(parent[0]);
-    XReal * xParent1 = new XReal(parent[1]);
-    XReal * xParent2 = new XReal(parent[2]);
-    XReal * xCurrent = new XReal(current);
-    XReal * xChild   = new XReal(child);
+    XReal * xParent0 = snew XReal(parent[0]);
+    XReal * xParent1 = snew XReal(parent[1]);
+    XReal * xParent2 = snew XReal(parent[2]);
+    XReal * xCurrent = snew XReal(current);
+    XReal * xChild   = snew XReal(child);
 
     int numberOfVariables = xParent0->getNumberOfDecisionVariables();
     jrand = PseudoRandom::randInt(0, numberOfVariables - 1);

@@ -41,7 +41,7 @@ int main(int argc, char ** argv)
     }
 
     //Create a new instance of the metric
-    Epsilon * qualityIndicator = new Epsilon();
+    Epsilon * qualityIndicator = snew Epsilon();
     //Read the front from the files
     vector< vector<double> > solutionFront =
         qualityIndicator->utils_->readFront(argv[1]);

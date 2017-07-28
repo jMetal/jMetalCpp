@@ -27,7 +27,7 @@
  */
 Hypervolume::Hypervolume()
 {
-    utils_ = new MetricsUtil();
+    utils_ = snew MetricsUtil();
 } // Hypervolume
 
 
@@ -239,10 +239,10 @@ double**  Hypervolume::mergeFronts(double** front1, int sizeFront1,
     double** frontPtr =0;
 
     /* allocate memory */
-    frontPtr =new double*[noPoints];
+    frontPtr =snew double*[noPoints];
     for (int y=0; y< noPoints; ++y)
     {
-        frontPtr[y] = new double[noObjectives];
+        frontPtr[y] = snew double[noObjectives];
     }
 
     /* copy points */
@@ -312,10 +312,10 @@ double Hypervolume::hypervolume(vector< vector<double> > paretoFront,
     invertedFront = utils_->invertedFront(normalizedFront);
 
     /*Makes a copy of invertedFront in pointer of pointer format*/
-    double ** invertedFront2 = new double*[invertedFront.size()];
+    double ** invertedFront2 = snew double*[invertedFront.size()];
     for (int i = 0; i < invertedFront.size(); i++)
     {
-        invertedFront2[i] = new double[invertedFront[i].size()];
+        invertedFront2[i] = snew double[invertedFront[i].size()];
         for (int j = 0; j < invertedFront[i].size(); j++)
         {
             invertedFront2[i][j] = invertedFront[i][j];

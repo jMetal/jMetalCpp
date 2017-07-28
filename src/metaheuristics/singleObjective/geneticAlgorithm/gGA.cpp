@@ -53,7 +53,7 @@ SolutionSet * gGA::execute()
     Operator * crossoverOperator;
     Operator * selectionOperator;
 
-    Comparator * comparator = new ObjectiveComparator(0) ;
+    Comparator * comparator = snew ObjectiveComparator(0) ;
 
     //Read the parameters
     populationSize = *(int *) getInputParameter("populationSize");
@@ -63,7 +63,7 @@ SolutionSet * gGA::execute()
 //  cout << "maxEvaluations = " << maxEvaluations << endl;
 
     //Initialize the variables
-    population = new SolutionSet(populationSize);
+    population = snew SolutionSet(populationSize);
     evaluations = 0;
 
 //  cout << "Poblacion inicializada con maxsize = " << population->getMaxSize() << endl;
@@ -81,7 +81,7 @@ SolutionSet * gGA::execute()
     Solution * newSolution;
     for (int i = 0; i < populationSize; i++)
     {
-        newSolution = new Solution(problem_);
+        newSolution = snew Solution(problem_);
         problem_->evaluate(newSolution);
         problem_->evaluateConstraints(newSolution);
         evaluations++;
@@ -96,8 +96,8 @@ SolutionSet * gGA::execute()
     {
 
         // Create the offSpring solutionSet
-        offspringPopulation = new SolutionSet(populationSize);
-        Solution ** parents = new Solution*[2];
+        offspringPopulation = snew SolutionSet(populationSize);
+        Solution ** parents = snew Solution*[2];
 
         for (int i = 0; i < (populationSize / 2); i++)
         {
@@ -127,8 +127,8 @@ SolutionSet * gGA::execute()
 
         delete offspringPopulation->get(offspringPopulation->size()-1);
         delete offspringPopulation->get(offspringPopulation->size()-2);
-        offspringPopulation->replace(offspringPopulation->size()-1, new Solution(population->get(0))) ;
-        offspringPopulation->replace(offspringPopulation->size()-2, new Solution(population->get(1))) ;
+        offspringPopulation->replace(offspringPopulation->size()-1, snew Solution(population->get(0))) ;
+        offspringPopulation->replace(offspringPopulation->size()-2, snew Solution(population->get(1))) ;
 
         for (int i=0; i<population->size(); i++)
         {
@@ -144,8 +144,8 @@ SolutionSet * gGA::execute()
 
     delete comparator;
 
-    SolutionSet * resultPopulation  = new SolutionSet(1) ;
-    resultPopulation->add(new Solution(population->get(0))) ;
+    SolutionSet * resultPopulation  = snew SolutionSet(1) ;
+    resultPopulation->add(snew Solution(population->get(0))) ;
     delete population;
 
     return resultPopulation ;

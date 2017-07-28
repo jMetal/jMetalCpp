@@ -62,7 +62,7 @@ double FastHypervolume::computeHypervolume(SolutionSet* solutionSet)
         if (numberOfObjectives_ == 2)
         {
             Comparator * comparator =
-                new ObjectiveComparator(numberOfObjectives_ - 1, true);
+                snew ObjectiveComparator(numberOfObjectives_ - 1, true);
             solutionSet->sort(comparator);
             delete comparator;
             hv = get2DHV(solutionSet);
@@ -86,7 +86,7 @@ double FastHypervolume::computeHypervolume(SolutionSet* solutionSet)
  */
 void FastHypervolume::updateReferencePoint(SolutionSet * solutionSet)
 {
-    double * maxObjectives = new double[numberOfObjectives_];
+    double * maxObjectives = snew double[numberOfObjectives_];
     for (int i = 0; i < numberOfObjectives_; i++)
     {
         maxObjectives[i] = 0;
@@ -139,11 +139,11 @@ double FastHypervolume::get2DHV(SolutionSet * solutionSet)
 
 void FastHypervolume::computeHVContributions(SolutionSet * solutionSet)
 {
-    double * contributions = new double[solutionSet->size()];
+    double * contributions = snew double[solutionSet->size()];
     double solutionSetHV = 0;
 
     numberOfObjectives_ = solutionSet->get(0)->getNumberOfObjectives();
-    referencePoint_ = new Solution(numberOfObjectives_);
+    referencePoint_ = snew Solution(numberOfObjectives_);
 
     solutionSetHV = computeHypervolume(solutionSet);
 

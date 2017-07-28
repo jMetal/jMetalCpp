@@ -21,6 +21,7 @@
 
 
 #include <F11ShiftedRotatedWeierstrass.h>
+#include "JMetalHeader.h"
 
 // Fixed (class) parameters
 const string F11ShiftedRotatedWeierstrass::FUNCTION_NAME = "Shifted Rotated Weierstrass Function";
@@ -51,14 +52,14 @@ F11ShiftedRotatedWeierstrass::F11ShiftedRotatedWeierstrass(int dimension, double
 {
 
     // Note: dimension starts from 0
-    m_o = new double[m_dimension];
-    m_matrix = new double*[m_dimension];
+    m_o = snew double[m_dimension];
+    m_matrix = snew double*[m_dimension];
     for (int i=0; i<m_dimension; i++)
     {
-        m_matrix[i] = new double[m_dimension];
+        m_matrix[i] = snew double[m_dimension];
     }
-    m_z = new double[m_dimension];
-    m_zM = new double[m_dimension];
+    m_z = snew double[m_dimension];
+    m_zM = snew double[m_dimension];
 
     // Load the shifted global optimum
     Benchmark::loadRowVectorFromFile(file_data, m_dimension, m_o);

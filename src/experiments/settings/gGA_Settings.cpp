@@ -63,7 +63,7 @@ gGA_Settings::gGA_Settings(string problemName)
 Algorithm * gGA_Settings::configure()
 {
 
-    algorithm = new gGA(problem_);
+    algorithm = snew gGA(problem_);
     algorithm->setInputParameter("populationSize",&populationSize_);
     algorithm->setInputParameter("maxEvaluations",&maxEvaluations_);
 
@@ -74,18 +74,18 @@ Algorithm * gGA_Settings::configure()
     double crossoverDistributionIndex = crossoverDistributionIndex_ ;
     parameters["probability"] =  &crossoverProbability;
     parameters["distributionIndex"] = &crossoverDistributionIndex;
-    crossover = new SBXCrossover(parameters);
+    crossover = snew SBXCrossover(parameters);
 
     parameters.clear();
     double mutationProbability = mutationProbability_;
     double mutationDistributionIndex = mutationDistributionIndex_;
     parameters["probability"] = &mutationProbability;
     parameters["distributionIndex"] = &mutationDistributionIndex;
-    mutation = new PolynomialMutation(parameters);
+    mutation = snew PolynomialMutation(parameters);
 
     // Selection Operator
     parameters.clear();
-    selection = new BinaryTournament2(parameters);
+    selection = snew BinaryTournament2(parameters);
 
     // Add the operators to the algorithm
     algorithm->addOperator("crossover",crossover);

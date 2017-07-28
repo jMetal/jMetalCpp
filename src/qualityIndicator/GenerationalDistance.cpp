@@ -33,7 +33,7 @@ const double GenerationalDistance::pow_ = 2.0;
  */
 GenerationalDistance::GenerationalDistance()
 {
-    utils_ = new MetricsUtil();
+    utils_ = snew MetricsUtil();
 } // GenerationalDistance
 
 

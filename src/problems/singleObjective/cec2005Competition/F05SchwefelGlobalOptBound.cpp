@@ -21,6 +21,7 @@
 
 
 #include <F05SchwefelGlobalOptBound.h>
+#include "JMetalHeader.h"
 
 // Fixed (class) parameters
 const string F05SchwefelGlobalOptBound::FUNCTION_NAME = "Schwefel's Problem 2.6 with Global Optimum on Bounds";
@@ -45,19 +46,19 @@ F05SchwefelGlobalOptBound::F05SchwefelGlobalOptBound(int dimension, double bias,
 {
 
     // Note: dimension starts from 0
-    m_o = new double[m_dimension];
-    m_A = new double*[m_dimension];
+    m_o = snew double[m_dimension];
+    m_A = snew double*[m_dimension];
     for (int i=0; i<m_dimension; i++)
     {
-        m_A[i] = new double[m_dimension];
+        m_A[i] = snew double[m_dimension];
     }
-    m_B = new double[m_dimension];
-    m_z = new double[m_dimension];
+    m_B = snew double[m_dimension];
+    m_z = snew double[m_dimension];
 
-    double ** m_data = new double*[m_dimension+1];
+    double ** m_data = snew double*[m_dimension+1];
     for (int i=0; i<m_dimension+1; i++)
     {
-        m_data[i] = new double[m_dimension];
+        m_data[i] = snew double[m_dimension];
     }
 
     // Load the shifted global optimum

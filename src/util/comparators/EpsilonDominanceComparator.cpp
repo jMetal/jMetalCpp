@@ -32,7 +32,7 @@
 EpsilonDominanceComparator::EpsilonDominanceComparator(double eta) : Comparator()
 {
     eta_ = eta;
-    overallConstraintViolationComparator_ = new OverallConstraintViolationComparator();
+    overallConstraintViolationComparator_ = snew OverallConstraintViolationComparator();
 } // EpsilonDominanceComparator
 
 /**

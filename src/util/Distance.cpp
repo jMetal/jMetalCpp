@@ -51,10 +51,10 @@ double ** Distance::distanceMatrix(SolutionSet * solutionSet)
 
     //The matrix of distances
     int size = solutionSet->size();
-    double ** distance = nullptr;// = new double [size][size];
+    double ** distance = nullptr;// = snew double [size][size];
     for (int i = 0; i < solutionSet->size(); i++)
     {
-        distance[i] = new double[size];
+        distance[i] = snew double[size];
     }
     //-> Calculate the distances
     for (int i = 0; i < solutionSet->size(); i++)
@@ -201,7 +201,7 @@ void Distance::crowdingDistanceAssignment(SolutionSet * solutionSet, int nObjs)
     } // if
 
     //Use a new SolutionSet to evite alter original solutionSet
-    SolutionSet * front = new SolutionSet(size);
+    SolutionSet * front = snew SolutionSet(size);
     for (int i = 0; i < size; i++)
     {
         front->add(solutionSet->get(i));
@@ -217,7 +217,7 @@ void Distance::crowdingDistanceAssignment(SolutionSet * solutionSet, int nObjs)
     for (int i = 0; i<nObjs; i++)
     {
         // Sort the population by Obj n
-        Comparator * c = new ObjectiveComparator(i);
+        Comparator * c = snew ObjectiveComparator(i);
         front->sort(c);
         delete c;
         objetiveMinn = front->get(0)->getObjective(i);

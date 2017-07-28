@@ -328,7 +328,7 @@ void LZ09::objective(vector<double> *x_var, vector <double> *y_obj)
             g = betaFunction(&aa,dtype_);          // distance function
             h = betaFunction(&bb,dtype_);
 
-            //double * alpha = new double[2];
+            //double * alpha = snew double[2];
             double alpha[2] ;
             alphaFunction(alpha,x_var,2,ptype_);  // shape function
             y_obj->at(0) = alpha[0] + h;
@@ -360,7 +360,7 @@ void LZ09::objective(vector<double> *x_var, vector <double> *y_obj)
             h = betaFunction(&bb,dtype_);
             e = betaFunction(&cc,dtype_);
 
-            //double * alpha = new double[3];
+            //double * alpha = snew double[3];
             double alpha[3] ;
             alphaFunction(alpha,x_var,3,ptype_);  // shape function
             y_obj->at(0) = alpha[0] + h;

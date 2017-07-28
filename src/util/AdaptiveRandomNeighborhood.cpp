@@ -37,11 +37,11 @@ AdaptiveRandomNeighborhood::AdaptiveRandomNeighborhood(SolutionSet * solutionSet
     numberOfRandomNeighbours_ = numberOfRandomNeighbours;
     //problem_ = solutionSet_->get(0)->getProblem() ;
 
-    //list_ = new int * [solutionSet_->size()];
+    //list_ = snew int * [solutionSet_->size()];
 
     for (int i = 0; i < solutionSet_->size(); i++)
     {
-        //list_[i] = new int []
+        //list_[i] = snew int []
         vector<int> list_i;
         list_i.push_back(i);
         list_.push_back(list_i);
@@ -110,7 +110,7 @@ int AdaptiveRandomNeighborhood::getNumberOfRandomNeighbours()
 
 SolutionSet * AdaptiveRandomNeighborhood::getBestFitnessSolutionInNeighborhood(Comparator * comparator)
 {
-    SolutionSet * result = new SolutionSet();
+    SolutionSet * result = snew SolutionSet();
     for (int i = 0; i < list_.size(); i++)
     {
         Solution * bestSolution = solutionSet_->get(list_.at(i).at(0));
@@ -140,7 +140,7 @@ void AdaptiveRandomNeighborhood::recompute()
 
     for (int i = 0; i < solutionSet_->size(); i++)
     {
-        //list_[i] = new int []
+        //list_[i] = snew int []
         vector<int> list_i;
         list_i.push_back(i);
         list_.push_back(list_i);

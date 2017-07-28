@@ -42,7 +42,7 @@ ArrayReal::ArrayReal(int size, Problem * problem)
 {
     problem_ = problem;
     size_   = size;
-    array_ = new double[size_];
+    array_ = snew double[size_];
 
     for (int i = 0; i < size_ ; i++)
     {
@@ -61,7 +61,7 @@ ArrayReal::ArrayReal(ArrayReal * arrayReal)
 {
     problem_ = arrayReal->problem_ ;
     size_  = arrayReal->size_;
-    array_ = new double[size_];
+    array_ = snew double[size_];
 
     for (int i = 0; i < size_; i++)
     {
@@ -85,7 +85,7 @@ ArrayReal::~ArrayReal()
  */
 Variable * ArrayReal::deepCopy()
 {
-    return new ArrayReal(this);
+    return snew ArrayReal(this);
 } // deepCopy
 
 

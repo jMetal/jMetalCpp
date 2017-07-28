@@ -32,14 +32,14 @@ Schaffer::Schaffer(string solutionType)
     numberOfObjectives_  = 2;
     numberOfConstraints_ = 0;
 
-    lowerLimit_ = new double[numberOfVariables_];
+    lowerLimit_ = snew double[numberOfVariables_];
     if (lowerLimit_ == nullptr)
     {
         cout << "Schaffer::Schaffer. Error reserving memory for storing the array of lower limits" << endl;
         exit(-1) ;
     }
 
-    upperLimit_ = new double[numberOfVariables_];
+    upperLimit_ = snew double[numberOfVariables_];
     if (upperLimit_ == nullptr)
     {
         cout << "Schaffer::Schaffer. Error reserving memory for storing the array of upper limits" << endl;
@@ -79,7 +79,7 @@ void Schaffer::evaluate(Solution *solution)
     double *fx;
     Variable **variables = solution->getDecisionVariables();
 
-    fx = new double[numberOfObjectives_];
+    fx = snew double[numberOfObjectives_];
     if (fx == nullptr)
     {
         cout << "Schaffer::evaluate: Error reserving memory while evaluating the problem" << endl;

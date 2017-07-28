@@ -24,6 +24,7 @@
 #ifndef _PseudoRandom_h
 #define _PseudoRandom_h
 
+#include "JMetalHeader.h"
 #include <iostream>
 #include <RandomGenerator.h>
 #include <math.h>

@@ -55,7 +55,7 @@ Solution::Solution (int numberOfObjectives)
     numberOfObjectives_ = numberOfObjectives;
     numberOfVariables_ = 0;
     variable_ = nullptr;
-    objective_ = new double[numberOfObjectives_];
+    objective_ = snew double[numberOfObjectives_];
     if (objective_ == nullptr)
     {
         cout << "ERROR GRAVE: Impossible to reserve memory for storing objectives in class Solution" << endl;
@@ -79,7 +79,7 @@ Solution::Solution (Problem *problem)
     numberOfVariables_  = problem_->getNumberOfVariables();
 
     // creating the objective vector
-    objective_ = new double[numberOfObjectives_];
+    objective_ = snew double[numberOfObjectives_];
     if (objective_ == nullptr)
     {
         cout << "ERROR GRAVE: Impossible to reserve memory for storing objectives in class Solution" << endl;
@@ -107,7 +107,7 @@ Solution::Solution (Problem * problem, Variable ** variables)
     type_ = problem->getSolutionType();
     numberOfObjectives_ = problem->getNumberOfObjectives();
     numberOfVariables_  = problem_->getNumberOfVariables();
-    objective_ = new double[numberOfObjectives_] ;
+    objective_ = snew double[numberOfObjectives_] ;
 
     // Setting initial values
     fitness_ = 0.0;
@@ -131,7 +131,7 @@ Solution::Solution (Solution *solution)
     numberOfVariables_ = solution->getNumberOfVariables();
 
     // creating the objective vector
-    objective_ = new double[numberOfObjectives_];
+    objective_ = snew double[numberOfObjectives_];
     if (objective_ == nullptr)
     {
         cout << "ERROR GRAVE: Impossible to reserve memory for storing objectives in class Solution" << endl;

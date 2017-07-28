@@ -21,6 +21,7 @@
 
 
 #include <F12Schwefel.h>
+#include "JMetalHeader.h"
 
 // Fixed (class) parameters
 const string F12Schwefel::FUNCTION_NAME = "Schwefel's Problem 2.13";
@@ -45,29 +46,29 @@ F12Schwefel::F12Schwefel(int dimension, double bias, string file_data)
 {
 
     // Note: dimension starts from 0
-    m_o = new double[m_dimension];
-    m_a = new double*[m_dimension];
+    m_o = snew double[m_dimension];
+    m_a = snew double*[m_dimension];
     for (int i = 0; i < m_dimension; i++)
     {
-        m_a[i] = new double[m_dimension];
+        m_a[i] = snew double[m_dimension];
     }
-    m_b = new double*[m_dimension];
+    m_b = snew double*[m_dimension];
     for (int i = 0; i < m_dimension; i++)
     {
-        m_b[i] = new double[m_dimension];
+        m_b[i] = snew double[m_dimension];
     }
 
-    m_A = new double[m_dimension];
-    m_B = new double[m_dimension];
+    m_A = snew double[m_dimension];
+    m_B = snew double[m_dimension];
 
     // Data:
     //  1. a    100x100
     //  2. b    100x100
     //  3. alpha  1x100
-    double ** m_data = new double*[100+100+1];
+    double ** m_data = snew double*[100+100+1];
     for (int i = 0; i < (100+100+1); i++)
     {
-        m_data[i] = new double[m_dimension];
+        m_data[i] = snew double[m_dimension];
     }
 
     // Load the shifted global optimum

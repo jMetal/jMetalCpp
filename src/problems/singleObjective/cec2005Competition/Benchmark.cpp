@@ -44,7 +44,7 @@ Benchmark::Benchmark() : Benchmark(DEFAULT_FILE_BIAS) {}
  */
 Benchmark::Benchmark(string file_bias)
 {
-    m_biases = new double[NUM_TEST_FUNC];
+    m_biases = snew double[NUM_TEST_FUNC];
     loadRowVectorFromFile(file_bias, NUM_TEST_FUNC, m_biases);
 }
 
@@ -71,79 +71,79 @@ TestFunc * Benchmark::testFunctionFactory(int func_num, int dimension)
     switch (func_num)
     {
     case 1:
-        return new F01ShiftedSphere(dimension, m_biases[func_num-1]);
+        return snew F01ShiftedSphere(dimension, m_biases[func_num-1]);
         break;
     case 2:
-        return new F02ShiftedSchwefel(dimension, m_biases[func_num-1]);
+        return snew F02ShiftedSchwefel(dimension, m_biases[func_num-1]);
         break;
     case 3:
-        return new F03ShiftedRotatedHighCondElliptic(dimension, m_biases[func_num-1]);
+        return snew F03ShiftedRotatedHighCondElliptic(dimension, m_biases[func_num-1]);
         break;
     case 4:
-        return new F04ShiftedSchwefelNoise(dimension, m_biases[func_num-1]);
+        return snew F04ShiftedSchwefelNoise(dimension, m_biases[func_num-1]);
         break;
     case 5:
-        return new F05SchwefelGlobalOptBound(dimension, m_biases[func_num-1]);
+        return snew F05SchwefelGlobalOptBound(dimension, m_biases[func_num-1]);
         break;
     case 6:
-        return new F06ShiftedRosenbrock(dimension, m_biases[func_num-1]);
+        return snew F06ShiftedRosenbrock(dimension, m_biases[func_num-1]);
         break;
     case 7:
-        return new F07ShiftedRotatedGriewank(dimension, m_biases[func_num-1]);
+        return snew F07ShiftedRotatedGriewank(dimension, m_biases[func_num-1]);
         break;
     case 8:
-        return new F08ShiftedRotatedAckleyGlobalOptBound(dimension, m_biases[func_num-1]);
+        return snew F08ShiftedRotatedAckleyGlobalOptBound(dimension, m_biases[func_num-1]);
         break;
     case 9:
-        return new F09ShiftedRastrigin(dimension, m_biases[func_num-1]);
+        return snew F09ShiftedRastrigin(dimension, m_biases[func_num-1]);
         break;
     case 10:
-        return new F10ShiftedRotatedRastrigin(dimension, m_biases[func_num-1]);
+        return snew F10ShiftedRotatedRastrigin(dimension, m_biases[func_num-1]);
         break;
     case 11:
-        return new F11ShiftedRotatedWeierstrass(dimension, m_biases[func_num-1]);
+        return snew F11ShiftedRotatedWeierstrass(dimension, m_biases[func_num-1]);
         break;
     case 12:
-        return new F12Schwefel(dimension, m_biases[func_num-1]);
+        return snew F12Schwefel(dimension, m_biases[func_num-1]);
         break;
     case 13:
-        return new F13ShiftedExpandedGriewankRosenbrock(dimension, m_biases[func_num-1]);
+        return snew F13ShiftedExpandedGriewankRosenbrock(dimension, m_biases[func_num-1]);
         break;
     case 14:
-        return new F14ShiftedRotatedExpandedScaffer(dimension, m_biases[func_num-1]);
+        return snew F14ShiftedRotatedExpandedScaffer(dimension, m_biases[func_num-1]);
         break;
     case 15:
-        return new F15HybridComposition1(dimension, m_biases[func_num-1]);
+        return snew F15HybridComposition1(dimension, m_biases[func_num-1]);
         break;
     case 16:
-        return new F16RotatedHybridComposition1(dimension, m_biases[func_num-1]);
+        return snew F16RotatedHybridComposition1(dimension, m_biases[func_num-1]);
         break;
     case 17:
-        return new F17RotatedHybridComposition1Noise(dimension, m_biases[func_num-1]);
+        return snew F17RotatedHybridComposition1Noise(dimension, m_biases[func_num-1]);
         break;
     case 18:
-        return new F18RotatedHybridComposition2(dimension, m_biases[func_num-1]);
+        return snew F18RotatedHybridComposition2(dimension, m_biases[func_num-1]);
         break;
     case 19:
-        return new F19RotatedHybridComposition2NarrowBasinGlobalOpt(dimension, m_biases[func_num-1]);
+        return snew F19RotatedHybridComposition2NarrowBasinGlobalOpt(dimension, m_biases[func_num-1]);
         break;
     case 20:
-        return new F20RotatedHybridComposition2GlobalOptBound(dimension, m_biases[func_num-1]);
+        return snew F20RotatedHybridComposition2GlobalOptBound(dimension, m_biases[func_num-1]);
         break;
     case 21:
-        return new F21RotatedHybridComposition3(dimension, m_biases[func_num-1]);
+        return snew F21RotatedHybridComposition3(dimension, m_biases[func_num-1]);
         break;
     case 22:
-        return new F22RotatedHybridComposition3HighCondNumMatrix(dimension, m_biases[func_num-1]);
+        return snew F22RotatedHybridComposition3HighCondNumMatrix(dimension, m_biases[func_num-1]);
         break;
     case 23:
-        return new F23NoncontinuousRotatedHybridComposition3(dimension, m_biases[func_num-1]);
+        return snew F23NoncontinuousRotatedHybridComposition3(dimension, m_biases[func_num-1]);
         break;
     case 24:
-        return new F24RotatedHybridComposition4(dimension, m_biases[func_num-1]);
+        return snew F24RotatedHybridComposition4(dimension, m_biases[func_num-1]);
         break;
     case 25:
-        return new F25RotatedHybridComposition4Bound(dimension, m_biases[func_num-1]);
+        return snew F25RotatedHybridComposition4Bound(dimension, m_biases[func_num-1]);
         break;
 
     default:

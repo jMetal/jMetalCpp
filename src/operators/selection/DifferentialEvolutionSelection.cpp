@@ -49,7 +49,7 @@ void * DifferentialEvolutionSelection::execute(void * object)
     SolutionSet * population = (SolutionSet *) parameters[0];
     int index = *(int *) parameters[1] ;
 
-    Solution ** parents = new Solution*[3];
+    Solution ** parents = snew Solution*[3];
     int r1, r2, r3;
 
     if (population->size() < 4)

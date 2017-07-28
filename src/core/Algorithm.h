@@ -23,6 +23,7 @@
 #ifndef __ALGORITHM__
 #define __ALGORITHM__
 
+#include "JMetalHeader.h"
 #include <string>
 #include <SolutionSet.h>
 #include <Operator.h>

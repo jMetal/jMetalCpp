@@ -59,8 +59,8 @@ SolutionSet * GDE3::execute()
     Operator * crossoverOperator;
     Operator * selectionOperator;
 
-    distance  = new Distance();
-    dominance = new DominanceComparator();
+    distance  = snew Distance();
+    dominance = snew DominanceComparator();
 
     Solution ** parent;
 
@@ -69,7 +69,7 @@ SolutionSet * GDE3::execute()
     maxIterations  = *(int *) getInputParameter("maxIterations");
 
     //Initialize the variables
-    population  = new SolutionSet(populationSize);
+    population  = snew SolutionSet(populationSize);
     evaluations = 0;
     iterations  = 0;
 
@@ -81,7 +81,7 @@ SolutionSet * GDE3::execute()
     Solution * newSolution;
     for (int i = 0; i < populationSize; i++)
     {
-        newSolution = new Solution(problem_);
+        newSolution = snew Solution(problem_);
         problem_->evaluate(newSolution);
         problem_->evaluateConstraints(newSolution);
         evaluations++;
@@ -92,13 +92,13 @@ SolutionSet * GDE3::execute()
     while (iterations < maxIterations)
     {
         // Create the offSpring solutionSet
-        offspringPopulation  = new SolutionSet(populationSize * 2);
+        offspringPopulation  = snew SolutionSet(populationSize * 2);
 
         for (int i = 0; i < populationSize; i++)
         {
             // Obtain parents. Two parameters are required: the population and the
             //                 index of the current individual
-            void ** object1 = new void*[2];
+            void ** object1 = snew void*[2];
             object1[0] = population;
             object1[1] = &i;
             parent = (Solution **) (selectionOperator->execute(object1));
@@ -107,7 +107,7 @@ SolutionSet * GDE3::execute()
             Solution * child ;
             // Crossover. Two parameters are required: the current individual and the
             //            array of parents
-            void ** object2 = new void*[2];
+            void ** object2 = snew void*[2];
             object2[0] = population->get(i);
             object2[1] = parent;
             child = (Solution *) (crossoverOperator->execute(object2));
@@ -123,7 +123,7 @@ SolutionSet * GDE3::execute()
             result = dominance->compare(population->get(i), child) ;
             if (result == -1)   // Solution i dominates child
             {
-                offspringPopulation->add(new Solution(population->get(i)));
+                offspringPopulation->add(snew Solution(population->get(i)));
                 delete child;
             } // if
             else if (result == 1)   // child dominates
@@ -133,12 +133,12 @@ SolutionSet * GDE3::execute()
             else   // the two solutions are non-dominated
             {
                 offspringPopulation->add(child) ;
-                offspringPopulation->add(new Solution(population->get(i)));
+                offspringPopulation->add(snew Solution(population->get(i)));
             } // else
         } // for
 
         // Ranking the offspring population
-        Ranking * ranking = new Ranking(offspringPopulation);
+        Ranking * ranking = snew Ranking(offspringPopulation);
 
         int remain = populationSize;
         int index  = 0;
@@ -159,7 +159,7 @@ SolutionSet * GDE3::execute()
             //Add the individuals of this front
             for (int k = 0; k < front->size(); k++ )
             {
-                population->add(new Solution(front->get(k)));
+                population->add(snew Solution(front->get(k)));
             } // for
 
             //Decrement remain
@@ -179,7 +179,7 @@ SolutionSet * GDE3::execute()
             while (front->size() > remain)
             {
                 distance->crowdingDistanceAssignment(front,problem_->getNumberOfObjectives());
-                Comparator * crowdingComparator = new CrowdingComparator();
+                Comparator * crowdingComparator = snew CrowdingComparator();
                 int indexWorst = front->indexWorst(crowdingComparator);
                 delete crowdingComparator;
                 delete front->get(indexWorst);
@@ -187,7 +187,7 @@ SolutionSet * GDE3::execute()
             }
             for (int k = 0; k < front->size(); k++)
             {
-                population->add(new Solution(front->get(k)));
+                population->add(snew Solution(front->get(k)));
             }
 
             remain = 0;
@@ -203,11 +203,11 @@ SolutionSet * GDE3::execute()
     delete distance;
 
     // Return the first non-dominated front
-    Ranking * ranking = new Ranking(population);
-    SolutionSet * result = new SolutionSet(ranking->getSubfront(0)->size());
+    Ranking * ranking = snew Ranking(population);
+    SolutionSet * result = snew SolutionSet(ranking->getSubfront(0)->size());
     for (int i=0; i<ranking->getSubfront(0)->size(); i++)
     {
-        result->add(new Solution(ranking->getSubfront(0)->get(i)));
+        result->add(snew Solution(ranking->getSubfront(0)->get(i)));
     }
     delete ranking;
     delete population;

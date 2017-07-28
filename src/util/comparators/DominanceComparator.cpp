@@ -36,7 +36,7 @@
  */
 DominanceComparator::DominanceComparator() : Comparator()
 {
-    overallConstraintViolationComparator_ = new OverallConstraintViolationComparator();
+    overallConstraintViolationComparator_ = snew OverallConstraintViolationComparator();
 } // DominanceComparator
 
 

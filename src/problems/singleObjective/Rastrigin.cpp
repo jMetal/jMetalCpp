@@ -36,14 +36,14 @@ Rastrigin::Rastrigin(string solutionType, int numberOfVariables)
     numberOfConstraints_ = 0;
     problemName_ 				 = "Rastrigin";
 
-    lowerLimit_ = new double[numberOfVariables_];
+    lowerLimit_ = snew double[numberOfVariables_];
     if (lowerLimit_ == nullptr)
     {
         cout << "Rastrigin::Rastrigin. Error reserving memory for storing the array of lower limits" << endl;
         exit(-1) ;
     }
 
-    upperLimit_ = new double[numberOfVariables_];
+    upperLimit_ = snew double[numberOfVariables_];
     if (upperLimit_ == nullptr)
     {
         cout << "Rastrigin::Rastrigin. Error reserving memory for storing the array of upper limits" << endl;
@@ -82,14 +82,14 @@ void Rastrigin::evaluate(Solution *solution)
     //double x [numberOfVariables_];
     Variable **variables = solution->getDecisionVariables();
 
-    double * fx = new double[numberOfObjectives_]; //(double *)malloc(sizeof(double) * numberOfObjectives_);
+    double * fx = snew double[numberOfObjectives_]; //(double *)malloc(sizeof(double) * numberOfObjectives_);
     if (fx == nullptr)
     {
         cout << "Rastrigin::evaluate: Error reserving memory while evaluating the problem" << endl;
         exit(-1);
     }
 
-    double * x = new double[numberOfVariables_];
+    double * x = snew double[numberOfVariables_];
     if (x == nullptr)
     {
         cout << "Rastrigin::evaluate: Error reserving memory for the variable values array" << endl;

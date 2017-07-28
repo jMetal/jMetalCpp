@@ -47,7 +47,7 @@ Ranking::Ranking (SolutionSet * solutionSet)
     constraint_  = new OverallConstraintViolationComparator();
 
     // dominateMe[i] contains the number of solutions dominating i
-    int * dominateMe = new int[solutionSet_->size()];
+    int * dominateMe = snew int[solutionSet_->size()];
 
     if (dominateMe == nullptr)
     {

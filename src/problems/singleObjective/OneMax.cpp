@@ -31,7 +31,7 @@ OneMax::OneMax(int numberOfBits, int numberOfStrings)
     problemName_ 				 = "OneMax";
 
     solutionType_ = new BinarySolutionType(this) ;
-    length_       = new int[numberOfVariables_];
+    length_       = snew int[numberOfVariables_];
     for (int i = 0; i < numberOfVariables_; i++)
         length_  [i] = numberOfBits ;
 } // OneMax

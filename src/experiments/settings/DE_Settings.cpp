@@ -62,7 +62,7 @@ DE_Settings::DE_Settings(string problemName)
 Algorithm * DE_Settings::configure()
 {
 
-    algorithm = new DE(problem_);
+    algorithm = snew DE(problem_);
     algorithm->setInputParameter("populationSize",&populationSize_);
     algorithm->setInputParameter("maxEvaluations",&maxEvaluations_);
 
@@ -75,11 +75,11 @@ Algorithm * DE_Settings::configure()
     parameters["F"] = &fParameter;
     string deVariantParameter = deVariantParameter_;
     parameters["DE_VARIANT"] = &deVariantParameter;
-    crossover = new DifferentialEvolutionCrossover(parameters);
+    crossover = snew DifferentialEvolutionCrossover(parameters);
 
     // Selection operator
     parameters.clear();
-    selection = new DifferentialEvolutionSelection(parameters) ;
+    selection = snew DifferentialEvolutionSelection(parameters) ;
 
     // Add the operators to the algorithm
     algorithm->addOperator("crossover",crossover);

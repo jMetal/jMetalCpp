@@ -30,7 +30,7 @@ ZDT5::ZDT5(string solutionType, int numberOfVariables)
 
     cout << "Problem: " << problemName_ << endl ;
 
-    length_ = new int[numberOfVariables_];
+    length_ = snew int[numberOfVariables_];
     length_[0] = 30;
     for (int var = 1; var < numberOfVariables_; var++)
     {
@@ -44,7 +44,7 @@ ZDT5::ZDT5(string solutionType, int numberOfVariables)
         cout << "Error: solution type " << solutionType << " invalid" << endl;
         exit(-1) ;
     }
-    fx_ = new double[numberOfObjectives_] ;
+    fx_ = snew double[numberOfObjectives_] ;
 } // ZDT5::ZDT5
 
 ZDT5::~ZDT5()

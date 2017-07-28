@@ -79,12 +79,12 @@ void SMPSO::initParams()
 
     // Create the speed_ vector
     int numberOfVariables = problem_->getNumberOfVariables();
-    //speed_ = new double[swarmSize_][numberOfVariables];
-    speed_ = new double*[swarmSize_];
+    //speed_ = snew double[swarmSize_][numberOfVariables];
+    speed_ = snew double*[swarmSize_];
     // TODO: Liberar memoria al finalizar
 
-    deltaMax_ = new double[problem_->getNumberOfVariables()];
-    deltaMin_ = new double[problem_->getNumberOfVariables()];
+    deltaMax_ = snew double[problem_->getNumberOfVariables()];
+    deltaMin_ = snew double[problem_->getNumberOfVariables()];
     for (int i = 0; i < problem_->getNumberOfVariables(); i++)
     {
         deltaMax_[i] = (problem_->getUpperLimit(i) -
@@ -341,7 +341,7 @@ SolutionSet * SMPSO::execute()
     //-> Step2. Initialize the speed_ of each particle to 0
     for (int i = 0; i < swarmSize_; i++)
     {
-        speed_[i] = new double[problem_->getNumberOfVariables()];
+        speed_[i] = snew double[problem_->getNumberOfVariables()];
         for (int j = 0; j < problem_->getNumberOfVariables(); j++)
         {
             speed_[i][j] = 0.0;

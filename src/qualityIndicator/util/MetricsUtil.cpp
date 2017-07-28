@@ -302,7 +302,7 @@ SolutionSet * MetricsUtil::readNonDominatedSolutionSet(string path)
         exit(-1);
     } // if
 
-    NonDominatedSolutionList * solutionSet = new NonDominatedSolutionList();
+    NonDominatedSolutionList * solutionSet = snew NonDominatedSolutionList();
     string line;
 
     while( getline(in, line ) )
@@ -321,7 +321,7 @@ SolutionSet * MetricsUtil::readNonDominatedSolutionSet(string path)
             } // if
         } // while
 
-        Solution * solution = new Solution(list.size());
+        Solution * solution = snew Solution(list.size());
         for (int i=0; i<list.size(); i++)
         {
             solution->setObjective(i,list[i]);
@@ -371,7 +371,7 @@ void MetricsUtil::readNonDominatedSolutionSet(string path, NonDominatedSolutionL
             } // if
         } // while
 
-        Solution * solution = new Solution(list.size());
+        Solution * solution = snew Solution(list.size());
         for (int i=0; i<list.size(); i++)
         {
             solution->setObjective(i,list[i]);

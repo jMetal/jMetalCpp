@@ -19,12 +19,13 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <PermutationUtility.h>
+#include "JMetalHeader.h"
 
 int * PermutationUtility::intPermutation(int length)
 {
 
-    int * aux    = new int[length];
-    int * result = new int[length];
+    int * aux    = snew int[length];
+    int * result = snew int[length];
 
     // First, create an array from 0 to length - 1.
     // Also is needed to create an random array of size length

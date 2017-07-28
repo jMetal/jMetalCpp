@@ -21,15 +21,16 @@
 
 
 #include <HCJob.h>
+#include "JMetalHeader.h"
 
 /**
  * Constructor.
  */
 HCJob::HCJob(int numFunc)
 {
-    sigma = new double[numFunc];
-    biases = new double[numFunc];
-    lambda = new double[numFunc];
+    sigma = snew double[numFunc];
+    biases = snew double[numFunc];
+    lambda = snew double[numFunc];
 } // HCJob
 
 /**

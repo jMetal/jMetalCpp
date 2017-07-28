@@ -60,7 +60,7 @@ int EqualSolutions::compare(void * o1, void * o2)
     double value1, value2;
     for (int i = 0; i < solution1->getNumberOfObjectives(); i++)
     {
-        Comparator * c = new ObjectiveComparator(i);
+        Comparator * c = snew ObjectiveComparator(i);
         flag = c->compare(solution1,solution2);
         delete c;
         value1 = solution1->getObjective(i);

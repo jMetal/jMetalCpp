@@ -84,13 +84,13 @@ void ExperimentExecution::runExperiment(int numberOfThreads)
         {
             for (int k=0; k<independentRuns_; k++)
             {
-                ExperimentIndividual * expInd = new ExperimentIndividual(j, i, k);
+                ExperimentIndividual * expInd = snew ExperimentIndividual(j, i, k);
                 experimentIndividualList_.push_back(expInd);
             }
         }
     }
 
-    algorithmSettingsList_ = new Settings*[experimentIndividualList_.size()];
+    algorithmSettingsList_ = snew Settings*[experimentIndividualList_.size()];
 
     cout << "Task list initialized." << endl;
 
@@ -109,10 +109,10 @@ void ExperimentExecution::runExperiment(int numberOfThreads)
     //pthread_t * p = new pthread_t[numberOfThreads];
     //thread * p = new thread[numberOfThreads];
     vector<thread> threads;
-    RunExperiment ** experiments_ = new RunExperiment*[numberOfThreads];
+    RunExperiment ** experiments_ = snew RunExperiment*[numberOfThreads];
     for (int i = 0; i < numberOfThreads; i++)
     {
-        experiments_[i] = new RunExperiment(this, map_, i, numberOfThreads,
+        experiments_[i] = snew RunExperiment(this, map_, i, numberOfThreads,
                                             problemList_.size(), i, &mtx);
 //    result = pthread_create(&p[i], nullptr, executeRun, experiments_[i]);
 //    if (result != 0) {

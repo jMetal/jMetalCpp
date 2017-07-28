@@ -33,8 +33,8 @@ AdaptiveGridArchive::AdaptiveGridArchive (int maxSize,int bisections,
 {
 
     maxSize_   = maxSize;
-    dominance_ = new DominanceComparator();
-    grid_      = new AdaptiveGrid(bisections,objectives);
+    dominance_ = snew DominanceComparator();
+    grid_      = snew AdaptiveGrid(bisections,objectives);
 }
 
 /**

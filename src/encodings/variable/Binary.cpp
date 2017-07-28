@@ -41,7 +41,7 @@ Binary::Binary(int numberOfBits)
 {
     numberOfBits_ = numberOfBits;
 
-    bits_ = new vector<bool>(numberOfBits_, false) ;
+    bits_ = snew vector<bool>(numberOfBits_, false) ;
 
     for (int i = 0; i < numberOfBits_; i++)
     {
@@ -64,7 +64,7 @@ Binary::Binary(int numberOfBits)
 Binary::Binary(Binary * variable)
 {
     numberOfBits_ = variable->getNumberOfBits();
-    bits_ = new vector<bool>(numberOfBits_, false) ;
+    bits_ = snew vector<bool>(numberOfBits_, false) ;
     for (int i = 0; i < numberOfBits_; i++)
     {
         (*bits_)[i] = (*variable->bits_)[i] ;
@@ -100,7 +100,7 @@ void Binary::decode()
  **/
 Variable * Binary::deepCopy()
 {
-    return new Binary(this);
+    return snew Binary(this);
 } //deepCopy
 
 

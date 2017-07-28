@@ -31,8 +31,8 @@ NonDominatedSolutionList::NonDominatedSolutionList()
     : SolutionSet()
 {
 
-    dominance = new DominanceComparator();
-    equal = new SolutionComparator();
+    dominance = snew DominanceComparator();
+    equal = snew SolutionComparator();
 
 } // NonDominatedList
 

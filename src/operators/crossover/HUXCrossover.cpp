@@ -47,7 +47,7 @@ HUXCrossover::HUXCrossover(map<string, void *> parameters)
 Solution ** HUXCrossover::doCrossover(double probability, Solution *parent1, Solution *parent2)
 {
 
-    Solution** offSpring = new Solution*[2];
+    Solution** offSpring = snew Solution*[2];
 
     if (offSpring == nullptr)
     {
@@ -55,8 +55,8 @@ Solution ** HUXCrossover::doCrossover(double probability, Solution *parent1, Sol
         exit(-1);
     }
 
-    offSpring[0] = new Solution(parent1);
-    offSpring[1] = new Solution(parent2);
+    offSpring[0] = snew Solution(parent1);
+    offSpring[1] = snew Solution(parent2);
 
     if (PseudoRandom::randDouble() < probability)
     {
