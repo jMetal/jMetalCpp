@@ -64,7 +64,7 @@ SolutionSet * CMAES::execute()
         {
             if (!isFeasible(population_->get(i)))
             {
-                //cout << "RESAMPLING!" << endl;
+                //std::cout << "RESAMPLING!" << std::endl;
                 population_->replace(i, resampleSingle(i));
             }
             problem_->evaluate(population_->get(i));
@@ -72,7 +72,7 @@ SolutionSet * CMAES::execute()
         counteval += populationSize;
 
         storeBest(comparator);
-        //cout << counteval << ": " << bestSolutionEver->getObjective(0) << endl;
+        //std::cout << counteval << ": " << bestSolutionEver->getObjective(0) << std::endl;
         updateDistribution();
 
         delete population_;
@@ -483,7 +483,7 @@ void CMAES::updateDistribution()
         {
             if (diagD[i] < 0)   // numerical problem?
             {
-                cerr << "CMAES::updateDistribution(): WARNING - an eigenvalue has become negative." << endl;
+                cerr << "CMAES::updateDistribution(): WARNING - an eigenvalue has become negative." << std::endl;
                 counteval = maxEvaluations;
                 //throw new JMException("Exception in CMAES.execute(): an eigenvalue has become negative.") ;
             }

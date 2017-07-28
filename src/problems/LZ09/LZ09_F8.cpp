@@ -23,7 +23,7 @@
 /**
  * Constructor
  */
-LZ09_F8::LZ09_F8(string solutionType, int ptype, int dtype, int ltype)
+LZ09_F8::LZ09_F8(std::string solutionType, int ptype, int dtype, int ltype)
 {
     numberOfVariables_  = 10;
     numberOfObjectives_ = 2;
@@ -39,16 +39,16 @@ LZ09_F8::LZ09_F8(string solutionType, int ptype, int dtype, int ltype)
     lowerLimit_ = snew double[numberOfVariables_];
     if (lowerLimit_ == nullptr)
     {
-        cout << "LZ09_F8::LZ09_F8: Error reserving memory for storing the "
-             << "variable lower limits" << endl;
+        std::cout << "LZ09_F8::LZ09_F8: Error reserving memory for storing the "
+             << "variable lower limits" << std::endl;
         exit(-1);
     }
 
     upperLimit_ = snew double[numberOfVariables_];
     if (upperLimit_ == nullptr)
     {
-        cout << "LZ09_F8::LZ09_F8: Error reserving  memory for storing the "
-             << "variable lower limits" << endl;
+        std::cout << "LZ09_F8::LZ09_F8: Error reserving  memory for storing the "
+             << "variable lower limits" << std::endl;
         exit(-1);
     }
 
@@ -70,7 +70,7 @@ LZ09_F8::LZ09_F8(string solutionType, int ptype, int dtype, int ltype)
         solutionType_ = snew ArrayRealSolutionType(this) ;
     else
     {
-        cout << "LZ09_F8::LZ09_F8: solution type " << solutionType << " invalid" << endl;
+        std::cout << "LZ09_F8::LZ09_F8: solution type " << solutionType << " invalid" << std::endl;
         exit(-1) ;
     }
 
@@ -93,8 +93,8 @@ void LZ09_F8::evaluate(Solution * solution)
 {
     XReal * vars = snew XReal(solution);
 
-    vector<double> * x = snew vector<double>(numberOfVariables_) ;
-    vector<double> * y = snew vector<double>(numberOfObjectives_);
+    std::vector<double> * x = snew std::vector<double>(numberOfVariables_) ;
+    std::vector<double> * y = snew std::vector<double>(numberOfObjectives_);
 
     for (int i = 0; i < numberOfVariables_; i++)
     {

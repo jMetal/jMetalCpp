@@ -30,9 +30,9 @@
  */
 int LexicoGraphicalComparator::compare(void * o1, void * o2)
 {
-    //Cast to vector<double> o1 and o2.
-    vector<double> pointOne = * (vector<double> *) o1;
-    vector<double> pointTwo = * (vector<double> *) o2;
+    //Cast to std::vector<double> o1 and o2.
+    std::vector<double> pointOne = * (std::vector<double> *) o1;
+    std::vector<double> pointTwo = * (std::vector<double> *) o2;
 
     //To determine the first i, that pointOne[i] != pointTwo[i];
     int index = 0;

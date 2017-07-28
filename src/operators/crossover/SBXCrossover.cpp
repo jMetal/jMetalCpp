@@ -38,7 +38,7 @@ const double SBXCrossover::ETA_C_DEFAULT_ = 20.0;
  * Create a new SBX crossover operator whit a default
  * index given by <code>DEFAULT_INDEX_CROSSOVER</code>
  */
-SBXCrossover::SBXCrossover(map<string, void *> parameters)
+SBXCrossover::SBXCrossover(std::map<std::string, void *> parameters)
     : Crossover(parameters)
 {
     //TODO: crossoverProbability_ = nullptr;
@@ -70,18 +70,18 @@ Solution ** SBXCrossover::doCrossover(double probability, Solution *parent1, Sol
 
     if (offSpring == nullptr)
     {
-        cout << "Error grave: Impossible reserve memory for allocating new solutions when performing SBXCrossover " << endl;
+        std::cout << "Error grave: Impossible reserve memory for allocating new solutions when performing SBXCrossover " << std::endl;
         exit(-1);
     }
 
-//  cout << "SBXCrossover: AggregativeValue de parent1 = " << parent1->getAggregativeValue() << endl;
-//  cout << "SBXCrossover: AggregativeValue de parent2 = " << parent2->getAggregativeValue() << endl;
+//  std::cout << "SBXCrossover: AggregativeValue de parent1 = " << parent1->getAggregativeValue() << std::endl;
+//  std::cout << "SBXCrossover: AggregativeValue de parent2 = " << parent2->getAggregativeValue() << std::endl;
 
     offSpring[0] = new Solution(parent1);
     offSpring[1] = new Solution(parent2);
 
-//  cout << "SBXCrossover: AggregativeValue de offSpring[0] = " << offSpring[0]->getAggregativeValue() << endl;
-//  cout << "SBXCrossover: AggregativeValue de offSpring[1] = " << offSpring[1]->getAggregativeValue() << endl;
+//  std::cout << "SBXCrossover: AggregativeValue de offSpring[0] = " << offSpring[0]->getAggregativeValue() << std::endl;
+//  std::cout << "SBXCrossover: AggregativeValue de offSpring[1] = " << offSpring[1]->getAggregativeValue() << std::endl;
 
     int i;
     double rand;
@@ -122,7 +122,7 @@ Solution ** SBXCrossover::doCrossover(double probability, Solution *parent1, Sol
                     yL = x1->getLowerBound(i);
                     yu = x1->getUpperBound(i);
 
-                    //cout << yL << " " << yu << endl;
+                    //std::cout << yL << " " << yu << std::endl;
                     rand = PseudoRandom::randDouble();
 
                     beta = 1.0 + (2.0*(y1-yL)/(y2-y1));

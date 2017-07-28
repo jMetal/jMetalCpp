@@ -110,14 +110,14 @@ double ArrayReal::getValue(int index)
         return array_[index] ;
     else
     {
-        cerr << "ArrayReal.getValue: index value (" << index << ") invalid" << endl;
+        cerr << "ArrayReal.getValue: index value (" << index << ") invalid" << std::endl;
         exit(-1);
     } // if
 } // getValue
 
 double ArrayReal::getValue()
 {
-    cerr << "ERROR: ArrayReal::getValue() without index" << endl;
+    cerr << "ERROR: ArrayReal::getValue() without index" << std::endl;
     exit(-1);
 } // getValue
 
@@ -133,13 +133,13 @@ void ArrayReal::setValue(int index, double value)
         array_[index] = value;
     else
     {
-        cout << "ArrayReal.getValue: index value (" << index << ") invalid" << endl;
+        std::cout << "ArrayReal.getValue: index value (" << index << ") invalid" << std::endl;
     } // if
 } // setValue
 
 void ArrayReal::setValue(double value)
 {
-    cout << "ERROR: ArrayReal::setValue(value) without index" << endl;
+    std::cout << "ERROR: ArrayReal::setValue(value) without index" << std::endl;
 } // setValue
 
 
@@ -154,14 +154,14 @@ double ArrayReal::getLowerBound(int index)
         return problem_->getLowerLimit(index) ;
     else
     {
-        cerr << "ArrayReal.getValue: index value (" << index << ") invalid" << endl;
+        cerr << "ArrayReal.getValue: index value (" << index << ") invalid" << std::endl;
         exit(-1);
     } // if
 } // getLowerBound
 
 double ArrayReal::getLowerBound()
 {
-    cerr << "ERROR: ArrayReal::getLowerBound() without index" << endl;
+    cerr << "ERROR: ArrayReal::getLowerBound() without index" << std::endl;
     exit(-1);
 } // getLowerBound
 
@@ -177,23 +177,23 @@ double ArrayReal::getUpperBound(int index)
         return problem_->getUpperLimit(index);
     else
     {
-        cerr << "ArrayReal.getValue: index value (" << index << ") invalid" << endl;
+        cerr << "ArrayReal.getValue: index value (" << index << ") invalid" << std::endl;
         exit(-1);
     } // if
 } // getLowerBound
 
 double ArrayReal::getUpperBound()
 {
-    cerr << "ERROR: ArrayReal::getUpperBound() without index" << endl;
+    cerr << "ERROR: ArrayReal::getUpperBound() without index" << std::endl;
     exit(-1);
 } // getUpperBound
 
 
 /**
- * Returns a string representing the object
+ * Returns a std::string representing the object
  * @return The string
  */
-string ArrayReal::toString()
+std::string ArrayReal::toString()
 {
     std::ostringstream ss;
     for (int i = 0; i < (size_ - 1); i ++)

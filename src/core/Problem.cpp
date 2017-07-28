@@ -101,7 +101,7 @@ double Problem::getLowerLimit(int i)
 {
     if ((lowerLimit_ == nullptr) || (i >= numberOfVariables_))
     {
-        cout << "Error: lower limits have been not initialized or accessing to a variable out of range" << endl;
+        std::cout << "Error: lower limits have been not initialized or accessing to a variable out of range" << std::endl;
         // exit(-1);
     }
     return lowerLimit_[i];
@@ -117,7 +117,7 @@ double Problem::getUpperLimit(int i)
 {
     if ((upperLimit_ == nullptr) || (i >= numberOfVariables_))
     {
-        cout << "Error: upper limits have been not initialized or accessing to a variable out of range" << endl;
+        std::cout << "Error: upper limits have been not initialized or accessing to a variable out of range" << std::endl;
         //exit(-1);
     }
     return upperLimit_[i];
@@ -240,7 +240,7 @@ SolutionType * Problem::getSolutionType()
  * Returns the problem name
  * @return The problem name
  */
-string Problem::getName()
+std::string Problem::getName()
 {
     return problemName_;
 } // getName

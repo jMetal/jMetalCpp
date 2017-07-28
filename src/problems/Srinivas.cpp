@@ -26,7 +26,7 @@
  * Creates a new instance of the Srinivas problem.
  * @param solutionType The solution type must "Real" or "BinaryReal
  */
-Srinivas::Srinivas(string solutionType)
+Srinivas::Srinivas(std::string solutionType)
 {
     numberOfVariables_   = 2;
     numberOfObjectives_  = 2;
@@ -36,14 +36,14 @@ Srinivas::Srinivas(string solutionType)
     lowerLimit_ = snew double[numberOfVariables_];
     if (lowerLimit_ == nullptr)
     {
-        cout << "Srinivas::Srinivas. Error reserving memory for storing the array of lower limits" << endl;
+        std::cout << "Srinivas::Srinivas. Error reserving memory for storing the array of lower limits" << std::endl;
         exit(-1) ;
     }
 
     upperLimit_ = snew double[numberOfVariables_];
     if (upperLimit_ == nullptr)
     {
-        cout << "Srinivas::Srinivas. Error reserving memory for storing the array of upper limits" << endl;
+        std::cout << "Srinivas::Srinivas. Error reserving memory for storing the array of upper limits" << std::endl;
         exit(-1) ;
     }
 
@@ -63,7 +63,7 @@ Srinivas::Srinivas(string solutionType)
     }
     else
     {
-        cout << "Error: solution type " << solutionType << " invalid" << endl;
+        std::cout << "Error: solution type " << solutionType << " invalid" << std::endl;
         exit(-1);
     }
 } // Srinivas
@@ -92,14 +92,14 @@ void Srinivas::evaluate(Solution *solution)
     double * fx = snew double[numberOfObjectives_];
     if (fx == nullptr)
     {
-        cout << "Srinivas::evaluate: Error reserving memory while evaluating the problem" << endl;
+        std::cout << "Srinivas::evaluate: Error reserving memory while evaluating the problem" << std::endl;
         exit(-1);
     }
 
     double * x = snew double[numberOfVariables_];
     if (x == nullptr)
     {
-        cout << "Srinivas::evaluate: Error reserving memory for the variable values array" << endl;
+        std::cout << "Srinivas::evaluate: Error reserving memory for the variable values array" << std::endl;
         exit(-1);
     } // if
 

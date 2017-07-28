@@ -43,7 +43,7 @@ Variable **RealSolutionType::createVariables()
     Variable **variables = new Variable*[problem_->getNumberOfVariables()]; //malloc(sizeof(Real) * problem->getNumberOfVariables());
     if (variables ==  nullptr)
     {
-        cout << "Error grave: Impossible to reserve memory for variable type" << endl;
+        std::cout << "Error grave: Impossible to reserve memory for variable type" << std::endl;
         exit(-1);
     }
 

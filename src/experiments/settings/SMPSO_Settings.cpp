@@ -44,7 +44,7 @@ SMPSO_Settings::~SMPSO_Settings ()
 /**
  * Constructor
  */
-SMPSO_Settings::SMPSO_Settings(string problemName)
+SMPSO_Settings::SMPSO_Settings(std::string problemName)
 {
 
     problemName_ = problemName ;
@@ -72,7 +72,7 @@ Algorithm * SMPSO_Settings::configure()
     algorithm->setInputParameter("maxIterations", &maxIterations_);
     algorithm->setInputParameter("archiveSize", &archiveSize_);
 
-    map<string, void *> parameters;
+   std::map<std::string, void *> parameters;
 
     double mutationProbability = mutationProbability_;
     double mutationDistributionIndex = mutationDistributionIndex_;
@@ -83,7 +83,7 @@ Algorithm * SMPSO_Settings::configure()
     // Add the operators to the algorithm
     algorithm->addOperator("mutation",mutation);
 
-    cout << "SMPSO algorithm initialized." << endl;
+    std::cout << "SMPSO algorithm initialized." << std::endl;
 
     return algorithm ;
 

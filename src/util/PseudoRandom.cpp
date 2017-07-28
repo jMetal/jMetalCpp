@@ -22,7 +22,7 @@
 
 #include <PseudoRandom.h>
 
-using namespace std;
+
 
 /**
  * This file is aimed at defining the interface for the random generator.

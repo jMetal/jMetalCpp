@@ -45,7 +45,7 @@ private:
 
 public:
     gGA_Settings() ;
-    gGA_Settings(string problemName) ;
+    gGA_Settings(std::string problemName) ;
     ~gGA_Settings() ;
 
     Algorithm * configure() ;

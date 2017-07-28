@@ -35,15 +35,15 @@ RandomGenerator::RandomGenerator()
 {
     srand(time(nullptr));
     //srand(0);
-    //cout << (unsigned)time(0) << endl;
+    //std::cout << (unsigned)time(0) << std::endl;
     seed_ = ((double) rand() / (double) (RAND_MAX ));
-    //cout << "Seed value is: " << seed_ << endl;
+    //std::cout << "Seed value is: " << seed_ << std::endl;
 
     // seed_ = RAND_MAX;
-    // cout << "Seed value is: " << seed_ << endl;
+    // std::cout << "Seed value is: " << seed_ << std::endl;
 
     // seed_ = (double) ((float) (float) seed_ / (float) RAND_MAX);
-    // cout << "Seed value is: " << seed_ << endl;
+    // std::cout << "Seed value is: " << seed_ << std::endl;
 
     randomize();
 } // RandomGenerator

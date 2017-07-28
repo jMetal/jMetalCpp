@@ -30,7 +30,7 @@
 #include <stdio.h>
 #include <string.h>
 
-using namespace std;
+
 
 /**
   * @class Srinivas
@@ -40,7 +40,7 @@ class Srinivas : public Problem
 {
 
 public:
-    Srinivas(string solutionType);
+    Srinivas(std::string solutionType);
     ~Srinivas();
     void evaluate(Solution *solution);
     void evaluateConstraints(Solution * solution);

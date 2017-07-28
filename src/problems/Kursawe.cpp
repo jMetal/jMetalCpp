@@ -36,7 +36,7 @@
  * @param numberOfVariables Number of variables of the problem
  * @param solutionType The solution type must "Real", "BinaryReal, and "ArrayReal".
  */
-Kursawe::Kursawe(string solutionType, int numberOfVariables)
+Kursawe::Kursawe(std::string solutionType, int numberOfVariables)
 {
     numberOfVariables_   = numberOfVariables;
     numberOfObjectives_  = 2;
@@ -46,14 +46,14 @@ Kursawe::Kursawe(string solutionType, int numberOfVariables)
     lowerLimit_ = snew double[numberOfVariables_];
     if (lowerLimit_ == nullptr)
     {
-        cout << "Impossible to reserve memory for storing the variable lower limits" << endl;
+        std::cout << "Impossible to reserve memory for storing the variable lower limits" << std::endl;
         exit(-1);
     }
 
     upperLimit_ = snew double[numberOfVariables_];
     if (upperLimit_ == nullptr)
     {
-        cout << "Impossible to reserve memory for storing the variable lower limits" << endl;
+        std::cout << "Impossible to reserve memory for storing the variable lower limits" << std::endl;
         exit(-1);
     }
 
@@ -68,13 +68,13 @@ Kursawe::Kursawe(string solutionType, int numberOfVariables)
     else if (solutionType.compare("Real") == 0)
     {
         solutionType_ = snew RealSolutionType(this) ;
-        //cout << "Tipo seleccionado Real" << endl;
+        //std::cout << "Tipo seleccionado Real" << std::endl;
     }
     else if (solutionType.compare("ArrayReal") == 0)
         solutionType_ = snew ArrayRealSolutionType(this) ;
     else
     {
-        cout << "Error: solution type " << solutionType << " invalid" << endl;
+        std::cout << "Error: solution type " << solutionType << " invalid" << std::endl;
         exit(-1) ;
     }
 } // Kursawe
@@ -104,7 +104,7 @@ void Kursawe::evaluate(Solution *solution)
     double * fx = snew double[2];                 // function values
     if (fx == nullptr)
     {
-        cout << "Error grave: Impossible to reserve memory while evaluating the problem" << endl;
+        std::cout << "Error grave: Impossible to reserve memory while evaluating the problem" << std::endl;
         exit(-1);
     }
 

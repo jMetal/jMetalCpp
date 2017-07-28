@@ -74,7 +74,7 @@ double FastHypervolume::computeHypervolume(SolutionSet* solutionSet)
             Front front = new Front(solutionSet.size(), numberOfObjectives_, solutionSet);
             hv = new WFGHV(numberOfObjectives_, solutionSet.size(), referencePoint_).getHV(front);
             */
-            cerr << "Fast Hypervolume only works with two objectives for now." << endl;
+            cerr << "Fast Hypervolume only works with two objectives for now." << std::endl;
         }
     }
 
@@ -166,7 +166,7 @@ void FastHypervolume::computeHVContributions(SolutionSet * solutionSet)
               new WFGHV(numberOfObjectives_, solutionSet.size(), referencePoint_).getHV(front);
             contributions[i] = solutionSetHV - hv;
             */
-            cerr << "Fast Hypervolume only works with two objectives for now." << endl;
+            cerr << "Fast Hypervolume only works with two objectives for now." << std::endl;
         }
         solutionSet->add(i, currentPoint);
     }

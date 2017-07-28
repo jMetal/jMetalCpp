@@ -24,9 +24,9 @@
 #include "JMetalHeader.h"
 
 // Fixed (class) parameters
-const string F15HybridComposition1::FUNCTION_NAME = "Hybrid Composition Function 1";
+const std::string F15HybridComposition1::FUNCTION_NAME = "Hybrid Composition Function 1";
 // TODO: Cambiar ruta
-const string F15HybridComposition1::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/hybrid_func1_data.txt";
+const std::string F15HybridComposition1::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/hybrid_func1_data.txt";
 
 
 const double F15HybridComposition1::m_sigma[NUM_FUNC] =
@@ -61,7 +61,7 @@ F15HybridComposition1::F15HybridComposition1(int dimension, double bias)
 /**
  * Constructor
  */
-F15HybridComposition1::F15HybridComposition1(int dimension, double bias, string file_data)
+F15HybridComposition1::F15HybridComposition1(int dimension, double bias, std::string file_data)
     : TestFunc(dimension, bias, FUNCTION_NAME)
 {
 
@@ -200,7 +200,7 @@ double F15HybridComposition1::MyHCJob::basic_func(int func_no, double* x, int le
         result = Benchmark::sphere(x, length);
         break;
     default:
-        cerr << "func_no is out of range." << endl;
+        cerr << "func_no is out of range." << std::endl;
         exit(-1);
     }
     return (result);

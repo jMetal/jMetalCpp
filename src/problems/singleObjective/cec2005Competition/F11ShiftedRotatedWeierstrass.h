@@ -31,10 +31,10 @@ class F11ShiftedRotatedWeierstrass : public TestFunc
 private:
 
     // Fixed (class) parameters
-    static const string FUNCTION_NAME;
-    static const string DEFAULT_FILE_DATA;
-    static const string DEFAULT_FILE_MX_PREFIX;
-    static const string DEFAULT_FILE_MX_SUFFIX;
+    static const std::string FUNCTION_NAME;
+    static const std::string DEFAULT_FILE_DATA;
+    static const std::string DEFAULT_FILE_MX_PREFIX;
+    static const std::string DEFAULT_FILE_MX_SUFFIX;
 
     static const int Kmax;
     static const double a;
@@ -49,12 +49,12 @@ private:
     double * m_z;
     double * m_zM;
 
-    string getFileMxName(string prefix, int dimension, string suffix);
+    std::string getFileMxName(std::string prefix, int dimension, std::string suffix);
 
 public:
 
     F11ShiftedRotatedWeierstrass(int dimension, double bias);
-    F11ShiftedRotatedWeierstrass(int dimension, double bias, string file_data, string file_m);
+    F11ShiftedRotatedWeierstrass(int dimension, double bias, std::string file_data, std::string file_m);
     ~F11ShiftedRotatedWeierstrass();
 
     double f (double * x);

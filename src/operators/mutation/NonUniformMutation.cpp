@@ -28,13 +28,13 @@
 /**
  * Valid solution types to apply this operator.
  */
-const string NonUniformMutation::VALID_TYPES[] = {"Real", "ArrayReal"};
+const std::string NonUniformMutation::VALID_TYPES[] = {"Real", "ArrayReal"};
 
 /**
  * Constructor
  * Creates a new instance of the non uniform mutation
  */
-NonUniformMutation::NonUniformMutation(map<string, void *> parameters)
+NonUniformMutation::NonUniformMutation(std::map<std::string, void *> parameters)
     : Mutation(parameters)
 {
     if (parameters["probability"] != nullptr)

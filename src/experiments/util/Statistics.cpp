@@ -31,12 +31,12 @@
  * @param last index of last position to consider in the vector
  * @return The median
  */
-double Statistics::calculateMedian(vector<double> vector_, int first, int last)
+double Statistics::calculateMedian(std::vector<double> vector_, int first, int last)
 {
     double median = 0.0;
 
     int size = last - first + 1;
-    // cout << "size: " << size << "first: " << first << " last: " << last << endl;
+    // std::cout << "size: " << size << "first: " << first << " last: " << last << std::endl;
 
     if (size % 2 != 0)
     {
@@ -56,7 +56,7 @@ double Statistics::calculateMedian(vector<double> vector_, int first, int last)
  * @param vector
  * @return The IQR
  */
-double Statistics::calculateIQR(vector<double> vector_)
+double Statistics::calculateIQR(std::vector<double> vector_)
 {
     double q3 = 0.0;
     double q1 = 0.0;
@@ -67,15 +67,15 @@ double Statistics::calculateIQR(vector<double> vector_)
         {
             q3 = calculateMedian(vector_, vector_.size() / 2 + 1, vector_.size() - 1);
             q1 = calculateMedian(vector_, 0, vector_.size() / 2 - 1);
-            //cout << "Q1: [" << 0 << ", " << (vector.size()/2 - 1) << "] = " << q1 << endl;
-            //cout << "Q3: [" << (vector.size()/2+1) << ", " << (vector.size()-1) << "]= " << q3 << endl;
+            //std::cout << "Q1: [" << 0 << ", " << (vector.size()/2 - 1) << "] = " << q1 << std::endl;
+            //std::cout << "Q3: [" << (vector.size()/2+1) << ", " << (vector.size()-1) << "]= " << q3 << std::endl;
         }
         else
         {
             q3 = calculateMedian(vector_, vector_.size() / 2, vector_.size() - 1);
             q1 = calculateMedian(vector_, 0, vector_.size() / 2 - 1);
-            //cout << "Q1: [" << 0 << ", " << (vector.size()/2 - 1) << "] = " << q1 << endl;
-            //cout << "Q3: [" << (vector.size()/2) << ", " << (vector.size()-1) << "]= " << q3 << endl;
+            //std::cout << "Q1: [" << 0 << ", " << (vector.size()/2 - 1) << "] = " << q1 << std::endl;
+            //std::cout << "Q3: [" << (vector.size()/2) << ", " << (vector.size()-1) << "]= " << q3 << std::endl;
         } // else
     } // if
 

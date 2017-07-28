@@ -24,11 +24,11 @@
 #include "JMetalHeader.h"
 
 // Fixed (class) parameters
-const string F25RotatedHybridComposition4Bound::FUNCTION_NAME = "Rotated Hybrid Composition Function 4 without bounds";
+const std::string F25RotatedHybridComposition4Bound::FUNCTION_NAME = "Rotated Hybrid Composition Function 4 without bounds";
 // TODO: Cambiar ruta
-const string F25RotatedHybridComposition4Bound::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/hybrid_func4_data.txt";
-const string F25RotatedHybridComposition4Bound::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/hybrid_func4_M_D";
-const string F25RotatedHybridComposition4Bound::DEFAULT_FILE_MX_SUFFIX = ".txt";
+const std::string F25RotatedHybridComposition4Bound::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/hybrid_func4_data.txt";
+const std::string F25RotatedHybridComposition4Bound::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/hybrid_func4_M_D";
+const std::string F25RotatedHybridComposition4Bound::DEFAULT_FILE_MX_SUFFIX = ".txt";
 
 const double F25RotatedHybridComposition4Bound::m_sigma[NUM_FUNC] =
 {
@@ -61,7 +61,7 @@ F25RotatedHybridComposition4Bound::F25RotatedHybridComposition4Bound(int dimensi
 /**
  * Constructor
  */
-F25RotatedHybridComposition4Bound::F25RotatedHybridComposition4Bound(int dimension, double bias, string file_data, string file_m)
+F25RotatedHybridComposition4Bound::F25RotatedHybridComposition4Bound(int dimension, double bias, std::string file_data, std::string file_m)
     : TestFunc(dimension, bias, FUNCTION_NAME)
 {
 
@@ -200,7 +200,7 @@ double F25RotatedHybridComposition4Bound::MyHCJob::basic_func(int func_no, doubl
         result = Benchmark::sphere_noise(x,length);
         break;
     default:
-        cerr << "func_no is out of range." << endl;
+        cerr << "func_no is out of range." << std::endl;
         exit(-1);
     }
     return (result);
@@ -222,7 +222,7 @@ double F25RotatedHybridComposition4Bound::f(double * x)
 }
 
 
-string F25RotatedHybridComposition4Bound::getFileMxName(string prefix, int dimension, string suffix)
+std::string F25RotatedHybridComposition4Bound::getFileMxName(std::string prefix, int dimension, std::string suffix)
 {
     std::stringstream sstm;
     sstm << prefix << dimension << suffix;

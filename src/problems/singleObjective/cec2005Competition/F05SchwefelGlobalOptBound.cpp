@@ -24,9 +24,9 @@
 #include "JMetalHeader.h"
 
 // Fixed (class) parameters
-const string F05SchwefelGlobalOptBound::FUNCTION_NAME = "Schwefel's Problem 2.6 with Global Optimum on Bounds";
+const std::string F05SchwefelGlobalOptBound::FUNCTION_NAME = "Schwefel's Problem 2.6 with Global Optimum on Bounds";
 // TODO: Cambiar ruta
-const string F05SchwefelGlobalOptBound::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/schwefel_206_data.txt";
+const std::string F05SchwefelGlobalOptBound::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/schwefel_206_data.txt";
 
 
 /**
@@ -41,7 +41,7 @@ F05SchwefelGlobalOptBound::F05SchwefelGlobalOptBound(int dimension, double bias)
 /**
  * Constructor
  */
-F05SchwefelGlobalOptBound::F05SchwefelGlobalOptBound(int dimension, double bias, string file_data)
+F05SchwefelGlobalOptBound::F05SchwefelGlobalOptBound(int dimension, double bias, std::string file_data)
     : TestFunc(dimension, bias, FUNCTION_NAME)
 {
 

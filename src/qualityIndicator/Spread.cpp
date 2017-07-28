@@ -41,7 +41,7 @@ Spread::~Spread()
 } // ~Spread
 
 
-bool Spread::compareFront(vector<double> pointOne, vector<double> pointTwo)
+bool Spread::compareFront(std::vector<double> pointOne, std::vector<double> pointTwo)
 {
 
     int value;
@@ -68,29 +68,29 @@ bool Spread::compareFront(vector<double> pointOne, vector<double> pointTwo)
  *  @param trueParetoFront The true pareto front.
  *  @param numberOfObjectives The number of objectives.
  */
-double Spread::spread(vector <vector<double> > front,
-                      vector <vector<double> > trueParetoFront, int numberOfObjectives)
+double Spread::spread(std::vector <std::vector<double> > front,
+                      std::vector <std::vector<double> > trueParetoFront, int numberOfObjectives)
 {
 
     /**
      * Stores the maximum values of true pareto front.
      */
-    vector<double> maximumValue ;
+    std::vector<double> maximumValue ;
 
     /**
      * Stores the minimum values of the true pareto front.
      */
-    vector<double> minimumValue ;
+    std::vector<double> minimumValue ;
 
     /**
      * Stores the normalized front.
      */
-    vector <vector<double> > normalizedFront ;
+    std::vector <std::vector<double> > normalizedFront ;
 
     /**
      * Stores the normalized true Pareto front.
      */
-    vector <vector<double> > normalizedParetoFront ;
+    std::vector <std::vector<double> > normalizedParetoFront ;
 
     // STEP 1. Obtain the maximum and minimum values of the Pareto front
     maximumValue = utils_->getMaximumValues(trueParetoFront, numberOfObjectives);

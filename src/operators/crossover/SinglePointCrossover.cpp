@@ -33,7 +33,7 @@
  * Create a new SBX crossover operator whit a default
  * index given by <code>DEFAULT_INDEX_CROSSOVER</code>
  */
-SinglePointCrossover::SinglePointCrossover(map<string, void *> parameters)
+SinglePointCrossover::SinglePointCrossover(std::map<std::string, void *> parameters)
     : Crossover(parameters)
 {
     crossoverProbability_ = 0.0 ;
@@ -57,7 +57,7 @@ Solution ** SinglePointCrossover::doCrossover(double probability, Solution *pare
 
     if (offSpring == nullptr)
     {
-        cout << "Error grave: Impossible reserve memory for allocating new solutions when performing SinglePointCrossover " << endl;
+        std::cout << "Error grave: Impossible reserve memory for allocating new solutions when performing SinglePointCrossover " << std::endl;
         exit(-1);
     }
 

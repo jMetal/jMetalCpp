@@ -24,11 +24,11 @@
 #include "JMetalHeader.h"
 
 // Fixed (class) parameters
-const string F10ShiftedRotatedRastrigin::FUNCTION_NAME = "Shifted Rotated Rastrigin's Function";
+const std::string F10ShiftedRotatedRastrigin::FUNCTION_NAME = "Shifted Rotated Rastrigin's Function";
 // TODO: Cambiar ruta
-const string F10ShiftedRotatedRastrigin::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/rastrigin_func_data.txt";
-const string F10ShiftedRotatedRastrigin::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/rastrigin_M_D";
-const string F10ShiftedRotatedRastrigin::DEFAULT_FILE_MX_SUFFIX = ".txt";
+const std::string F10ShiftedRotatedRastrigin::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/rastrigin_func_data.txt";
+const std::string F10ShiftedRotatedRastrigin::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/rastrigin_M_D";
+const std::string F10ShiftedRotatedRastrigin::DEFAULT_FILE_MX_SUFFIX = ".txt";
 
 
 /**
@@ -43,7 +43,7 @@ F10ShiftedRotatedRastrigin::F10ShiftedRotatedRastrigin(int dimension, double bia
 /**
  * Constructor
  */
-F10ShiftedRotatedRastrigin::F10ShiftedRotatedRastrigin(int dimension, double bias, string file_data, string file_m)
+F10ShiftedRotatedRastrigin::F10ShiftedRotatedRastrigin(int dimension, double bias, std::string file_data, std::string file_m)
     : TestFunc(dimension, bias, FUNCTION_NAME)
 {
 
@@ -99,7 +99,7 @@ double F10ShiftedRotatedRastrigin::f(double * x)
 }
 
 
-string F10ShiftedRotatedRastrigin::getFileMxName(string prefix, int dimension, string suffix)
+std::string F10ShiftedRotatedRastrigin::getFileMxName(std::string prefix, int dimension, std::string suffix)
 {
     std::stringstream sstm;
     sstm << prefix << dimension << suffix;

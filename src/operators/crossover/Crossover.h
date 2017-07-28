@@ -33,7 +33,7 @@ class Crossover : public Operator
 {
 
 public:
-    Crossover(map<string, void *> parameters);
+    Crossover(std::map<std::string, void *> parameters);
     virtual ~Crossover() = 0;
 
 };

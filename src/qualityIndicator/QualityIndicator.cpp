@@ -27,7 +27,7 @@
  * @param paretoFrontFile
  */
 QualityIndicator::QualityIndicator(Problem * problem,
-                                   string paretoFrontFile)
+                                   std::string paretoFrontFile)
 {
     problem_ = problem;
     dim_ = problem_->getNumberOfObjectives();

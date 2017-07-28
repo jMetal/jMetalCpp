@@ -22,7 +22,7 @@
 
 #include <Crossover.h>
 
-Crossover::Crossover(map<string, void*> parameters)
+Crossover::Crossover(std::map<std::string, void*> parameters)
     : Operator(parameters) {}
 
 Crossover::~Crossover() { /* do nothing */ }

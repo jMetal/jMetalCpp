@@ -26,7 +26,7 @@
 #include <cstdlib>
 #include <vector>
 
-using namespace std;
+
 
 /**
  * This class implements the hypervolume indicator. The code is a C++ version
@@ -60,8 +60,8 @@ public:
     ~Hypervolume();
 
     double calculateHypervolume(double** front, int noPoints, int noObjectives);
-    double hypervolume(vector< vector<double> > paretoFront,
-                       vector< vector<double> > paretoTrueFront, int numberOfObjectives);
+    double hypervolume(std::vector< std::vector<double> > paretoFront,
+                       std::vector< std::vector<double> > paretoTrueFront, int numberOfObjectives);
 
 };
 

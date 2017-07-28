@@ -35,7 +35,7 @@ class Griewank : public Problem
 {
 
 public:
-    Griewank(string solutionType, int numberOfVariables = 10);
+    Griewank(std::string solutionType, int numberOfVariables = 10);
     ~Griewank();
     void evaluate(Solution *solution);
 };

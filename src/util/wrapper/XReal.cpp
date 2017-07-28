@@ -62,8 +62,8 @@ double XReal::getValue(int index)
     }
     else
     {
-        cout << "ERROR GRAVE: solution type "
-             << typeid(*type_).name() << " invalid" << endl;
+        std::cout << "ERROR GRAVE: solution type "
+             << typeid(*type_).name() << " invalid" << std::endl;
         exit(-1);
     }
     return 0.0;
@@ -89,8 +89,8 @@ void XReal::setValue(int index, double value)
     }
     else
     {
-        cout << "ERROR GRAVE: solution type "
-             << typeid(*type_).name() << " invalid" << endl;
+        std::cout << "ERROR GRAVE: solution type "
+             << typeid(*type_).name() << " invalid" << std::endl;
         exit(-1);
     }
 } // setValue
@@ -111,8 +111,8 @@ double XReal::getLowerBound(int index)
         return ((ArrayReal*)(solution_->getDecisionVariables()[0]))->getLowerBound(index);
     else
     {
-        cout << "ERROR GRAVE: solution type "
-             << typeid(*type_).name() << " invalid" << endl;
+        std::cout << "ERROR GRAVE: solution type "
+             << typeid(*type_).name() << " invalid" << std::endl;
         exit(-1);
     }
     return 0.0;
@@ -134,8 +134,8 @@ double XReal::getUpperBound(int index)
         return ((ArrayReal*)(solution_->getDecisionVariables()[0]))->getUpperBound(index);
     else
     {
-        cout << "ERROR GRAVE: solution type "
-             << typeid(*type_).name() << " invalid" << endl;
+        std::cout << "ERROR GRAVE: solution type "
+             << typeid(*type_).name() << " invalid" << std::endl;
         exit(-1);
     }
     return 0.0;
@@ -156,8 +156,8 @@ int XReal::getNumberOfDecisionVariables()
         return ((ArrayReal*)(solution_->getDecisionVariables()[0]))->getLength() ;
     else
     {
-        cout << "ERROR GRAVE: solution type "
-             << typeid(*type_).name() << " invalid" << endl;
+        std::cout << "ERROR GRAVE: solution type "
+             << typeid(*type_).name() << " invalid" << std::endl;
         exit(-1);
     }
     return 0 ;
@@ -177,8 +177,8 @@ int XReal::size()
         return ((ArrayReal*)(solution_->getDecisionVariables()[0]))->getLength();
     else
     {
-        cout << "ERROR GRAVE: solution type "
-             << typeid(*type_).name() << " invalid" << endl;
+        std::cout << "ERROR GRAVE: solution type "
+             << typeid(*type_).name() << " invalid" << std::endl;
         exit(-1);
     }
     return 0 ;

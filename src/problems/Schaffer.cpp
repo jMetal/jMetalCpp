@@ -26,7 +26,7 @@
  * Creates a new instance of the Schaffer problem.
  * @param solutionType The solution type must "Real", "BinaryReal, and "ArrayReal".
  */
-Schaffer::Schaffer(string solutionType)
+Schaffer::Schaffer(std::string solutionType)
 {
     numberOfVariables_   = 1;
     numberOfObjectives_  = 2;
@@ -35,14 +35,14 @@ Schaffer::Schaffer(string solutionType)
     lowerLimit_ = snew double[numberOfVariables_];
     if (lowerLimit_ == nullptr)
     {
-        cout << "Schaffer::Schaffer. Error reserving memory for storing the array of lower limits" << endl;
+        std::cout << "Schaffer::Schaffer. Error reserving memory for storing the array of lower limits" << std::endl;
         exit(-1) ;
     }
 
     upperLimit_ = snew double[numberOfVariables_];
     if (upperLimit_ == nullptr)
     {
-        cout << "Schaffer::Schaffer. Error reserving memory for storing the array of upper limits" << endl;
+        std::cout << "Schaffer::Schaffer. Error reserving memory for storing the array of upper limits" << std::endl;
         exit(-1) ;
     }
 
@@ -82,7 +82,7 @@ void Schaffer::evaluate(Solution *solution)
     fx = snew double[numberOfObjectives_];
     if (fx == nullptr)
     {
-        cout << "Schaffer::evaluate: Error reserving memory while evaluating the problem" << endl;
+        std::cout << "Schaffer::evaluate: Error reserving memory while evaluating the problem" << std::endl;
         exit(-1);
     }
 

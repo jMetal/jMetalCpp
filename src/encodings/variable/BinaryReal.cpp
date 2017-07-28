@@ -69,7 +69,7 @@ BinaryReal::~BinaryReal() { /* do nothing */ }
 
 
 /**
- * Decodes the real value encoded in the binary string represented
+ * Decodes the real value encoded in the binary std::string represented
  * by the <code>BinaryReal</code> object. The decoded value is stores in the
  * <code>value_</code> field and can be accessed by the method
  * <code>getValue</code>.
@@ -157,10 +157,10 @@ void BinaryReal::setUpperBound(double upperBound)
 
 
 /**
- * Returns a string representing the object.
+ * Returns a std::string representing the object.
  * @return the string.
  */
-string BinaryReal::toString()
+std::string BinaryReal::toString()
 {
     std::ostringstream ss;
     ss << value_;

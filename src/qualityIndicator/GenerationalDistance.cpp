@@ -51,29 +51,29 @@ GenerationalDistance::~GenerationalDistance()
  * @param front The front
  * @param trueParetoFront The true pareto front
  */
-double GenerationalDistance::generationalDistance(vector< vector<double> > front,
-        vector< vector<double> > trueParetoFront, int numberOfObjectives)
+double GenerationalDistance::generationalDistance(std::vector< std::vector<double> > front,
+        std::vector< std::vector<double> > trueParetoFront, int numberOfObjectives)
 {
 
     /**
      * Stores the maximum values of true pareto front.
      */
-    vector<double> maximumValue;
+    std::vector<double> maximumValue;
 
     /**
      * Stores the minimum values of the true pareto front.
      */
-    vector<double> minimumValue;
+    std::vector<double> minimumValue;
 
     /**
      * Stores the normalized front.
      */
-    vector< vector<double> > normalizedFront;
+    std::vector< std::vector<double> > normalizedFront;
 
     /**
      * Stores the normalized true Pareto front.
      */
-    vector< vector<double> > normalizedParetoFront ;
+    std::vector< std::vector<double> > normalizedParetoFront ;
 
     // STEP 1. Obtain the maximum and minimum values of the Pareto front
     maximumValue = utils_->getMaximumValues(trueParetoFront, numberOfObjectives);

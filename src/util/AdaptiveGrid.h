@@ -95,7 +95,7 @@ public:
     void removeSolution(int location);
     void addSolution(int location);
     int getBisections();
-    string toString();
+    std::string toString();
     int rouletteWheel();
     int calculateOccupied();
     int occupiedHypercubes();

@@ -32,8 +32,8 @@ class F15HybridComposition1 : public TestFunc
 private:
 
     // Fixed (class) parameters
-    static const string FUNCTION_NAME;
-    static const string DEFAULT_FILE_DATA;
+    static const std::string FUNCTION_NAME;
+    static const std::string DEFAULT_FILE_DATA;
 
     // Number of functions
     static const int NUM_FUNC = 10;
@@ -66,7 +66,7 @@ private:
 public:
 
     F15HybridComposition1(int dimension, double bias);
-    F15HybridComposition1(int dimension, double bias, string file_data);
+    F15HybridComposition1(int dimension, double bias, std::string file_data);
     ~F15HybridComposition1();
 
     double f (double * x);

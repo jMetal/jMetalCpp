@@ -49,19 +49,19 @@ int main(int argc, char ** argv)
 
     QualityIndicator *indicators ; // Object to get quality indicators
 
-    map<string, void *> parameters; // Operator parameters
+   std::map<std::string, void *> parameters; // Operator parameters
 
     indicators = nullptr;
 
     if (argc>=2)
     {
         problem = ProblemFactory::getProblem(argc, argv);
-        cout << "Selected problem: " << problem->getName() << endl;
+        std::cout << "Selected problem: " << problem->getName() << std::endl;
     }
     else
     {
-        cout << "No problem selected." << endl;
-        cout << "Default problem will be used: Kursawe" << endl;
+        std::cout << "No problem selected." << std::endl;
+        std::cout << "Default problem will be used: Kursawe" << std::endl;
         problem = ProblemFactory::getProblem(const_cast<char *>("Kursawe"));
     }
 
@@ -101,20 +101,20 @@ int main(int argc, char ** argv)
     secs = secs / CLOCKS_PER_SEC;
 
     // Print the results
-    cout << "Total execution time: " << secs << "s" << endl;
-    cout << "Variables values have been written to file VAR" << endl;
+    std::cout << "Total execution time: " << secs << "s" << std::endl;
+    std::cout << "Variables values have been written to file VAR" << std::endl;
     population->printVariablesToFile("VAR");
-    cout << "Objectives values have been written to file FUN" << endl;
+    std::cout << "Objectives values have been written to file FUN" << std::endl;
     population->printObjectivesToFile("FUN");
 
     if (indicators != nullptr)
     {
-        cout << "Quality indicators" << endl ;
-        cout << "Hypervolume: " << indicators->getHypervolume(population) << endl;
-        cout << "GD         : " << indicators->getGD(population) << endl ;
-        cout << "IGD        : " << indicators->getIGD(population) << endl ;
-        cout << "Spread     : " << indicators->getSpread(population) << endl ;
-        cout << "Epsilon    : " << indicators->getEpsilon(population) << endl ;
+        std::cout << "Quality indicators" << std::endl ;
+        std::cout << "Hypervolume: " << indicators->getHypervolume(population) << std::endl;
+        std::cout << "GD         : " << indicators->getGD(population) << std::endl ;
+        std::cout << "IGD        : " << indicators->getIGD(population) << std::endl ;
+        std::cout << "Spread     : " << indicators->getSpread(population) << std::endl ;
+        std::cout << "Epsilon    : " << indicators->getEpsilon(population) << std::endl ;
     } // if
 
     delete uniformMutation;

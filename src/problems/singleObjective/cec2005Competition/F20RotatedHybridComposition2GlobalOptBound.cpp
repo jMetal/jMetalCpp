@@ -24,11 +24,11 @@
 #include "JMetalHeader.h"
 
 // Fixed (class) parameters
-const string F20RotatedHybridComposition2GlobalOptBound::FUNCTION_NAME = "Rotated Hybrid Composition Function 2 with Global Optimum on the Bounds";
+const std::string F20RotatedHybridComposition2GlobalOptBound::FUNCTION_NAME = "Rotated Hybrid Composition Function 2 with Global Optimum on the Bounds";
 // TODO: Cambiar ruta
-const string F20RotatedHybridComposition2GlobalOptBound::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/hybrid_func2_data.txt";
-const string F20RotatedHybridComposition2GlobalOptBound::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/hybrid_func2_M_D";
-const string F20RotatedHybridComposition2GlobalOptBound::DEFAULT_FILE_MX_SUFFIX = ".txt";
+const std::string F20RotatedHybridComposition2GlobalOptBound::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/hybrid_func2_data.txt";
+const std::string F20RotatedHybridComposition2GlobalOptBound::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/hybrid_func2_M_D";
+const std::string F20RotatedHybridComposition2GlobalOptBound::DEFAULT_FILE_MX_SUFFIX = ".txt";
 
 const double F20RotatedHybridComposition2GlobalOptBound::m_sigma[NUM_FUNC] =
 {
@@ -61,7 +61,7 @@ F20RotatedHybridComposition2GlobalOptBound::F20RotatedHybridComposition2GlobalOp
 /**
  * Constructor
  */
-F20RotatedHybridComposition2GlobalOptBound::F20RotatedHybridComposition2GlobalOptBound(int dimension, double bias, string file_data, string file_m)
+F20RotatedHybridComposition2GlobalOptBound::F20RotatedHybridComposition2GlobalOptBound(int dimension, double bias, std::string file_data, std::string file_m)
     : TestFunc(dimension, bias, FUNCTION_NAME)
 {
 
@@ -198,7 +198,7 @@ double F20RotatedHybridComposition2GlobalOptBound::MyHCJob::basic_func(int func_
         result = Benchmark::griewank(x, length);
         break;
     default:
-        cerr << "func_no is out of range." << endl;
+        cerr << "func_no is out of range." << std::endl;
         exit(-1);
     }
     return (result);
@@ -220,7 +220,7 @@ double F20RotatedHybridComposition2GlobalOptBound::f(double * x)
 }
 
 
-string F20RotatedHybridComposition2GlobalOptBound::getFileMxName(string prefix, int dimension, string suffix)
+std::string F20RotatedHybridComposition2GlobalOptBound::getFileMxName(std::string prefix, int dimension, std::string suffix)
 {
     std::stringstream sstm;
     sstm << prefix << dimension << suffix;

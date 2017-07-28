@@ -43,7 +43,7 @@ private:
 
 public:
     GDE3_Settings() ;
-    GDE3_Settings(string problemName) ;
+    GDE3_Settings(std::string problemName) ;
     ~GDE3_Settings() ;
 
     Algorithm * configure() ;

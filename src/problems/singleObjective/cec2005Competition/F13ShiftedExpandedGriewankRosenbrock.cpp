@@ -23,9 +23,9 @@
 #include <F13ShiftedExpandedGriewankRosenbrock.h>
 
 // Fixed (class) parameters
-const string F13ShiftedExpandedGriewankRosenbrock::FUNCTION_NAME = "Shifted Expanded Griewank's plus Rosenbrock's Function";
+const std::string F13ShiftedExpandedGriewankRosenbrock::FUNCTION_NAME = "Shifted Expanded Griewank's plus Rosenbrock's Function";
 // TODO: Cambiar ruta
-const string F13ShiftedExpandedGriewankRosenbrock::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/EF8F2_func_data.txt";
+const std::string F13ShiftedExpandedGriewankRosenbrock::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/EF8F2_func_data.txt";
 
 
 /**
@@ -40,7 +40,7 @@ F13ShiftedExpandedGriewankRosenbrock::F13ShiftedExpandedGriewankRosenbrock(int d
 /**
  * Constructor
  */
-F13ShiftedExpandedGriewankRosenbrock::F13ShiftedExpandedGriewankRosenbrock(int dimension, double bias, string file_data)
+F13ShiftedExpandedGriewankRosenbrock::F13ShiftedExpandedGriewankRosenbrock(int dimension, double bias, std::string file_data)
     : TestFunc(dimension, bias, FUNCTION_NAME)
 {
 

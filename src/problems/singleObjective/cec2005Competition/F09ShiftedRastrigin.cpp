@@ -23,9 +23,9 @@
 #include <F09ShiftedRastrigin.h>
 
 // Fixed (class) parameters
-const string F09ShiftedRastrigin::FUNCTION_NAME = "Shifted Rastrigin's Function";
+const std::string F09ShiftedRastrigin::FUNCTION_NAME = "Shifted Rastrigin's Function";
 // TODO: Cambiar ruta
-const string F09ShiftedRastrigin::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/rastrigin_func_data.txt";
+const std::string F09ShiftedRastrigin::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/rastrigin_func_data.txt";
 
 
 /**
@@ -40,7 +40,7 @@ F09ShiftedRastrigin::F09ShiftedRastrigin(int dimension, double bias)
 /**
  * Constructor
  */
-F09ShiftedRastrigin::F09ShiftedRastrigin(int dimension, double bias, string file_data)
+F09ShiftedRastrigin::F09ShiftedRastrigin(int dimension, double bias, std::string file_data)
     : TestFunc(dimension, bias, FUNCTION_NAME)
 {
 

@@ -24,11 +24,11 @@
 #include "JMetalHeader.h"
 
 // Fixed (class) parameters
-const string F18RotatedHybridComposition2::FUNCTION_NAME = "Rotated Hybrid Composition Function 2";
+const std::string F18RotatedHybridComposition2::FUNCTION_NAME = "Rotated Hybrid Composition Function 2";
 // TODO: Cambiar ruta
-const string F18RotatedHybridComposition2::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/hybrid_func2_data.txt";
-const string F18RotatedHybridComposition2::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/hybrid_func2_M_D";
-const string F18RotatedHybridComposition2::DEFAULT_FILE_MX_SUFFIX = ".txt";
+const std::string F18RotatedHybridComposition2::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/hybrid_func2_data.txt";
+const std::string F18RotatedHybridComposition2::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/hybrid_func2_M_D";
+const std::string F18RotatedHybridComposition2::DEFAULT_FILE_MX_SUFFIX = ".txt";
 
 const double F18RotatedHybridComposition2::m_sigma[NUM_FUNC] =
 {
@@ -61,7 +61,7 @@ F18RotatedHybridComposition2::F18RotatedHybridComposition2(int dimension, double
 /**
  * Constructor
  */
-F18RotatedHybridComposition2::F18RotatedHybridComposition2(int dimension, double bias, string file_data, string file_m)
+F18RotatedHybridComposition2::F18RotatedHybridComposition2(int dimension, double bias, std::string file_data, std::string file_m)
     : TestFunc(dimension, bias, FUNCTION_NAME)
 {
 
@@ -194,7 +194,7 @@ double F18RotatedHybridComposition2::MyHCJob::basic_func(int func_no, double* x,
         result = Benchmark::griewank(x, length);
         break;
     default:
-        cerr << "func_no is out of range." << endl;
+        cerr << "func_no is out of range." << std::endl;
         exit(-1);
     }
     return (result);
@@ -216,7 +216,7 @@ double F18RotatedHybridComposition2::f(double * x)
 }
 
 
-string F18RotatedHybridComposition2::getFileMxName(string prefix, int dimension, string suffix)
+std::string F18RotatedHybridComposition2::getFileMxName(std::string prefix, int dimension, std::string suffix)
 {
     std::stringstream sstm;
     sstm << prefix << dimension << suffix;

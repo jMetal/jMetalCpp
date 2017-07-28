@@ -54,7 +54,7 @@ public:
 
     Epsilon();
     ~Epsilon();
-    double epsilon(vector <vector<double> > b, vector< vector<double> > a, int dim);
+    double epsilon(std::vector <std::vector<double> > b, std::vector< std::vector<double> > a, int dim);
 
 }; // Epsilon
 

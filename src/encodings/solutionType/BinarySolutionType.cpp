@@ -41,7 +41,7 @@ Variable **BinarySolutionType::createVariables()
 
     Variable **variables = snew Variable*[problem_->getNumberOfVariables()]; //malloc(sizeof(Real) * problem->getNumberOfVariables());
 //  if (problem_->variableType_ ==  nullptr) {
-//    cout << "Error grave: Impossible to reserve memory for variable type" << endl;
+//    std::cout << "Error grave: Impossible to reserve memory for variable type" << std::endl;
 //    exit(-1);
 //  }
 

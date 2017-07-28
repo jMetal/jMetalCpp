@@ -33,7 +33,7 @@
 #include <Solution.h>
 #include <Comparator.h>
 
-using namespace std;
+
 
 //class Solution ;
 class Comparator;
@@ -46,7 +46,7 @@ class SolutionSet
 {
 
 protected:
-    vector<Solution*> solutionsList_;
+    std::vector<Solution*> solutionsList_;
     int capacity_;
 
 public:
@@ -65,10 +65,10 @@ public:
     int indexWorst(Comparator * comparator);
     Solution * worst(Comparator * comparator);
     int size();
-    void printObjectivesToFile(string path);
-    void printObjectivesToFile(string path, bool append);
-    void printVariablesToFile(string file);
-    void printVariablesToFile(string file, bool append);
+    void printObjectivesToFile(std::string path);
+    void printObjectivesToFile(std::string path, bool append);
+    void printVariablesToFile(std::string file);
+    void printVariablesToFile(std::string file, bool append);
     void clear();
     void clear(bool del);
     void remove(int i);
@@ -76,11 +76,11 @@ public:
     SolutionSet * join(SolutionSet * another);
     void replace(int position, Solution * solution);
     void replace(int position, Solution * solution, bool del);
-    vector <vector<double> > writeObjectivesToMatrix();
+    std::vector <std::vector<double> > writeObjectivesToMatrix();
     void printObjectives();
 
     //void reset() ;
-    //string toString();
+    //std::string toString();
 };
 
 

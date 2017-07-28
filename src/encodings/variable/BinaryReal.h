@@ -52,7 +52,7 @@ public:
     double getUpperBound();
     void setLowerBound(double bound);
     void setUpperBound(double bound);
-    string toString();
+    std::string toString();
 
 private:
     double value_;

@@ -36,7 +36,7 @@ class SBXCrossover : public Crossover
 {
 
 public:
-    SBXCrossover(map<string, void *> parameters);
+    SBXCrossover(std::map<std::string, void *> parameters);
     ~SBXCrossover();
     void *execute(void *);
 

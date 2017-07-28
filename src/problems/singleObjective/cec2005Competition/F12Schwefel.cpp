@@ -24,9 +24,9 @@
 #include "JMetalHeader.h"
 
 // Fixed (class) parameters
-const string F12Schwefel::FUNCTION_NAME = "Schwefel's Problem 2.13";
+const std::string F12Schwefel::FUNCTION_NAME = "Schwefel's Problem 2.13";
 // TODO: Cambiar ruta
-const string F12Schwefel::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/schwefel_213_data.txt";
+const std::string F12Schwefel::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/schwefel_213_data.txt";
 
 
 /**
@@ -41,7 +41,7 @@ F12Schwefel::F12Schwefel(int dimension, double bias)
 /**
  * Constructor
  */
-F12Schwefel::F12Schwefel(int dimension, double bias, string file_data)
+F12Schwefel::F12Schwefel(int dimension, double bias, std::string file_data)
     : TestFunc(dimension, bias, FUNCTION_NAME)
 {
 

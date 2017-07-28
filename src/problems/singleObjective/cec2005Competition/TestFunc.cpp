@@ -32,7 +32,7 @@ TestFunc::TestFunc(int dimension, double bias) : TestFunc(dimension, bias, "unde
 /**
  * Constructor
  */
-TestFunc::TestFunc(int dimension, double bias, string func_name)
+TestFunc::TestFunc(int dimension, double bias, std::string func_name)
 {
     m_dimension = dimension;
     m_bias = bias;
@@ -56,7 +56,7 @@ double TestFunc::bias()
     return (m_bias);
 } // bias
 
-string TestFunc::name()
+std::string TestFunc::name()
 {
     return (m_func_name);
 } // name

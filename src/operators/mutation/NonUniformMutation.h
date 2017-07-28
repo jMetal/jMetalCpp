@@ -38,7 +38,7 @@ private:
     /**
      * Valid solution types to apply this operator.
      */
-    static const string VALID_TYPES[];
+    static const std::string VALID_TYPES[];
 
     /**
      * perturbation_ stores the perturbation value used in the Non Uniform
@@ -78,7 +78,7 @@ public:
      * Constructor.
      * Creates a new instance of the non uniform mutation
      */
-    NonUniformMutation(map<string, void *> parameters);
+    NonUniformMutation(std::map<std::string, void *> parameters);
 
     /**
      * Executes the operation

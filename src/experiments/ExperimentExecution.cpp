@@ -73,8 +73,8 @@ void ExperimentExecution::runExperiment(int numberOfThreads)
     map_["outputParetoFrontFile"] = &outputParetoFrontFile_;
     map_["outputParetoSetFile"] = &outputParetoSetFile_;
 
-    cout << "Initializing task list..." << endl;
-    //cout << "algorithmNameList_.size() = " << algorithmNameList_.size() << endl;
+    std::cout << "Initializing task list..." << std::endl;
+    //std::cout << "algorithmNameList_.size() = " << algorithmNameList_.size() << std::endl;
 
     experimentIndividualListSize_ =
         problemList_.size() * algorithmNameList_.size() * independentRuns_;
@@ -92,7 +92,7 @@ void ExperimentExecution::runExperiment(int numberOfThreads)
 
     algorithmSettingsList_ = snew Settings*[experimentIndividualList_.size()];
 
-    cout << "Task list initialized." << endl;
+    std::cout << "Task list initialized." << std::endl;
 
     int result;
 
@@ -104,11 +104,11 @@ void ExperimentExecution::runExperiment(int numberOfThreads)
 //    exit(-1) ;
 //  }
 //  else
-//    cout << "------- MUTEX OK ------" << endl ;
+//    std::cout << "------- MUTEX OK ------" << std::endl ;
 
     //pthread_t * p = new pthread_t[numberOfThreads];
     //thread * p = new thread[numberOfThreads];
-    vector<thread> threads;
+    std::vector<thread> threads;
     RunExperiment ** experiments_ = snew RunExperiment*[numberOfThreads];
     for (int i = 0; i < numberOfThreads; i++)
     {
@@ -124,7 +124,7 @@ void ExperimentExecution::runExperiment(int numberOfThreads)
 
 //  for (int i = 0; i < numberOfThreads; i++) {
 //    result = pthread_join(p[i], nullptr) ;
-//    cout << "Joined thread number " << (i+1) << "." <<endl;
+//    std::cout << "Joined thread number " << (i+1) << "." <<std::endl;
 //    if (result != 0) {
 //      perror("ERROR WHILE MAKING THREAD JOIN");
 //      exit(-1) ;
@@ -133,7 +133,7 @@ void ExperimentExecution::runExperiment(int numberOfThreads)
 //  }
     for (auto& th : threads) th.join();
 
-    cout << "All the threads have finished." << endl;
+    std::cout << "All the threads have finished." << std::endl;
 
     for (int i=0; i < experimentIndividualList_.size(); i++)
     {

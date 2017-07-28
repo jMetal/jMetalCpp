@@ -24,7 +24,7 @@
 /**
  * Class constructor
  */
-Fonseca::Fonseca(string solutionType)
+Fonseca::Fonseca(std::string solutionType)
 {
     numberOfVariables_   = 3;
     numberOfObjectives_  = 2;
@@ -34,13 +34,13 @@ Fonseca::Fonseca(string solutionType)
     lowerLimit_ = snew double[numberOfVariables_];
     if (lowerLimit_ == nullptr)
     {
-        cout << "Fonseca::Fonseca. Error reserving memory for storing the array of lower limits" << endl;
+        std::cout << "Fonseca::Fonseca. Error reserving memory for storing the array of lower limits" << std::endl;
     } // if
 
     upperLimit_ = snew double[numberOfVariables_];
     if (upperLimit_ == nullptr)
     {
-        cout << "Fonseca::Fonseca. Error reserving memory for storing the array of upper limits" << endl;
+        std::cout << "Fonseca::Fonseca. Error reserving memory for storing the array of upper limits" << std::endl;
         exit(-1) ;
     } // if
 
@@ -52,13 +52,13 @@ Fonseca::Fonseca(string solutionType)
 
     if (solutionType.compare("BinaryReal") == 0)
     {
-        //cout << "Selected solution type: BinaryReal" << endl;
+        //std::cout << "Selected solution type: BinaryReal" << std::endl;
         solutionType_ = snew BinaryRealSolutionType(this) ;
     }
     else if (solutionType.compare("Real") == 0)
     {
         solutionType_ = snew RealSolutionType(this) ;
-        //cout << "Selected solution type: Real" << endl;
+        //std::cout << "Selected solution type: Real" << std::endl;
     }
     else if (solutionType.compare("ArrayReal") == 0)
     {
@@ -66,7 +66,7 @@ Fonseca::Fonseca(string solutionType)
     }
     else
     {
-        cout << "Error: solution type " << solutionType << " invalid" << endl;
+        std::cout << "Error: solution type " << solutionType << " invalid" << std::endl;
         exit(-1) ;
     }
 } // Fonseca
@@ -95,14 +95,14 @@ void Fonseca::evaluate(Solution *solution)
     fx = snew double[numberOfObjectives_];
     if (fx == nullptr)
     {
-        cout << "Fonseca::evaluate: Error reserving memory for the function values array" << endl;
+        std::cout << "Fonseca::evaluate: Error reserving memory for the function values array" << std::endl;
         exit(-1);
     } // if
 
     x = snew double[numberOfVariables_];
     if (x == nullptr)
     {
-        cout << "Fonseca::evaluate: Error reserving memory for the variable values array" << endl;
+        std::cout << "Fonseca::evaluate: Error reserving memory for the variable values array" << std::endl;
         exit(-1);
     } // if
 

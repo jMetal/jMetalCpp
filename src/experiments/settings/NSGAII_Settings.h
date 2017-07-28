@@ -45,7 +45,7 @@ private:
 
 public:
     NSGAII_Settings() ;
-    NSGAII_Settings(string problemName) ;
+    NSGAII_Settings(std::string problemName) ;
     ~NSGAII_Settings() ;
 
     Algorithm * configure() ;

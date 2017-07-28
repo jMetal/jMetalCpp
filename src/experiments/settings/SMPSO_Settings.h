@@ -41,7 +41,7 @@ private:
 
 public:
     SMPSO_Settings() ;
-    SMPSO_Settings(string problemName) ;
+    SMPSO_Settings(std::string problemName) ;
     ~SMPSO_Settings() ;
 
     Algorithm * configure() ;

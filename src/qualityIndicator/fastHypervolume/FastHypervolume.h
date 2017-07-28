@@ -27,7 +27,7 @@
 //#include <cstdlib>
 #include <math.h>
 
-using namespace std;
+
 
 class FastHypervolume
 {

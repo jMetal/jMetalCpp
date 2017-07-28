@@ -20,15 +20,15 @@
 
 #include "ZDT5.h"
 
-ZDT5::ZDT5(string solutionType, int numberOfVariables)
+ZDT5::ZDT5(std::string solutionType, int numberOfVariables)
 {
-    cout << "Solutiontype: " << solutionType << endl ;
+    std::cout << "Solutiontype: " << solutionType << std::endl ;
     numberOfVariables_   = numberOfVariables;
     numberOfObjectives_  = 2;
     numberOfConstraints_ = 0;
     problemName_ 				 = "ZDT5";
 
-    cout << "Problem: " << problemName_ << endl ;
+    std::cout << "Problem: " << problemName_ << std::endl ;
 
     length_ = snew int[numberOfVariables_];
     length_[0] = 30;
@@ -41,7 +41,7 @@ ZDT5::ZDT5(string solutionType, int numberOfVariables)
         solutionType_ = new BinarySolutionType(this) ;
     else
     {
-        cout << "Error: solution type " << solutionType << " invalid" << endl;
+        std::cout << "Error: solution type " << solutionType << " invalid" << std::endl;
         exit(-1) ;
     }
     fx_ = snew double[numberOfObjectives_] ;

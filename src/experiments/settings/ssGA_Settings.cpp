@@ -42,7 +42,7 @@ ssGA_Settings::~ssGA_Settings ()
 /**
  * Constructor
  */
-ssGA_Settings::ssGA_Settings(string problemName)
+ssGA_Settings::ssGA_Settings(std::string problemName)
 {
     problemName_ = problemName ;
 
@@ -68,7 +68,7 @@ Algorithm * ssGA_Settings::configure()
     algorithm->setInputParameter("maxEvaluations",&maxEvaluations_);
 
     // Mutation and Crossover for Real codification
-    map<string, void *> parameters;
+   std::map<std::string, void *> parameters;
 
     double crossoverProbability = crossoverProbability_;
     double crossoverDistributionIndex = crossoverDistributionIndex_ ;
@@ -92,7 +92,7 @@ Algorithm * ssGA_Settings::configure()
     algorithm->addOperator("mutation",mutation);
     algorithm->addOperator("selection",selection);
 
-    cout << "ssGA algorithm initialized." << endl;
+    std::cout << "ssGA algorithm initialized." << std::endl;
 
     return algorithm ;
 } // configure

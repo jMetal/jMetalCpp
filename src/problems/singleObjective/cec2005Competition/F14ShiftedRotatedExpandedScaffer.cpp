@@ -24,11 +24,11 @@
 #include "JMetalHeader.h"
 
 // Fixed (class) parameters
-const string F14ShiftedRotatedExpandedScaffer::FUNCTION_NAME = "Shifted Rotated Expanded Scaffer's F6 Function";
+const std::string F14ShiftedRotatedExpandedScaffer::FUNCTION_NAME = "Shifted Rotated Expanded Scaffer's F6 Function";
 // TODO: Cambiar ruta
-const string F14ShiftedRotatedExpandedScaffer::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/E_ScafferF6_func_data.txt";
-const string F14ShiftedRotatedExpandedScaffer::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/E_ScafferF6_M_D";
-const string F14ShiftedRotatedExpandedScaffer::DEFAULT_FILE_MX_SUFFIX = ".txt";
+const std::string F14ShiftedRotatedExpandedScaffer::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/E_ScafferF6_func_data.txt";
+const std::string F14ShiftedRotatedExpandedScaffer::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/E_ScafferF6_M_D";
+const std::string F14ShiftedRotatedExpandedScaffer::DEFAULT_FILE_MX_SUFFIX = ".txt";
 
 
 /**
@@ -43,7 +43,7 @@ F14ShiftedRotatedExpandedScaffer::F14ShiftedRotatedExpandedScaffer(int dimension
 /**
  * Constructor
  */
-F14ShiftedRotatedExpandedScaffer::F14ShiftedRotatedExpandedScaffer(int dimension, double bias, string file_data, string file_m)
+F14ShiftedRotatedExpandedScaffer::F14ShiftedRotatedExpandedScaffer(int dimension, double bias, std::string file_data, std::string file_m)
     : TestFunc(dimension, bias, FUNCTION_NAME)
 {
 
@@ -99,7 +99,7 @@ double F14ShiftedRotatedExpandedScaffer::f(double * x)
 }
 
 
-string F14ShiftedRotatedExpandedScaffer::getFileMxName(string prefix, int dimension, string suffix)
+std::string F14ShiftedRotatedExpandedScaffer::getFileMxName(std::string prefix, int dimension, std::string suffix)
 {
     std::stringstream sstm;
     sstm << prefix << dimension << suffix;

@@ -47,7 +47,7 @@ Epsilon::~Epsilon()
  * @param a. Solution front
  * @return the value of the epsilon indicator
  */
-double Epsilon::epsilon(vector <vector<double> > b, vector <vector<double> > a,
+double Epsilon::epsilon(std::vector <std::vector<double> > b, std::vector <std::vector<double> > a,
                         int dim)
 {
 
@@ -86,7 +86,7 @@ double Epsilon::epsilon(vector <vector<double> > b, vector <vector<double> > a,
                         //if ( (a[i * dim_ + k] < 0 && b[j * dim_ + k] > 0) ||
                         //     (a[i * dim_ + k] > 0 && b[j * dim_ + k] < 0) ||
                         //     (a[i * dim_ + k] == 0 || b[j * dim_ + k] == 0)) {
-                        cout << "error in data file" << endl;
+                        std::cout << "error in data file" << std::endl;
                         exit(-1);
                     }
                     if (obj_[k] == 0)

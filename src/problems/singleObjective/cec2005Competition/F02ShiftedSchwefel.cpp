@@ -23,9 +23,9 @@
 #include <F02ShiftedSchwefel.h>
 
 // Fixed (class) parameters
-const string F02ShiftedSchwefel::FUNCTION_NAME = "Shifted Schwefel's Problem 1.2";
+const std::string F02ShiftedSchwefel::FUNCTION_NAME = "Shifted Schwefel's Problem 1.2";
 // TODO: Cambiar ruta
-const string F02ShiftedSchwefel::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/schwefel_102_data.txt";
+const std::string F02ShiftedSchwefel::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/schwefel_102_data.txt";
 
 
 /**
@@ -40,7 +40,7 @@ F02ShiftedSchwefel::F02ShiftedSchwefel(int dimension, double bias)
 /**
  * Constructor
  */
-F02ShiftedSchwefel::F02ShiftedSchwefel(int dimension, double bias, string file_data)
+F02ShiftedSchwefel::F02ShiftedSchwefel(int dimension, double bias, std::string file_data)
     : TestFunc(dimension, bias, FUNCTION_NAME)
 {
 

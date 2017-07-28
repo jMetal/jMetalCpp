@@ -29,7 +29,7 @@ const double Rastrigin::PI = 3.141592653589793;
  * @param solutionType The solution type must "Real", "BinaryReal, and "ArrayReal".
  * @param numberOfVariables Number of variables of the problem
  */
-Rastrigin::Rastrigin(string solutionType, int numberOfVariables)
+Rastrigin::Rastrigin(std::string solutionType, int numberOfVariables)
 {
     numberOfVariables_   = numberOfVariables;
     numberOfObjectives_  = 1;
@@ -39,14 +39,14 @@ Rastrigin::Rastrigin(string solutionType, int numberOfVariables)
     lowerLimit_ = snew double[numberOfVariables_];
     if (lowerLimit_ == nullptr)
     {
-        cout << "Rastrigin::Rastrigin. Error reserving memory for storing the array of lower limits" << endl;
+        std::cout << "Rastrigin::Rastrigin. Error reserving memory for storing the array of lower limits" << std::endl;
         exit(-1) ;
     }
 
     upperLimit_ = snew double[numberOfVariables_];
     if (upperLimit_ == nullptr)
     {
-        cout << "Rastrigin::Rastrigin. Error reserving memory for storing the array of upper limits" << endl;
+        std::cout << "Rastrigin::Rastrigin. Error reserving memory for storing the array of upper limits" << std::endl;
         exit(-1) ;
     }
 
@@ -85,14 +85,14 @@ void Rastrigin::evaluate(Solution *solution)
     double * fx = snew double[numberOfObjectives_]; //(double *)malloc(sizeof(double) * numberOfObjectives_);
     if (fx == nullptr)
     {
-        cout << "Rastrigin::evaluate: Error reserving memory while evaluating the problem" << endl;
+        std::cout << "Rastrigin::evaluate: Error reserving memory while evaluating the problem" << std::endl;
         exit(-1);
     }
 
     double * x = snew double[numberOfVariables_];
     if (x == nullptr)
     {
-        cout << "Rastrigin::evaluate: Error reserving memory for the variable values array" << endl;
+        std::cout << "Rastrigin::evaluate: Error reserving memory for the variable values array" << std::endl;
         exit(-1);
     } // if
 

@@ -40,7 +40,7 @@ private:
     static const double PI ;
 
 public:
-    ZDT4(string solutionType, int numberOfVariables = 10);
+    ZDT4(std::string solutionType, int numberOfVariables = 10);
     void evaluate(Solution *solution);
     virtual ~ZDT4();
 };

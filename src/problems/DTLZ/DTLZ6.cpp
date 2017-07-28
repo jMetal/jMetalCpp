@@ -22,7 +22,7 @@
 
 const double DTLZ6::PI = 3.141592653589793;
 
-DTLZ6::DTLZ6(string solutionType, int numberOfVariables, int numberOfObjectives)
+DTLZ6::DTLZ6(std::string solutionType, int numberOfVariables, int numberOfObjectives)
 {
     numberOfVariables_   = numberOfVariables;
     numberOfObjectives_  = numberOfObjectives;
@@ -32,14 +32,14 @@ DTLZ6::DTLZ6(string solutionType, int numberOfVariables, int numberOfObjectives)
     lowerLimit_ = snew double[numberOfVariables_];//(double *)malloc(sizeof(double)*numberOfVariables);
     if (lowerLimit_ == nullptr)
     {
-        cout << "Impossible to reserve memory for storing the variable lower limits" << endl;
+        std::cout << "Impossible to reserve memory for storing the variable lower limits" << std::endl;
         exit(-1);
     }
 
     upperLimit_ = snew double[numberOfVariables_];//(double *)malloc(sizeof(double)*numberOfVariables);
     if (upperLimit_ == nullptr)
     {
-        cout << "Impossible to reserve memory for storing the variable lower limits" << endl;
+        std::cout << "Impossible to reserve memory for storing the variable lower limits" << std::endl;
         exit(-1);
     }
 
@@ -54,13 +54,13 @@ DTLZ6::DTLZ6(string solutionType, int numberOfVariables, int numberOfObjectives)
     else if (solutionType.compare("Real") == 0)
     {
         solutionType_ = snew RealSolutionType(this) ;
-        //cout << "Tipo seleccionado Real" << endl;
+        //std::cout << "Tipo seleccionado Real" << std::endl;
     }
     else if (solutionType.compare("ArrayReal") == 0)
         solutionType_ = snew ArrayRealSolutionType(this) ;
     else
     {
-        cout << "Error: solution type " << solutionType << " invalid" << endl;
+        std::cout << "Error: solution type " << solutionType << " invalid" << std::endl;
         exit(-1) ;
     }
 

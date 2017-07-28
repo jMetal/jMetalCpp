@@ -19,7 +19,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "AdaptiveGrid.h"
-using namespace std;
+
 
 /**
 * Constructor.
@@ -305,7 +305,7 @@ int AdaptiveGrid::getBisections()
  * Retunrns a String representing the grid.
  * @return The String.
  */
-string AdaptiveGrid::toString()
+std::string AdaptiveGrid::toString()
 {
     stringstream result;
     result << "Grid\n";

@@ -51,7 +51,7 @@ public:
     void setValue(int index, double value);
     double getLowerBound(int index);
     double getUpperBound(int index);
-    string toString();
+    std::string toString();
 
     void setValue(double value);
     double getValue();

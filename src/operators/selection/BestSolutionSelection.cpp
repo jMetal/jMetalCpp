@@ -31,7 +31,7 @@
 /**
  * Constructor
  */
-BestSolutionSelection::BestSolutionSelection(map<string, void *> parameters)
+BestSolutionSelection::BestSolutionSelection(std::map<std::string, void *> parameters)
     : Selection(parameters)
 {
     comparator_ = nullptr;

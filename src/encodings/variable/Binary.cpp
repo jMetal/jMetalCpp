@@ -41,7 +41,7 @@ Binary::Binary(int numberOfBits)
 {
     numberOfBits_ = numberOfBits;
 
-    bits_ = snew vector<bool>(numberOfBits_, false) ;
+    bits_ = snew std::vector<bool>(numberOfBits_, false) ;
 
     for (int i = 0; i < numberOfBits_; i++)
     {
@@ -64,7 +64,7 @@ Binary::Binary(int numberOfBits)
 Binary::Binary(Binary * variable)
 {
     numberOfBits_ = variable->getNumberOfBits();
-    bits_ = snew vector<bool>(numberOfBits_, false) ;
+    bits_ = snew std::vector<bool>(numberOfBits_, false) ;
     for (int i = 0; i < numberOfBits_; i++)
     {
         (*bits_)[i] = (*variable->bits_)[i] ;
@@ -146,7 +146,7 @@ void Binary::setIth(int bit, bool value)
 
 /**
 * Obtain the hamming distance between two binary strings
-* @param other The binary string to compare
+* @param other The binary std::string to compare
 * @return The hamming distance
 */
 int Binary::hammingDistance(Binary * other)
@@ -166,13 +166,13 @@ int Binary::hammingDistance(Binary * other)
 
 
 /**
- * Returns a string representing the object.
+ * Returns a std::string representing the object.
  * @return the string.
  */
-string Binary::toString()
+std::string Binary::toString()
 {
-    vector<bool>::iterator it;
-    string str = "" ;
+    std::vector<bool>::iterator it;
+    std::string str = "" ;
     for(it = bits_->begin(); it != bits_->end(); it++)
     {
         if (*it == true)
@@ -189,7 +189,7 @@ string Binary::toString()
 int Binary::cardinality()
 {
     int counter = 0 ;
-    vector<bool>::iterator it;
+    std::vector<bool>::iterator it;
     for(it = bits_->begin(); it != bits_->end(); it++)
         if (*it == true)
             counter ++ ;

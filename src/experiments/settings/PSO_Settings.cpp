@@ -44,7 +44,7 @@ PSO_Settings::~PSO_Settings ()
 /**
  * Constructor
  */
-PSO_Settings::PSO_Settings(string problemName)
+PSO_Settings::PSO_Settings(std::string problemName)
 {
 
     problemName_ = problemName ;
@@ -70,7 +70,7 @@ Algorithm * PSO_Settings::configure()
     algorithm->setInputParameter("swarmSize", &swarmSize_);
     algorithm->setInputParameter("maxIterations", &maxIterations_);
 
-    map<string, void *> parameters;
+   std::map<std::string, void *> parameters;
 
     // Mutation operator
     double mutationProbability = mutationProbability_;
@@ -82,7 +82,7 @@ Algorithm * PSO_Settings::configure()
     // Add the operators to the algorithm
     algorithm->addOperator("mutation",mutation);
 
-    cout << "PSO algorithm initialized." << endl;
+    std::cout << "PSO algorithm initialized." << std::endl;
 
     return algorithm ;
 

@@ -42,7 +42,7 @@ private:
     MetricsUtil * utilities_;
 
 public:
-    QualityIndicator(Problem * problem, string paretoFrontFile);
+    QualityIndicator(Problem * problem, std::string paretoFrontFile);
     ~QualityIndicator();
     double getHypervolume(SolutionSet * solutionSet);
     double getTrueParetoFrontHypervolume();

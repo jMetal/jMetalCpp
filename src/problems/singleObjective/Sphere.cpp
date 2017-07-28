@@ -27,7 +27,7 @@
  * @param solutionType The solution type must "Real", "BinaryReal, and "ArrayReal".
  * @param numberOfVariables Number of variables of the problem
  */
-Sphere::Sphere(string solutionType, int numberOfVariables)
+Sphere::Sphere(std::string solutionType, int numberOfVariables)
 {
     numberOfVariables_   = numberOfVariables;
     numberOfObjectives_  = 1;
@@ -37,14 +37,14 @@ Sphere::Sphere(string solutionType, int numberOfVariables)
     lowerLimit_ = snew double[numberOfVariables_];
     if (lowerLimit_ == nullptr)
     {
-        cout << "Sphere::Sphere. Error reserving memory for storing the array of lower limits" << endl;
+        std::cout << "Sphere::Sphere. Error reserving memory for storing the array of lower limits" << std::endl;
         exit(-1) ;
     }
 
     upperLimit_ = snew double[numberOfVariables_];
     if (upperLimit_ == nullptr)
     {
-        cout << "Sphere::Sphere. Error reserving memory for storing the array of upper limits" << endl;
+        std::cout << "Sphere::Sphere. Error reserving memory for storing the array of upper limits" << std::endl;
         exit(-1) ;
     }
 
@@ -84,14 +84,14 @@ void Sphere::evaluate(Solution *solution)
     double * fx = snew double[numberOfObjectives_]; //(double *)malloc(sizeof(double) * numberOfObjectives_);
     if (fx == nullptr)
     {
-        cout << "Sphere::evaluate: Error reserving memory while evaluating the problem" << endl;
+        std::cout << "Sphere::evaluate: Error reserving memory while evaluating the problem" << std::endl;
         exit(-1);
     }
 
     double * x = snew double[numberOfVariables_];
     if (x == nullptr)
     {
-        cout << "Sphere::evaluate: Error reserving memory for the variable values array" << endl;
+        std::cout << "Sphere::evaluate: Error reserving memory for the variable values array" << std::endl;
         exit(-1);
     } // if
 

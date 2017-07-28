@@ -35,8 +35,8 @@ class ExperimentReport;
 class RBoxplot
 {
 public:
-    static void generateScripts(int rows, int cols, vector<string> problems,
-                                string prefix, bool notch, ExperimentReport * experiment);
+    static void generateScripts(int rows, int cols, std::vector<std::string> problems,
+                                std::string prefix, bool notch, ExperimentReport * experiment);
 };
 
 #endif /* __RBOXPLOT__ */

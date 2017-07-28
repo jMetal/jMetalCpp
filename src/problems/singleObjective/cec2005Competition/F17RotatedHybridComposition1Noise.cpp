@@ -24,11 +24,11 @@
 #include "JMetalHeader.h"
 
 // Fixed (class) parameters
-const string F17RotatedHybridComposition1Noise::FUNCTION_NAME = "Rotated Hybrid Composition Function 1 with Noise in Fitness";
+const std::string F17RotatedHybridComposition1Noise::FUNCTION_NAME = "Rotated Hybrid Composition Function 1 with Noise in Fitness";
 // TODO: Cambiar ruta
-const string F17RotatedHybridComposition1Noise::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/hybrid_func1_data.txt";
-const string F17RotatedHybridComposition1Noise::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/hybrid_func1_M_D";
-const string F17RotatedHybridComposition1Noise::DEFAULT_FILE_MX_SUFFIX = ".txt";
+const std::string F17RotatedHybridComposition1Noise::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/hybrid_func1_data.txt";
+const std::string F17RotatedHybridComposition1Noise::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/hybrid_func1_M_D";
+const std::string F17RotatedHybridComposition1Noise::DEFAULT_FILE_MX_SUFFIX = ".txt";
 
 const double F17RotatedHybridComposition1Noise::m_sigma[NUM_FUNC] =
 {
@@ -62,7 +62,7 @@ F17RotatedHybridComposition1Noise::F17RotatedHybridComposition1Noise(int dimensi
 /**
  * Constructor
  */
-F17RotatedHybridComposition1Noise::F17RotatedHybridComposition1Noise(int dimension, double bias, string file_data, string file_m)
+F17RotatedHybridComposition1Noise::F17RotatedHybridComposition1Noise(int dimension, double bias, std::string file_data, std::string file_m)
     : TestFunc(dimension, bias, FUNCTION_NAME)
 {
 
@@ -191,7 +191,7 @@ double F17RotatedHybridComposition1Noise::MyHCJob::basic_func(int func_no, doubl
         result = Benchmark::sphere(x, length);
         break;
     default:
-        cerr << "func_no is out of range." << endl;
+        cerr << "func_no is out of range." << std::endl;
         exit(-1);
     }
     return (result);
@@ -217,7 +217,7 @@ double F17RotatedHybridComposition1Noise::f(double * x)
 }
 
 
-string F17RotatedHybridComposition1Noise::getFileMxName(string prefix, int dimension, string suffix)
+std::string F17RotatedHybridComposition1Noise::getFileMxName(std::string prefix, int dimension, std::string suffix)
 {
     std::stringstream sstm;
     sstm << prefix << dimension << suffix;

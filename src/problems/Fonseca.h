@@ -36,7 +36,7 @@
 class Fonseca : public Problem
 {
 public:
-    Fonseca(string solutionType);
+    Fonseca(std::string solutionType);
     ~Fonseca();
     void evaluate(Solution *solution);
 };

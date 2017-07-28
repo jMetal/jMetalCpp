@@ -59,23 +59,23 @@ SolutionSet * gGA::execute()
     populationSize = *(int *) getInputParameter("populationSize");
     maxEvaluations = *(int *) getInputParameter("maxEvaluations");
     // TODO: indicators = (QualityIndicator) getInputParameter("indicators");
-//  cout << "populationSize = " << populationSize << endl;
-//  cout << "maxEvaluations = " << maxEvaluations << endl;
+//  std::cout << "populationSize = " << populationSize << std::endl;
+//  std::cout << "maxEvaluations = " << maxEvaluations << std::endl;
 
     //Initialize the variables
     population = snew SolutionSet(populationSize);
     evaluations = 0;
 
-//  cout << "Poblacion inicializada con maxsize = " << population->getMaxSize() << endl;
-//  cout << "Poblacion inicializada con size = " << population->size() << endl;
-//  cout << "Problema: " << problem_->getName() << endl;
+//  std::cout << "Poblacion inicializada con maxsize = " << population->getMaxSize() << std::endl;
+//  std::cout << "Poblacion inicializada con size = " << population->size() << std::endl;
+//  std::cout << "Problema: " << problem_->getName() << std::endl;
 
     //Read the operators
     mutationOperator = operators_["mutation"];
     crossoverOperator = operators_["crossover"];
     selectionOperator = operators_["selection"];
 
-//  cout << "Comienza la inicializacion de la poblacion con size " << populationSize << endl;
+//  std::cout << "Comienza la inicializacion de la poblacion con size " << populationSize << std::endl;
 
     // Create the initial solutionSet
     Solution * newSolution;
@@ -88,8 +88,8 @@ SolutionSet * gGA::execute()
         population->add(newSolution);
     } //for
 
-//  cout << "gGA: Poblacion inicializada con size = " << population->size() << endl;
-//  cout << "gGA: Maximo de evaluaciones: " << maxEvaluations << endl;
+//  std::cout << "gGA: Poblacion inicializada con size = " << population->size() << std::endl;
+//  std::cout << "gGA: Maximo de evaluaciones: " << maxEvaluations << std::endl;
 
     // Generations
     while (evaluations < maxEvaluations)

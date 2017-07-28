@@ -23,7 +23,7 @@
 
 #include <InvertedGenerationalDistance.h>
 
-using namespace std;
+
 
 /**
  * This method can be invoked from the command line. Three params are required:
@@ -36,7 +36,7 @@ int main(int argc, char ** argv)
     if (argc < 4)
     {
         cerr << "Error using delta. Type: \n InvertedGenerationalDistance " <<
-             "<SolutionFrontFile> <TrueFrontFile> <numberOfObjectives>" << endl;
+             "<SolutionFrontFile> <TrueFrontFile> <numberOfObjectives>" << std::endl;
         exit(-1);
     }
 
@@ -44,9 +44,9 @@ int main(int argc, char ** argv)
     InvertedGenerationalDistance * qualityIndicator =
         snew InvertedGenerationalDistance();
     //Read the front from the files
-    vector< vector<double> > solutionFront =
+    std::vector< std::vector<double> > solutionFront =
         qualityIndicator->utils_->readFront(argv[1]);
-    vector< vector<double> > trueFront =
+    std::vector< std::vector<double> > trueFront =
         qualityIndicator->utils_->readFront(argv[2]);
 
     //Obtain delta value
@@ -55,5 +55,5 @@ int main(int argc, char ** argv)
 
     delete qualityIndicator;
 
-    cout << value << endl;
+    std::cout << value << std::endl;
 } // main

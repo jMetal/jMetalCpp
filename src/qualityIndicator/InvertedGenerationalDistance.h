@@ -48,8 +48,8 @@ public:
 
     InvertedGenerationalDistance();
     ~InvertedGenerationalDistance();
-    double invertedGenerationalDistance(vector< vector<double> > front,
-                                        vector< vector<double> > trueParetoFront, int numberOfObjectives);
+    double invertedGenerationalDistance(std::vector< std::vector<double> > front,
+                                        std::vector< std::vector<double> > trueParetoFront, int numberOfObjectives);
 
 };
 

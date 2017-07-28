@@ -32,7 +32,7 @@
 class DTLZ1 : public Problem
 {
 public:
-    DTLZ1(string solutionType, int numberOfVariables = 7, int numberOfObjectives = 3);
+    DTLZ1(std::string solutionType, int numberOfVariables = 7, int numberOfObjectives = 3);
     void evaluate(Solution *solution);
 
     virtual ~DTLZ1();

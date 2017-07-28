@@ -32,7 +32,7 @@ const double PolynomialMutation::eta_m_ = ETA_M_DEFAULT_;
  * Constructor
  * Creates a new instance of the polynomial mutation operator
  */
-PolynomialMutation::PolynomialMutation(map<string, void *> parameters)
+PolynomialMutation::PolynomialMutation(std::map<std::string, void *> parameters)
     : Mutation(parameters)
 {
     // TODO: mutationProbability_ = nullptr;

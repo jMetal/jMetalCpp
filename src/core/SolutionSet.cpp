@@ -66,7 +66,7 @@ bool SolutionSet::add(Solution * solution)
 {
     if (solutionsList_.size() >= capacity_)
     {
-        cout << "Error in class SolutionSet the maximum capacity of the set has been reached" << endl;
+        std::cout << "Error in class SolutionSet the maximum capacity of the set has been reached" << std::endl;
         exit(-1);
     }
     solutionsList_.push_back(solution);
@@ -97,7 +97,7 @@ Solution * SolutionSet::get(int i)
 {
     if (i < 0 || i >= solutionsList_.size())
     {
-        cout << "Error in class SolutionSet trying to access to an element out of range" << endl;
+        std::cout << "Error in class SolutionSet trying to access to an element out of range" << std::endl;
         exit(-1);
     }
     return solutionsList_[i];
@@ -122,7 +122,7 @@ void SolutionSet::sort(Comparator * comparator)
 {
     if (comparator == nullptr)
     {
-        cout << "Error. No criterium for compare exist" << endl;
+        std::cout << "Error. No criterium for compare exist" << std::endl;
         exit(-1);
     } // if
     for (int i = 0; i < solutionsList_.size(); i++)
@@ -161,7 +161,7 @@ int SolutionSet::indexBest(Comparator *comparator)
     {
         candidateSolution = solutionsList_[i];
         flag = comparator->compare(bestKnown, candidateSolution);
-        //cout << "flag: " << flag << endl;
+        //std::cout << "flag: " << flag << std::endl;
         if (flag == 1)
         {
             index = i;
@@ -260,20 +260,20 @@ int SolutionSet::size()
  * objects into the set in a file.
  * @param path The output file name
  */
-void SolutionSet::printObjectivesToFile(string file)
+void SolutionSet::printObjectivesToFile(std::string file)
 {
     std::ofstream out(file.c_str());
-    cout.setf(ios::fixed);
+    std::cout.setf(ios::fixed);
     for (int i = 0; i < solutionsList_.size(); i++)
     {
         int nObj = solutionsList_[i]->getNumberOfObjectives();
         for (int obj = 0; obj < nObj; obj++)
         {
             out << solutionsList_[i]->getObjective(obj) << " ";
-            //cout << setprecision(15) << solutionsList_[i]->getObjective(obj) << " ";
+            //std::cout << setprecision(15) << solutionsList_[i]->getObjective(obj) << " ";
         }
-        out << endl;
-        //cout << endl;
+        out << std::endl;
+        //std::cout << std::endl;
     }
     out.close();
 } // printObjectivesToFile
@@ -286,12 +286,12 @@ void SolutionSet::printObjectivesToFile(string file)
  * @param append If the objectives will be appended in case a file
  * already exists
  */
-void SolutionSet::printObjectivesToFile(string file, bool append)
+void SolutionSet::printObjectivesToFile(std::string file, bool append)
 {
     if (append)
     {
         std::fstream out(file.c_str(), std::ios::out | std::ios::app);
-        cout.setf(ios::fixed);
+        std::cout.setf(ios::fixed);
         for (int i = 0; i < solutionsList_.size(); i++)
         {
             int nObj = solutionsList_[i]->getNumberOfObjectives();
@@ -299,7 +299,7 @@ void SolutionSet::printObjectivesToFile(string file, bool append)
             {
                 out << solutionsList_[i]->getObjective(obj) << " ";
             }
-            out << endl;
+            out << std::endl;
         }
         out.close();
     }
@@ -315,12 +315,12 @@ void SolutionSet::printObjectivesToFile(string file, bool append)
  * solutions objects into the set in a file.
  * @param path The output file name
  */
-void SolutionSet::printVariablesToFile(string file)
+void SolutionSet::printVariablesToFile(std::string file)
 {
     std::ofstream out(file.c_str());
     for (int i = 0; i < solutionsList_.size(); i++)
     {
-        out << solutionsList_[i]->toString() << endl ;
+        out << solutionsList_[i]->toString() << std::endl ;
     }
     out.close();
 } // printVariablesToFile
@@ -331,14 +331,14 @@ void SolutionSet::printVariablesToFile(string file)
  * solutions objects into the set in a file.
  * @param path The output file name
  */
-void SolutionSet::printVariablesToFile(string file, bool append)
+void SolutionSet::printVariablesToFile(std::string file, bool append)
 {
     if (append)
     {
         std::fstream out(file.c_str(), std::ios::out | std::ios::app);
         for (int i = 0; i < solutionsList_.size(); i++)
         {
-            out << solutionsList_[i]->toString() << endl ;
+            out << solutionsList_[i]->toString() << std::endl ;
         }
         out.close();
     }
@@ -366,7 +366,7 @@ void SolutionSet::remove(int i)
 {
     if (i < 0 || i >= solutionsList_.size())
     {
-        cout << "Error in class SolutionSet trying to access to an element out of range" << endl;
+        std::cout << "Error in class SolutionSet trying to access to an element out of range" << std::endl;
         exit(-1);
     }
     solutionsList_.erase(solutionsList_.begin() + i);
@@ -404,7 +404,7 @@ void SolutionSet::replace(int position, Solution *solution)
 {
     if (position < 0 || position >= solutionsList_.size())
     {
-        cout << "Error in class SolutionSet trying to access to an element out of range" << endl;
+        std::cout << "Error in class SolutionSet trying to access to an element out of range" << std::endl;
         exit(-1);
     }
     solutionsList_[position] = solution;
@@ -415,13 +415,13 @@ void SolutionSet::replace(int position, Solution *solution)
  * Copies the objectives of the solution set to a matrix
  * @return A matrix containing the objectives
  */
-vector <vector<double> > SolutionSet::writeObjectivesToMatrix()
+std::vector <std::vector<double> > SolutionSet::writeObjectivesToMatrix()
 {
-    vector <vector<double> > objectives;
+    std::vector <std::vector<double> > objectives;
     //objectives = snew double[size()][get(0).numberOfObjectives()];
     for (int i = 0; i < size(); i++)
     {
-        vector<double> list;
+        std::vector<double> list;
         for (int j = 0; j < get(0)->getNumberOfObjectives(); j++)
         {
             list.push_back(get(i)->getObjective(j));
@@ -436,6 +436,6 @@ void SolutionSet::printObjectives()
 {
     for (int i = 0; i < solutionsList_.size(); i++)
     {
-        cout << solutionsList_.at(i)->toString() << endl;
+        std::cout << solutionsList_.at(i)->toString() << std::endl;
     }
 }

@@ -22,46 +22,46 @@
 
 #include <RBoxplot.h>
 
-void RBoxplot::generateScripts(int rows, int cols, vector<string> problems, string prefix,
+void RBoxplot::generateScripts(int rows, int cols, std::vector<std::string> problems, std::string prefix,
                                bool notch, ExperimentReport * experiment)
 {
 
     // STEP 1. Creating R output directory
 
-    string rDirectory = "R";
+    std::string rDirectory = "R";
     rDirectory = experiment->experimentBaseDirectory_ + "/" +  rDirectory;
-    cout << "R    : " << rDirectory << endl;
+    std::cout << "R    : " << rDirectory << std::endl;
     if (FileUtils::existsPath(rDirectory.c_str()) == 0)
     {
         FileUtils::createDirectory(rDirectory);
-        cout << "Creating " << rDirectory << " directory" << endl;
+        std::cout << "Creating " << rDirectory << " directory" << std::endl;
     }
 
     for (int indicator = 0; indicator < experiment->indicatorList_.size(); indicator++)
     {
-        cout << "Indicator: " <<  experiment->indicatorList_[indicator] << endl;
-        string rFile =  rDirectory + "/" + prefix + "." +  experiment->indicatorList_[indicator] + ".Boxplot.R";
+        std::cout << "Indicator: " <<  experiment->indicatorList_[indicator] << std::endl;
+        std::string rFile =  rDirectory + "/" + prefix + "." +  experiment->indicatorList_[indicator] + ".Boxplot.R";
 
         std::ofstream out(rFile.c_str());
         out << "postscript(\"" << prefix << "." << experiment->indicatorList_[indicator] <<
             ".Boxplot.eps\", horizontal=FALSE, onefile=FALSE, height=8, width=12, pointsize=10)" <<
-            endl;
-        //out << "resultDirectory<-\"../data/" << experimentName_ << "\"" << endl;
-        out << "resultDirectory<-\"../data/" << "\"" << endl;
-        out << "qIndicator <- function(indicator, problem)" << endl;
-        out << "{" << endl;
+            std::endl;
+        //out << "resultDirectory<-\"../data/" << experimentName_ << "\"" << std::endl;
+        out << "resultDirectory<-\"../data/" << "\"" << std::endl;
+        out << "qIndicator <- function(indicator, problem)" << std::endl;
+        out << "{" << std::endl;
 
         for (int i = 0; i <  experiment->algorithmNameList_.size(); i++)
         {
             out << "file" << experiment->algorithmNameList_[i] << "<-paste(resultDirectory, \"" <<
-                experiment->algorithmNameList_[i] << "\", sep=\"/\")" << endl;
+                experiment->algorithmNameList_[i] << "\", sep=\"/\")" << std::endl;
             out << "file" <<  experiment->algorithmNameList_[i] << "<-paste(file" <<
-                experiment->algorithmNameList_[i] << ", " << "problem, sep=\"/\")" << endl;
+                experiment->algorithmNameList_[i] << ", " << "problem, sep=\"/\")" << std::endl;
             out << "file" <<  experiment->algorithmNameList_[i] << "<-paste(file" <<
-                experiment->algorithmNameList_[i] << ", " << "indicator, sep=\"/\")" << endl;
+                experiment->algorithmNameList_[i] << ", " << "indicator, sep=\"/\")" << std::endl;
             out << experiment->algorithmNameList_[i] << "<-scan(" << "file" <<
-                experiment->algorithmNameList_[i] << ")" << endl;
-            out << endl;
+                experiment->algorithmNameList_[i] << ")" << std::endl;
+            out << std::endl;
         } // for
 
         out << "algs<-c(";
@@ -70,7 +70,7 @@ void RBoxplot::generateScripts(int rows, int cols, vector<string> problems, stri
             out << "\"" << experiment->algorithmNameList_[i] << "\",";
         } // for
         out << "\"" << experiment->algorithmNameList_[ experiment->algorithmNameList_.size() - 1] <<
-            "\")" << endl;
+            "\")" << std::endl;
 
         out << "boxplot(";
         for (int i = 0; i <  experiment->algorithmNameList_.size(); i++)
@@ -79,24 +79,24 @@ void RBoxplot::generateScripts(int rows, int cols, vector<string> problems, stri
         } // for
         if (notch)
         {
-            out << "names=algs, notch = TRUE)" << endl;
+            out << "names=algs, notch = TRUE)" << std::endl;
         }
         else
         {
-            out << "names=algs, notch = FALSE)" << endl;
+            out << "names=algs, notch = FALSE)" << std::endl;
         }
-        out << "titulo <-paste(indicator, problem, sep=\":\")" << endl;
-        out << "title(main=titulo)" << endl;
+        out << "titulo <-paste(indicator, problem, sep=\":\")" << std::endl;
+        out << "title(main=titulo)" << std::endl;
 
-        out << "}" << endl;
+        out << "}" << std::endl;
 
-        out << "par(mfrow=c(" << rows << "," << cols << "))" << endl;
+        out << "par(mfrow=c(" << rows << "," << cols << "))" << std::endl;
 
-        out << "indicator<-\"" <<  experiment->indicatorList_[indicator] << "\"" << endl;
+        out << "indicator<-\"" <<  experiment->indicatorList_[indicator] << "\"" << std::endl;
 
         for (int i = 0; i < problems.size(); i++)
         {
-            out << "qIndicator(indicator, \"" << problems[i] << "\")" << endl;
+            out << "qIndicator(indicator, \"" << problems[i] << "\")" << std::endl;
         }
 
         out.close();

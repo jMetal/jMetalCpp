@@ -34,7 +34,7 @@ private:
     int maxEvaluations_        ;
     double crParameter_        ;
     double fParameter_         ;
-    string deVariantParameter_ ;
+    std::string deVariantParameter_ ;
 
     Algorithm * algorithm ;
     Operator  * crossover ; // Crossover operator
@@ -42,7 +42,7 @@ private:
 
 public:
     DE_Settings() ;
-    DE_Settings(string problemName) ;
+    DE_Settings(std::string problemName) ;
     ~DE_Settings() ;
 
     Algorithm * configure() ;

@@ -42,7 +42,7 @@ public:
     static const double ETA_M_DEFAULT_;
     static const double eta_m_;
 
-    PolynomialMutation(map<string, void *> parameters);
+    PolynomialMutation(std::map<std::string, void *> parameters);
     ~PolynomialMutation();
 
     void * execute(void *);

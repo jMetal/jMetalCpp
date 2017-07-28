@@ -35,7 +35,7 @@
  * Creates a new instance of the Binary tournament operator (Deb's
  * NSGA-II implementation version)
  */
-BinaryTournament2::BinaryTournament2(map<string, void *> parameters)
+BinaryTournament2::BinaryTournament2(std::map<std::string, void *> parameters)
     : Selection(parameters)
 {
     index_ = 0;
@@ -43,8 +43,8 @@ BinaryTournament2::BinaryTournament2(map<string, void *> parameters)
     dominance_ = snew DominanceComparator();
     if (dominance_ == nullptr)
     {
-        cout << "BinaryTournament::BinaryTournament: error creating comparator" ;
-        cout << endl ;
+        std::cout << "BinaryTournament::BinaryTournament: error creating comparator" ;
+        std::cout << std::endl ;
         exit(-1) ;
     }
 }

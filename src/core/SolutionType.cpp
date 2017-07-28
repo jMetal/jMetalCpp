@@ -52,7 +52,7 @@ Variable ** SolutionType::copyVariables(Variable **vars)
 
     if (variables == nullptr)
     {
-        cout << "Error grave: Impossible to reserve memory for allocating a copy of variables" << endl;
+        std::cout << "Error grave: Impossible to reserve memory for allocating a copy of variables" << std::endl;
         exit(-1);
     }
 

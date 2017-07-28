@@ -27,7 +27,7 @@
 #include <string>
 #include <iostream>
 
-using namespace std;
+
 
 /**
  * Stores the current operator parameters.
@@ -39,15 +39,15 @@ class Operator
 {
 
 protected:
-    map<string,void *> parameters_;
+   std::map<std::string,void *> parameters_;
 
 public:
     Operator ();
-    Operator (map<string, void*> parameters);
+    Operator (std::map<std::string, void*> parameters);
     virtual ~Operator() = 0;
     virtual void *execute(void *) = 0;
-    void setParameter(string name, void *value);
-    void *getParameter(string name);
+    void setParameter(std::string name, void *value);
+    void *getParameter(std::string name);
 
 }; // Operator
 

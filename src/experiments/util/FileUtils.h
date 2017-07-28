@@ -36,7 +36,7 @@
 //#include <dir.h>
 #endif
 
-using namespace std;
+
 
 class FileUtils
 {
@@ -44,7 +44,7 @@ class FileUtils
 public:
 
     static int existsPath(const char* path);
-    static int createDirectory(string path);
+    static int createDirectory(std::string path);
 
 }; //FileUtils
 

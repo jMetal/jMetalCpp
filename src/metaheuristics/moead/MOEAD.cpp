@@ -45,7 +45,7 @@ SolutionSet * MOEAD::execute()
     evaluations_ = 0;
     maxEvaluations = *(int *) getInputParameter("maxEvaluations");
     populationSize_ = *(int *) getInputParameter("populationSize");
-    dataDirectory_ = * (string *) getInputParameter("dataDirectory");
+    dataDirectory_ = * (std::string *) getInputParameter("dataDirectory");
 
     population_ = snew SolutionSet(populationSize_);
     //indArray_ = new Solution*[problem_->getNumberOfObjectives()];
@@ -71,7 +71,7 @@ SolutionSet * MOEAD::execute()
     // STEP 1.1. Compute euclidean distances between weight vectors and find T
     initUniformWeight();
     //for (int i = 0; i < 300; i++)
-    // 	cout << lambda_[i][0] << " " << lambda_[i][1] << endl ;
+    // 	std::cout << lambda_[i][0] << " " << lambda_[i][1] << std::endl ;
 
     initNeighborhood();
 
@@ -102,7 +102,7 @@ SolutionSet * MOEAD::execute()
             {
                 type = 2;   // whole population
             }
-            vector<int> p;
+            std::vector<int> p;
             matingSelection(p, n, 2, type);
 
             // STEP 2.2. Reproduction
@@ -170,22 +170,22 @@ void MOEAD::initUniformWeight()
         ostringstream os;
         os << dataDirectory_ + "/" << "W" << problem_->getNumberOfObjectives() << "D_"
            << populationSize_ << ".dat";
-        string dataFileName;
+        std::string dataFileName;
         dataFileName = os.str();
 
         // Open the file
         std::ifstream in(dataFileName.c_str());
         if( !in )
         {
-            cout << "initUniformWeight: failed when reading from file: : " <<
-                 dataFileName << endl;
+            std::cout << "initUniformWeight: failed when reading from file: : " <<
+                 dataFileName << std::endl;
             exit(-1);
         } // if
 
         //int numberOfObjectives = 0;
         int i = 0;
         int j = 0;
-        string aux;
+        std::string aux;
         while (getline(in, aux))
         {
             istringstream iss(aux);
@@ -195,13 +195,13 @@ void MOEAD::initUniformWeight()
             lambda_[i] = snew double[problem_->getNumberOfObjectives()];
             while (iss)
             {
-                string token;
+                std::string token;
                 iss >> token;
                 if (token.compare("")!=0)
                 {
                     double value = atof(token.c_str());
                     lambda_[i][j] = value;
-                    //cout << "lambda[" << i << "," << j << "] = " << value << endl;
+                    //std::cout << "lambda[" << i << "," << j << "] = " << value << std::endl;
                     j++;
                 } // if
             } // while
@@ -229,8 +229,8 @@ void MOEAD::initNeighborhood()
                                           problem_->getNumberOfObjectives());
             //x[j] = dist_vector(population[i].namda,population[j].namda);
             idx[j] = j;
-            // cout << "x[" << j << "]: " << x[j] << ". idx[" << j << "]: " <<
-            //    idx[j] << endl ;
+            // std::cout << "x[" << j << "]: " << x[j] << ". idx[" << j << "]: " <<
+            //    idx[j] << std::endl ;
         } // for
 
         // find 'niche' nearest neighboring subproblems
@@ -241,7 +241,7 @@ void MOEAD::initNeighborhood()
         for (int k = 0; k < T_; k++)
         {
             neighborhood_[i][k] = idx[k];
-            //cout << "neg[ << i << "," << k << "]: " << neighborhood_[i][k] << endl;
+            //std::cout << "neg[ << i << "," << k << "]: " << neighborhood_[i][k] << std::endl;
         }
     } // for
 
@@ -290,7 +290,7 @@ void MOEAD::initIdealPoint()
 /**
  * matingSelection
  */
-void MOEAD::matingSelection(vector<int> &list, int cid, int size, int type)
+void MOEAD::matingSelection(std::vector<int> &list, int cid, int size, int type)
 {
 
     // list : the set of the indexes of selected mating parents
@@ -457,7 +457,7 @@ double MOEAD::fitnessFunction(Solution * individual, double * lambda)
     } // if
     else
     {
-        cout << "MOEAD.fitnessFunction: unknown type " << functionType_ << endl;
+        std::cout << "MOEAD.fitnessFunction: unknown type " << functionType_ << std::endl;
         exit (EXIT_FAILURE);
     }
     return fitness;

@@ -35,7 +35,7 @@ class ExperimentReport;
 class RWilcoxon
 {
 public:
-    static void generateScripts(vector<string> problems, string prefix,
+    static void generateScripts(std::vector<std::string> problems, std::string prefix,
                                 ExperimentReport * experiment);
 
 }; // RWilcoxon

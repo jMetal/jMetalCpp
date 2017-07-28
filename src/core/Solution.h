@@ -33,7 +33,7 @@
 #include <SolutionType.h>
 
 
-//using namespace std;
+//
 //
 class Problem ;
 class Variable ;
@@ -85,7 +85,7 @@ public:
     double getObjective(int i);
     int getNumberOfObjectives();
     int getNumberOfVariables();
-    string toString();
+    std::string toString();
     Variable ** getDecisionVariables();
     void setDecisionVariables(Variable ** variables);
     bool isMarked();

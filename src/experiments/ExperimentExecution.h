@@ -34,23 +34,23 @@
 #include <Experiment.h>
 #include <ExperimentIndividual.h>
 
-using namespace std;
+
 
 class ExperimentExecution : public Experiment
 {
 
 private:
 
-    map<string, void *> map_; // Map used to send experiment parameters to threads
+   std::map<std::string, void *> map_; // Map used to send experiment parameters to threads
 
 public:
 
-    string outputParetoFrontFile_; // Name of the file containing the output
+    std::string outputParetoFrontFile_; // Name of the file containing the output
     // Pareto front
-    string outputParetoSetFile_; // Name of the file containing the output Pareto
+    std::string outputParetoSetFile_; // Name of the file containing the output Pareto
     // set
 
-    vector<ExperimentIndividual*> experimentIndividualList_;
+    std::vector<ExperimentIndividual*> experimentIndividualList_;
     Settings ** algorithmSettingsList_;
     int experimentIndividualListIndex_;
     int experimentIndividualListSize_;
@@ -61,10 +61,10 @@ public:
     void runExperiment();
 
     // TODO: Check different algorithmSettings configurations
-    // virtual void algorithmSettings(string problemName, int problemId,
+    // virtual void algorithmSettings(std::string problemName, int problemId,
     //      Algorithm ** algorithm) = 0;
-    // virtual Algorithm * algorithmSettings(string problemName) = 0;
-    virtual Algorithm * algorithmSettings(string problemName, int algorithmId,
+    // virtual Algorithm * algorithmSettings(std::string problemName) = 0;
+    virtual Algorithm * algorithmSettings(std::string problemName, int algorithmId,
                                           int experimentIndividiualId) = 0;
 
 }; // ExperimentExecution

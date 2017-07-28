@@ -35,7 +35,7 @@ class Rastrigin : public Problem
 {
 
 public:
-    Rastrigin(string solutionType, int numberOfVariables = 10);
+    Rastrigin(std::string solutionType, int numberOfVariables = 10);
     ~Rastrigin();
     void evaluate(Solution *solution);
 

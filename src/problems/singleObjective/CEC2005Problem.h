@@ -44,7 +44,7 @@ private:
     static const double PI;
 
 public:
-    CEC2005Problem(string solutionType, int problemID, int numberOfVariables = 10);
+    CEC2005Problem(std::string solutionType, int problemID, int numberOfVariables = 10);
     ~CEC2005Problem();
     void evaluate(Solution *solution);
 };

@@ -24,11 +24,11 @@
 #include "JMetalHeader.h"
 
 // Fixed (class) parameters
-const string F03ShiftedRotatedHighCondElliptic::FUNCTION_NAME = "Shifted Rotated High Conditioned Elliptic Function";
+const std::string F03ShiftedRotatedHighCondElliptic::FUNCTION_NAME = "Shifted Rotated High Conditioned Elliptic Function";
 // TODO: Cambiar ruta
-const string F03ShiftedRotatedHighCondElliptic::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/high_cond_elliptic_rot_data.txt";
-const string F03ShiftedRotatedHighCondElliptic::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/Elliptic_M_D";
-const string F03ShiftedRotatedHighCondElliptic::DEFAULT_FILE_MX_SUFFIX = ".txt";
+const std::string F03ShiftedRotatedHighCondElliptic::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/high_cond_elliptic_rot_data.txt";
+const std::string F03ShiftedRotatedHighCondElliptic::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/Elliptic_M_D";
+const std::string F03ShiftedRotatedHighCondElliptic::DEFAULT_FILE_MX_SUFFIX = ".txt";
 
 
 /**
@@ -43,7 +43,7 @@ F03ShiftedRotatedHighCondElliptic::F03ShiftedRotatedHighCondElliptic(int dimensi
 /**
  * Constructor
  */
-F03ShiftedRotatedHighCondElliptic::F03ShiftedRotatedHighCondElliptic(int dimension, double bias, string file_data, string file_m)
+F03ShiftedRotatedHighCondElliptic::F03ShiftedRotatedHighCondElliptic(int dimension, double bias, std::string file_data, std::string file_m)
     : TestFunc(dimension, bias, FUNCTION_NAME)
 {
 
@@ -106,7 +106,7 @@ double F03ShiftedRotatedHighCondElliptic::f(double * x)
 }
 
 
-string F03ShiftedRotatedHighCondElliptic::getFileMxName(string prefix, int dimension, string suffix)
+std::string F03ShiftedRotatedHighCondElliptic::getFileMxName(std::string prefix, int dimension, std::string suffix)
 {
     std::stringstream sstm;
     sstm << prefix << dimension << suffix;

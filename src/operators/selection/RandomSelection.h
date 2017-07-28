@@ -37,7 +37,7 @@ private:
     Comparator * comparator_;
 
 public:
-    RandomSelection(map<string, void *> parameters);
+    RandomSelection(std::map<std::string, void *> parameters);
     ~RandomSelection();
     void *execute(void *);
 

@@ -45,7 +45,7 @@ GDE3_Settings::~GDE3_Settings ()
 /**
  * Constructor
  */
-GDE3_Settings::GDE3_Settings(string problemName)
+GDE3_Settings::GDE3_Settings(std::string problemName)
 {
 
     problemName_ = problemName ;
@@ -72,7 +72,7 @@ Algorithm * GDE3_Settings::configure()
     algorithm->setInputParameter("maxIterations",&maxIterations_);
 
     // Mutation and Crossover for Real codification
-    map<string, void *> parameters;
+   std::map<std::string, void *> parameters;
 
     double CR = CR_;
     double F = F_;
@@ -88,7 +88,7 @@ Algorithm * GDE3_Settings::configure()
     algorithm->addOperator("crossover",crossover);
     algorithm->addOperator("selection",selection);
 
-    cout << "GDE3 algorithm initialized." << endl;
+    std::cout << "GDE3 algorithm initialized." << std::endl;
 
     return algorithm ;
 

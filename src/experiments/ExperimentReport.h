@@ -46,7 +46,7 @@
 #include <MetricsUtil.h>
 #include <Experiment.h>
 
-using namespace std;
+
 
 /**
  * Abstract class generating jMetal experiments reports
@@ -58,23 +58,23 @@ class ExperimentReport : public Experiment
 private:
 
     void generateReferenceFronts();
-    void calculateStatistics(vector<double> vector_, map<string, double> * values);
-    void printHeaderLatexCommands(string fileName);
-    void printEndLatexCommands(string fileName);
-    void printMeanStdDev(string fileName, int indicator, double*** mean,
+    void calculateStatistics(std::vector<double> vector_,std::map<std::string, double> * values);
+    void printHeaderLatexCommands(std::string fileName);
+    void printEndLatexCommands(std::string fileName);
+    void printMeanStdDev(std::string fileName, int indicator, double*** mean,
                          double*** stdDev);
-    void printMedianIQR(string fileName, int indicator, double*** median,
+    void printMedianIQR(std::string fileName, int indicator, double*** median,
                         double*** IQR);
 
 public:
 
-    vector<string> paretoFrontFile_; // List of the files containing the pareto
+    std::vector<std::string> paretoFrontFile_; // List of the files containing the pareto
     // fronts corresponding to the problems in
     // problemList_
-    vector<string> indicatorList_; // List of the quality indicators to be applied
-    string latexDirectory_; // Directory to store the latex files
-    string paretoFrontDirectory_; // Directory containing the Pareto front files
-    map<string, bool> indicatorMinimize_; // To indicate whether an indicator
+    std::vector<std::string> indicatorList_; // List of the quality indicators to be applied
+    std::string latexDirectory_; // Directory to store the latex files
+    std::string paretoFrontDirectory_; // Directory containing the Pareto front files
+   std::map<std::string, bool> indicatorMinimize_; // To indicate whether an indicator
     // is to be minimized. Hard-coded
     // in the constructor
 
@@ -82,9 +82,9 @@ public:
 
     void generateQualityIndicators();
     void generateLatexTables();
-    void generateRBoxplotScripts(int rows, int cols, vector<string> problems,
-                                 string prefix, bool notch, ExperimentReport * experiment);
-    void generateRWilcoxonScripts(vector<string> problems, string prefix,
+    void generateRBoxplotScripts(int rows, int cols, std::vector<std::string> problems,
+                                 std::string prefix, bool notch, ExperimentReport * experiment);
+    void generateRWilcoxonScripts(std::vector<std::string> problems, std::string prefix,
                                   ExperimentReport * experiment);
 
 }; // ExperimentReport

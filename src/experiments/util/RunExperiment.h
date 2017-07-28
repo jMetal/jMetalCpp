@@ -36,7 +36,7 @@
 #include <Problem.h>
 #include <SolutionSet.h>
 
-using namespace std;
+
 
 class ExperimentExecution;
 
@@ -47,11 +47,11 @@ public:
 
     ExperimentExecution * experiment_;
     int id_;
-    map<string, void *> map_;
+   std::map<std::string, void *> map_;
     int numberOfThreads_;
     int numberOfProblems_;
 
-    RunExperiment(ExperimentExecution * experiment, map<string, void *> map, int id,
+    RunExperiment(ExperimentExecution * experiment,std::map<std::string, void *> map, int id,
                   int numberOfThreads, int numberOfProblems, int threadIndex,
                   mutex * mtx);
     void run();
@@ -62,17 +62,17 @@ private:
 
     mutex * mutex_;
 
-    string experimentName_;
-    vector<string> algorithmNameList_; // List of the names of the algorithms to
+    std::string experimentName_;
+    std::vector<std::string> algorithmNameList_; // List of the names of the algorithms to
     // be executed
-    vector<string> problemList_; // List of problems to be solved
-    string experimentBaseDirectory_; // Directory to store the results
-    string latexDirectory_; // Directory to store the latex files
-    string rDirectory_; // Directory to store the generated R scripts
-    string paretoFrontDirectory_; // Directory containing the Pareto front files
-    string outputParetoFrontFile_; // Name of the file containing the output
+    std::vector<std::string> problemList_; // List of problems to be solved
+    std::string experimentBaseDirectory_; // Directory to store the results
+    std::string latexDirectory_; // Directory to store the latex files
+    std::string rDirectory_; // Directory to store the generated R scripts
+    std::string paretoFrontDirectory_; // Directory containing the Pareto front files
+    std::string outputParetoFrontFile_; // Name of the file containing the output
     // Pareto front
-    string outputParetoSetFile_; // Name of the file containing the output
+    std::string outputParetoSetFile_; // Name of the file containing the output
     // Pareto set
     int independentRuns_; // Number of independent runs per algorithm
     // TODO: Settings[] algorithmSettings_; // Parameter settings of each algorithm

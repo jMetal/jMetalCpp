@@ -24,11 +24,11 @@
 #include "JMetalHeader.h"
 
 // Fixed (class) parameters
-const string F11ShiftedRotatedWeierstrass::FUNCTION_NAME = "Shifted Rotated Weierstrass Function";
+const std::string F11ShiftedRotatedWeierstrass::FUNCTION_NAME = "Shifted Rotated Weierstrass Function";
 // TODO: Cambiar ruta
-const string F11ShiftedRotatedWeierstrass::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/weierstrass_data.txt";
-const string F11ShiftedRotatedWeierstrass::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/weierstrass_M_D";
-const string F11ShiftedRotatedWeierstrass::DEFAULT_FILE_MX_SUFFIX = ".txt";
+const std::string F11ShiftedRotatedWeierstrass::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/weierstrass_data.txt";
+const std::string F11ShiftedRotatedWeierstrass::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/weierstrass_M_D";
+const std::string F11ShiftedRotatedWeierstrass::DEFAULT_FILE_MX_SUFFIX = ".txt";
 
 const int F11ShiftedRotatedWeierstrass::Kmax = 20;
 const double F11ShiftedRotatedWeierstrass::a = 0.5;
@@ -47,7 +47,7 @@ F11ShiftedRotatedWeierstrass::F11ShiftedRotatedWeierstrass(int dimension, double
 /**
  * Constructor
  */
-F11ShiftedRotatedWeierstrass::F11ShiftedRotatedWeierstrass(int dimension, double bias, string file_data, string file_m)
+F11ShiftedRotatedWeierstrass::F11ShiftedRotatedWeierstrass(int dimension, double bias, std::string file_data, std::string file_m)
     : TestFunc(dimension, bias, FUNCTION_NAME)
 {
 
@@ -103,7 +103,7 @@ double F11ShiftedRotatedWeierstrass::f(double * x)
 }
 
 
-string F11ShiftedRotatedWeierstrass::getFileMxName(string prefix, int dimension, string suffix)
+std::string F11ShiftedRotatedWeierstrass::getFileMxName(std::string prefix, int dimension, std::string suffix)
 {
     std::stringstream sstm;
     sstm << prefix << dimension << suffix;

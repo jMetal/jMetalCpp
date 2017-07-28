@@ -24,11 +24,11 @@
 #include "JMetalHeader.h"
 
 // Fixed (class) parameters
-const string F19RotatedHybridComposition2NarrowBasinGlobalOpt::FUNCTION_NAME = "Rotated Hybrid Composition Function 2 with narrow basin global optimum";
+const std::string F19RotatedHybridComposition2NarrowBasinGlobalOpt::FUNCTION_NAME = "Rotated Hybrid Composition Function 2 with narrow basin global optimum";
 // TODO: Cambiar ruta
-const string F19RotatedHybridComposition2NarrowBasinGlobalOpt::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/hybrid_func2_data.txt";
-const string F19RotatedHybridComposition2NarrowBasinGlobalOpt::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/hybrid_func2_M_D";
-const string F19RotatedHybridComposition2NarrowBasinGlobalOpt::DEFAULT_FILE_MX_SUFFIX = ".txt";
+const std::string F19RotatedHybridComposition2NarrowBasinGlobalOpt::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/hybrid_func2_data.txt";
+const std::string F19RotatedHybridComposition2NarrowBasinGlobalOpt::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/hybrid_func2_M_D";
+const std::string F19RotatedHybridComposition2NarrowBasinGlobalOpt::DEFAULT_FILE_MX_SUFFIX = ".txt";
 
 const double F19RotatedHybridComposition2NarrowBasinGlobalOpt::m_sigma[NUM_FUNC] =
 {
@@ -61,7 +61,7 @@ F19RotatedHybridComposition2NarrowBasinGlobalOpt::F19RotatedHybridComposition2Na
 /**
  * Constructor
  */
-F19RotatedHybridComposition2NarrowBasinGlobalOpt::F19RotatedHybridComposition2NarrowBasinGlobalOpt(int dimension, double bias, string file_data, string file_m)
+F19RotatedHybridComposition2NarrowBasinGlobalOpt::F19RotatedHybridComposition2NarrowBasinGlobalOpt(int dimension, double bias, std::string file_data, std::string file_m)
     : TestFunc(dimension, bias, FUNCTION_NAME)
 {
 
@@ -194,7 +194,7 @@ double F19RotatedHybridComposition2NarrowBasinGlobalOpt::MyHCJob::basic_func(int
         result = Benchmark::griewank(x, length);
         break;
     default:
-        cerr << "func_no is out of range." << endl;
+        cerr << "func_no is out of range." << std::endl;
         exit(-1);
     }
     return (result);
@@ -216,7 +216,7 @@ double F19RotatedHybridComposition2NarrowBasinGlobalOpt::f(double * x)
 }
 
 
-string F19RotatedHybridComposition2NarrowBasinGlobalOpt::getFileMxName(string prefix, int dimension, string suffix)
+std::string F19RotatedHybridComposition2NarrowBasinGlobalOpt::getFileMxName(std::string prefix, int dimension, std::string suffix)
 {
     std::stringstream sstm;
     sstm << prefix << dimension << suffix;

@@ -71,7 +71,7 @@ private:
      */
     int nr_;
     Solution ** indArray_;
-    string functionType_;
+    std::string functionType_;
     int evaluations_;
     /**
      * Operators
@@ -79,13 +79,13 @@ private:
     Operator * crossover_;
     Operator * mutation_;
 
-    string dataDirectory_;
+    std::string dataDirectory_;
 
     void initUniformWeight();
     void initNeighborhood();
     void initPopulation();
     void initIdealPoint();
-    void matingSelection(vector<int> &list, int cid, int size, int type);
+    void matingSelection(std::vector<int> &list, int cid, int size, int type);
     void updateReference(Solution * individual);
     void updateProblem(Solution * indiv, int id, int type);
     double fitnessFunction(Solution * individual, double * lambda);

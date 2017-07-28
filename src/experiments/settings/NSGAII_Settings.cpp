@@ -42,7 +42,7 @@ NSGAII_Settings::~NSGAII_Settings ()
 /**
  * Constructor
  */
-NSGAII_Settings::NSGAII_Settings(string problemName)
+NSGAII_Settings::NSGAII_Settings(std::string problemName)
 {
     problemName_ = problemName ;
 
@@ -68,7 +68,7 @@ Algorithm * NSGAII_Settings::configure()
     algorithm->setInputParameter("maxEvaluations",&maxEvaluations_);
 
     // Mutation and Crossover for Real codification
-    map<string, void *> parameters;
+   std::map<std::string, void *> parameters;
 
     double crossoverProbability = crossoverProbability_;
     double crossoverDistributionIndex = crossoverDistributionIndex_ ;
@@ -92,7 +92,7 @@ Algorithm * NSGAII_Settings::configure()
     algorithm->addOperator("mutation",mutation);
     algorithm->addOperator("selection",selection);
 
-    cout << "NGSAII algorithm initialized." << endl;
+    std::cout << "NGSAII algorithm initialized." << std::endl;
 
     return algorithm ;
 } // configure

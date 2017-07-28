@@ -30,8 +30,8 @@
 #include <stdlib.h>
 
 /**
- * This class implements a generic binary string variable.It can be used as
- * a base class other binary string based classes (e.g., binary coded integer
+ * This class implements a generic binary std::string variable.It can be used as
+ * a base class other binary std::string based classes (e.g., binary coded integer
  * or real variables).
  */
 class Binary : public Variable
@@ -51,7 +51,7 @@ public:
     void setIth(int bit, bool value);
     void flip(int bit) ;
     int hammingDistance(Binary * other);
-    string toString();
+    std::string toString();
     int cardinality() ;
 
     double getValue();
@@ -60,7 +60,7 @@ public:
     double getUpperBound();
 
 protected:
-    vector<bool> * bits_;
+    std::vector<bool> * bits_;
     int numberOfBits_;
 };
 

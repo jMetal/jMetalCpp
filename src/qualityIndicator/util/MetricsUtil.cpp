@@ -22,7 +22,7 @@
 #include <MetricsUtil.h>
 
 
-using namespace std;
+
 
 
 /**
@@ -30,33 +30,33 @@ using namespace std;
  * @param path The path to the file that contains the pareto front
  * @return double [][] whit the pareto front
  **/
-vector< vector <double> > MetricsUtil::readFront(string path)
+std::vector< std::vector <double> > MetricsUtil::readFront(std::string path)
 {
 
-    vector< vector <double> > front;
+    std::vector< std::vector <double> > front;
 
     std::ifstream in(path.c_str());
     if( !in )
     {
-        cout << "Error trying to read Pareto Front file: " << path << endl;
+        std::cout << "Error trying to read Pareto Front file: " << path << std::endl;
         exit(-1);
     }
 
-    string line;
+    std::string line;
     while( getline(in, line ) )
     {
 
-        vector<double> list;
+        std::vector<double> list;
 
         istringstream iss(line);
 
         while (iss)
         {
-            string token;
+            std::string token;
             iss >> token;
             if (token.compare("")!=0)
             {
-                //cout << "Substring: " << token << endl;
+                //std::cout << "Substring: " << token << std::endl;
                 list.push_back(atof(token.c_str()));
             }
         }
@@ -75,14 +75,14 @@ vector< vector <double> > MetricsUtil::readFront(string path)
  *  front
  *  @param front The pareto front
  *  @param noObjectives Number of objectives in the pareto front
- *  @return vector<double> A vector of noOjectives values with the maximum values
+ *  @return std::vector<double> A vector of noOjectives values with the maximum values
  *  for each objective
  **/
-vector<double> MetricsUtil::getMaximumValues(vector< vector<double> > front,
+std::vector<double> MetricsUtil::getMaximumValues(std::vector< std::vector<double> > front,
         int noObjectives)
 {
 
-    vector<double> maximumValue;
+    std::vector<double> maximumValue;
 
     for (int i = 0; i < noObjectives; i++)
     {
@@ -109,14 +109,14 @@ vector<double> MetricsUtil::getMaximumValues(vector< vector<double> > front,
  *  front
  *  @param front The pareto front
  *  @param noObjectives Number of objectives in the pareto front
- *  @return vector<double> A vector of noOjectives values with the minimum values
+ *  @return std::vector<double> A vector of noOjectives values with the minimum values
  *  for each objective
  **/
-vector<double> MetricsUtil::getMinimumValues(vector< vector<double> > front,
+std::vector<double> MetricsUtil::getMinimumValues(std::vector< std::vector<double> > front,
         int noObjectives)
 {
 
-    vector<double> minimumValue;
+    std::vector<double> minimumValue;
 
     for (int i = 0; i < noObjectives; i++)
     {
@@ -146,7 +146,7 @@ vector<double> MetricsUtil::getMinimumValues(vector< vector<double> > front,
  *  @param b A point
  *  @return The euclidean distance between the points
  **/
-double MetricsUtil::distance(vector<double> a, vector<double> b)
+double MetricsUtil::distance(std::vector<double> a, std::vector<double> b)
 {
 
     double distance = 0.0;
@@ -162,14 +162,14 @@ double MetricsUtil::distance(vector<double> a, vector<double> b)
 
 /**
  * Gets the distance between a point and the nearest one in
- * a given front (the front is given as <code>vector< vector<double> ></code>)
+ * a given front (the front is given as <code>std::vector< std::vector<double> ></code>)
  * @param point The point
  * @param front The front that contains the other points to calculate the
  * distances
  * @return The minimum distance between the point and the front
  **/
-double MetricsUtil::distanceToClosedPoint(vector<double> point,
-        vector< vector<double> > front)
+double MetricsUtil::distanceToClosedPoint(std::vector<double> point,
+        std::vector< std::vector<double> > front)
 {
 
     double minDistance = distance(point,front[0]);
@@ -197,8 +197,8 @@ double MetricsUtil::distanceToClosedPoint(vector<double> point,
  * @return The minimun distances greater than zero between the point and
  * the front
  */
-double MetricsUtil::distanceToNearestPoint(vector<double> point,
-        vector< vector<double> > front)
+double MetricsUtil::distanceToNearestPoint(std::vector<double> point,
+        std::vector< std::vector<double> > front)
 {
 
     double minDistance = std::numeric_limits<double>::max();
@@ -226,15 +226,15 @@ double MetricsUtil::distanceToNearestPoint(vector<double> point,
  * @param minimumValue The minimum values allowed
  * @return the normalized pareto front
  **/
-vector< vector<double> > MetricsUtil::getNormalizedFront(vector< vector<double> > front,
-        vector<double> maximumValue, vector<double> minimumValue)
+std::vector< std::vector<double> > MetricsUtil::getNormalizedFront(std::vector< std::vector<double> > front,
+        std::vector<double> maximumValue, std::vector<double> minimumValue)
 {
 
-    vector< vector<double> > normalizedFront;
+    std::vector< std::vector<double> > normalizedFront;
 
     for (int i = 0; i < front.size(); i++)
     {
-        vector<double> list;
+        std::vector<double> list;
         for (int j = 0; j < front[i].size(); j++)
         {
             //normalizedFront[i][j] = (front[i][j] - minimumValue[j]) /
@@ -255,14 +255,14 @@ vector< vector<double> > MetricsUtil::getNormalizedFront(vector< vector<double> 
  * @param front The pareto front to inverse
  * @return The inverted pareto front
  **/
-vector< vector<double> > MetricsUtil::invertedFront(vector< vector<double> > front)
+std::vector< std::vector<double> > MetricsUtil::invertedFront(std::vector< std::vector<double> > front)
 {
 
-    vector< vector<double> > invertedFront;
+    std::vector< std::vector<double> > invertedFront;
 
     for (int i = 0; i < front.size(); i++)
     {
-        vector<double> list;
+        std::vector<double> list;
         for (int j = 0; j < front[i].size(); j++)
         {
             if (front[i][j] <= 1.0 && front[i][j]>= 0.0)
@@ -291,32 +291,32 @@ vector< vector<double> > MetricsUtil::invertedFront(vector< vector<double> > fro
  * @param path The path of the file containing the data
  * @return A solution set
  */
-SolutionSet * MetricsUtil::readNonDominatedSolutionSet(string path)
+SolutionSet * MetricsUtil::readNonDominatedSolutionSet(std::string path)
 {
 
     std::ifstream in(path.c_str());
     if( !in )
     {
-        cout << "Error trying to read non dominated solutions file: "
-             << path << endl;
+        std::cout << "Error trying to read non dominated solutions file: "
+             << path << std::endl;
         exit(-1);
     } // if
 
     NonDominatedSolutionList * solutionSet = snew NonDominatedSolutionList();
-    string line;
+    std::string line;
 
     while( getline(in, line ) )
     {
 
-        vector<double> list;
+        std::vector<double> list;
         istringstream iss(line);
         while (iss)
         {
-            string token;
+            std::string token;
             iss >> token;
             if (token.compare("")!=0)
             {
-                //cout << "Substring: " << token << endl;
+                //std::cout << "Substring: " << token << std::endl;
                 list.push_back(atof(token.c_str()));
             } // if
         } // while
@@ -342,31 +342,31 @@ SolutionSet * MetricsUtil::readNonDominatedSolutionSet(string path)
  * @param path The path of the file containing the data
  * @return A solution set
  */
-void MetricsUtil::readNonDominatedSolutionSet(string path, NonDominatedSolutionList * solutionSet)
+void MetricsUtil::readNonDominatedSolutionSet(std::string path, NonDominatedSolutionList * solutionSet)
 {
 
     std::ifstream in(path.c_str());
     if( !in )
     {
-        cout << "Error trying to read non dominated solutions file: "
-             << path << endl;
+        std::cout << "Error trying to read non dominated solutions file: "
+             << path << std::endl;
         exit(-1);
     } // if
 
-    string line;
+    std::string line;
 
     while( getline(in, line ) )
     {
 
-        vector<double> list;
+        std::vector<double> list;
         istringstream iss(line);
         while (iss)
         {
-            string token;
+            std::string token;
             iss >> token;
             if (token.compare("")!=0)
             {
-                //cout << "Substring: " << token << endl;
+                //std::cout << "Substring: " << token << std::endl;
                 list.push_back(atof(token.c_str()));
             } // if
         } // while

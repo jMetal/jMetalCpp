@@ -22,8 +22,8 @@
 #include <Benchmark.h>
 
 //TODO: Cambiar ruta
-//const string Benchmark::DEFAULT_FILE_BIAS = Configuration.cec2005SupportDataDirectory + "/fbias_data.txt";
-const string Benchmark::DEFAULT_FILE_BIAS = "../../data/cec2005CompetitionResources/supportData/fbias_data.txt";
+//const std::string Benchmark::DEFAULT_FILE_BIAS = Configuration.cec2005SupportDataDirectory + "/fbias_data.txt";
+const std::string Benchmark::DEFAULT_FILE_BIAS = "../../data/cec2005CompetitionResources/supportData/fbias_data.txt";
 
 
 const int Benchmark::NUM_TEST_FUNC = 25;
@@ -42,7 +42,7 @@ Benchmark::Benchmark() : Benchmark(DEFAULT_FILE_BIAS) {}
 /*
  * Constructor
  */
-Benchmark::Benchmark(string file_bias)
+Benchmark::Benchmark(std::string file_bias)
 {
     m_biases = snew double[NUM_TEST_FUNC];
     loadRowVectorFromFile(file_bias, NUM_TEST_FUNC, m_biases);
@@ -148,7 +148,7 @@ TestFunc * Benchmark::testFunctionFactory(int func_num, int dimension)
 
     default:
         cerr << "Incorrect number of function. Expected an integer between " <<
-             "1 and 25." << endl;
+             "1 and 25." << std::endl;
         exit(-1);
     }
 }
@@ -527,7 +527,7 @@ void Benchmark::Ax(double * result, double ** A, double * x, int length)
 
 
 
-void Benchmark::loadRowVectorFromFile(string file, int columns, double * row)
+void Benchmark::loadRowVectorFromFile(std::string file, int columns, double * row)
 {
 
     // Open the file
@@ -535,7 +535,7 @@ void Benchmark::loadRowVectorFromFile(string file, int columns, double * row)
     if( !in )
     {
         cerr << "Benchmark::loadRowVectorFromFile: failed when reading from file : " <<
-             file << endl;
+             file << std::endl;
         exit(-1);
     }
     else
@@ -550,7 +550,7 @@ void Benchmark::loadRowVectorFromFile(string file, int columns, double * row)
 
 void Benchmark::loadRowVector(ifstream& in, int columns, double * row)
 {
-    string aux;
+    std::string aux;
 
     if (getline(in, aux))
     {
@@ -558,7 +558,7 @@ void Benchmark::loadRowVector(ifstream& in, int columns, double * row)
         istringstream iss(aux);
         for (int i = 0; i < columns; i++)
         {
-            string stToken;
+            std::string stToken;
             iss >> stToken;
             if (stToken.compare("")!=0)
             {
@@ -567,7 +567,7 @@ void Benchmark::loadRowVector(ifstream& in, int columns, double * row)
             else
             {
                 cerr << "Benchmark::loadRowVector: unexpected format encountered when " <<
-                     "reading from file (incorrect number of tokens)." << endl;
+                     "reading from file (incorrect number of tokens)." << std::endl;
                 exit(-1);
             }
         }
@@ -575,18 +575,18 @@ void Benchmark::loadRowVector(ifstream& in, int columns, double * row)
     else
     {
         cerr << "Benchmark::loadRowVector: unexpected format encountered when " <<
-             "reading from file (zero lines found)." << endl;
+             "reading from file (zero lines found)." << std::endl;
         exit(-1);
     }
 }
 
-void Benchmark::loadNMatrixFromFile(string file, int N, int rows, int columns, double*** matrix)
+void Benchmark::loadNMatrixFromFile(std::string file, int N, int rows, int columns, double*** matrix)
 {
     ifstream in(file.c_str());
     if (!in)
     {
         cerr << "Benchmark::loadNMatrixFromFile: failed when reading from file : " <<
-             file << endl;
+             file << std::endl;
         exit(-1);
     }
     else
@@ -599,14 +599,14 @@ void Benchmark::loadNMatrixFromFile(string file, int N, int rows, int columns, d
     }
 }
 
-void Benchmark::loadMatrixFromFile(string file, int rows, int columns, double ** matrix)
+void Benchmark::loadMatrixFromFile(std::string file, int rows, int columns, double ** matrix)
 {
     // Open the file
     ifstream in(file.c_str());
     if( !in )
     {
         cerr << "Benchmark::loadRowVectorFromFile: failed when reading from file : " <<
-             file << endl;
+             file << std::endl;
         exit(-1);
     }
     else

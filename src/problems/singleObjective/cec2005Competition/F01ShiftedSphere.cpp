@@ -23,9 +23,9 @@
 #include <F01ShiftedSphere.h>
 
 // Fixed (class) parameters
-const string F01ShiftedSphere::FUNCTION_NAME = "Shifted Sphere Function";
+const std::string F01ShiftedSphere::FUNCTION_NAME = "Shifted Sphere Function";
 // TODO: Cambiar ruta
-const string F01ShiftedSphere::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/sphere_func_data.txt";
+const std::string F01ShiftedSphere::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/sphere_func_data.txt";
 
 
 /**
@@ -40,7 +40,7 @@ F01ShiftedSphere::F01ShiftedSphere(int dimension, double bias)
 /**
  * Constructor
  */
-F01ShiftedSphere::F01ShiftedSphere(int dimension, double bias, string file_data)
+F01ShiftedSphere::F01ShiftedSphere(int dimension, double bias, std::string file_data)
     : TestFunc(dimension, bias, FUNCTION_NAME)
 {
 

@@ -135,14 +135,14 @@ void Real::setUpperBound(double bound)
 
 
 /**
- * Returns a string representing the object
+ * Returns a std::string representing the object
  * @return The string
  */
-string Real::toString()
+std::string Real::toString()
 {
     std::ostringstream stringStream;
     stringStream << value_ ;
-    string aux = stringStream.str() + " ";
+    std::string aux = stringStream.str() + " ";
 
     return aux ;
 } // toString

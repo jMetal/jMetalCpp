@@ -28,7 +28,7 @@ const double Tanaka::PI = 3.141592653589793;
  * Creates a new instance of the Tanaka problem.
  * @param solutionType The solution type must "Real" or "BinaryReal
  */
-Tanaka::Tanaka(string solutionType)
+Tanaka::Tanaka(std::string solutionType)
 {
     numberOfVariables_   = 2;
     numberOfObjectives_  = 2;
@@ -38,14 +38,14 @@ Tanaka::Tanaka(string solutionType)
     lowerLimit_ = snew double[numberOfVariables_];
     if (lowerLimit_ == nullptr)
     {
-        cout << "Tanaka::Tanaka. Error reserving memory for storing the array of lower limits" << endl;
+        std::cout << "Tanaka::Tanaka. Error reserving memory for storing the array of lower limits" << std::endl;
         exit(-1) ;
     }
 
     upperLimit_ = snew double[numberOfVariables_];
     if (upperLimit_ == nullptr)
     {
-        cout << "Tanaka::Tanaka. Error reserving memory for storing the array of upper limits" << endl;
+        std::cout << "Tanaka::Tanaka. Error reserving memory for storing the array of upper limits" << std::endl;
         exit(-1) ;
     }
 
@@ -65,7 +65,7 @@ Tanaka::Tanaka(string solutionType)
     }
     else
     {
-        cout << "Error: solution type " << solutionType << " invalid" << endl;
+        std::cout << "Error: solution type " << solutionType << " invalid" << std::endl;
         exit(-1);
     }
 } // Tanaka
@@ -94,7 +94,7 @@ void Tanaka::evaluate(Solution *solution)
     double * fx = snew double[numberOfObjectives_];
     if (fx == nullptr)
     {
-        cout << "Tanaka::evaluate: Error reserving memory while evaluating the problem" << endl;
+        std::cout << "Tanaka::evaluate: Error reserving memory while evaluating the problem" << std::endl;
         exit(-1);
     }
 

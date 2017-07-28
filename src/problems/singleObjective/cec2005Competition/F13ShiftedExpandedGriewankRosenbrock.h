@@ -31,8 +31,8 @@ class F13ShiftedExpandedGriewankRosenbrock : public TestFunc
 private:
 
     // Fixed (class) parameters
-    static const string FUNCTION_NAME;
-    static const string DEFAULT_FILE_DATA;
+    static const std::string FUNCTION_NAME;
+    static const std::string DEFAULT_FILE_DATA;
 
     // Shifted global optimum
     double * m_o;
@@ -44,7 +44,7 @@ private:
 public:
 
     F13ShiftedExpandedGriewankRosenbrock(int dimension, double bias);
-    F13ShiftedExpandedGriewankRosenbrock(int dimension, double bias, string file_data);
+    F13ShiftedExpandedGriewankRosenbrock(int dimension, double bias, std::string file_data);
     ~F13ShiftedExpandedGriewankRosenbrock();
 
     double f (double * x);

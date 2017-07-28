@@ -37,7 +37,7 @@ private:
     double * fx_ ;
 
 public:
-    ZDT1(string solutionType, int numberOfVariables = 30);
+    ZDT1(std::string solutionType, int numberOfVariables = 30);
     void evaluate(Solution *solution);
 
     ~ZDT1();

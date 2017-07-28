@@ -81,11 +81,11 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new CEC2005Problem(argv[0], atoi(argv[1]), atoi(argv[2]));
         else
         {
-            cerr << "Incorrect number of arguments for CEC2005 problem." << endl;
-            cerr << "Use one of this:" << endl;
-            cerr << "\tCEC2005 NUMBER_OF_CEC2005_PROBLEM" << endl;
-            cerr << "\tCEC2005 SOLUTION_TYPE NUMBER_OF_CEC2005_PROBLEM " << endl;
-            cerr << "\tCEC2005 SOLUTION_TYPE NUMBER_OF_CEC2005_PROBLEM NUMBER_OF_VARIABLES" << endl;
+            cerr << "Incorrect number of arguments for CEC2005 problem." << std::endl;
+            cerr << "Use one of this:" << std::endl;
+            cerr << "\tCEC2005 NUMBER_OF_CEC2005_PROBLEM" << std::endl;
+            cerr << "\tCEC2005 SOLUTION_TYPE NUMBER_OF_CEC2005_PROBLEM " << std::endl;
+            cerr << "\tCEC2005 SOLUTION_TYPE NUMBER_OF_CEC2005_PROBLEM NUMBER_OF_VARIABLES" << std::endl;
             exit(-1);
         }
     }
@@ -101,7 +101,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new DTLZ1(argv[0], atoi(argv[1]), atoi(argv[2]));
         else
         {
-            cerr << "Incorrect number of arguments for DTLZ1 problem." << endl;
+            cerr << "Incorrect number of arguments for DTLZ1 problem." << std::endl;
             exit(-1);
         }
     }
@@ -117,7 +117,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new DTLZ2(argv[0], atoi(argv[1]), atoi(argv[2]));
         else
         {
-            cerr << "Incorrect number of arguments for DTLZ2 problem." << endl;
+            cerr << "Incorrect number of arguments for DTLZ2 problem." << std::endl;
             exit(-1);
         }
     }
@@ -133,7 +133,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new DTLZ3(argv[0], atoi(argv[1]), atoi(argv[2]));
         else
         {
-            cerr << "Incorrect number of arguments for DTLZ3 problem." << endl;
+            cerr << "Incorrect number of arguments for DTLZ3 problem." << std::endl;
             exit(-1);
         }
     }
@@ -149,7 +149,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new DTLZ4(argv[0], atoi(argv[1]), atoi(argv[2]));
         else
         {
-            cerr << "Incorrect number of arguments for DTLZ4 problem." << endl;
+            cerr << "Incorrect number of arguments for DTLZ4 problem." << std::endl;
             exit(-1);
         }
     }
@@ -165,7 +165,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new DTLZ5(argv[0], atoi(argv[1]), atoi(argv[2]));
         else
         {
-            cerr << "Incorrect number of arguments for DTLZ5 problem." << endl;
+            cerr << "Incorrect number of arguments for DTLZ5 problem." << std::endl;
             exit(-1);
         }
     }
@@ -181,7 +181,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new DTLZ6(argv[0], atoi(argv[1]), atoi(argv[2]));
         else
         {
-            cerr << "Incorrect number of arguments for DTLZ6 problem." << endl;
+            cerr << "Incorrect number of arguments for DTLZ6 problem." << std::endl;
             exit(-1);
         }
     }
@@ -197,7 +197,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new DTLZ7(argv[0], atoi(argv[1]), atoi(argv[2]));
         else
         {
-            cerr << "Incorrect number of arguments for DTLZ7 problem." << endl;
+            cerr << "Incorrect number of arguments for DTLZ7 problem." << std::endl;
             exit(-1);
         }
     }
@@ -209,7 +209,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new Fonseca(argv[0]);
         else
         {
-            cerr << "Incorrect number of arguments for Fonseca problem." << endl;
+            cerr << "Incorrect number of arguments for Fonseca problem." << std::endl;
             exit(-1);
         }
     }
@@ -223,7 +223,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new Griewank(argv[0], atoi(argv[1]));
         else
         {
-            cerr << "Incorrect number of arguments for Griewank problem." << endl;
+            cerr << "Incorrect number of arguments for Griewank problem." << std::endl;
             exit(-1);
         }
     }
@@ -237,7 +237,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new Kursawe(argv[0], atoi(argv[1]));
         else
         {
-            cerr << "Incorrect number of arguments for Kursawe problem." << endl;
+            cerr << "Incorrect number of arguments for Kursawe problem." << std::endl;
             exit(-1);
         }
     }
@@ -255,7 +255,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new LZ09_F1(argv[0], atoi(argv[1]), atoi(argv[2]), atoi(argv[3]));
         else
         {
-            cerr << "Incorrect number of arguments for LZ09_F1 problem." << endl;
+            cerr << "Incorrect number of arguments for LZ09_F1 problem." << std::endl;
             exit(-1);
         }
     }
@@ -273,7 +273,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new LZ09_F2(argv[0], atoi(argv[1]), atoi(argv[2]), atoi(argv[3]));
         else
         {
-            cerr << "Incorrect number of arguments for LZ09_F2 problem." << endl;
+            cerr << "Incorrect number of arguments for LZ09_F2 problem." << std::endl;
             exit(-1);
         }
     }
@@ -291,7 +291,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new LZ09_F3(argv[0], atoi(argv[1]), atoi(argv[2]), atoi(argv[3]));
         else
         {
-            cerr << "Incorrect number of arguments for LZ09_F3 problem." << endl;
+            cerr << "Incorrect number of arguments for LZ09_F3 problem." << std::endl;
             exit(-1);
         }
     }
@@ -309,7 +309,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new LZ09_F4(argv[0], atoi(argv[1]), atoi(argv[2]), atoi(argv[3]));
         else
         {
-            cerr << "Incorrect number of arguments for LZ09_F4 problem." << endl;
+            cerr << "Incorrect number of arguments for LZ09_F4 problem." << std::endl;
             exit(-1);
         }
     }
@@ -327,7 +327,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new LZ09_F5(argv[0], atoi(argv[1]), atoi(argv[2]), atoi(argv[3]));
         else
         {
-            cerr << "Incorrect number of arguments for LZ09_F5 problem." << endl;
+            cerr << "Incorrect number of arguments for LZ09_F5 problem." << std::endl;
             exit(-1);
         }
     }
@@ -345,7 +345,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new LZ09_F6(argv[0], atoi(argv[1]), atoi(argv[2]), atoi(argv[3]));
         else
         {
-            cerr << "Incorrect number of arguments for LZ09_F6 problem." << endl;
+            cerr << "Incorrect number of arguments for LZ09_F6 problem." << std::endl;
             exit(-1);
         }
     }
@@ -363,7 +363,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new LZ09_F7(argv[0], atoi(argv[1]), atoi(argv[2]), atoi(argv[3]));
         else
         {
-            cerr << "Incorrect number of arguments for LZ09_F7 problem." << endl;
+            cerr << "Incorrect number of arguments for LZ09_F7 problem." << std::endl;
             exit(-1);
         }
     }
@@ -381,7 +381,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new LZ09_F8(argv[0], atoi(argv[1]), atoi(argv[2]), atoi(argv[3]));
         else
         {
-            cerr << "Incorrect number of arguments for LZ09_F8 problem." << endl;
+            cerr << "Incorrect number of arguments for LZ09_F8 problem." << std::endl;
             exit(-1);
         }
     }
@@ -399,7 +399,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new LZ09_F9(argv[0], atoi(argv[1]), atoi(argv[2]), atoi(argv[3]));
         else
         {
-            cerr << "Incorrect number of arguments for LZ09_F9 problem." << endl;
+            cerr << "Incorrect number of arguments for LZ09_F9 problem." << std::endl;
             exit(-1);
         }
 
@@ -414,7 +414,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new OneMax(atoi(argv[0]), atoi(argv[1]));
         else
         {
-            cerr << "Incorrect number of arguments for OneMax problem." << endl;
+            cerr << "Incorrect number of arguments for OneMax problem." << std::endl;
             exit(-1);
         }
 
@@ -429,7 +429,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new Rastrigin(argv[0], atoi(argv[1]));
         else
         {
-            cerr << "Incorrect number of arguments for Rastrigin problem." << endl;
+            cerr << "Incorrect number of arguments for Rastrigin problem." << std::endl;
             exit(-1);
         }
 
@@ -444,7 +444,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new Rosenbrock(argv[0], atoi(argv[1]));
         else
         {
-            cerr << "Incorrect number of arguments for Rosenbrock problem." << endl;
+            cerr << "Incorrect number of arguments for Rosenbrock problem." << std::endl;
             exit(-1);
         }
 
@@ -457,7 +457,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new Schaffer(argv[0]);
         else
         {
-            cerr << "Incorrect number of arguments for Schaffer problem." << endl;
+            cerr << "Incorrect number of arguments for Schaffer problem." << std::endl;
             exit(-1);
         }
 
@@ -472,7 +472,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new Sphere(argv[0], atoi(argv[1]));
         else
         {
-            cerr << "Incorrect number of arguments for Sphere problem." << endl;
+            cerr << "Incorrect number of arguments for Sphere problem." << std::endl;
             exit(-1);
         }
 
@@ -485,7 +485,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new Srinivas(argv[0]);
         else
         {
-            cerr << "Incorrect number of arguments for Srinivas problem." << endl;
+            cerr << "Incorrect number of arguments for Srinivas problem." << std::endl;
             exit(-1);
         }
 
@@ -498,7 +498,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new Tanaka(argv[0]);
         else
         {
-            cerr << "Incorrect number of arguments for Tanaka problem." << endl;
+            cerr << "Incorrect number of arguments for Tanaka problem." << std::endl;
             exit(-1);
         }
 
@@ -513,7 +513,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new ZDT1(argv[0], atoi(argv[1]));
         else
         {
-            cerr << "Incorrect number of arguments for ZDT1 problem." << endl;
+            cerr << "Incorrect number of arguments for ZDT1 problem." << std::endl;
             exit(-1);
         }
     }
@@ -527,7 +527,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new ZDT2(argv[0], atoi(argv[1]));
         else
         {
-            cerr << "Incorrect number of arguments for ZDT3 problem." << endl;
+            cerr << "Incorrect number of arguments for ZDT3 problem." << std::endl;
             exit(-1);
         }
     }
@@ -541,7 +541,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new ZDT3(argv[0], atoi(argv[1]));
         else
         {
-            cerr << "Incorrect number of arguments for ZDT4 problem." << endl;
+            cerr << "Incorrect number of arguments for ZDT4 problem." << std::endl;
             exit(-1);
         }
     }
@@ -555,7 +555,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new ZDT4(argv[0], atoi(argv[1]));
         else
         {
-            cerr << "Incorrect number of arguments for ZDT4 problem." << endl;
+            cerr << "Incorrect number of arguments for ZDT4 problem." << std::endl;
             exit(-1);
         }
     }
@@ -569,7 +569,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new ZDT5(argv[0], atoi(argv[1]));
         else
         {
-            cerr << "Incorrect number of arguments for ZDT5 problem." << endl;
+            cerr << "Incorrect number of arguments for ZDT5 problem." << std::endl;
             exit(-1);
         }
     }
@@ -583,7 +583,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
             return new ZDT6(argv[0], atoi(argv[1]));
         else
         {
-            cerr << "Incorrect number of arguments for ZDT6 problem." << endl;
+            cerr << "Incorrect number of arguments for ZDT6 problem." << std::endl;
             exit(-1);
         }
 
@@ -593,7 +593,7 @@ Problem * ProblemFactory::getProblem(char * name, int argc, char ** argv)
 
         cerr << "ProblemFactory::getProblem: Problem '" << name
              << "' does not exist. Please, check the problem names "
-             << "in jmetalcpp/problems" << endl;
+             << "in jmetalcpp/problems" << std::endl;
         exit(-1);
 
     }

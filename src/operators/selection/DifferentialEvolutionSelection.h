@@ -34,7 +34,7 @@ class DifferentialEvolutionSelection : public Selection
 {
 
 public:
-    DifferentialEvolutionSelection(map<string, void *> parameters);
+    DifferentialEvolutionSelection(std::map<std::string, void *> parameters);
     void *execute(void *);
 
 };

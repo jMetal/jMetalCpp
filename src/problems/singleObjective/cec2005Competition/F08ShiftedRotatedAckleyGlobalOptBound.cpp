@@ -24,11 +24,11 @@
 #include "JMetalHeader.h"
 
 // Fixed (class) parameters
-const string F08ShiftedRotatedAckleyGlobalOptBound::FUNCTION_NAME = "Shifted Rotated Ackley's Function with Global Optimum on Bounds";
+const std::string F08ShiftedRotatedAckleyGlobalOptBound::FUNCTION_NAME = "Shifted Rotated Ackley's Function with Global Optimum on Bounds";
 // TODO: Cambiar ruta
-const string F08ShiftedRotatedAckleyGlobalOptBound::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/ackley_func_data.txt";
-const string F08ShiftedRotatedAckleyGlobalOptBound::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/ackley_M_D";
-const string F08ShiftedRotatedAckleyGlobalOptBound::DEFAULT_FILE_MX_SUFFIX = ".txt";
+const std::string F08ShiftedRotatedAckleyGlobalOptBound::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/ackley_func_data.txt";
+const std::string F08ShiftedRotatedAckleyGlobalOptBound::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/ackley_M_D";
+const std::string F08ShiftedRotatedAckleyGlobalOptBound::DEFAULT_FILE_MX_SUFFIX = ".txt";
 
 
 /**
@@ -43,7 +43,7 @@ F08ShiftedRotatedAckleyGlobalOptBound::F08ShiftedRotatedAckleyGlobalOptBound(int
 /**
  * Constructor
  */
-F08ShiftedRotatedAckleyGlobalOptBound::F08ShiftedRotatedAckleyGlobalOptBound(int dimension, double bias, string file_data, string file_m)
+F08ShiftedRotatedAckleyGlobalOptBound::F08ShiftedRotatedAckleyGlobalOptBound(int dimension, double bias, std::string file_data, std::string file_m)
     : TestFunc(dimension, bias, FUNCTION_NAME)
 {
 
@@ -104,7 +104,7 @@ double F08ShiftedRotatedAckleyGlobalOptBound::f(double * x)
 }
 
 
-string F08ShiftedRotatedAckleyGlobalOptBound::getFileMxName(string prefix, int dimension, string suffix)
+std::string F08ShiftedRotatedAckleyGlobalOptBound::getFileMxName(std::string prefix, int dimension, std::string suffix)
 {
     std::stringstream sstm;
     sstm << prefix << dimension << suffix;

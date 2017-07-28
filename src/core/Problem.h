@@ -30,8 +30,6 @@
 #include <Solution.h>
 #include <stddef.h>
 
-using namespace std;
-
 class SolutionType;
 class Solution;
 
@@ -48,7 +46,7 @@ protected:
     int numberOfVariables_;
     int numberOfObjectives_;
     int numberOfConstraints_;
-    string problemName_;
+    std::string problemName_;
     SolutionType *solutionType_;
     double *lowerLimit_;
     double *upperLimit_;
@@ -74,7 +72,7 @@ public:
     int getLength(int var);
     void setSolutionType(SolutionType * type);
     SolutionType * getSolutionType();
-    string getName();
+    std::string getName();
     int getNumberOfBits();
 
 }; // Problem

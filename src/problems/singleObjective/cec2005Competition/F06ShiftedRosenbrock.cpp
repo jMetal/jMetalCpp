@@ -23,9 +23,9 @@
 #include <F06ShiftedRosenbrock.h>
 
 // Fixed (class) parameters
-const string F06ShiftedRosenbrock::FUNCTION_NAME = "Shifted Rosenbrock's Function";
+const std::string F06ShiftedRosenbrock::FUNCTION_NAME = "Shifted Rosenbrock's Function";
 // TODO: Cambiar ruta
-const string F06ShiftedRosenbrock::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/rosenbrock_func_data.txt";
+const std::string F06ShiftedRosenbrock::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/rosenbrock_func_data.txt";
 
 
 /**
@@ -40,7 +40,7 @@ F06ShiftedRosenbrock::F06ShiftedRosenbrock(int dimension, double bias)
 /**
  * Constructor
  */
-F06ShiftedRosenbrock::F06ShiftedRosenbrock(int dimension, double bias, string file_data)
+F06ShiftedRosenbrock::F06ShiftedRosenbrock(int dimension, double bias, std::string file_data)
     : TestFunc(dimension, bias, FUNCTION_NAME)
 {
 

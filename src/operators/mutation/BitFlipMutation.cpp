@@ -26,7 +26,7 @@
  * Constructor
  * Creates a new instance of the polynomial mutation operator
  */
-BitFlipMutation::BitFlipMutation(map<string, void *> parameters)
+BitFlipMutation::BitFlipMutation(std::map<std::string, void *> parameters)
     : Mutation(parameters)
 {
     mutationProbability_ = 0.0 ;

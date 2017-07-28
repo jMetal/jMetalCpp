@@ -27,13 +27,13 @@
 /**
  * Valid solution types to apply this operator.
  */
-const string UniformMutation::VALID_TYPES[] = {"Real", "ArrayReal"};
+const std::string UniformMutation::VALID_TYPES[] = {"Real", "ArrayReal"};
 
 /**
  * Constructor
  * Creates a new uniform mutation operator instance
  */
-UniformMutation::UniformMutation(map<string, void *> parameters)
+UniformMutation::UniformMutation(std::map<std::string, void *> parameters)
     : Mutation(parameters)
 {
     if (parameters["probability"] != nullptr)

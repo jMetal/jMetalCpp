@@ -58,7 +58,7 @@
 #include <HCJob.h>
 #include <TestFunc.h>
 
-using namespace std;
+
 
 template <typename T> int sgn(T val)
 {
@@ -69,7 +69,7 @@ class Benchmark
 {
 
 private:
-    static const string DEFAULT_FILE_BIAS;
+    static const std::string DEFAULT_FILE_BIAS;
 
     static const int NUM_TEST_FUNC;
 
@@ -84,7 +84,7 @@ private:
 
 public:
     Benchmark();
-    Benchmark(string file_bias);
+    Benchmark(std::string file_bias);
     ~Benchmark();
 
     // Random number generator
@@ -125,10 +125,10 @@ public:
     static void Ax(double * result, double ** A, double * x, int length);
 
     // Utility functions for loading data from given text files
-    static void loadRowVectorFromFile(string file, int columns, double * row);
+    static void loadRowVectorFromFile(std::string file, int columns, double * row);
     static void loadRowVector(ifstream& brSrc, int columns, double * row);
-    static void loadNMatrixFromFile(string file, int N, int rows, int columns, double*** matrix);
-    static void loadMatrixFromFile(string file, int rows, int columns, double ** matrix);
+    static void loadNMatrixFromFile(std::string file, int N, int rows, int columns, double*** matrix);
+    static void loadMatrixFromFile(std::string file, int rows, int columns, double ** matrix);
     static void loadMatrix(ifstream& brSrc, int rows, int columns, double ** matrix);
 
 }; // Benchmark

@@ -34,7 +34,7 @@
 class LZ09_F8 : public Problem
 {
 public:
-    LZ09_F8(string solutionType, int ptype=21, int dtype=4, int ltype=21);
+    LZ09_F8(std::string solutionType, int ptype=21, int dtype=4, int ltype=21);
     void evaluate(Solution *solution);
 
     virtual ~LZ09_F8();

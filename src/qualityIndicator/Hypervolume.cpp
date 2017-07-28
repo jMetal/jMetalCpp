@@ -135,7 +135,7 @@ double Hypervolume::surfaceUnchangedTo(double** front, int noPoints,
 
     if (noPoints < 1)
     {
-        cout << "run-time error" << endl;
+        std::cout << "run-time error" << std::endl;
         exit(-1);
     }
 
@@ -204,7 +204,7 @@ double Hypervolume::calculateHypervolume(double** front, int noPoints,
         {
             if (noNondominatedPoints < 1)
             {
-                cout << "run-time error" << endl;
+                std::cout << "run-time error" << std::endl;
                 exit(-1);
             } // if
             tempVolume = front[0][0];
@@ -276,29 +276,29 @@ double**  Hypervolume::mergeFronts(double** front1, int sizeFront1,
  * @param paretoTrueFront The true pareto front
  * @param numberOfObjectives Number of objectives of the pareto front
  */
-double Hypervolume::hypervolume(vector< vector<double> > paretoFront,
-                                vector< vector<double> > paretoTrueFront, int numberOfObjectives)
+double Hypervolume::hypervolume(std::vector< std::vector<double> > paretoFront,
+                                std::vector< std::vector<double> > paretoTrueFront, int numberOfObjectives)
 {
 
     /**
      * Stores the maximum values of true pareto front.
      */
-    vector<double> maximumValues;
+    std::vector<double> maximumValues;
 
     /**
      * Stores the minimum values of the true pareto front.
      */
-    vector<double> minimumValues;
+    std::vector<double> minimumValues;
 
     /**
      * Stores the normalized front.
      */
-    vector< vector<double> > normalizedFront;
+    std::vector< std::vector<double> > normalizedFront;
 
     /**
      * Stores the inverted front. Needed for minimization problems
      */
-    vector< vector<double> > invertedFront;
+    std::vector< std::vector<double> > invertedFront;
 
     // STEP 1. Obtain the maximum and minimum values of the Pareto front
     maximumValues = utils_->getMaximumValues(paretoTrueFront, numberOfObjectives);

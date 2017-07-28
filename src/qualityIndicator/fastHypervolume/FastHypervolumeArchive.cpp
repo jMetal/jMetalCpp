@@ -53,7 +53,7 @@ FastHypervolumeArchive::FastHypervolumeArchive(int maxSize, int numberOfObjectiv
  */
 FastHypervolumeArchive::~FastHypervolumeArchive()
 {
-    cout << "DELETING FASTHYPERVOLUMEARCHIVE" << endl;
+    std::cout << "DELETING FASTHYPERVOLUMEARCHIVE" << std::endl;
     delete dominance;
     delete equals;
     delete referencePoint;

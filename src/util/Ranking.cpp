@@ -51,15 +51,15 @@ Ranking::Ranking (SolutionSet * solutionSet)
 
     if (dominateMe == nullptr)
     {
-        cout << "Fatal Problem: Cannot reserve memory in class Ranking" << endl;
+        std::cout << "Fatal Problem: Cannot reserve memory in class Ranking" << std::endl;
         exit(-1);
     }
 
     // iDominate[k] contains the list of solutions dominated by k
-    vector<int> * iDominate = new vector<int>[solutionSet_->size()];
+    std::vector<int> * iDominate = new std::vector<int>[solutionSet_->size()];
 
     // front[i] contains the list of individuals belonging to the front i
-    vector<int> * front = new vector<int>[solutionSet_->size()+1];
+    std::vector<int> * front = new std::vector<int>[solutionSet_->size()+1];
 
     // flagDominate is an auxiliar variable
     int flagDominate;
@@ -109,7 +109,7 @@ Ranking::Ranking (SolutionSet * solutionSet)
 
     // Obtain the rest of fronts
     int i = 0;
-    vector<int>::iterator it1, it2;
+    std::vector<int>::iterator it1, it2;
     while (front[i].size()!=0)
     {
         i++;
@@ -130,7 +130,7 @@ Ranking::Ranking (SolutionSet * solutionSet)
     ranking_ = new SolutionSet*[i];
     if (ranking_ == nullptr)
     {
-        cout << "Fatal Error: Impossible to reserve memory in Ranking" << endl;
+        std::cout << "Fatal Error: Impossible to reserve memory in Ranking" << std::endl;
         exit(-1);
     }
 

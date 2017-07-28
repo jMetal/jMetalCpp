@@ -48,20 +48,20 @@ class DifferentialEvolutionCrossover : public Crossover
 {
 
 public:
-    DifferentialEvolutionCrossover(map<string, void *> parameters);
+    DifferentialEvolutionCrossover(std::map<std::string, void *> parameters);
     void *execute(void *);
 
 protected:
     static const double DEFAULT_CR;
     static const double DEFAULT_F;
     static const double DEFAULT_K;
-    static const string DEFAULT_DE_VARIANT;
+    static const std::string DEFAULT_DE_VARIANT;
 
 private:
     double CR_  ;
     double F_   ;
     double K_   ;
-    string DE_Variant_ ; // DE variant (rand/1/bin, rand/1/exp, etc.)
+    std::string DE_Variant_ ; // DE variant (rand/1/bin, rand/1/exp, etc.)
     //TODO: A�adir VALID_TYPES;
 
 };

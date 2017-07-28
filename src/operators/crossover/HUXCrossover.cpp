@@ -27,7 +27,7 @@
  * Create a new SBX crossover operator whit a default
  * index given by <code>DEFAULT_INDEX_CROSSOVER</code>
  */
-HUXCrossover::HUXCrossover(map<string, void *> parameters)
+HUXCrossover::HUXCrossover(std::map<std::string, void *> parameters)
     : Crossover(parameters)
 {
     crossoverProbability_ = 0.0 ;
@@ -51,7 +51,7 @@ Solution ** HUXCrossover::doCrossover(double probability, Solution *parent1, Sol
 
     if (offSpring == nullptr)
     {
-        cout << "Error grave: Impossible reserve memory for allocating new solutions when performing SinglePointCrossover " << endl;
+        std::cout << "Error grave: Impossible reserve memory for allocating new solutions when performing SinglePointCrossover " << std::endl;
         exit(-1);
     }
 

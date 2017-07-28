@@ -66,19 +66,19 @@ void ExperimentReport::generateQualityIndicators()
     if (indicatorList_.size() > 0)
     {
 
-        cout << "PF file: " << paretoFrontDirectory_ << endl;
+        std::cout << "PF file: " << paretoFrontDirectory_ << std::endl;
 
         for (int algorithmIndex=0; algorithmIndex<algorithmNameList_.size(); algorithmIndex++)
         {
 
-            string algorithmDirectory;
+            std::string algorithmDirectory;
             algorithmDirectory = experimentBaseDirectory_ + "/data/" + algorithmNameList_[algorithmIndex] + "/";
 
             for (int problemIndex=0; problemIndex<problemList_.size(); problemIndex++)
             {
 
-                string problemDirectory = algorithmDirectory + problemList_[problemIndex];
-                string paretoFrontPath;
+                std::string problemDirectory = algorithmDirectory + problemList_[problemIndex];
+                std::string paretoFrontPath;
 
                 if (!isSingleObjective_)
                 {
@@ -86,7 +86,7 @@ void ExperimentReport::generateQualityIndicators()
                     if (paretoFrontDirectory_.empty())
                     {
 
-                        string referenceFrontDirectory = experimentBaseDirectory_ + "/referenceFronts";
+                        std::string referenceFrontDirectory = experimentBaseDirectory_ + "/referenceFronts";
                         paretoFrontPath = referenceFrontDirectory + "/" + problemList_[problemIndex] + ".rf";
 
                     }
@@ -106,11 +106,11 @@ void ExperimentReport::generateQualityIndicators()
                     if (indicatorList_[indicatorIndex].compare("FIT")==0)
                     {
 
-                        string solutionFrontFile = problemDirectory + "/FUN";
-                        string qualityIndicatorFile = problemDirectory;
+                        std::string solutionFrontFile = problemDirectory + "/FUN";
+                        std::string qualityIndicatorFile = problemDirectory;
 
                         Fitness * indicators = snew Fitness();
-                        vector< vector<double> > solutionFront =
+                        std::vector< std::vector<double> > solutionFront =
                             indicators->utils_->readFront(solutionFrontFile);
                         qualityIndicatorFile = qualityIndicatorFile + "/FIT";
                         indicators->fitness(solutionFront, qualityIndicatorFile);
@@ -125,19 +125,19 @@ void ExperimentReport::generateQualityIndicators()
 
                             stringstream outputParetoFrontFilePath;
                             outputParetoFrontFilePath << problemDirectory << "/FUN_" << numRun;
-                            string solutionFrontFile = outputParetoFrontFilePath.str();
-                            string qualityIndicatorFile = problemDirectory;
+                            std::string solutionFrontFile = outputParetoFrontFilePath.str();
+                            std::string qualityIndicatorFile = problemDirectory;
                             double value;
 
-                            cout << "ExperimentReport: Quality indicator: " << indicatorList_[indicatorIndex] << endl;
+                            std::cout << "ExperimentReport: Quality indicator: " << indicatorList_[indicatorIndex] << std::endl;
 
                             if (indicatorList_[indicatorIndex].compare("HV")==0)
                             {
 
                                 Hypervolume * indicators = snew Hypervolume();
-                                vector< vector<double> > solutionFront =
+                                std::vector< std::vector<double> > solutionFront =
                                     indicators->utils_->readFront(solutionFrontFile);
-                                vector< vector<double> > trueFront =
+                                std::vector< std::vector<double> > trueFront =
                                     indicators->utils_->readFront(paretoFrontPath);
                                 value = indicators->hypervolume(solutionFront, trueFront, trueFront[0].size());
                                 delete indicators;
@@ -146,9 +146,9 @@ void ExperimentReport::generateQualityIndicators()
                             if (indicatorList_[indicatorIndex].compare("SPREAD")==0)
                             {
                                 Spread * indicators = snew Spread();
-                                vector< vector<double> > solutionFront =
+                                std::vector< std::vector<double> > solutionFront =
                                     indicators->utils_->readFront(solutionFrontFile);
-                                vector< vector<double> > trueFront =
+                                std::vector< std::vector<double> > trueFront =
                                     indicators->utils_->readFront(paretoFrontPath);
                                 value = indicators->spread(solutionFront, trueFront, trueFront[0].size());
                                 delete indicators;
@@ -157,9 +157,9 @@ void ExperimentReport::generateQualityIndicators()
                             if (indicatorList_[indicatorIndex].compare("IGD")==0)
                             {
                                 InvertedGenerationalDistance * indicators = snew InvertedGenerationalDistance();
-                                vector< vector<double> > solutionFront =
+                                std::vector< std::vector<double> > solutionFront =
                                     indicators->utils_->readFront(solutionFrontFile);
-                                vector< vector<double> > trueFront =
+                                std::vector< std::vector<double> > trueFront =
                                     indicators->utils_->readFront(paretoFrontPath);
                                 value = indicators->invertedGenerationalDistance(solutionFront, trueFront, trueFront[0].size());
                                 delete indicators;
@@ -168,22 +168,22 @@ void ExperimentReport::generateQualityIndicators()
                             if (indicatorList_[indicatorIndex].compare("EPSILON")==0)
                             {
                                 Epsilon * indicators = snew Epsilon();
-                                vector< vector<double> > solutionFront =
+                                std::vector< std::vector<double> > solutionFront =
                                     indicators->utils_->readFront(solutionFrontFile);
-                                vector< vector<double> > trueFront =
+                                std::vector< std::vector<double> > trueFront =
                                     indicators->utils_->readFront(paretoFrontPath);
                                 value = indicators->epsilon(solutionFront, trueFront, trueFront[0].size());
                                 delete indicators;
                                 qualityIndicatorFile = qualityIndicatorFile + "/EPSILON";
                             }
 
-                            cout << "ExperimentReport: Quality indicator file: " << qualityIndicatorFile << endl;
+                            std::cout << "ExperimentReport: Quality indicator file: " << qualityIndicatorFile << std::endl;
 
                             if (qualityIndicatorFile.compare(problemDirectory)!=0)
                             {
                                 std::fstream out(qualityIndicatorFile.c_str(),
                                                  std::ios::out | std::ios::app);
-                                out << value << endl;
+                                out << value << std::endl;
                                 out.close();
                             } // if
 
@@ -200,25 +200,25 @@ void ExperimentReport::generateQualityIndicators()
 void ExperimentReport::generateReferenceFronts()
 {
 
-    string referenceFrontDirectory = experimentBaseDirectory_ + "/referenceFronts";
+    std::string referenceFrontDirectory = experimentBaseDirectory_ + "/referenceFronts";
 
     if (FileUtils::existsPath(referenceFrontDirectory.c_str()) != 1)
     {
         FileUtils::createDirectory(referenceFrontDirectory);
-        cout << "Creating " << referenceFrontDirectory << endl;
+        std::cout << "Creating " << referenceFrontDirectory << std::endl;
     }
 
     for (int problemIndex=0; problemIndex<problemList_.size(); problemIndex++)
     {
 
-        string paretoFrontPath = referenceFrontDirectory + "/" + problemList_[problemIndex] + ".rf";
+        std::string paretoFrontPath = referenceFrontDirectory + "/" + problemList_[problemIndex] + ".rf";
 
         MetricsUtil * metricsUtils = snew MetricsUtil();
         NonDominatedSolutionList * solutionSet = snew NonDominatedSolutionList();
         for (int algorithmIndex=0; algorithmIndex<algorithmNameList_.size(); algorithmIndex++)
         {
 
-            string problemDirectory = experimentBaseDirectory_ + "/data/" + algorithmNameList_[algorithmIndex] +
+            std::string problemDirectory = experimentBaseDirectory_ + "/data/" + algorithmNameList_[algorithmIndex] +
                                       "/" + problemList_[problemIndex];
 
             for (int numRun=0; numRun<independentRuns_; numRun++)
@@ -227,8 +227,8 @@ void ExperimentReport::generateReferenceFronts()
 
                 stringstream outputParetoFrontFilePath;
                 outputParetoFrontFilePath << problemDirectory << "/FUN_" << numRun;
-                string solutionFrontFile = outputParetoFrontFilePath.str();
-                string qualityIndicatorFile = problemDirectory;
+                std::string solutionFrontFile = outputParetoFrontFilePath.str();
+                std::string qualityIndicatorFile = problemDirectory;
                 double value;
 
                 metricsUtils->readNonDominatedSolutionSet(solutionFrontFile, solutionSet);
@@ -249,22 +249,22 @@ void ExperimentReport::generateReferenceFronts()
 void ExperimentReport::generateLatexTables()
 {
     latexDirectory_ = experimentBaseDirectory_ + "/" + latexDirectory_;
-    cout << "latex directory: " << latexDirectory_ << endl;
+    std::cout << "latex directory: " << latexDirectory_ << std::endl;
 
-    vector<double> *** data = snew vector<double>**[indicatorList_.size()];
+    std::vector<double> *** data = snew std::vector<double>**[indicatorList_.size()];
     for (int indicator = 0; indicator < indicatorList_.size(); indicator++)
     {
         // A data vector per problem
-        data[indicator] = snew vector<double>*[problemList_.size()];
+        data[indicator] = snew std::vector<double>*[problemList_.size()];
 
         for (int problem = 0; problem < problemList_.size(); problem++)
         {
-            data[indicator][problem] = snew vector<double>[algorithmNameList_.size()];
+            data[indicator][problem] = snew std::vector<double>[algorithmNameList_.size()];
 
             for (int algorithm = 0; algorithm < algorithmNameList_.size(); algorithm++)
             {
 
-                string directory = experimentBaseDirectory_;
+                std::string directory = experimentBaseDirectory_;
                 directory += "/data/";
                 directory += "/" + algorithmNameList_[algorithm];
                 directory += "/" + problemList_[problem];
@@ -274,10 +274,10 @@ void ExperimentReport::generateLatexTables()
                 std::ifstream in(directory.c_str());
                 if( !in )
                 {
-                    cout << "Error trying to read quality indicator file: " << directory << endl;
+                    std::cout << "Error trying to read quality indicator file: " << directory << std::endl;
                     exit(-1);
                 } // if
-                string aux;
+                std::string aux;
                 while( getline(in, aux ) )
                 {
                     data[indicator][problem][algorithm].push_back(atof(aux.c_str()));
@@ -294,7 +294,7 @@ void ExperimentReport::generateLatexTables()
     double *** min;
     int *** numberOfValues;
 
-    map<string, double> statValues;
+   std::map<std::string, double> statValues;
 
     statValues["mean"] =  0.0;
     statValues["median"] = 0.0;
@@ -337,23 +337,23 @@ void ExperimentReport::generateLatexTables()
                 sort(data[indicator][problem][algorithm].begin(),
                      data[indicator][problem][algorithm].end());
 
-                string directory = experimentBaseDirectory_;
+                std::string directory = experimentBaseDirectory_;
                 directory += "/" + algorithmNameList_[algorithm];
                 directory += "/" + problemList_[problem];
                 directory += "/" + indicatorList_[indicator];
 
-                //cout << "----" << directory << "-----" << endl;
+                //std::cout << "----" << directory << "-----" << std::endl;
                 //calculateStatistics(data[indicator][problem][algorithm], meanV, medianV, minV, maxV, stdDeviationV, iqrV);
                 calculateStatistics(data[indicator][problem][algorithm], &statValues);
 
                 /*
-                cout << "Mean: " << statValues["mean"] << endl;
-                cout << "Median : " << statValues["median"] << endl;
-                cout << "Std : " << statValues["stdDeviation"] << endl;
-                cout << "IQR : " << statValues["iqr"] << endl;
-                cout << "Min : " << statValues["min"] << endl;
-                cout << "Max : " << statValues["max"] << endl;
-                cout << "N_values: " << data[indicator][problem][algorithm].size() << endl;
+                std::cout << "Mean: " << statValues["mean"] << std::endl;
+                std::cout << "Median : " << statValues["median"] << std::endl;
+                std::cout << "Std : " << statValues["stdDeviation"] << std::endl;
+                std::cout << "IQR : " << statValues["iqr"] << std::endl;
+                std::cout << "Min : " << statValues["min"] << std::endl;
+                std::cout << "Max : " << statValues["max"] << std::endl;
+                std::cout << "N_values: " << data[indicator][problem][algorithm].size() << std::endl;
                 */
 
                 mean[indicator][problem][algorithm] = statValues["mean"];
@@ -371,13 +371,13 @@ void ExperimentReport::generateLatexTables()
     {
         if (FileUtils::createDirectory(latexDirectory_) == -1)
         {
-            cout << "Error creating directory: " << latexDirectory_ << endl;
+            std::cout << "Error creating directory: " << latexDirectory_ << std::endl;
             exit(-1);
         } // if
-        cout << "Creating " << latexDirectory_ << " directory" << endl;
+        std::cout << "Creating " << latexDirectory_ << " directory" << std::endl;
     } // if
-    cout << "Experiment name: " << experimentName_ << endl;
-    string latexFile = latexDirectory_ + "/" + experimentName_ + ".tex";
+    std::cout << "Experiment name: " << experimentName_ << std::endl;
+    std::string latexFile = latexDirectory_ + "/" + experimentName_ + ".tex";
     printHeaderLatexCommands(latexFile);
     for (int i = 0; i < indicatorList_.size(); i++)
     {
@@ -425,7 +425,7 @@ void ExperimentReport::generateLatexTables()
 /**
  * Calculates statistical values from a vector of Double objects
  */
-void ExperimentReport::calculateStatistics(vector<double> vector, map<string, double> * values)
+void ExperimentReport::calculateStatistics(std::vector<double> vector,std::map<std::string, double> * values)
 {
     if (vector.size() > 0)
     {
@@ -484,41 +484,41 @@ void ExperimentReport::calculateStatistics(vector<double> vector, map<string, do
 } // calculateStatistics
 
 
-void ExperimentReport::printHeaderLatexCommands(string fileName)
+void ExperimentReport::printHeaderLatexCommands(std::string fileName)
 {
     std::ofstream out(fileName.c_str());
-    out << "\\documentclass{article}" << endl;
-    out << "\\title{" << experimentName_ << "}" << endl;
-    out << "\\usepackage{colortbl}" << endl;
-    out << "\\usepackage[table*]{xcolor}" << endl;
-    out << "\\xdefinecolor{gray95}{gray}{0.65}" << endl;
-    out << "\\xdefinecolor{gray25}{gray}{0.8}" << endl;
-    out << "\\author{}" << endl;
-    out << "\\begin{document}" << endl;
-    out << "\\maketitle" << endl;
-    out << "\\section{Tables}" << endl;
+    out << "\\documentclass{article}" << std::endl;
+    out << "\\title{" << experimentName_ << "}" << std::endl;
+    out << "\\usepackage{colortbl}" << std::endl;
+    out << "\\usepackage[table*]{xcolor}" << std::endl;
+    out << "\\xdefinecolor{gray95}{gray}{0.65}" << std::endl;
+    out << "\\xdefinecolor{gray25}{gray}{0.8}" << std::endl;
+    out << "\\author{}" << std::endl;
+    out << "\\begin{document}" << std::endl;
+    out << "\\maketitle" << std::endl;
+    out << "\\section{Tables}" << std::endl;
     out.close();
 } // printHeaderLatexCommands
 
 
-void ExperimentReport::printEndLatexCommands(string fileName)
+void ExperimentReport::printEndLatexCommands(std::string fileName)
 {
     std::fstream out(fileName.c_str(), std::ios::out | std::ios::app);
-    out << "\\end{document}" << endl;
+    out << "\\end{document}" << std::endl;
     out.close();
 } //printEndLatexCommands
 
 
-void ExperimentReport::printMeanStdDev(string fileName, int indicator, double *** mean,
+void ExperimentReport::printMeanStdDev(std::string fileName, int indicator, double *** mean,
                                        double *** stdDev)
 {
     std::fstream out(fileName.c_str(), std::ios::out | std::ios::app);
-    out << "\\" << endl;
-    out << "\\begin{table}" << endl;
-    out << "\\caption{" << indicatorList_[indicator] << ". Mean and standard deviation}" << endl;
-    out << "\\label{table:mean." << indicatorList_[indicator] << "}" << endl;
-    out << "\\centering" << endl;
-    out << "\\begin{scriptsize}" << endl;
+    out << "\\" << std::endl;
+    out << "\\begin{table}" << std::endl;
+    out << "\\caption{" << indicatorList_[indicator] << ". Mean and standard deviation}" << std::endl;
+    out << "\\label{table:mean." << indicatorList_[indicator] << "}" << std::endl;
+    out << "\\centering" << std::endl;
+    out << "\\begin{scriptsize}" << std::endl;
     out << "\\begin{tabular}{l";
 
     // calculate the number of columns
@@ -526,7 +526,7 @@ void ExperimentReport::printMeanStdDev(string fileName, int indicator, double **
     {
         out << "l";
     }
-    out << "}" << endl;
+    out << "}" << std::endl;
 
     out << "\\hline";
     // write table head
@@ -538,14 +538,14 @@ void ExperimentReport::printMeanStdDev(string fileName, int indicator, double **
         }
         else if (i == (algorithmNameList_.size() - 1))
         {
-            out << " " << algorithmNameList_[i] << "\\\\" << endl;
+            out << " " << algorithmNameList_[i] << "\\\\" << std::endl;
         }
         else
         {
             out << "" << algorithmNameList_[i] << " & ";
         }
     }
-    out << "\\hline" << endl;
+    out << "\\hline" << std::endl;
 
     char m[20], s[20];
     // write lines
@@ -635,28 +635,28 @@ void ExperimentReport::printMeanStdDev(string fileName, int indicator, double **
         }
         sprintf(m, "%10.2e", mean[indicator][i][algorithmNameList_.size() - 1]);
         sprintf(s, "%8.1e", stdDev[indicator][i][algorithmNameList_.size() - 1]);
-        out << "$" << m << "_{" << s << "}$ \\\\" << endl;
+        out << "$" << m << "_{" << s << "}$ \\\\" << std::endl;
     } // for
     //out << "" + mean[0][problemList_.length-1][algorithmNameList_.length-1] + "\\\\"+ "\n" ) ;
 
-    out << "\\hline" << endl;
-    out << "\\end{tabular}" << endl;
-    out << "\\end{scriptsize}" << endl;
-    out << "\\end{table}" << endl;
+    out << "\\hline" << std::endl;
+    out << "\\end{tabular}" << std::endl;
+    out << "\\end{scriptsize}" << std::endl;
+    out << "\\end{table}" << std::endl;
     out.close();
 } // printMeanStdDev
 
 
-void ExperimentReport::printMedianIQR(string fileName, int indicator, double *** median,
+void ExperimentReport::printMedianIQR(std::string fileName, int indicator, double *** median,
                                       double *** IQR)
 {
     std::fstream out(fileName.c_str(), std::ios::out | std::ios::app);
-    out << "\\" << endl;
-    out << "\\begin{table}" << endl;
-    out << "\\caption{" << indicatorList_[indicator] << ". Median and IQR}" << endl;
-    out << "\\label{table:median." << indicatorList_[indicator] << "}" << endl;
-    out << "\\begin{scriptsize}" << endl;
-    out << "\\centering" << endl;
+    out << "\\" << std::endl;
+    out << "\\begin{table}" << std::endl;
+    out << "\\caption{" << indicatorList_[indicator] << ". Median and IQR}" << std::endl;
+    out << "\\label{table:median." << indicatorList_[indicator] << "}" << std::endl;
+    out << "\\begin{scriptsize}" << std::endl;
+    out << "\\centering" << std::endl;
     out << "\\begin{tabular}{l";
 
     // calculate the number of columns
@@ -664,7 +664,7 @@ void ExperimentReport::printMedianIQR(string fileName, int indicator, double ***
     {
         out << "l";
     }
-    out << "}" << endl;
+    out << "}" << std::endl;
 
     out << "\\hline";
     // write table head
@@ -676,14 +676,14 @@ void ExperimentReport::printMedianIQR(string fileName, int indicator, double ***
         }
         else if (i == (algorithmNameList_.size() - 1))
         {
-            out << " " << algorithmNameList_[i] << "\\\\" << endl;
+            out << " " << algorithmNameList_[i] << "\\\\" << std::endl;
         }
         else
         {
             out << "" << algorithmNameList_[i] << " & ";
         }
     }
-    out << "\\hline" << endl;
+    out << "\\hline" << std::endl;
 
     char m[20], s[20];
     // write lines
@@ -773,14 +773,14 @@ void ExperimentReport::printMedianIQR(string fileName, int indicator, double ***
         }
         sprintf(m, "%10.2e", median[indicator][i][algorithmNameList_.size() - 1]);
         sprintf(s, "%8.1e", IQR[indicator][i][algorithmNameList_.size() - 1]);
-        out << "$" << m << "_{" << s << "}$ \\\\" << endl;
+        out << "$" << m << "_{" << s << "}$ \\\\" << std::endl;
     } // for
-    //out << "" << mean[0][problemList_.size()-1][algorithmNameList_.size()-1] << "\\\\" << endl;
+    //out << "" << mean[0][problemList_.size()-1][algorithmNameList_.size()-1] << "\\\\" << std::endl;
 
-    out << "\\hline" << endl;
-    out << "\\end{tabular}" << endl;
-    out << "\\end{scriptsize}" << endl;
-    out << "\\end{table}" << endl;
+    out << "\\hline" << std::endl;
+    out << "\\end{tabular}" << std::endl;
+    out << "\\end{scriptsize}" << std::endl;
+    out << "\\end{table}" << std::endl;
     out.close();
 } // printMedianIQR
 
@@ -788,8 +788,8 @@ void ExperimentReport::printMedianIQR(string fileName, int indicator, double ***
 /**
  * Invoking the generateScripts method on the RBoxplot class
  */
-void ExperimentReport::generateRBoxplotScripts (int rows, int cols, vector<string> problems,
-        string prefix, bool notch, ExperimentReport * experiment)
+void ExperimentReport::generateRBoxplotScripts (int rows, int cols, std::vector<std::string> problems,
+        std::string prefix, bool notch, ExperimentReport * experiment)
 {
     RBoxplot::generateScripts(rows, cols, problems, prefix, notch, this);
 } // generateRBoxplotScripts
@@ -798,7 +798,7 @@ void ExperimentReport::generateRBoxplotScripts (int rows, int cols, vector<strin
 /**
  * Invoking the generateScripts method on the RWilcoxon class
  */
-void ExperimentReport::generateRWilcoxonScripts(vector<string> problems, string prefix,
+void ExperimentReport::generateRWilcoxonScripts(std::vector<std::string> problems, std::string prefix,
         ExperimentReport * experiment)
 {
     RWilcoxon::generateScripts(problems, prefix, this);

@@ -58,7 +58,7 @@ Solution::Solution (int numberOfObjectives)
     objective_ = snew double[numberOfObjectives_];
     if (objective_ == nullptr)
     {
-        cout << "ERROR GRAVE: Impossible to reserve memory for storing objectives in class Solution" << endl;
+        std::cout << "ERROR GRAVE: Impossible to reserve memory for storing objectives in class Solution" << std::endl;
         exit(-1);
     }
     rank_ = 0;
@@ -82,7 +82,7 @@ Solution::Solution (Problem *problem)
     objective_ = snew double[numberOfObjectives_];
     if (objective_ == nullptr)
     {
-        cout << "ERROR GRAVE: Impossible to reserve memory for storing objectives in class Solution" << endl;
+        std::cout << "ERROR GRAVE: Impossible to reserve memory for storing objectives in class Solution" << std::endl;
         exit(-1);
     }
     // at this point objective vector has been created successfully
@@ -134,7 +134,7 @@ Solution::Solution (Solution *solution)
     objective_ = snew double[numberOfObjectives_];
     if (objective_ == nullptr)
     {
-        cout << "ERROR GRAVE: Impossible to reserve memory for storing objectives in class Solution" << endl;
+        std::cout << "ERROR GRAVE: Impossible to reserve memory for storing objectives in class Solution" << std::endl;
         exit(-1);
     }
     for (int i = 0; i< numberOfObjectives_; i++)
@@ -282,8 +282,8 @@ void Solution::setObjective(int i, double value)
 {
     if (i < 0 || i >= numberOfObjectives_)
     {
-        cout << "Solution::setObjective: objective index out of range: " << i
-             << endl;
+        std::cout << "Solution::setObjective: objective index out of range: " << i
+             << std::endl;
         exit(-1);
     }
     objective_[i] = value;
@@ -298,8 +298,8 @@ double Solution::getObjective(int i)
 {
     if (i < 0 || i >= numberOfObjectives_)
     {
-        cout << "Solution::getObjective: objective index out of range: " << i
-             << endl;
+        std::cout << "Solution::getObjective: objective index out of range: " << i
+             << std::endl;
         exit(-1);
     }
     return objective_[i];
@@ -327,12 +327,12 @@ int Solution::getNumberOfVariables()
 
 
 /**
- * Returns a string representing the solution.
+ * Returns a std::string representing the solution.
  * @return The string.
  */
-string Solution::toString()
+std::string Solution::toString()
 {
-    string aux = "";
+    std::string aux = "";
 
     for (int i = 0; i < numberOfVariables_; i++)
     {

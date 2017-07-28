@@ -40,7 +40,7 @@ StandardPSO2007::StandardPSO2007(Problem * problem) : Algorithm(problem)
     C_ = 1.0/2.0 + log(2) ; //1.193;
 
     comparator_ = new ObjectiveComparator(0) ; // Single objective comparator
-    map<string, void *> parameters ; // Operator parameters
+   std::map<std::string, void *> parameters ; // Operator parameters
 
     parameters["comparator"] = comparator_;
     findBestSolution_ = new BestSolutionSelection(parameters) ;
@@ -80,7 +80,7 @@ void StandardPSO2007::initParams()
     maxIterations_ = *(int *) getInputParameter("maxIterations");
     numberOfParticlesToInform_ = *(int *) getInputParameter("numberOfParticlesToInform");
 
-    cout << "Swarm size: " << swarmSize_ << endl;
+    std::cout << "Swarm size: " << swarmSize_ << std::endl;
 
     iteration_ = 0;
 
@@ -212,9 +212,9 @@ SolutionSet * StandardPSO2007::execute()
 
     neighborhood_ = new AdaptiveRandomNeighborhood(swarm_, numberOfParticlesToInform_) ;
 
-    cout << "SwarmSize: " << swarmSize_ << endl;
-    cout << "Swarm size: " << swarm_->size() << endl;
-    cout << "list size: " << neighborhood_->getNeighborhood().size() << endl;
+    std::cout << "SwarmSize: " << swarmSize_ << std::endl;
+    std::cout << "Swarm size: " << swarm_->size() << std::endl;
+    std::cout << "list size: " << neighborhood_->getNeighborhood().size() << std::endl;
 
     //-> Step2. Initialize the speed_ of each particle
     for (int i = 0; i < swarmSize_; i++)
@@ -241,25 +241,25 @@ SolutionSet * StandardPSO2007::execute()
         neighborhoodBest_[i] = getNeighborBest(i) ;
     }
 
-    //cout << "neighborhood_i " << neighborhood_->getNeighbors(0) << endl;
-    cout << "[";
+    //std::cout << "neighborhood_i " << neighborhood_->getNeighbors(0) << std::endl;
+    std::cout << "[";
     for (int i = 0; i < neighborhood_->getNeighbors(0).size()-1; i++)
     {
-        cout << neighborhood_->getNeighbors(0).at(i) << ",";
+        std::cout << neighborhood_->getNeighbors(0).at(i) << ",";
     }
-    cout << neighborhood_->getNeighbors(0).back() << "]" << endl;
+    std::cout << neighborhood_->getNeighbors(0).back() << "]" << std::endl;
     for (int s :  neighborhood_->getNeighbors(0))
     {
-        cout << s << ": " << localBest_[s]->getObjective(0) << endl;
+        std::cout << s << ": " << localBest_[s]->getObjective(0) << std::endl;
     }
 
-    cout << "localBest_i " << localBest_[0]->getObjective(0) << endl;
-    cout << "neighborhoodBest_i " << getNeighborBest(0)->getObjective(0) << endl;
+    std::cout << "localBest_i " << localBest_[0]->getObjective(0) << std::endl;
+    std::cout << "neighborhoodBest_i " << getNeighborBest(0)->getObjective(0) << std::endl;
 
-    cout << "Swarm: " << swarm_ << endl;
+    std::cout << "Swarm: " << swarm_ << std::endl;
     swarm_->printObjectives();
     double b = swarm_->best(comparator_)->getObjective(0) ;
-    cout << "Best: " << b << endl;
+    std::cout << "Best: " << b << std::endl;
 
     double bestFoundFitness = numeric_limits<double>::max();
 
@@ -298,11 +298,11 @@ SolutionSet * StandardPSO2007::execute()
         //System.out.println("Swarm( " + iteration_+ "): " + swarm_) ;
         //swarm_.printObjectives();
         double bestCurrentFitness = swarm_->best(comparator_)->getObjective(0) ;
-        cout << "Best: " << bestCurrentFitness << endl;
+        std::cout << "Best: " << bestCurrentFitness << std::endl;
 
         if (bestCurrentFitness == bestFoundFitness)
         {
-            cout << "Recomputing" << endl;
+            std::cout << "Recomputing" << std::endl;
             neighborhood_->recompute();
         }
 

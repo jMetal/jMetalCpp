@@ -325,7 +325,7 @@ int UtilsCMAES::checkEigenSystem (int N, double ** C, double * diag, double ** Q
     /* compute Q diag Q^T and Q Q^T to check */
     int i, j, k, res = 0;
     double cc, dd;
-    string s;
+    std::string s;
 
     for (i=0; i < N; ++i)
         for (j=0; j < N; ++j)
@@ -342,15 +342,15 @@ int UtilsCMAES::checkEigenSystem (int N, double ** C, double * diag, double ** Q
                 ostringstream stringStream;
                 stringStream << " " << i << " " << j << " " << cc << " " << C[i>j?i:j][i>j?j:i] << " " << (cc-C[i>j?i:j][i>j?j:i]);
                 s = stringStream.str();
-                cerr << "UtilsCMAES::checkEigenSystem(): WARNING - imprecise result detected " << s << endl;
+                cerr << "UtilsCMAES::checkEigenSystem(): WARNING - imprecise result detected " << s << std::endl;
                 ++res;
             }
             if (fabs(dd - (i==j?1:0)) > 1e-10)
             {
                 ostringstream stringStream;
-                stringStream << i << " " << j << " " << dd << endl;
+                stringStream << i << " " << j << " " << dd << std::endl;
                 s = stringStream.str();
-                cerr << "UtilsCMAES::checkEigenSystem(): WARNING - imprecise result detected (Q not orthog.) " << s << endl;
+                cerr << "UtilsCMAES::checkEigenSystem(): WARNING - imprecise result detected (Q not orthog.) " << s << std::endl;
                 ++res;
             }
         }

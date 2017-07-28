@@ -24,11 +24,11 @@
 #include "JMetalHeader.h"
 
 // Fixed (class) parameters
-const string F22RotatedHybridComposition3HighCondNumMatrix::FUNCTION_NAME = "Rotated Hybrid Composition Function 3 with High Condition Number Matrix";
+const std::string F22RotatedHybridComposition3HighCondNumMatrix::FUNCTION_NAME = "Rotated Hybrid Composition Function 3 with High Condition Number Matrix";
 // TODO: Cambiar ruta
-const string F22RotatedHybridComposition3HighCondNumMatrix::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/hybrid_func3_data.txt";
-const string F22RotatedHybridComposition3HighCondNumMatrix::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/hybrid_func3_HM_D";
-const string F22RotatedHybridComposition3HighCondNumMatrix::DEFAULT_FILE_MX_SUFFIX = ".txt";
+const std::string F22RotatedHybridComposition3HighCondNumMatrix::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/hybrid_func3_data.txt";
+const std::string F22RotatedHybridComposition3HighCondNumMatrix::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/hybrid_func3_HM_D";
+const std::string F22RotatedHybridComposition3HighCondNumMatrix::DEFAULT_FILE_MX_SUFFIX = ".txt";
 
 const double F22RotatedHybridComposition3HighCondNumMatrix::m_sigma[NUM_FUNC] =
 {
@@ -61,7 +61,7 @@ F22RotatedHybridComposition3HighCondNumMatrix::F22RotatedHybridComposition3HighC
 /**
  * Constructor
  */
-F22RotatedHybridComposition3HighCondNumMatrix::F22RotatedHybridComposition3HighCondNumMatrix(int dimension, double bias, string file_data, string file_m)
+F22RotatedHybridComposition3HighCondNumMatrix::F22RotatedHybridComposition3HighCondNumMatrix(int dimension, double bias, std::string file_data, std::string file_m)
     : TestFunc(dimension, bias, FUNCTION_NAME)
 {
 
@@ -190,7 +190,7 @@ double F22RotatedHybridComposition3HighCondNumMatrix::MyHCJob::basic_func(int fu
         result = Benchmark::griewank(x, length);
         break;
     default:
-        cerr << "func_no is out of range." << endl;
+        cerr << "func_no is out of range." << std::endl;
         exit(-1);
     }
     return (result);
@@ -212,7 +212,7 @@ double F22RotatedHybridComposition3HighCondNumMatrix::f(double * x)
 }
 
 
-string F22RotatedHybridComposition3HighCondNumMatrix::getFileMxName(string prefix, int dimension, string suffix)
+std::string F22RotatedHybridComposition3HighCondNumMatrix::getFileMxName(std::string prefix, int dimension, std::string suffix)
 {
     std::stringstream sstm;
     sstm << prefix << dimension << suffix;

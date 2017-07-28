@@ -37,78 +37,78 @@ void Experiment::checkExperimentDirectory()
     switch (res)
     {
     case 0:
-        cout << "Experiment directory does NOT exist. Creating" << endl;
+        std::cout << "Experiment directory does NOT exist. Creating" << std::endl;
         if (FileUtils::createDirectory(experimentBaseDirectory_) == -1)
         {
-            cout << "Error creating directory" << endl;
+            std::cout << "Error creating directory" << std::endl;
             exit(-1);
         }
         break;
     case 1:
-        cout << "Experiment directory exists." << endl;
-        cout << "Experiment directory is a directory" << endl;
+        std::cout << "Experiment directory exists." << std::endl;
+        std::cout << "Experiment directory is a directory" << std::endl;
         break;
     case 2:
-        cout << "Experiment directory exists." << endl;
-        cout << "Experiment directory is not a directory. Deleting file and creating directory" << endl;
+        std::cout << "Experiment directory exists." << std::endl;
+        std::cout << "Experiment directory is not a directory. Deleting file and creating directory" << std::endl;
         if( remove(experimentBaseDirectory_.c_str()) != 0 )
         {
-            cout << "Error deleting file." << endl;
+            std::cout << "Error deleting file." << std::endl;
             exit(-1);
         }
         else
         {
-            cout << "File successfully deleted." << endl;
+            std::cout << "File successfully deleted." << std::endl;
         }
         if (FileUtils::createDirectory(experimentBaseDirectory_) == -1)
         {
-            cout << "Error creating directory" << endl;
+            std::cout << "Error creating directory" << std::endl;
             exit(-1);
         }
         break;
     case -1:
-        cout << "Error checking experiment directory" << endl;
+        std::cout << "Error checking experiment directory" << std::endl;
         exit(-1);
     }
 } // checkExperimentDirectory
 
 
-void Experiment::resetFile(string file)
+void Experiment::resetFile(std::string file)
 {
     int res = FileUtils::existsPath(file.c_str());
     switch (res)
     {
     case 0:
-        cout << "File (" << file << ") does NOT exist." << endl;
+        std::cout << "File (" << file << ") does NOT exist." << std::endl;
         break;
     case 1:
-        cout << "File (" << file << ") exists." << endl;
-        cout << "File (" << file << ") is a directory. Deleting directory." << endl;
+        std::cout << "File (" << file << ") exists." << std::endl;
+        std::cout << "File (" << file << ") is a directory. Deleting directory." << std::endl;
         if( remove(file.c_str()) != 0 )
         {
-            cout << "Error deleting directory." << endl;
+            std::cout << "Error deleting directory." << std::endl;
             exit(-1);
         }
         else
         {
-            cout << "Directory successfully deleted." << endl;
+            std::cout << "Directory successfully deleted." << std::endl;
         }
         break;
     case 2:
-        cout << "File (" << file << ") exists." << endl;
-        cout << "File (" << file << ") is a file. Deleting file." << endl;
+        std::cout << "File (" << file << ") exists." << std::endl;
+        std::cout << "File (" << file << ") is a file. Deleting file." << std::endl;
         if( remove(file.c_str()) != 0 )
         {
-            cout << "Error deleting file." << endl;
+            std::cout << "Error deleting file." << std::endl;
             exit(-1);
         }
         else
         {
-            cout << "File successfully deleted." << endl;
+            std::cout << "File successfully deleted." << std::endl;
         }
         break;
     case -1:
-        cout << "Error checking file (" << file << ")" << endl;
+        std::cout << "Error checking file (" << file << ")" << std::endl;
         exit(-1);
     }
 } // resetFile

@@ -59,10 +59,10 @@ int FileUtils::existsPath(const char* path)
 /**
  * Creates a directory in the specified path
  */
-int FileUtils::createDirectory(string path)
+int FileUtils::createDirectory(std::string path)
 {
     int res;
-    cout << "Creating directory: " << path << endl;
+    std::cout << "Creating directory: " << path << std::endl;
 
     if (path.size() > 512)
         res = 1;
@@ -71,7 +71,7 @@ int FileUtils::createDirectory(string path)
         for (int i = 0; i < path.size(); i++)
             if (path[i] == '/' || i == path.size()-1)
             {
-                string path2 = path.substr(0, i+1);
+                std::string path2 = path.substr(0, i+1);
 
 #ifdef WINDOWS
                 //res = mkdir(path2.c_str());

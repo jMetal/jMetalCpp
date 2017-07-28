@@ -41,7 +41,7 @@ DE_Settings::~DE_Settings ()
 /**
  * Constructor
  */
-DE_Settings::DE_Settings(string problemName)
+DE_Settings::DE_Settings(std::string problemName)
 {
     problemName_ = problemName ;
 
@@ -66,14 +66,14 @@ Algorithm * DE_Settings::configure()
     algorithm->setInputParameter("populationSize",&populationSize_);
     algorithm->setInputParameter("maxEvaluations",&maxEvaluations_);
 
-    map<string, void *> parameters;
+   std::map<std::string, void *> parameters;
 
     // Crossover operator
     double crParameter = crParameter_;
     double fParameter  = fParameter_;
     parameters["CR"] =  &crParameter;
     parameters["F"] = &fParameter;
-    string deVariantParameter = deVariantParameter_;
+    std::string deVariantParameter = deVariantParameter_;
     parameters["DE_VARIANT"] = &deVariantParameter;
     crossover = snew DifferentialEvolutionCrossover(parameters);
 
@@ -85,7 +85,7 @@ Algorithm * DE_Settings::configure()
     algorithm->addOperator("crossover",crossover);
     algorithm->addOperator("selection",selection);
 
-    cout << "DE algorithm initialized." << endl;
+    std::cout << "DE algorithm initialized." << std::endl;
 
     return algorithm ;
 } // configure

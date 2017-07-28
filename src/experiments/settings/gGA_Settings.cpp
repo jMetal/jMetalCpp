@@ -42,7 +42,7 @@ gGA_Settings::~gGA_Settings ()
 /**
  * Constructor
  */
-gGA_Settings::gGA_Settings(string problemName)
+gGA_Settings::gGA_Settings(std::string problemName)
 {
     problemName_ = problemName ;
 
@@ -68,7 +68,7 @@ Algorithm * gGA_Settings::configure()
     algorithm->setInputParameter("maxEvaluations",&maxEvaluations_);
 
     // Mutation and Crossover for Real codification
-    map<string, void *> parameters;
+   std::map<std::string, void *> parameters;
 
     double crossoverProbability = crossoverProbability_;
     double crossoverDistributionIndex = crossoverDistributionIndex_ ;
@@ -92,7 +92,7 @@ Algorithm * gGA_Settings::configure()
     algorithm->addOperator("mutation",mutation);
     algorithm->addOperator("selection",selection);
 
-    cout << "gGA algorithm initialized." << endl;
+    std::cout << "gGA algorithm initialized." << std::endl;
 
     return algorithm ;
 } // configure

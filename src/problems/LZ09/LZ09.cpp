@@ -35,7 +35,7 @@ LZ09::LZ09(int nvar, int nobj, int ptype, int dtype, int ltype)
 /**
  * Alpha function
  */
-void LZ09::alphaFunction(double *alpha, vector<double> * x, int dim, int type)
+void LZ09::alphaFunction(double *alpha, std::vector<double> * x, int dim, int type)
 {
     if (dim == 2)
     {
@@ -105,7 +105,7 @@ void LZ09::alphaFunction(double *alpha, vector<double> * x, int dim, int type)
  */
 
 
-double LZ09::betaFunction(vector<double> * x, int type)
+double LZ09::betaFunction(std::vector<double> * x, int type)
 {
 
     double beta;
@@ -263,7 +263,7 @@ double LZ09::psfunc3(double x, double t1, double t2, int dim, int type)
     return beta;
 }
 
-void LZ09::objective(vector<double> *x_var, vector <double> *y_obj)
+void LZ09::objective(std::vector<double> *x_var, std::vector <double> *y_obj)
 {
     // 2-objective case
     if(nobj_==2)
@@ -271,8 +271,8 @@ void LZ09::objective(vector<double> *x_var, vector <double> *y_obj)
         if(ltype_==21||ltype_==22||ltype_==23||ltype_==24||ltype_==26)
         {
             double g = 0, h = 0, a, b;
-            vector <double> aa  ; // *aa = new vector();
-            vector <double> bb ; // *bb = new vector();
+            std::vector <double> aa  ; // *aa = new vector();
+            std::vector <double> bb ; // *bb = new vector();
             for(int n=1; n<nvar_; n++)
             {
 
@@ -304,8 +304,8 @@ void LZ09::objective(vector<double> *x_var, vector <double> *y_obj)
         {
             double g = 0, h = 0, a, b;
             double e = 0, c;
-            vector <double> aa ; //= new Vector() ;
-            vector <double> bb ; //= new Vector() ;
+            std::vector <double> aa ; //= new Vector() ;
+            std::vector <double> bb ; //= new Vector() ;
             for(int n=1; n<nvar_; n++)
             {
                 if(n%3==0)
@@ -345,9 +345,9 @@ void LZ09::objective(vector<double> *x_var, vector <double> *y_obj)
         if(ltype_==31||ltype_==32)
         {
             double g = 0, h = 0, e = 0, a;
-            vector <double> aa ;
-            vector <double> bb ;
-            vector <double> cc ;
+            std::vector <double> aa ;
+            std::vector <double> bb ;
+            std::vector <double> cc ;
             for(int n=2; n<nvar_; n++)
             {
                 a = psfunc3(x_var->at(n),x_var->at(0),x_var->at(1),n,ltype_);

@@ -20,7 +20,7 @@
 
 #include <ZDT2.h>
 
-ZDT2::ZDT2(string solutionType, int numberOfVariables)
+ZDT2::ZDT2(std::string solutionType, int numberOfVariables)
 {
     numberOfVariables_   = numberOfVariables;
     numberOfObjectives_  = 2;
@@ -30,14 +30,14 @@ ZDT2::ZDT2(string solutionType, int numberOfVariables)
     lowerLimit_ = snew double[numberOfVariables_];//(double *)malloc(sizeof(double)*numberOfVariables);
     if (lowerLimit_ == nullptr)
     {
-        cout << "Impossible to reserve memory for storing the variable lower limits" << endl;
+        std::cout << "Impossible to reserve memory for storing the variable lower limits" << std::endl;
         exit(-1);
     }
 
     upperLimit_ = snew double[numberOfVariables_];//(double *)malloc(sizeof(double)*numberOfVariables);
     if (upperLimit_ == nullptr)
     {
-        cout << "Impossible to reserve memory for storing the variable lower limits" << endl;
+        std::cout << "Impossible to reserve memory for storing the variable lower limits" << std::endl;
         exit(-1);
     }
 
@@ -52,13 +52,13 @@ ZDT2::ZDT2(string solutionType, int numberOfVariables)
     else if (solutionType.compare("Real") == 0)
     {
         solutionType_ = new RealSolutionType(this) ;
-        //cout << "Tipo seleccionado Real" << endl;
+        //std::cout << "Tipo seleccionado Real" << std::endl;
     }
     else if (solutionType.compare("ArrayReal") == 0)
         solutionType_ = new ArrayRealSolutionType(this) ;
     else
     {
-        cout << "Error: solution type " << solutionType << " invalid" << endl;
+        std::cout << "Error: solution type " << solutionType << " invalid" << std::endl;
         exit(-1) ;
     }
     fx_ = snew double[numberOfObjectives_] ;

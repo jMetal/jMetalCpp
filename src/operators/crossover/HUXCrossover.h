@@ -33,7 +33,7 @@ class HUXCrossover : public Crossover
 {
 
 public:
-    HUXCrossover(map<string, void *> parameters);
+    HUXCrossover(std::map<std::string, void *> parameters);
     void *execute(void *);
 
 private:

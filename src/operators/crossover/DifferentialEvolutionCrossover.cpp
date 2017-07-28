@@ -59,13 +59,13 @@ const double DifferentialEvolutionCrossover::DEFAULT_K = 0.5;
 /**
  * DEFAULT_VARIANT defines the default DE variant
  */
-const string DifferentialEvolutionCrossover::DEFAULT_DE_VARIANT = "rand/1/bin";
+const std::string DifferentialEvolutionCrossover::DEFAULT_DE_VARIANT = "rand/1/bin";
 
 
 /**
  * Constructor
  */
-DifferentialEvolutionCrossover::DifferentialEvolutionCrossover(map<string, void *> parameters)
+DifferentialEvolutionCrossover::DifferentialEvolutionCrossover(std::map<std::string, void *> parameters)
     : Crossover(parameters)
 {
 
@@ -88,7 +88,7 @@ DifferentialEvolutionCrossover::DifferentialEvolutionCrossover(map<string, void 
     }
     if (parameters["DE_VARIANT"] != nullptr)
     {
-        DE_Variant_ = *(string *) parameters["DE_VARIANT"];
+        DE_Variant_ = *(std::string *) parameters["DE_VARIANT"];
     }
 
 } // DifferentialEvolutionCrossover
@@ -308,8 +308,8 @@ void * DifferentialEvolutionCrossover::execute(void *object)
     {
 
         cerr << "DifferentialEvolutionCrossover.execute: " <<
-             " unknown DE variant (" << DE_Variant_ << ")" << endl;
-        cerr << "Exception in DifferentialEvolutionCrossover.execute()" << endl;
+             " unknown DE variant (" << DE_Variant_ << ")" << std::endl;
+        cerr << "Exception in DifferentialEvolutionCrossover.execute()" << std::endl;
         exit(-1);
 
     } // if

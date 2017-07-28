@@ -40,7 +40,7 @@ private:
 
 public:
     PSO_Settings() ;
-    PSO_Settings(string problemName) ;
+    PSO_Settings(std::string problemName) ;
     ~PSO_Settings() ;
 
     Algorithm * configure() ;

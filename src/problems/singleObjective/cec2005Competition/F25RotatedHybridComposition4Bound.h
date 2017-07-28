@@ -32,10 +32,10 @@ class F25RotatedHybridComposition4Bound : public TestFunc
 private:
 
     // Fixed (class) parameters
-    static const string FUNCTION_NAME;
-    static const string DEFAULT_FILE_DATA;
-    static const string DEFAULT_FILE_MX_PREFIX;
-    static const string DEFAULT_FILE_MX_SUFFIX;
+    static const std::string FUNCTION_NAME;
+    static const std::string DEFAULT_FILE_DATA;
+    static const std::string DEFAULT_FILE_MX_PREFIX;
+    static const std::string DEFAULT_FILE_MX_SUFFIX;
 
     // Number of functions
     static const int NUM_FUNC = 10;
@@ -65,12 +65,12 @@ private:
 
     MyHCJob * theJob;
 
-    string getFileMxName(string prefix, int dimension, string suffix);
+    std::string getFileMxName(std::string prefix, int dimension, std::string suffix);
 
 public:
 
     F25RotatedHybridComposition4Bound(int dimension, double bias);
-    F25RotatedHybridComposition4Bound(int dimension, double bias, string file_data, string file_m);
+    F25RotatedHybridComposition4Bound(int dimension, double bias, std::string file_data, std::string file_m);
     ~F25RotatedHybridComposition4Bound();
 
     double f (double * x);

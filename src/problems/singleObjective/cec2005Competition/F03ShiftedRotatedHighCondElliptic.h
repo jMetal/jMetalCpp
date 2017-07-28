@@ -31,10 +31,10 @@ class F03ShiftedRotatedHighCondElliptic : public TestFunc
 private:
 
     // Fixed (class) parameters
-    static const string FUNCTION_NAME;
-    static const string DEFAULT_FILE_DATA;
-    static const string DEFAULT_FILE_MX_PREFIX;
-    static const string DEFAULT_FILE_MX_SUFFIX;
+    static const std::string FUNCTION_NAME;
+    static const std::string DEFAULT_FILE_DATA;
+    static const std::string DEFAULT_FILE_MX_PREFIX;
+    static const std::string DEFAULT_FILE_MX_SUFFIX;
 
     // Shifted global optimum
     double * m_o;
@@ -47,12 +47,12 @@ private:
 
     double constant;
 
-    string getFileMxName(string prefix, int dimension, string suffix);
+    std::string getFileMxName(std::string prefix, int dimension, std::string suffix);
 
 public:
 
     F03ShiftedRotatedHighCondElliptic(int dimension, double bias);
-    F03ShiftedRotatedHighCondElliptic(int dimension, double bias, string file_data, string file_m);
+    F03ShiftedRotatedHighCondElliptic(int dimension, double bias, std::string file_data, std::string file_m);
     ~F03ShiftedRotatedHighCondElliptic();
 
     double f (double * x);

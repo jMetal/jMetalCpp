@@ -30,7 +30,7 @@
 #include <algorithm>
 //#include <list>
 
-using namespace std;
+
 
 /**
  * Class representing an adaptive random neighborhood
@@ -41,18 +41,18 @@ class AdaptiveRandomNeighborhood
 private:
 
     SolutionSet * solutionSet_;
-    vector<vector<int>> list_;
+    std::vector<std::vector<int>> list_;
     int numberOfRandomNeighbours_;
 
 public:
 
     AdaptiveRandomNeighborhood(SolutionSet * solutionSet, int numberOfRandomNeighbours);
-    vector<int> getNeighbors(int i);
+    std::vector<int> getNeighbors(int i);
     int getNumberOfRandomNeighbours();
     SolutionSet * getBestFitnessSolutionInNeighborhood(Comparator * comparator);
-    vector<vector<int>> getNeighborhood();
+    std::vector<std::vector<int>> getNeighborhood();
     void recompute();
-    //string toString();
+    //std::string toString();
 
 }; // AdaptiveRandomNeighborhood
 

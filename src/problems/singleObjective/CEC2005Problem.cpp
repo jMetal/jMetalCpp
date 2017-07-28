@@ -31,7 +31,7 @@ const double CEC2005Problem::PI = 3.141592653589793;
  * @param problemId CEC2005 problem id
  * @param numberOfVariables Number of variables of the problem
  */
-CEC2005Problem::CEC2005Problem(string solutionType, int problemID, int numberOfVariables)
+CEC2005Problem::CEC2005Problem(std::string solutionType, int problemID, int numberOfVariables)
 {
     numberOfVariables_   = numberOfVariables ;
     numberOfObjectives_  = 1;
@@ -112,7 +112,7 @@ CEC2005Problem::CEC2005Problem(string solutionType, int problemID, int numberOfV
         solutionType_ = snew RealSolutionType(this) ;
     else
     {
-        cout << "Error: solution type " << solutionType << " invalid" << endl;
+        std::cout << "Error: solution type " << solutionType << " invalid" << std::endl;
         exit(-1) ;
     } // if
 

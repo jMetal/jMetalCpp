@@ -40,7 +40,7 @@ private:
     MetricsUtil * utils_;
     Hypervolume * hv_;
 
-    vector<double> hvContributions(vector< vector<double> > front);
+    std::vector<double> hvContributions(std::vector< std::vector<double> > front);
 
 
 public:

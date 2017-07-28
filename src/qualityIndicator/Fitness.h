@@ -26,7 +26,7 @@
 #include <fstream>
 #include <iostream>
 
-using namespace std;
+
 
 class Fitness
 {
@@ -39,7 +39,7 @@ public:
 
     Fitness();
     ~Fitness();
-    void fitness(vector <vector<double> > a, string file);
+    void fitness(std::vector <std::vector<double> > a, std::string file);
 
 }; // Fitness
 

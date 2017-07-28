@@ -32,7 +32,7 @@
 /**
  * Constructor
  */
-DifferentialEvolutionSelection::DifferentialEvolutionSelection(map<string, void *> parameters)
+DifferentialEvolutionSelection::DifferentialEvolutionSelection(std::map<std::string, void *> parameters)
     : Selection(parameters) {}
 
 
@@ -54,7 +54,7 @@ void * DifferentialEvolutionSelection::execute(void * object)
 
     if (population->size() < 4)
     {
-        cerr << "DifferentialEvolutionSelection: the population has less than four solutions" << endl;
+        cerr << "DifferentialEvolutionSelection: the population has less than four solutions" << std::endl;
         exit(-1);
     }
 
