@@ -30,7 +30,7 @@
 #include <ProblemFactory.h>
 #include <QualityIndicator.h>
 #include <UniformMutation.h>
-
+#include "RangeMutation.h"
 #include <iostream>
 #include <time.h>
 
@@ -64,6 +64,9 @@ int main(int argc, char ** argv)
     double mutationProbability = 1.0/problem->getNumberOfVariables();
     int swarmSize = 100;
     int archiveSize = 100;
+	JMetal::MatrixOfShort indexZones{{0, 1}};
+	//JMetal::VectorOfShort indexes{0, 1};
+	//indexZones.push_back(indexes);
 
     // Algorithm parameters
     algorithm->setInputParameter("swarmSize",&swarmSize);
@@ -71,7 +74,9 @@ int main(int argc, char ** argv)
     algorithm->setInputParameter("maxIterations",&maxIterations);
     parameters["probability"] =  &mutationProbability;
     parameters["perturbation"] = &perturbationIndex;
-    uniformMutation = snew UniformMutation(parameters);
+	parameters["zone_index"] = &indexZones;
+    //uniformMutation = snew UniformMutation(parameters);
+	uniformMutation = snew RangeMutation(parameters);
     parameters.clear();
     parameters["probability"] =  &mutationProbability;
     parameters["perturbation"] =  &perturbationIndex;

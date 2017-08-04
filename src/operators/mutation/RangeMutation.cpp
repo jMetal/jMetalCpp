@@ -19,30 +19,54 @@ RangeMutation::RangeMutation(MapOfStringFunct parameters): Mutation(parameters)
 void RangeMutation::doMutation(double probability, Solution * solution)
 {
 	XReal * x = new XReal(solution);
-	for (int var = 0; var < solution->getNumberOfVariables(); ++var)
+	for (auto row : zoneIndex_)
 	{
-		if (PseudoRandom::randDouble() < probability)
+		for (auto col: row)
 		{
-			double rand = PseudoRandom::randDouble();
-			double tmp = (rand - 0.5) * perturbation_;
-
-			tmp += x->getValue(var);
-			if (tmp < x->getLowerBound(var))
+			if (PseudoRandom::randDouble() < probability)
 			{
-				tmp = x->getLowerBound(var);
+				double tmp = doPertubation(x, col);
+				x->setValue(col, tmp);
 			}
-			else if (tmp > x->getUpperBound(var))
-			{
-				tmp = x->getUpperBound(var);
-			}
-			x->setValue(var, tmp);
-		} // if
-	} // for
-
+		}
+	}
 	delete x;
 }
 
-void * RangeMutation::execute(void *)
+double RangeMutation::doPertubation(XReal* array, short col)
 {
-	return nullptr;
+	double rand = PseudoRandom::randDouble();
+	double tmp = (rand - 0.5) * perturbation_;
+	tmp += array->getValue(col);
+	double minMaxRange = ((array->getUpperBound(col) - array->getLowerBound(col)) / 2.0);
+	if (tmp < array->getLowerBound(col))
+	{
+		//tmp = array->getLowerBound(col);
+		tmp = array->getLowerBound(col) + minMaxRange;
+		if (perturbation_ > 0.0 
+			&& perturbation_ < 1.0) 
+		{
+			double prand = PseudoRandom::randDouble() * perturbation_;
+			tmp = array->getLowerBound(col) + minMaxRange * prand;
+		}
+	}
+	else if (tmp > array->getUpperBound(col))
+	{
+		//tmp = array->getUpperBound(col);
+		tmp = array->getUpperBound(col) - minMaxRange;
+		if (perturbation_ > 0.0
+			&& perturbation_ < 1.0)
+		{
+			double prand = PseudoRandom::randDouble() * perturbation_;
+			tmp = array->getUpperBound(col) - minMaxRange * prand;
+		}
+	}
+	return tmp;
+}
+
+void * RangeMutation::execute(void * object)
+{
+	Solution *solution = (Solution *)object;
+	doMutation(mutationProbability_, solution);
+	return solution;
 }

@@ -45,6 +45,10 @@ protected:
 	* @throws JMException
 	*/
 	void doMutation(double probability, Solution *solution);
+	/**
+	 * Creates a valid random pertubation
+	**/
+	double doPertubation(XReal* array, short col);
 public:
 	/**
 	* Constructor.
