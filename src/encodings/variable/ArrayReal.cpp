@@ -30,7 +30,7 @@ ArrayReal::ArrayReal()
 {
     problem_ = nullptr;
     size_   = 0;
-    array_ = nullptr;
+    //array_ = nullptr;
 } // Constructor
 
 
@@ -42,7 +42,8 @@ ArrayReal::ArrayReal(int size, Problem * problem)
 {
     problem_ = problem;
     size_   = size;
-    array_ = snew double[size_];
+    //array_ = snew double[size_];
+	array_.assign(size_, 0.0);
 
     for (int i = 0; i < size_ ; i++)
     {
@@ -61,7 +62,8 @@ ArrayReal::ArrayReal(ArrayReal * arrayReal)
 {
     problem_ = arrayReal->problem_ ;
     size_  = arrayReal->size_;
-    array_ = snew double[size_];
+    //array_ = snew double[size_];
+	array_.assign(size_, 0.0);
 
     for (int i = 0; i < size_; i++)
     {
@@ -75,7 +77,7 @@ ArrayReal::ArrayReal(ArrayReal * arrayReal)
  */
 ArrayReal::~ArrayReal()
 {
-    delete [] array_;
+    //delete [] array_;
 } // ~ArrayReal
 
 

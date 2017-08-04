@@ -30,6 +30,8 @@ namespace JMetal
 	using VectorOfBoolean = std::vector<bool>;
 	using MatrixOfBoolean = std::vector<VectorOfBoolean>;
 	using VectorOfString = std::vector<std::string>;
+	using VectorOfShort = std::vector<unsigned short>;
+	using MatrixOfShort = std::vector<VectorOfShort>;
 }
 
 #endif

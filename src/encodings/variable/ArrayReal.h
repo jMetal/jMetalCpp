@@ -33,11 +33,10 @@
  */
 class ArrayReal : public Variable
 {
-
-public:
-
-    double * array_;
-    Problem * problem_;
+protected:
+	JMetal::VectorOfDouble array_;
+public:    
+    Problem * problem_ = nullptr;
     int size_;
 
     ArrayReal();

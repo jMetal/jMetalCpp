@@ -58,7 +58,8 @@ double XReal::getValue(int index)
     }
     else if (typeid(*type_) == typeid(ArrayRealSolutionType))
     {
-        return ((ArrayReal*)(solution_->getDecisionVariables()[0]))->array_[index];
+        //return ((ArrayReal*)(solution_->getDecisionVariables()[0]))->array_[index];
+		return ((ArrayReal*)(solution_->getDecisionVariables()[0]))->getValue(index);
     }
     else
     {
@@ -85,7 +86,8 @@ void XReal::setValue(int index, double value)
     }
     else if (typeid(*type_) == typeid(ArrayRealSolutionType))
     {
-        ((ArrayReal*)(solution_->getDecisionVariables()[0]))->array_[index]=value;
+        //((ArrayReal*)(solution_->getDecisionVariables()[0]))->array_[index]=value;
+		((ArrayReal*)(solution_->getDecisionVariables()[0]))->setValue(index, value);
     }
     else
     {
