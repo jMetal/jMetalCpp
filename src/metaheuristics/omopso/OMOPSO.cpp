@@ -162,16 +162,19 @@ void OMOPSO::computeNewPositions()
         //particle.move(speed_[i]);
         for (int var = 0; var < particle->getNumberOfDecisionVariables(); var++)
         {
+			double diff = (speed[i][var] / 2.0) + PseudoRandom::randDouble();
             particle->setValue(var, particle->getValue(var) + speed[i][var]);
 
             if (particle->getValue(var) < problem_->getLowerLimit(var))
-            {
-                particle->setValue(var, problem_->getLowerLimit(var));
+            {				
+                //particle->setValue(var, problem_->getLowerLimit(var));
+				particle->setValue(var, problem_->getLowerLimit(var) + diff);
                 speed[i][var] = speed[i][var] * -1.0;
             }
             if (particle->getValue(var) > problem_->getUpperLimit(var))
             {
-                particle->setValue(var, problem_->getUpperLimit(var));
+                //particle->setValue(var, problem_->getUpperLimit(var));
+				particle->setValue(var, problem_->getUpperLimit(var) - diff);
                 speed[i][var] = speed[i][var] * -1.0;
             }
         }
