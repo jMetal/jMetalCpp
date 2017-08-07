@@ -58,6 +58,7 @@ void UniformMutation::doMutation(double probability, Solution *solution)
 
     for (int var=0; var < solution->getNumberOfVariables(); var++)
     {
+		double minMaxRange = ((x->getUpperBound(var) - x->getLowerBound(var)) / 2.0);
         if (PseudoRandom::randDouble() < probability)
         {
             double rand = PseudoRandom::randDouble();
@@ -67,11 +68,25 @@ void UniformMutation::doMutation(double probability, Solution *solution)
 
             if (tmp < x->getLowerBound(var))
             {
-                tmp = x->getLowerBound(var);
+                //tmp = x->getLowerBound(var);
+				tmp = x->getLowerBound(var) + minMaxRange;
+				if (perturbation_ > 0.0
+					&& perturbation_ < 1.0)
+				{
+					double prand = PseudoRandom::randDouble() * perturbation_;
+					tmp = x->getLowerBound(var) + minMaxRange * prand;
+				}
+
             }
             else if (tmp > x->getUpperBound(var))
             {
-                tmp = x->getUpperBound(var);
+                //tmp = x->getUpperBound(var);
+				if (perturbation_ > 0.0
+					&& perturbation_ < 1.0)
+				{
+					double prand = PseudoRandom::randDouble() * perturbation_;
+					tmp = x->getUpperBound(var) - minMaxRange * prand;
+				}
             }
 
             x->setValue(var, tmp) ;
