@@ -33,6 +33,7 @@
 #include "RangeMutation.h"
 #include <iostream>
 #include <time.h>
+#include "problems/SIGA/BarrosF1F2.h"
 
 /**
  * Method for configuring and running the OMOPSO algorithm
@@ -56,7 +57,8 @@ int main(int argc, char ** argv)
     {
         std::cout << "No problem selected." << std::endl;
         std::cout << "Default problem will be used: Kursawe" << std::endl;
-        problem = ProblemFactory::getProblem(const_cast<char *>("Kursawe"));
+        //problem = ProblemFactory::getProblem(const_cast<char *>("Kursawe"));
+		problem = snew BarrosF1F2("Real");
     }
     algorithm = snew OMOPSO(problem);
     int maxIterations = 250;
