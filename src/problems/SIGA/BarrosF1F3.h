@@ -17,8 +17,7 @@ public:
 	void evaluate(Solution *solution);
 
 	virtual ~BarrosF1F3();
-private:
-	std::function<void(Solution*)> callback_;
+
 };
 
 #endif /* __BARROS_F1_F3_H__ */

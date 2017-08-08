@@ -50,18 +50,18 @@ private:
     Problem * problem_;
     SolutionType * type_;
     Variable ** variable_;
-    int numberOfVariables_;
+    int numberOfVariables_ = 0;
     double *objective_;
-    int numberOfObjectives_;
-    double fitness_;
-    bool marked_;
-    int rank_;
-    double overallConstraintViolation_;
-    int numberOfViolatedConstraints_;
-    int location_;
-    double kDistance_;
-    double crowdingDistance_;
-    double distanceToSolutionSet_;
+    int numberOfObjectives_ = 0;
+    double fitness_ = 0.0;
+    bool marked_ = false;
+    int rank_ = 0;
+    double overallConstraintViolation_ = 0.0;
+    int numberOfViolatedConstraints_ = 0;
+    int location_ = 0;
+    double kDistance_ = 0.0;
+    double crowdingDistance_ = 0.0;
+    double distanceToSolutionSet_ = 0.0;
 
 public:
     Solution ();

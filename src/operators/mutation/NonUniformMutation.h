@@ -44,20 +44,20 @@ private:
      * perturbation_ stores the perturbation value used in the Non Uniform
      * mutation operator
      */
-    double perturbation_;
+    double perturbation_ = 0.0;
 
     /**
      * maxIterations_ stores the maximun number of iterations.
      */
-    int maxIterations_;
+    int maxIterations_ = 0;
 
     /**
      * currentIteration_ stores the iteration in which the operator is going to be
      * applied
      */
-    int currentIteration_;
+    int currentIteration_ = 0;
 
-    double mutationProbability_;
+    double mutationProbability_ = 0;
 
     /**
      * Performs the operation.
