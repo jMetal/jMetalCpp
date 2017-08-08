@@ -162,19 +162,23 @@ void OMOPSO::computeNewPositions()
         //particle.move(speed_[i]);
         for (int var = 0; var < particle->getNumberOfDecisionVariables(); var++)
         {
-            particle->setValue(var, particle->getValue(var) + speed[i][var]);
+			double oldPosition = particle->getValue(var);
+			double newPosition = oldPosition + speed[i][var];
+            particle->setValue(var, newPosition);
             if (particle->getValue(var) < problem_->getLowerLimit(var))
             {				
-                //particle->setValue(var, problem_->getLowerLimit(var));
-				double diff = (problem_->getLowerLimit(var) - particle->getValue(var)) / 2.0 + PseudoRandom::randDouble();
-				particle->setValue(var, problem_->getLowerLimit(var) + diff);
+                particle->setValue(var, problem_->getLowerLimit(var));
+				double diff = ((oldPosition - problem_->getLowerLimit(var)) / 2.0) * PseudoRandom::randDouble();
+				newPosition = problem_->getLowerLimit(var) + diff;
+				particle->setValue(var, newPosition);
                 speed[i][var] = speed[i][var] * -1.0;
             }
             if (particle->getValue(var) > problem_->getUpperLimit(var))
             {
                 //particle->setValue(var, problem_->getUpperLimit(var));
-				double diff = (particle->getValue(var) - problem_->getUpperLimit(var)) / 2.0 + PseudoRandom::randDouble();
-				particle->setValue(var, problem_->getUpperLimit(var) - diff);
+				double diff = ((problem_->getUpperLimit(var) - oldPosition) / 2.0) * PseudoRandom::randDouble();
+				newPosition = problem_->getUpperLimit(var) - diff;
+				particle->setValue(var, newPosition);
                 speed[i][var] = speed[i][var] * -1.0;
             }
         }

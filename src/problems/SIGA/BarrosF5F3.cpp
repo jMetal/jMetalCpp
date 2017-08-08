@@ -45,8 +45,8 @@ BarrosF5F3::BarrosF5F3(std::string solutionType)
 
     for (int i = 0; i < numberOfVariables_; i++)
     {
-        lowerLimit_[i] = -10.0;
-        upperLimit_[i] =  20.0;
+        lowerLimit_[i] = 0.0;
+        upperLimit_[i] = 1.0;
     } // for
 
     if (solutionType.compare("BinaryReal") == 0)
