@@ -53,7 +53,7 @@ void BarrosF1F3::evaluate(Solution * solution)
 	double f1 = x1;
 	double a = std::exp(-pow ( (x2 - 0.2) / 0.004, 2.0));
 	double b = std::exp(-pow ( (x2 - 0.6) / 0.4, 2.0));
-	double f3 = (2 - a - 0.8 * b) / x1;
+	double f3 = (2.0 - a - 0.8 * b) / x1;
 	solution->setObjective(0, f1);
 	solution->setObjective(1, f3);
 }
