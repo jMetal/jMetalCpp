@@ -25,6 +25,8 @@
 #include <Solution.h>
 
 #include <OMOPSO.h>
+#include "metaheuristics/smpso/SMPSO.h"
+#include "operators/mutation/PolynomialMutation.h"
 
 #include <NonUniformMutation.h>
 #include <ProblemFactory.h>
@@ -35,7 +37,9 @@
 #include <time.h>
 #include "problems/SIGA/BarrosF1F2.h"
 #include "problems/SIGA/BarrosF1F3.h"
+#include "problems/SIGA/BarrosF1F4.h"
 #include "problems/SIGA/BarrosF1F5.h"
+#include "problems/SIGA/BarrosF5F3.h"
 
 /**
  * Method for configuring and running the OMOPSO algorithm
@@ -59,30 +63,34 @@ int main(int argc, char ** argv)
         std::cout << "No problem selected." << std::endl;
         std::cout << "Default problem will be used: Kursawe" << std::endl;
         //problem = ProblemFactory::getProblem(const_cast<char *>("Kursawe"));
-		problem = snew BarrosF1F5("Real");
+		problem = snew BarrosF1F3("Real");
     }
 	//indicators = snew QualityIndicator(problem, "paretofront.txt");
-    algorithm = snew OMOPSO(problem);
-    int maxIterations = 250;
+    algorithm = snew SMPSO(problem);
+    int maxIterations = 100;
     double perturbationIndex = 0.5;
     double mutationProbability = 1.0 / problem->getNumberOfVariables();
-    int swarmSize = 100;
+    int swarmSize = 150;
     int archiveSize = 100;
     // Algorithm parameters
     algorithm->setInputParameter("swarmSize",&swarmSize);
     algorithm->setInputParameter("archiveSize",&archiveSize);
     algorithm->setInputParameter("maxIterations",&maxIterations);
     parameters["probability"] =  &mutationProbability;
-    parameters["perturbation"] = &perturbationIndex;
-    uniformMutation = snew UniformMutation(parameters);
+    //parameters["perturbation"] = &perturbationIndex;
+	parameters["distributionIndex"] = &perturbationIndex;
+    //uniformMutation = snew UniformMutation(parameters);
+	uniformMutation = snew PolynomialMutation(parameters);
+	
     parameters.clear();
     parameters["probability"] =  &mutationProbability;
     parameters["perturbation"] =  &perturbationIndex;
     parameters["maxIterations"] = &maxIterations;
     nonUniformMutation = snew NonUniformMutation(parameters);
     // Add the operators to the algorithm
-    algorithm->addOperator("uniformMutation", uniformMutation);
-    algorithm->addOperator("nonUniformMutation", nonUniformMutation);
+	algorithm->addOperator("mutation", uniformMutation);
+    //algorithm->addOperator("uniformMutation", uniformMutation);
+    //algorithm->addOperator("nonUniformMutation", nonUniformMutation);
     // Execute the Algorithm
     t_ini = clock();
     SolutionSet * population = algorithm->execute();
@@ -92,9 +100,9 @@ int main(int argc, char ** argv)
     // Print the results
     std::cout << "Total execution time: " << secs << "s" << std::endl;
     std::cout << "Variables values have been written to file VAR" << std::endl;
-    population->printVariablesToFile("variables.txt");
+    //population->printVariablesToFile("variables.txt");
     std::cout << "Objectives values have been written to file FUN" << std::endl;
-    population->printObjectivesToFile("objectives.txt");
+    population->printObjectivesToFile("objectives-" + problem->getName() + ".txt");
     if (indicators != nullptr)
     {
         std::cout << "Quality indicators" << std::endl ;

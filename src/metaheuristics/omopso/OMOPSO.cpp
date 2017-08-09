@@ -168,7 +168,7 @@ void OMOPSO::computeNewPositions()
             if (particle->getValue(var) < problem_->getLowerLimit(var))
             {				
                 particle->setValue(var, problem_->getLowerLimit(var));
-				double diff = ((oldPosition - problem_->getLowerLimit(var)) / 2.0) * PseudoRandom::randDouble();
+				double diff = ((oldPosition - problem_->getLowerLimit(var))) * PseudoRandom::randDouble();
 				newPosition = problem_->getLowerLimit(var) + diff;
 				particle->setValue(var, newPosition);
                 speed[i][var] = speed[i][var] * -1.0;
@@ -176,7 +176,7 @@ void OMOPSO::computeNewPositions()
             if (particle->getValue(var) > problem_->getUpperLimit(var))
             {
                 //particle->setValue(var, problem_->getUpperLimit(var));
-				double diff = ((problem_->getUpperLimit(var) - oldPosition) / 2.0) * PseudoRandom::randDouble();
+				double diff = ((problem_->getUpperLimit(var) - oldPosition)) * PseudoRandom::randDouble();
 				newPosition = problem_->getUpperLimit(var) - diff;
 				particle->setValue(var, newPosition);
                 speed[i][var] = speed[i][var] * -1.0;
