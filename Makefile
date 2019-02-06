@@ -18,6 +18,9 @@ CC := g++
 # Source files extension
 SRCEXT := cpp
 
+# header files extension
+HEADEREXT := h
+
 # Source directory
 SRCDIR := src
 
@@ -33,6 +36,12 @@ BINDIR := bin
 
 # Header files directories
 HEADER_DIRS := $(shell find $(SRCDIR)/* -type d -print)
+
+# Header files directories
+HEADER_FILES := $(shell find ./JMetalInc -type f -name *.$(HEADEREXT))
+
+# Header files names
+HEADER_NAMES := $(shell find $(SRCDIR) -type f -name *.$(HEADEREXT) -exec basename \{} \; )
 
 # Main files directories
 MAIN_DIRS := $(shell find $(SRCDIR) -type d -name main)
@@ -72,7 +81,7 @@ LIB := $(LIBDIR)/$(LIBNAME)
 MAIN_DEPS := $(LIB)
 
 # Libraries needed when generating executables
-MAIN_LIBS := -lm #-pthread
+MAIN_LIBS := -lm -pthread
 
 
 # All rule
@@ -121,3 +130,17 @@ CMAES_main_spike : $(SRCDIR)/main/CMAES_main.$(SRCEXT) $(LIB)
 	@echo "$(CC) $(CFLAGS) $(SRCDIR)/main/CMAES_main.$(SRCEXT) $(MAIN_DEPS) -o $(BINDIR)/spike/CMAES_main $(INC) $(MAIN_LIBS)"; $(CC) $(CFLAGS) $(SRCDIR)/main/CMAES_main.$(SRCEXT) $(MAIN_DEPS) -o $(BINDIR)/spike/CMAES_main $(INC) $(MAIN_LIBS)
 
 .PHONY: clean
+ifeq ($(PREFIX),)
+    PREFIX := /usr/local
+    
+endif
+install: $(LIB)
+	@mkdir -p $(PREFIX)/include/JMetalInc
+	install -m 644 $(LIB) $(DESTDIR)$(PREFIX)/lib/
+	install -m 644 $(HEADER_FILES) $(DESTDIR)$(PREFIX)/include/JMetalInc
+	@echo 'Installation ... Done'
+uninstall:
+	@rm $(DESTDIR)$(PREFIX)/$(LIB)
+	$(foreach var,$(HEADER_NAMES),rm  $(DESTDIR)$(PREFIX)/include/JMetalInc/$(var);)
+	@rm -r $(DESTDIR)$(PREFIX)/include/JMetalInc
+	@echo 'Uninstallation ... Done'
