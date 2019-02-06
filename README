@@ -17,6 +17,7 @@ TABLE OF CONTENTS
 7. Advanced: Building a Experiment
   7.1. Executing a experiment
   7.2. Generating reports from a experiment
+8. Installation  
 =======================================================================================
 
 
@@ -502,3 +503,10 @@ match with the ones included in the execution part which was previously run:
  reference fronts of the solved problems.
  
 =======================================================================================
+
+=======================================================================================
+8. Installation
+=======================================================================================
+- For installation: make install 
+- For uninstallation : make uninstall
+- To install in not usr/local/, set value to PREFIX. For example export PREFIX=a/b/c 
