@@ -509,4 +509,4 @@ match with the ones included in the execution part which was previously run:
 =======================================================================================
 - For installation: make install 
 - For uninstallation : make uninstall
-- To install in not usr/local/, set value to PREFIX. For example export PREFIX=a/b/c 
+- To install in not usr/local/, set a path to PREFIX. For example export PREFIX=a/b/c 
