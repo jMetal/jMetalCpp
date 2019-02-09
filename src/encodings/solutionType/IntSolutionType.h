@@ -1,4 +1,4 @@
-//  Int.h
+//  IntSolutionType.h
 //
 //  Author:
 //       Juan J. Durillo <durillo@lcc.uma.es>
@@ -19,38 +19,22 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef Int_h
-#define Int_h
+#ifndef __INT_SOLUTION_TYPE__
+#define __INT_SOLUTION_TYPE__
 
-#include <JMetalInc/Variable.h>
-#include <JMetalInc/PseudoRandom.h>
-#include <sstream>
+#include <SolutionType.h>
+#include <Int.h>
+#include <string>
 
 /**
- * This class implements a Int value decision variable
- */
-class Int : public Variable {
+ * This class is aimed at defining a Type encoding a Int solution
+**/
+class IntSolutionType : public SolutionType {
 
 public:
+	IntSolutionType(Problem *problem);
+    Variable **createVariables();
 
-	Int();
-	Int(double lowerBound, double upperBound);
-	Int(Variable * variable);
-  ~Int();
-
-  double getValue();
-  void setValue(double value);
-  Variable * deepCopy();
-  double getLowerBound();
-  double getUpperBound();
-  void setLowerBound(double bound);
-  void setUpperBound(double bound);
-  string toString() ;
-
-private:
-  double value_;
-  double lowerBound_ ;
-  double upperBound_ ;
 };
 
 #endif

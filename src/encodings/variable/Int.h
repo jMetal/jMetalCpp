@@ -22,8 +22,8 @@
 #ifndef Int_h
 #define Int_h
 
-#include <JMetalInc/Variable.h>
-#include <JMetalInc/PseudoRandom.h>
+#include <Variable.h>
+#include <PseudoRandom.h>
 #include <sstream>
 
 /**

@@ -1,4 +1,4 @@
-//  Int.h
+// IntSolutionType.cpp
 //
 //  Author:
 //       Juan J. Durillo <durillo@lcc.uma.es>
@@ -19,38 +19,38 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef Int_h
-#define Int_h
 
-#include <JMetalInc/Variable.h>
-#include <JMetalInc/PseudoRandom.h>
-#include <sstream>
+#include <IntSolutionType.h>
+#include <cstddef>
+
 
 /**
- * This class implements a Int value decision variable
+ * Constructor
+ * @param problem
  */
-class Int : public Variable {
+IntSolutionType::IntSolutionType(Problem *problem)
+: SolutionType(problem) {
 
-public:
 
-	Int();
-	Int(double lowerBound, double upperBound);
-	Int(Variable * variable);
-  ~Int();
+}
 
-  double getValue();
-  void setValue(double value);
-  Variable * deepCopy();
-  double getLowerBound();
-  double getUpperBound();
-  void setLowerBound(double bound);
-  void setUpperBound(double bound);
-  string toString() ;
 
-private:
-  double value_;
-  double lowerBound_ ;
-  double upperBound_ ;
-};
+/**
+ * Creates the variables of the solution
+ * @param decisionVariables
+ */
+Variable **IntSolutionType::createVariables() {
+  int i;
 
-#endif
+  Variable **variables = new Variable*[problem_->getNumberOfVariables()]; //malloc(sizeof(Int) * problem->getNumberOfVariables());
+  if (variables ==  NULL) {
+    cout << "Error grave: Impossible to reserve memory for variable type" << endl;
+    exit(-1);
+  }
+
+  for (i = 0; i < problem_->getNumberOfVariables(); i++) {
+    variables[i] = new Int(problem_->getLowerLimit(i),problem_->getUpperLimit(i));
+  }
+
+  return variables;
+} // createVariables
