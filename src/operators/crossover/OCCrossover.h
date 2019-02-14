@@ -9,6 +9,8 @@
 #define SRC_OPERATORS_CROSSOVER_OCCROSSOVER_H_
 #include <Crossover.h>
 #include <Solution.h>
+#include <Int.h>
+#include <math.h>
 class OCCrossover: public Crossover {
 public:
 	OCCrossover(map<string, void *> parameters);

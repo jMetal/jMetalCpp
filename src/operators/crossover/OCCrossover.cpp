@@ -17,7 +17,74 @@ OCCrossover::OCCrossover (map<string, void *> parameters)
 
 }
 Solution ** OCCrossover::doCrossover(double probability,Solution *parent1, Solution *parent2) {
+	 Solution** offSpring = new Solution*[2];
 
+	  offSpring[0] = new Solution(parent1);
+	  offSpring[1] = new Solution(parent2);
+
+	  if (PseudoRandom::randDouble() < probability){
+
+	  int SubStringFrom=PseudoRandom::randInt(0,parent1->getProblem()->getNumberOfVariables());
+	  int SubStringTo=PseudoRandom::randInt(0,parent1->getProblem()->getNumberOfVariables());
+
+	  while(SubStringFrom == SubStringTo ||  SubStringTo < SubStringFrom){ // should not be same
+
+		  SubStringFrom=PseudoRandom::randInt(0,parent1->getProblem()->getNumberOfVariables());
+		  SubStringTo=PseudoRandom::randInt(0,parent1->getProblem()->getNumberOfVariables());
+
+	  }
+
+	int indexOfCurrentGenToChange=0;
+	if(indexOfCurrentGenToChange==SubStringFrom)
+		indexOfCurrentGenToChange=SubStringTo;
+
+	for(int i=0 ; i < parent2->getProblem()->getNumberOfVariables(); ++i ){
+
+			bool IsInTheSubStringOfParent1=false;
+			for(int c=SubStringFrom ; c < SubStringTo; ++c ){
+	if(parent2->getDecisionVariables()[i]->getValue() == parent1->getDecisionVariables()[c]->getValue() )
+		IsInTheSubStringOfParent1=true;
+			}
+			if(IsInTheSubStringOfParent1==false){
+
+				offSpring[0]->getDecisionVariables()[indexOfCurrentGenToChange]->setValue(parent2->getDecisionVariables()[i]->getValue());
+				indexOfCurrentGenToChange++;
+			}
+			if(indexOfCurrentGenToChange==SubStringFrom)
+				indexOfCurrentGenToChange=SubStringTo;
+	}
+
+	// now offSpring2
+
+	 SubStringFrom=PseudoRandom::randInt(0,parent2->getProblem()->getNumberOfVariables());
+	   SubStringTo=PseudoRandom::randInt(0,parent2->getProblem()->getNumberOfVariables());
+	  while(SubStringFrom == SubStringTo ||  SubStringTo < SubStringFrom){ // should not be same
+		  SubStringFrom=PseudoRandom::randInt(0,parent2->getProblem()->getNumberOfVariables());
+		  SubStringTo=PseudoRandom::randInt(0,parent2->getProblem()->getNumberOfVariables());
+	  }
+
+	    indexOfCurrentGenToChange=0;
+	  if(indexOfCurrentGenToChange==SubStringFrom){
+	  	indexOfCurrentGenToChange=SubStringTo;
+	  }
+	for(int i=0 ; i < parent1->getProblem()->getNumberOfVariables(); ++i ){
+
+			bool IsInTheSubStringOfParent2=false;
+			for(int c=SubStringFrom ; c < SubStringTo; ++c ){
+	if(parent1->getDecisionVariables()[i]->getValue() == parent2->getDecisionVariables()[c]->getValue() )
+		IsInTheSubStringOfParent2=true;
+			}
+			if(IsInTheSubStringOfParent2==false){
+
+				offSpring[1]->getDecisionVariables()[indexOfCurrentGenToChange]->setValue(parent1->getDecisionVariables()[i]->getValue());
+				indexOfCurrentGenToChange++;
+			}
+			if(indexOfCurrentGenToChange==SubStringFrom)
+			  	indexOfCurrentGenToChange=SubStringTo;
+
+	}
+	  }
+	  return offSpring;
 }
 void * OCCrossover::execute(void *object) {
   Solution ** parents = (Solution **) object;
