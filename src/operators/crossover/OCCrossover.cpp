@@ -16,7 +16,18 @@ OCCrossover::OCCrossover (map<string, void *> parameters)
 	    crossoverProbability_ = *(double *)parameters["probability"];
 
 }
+Solution ** OCCrossover::doCrossover(double probability,Solution *parent1, Solution *parent2) {
 
+}
+void * OCCrossover::execute(void *object) {
+  Solution ** parents = (Solution **) object;
+  // TODO: Comprobar la longitud de parents
+  // TODO: Chequear el tipo de parents
+
+  Solution ** offSpring = (Solution **)doCrossover(crossoverProbability_, parents[0], parents[1]);
+
+  return offSpring;
+}
 OCCrossover::~OCCrossover() {
 	// TODO Auto-generated destructor stub
 }
