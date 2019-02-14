@@ -60,9 +60,9 @@ int main()
 
 
 	//TSPProblem *tsp = new TSPProblem();
-   //GARunner *GA= new GARunner(tsp,100,25000,0.9,0,0.2,0,"OCCrossover","BitFlipMutation","BinaryTournament2");
+   //GARunner *GA= new GARunner(tsp,100,25000,0.9,0,0.2,0,"PositionBasedCrossover","InversionMutation","BinaryTournament2");
  // SolutionSet * population = GA->RealNumbers();
-  //  population->printObjectives();
+   // population->printObjectives();
 
 
 
@@ -72,29 +72,9 @@ int main()
 
 	op->AddMBall("Mutation","InsertionMutation");
 	op->AddMBall("Mutation","InversionMutation");
-/*
-	op->AddMBall("Population","100");
-	op->AddMBall("Evaluation","200");
-	op->AddMBall("Population","200");
-	op->AddMBall("Population","300");
-	op->AddMBall("Population","400");
-	op->AddMBall("Population","500");
-	op->AddMBall("Population","600");
-	op->AddMBall("Population","700");
-	op->AddMBall("Population","800");
-	op->AddMBall("Population","900");
-	op->AddMBall("Population","1000");
-	op->AddMBall("Evaluation","300");
-	op->AddMBall("Evaluation","400");
-	op->AddMBall("Evaluation","500");
-	op->AddMBall("Evaluation","600");
-	op->AddMBall("Evaluation","700");
-	op->AddMBall("Evaluation","800");
-	op->AddMBall("Evaluation","900");
-	op->AddMBall("Evaluation","1000");
-	//op->AddMBall("Evaluation","5000");
 
-*/
+
+
 
 	for(int i=0; i<2000000;i=i+5000){
 

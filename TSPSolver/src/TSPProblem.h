@@ -15,8 +15,11 @@
 #include <JMetalInc/BinaryRealSolutionType.h>
 #include <JMetalInc/IntNoneRepeatedSolutionType.h>
 struct CCdatagroup {   // for holding city coordinates
-	double x[1904712]; // one element larger because the city tour start from 1 so element 0 is ignored
-	double y[1904712]; // one element larger because the city tour start from 1 so element 0 is ignored
+	//double x[1904712]; // one element larger because the city tour start from 1 so element 0 is ignored
+	//double y[1904712]; // one element larger because the city tour start from 1 so element 0 is ignored
+
+	double x[8247]; // one element larger because the city tour start from 1 so element 0 is ignored
+    double y[8247]; // one element larger because the city tour start from 1 so element 0 is ignored
 
 	//double x[30]; // one element larger because the city tour start from 1 so element 0 is ignored
 	//double y[30]; // one element larger because the city tour start from 1 so element 0 is ignored
@@ -30,6 +33,13 @@ public:
 	TSPProblem();
 	virtual ~TSPProblem();
 	void evaluate(Solution *solution);
+	int EUC_2D (int i, int j, CCdatagroup *dat);
+
+	int geom_edgelen (int i, int j, CCdatagroup *dat);
+
+
+	void fillGPSData (CCdatagroup* filldat) ;
+
 };
 
 #endif /* TSPPROBLEM_H_ */
