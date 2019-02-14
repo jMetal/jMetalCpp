@@ -65,19 +65,19 @@ void Optimizer::Optimize(int NumberOfBasket, int NumberOfIterations){
 	TSPProblem *tsp = new TSPProblem();
 	 std::map<std::string, int> Repetition;
 	for(int I=0 ; I < NumberOfIterations ; ++I){
-		std::cout << "Creating RandomBaskets "<<std::endl;
+		std::cout << "Iterations "<<I << std::endl ;
 		std::vector<std::vector<MetalBall> > Baskets= RandomBaskets(NumberOfBasket);
-		std::cout << "Creating RandomBaskets done"<<std::endl;
+
 		int BestBasketIndex=0;
 		double BestFitness=-1;
 		for(int b=0 ; b < NumberOfBasket ; ++b){
-			 std::cout << "GA is Running  " << std::endl;
-
+			std::cout << "Basket "<<b << std::endl ;
+//std::cout << "Setting GA parameters "<<std::endl;
 		    GARunner *GA= new GARunner(tsp,stoi(FindParameter(Baskets[b],"Population")),stoi(FindParameter(Baskets[b],"Evaluation")),stod(FindParameter(Baskets[b],"crossoverProbability")),0,stod(FindParameter(Baskets[b],"mutationProbability")),0,FindParameter(Baskets[b],"Crossover"),FindParameter(Baskets[b],"Mutation"),FindParameter(Baskets[b],"Selection"));
-
+		   // std::cout << "Running GA"<<std::endl;
 		    SolutionSet * population = GA->RealNumbers();
 		    population->printObjectives();
-		    std::cout << "GA is done  " << std::endl;
+
 
 		    if(BestFitness==-1){
 		    	BestFitness=population->get(0)->getObjective(0);
@@ -90,25 +90,25 @@ void Optimizer::Optimize(int NumberOfBasket, int NumberOfIterations){
 		    	}
 		    }
 		}
-		std::cout << "BestBasketIndex  "<<BestBasketIndex << std::endl;
+
 		for (int Ba=0; Ba<Baskets[BestBasketIndex].size(); ++Ba ){
 			std::string Key=Baskets[BestBasketIndex][Ba].MetalBallType;
 			Key.append(Baskets[BestBasketIndex][Ba].MetalBallValue);
 			if (Repetition.find(Key) != Repetition.end()){
-				std::cout << "found  " << std::endl;
+
 				auto it = std::find_if(std::begin(Repetition), std::end(Repetition), [&](const std::pair<std::string, int> &pair)
 				{
 				    return pair.first == Key;
 				});
-				std::cout << "update  " << std::endl;
+
 				if (it != Repetition.end()) {
-					std::cout << "update  " <<it->second<< std::endl;
+
 				     it->second=it->second+1;
-				     std::cout << "after update  " <<it->second<< std::endl;
+
 				}
 			}
 			else{
-				std::cout << "not found  " << std::endl;
+
 std::string Key=Baskets[BestBasketIndex][Ba].MetalBallType;
 Key.append(Baskets[BestBasketIndex][Ba].MetalBallValue);
 				Repetition.insert(std::pair<std::string, int>(Key,1));
@@ -126,8 +126,7 @@ std::string Optimizer::FindParameter (std::vector<MetalBall> Basket, std::string
 
 	for(int i=0 ; i < Basket.size();++i){
 		if(Basket[i].MetalBallType==Parameter){
-			std::cout << "Parameter "<<Parameter<<std::endl;
-			std::cout << "Parameter value "<<Basket[i].MetalBallValue<<std::endl;
+			//std::cout << "Parameter "<<Basket[i].MetalBallValue<<std::endl;
 			return Basket[i].MetalBallValue;
 		}
 	}

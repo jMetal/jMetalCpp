@@ -42,7 +42,7 @@ using namespace std;
 #include <JMetalInc/WorstSolutionSelection.h>
 #include <JMetalInc/RandomGenerator.h>
 #include "TSPProblem.h"
-#include <JMetalInc/OrderCrossover.h>
+
 #include <JMetalInc/InversionMutation.h>
 
 #include <JMetalInc/InsertionMutation.h>
@@ -50,6 +50,7 @@ using namespace std;
 #include "GARunner.h"
 #include "Optimizer.h"
 
+#include <JMetalInc/OXCrossover.h>
 using namespace std;
 
 
@@ -58,13 +59,15 @@ int main()
 
 
 
-	TSPProblem *tsp = new TSPProblem();
-   //GARunner *GA= new GARunner(tsp,100,2400,0.9,0,0.2,0,"OrderCrossover","InversionMutation","BinaryTournament2");
-    //SolutionSet * population = GA->RealNumbers();
-   // population->printObjectives();
+	//TSPProblem *tsp = new TSPProblem();
+   //GARunner *GA= new GARunner(tsp,100,25000,0.9,0,0.2,0,"OCCrossover","BitFlipMutation","BinaryTournament2");
+ // SolutionSet * population = GA->RealNumbers();
+  //  population->printObjectives();
+
+
 
 	Optimizer *op = new Optimizer();
-	op->AddMBall("Crossover","OrderCrossover");
+	op->AddMBall("Crossover","OXCrossover");
 	op->AddMBall("Crossover","PositionBasedCrossover");
 
 	op->AddMBall("Mutation","InsertionMutation");
@@ -89,22 +92,24 @@ int main()
 	op->AddMBall("Evaluation","800");
 	op->AddMBall("Evaluation","900");
 	op->AddMBall("Evaluation","1000");
-	op->AddMBall("Evaluation","5000");
-	*/
+	//op->AddMBall("Evaluation","5000");
 
-	for(int i=1000; i<25000;i=i+1000){
+*/
+
+	for(int i=0; i<2000000;i=i+5000){
 
 		op->AddMBall("Evaluation",std::to_string(i));
 	}
-	for(int i=100; i<2500;i=i+100){
+	for(int i=100; i<10000;i=i+100){
 			op->AddMBall("Population",std::to_string(i));
 	}
+
 	op->AddMBall("crossoverProbability","0.9");
 	op->AddMBall("mutationProbability","0.2");
 	op->AddMBall("Selection","BinaryTournament2");
 	try
 	    {
-		op->Optimize(6,600);
+		op->Optimize(6,10000);
 	    }
 	    catch (std::exception const &exc)
 	    {

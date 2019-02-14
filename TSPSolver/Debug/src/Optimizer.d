@@ -31,37 +31,6 @@ src/Optimizer.o: ../src/Optimizer.cpp ../src/Optimizer.h \
  /usr/local/include/JMetalInc/ArrayReal.h \
  /usr/local/include/JMetalInc/PolynomialMutation.h \
  /usr/local/include/JMetalInc/DifferentialEvolutionCrossover.h \
- /usr/local/include/clipper/clipper-ccp4.h \
- /usr/local/include/clipper/ccp4/ccp4_utils.h \
- /usr/local/include/clipper/ccp4/ccp4_mtz_io.h \
- /usr/local/include/clipper/ccp4/ccp4_mtz_types.h \
- /usr/local/include/clipper/ccp4/../core/container_hkl.h \
- /usr/local/include/clipper/ccp4/../core/container_types.h \
- /usr/local/include/clipper/ccp4/../core/container.h \
- /usr/local/include/clipper/ccp4/../core/coords.h \
- /usr/local/include/clipper/ccp4/../core/cell.h \
- /usr/local/include/clipper/ccp4/../core/clipper_types.h \
- /usr/local/include/clipper/ccp4/../core/clipper_util.h \
- /usr/local/include/clipper/ccp4/../core/clipper_precision.h \
- /usr/local/include/clipper/ccp4/../core/clipper_sysdep.h \
- /usr/local/include/clipper/ccp4/../core/clipper_memory.h \
- /usr/local/include/clipper/ccp4/../core/clipper_thread.h \
- /usr/local/include/clipper/ccp4/../core/clipper_message.h \
- /usr/local/include/clipper/ccp4/../core/spacegroup.h \
- /usr/local/include/clipper/ccp4/../core/symop.h \
- /usr/local/include/clipper/ccp4/../core/spacegroup_data.h \
- /usr/local/include/clipper/ccp4/../core/clipper_stats.h \
- /usr/local/include/clipper/ccp4/../core/hkl_data.h \
- /usr/local/include/clipper/ccp4/../core/hkl_info.h \
- /usr/local/include/clipper/ccp4/../core/hkl_lookup.h \
- /usr/local/include/clipper/ccp4/ccp4_map_io.h \
- /usr/local/include/clipper/ccp4/../core/container_map.h \
- /usr/local/include/clipper/ccp4/../core/nxmap_operator.h \
- /usr/local/include/clipper/ccp4/../core/xmap.h \
- /usr/local/include/clipper/ccp4/../core/fftmap.h \
- /usr/local/include/clipper/ccp4/../core/fftmap_sparse.h \
- /usr/local/include/clipper/ccp4/../core/derivs.h \
- /usr/local/include/clipper/ccp4/../core/nxmap.h \
  /usr/local/include/JMetalInc/HUXCrossover.h \
  /usr/local/include/JMetalInc/NonUniformMutation.h \
  /usr/local/include/JMetalInc/UniformMutation.h \
@@ -72,9 +41,9 @@ src/Optimizer.o: ../src/Optimizer.cpp ../src/Optimizer.h \
  /usr/local/include/JMetalInc/WorstSolutionSelection.h \
  /usr/local/include/JMetalInc/PositionBasedCrossover.h \
  /usr/local/include/JMetalInc/Int.h \
- /usr/local/include/JMetalInc/OrderCrossover.h \
  /usr/local/include/JMetalInc/InsertionMutation.h \
- /usr/local/include/JMetalInc/InversionMutation.h ../src/TSPProblem.h \
+ /usr/local/include/JMetalInc/InversionMutation.h \
+ /usr/local/include/JMetalInc/OXCrossover.h ../src/TSPProblem.h \
  /usr/local/include/JMetalInc/BinarySolutionType.h \
  /usr/local/include/JMetalInc/IntSolutionType.h \
  /usr/local/include/JMetalInc/IntNoneRepeatedSolutionType.h
@@ -147,68 +116,6 @@ src/Optimizer.o: ../src/Optimizer.cpp ../src/Optimizer.h \
 
 /usr/local/include/JMetalInc/DifferentialEvolutionCrossover.h:
 
-/usr/local/include/clipper/clipper-ccp4.h:
-
-/usr/local/include/clipper/ccp4/ccp4_utils.h:
-
-/usr/local/include/clipper/ccp4/ccp4_mtz_io.h:
-
-/usr/local/include/clipper/ccp4/ccp4_mtz_types.h:
-
-/usr/local/include/clipper/ccp4/../core/container_hkl.h:
-
-/usr/local/include/clipper/ccp4/../core/container_types.h:
-
-/usr/local/include/clipper/ccp4/../core/container.h:
-
-/usr/local/include/clipper/ccp4/../core/coords.h:
-
-/usr/local/include/clipper/ccp4/../core/cell.h:
-
-/usr/local/include/clipper/ccp4/../core/clipper_types.h:
-
-/usr/local/include/clipper/ccp4/../core/clipper_util.h:
-
-/usr/local/include/clipper/ccp4/../core/clipper_precision.h:
-
-/usr/local/include/clipper/ccp4/../core/clipper_sysdep.h:
-
-/usr/local/include/clipper/ccp4/../core/clipper_memory.h:
-
-/usr/local/include/clipper/ccp4/../core/clipper_thread.h:
-
-/usr/local/include/clipper/ccp4/../core/clipper_message.h:
-
-/usr/local/include/clipper/ccp4/../core/spacegroup.h:
-
-/usr/local/include/clipper/ccp4/../core/symop.h:
-
-/usr/local/include/clipper/ccp4/../core/spacegroup_data.h:
-
-/usr/local/include/clipper/ccp4/../core/clipper_stats.h:
-
-/usr/local/include/clipper/ccp4/../core/hkl_data.h:
-
-/usr/local/include/clipper/ccp4/../core/hkl_info.h:
-
-/usr/local/include/clipper/ccp4/../core/hkl_lookup.h:
-
-/usr/local/include/clipper/ccp4/ccp4_map_io.h:
-
-/usr/local/include/clipper/ccp4/../core/container_map.h:
-
-/usr/local/include/clipper/ccp4/../core/nxmap_operator.h:
-
-/usr/local/include/clipper/ccp4/../core/xmap.h:
-
-/usr/local/include/clipper/ccp4/../core/fftmap.h:
-
-/usr/local/include/clipper/ccp4/../core/fftmap_sparse.h:
-
-/usr/local/include/clipper/ccp4/../core/derivs.h:
-
-/usr/local/include/clipper/ccp4/../core/nxmap.h:
-
 /usr/local/include/JMetalInc/HUXCrossover.h:
 
 /usr/local/include/JMetalInc/NonUniformMutation.h:
@@ -229,11 +136,11 @@ src/Optimizer.o: ../src/Optimizer.cpp ../src/Optimizer.h \
 
 /usr/local/include/JMetalInc/Int.h:
 
-/usr/local/include/JMetalInc/OrderCrossover.h:
-
 /usr/local/include/JMetalInc/InsertionMutation.h:
 
 /usr/local/include/JMetalInc/InversionMutation.h:
+
+/usr/local/include/JMetalInc/OXCrossover.h:
 
 ../src/TSPProblem.h:
 

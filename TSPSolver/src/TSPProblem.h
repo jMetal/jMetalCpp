@@ -15,11 +15,11 @@
 #include <JMetalInc/BinaryRealSolutionType.h>
 #include <JMetalInc/IntNoneRepeatedSolutionType.h>
 struct CCdatagroup {   // for holding city coordinates
-	//double x[1904712]; // one element larger because the city tour start from 1 so element 0 is ignored
-	//double y[1904712]; // one element larger because the city tour start from 1 so element 0 is ignored
+	double x[1904712]; // one element larger because the city tour start from 1 so element 0 is ignored
+	double y[1904712]; // one element larger because the city tour start from 1 so element 0 is ignored
 
-	double x[30]; // one element larger because the city tour start from 1 so element 0 is ignored
-	double y[30]; // one element larger because the city tour start from 1 so element 0 is ignored
+	//double x[30]; // one element larger because the city tour start from 1 so element 0 is ignored
+	//double y[30]; // one element larger because the city tour start from 1 so element 0 is ignored
 
 	//double x[5]; // one element larger because the city tour start from 1 so element 0 is ignored
 	//double y[5]; // one element larger because the city tour start from 1 so element 0 is ignored

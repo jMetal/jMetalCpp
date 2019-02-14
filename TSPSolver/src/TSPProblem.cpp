@@ -71,7 +71,7 @@ int geom_edgelen (int i, int j, CCdatagroup *dat)
 void fillGPSData (CCdatagroup* filldat) {
 
 	string line;
-	ifstream myfile ("/Users/emadalharbi/Downloads/wi29.tsp");
+	ifstream myfile ("world.tsp");
 	unsigned long long index = 1;
 
 	if (myfile.is_open())
@@ -117,13 +117,13 @@ TSPProblem::TSPProblem() {
 	CCdatagroup *tspdata = new CCdatagroup();
 	fillGPSData(tspdata);
 	TSPDATA=tspdata;
-	for (int i = 1; i < (sizeof(tspdata->x)/sizeof(*tspdata->x)); i++){
+	//for (int i = 1; i < (sizeof(tspdata->x)/sizeof(*tspdata->x)); i++){
 
-		for (int b = 1; b < (sizeof(tspdata->x)/sizeof(*tspdata->x)); b++){
-			std::cout << "From "<< i  << " b "<< b <<" "<< EUC_2D(i,b,TSPDATA) << std::endl;
+		//for (int b = 1; b < (sizeof(tspdata->x)/sizeof(*tspdata->x)); b++){
+			//std::cout << "From "<< i  << " b "<< b <<" "<< EUC_2D(i,b,TSPDATA) << std::endl;
 
-		}
-	}
+		//}
+	//}
 
 	numberOfVariables_   = (sizeof(tspdata->x)/sizeof(*tspdata->x))-1;
 	std::cout << "numberOfVariables_ "<<numberOfVariables_ << std::endl;
@@ -149,7 +149,7 @@ TSPProblem::~TSPProblem() {
 	delete solutionType_ ;
 }
 void TSPProblem::evaluate(Solution * solution) {
-	std::cout << "evaluate" << std::endl ;
+
 	Variable **variables = solution->getDecisionVariables();
 	cout.precision(dbl::max_digits10);
 	//	std::cout << solution->getType() << std::endl ;
@@ -161,11 +161,11 @@ void TSPProblem::evaluate(Solution * solution) {
 
 
 		if(i+1 < numberOfVariables_)
-	    cost+=EUC_2D(variables[i]->getValue(),variables[i+1]->getValue(),TSPDATA);
+	    cost+=geom_edgelen(variables[i]->getValue(),variables[i+1]->getValue(),TSPDATA);
 
 	}
-	cost+=EUC_2D(variables[numberOfVariables_-1]->getValue(),variables[0]->getValue(),TSPDATA);
-	std::cout << cost << std::endl ;
+	cost+=geom_edgelen(variables[numberOfVariables_-1]->getValue(),variables[0]->getValue(),TSPDATA);
+
 	solution->setObjective(0,cost);
 
 }

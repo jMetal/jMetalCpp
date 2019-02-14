@@ -6,12 +6,12 @@
  */
 
 #include "GARunner.h"
-#include <clipper/clipper-ccp4.h>
+
 //namespace GARunner {
 
 GARunner::GARunner(Problem * probelm , int population , int Evaluations , double crossoverProbability, double distributionIndexValue1 , double mutationProbability, double distributionIndexValue2, std::string crossovertype, std::string mutationtype , std::string selectiontype) {
 	// TODO Auto-generated constructor stub
-	std::cout << "GARunner "<<std::endl;
+
 	ProbelmToSolve=probelm;
 	algorithm = new gGA(ProbelmToSolve);
 
@@ -19,18 +19,25 @@ GARunner::GARunner(Problem * probelm , int population , int Evaluations , double
 	populationSizeValue=population;
 	maxEvaluationsValue=Evaluations;
 
-	map<string, void *> parameters;
+	 map<string, void *> parameters;
 
 	 parameters["probability"] =  &crossoverProbability ;
 	 parameters["distributionIndex"] = &distributionIndexValue1 ;
-	 std::cout << crossover << std::endl;
+	//  std::cout <<  *(double *)parameters["probability"] << std::endl;
+
 	 crossover=  crossoverType(crossovertype,parameters);
-	 std::cout << crossover << std::endl;
+	// std::cout <<  *(double *)parameters["probability"] << std::endl;
+	// std::cout << crossover << std::endl;
 	 parameters.clear();
 
 	 parameters["probability"] = &mutationProbability;
+	// std::cout <<  *(double *)parameters["probability"] << std::endl;
 	 parameters["distributionIndex"] = &distributionIndexValue2 ;
+	 //std::cout <<  *(double *)parameters["probability"] << std::endl;
+	// std::cout << mutationType(mutationtype,parameters) << std::endl;
 	 mutation= mutationType(mutationtype,parameters);
+	 //std::cout <<  *(double *)parameters["probability"] << std::endl;
+	 //mutation= mutationType(mutationtype,parameters);
 
 	 parameters.clear();
 
@@ -39,12 +46,14 @@ GARunner::GARunner(Problem * probelm , int population , int Evaluations , double
 
 	 selection= selectionType(selectiontype,parameters);
 
-	 std::cout << " populationSizeValue " << populationSizeValue << std::endl;
-	 std::cout << " maxEvaluationsValue " << maxEvaluationsValue << std::endl;
+	// std::cout << " populationSizeValue " << populationSizeValue << std::endl;
+	//std::cout << " maxEvaluationsValue " << maxEvaluationsValue << std::endl;
 
 }
 
 Operator * GARunner::crossoverType(std::string type , map<string, void *> parameters){
+
+
 
 	if(type=="SBXCrossover"){
 		//std::cout << type <<std::endl;
@@ -67,11 +76,11 @@ Operator * GARunner::crossoverType(std::string type , map<string, void *> parame
 			//std::cout << type <<std::endl;
 			return new PositionBasedCrossover(parameters);
 		}
-
-	if(type=="OrderCrossover"){
+	if(type=="OXCrossover"){
 				//std::cout << type <<std::endl;
-				return new OrderCrossover(parameters);
+				return new OXCrossover(parameters);
 			}
+
 
 	return new SBXCrossover(parameters); // Default
 }
@@ -183,7 +192,7 @@ SolutionSet * GARunner::RealNumbers(){
 		//algorithm->setInputParameter("indicators", indicators) ;
 
 
-		std::cout << " algorithm->execute "<<std::endl;
+		//std::cout << " algorithm->execute "<<std::endl;
 		SolutionSet * population = algorithm->execute();
 
 

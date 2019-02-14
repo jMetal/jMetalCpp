@@ -19,7 +19,6 @@
 #include <JMetalInc/PolynomialMutation.h>
 #include <JMetalInc/DifferentialEvolutionCrossover.h>
 #include <JMetalInc/Operator.h>
-#include <clipper/clipper-ccp4.h>
 #include <JMetalInc/HUXCrossover.h>
 #include <JMetalInc/SinglePointCrossover.h>
 #include <JMetalInc/NonUniformMutation.h>
@@ -31,9 +30,11 @@
 #include <JMetalInc/RandomSelection.h>
 #include <JMetalInc/WorstSolutionSelection.h>
 #include <JMetalInc/PositionBasedCrossover.h>
-#include <JMetalInc/OrderCrossover.h>
+
 #include <JMetalInc/InsertionMutation.h>
 #include <JMetalInc/InversionMutation.h>
+
+#include <JMetalInc/OXCrossover.h>
 //namespace GARunner {
 
 class GARunner {
