@@ -1,13 +1,13 @@
 /*
- * OCCrossover.cpp
+ * OXCrossover.cpp
  *
  *  Created on: 14 Feb 2019
  *      Author: Emad Alharbi
  */
 
-#include "OCCrossover.h"
+#include "OXCrossover.h"
 
-OCCrossover::OCCrossover (map<string, void *> parameters)
+OXCrossover::OXCrossover (map<string, void *> parameters)
 : Crossover(parameters) {
 	// TODO Auto-generated constructor stub
 	 crossoverProbability_ = 0.0 ;
@@ -16,7 +16,7 @@ OCCrossover::OCCrossover (map<string, void *> parameters)
 	    crossoverProbability_ = *(double *)parameters["probability"];
 
 }
-Solution ** OCCrossover::doCrossover(double probability,Solution *parent1, Solution *parent2) {
+Solution ** OXCrossover::doCrossover(double probability,Solution *parent1, Solution *parent2) {
 	 Solution** offSpring = new Solution*[2];
 
 	  offSpring[0] = new Solution(parent1);
@@ -86,7 +86,7 @@ Solution ** OCCrossover::doCrossover(double probability,Solution *parent1, Solut
 	  }
 	  return offSpring;
 }
-void * OCCrossover::execute(void *object) {
+void * OXCrossover::execute(void *object) {
   Solution ** parents = (Solution **) object;
   // TODO: Comprobar la longitud de parents
   // TODO: Chequear el tipo de parents
@@ -95,7 +95,7 @@ void * OCCrossover::execute(void *object) {
 
   return offSpring;
 }
-OCCrossover::~OCCrossover() {
+OXCrossover::~OXCrossover() {
 	// TODO Auto-generated destructor stub
 }
 
