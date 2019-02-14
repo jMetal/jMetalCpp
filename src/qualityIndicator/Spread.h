@@ -38,19 +38,20 @@ using namespace std;
  *            on Evol. Computation 6 (2002) 182-197
  */
 
-class Spread {
+class Spread
+{
 
 private:
-  static bool compareFront(vector<double> pointOne, vector<double> pointTwo);
+    static bool compareFront(vector<double> pointOne, vector<double> pointTwo);
 
 public:
 
-  MetricsUtil * utils_;
+    MetricsUtil * utils_;
 
-  Spread();
-  ~Spread();
-  double spread (vector< vector<double> > front,
-      vector< vector<double> > trueParetoFront, int numberOfObjectives);
+    Spread();
+    ~Spread();
+    double spread (vector< vector<double> > front,
+                   vector< vector<double> > trueParetoFront, int numberOfObjectives);
 
 }; // Spread
 

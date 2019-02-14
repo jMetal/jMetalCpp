@@ -23,13 +23,12 @@
 #ifndef __PROBLEM__
 #define __PROBLEM__
 
+#include "JMetalHeader.h"
 #include <string>
 #include <iostream>
 #include <SolutionType.h>
 #include <Solution.h>
 #include <stddef.h>
-
-using namespace std;
 
 class SolutionType;
 class Solution;
@@ -37,43 +36,44 @@ class Solution;
 /**
  * Abstract class representing a multiobjective optimization problem
  */
-class Problem {
+class Problem
+{
 
 private:
-  static const int DEFAULT_PRECISSION;
+    static const int DEFAULT_PRECISSION;
 
 protected:
-  int numberOfVariables_;
-  int numberOfObjectives_;
-  int numberOfConstraints_;
-  string problemName_;
-  SolutionType *solutionType_;
-  double *lowerLimit_;
-  double *upperLimit_;
-  int *precision_;
-  int *length_;
-   
+    int numberOfVariables_;
+    int numberOfObjectives_;
+    int numberOfConstraints_;
+    std::string problemName_;
+    SolutionType *solutionType_;
+    double *lowerLimit_;
+    double *upperLimit_;
+    int *precision_;
+    int *length_;
+
 public:
-  Problem();
-  Problem(SolutionType * solutionType);
-  virtual ~Problem() = 0;
-  int getNumberOfVariables();
-  void setNumberOfVariables(int numberOfVariables);
-  int getNumberOfObjectives();
-  void setNumberOfObjectives(int numberOfObjectives);
-  double getLowerLimit(int i);
-  double getUpperLimit(int i);
-  virtual void evaluate(Solution * solution) = 0;
-  int getNumberOfConstraints();
-  virtual void evaluateConstraints(Solution * solution);
-  int getPrecision(int var);
-  int * getPrecision();
-  void setPrecision(int * precision);
-  int getLength(int var);
-  void setSolutionType(SolutionType * type);
-  SolutionType * getSolutionType();
-  string getName();
-  int getNumberOfBits();
+    Problem();
+    Problem(SolutionType * solutionType);
+    virtual ~Problem() = 0;
+    int getNumberOfVariables();
+    void setNumberOfVariables(int numberOfVariables);
+    int getNumberOfObjectives();
+    void setNumberOfObjectives(int numberOfObjectives);
+    double getLowerLimit(int i);
+    double getUpperLimit(int i);
+    virtual void evaluate(Solution * solution) = 0;
+    int getNumberOfConstraints();
+    virtual void evaluateConstraints(Solution * solution);
+    int getPrecision(int var);
+    int * getPrecision();
+    void setPrecision(int * precision);
+    int getLength(int var);
+    void setSolutionType(SolutionType * type);
+    SolutionType * getSolutionType();
+    std::string getName();
+    int getNumberOfBits();
 
 }; // Problem
 

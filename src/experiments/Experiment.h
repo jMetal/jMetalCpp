@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -21,35 +22,30 @@
 #ifndef __EXPERIMENT__
 #define __EXPERIMENT__
 
-#include <string>
-#include <vector>
+#include "JMetalHeader.h"
 #include <FileUtils.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-using namespace std;
+using namespace JMetal;
 
 /**
  * Abstract class representing jMetal experiments
  */
 
-class Experiment {
-
+class Experiment
+{
 public:
-
-  string experimentName_;
-  vector<string> algorithmNameList_; // List of the names of the algorithms to
-                                     // be executed
-  vector<string> problemList_; // List of problems to be solved
-  string experimentBaseDirectory_; // Directory to store the results
-  int independentRuns_; // Number of independent runs per algorithm
-  bool isSingleObjective_; // If this experiment is a singleObjective one or not
-
-  Experiment();
-
-  void checkExperimentDirectory();
-  void resetFile(string file);
-
+    std::string experimentName_;
+    VectorOfString algorithmNameList_; // List of the names of the algorithms to
+    // be executed
+    VectorOfString problemList_; // List of problems to be solved
+    std::string experimentBaseDirectory_; // Directory to store the results
+    int independentRuns_; // Number of independent runs per algorithm
+    bool isSingleObjective_; // If this experiment is a singleObjective one or not
+    Experiment();
+    void checkExperimentDirectory();
+    void resetFile(std::string file);
 };
 
 #endif /* __EXPERIMENT__ */

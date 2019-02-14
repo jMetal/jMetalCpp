@@ -1,0 +1,6 @@
+file(GLOB SOURCES "*.cpp" "*.h")
+ListToString(SOURCES ";" ${SOURCES})
+LIST_APPEND("${SOURCES}")
+add_subdirectory(archive)
+add_subdirectory(comparators)
+add_subdirectory(wrapper)

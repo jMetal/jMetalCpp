@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //       Antonio J. Nebro <antonio@lcc.uma.es>
 //
 //  Copyright (c) 2014 Antonio J. Nebro
@@ -36,46 +37,47 @@
 /**
  * Class implementing a Standard PSO 2007 algorithm
  */
-class StandardPSO2007 : public Algorithm {
+class StandardPSO2007 : public Algorithm
+{
 
 private:
 
-  SolutionSet * swarm_;
-  int swarmSize_;
-  int maxIterations_;
-  int iteration_;
-  int numberOfParticlesToInform_ ; // Referred a K in the SPSO document
-  Solution ** localBest_;
-  Solution ** neighborhoodBest_;
-  double ** speed_;
-  AdaptiveRandomNeighborhood * neighborhood_ ;
+    SolutionSet * swarm_;
+    int swarmSize_;
+    int maxIterations_;
+    int iteration_;
+    int numberOfParticlesToInform_ ; // Referred a K in the SPSO document
+    Solution ** localBest_;
+    Solution ** neighborhoodBest_;
+    double ** speed_;
+    AdaptiveRandomNeighborhood * neighborhood_ ;
 
-  int evaluations_ ;
+    int evaluations_ ;
 
-  /**
-   * Comparator object
-   */
-  Comparator  * comparator_  ;
+    /**
+     * Comparator object
+     */
+    Comparator  * comparator_  ;
 
-  Operator * findBestSolution_ ;
+    Operator * findBestSolution_ ;
 
-  double W_;
-  double C_;
+    double W_;
+    double C_;
 
-  void initParams();
-  void deleteParams();
-  Solution * getNeighborBest(int i);
-  void computeSpeed();
-  void computeNewPositions();
+    void initParams();
+    void deleteParams();
+    Solution * getNeighborBest(int i);
+    void computeSpeed();
+    void computeNewPositions();
 
 public:
 
-  double getW();
-  double getC();
+    double getW();
+    double getC();
 
-  StandardPSO2007(Problem * problem);
-  ~StandardPSO2007();
-  SolutionSet * execute();
+    StandardPSO2007(Problem * problem);
+    ~StandardPSO2007();
+    SolutionSet * execute();
 
 }; // StandardPSO2007
 

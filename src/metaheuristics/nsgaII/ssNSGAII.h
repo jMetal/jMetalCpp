@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -34,16 +35,17 @@
   * @brief This class implements a steady-state version of NSGA-II.
 **/
 
-class ssNSGAII : public Algorithm {
+class ssNSGAII : public Algorithm
+{
 
 private:
-  int populationSize_;
-  int maxEvaluations_;
-  //QualityIndicator *indicators_;
+    int populationSize_;
+    int maxEvaluations_;
+    //QualityIndicator *indicators_;
 
 public:
-  ssNSGAII(Problem * problem);
-  SolutionSet * execute();
+    ssNSGAII(Problem * problem);
+    SolutionSet * execute();
 
 };
 

@@ -23,31 +23,33 @@
 #include <F01ShiftedSphere.h>
 
 // Fixed (class) parameters
-const string F01ShiftedSphere::FUNCTION_NAME = "Shifted Sphere Function";
+const std::string F01ShiftedSphere::FUNCTION_NAME = "Shifted Sphere Function";
 // TODO: Cambiar ruta
-const string F01ShiftedSphere::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/sphere_func_data.txt";
+const std::string F01ShiftedSphere::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/sphere_func_data.txt";
 
 
 /**
  * Constructor.
  */
 F01ShiftedSphere::F01ShiftedSphere(int dimension, double bias)
-    : F01ShiftedSphere(dimension, bias, DEFAULT_FILE_DATA) {
+    : F01ShiftedSphere(dimension, bias, DEFAULT_FILE_DATA)
+{
 } // F01ShiftedSphere
 
 
 /**
  * Constructor
  */
-F01ShiftedSphere::F01ShiftedSphere(int dimension, double bias, string file_data)
-    : TestFunc(dimension, bias, FUNCTION_NAME) {
+F01ShiftedSphere::F01ShiftedSphere(int dimension, double bias, std::string file_data)
+    : TestFunc(dimension, bias, FUNCTION_NAME)
+{
 
-  // Note: dimension starts from 0
-  m_o = new double[m_dimension];
-  m_z = new double[m_dimension];
+    // Note: dimension starts from 0
+    m_o = snew double[m_dimension];
+    m_z = snew double[m_dimension];
 
-  // Load the shifted global optimum
-  Benchmark::loadRowVectorFromFile(file_data, m_dimension, m_o);
+    // Load the shifted global optimum
+    Benchmark::loadRowVectorFromFile(file_data, m_dimension, m_o);
 
 } // F01ShiftedSphere
 
@@ -55,23 +57,25 @@ F01ShiftedSphere::F01ShiftedSphere(int dimension, double bias, string file_data)
 /**
  * Destructor
  */
-F01ShiftedSphere::~F01ShiftedSphere() {
-  delete [] m_o;
-  delete [] m_z;
+F01ShiftedSphere::~F01ShiftedSphere()
+{
+    delete [] m_o;
+    delete [] m_z;
 } // ~F01ShiftedSphere
 
 
 /**
  * Function body
  */
-double F01ShiftedSphere::f(double * x) {
-  double result = 0.0;
+double F01ShiftedSphere::f(double * x)
+{
+    double result = 0.0;
 
-  Benchmark::shift(m_z, x, m_o, m_dimension);
+    Benchmark::shift(m_z, x, m_o, m_dimension);
 
-  result = Benchmark::sphere(m_z, m_dimension);
+    result = Benchmark::sphere(m_z, m_dimension);
 
-  result += m_bias;
+    result += m_bias;
 
-  return result;
+    return result;
 }

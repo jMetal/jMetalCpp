@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -36,13 +37,14 @@ using namespace std;
  */
 
 
-class UtilsMOEAD {
-    
+class UtilsMOEAD
+{
+
 public:
-  static double distVector(double * vector1, double * vector2, int dim);
-  static void minFastSort(double * x, int * idx, int n, int m);
-  static void randomPermutation(int * perm, int size);
-  
+    static double distVector(double * vector1, double * vector2, int dim);
+    static void minFastSort(double * x, int * idx, int n, int m);
+    static void randomPermutation(int * perm, int size);
+
 };
 
 

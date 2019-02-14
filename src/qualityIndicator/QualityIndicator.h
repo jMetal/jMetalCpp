@@ -31,24 +31,25 @@
 #include <GenerationalDistance.h>
 #include <InvertedGenerationalDistance.h>
 
-class QualityIndicator {
+class QualityIndicator
+{
 
 private:
-	SolutionSet * trueParetoFront_;
-	double trueParetoFrontHypervolume_;
-	Problem * problem_;
-	int dim_;
-	MetricsUtil * utilities_;
+    SolutionSet * trueParetoFront_;
+    double trueParetoFrontHypervolume_;
+    Problem * problem_;
+    int dim_;
+    MetricsUtil * utilities_;
 
 public:
-	QualityIndicator(Problem * problem, string paretoFrontFile);
-	~QualityIndicator();
-	double getHypervolume(SolutionSet * solutionSet);
-	double getTrueParetoFrontHypervolume();
-	double getIGD(SolutionSet * solutionSet);
-	double getGD(SolutionSet * solutionSet);
-	double getSpread(SolutionSet * solutionSet);
-	double getEpsilon(SolutionSet * solutionSet);
+    QualityIndicator(Problem * problem, std::string paretoFrontFile);
+    ~QualityIndicator();
+    double getHypervolume(SolutionSet * solutionSet);
+    double getTrueParetoFrontHypervolume();
+    double getIGD(SolutionSet * solutionSet);
+    double getGD(SolutionSet * solutionSet);
+    double getSpread(SolutionSet * solutionSet);
+    double getEpsilon(SolutionSet * solutionSet);
 
 };
 

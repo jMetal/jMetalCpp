@@ -23,7 +23,7 @@
 
 #include <Epsilon.h>
 
-using namespace std;
+
 
 /**
  * This method can be invoked from the command line. Three params are required:
@@ -31,26 +31,28 @@ using namespace std;
  * 2) the name of the file containing the true Pareto front
  * 3) the number of objectives
  */
-int main(int argc, char ** argv) {
-  if (argc < 4) {
-    cerr << "Error using delta. Type: \n Epsilon " <<
-        "<SolutionFrontFile> <TrueFrontFile> <numberOfObjectives>" << endl;
-    exit(-1);
-  }
+int main(int argc, char ** argv)
+{
+    if (argc < 4)
+    {
+        cerr << "Error using delta. Type: \n Epsilon " <<
+             "<SolutionFrontFile> <TrueFrontFile> <numberOfObjectives>" << std::endl;
+        exit(-1);
+    }
 
-  //Create a new instance of the metric
-  Epsilon * qualityIndicator = new Epsilon();
-  //Read the front from the files
-  vector< vector<double> > solutionFront =
-      qualityIndicator->utils_->readFront(argv[1]);
-  vector< vector<double> > trueFront =
-      qualityIndicator->utils_->readFront(argv[2]);
+    //Create a new instance of the metric
+    Epsilon * qualityIndicator = snew Epsilon();
+    //Read the front from the files
+    MatrixOfDouble solutionFront =
+        qualityIndicator->utils_->readFront(argv[1]);
+    MatrixOfDouble trueFront =
+        qualityIndicator->utils_->readFront(argv[2]);
 
-  //Obtain delta value
-  double value = qualityIndicator->epsilon(solutionFront,
-      trueFront, atoi(argv[3]));
+    //Obtain delta value
+    double value = qualityIndicator->epsilon(solutionFront,
+                   trueFront, atoi(argv[3]));
 
-  delete qualityIndicator;
+    delete qualityIndicator;
 
-  cout << value << endl;
+    std::cout << value << std::endl;
 } // main

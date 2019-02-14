@@ -29,7 +29,8 @@
  * Constructor
  * @param problem Problem to solve
  */
-gGA::gGA(Problem *problem) : Algorithm(problem) {
+gGA::gGA(Problem *problem) : Algorithm(problem)
+{
 } // gGA
 
 
@@ -38,108 +39,114 @@ gGA::gGA(Problem *problem) : Algorithm(problem) {
  * @return a <code>SolutionSet</code> that is a set of non dominated solutions
  * as a result of the algorithm execution
  */
-SolutionSet * gGA::execute() {
+SolutionSet * gGA::execute()
+{
 
-  int populationSize;
-  int maxEvaluations;
-  int evaluations;
+    int populationSize;
+    int maxEvaluations;
+    int evaluations;
 
-  SolutionSet * population;
-  SolutionSet * offspringPopulation;
+    SolutionSet * population;
+    SolutionSet * offspringPopulation;
 
-  Operator * mutationOperator;
-  Operator * crossoverOperator;
-  Operator * selectionOperator;
+    Operator * mutationOperator;
+    Operator * crossoverOperator;
+    Operator * selectionOperator;
 
-  Comparator * comparator = new ObjectiveComparator(0) ;
+    Comparator * comparator = snew ObjectiveComparator(0) ;
 
-  //Read the parameters
-  populationSize = *(int *) getInputParameter("populationSize");
-  maxEvaluations = *(int *) getInputParameter("maxEvaluations");
-  // TODO: indicators = (QualityIndicator) getInputParameter("indicators");
-//  cout << "populationSize = " << populationSize << endl;
-//  cout << "maxEvaluations = " << maxEvaluations << endl;
+    //Read the parameters
+    populationSize = *(int *) getInputParameter("populationSize");
+    maxEvaluations = *(int *) getInputParameter("maxEvaluations");
+    // TODO: indicators = (QualityIndicator) getInputParameter("indicators");
+//  std::cout << "populationSize = " << populationSize << std::endl;
+//  std::cout << "maxEvaluations = " << maxEvaluations << std::endl;
 
-  //Initialize the variables
-  population = new SolutionSet(populationSize);
-  evaluations = 0;
+    //Initialize the variables
+    population = snew SolutionSet(populationSize);
+    evaluations = 0;
 
-//  cout << "Poblacion inicializada con maxsize = " << population->getMaxSize() << endl;
-//  cout << "Poblacion inicializada con size = " << population->size() << endl;
-//  cout << "Problema: " << problem_->getName() << endl;
+//  std::cout << "Poblacion inicializada con maxsize = " << population->getMaxSize() << std::endl;
+//  std::cout << "Poblacion inicializada con size = " << population->size() << std::endl;
+//  std::cout << "Problema: " << problem_->getName() << std::endl;
 
-  //Read the operators
-  mutationOperator = operators_["mutation"];
-  crossoverOperator = operators_["crossover"];
-  selectionOperator = operators_["selection"];
+    //Read the operators
+    mutationOperator = operators_["mutation"];
+    crossoverOperator = operators_["crossover"];
+    selectionOperator = operators_["selection"];
 
-//  cout << "Comienza la inicializacion de la poblacion con size " << populationSize << endl;
+//  std::cout << "Comienza la inicializacion de la poblacion con size " << populationSize << std::endl;
 
-  // Create the initial solutionSet
-  Solution * newSolution;
-  for (int i = 0; i < populationSize; i++) {
-    newSolution = new Solution(problem_);
-    problem_->evaluate(newSolution);
-    problem_->evaluateConstraints(newSolution);
-    evaluations++;
-    population->add(newSolution);
-  } //for
+    // Create the initial solutionSet
+    Solution * newSolution;
+    for (int i = 0; i < populationSize; i++)
+    {
+        newSolution = snew Solution(problem_);
+        problem_->evaluate(newSolution);
+        problem_->evaluateConstraints(newSolution);
+        evaluations++;
+        population->add(newSolution);
+    } //for
 
-//  cout << "gGA: Poblacion inicializada con size = " << population->size() << endl;
-//  cout << "gGA: Maximo de evaluaciones: " << maxEvaluations << endl;
+//  std::cout << "gGA: Poblacion inicializada con size = " << population->size() << std::endl;
+//  std::cout << "gGA: Maximo de evaluaciones: " << maxEvaluations << std::endl;
 
-  // Generations
-  while (evaluations < maxEvaluations) {
-  
-    // Create the offSpring solutionSet
-    offspringPopulation = new SolutionSet(populationSize);
-    Solution ** parents = new Solution*[2];
+    // Generations
+    while (evaluations < maxEvaluations)
+    {
 
-    for (int i = 0; i < (populationSize / 2); i++) {
-      if (evaluations < maxEvaluations) {
-        //obtain parents
-        parents[0] = (Solution *) (selectionOperator->execute(population));
-        parents[1] = (Solution *) (selectionOperator->execute(population));
-        Solution ** offSpring = (Solution **) (crossoverOperator->execute(parents));
-        mutationOperator->execute(offSpring[0]);
-        mutationOperator->execute(offSpring[1]);
-        problem_->evaluate(offSpring[0]);
-        problem_->evaluateConstraints(offSpring[0]);
-        problem_->evaluate(offSpring[1]);
-        problem_->evaluateConstraints(offSpring[1]);
+        // Create the offSpring solutionSet
+        offspringPopulation = snew SolutionSet(populationSize);
+        Solution ** parents = snew Solution*[2];
 
-        offspringPopulation->add(offSpring[0]);
-        offspringPopulation->add(offSpring[1]);
-        evaluations += 2;
-        delete[] offSpring;
-      } // if
-    } // for
-    delete[] parents;
+        for (int i = 0; i < (populationSize / 2); i++)
+        {
+            if (evaluations < maxEvaluations)
+            {
+                //obtain parents
+                parents[0] = (Solution *) (selectionOperator->execute(population));
+                parents[1] = (Solution *) (selectionOperator->execute(population));
+                Solution ** offSpring = (Solution **) (crossoverOperator->execute(parents));
+                mutationOperator->execute(offSpring[0]);
+                mutationOperator->execute(offSpring[1]);
+                problem_->evaluate(offSpring[0]);
+                problem_->evaluateConstraints(offSpring[0]);
+                problem_->evaluate(offSpring[1]);
+                problem_->evaluateConstraints(offSpring[1]);
 
-    population->sort(comparator) ;
-    offspringPopulation->sort(comparator) ;
+                offspringPopulation->add(offSpring[0]);
+                offspringPopulation->add(offSpring[1]);
+                evaluations += 2;
+                delete[] offSpring;
+            } // if
+        } // for
+        delete[] parents;
 
-    delete offspringPopulation->get(offspringPopulation->size()-1);
-    delete offspringPopulation->get(offspringPopulation->size()-2);
-    offspringPopulation->replace(offspringPopulation->size()-1, new Solution(population->get(0))) ;
-    offspringPopulation->replace(offspringPopulation->size()-2, new Solution(population->get(1))) ;
+        population->sort(comparator) ;
+        offspringPopulation->sort(comparator) ;
 
-    for (int i=0;i<population->size();i++) {
-      delete population->get(i);
+        delete offspringPopulation->get(offspringPopulation->size()-1);
+        delete offspringPopulation->get(offspringPopulation->size()-2);
+        offspringPopulation->replace(offspringPopulation->size()-1, snew Solution(population->get(0))) ;
+        offspringPopulation->replace(offspringPopulation->size()-2, snew Solution(population->get(1))) ;
+
+        for (int i=0; i<population->size(); i++)
+        {
+            delete population->get(i);
+        }
+        population->clear() ;
+
+        for (int i = 0; i < offspringPopulation->size(); i++)
+            population->add(offspringPopulation->get(i)) ;
+        offspringPopulation->clear() ;
+        delete offspringPopulation;
     }
-    population->clear() ;
 
-    for (int i = 0; i < offspringPopulation->size(); i++)
-      population->add(offspringPopulation->get(i)) ;
-    offspringPopulation->clear() ;
-    delete offspringPopulation;
-  }
+    delete comparator;
 
-  delete comparator;
+    SolutionSet * resultPopulation  = snew SolutionSet(1) ;
+    resultPopulation->add(snew Solution(population->get(0))) ;
+    delete population;
 
-  SolutionSet * resultPopulation  = new SolutionSet(1) ;
-  resultPopulation->add(new Solution(population->get(0))) ;
-  delete population;
-
-  return resultPopulation ;
+    return resultPopulation ;
 } // execute

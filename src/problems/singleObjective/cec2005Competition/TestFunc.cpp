@@ -25,32 +25,38 @@
 /**
  * Constructor.
  */
-TestFunc::TestFunc(int dimension, double bias) : TestFunc(dimension, bias, "undefined") {
+TestFunc::TestFunc(int dimension, double bias) : TestFunc(dimension, bias, "undefined")
+{
 } // TestFunc
 
 /**
  * Constructor
  */
-TestFunc::TestFunc(int dimension, double bias, string func_name) {
-  m_dimension = dimension;
-  m_bias = bias;
-  m_func_name = func_name;
+TestFunc::TestFunc(int dimension, double bias, std::string func_name)
+{
+    m_dimension = dimension;
+    m_bias = bias;
+    m_func_name = func_name;
 } // TestFunc
 
 /**
  * Destructor
  */
-TestFunc::~TestFunc() {
+TestFunc::~TestFunc()
+{
 } // ~TestFunc
 
-int TestFunc::dimension() {
-  return (m_dimension);
+int TestFunc::dimension()
+{
+    return (m_dimension);
 } // dimension
 
-double TestFunc::bias() {
-  return (m_bias);
+double TestFunc::bias()
+{
+    return (m_bias);
 } // bias
 
-string TestFunc::name() {
-  return (m_func_name);
+std::string TestFunc::name()
+{
+    return (m_func_name);
 } // name

@@ -24,6 +24,7 @@
 #include <MetricsUtil.h>
 #include <vector>
 
+
 /**
  * This class implements the unary epsilon additive indicator as proposed in
  * E. Zitzler, E. Thiele, L. Laummanns, M., Fonseca, C., and Grunert da Fonseca.
@@ -34,26 +35,29 @@
  * $java jmetal.qualityIndicator.Epsilon <solutionFrontFile> <trueFrontFile> <numberOfOjbectives>
  */
 
-class Epsilon {
+using namespace JMetal;
+
+class Epsilon
+{
 
 private:
 
-  int dim_; // stores the number of objectives
-  int * obj_; // obj_[i]=0 means objective i is to be minimized. This code always supposes
-              //the minimization of all the objectives
-  int method_; // method_ = 0 means apply additive epsilon and method_ = 1 means multiplicative
-               // epsilon. This code always apply additive epsilon
+    int dim_; // stores the number of objectives
+    int * obj_; // obj_[i]=0 means objective i is to be minimized. This code always supposes
+    //the minimization of all the objectives
+    int method_; // method_ = 0 means apply additive epsilon and method_ = 1 means multiplicative
+    // epsilon. This code always apply additive epsilon
 
-  void set_params();
-  void free_params();
+    void set_params();
+    void free_params();
 
 public:
 
-  MetricsUtil * utils_; // stores a reference to  qualityIndicatorUtils
+    MetricsUtil * utils_; // stores a reference to  qualityIndicatorUtils
 
-  Epsilon();
-  ~Epsilon();
-  double epsilon(vector <vector<double> > b, vector< vector<double> > a, int dim);
+    Epsilon();
+    ~Epsilon();
+    double epsilon(MatrixOfDouble b, MatrixOfDouble a, int dim);
 
 }; // Epsilon
 

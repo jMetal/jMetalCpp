@@ -29,11 +29,12 @@
  * @class DominanceComparator
  * @brief This class is aimed at representing a Solution
 **/
-class Comparator {
+class Comparator
+{
 
 public:
-  virtual ~Comparator();
-  virtual int compare(void * one, void * two) = 0;
+    virtual ~Comparator();
+    virtual int compare(void * one, void * two) = 0;
 
 };
 

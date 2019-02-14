@@ -28,12 +28,13 @@
   * Class representing the solution type of solutions composed of an ArrayReal
   * variable
   */
-class ArrayRealSolutionType : public SolutionType {
+class ArrayRealSolutionType : public SolutionType
+{
 
 public:
-  ArrayRealSolutionType(Problem *problem);
-  Variable **createVariables();
-  Variable **copyVariables(Variable ** vars);
+    ArrayRealSolutionType(Problem *problem);
+    Variable **createVariables();
+    Variable **copyVariables(Variable ** vars);
 
 };
 

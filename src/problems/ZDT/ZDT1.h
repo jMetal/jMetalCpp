@@ -29,17 +29,18 @@
 #include <XReal.h>
 #include <Solution.h>
 
-class ZDT1 : public Problem {
+class ZDT1 : public Problem
+{
 private:
-	double evalG(XReal *x) ;
-	double evalH(double f, double g) ;
-	double * fx_ ;
+    double evalG(XReal *x) ;
+    double evalH(double f, double g) ;
+    double * fx_ ;
 
 public:
-	ZDT1(string solutionType, int numberOfVariables = 30);
-	void evaluate(Solution *solution);
+    ZDT1(std::string solutionType, int numberOfVariables = 30);
+    void evaluate(Solution *solution);
 
-	~ZDT1();
+    ~ZDT1();
 };
 
 #endif /* ZDT1_H_ */

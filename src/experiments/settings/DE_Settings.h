@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -26,24 +27,25 @@
 #include <DifferentialEvolutionCrossover.h>
 #include <DifferentialEvolutionSelection.h>
 
-class DE_Settings : public Settings {
+class DE_Settings : public Settings
+{
 private:
-	int populationSize_        ;
-	int maxEvaluations_        ;
-	double crParameter_        ;
-  double fParameter_         ;
-  string deVariantParameter_ ;
+    int populationSize_        ;
+    int maxEvaluations_        ;
+    double crParameter_        ;
+    double fParameter_         ;
+    std::string deVariantParameter_ ;
 
-  Algorithm * algorithm ;
-  Operator  * crossover ; // Crossover operator
-  Operator  * selection ; // Selection operator
+    Algorithm * algorithm ;
+    Operator  * crossover ; // Crossover operator
+    Operator  * selection ; // Selection operator
 
 public:
-  DE_Settings() ;
-  DE_Settings(string problemName) ;
-	~DE_Settings() ;
+    DE_Settings() ;
+    DE_Settings(std::string problemName) ;
+    ~DE_Settings() ;
 
-  Algorithm * configure() ;
+    Algorithm * configure() ;
 }; // DE_Settings
 
 #endif // __DE_SETTINGS__

@@ -32,23 +32,24 @@
  * This class allows to apply a SBX crossover operator using two parent
  * solutions.
 **/
-class SBXCrossover : public Crossover {
+class SBXCrossover : public Crossover
+{
 
 public:
-  SBXCrossover(map<string, void *> parameters);
-  ~SBXCrossover();
-  void *execute(void *);
+    SBXCrossover(MapOfStringFunct parameters);
+    ~SBXCrossover();
+    void *execute(void *);
 
 protected:
-  static const double ETA_C_DEFAULT_;
-  static const double EPS;
+    static const double ETA_C_DEFAULT_;
+    static const double EPS;
 
 private:
-  double crossoverProbability_;
-  double distributionIndex_;
-  //TODO: A�adir VALID_TYPES;
-  Solution ** doCrossover(double probability,
-      Solution * parent1, Solution * parent2);
+    double crossoverProbability_;
+    double distributionIndex_;
+    //TODO: A�adir VALID_TYPES;
+    Solution ** doCrossover(double probability,
+                            Solution * parent1, Solution * parent2);
 };
 
 #endif

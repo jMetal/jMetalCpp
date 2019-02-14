@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -33,11 +34,12 @@
  * spread and additive epsilon indicators are used for performance assessment.
  */
 
-class StandardStudyExecution : public ExperimentExecution {
+class StandardStudyExecution : public ExperimentExecution
+{
 
 public:
-  Algorithm * algorithmSettings(string problemName, int algorithmId,
-      int experimentIndividualId);
+    Algorithm * algorithmSettings(string problemName, int algorithmId,
+                                  int experimentIndividualId);
 
 };
 

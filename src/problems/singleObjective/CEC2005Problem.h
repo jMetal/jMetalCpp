@@ -36,16 +36,17 @@
   * @class CEC2005Problem
   * @brief Class representing all problems in CEC2005
  **/
-class CEC2005Problem : public Problem {
+class CEC2005Problem : public Problem
+{
 
 private:
-  TestFunc * testFunction_ ;
-  static const double PI;
+    TestFunc * testFunction_ ;
+    static const double PI;
 
 public:
-  CEC2005Problem(string solutionType, int problemID, int numberOfVariables = 10);
-	~CEC2005Problem();
-	void evaluate(Solution *solution);
+    CEC2005Problem(std::string solutionType, int problemID, int numberOfVariables = 10);
+    ~CEC2005Problem();
+    void evaluate(Solution *solution);
 };
 
 #endif /* __CEC_2005_PROBLEM__ */

@@ -34,24 +34,25 @@
   * @class Mutation
   * @brief This class implements a polynomial mutation operator.
 **/
-class PolynomialMutation : public Mutation {
+class PolynomialMutation : public Mutation
+{
 
 public:
 
-  static const double ETA_M_DEFAULT_;
-  static const double eta_m_;
+    static const double ETA_M_DEFAULT_;
+    static const double eta_m_;
 
-  PolynomialMutation(map<string, void *> parameters);
-  ~PolynomialMutation();
+    PolynomialMutation(MapOfStringFunct parameters);
+    ~PolynomialMutation();
 
-  void * execute(void *);
+    void * execute(void *);
 
 private:
-  double mutationProbability_;
-  double distributionIndex_;
+    double mutationProbability_;
+    double distributionIndex_;
 
-  void * doMutation(double probability, Solution * solution);
-  // TODO: VALID_TYPES;
+    void * doMutation(double probability, Solution * solution);
+    // TODO: VALID_TYPES;
 
 }; // PolynomialMutation
 

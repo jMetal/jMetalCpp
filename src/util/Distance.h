@@ -29,24 +29,25 @@
 #include <ObjectiveComparator.h>
 #include <math.h>
 
-using namespace std;
+
 
 
 /**
  * This class implements some utilities for calculating distances
  */
-class Distance {
+class Distance
+{
 
 public:
-  Distance();
-  double ** distanceMatrix(SolutionSet * solutionSet);
-  double distanceToSolutionSetInObjectiveSpace(Solution * solution,
-                                               SolutionSet * solutionSet);
-  double distanceToSolutionSetInSolutionSpace(Solution * solution,
-                                              SolutionSet * solutionSet);
-  double distanceBetweenSolutions(Solution * solutionI, Solution * solutionJ);
-  double distanceBetweenObjectives(Solution * solutionI, Solution * solutionJ);
-  void crowdingDistanceAssignment(SolutionSet * solutionSet, int nObjs);
+    Distance();
+    double ** distanceMatrix(SolutionSet * solutionSet);
+    double distanceToSolutionSetInObjectiveSpace(Solution * solution,
+            SolutionSet * solutionSet);
+    double distanceToSolutionSetInSolutionSpace(Solution * solution,
+            SolutionSet * solutionSet);
+    double distanceBetweenSolutions(Solution * solutionI, Solution * solutionJ);
+    double distanceBetweenObjectives(Solution * solutionI, Solution * solutionJ);
+    void crowdingDistanceAssignment(SolutionSet * solutionSet, int nObjs);
 
 };
 

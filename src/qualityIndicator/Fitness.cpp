@@ -26,16 +26,18 @@
  * Constructor
  * Creates a new instance of a Fitness object
  */
-Fitness::Fitness() {
-  utils_ = new MetricsUtil();
+Fitness::Fitness()
+{
+    utils_ = snew MetricsUtil();
 } // Fitness
 
 
 /**
  * Destructor
  */
-Fitness::~Fitness() {
-  delete utils_;
+Fitness::~Fitness()
+{
+    delete utils_;
 } // ~Fitness
 
 
@@ -45,18 +47,22 @@ Fitness::~Fitness() {
  * @param a. Solution front
  * @return the value of the epsilon indicator
  */
-void Fitness::fitness(vector <vector<double> > a, string file) {
-  std::fstream out(file.c_str(), std::ios::out | std::ios::app);
-  for (int i=0; i<a.size(); i++) {
-    for (int j=0; j<a[i].size(); j++) {
-      if (j!=0) {
-        out << " ";
-      }
-      out << a[i][j];
-    }
-    out << endl;
+void Fitness::fitness(std::vector <VectorOfDouble > a, std::string file)
+{
+    std::fstream out(file.c_str(), std::ios::out | std::ios::app);
+    for (int i=0; i<a.size(); i++)
+    {
+        for (int j=0; j<a[i].size(); j++)
+        {
+            if (j!=0)
+            {
+                out << " ";
+            }
+            out << a[i][j];
+        }
+        out << std::endl;
 
-  }
-  out.close();
+    }
+    out.close();
 }
 

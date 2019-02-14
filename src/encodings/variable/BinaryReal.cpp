@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -41,10 +42,11 @@ BinaryReal::BinaryReal() : Binary() { }
  * @param upperBound The upper limit for the variable.
  */
 BinaryReal::BinaryReal(int numberOfBits, double lowerBound, double upperBound)
-: Binary(numberOfBits) {
-  lowerBound_ = lowerBound;
-  upperBound_ = upperBound;
-  this->decode();
+    : Binary(numberOfBits)
+{
+    lowerBound_ = lowerBound;
+    upperBound_ = upperBound;
+    this->decode();
 } //BinaryReal
 
 
@@ -52,10 +54,11 @@ BinaryReal::BinaryReal(int numberOfBits, double lowerBound, double upperBound)
  * Copy constructor
  * @param variable The variable to copy
  */
-BinaryReal::BinaryReal(BinaryReal * variable) : Binary (variable) {
-  lowerBound_   = variable->lowerBound_;
-  upperBound_   = variable->upperBound_;
-  value_ = variable->value_;
+BinaryReal::BinaryReal(BinaryReal * variable) : Binary (variable)
+{
+    lowerBound_   = variable->lowerBound_;
+    upperBound_   = variable->upperBound_;
+    value_ = variable->value_;
 } //BinaryReal
 
 
@@ -66,21 +69,24 @@ BinaryReal::~BinaryReal() { /* do nothing */ }
 
 
 /**
- * Decodes the real value encoded in the binary string represented
+ * Decodes the real value encoded in the binary std::string represented
  * by the <code>BinaryReal</code> object. The decoded value is stores in the
  * <code>value_</code> field and can be accessed by the method
  * <code>getValue</code>.
  */
-void BinaryReal::decode(){
-  double value = 0.0;
-  for (int i = 0; i < numberOfBits_; i++) {
-    if ((*bits_)[i] == true) {
-      value += pow(2.0,i);
+void BinaryReal::decode()
+{
+    double value = 0.0;
+    for (int i = 0; i < numberOfBits_; i++)
+    {
+        if ((*bits_)[i] == true)
+        {
+            value += pow(2.0,i);
+        }
     }
-  }
-  value_ = value * (upperBound_ - lowerBound_) /
-      (pow(2.0,numberOfBits_)-1.0);
-  value_ += lowerBound_;
+    value_ = value * (upperBound_ - lowerBound_) /
+             (pow(2.0,numberOfBits_)-1.0);
+    value_ += lowerBound_;
 } //decode
 
 
@@ -88,13 +94,15 @@ void BinaryReal::decode(){
  * Returns the double value of the variable.
  * @return the double value.
  */
-double BinaryReal::getValue() {
-  return value_;
+double BinaryReal::getValue()
+{
+    return value_;
 } //getValue
 
 
-void BinaryReal::setValue(double value) {
-  value_ = value;
+void BinaryReal::setValue(double value)
+{
+    value_ = value;
 }
 
 
@@ -102,8 +110,9 @@ void BinaryReal::setValue(double value) {
  * Creates an exact copy of a <code>BinaryReal</code> object.
  * @return The copy of the object
  */
-Variable * BinaryReal::deepCopy() {
-  return new BinaryReal(this);
+Variable * BinaryReal::deepCopy()
+{
+    return snew BinaryReal(this);
 } //deepCopy
 
 
@@ -111,8 +120,9 @@ Variable * BinaryReal::deepCopy() {
  * Returns the lower bound of the variable.
  * @return the lower bound.
  */
-double BinaryReal::getLowerBound() {
-  return lowerBound_;
+double BinaryReal::getLowerBound()
+{
+    return lowerBound_;
 } // getLowerBound
 
 
@@ -120,8 +130,9 @@ double BinaryReal::getLowerBound() {
  * Returns the upper bound of the variable.
  * @return the upper bound.
  */
-double BinaryReal::getUpperBound() {
-  return upperBound_;
+double BinaryReal::getUpperBound()
+{
+    return upperBound_;
 } // getUpperBound
 
 
@@ -129,8 +140,9 @@ double BinaryReal::getUpperBound() {
  * Sets the lower bound of the variable.
  * @param lowerBound the lower bound.
  */
-void BinaryReal::setLowerBound(double lowerBound) {
-  lowerBound_ = lowerBound;
+void BinaryReal::setLowerBound(double lowerBound)
+{
+    lowerBound_ = lowerBound;
 } // setLowerBound
 
 
@@ -138,17 +150,19 @@ void BinaryReal::setLowerBound(double lowerBound) {
  * Sets the upper bound of the variable.
  * @param upperBound the upper bound.
  */
-void BinaryReal::setUpperBound(double upperBound) {
-  upperBound_ = upperBound;
+void BinaryReal::setUpperBound(double upperBound)
+{
+    upperBound_ = upperBound;
 } // setUpperBound
 
 
 /**
- * Returns a string representing the object.
+ * Returns a std::string representing the object.
  * @return the string.
  */
-string BinaryReal::toString() {
-  std::ostringstream ss;
-   ss << value_;
-  return ss.str();
+std::string BinaryReal::toString()
+{
+    std::ostringstream ss;
+    ss << value_;
+    return ss.str();
 } // toString

@@ -26,48 +26,50 @@
 #include <HCJob.h>
 #include <TestFunc.h>
 
-class F15HybridComposition1 : public TestFunc {
+class F15HybridComposition1 : public TestFunc
+{
 
 private:
 
-  // Fixed (class) parameters
-  static const string FUNCTION_NAME;
-  static const string DEFAULT_FILE_DATA;
+    // Fixed (class) parameters
+    static const std::string FUNCTION_NAME;
+    static const std::string DEFAULT_FILE_DATA;
 
-  // Number of functions
-  static const int NUM_FUNC = 10;
+    // Number of functions
+    static const int NUM_FUNC = 10;
 
-  // Shifted global optimum
-  double ** m_o;
-  double *** m_M;
-  static const double m_sigma[NUM_FUNC];
-  static const double m_lambda[NUM_FUNC];
-  static const double m_func_biases[NUM_FUNC];
-  double * m_testPoint;
-  double * m_testPointM;
-  double * m_fmax;
+    // Shifted global optimum
+    double ** m_o;
+    double *** m_M;
+    static const double m_sigma[NUM_FUNC];
+    static const double m_lambda[NUM_FUNC];
+    static const double m_func_biases[NUM_FUNC];
+    double * m_testPoint;
+    double * m_testPointM;
+    double * m_fmax;
 
-  // In order to avoid excessive memory allocation,
-  // a fixed memory buffer is allocated for each function object.
-  double * m_w;
-  double ** m_z;
-  double ** m_zM;
+    // In order to avoid excessive memory allocation,
+    // a fixed memory buffer is allocated for each function object.
+    double * m_w;
+    double ** m_z;
+    double ** m_zM;
 
-  class MyHCJob : public HCJob {
-  public:
-    MyHCJob(int numFunc);
-    double basic_func(int func_no, double* x, int length);
-  };
+    class MyHCJob : public HCJob
+    {
+    public:
+        MyHCJob(int numFunc);
+        double basic_func(int func_no, double* x, int length);
+    };
 
-  MyHCJob * theJob;
+    MyHCJob * theJob;
 
 public:
 
-  F15HybridComposition1(int dimension, double bias);
-  F15HybridComposition1(int dimension, double bias, string file_data);
-  ~F15HybridComposition1();
+    F15HybridComposition1(int dimension, double bias);
+    F15HybridComposition1(int dimension, double bias, std::string file_data);
+    ~F15HybridComposition1();
 
-  double f (double * x);
+    double f (double * x);
 
 }; // F15HybridComposition1
 

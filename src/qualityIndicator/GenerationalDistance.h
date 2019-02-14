@@ -36,19 +36,20 @@
  *            Inst. Technol. (1998)
  */
 
-class GenerationalDistance {
+class GenerationalDistance
+{
 
 private:
-  static const double pow_;
+    static const double pow_;
 
 public:
 
-  MetricsUtil * utils_;
+    MetricsUtil * utils_;
 
-  GenerationalDistance();
-  ~GenerationalDistance();
-  double generationalDistance(vector< vector<double> > front,
-      vector< vector<double> > trueParetoFront, int numberOfObjectives);
+    GenerationalDistance();
+    ~GenerationalDistance();
+    double generationalDistance(MatrixOfDouble front,
+                                MatrixOfDouble trueParetoFront, int numberOfObjectives);
 
 };
 

@@ -23,6 +23,7 @@
 #ifndef __SOLUTION_SET__
 #define __SOLUTION_SET__
 
+#include "JMetalHeader.h"
 #include <string>
 #include <cstdlib>
 #include <iostream>
@@ -33,7 +34,7 @@
 #include <Solution.h>
 #include <Comparator.h>
 
-using namespace std;
+using namespace JMetal;
 
 //class Solution ;
 class Comparator;
@@ -42,44 +43,45 @@ class Comparator;
  * @class SolutionSet
  * @brief This class is aimed at representing a solution set
 **/
-class SolutionSet {
+class SolutionSet
+{
 
 protected:
-  vector<Solution*> solutionsList_;
-  int capacity_;
+	VectorOfSolutionPtr solutionsList_;
+    int capacity_;
 
 public:
 
-  SolutionSet();
-  SolutionSet(int maximumSize);
-  ~SolutionSet();
+    SolutionSet();
+    SolutionSet(int maximumSize);
+    ~SolutionSet();
 
-  bool add(Solution * solution);
-  bool add(int index, Solution * solution);
-  Solution *get(int index);
-  int getMaxSize();
-  void sort(Comparator * comparator);
-  int indexBest(Comparator * comparator);
-  Solution * best(Comparator * comparator);
-  int indexWorst(Comparator * comparator);
-  Solution * worst(Comparator * comparator);
-  int size();
-  void printObjectivesToFile(string path);
-  void printObjectivesToFile(string path, bool append);
-  void printVariablesToFile(string file);
-  void printVariablesToFile(string file, bool append);
-  void clear();
-  void clear(bool del);
-  void remove(int i);
-  void remove(int i, bool del);
-  SolutionSet * join(SolutionSet * another);
-  void replace(int position, Solution * solution);
-  void replace(int position, Solution * solution, bool del);
-  vector <vector<double> > writeObjectivesToMatrix();
-  void printObjectives();
+    bool add(Solution * solution);
+    bool add(int index, Solution * solution);
+    Solution *get(int index);
+    int getMaxSize();
+    void sort(Comparator * comparator);
+    int indexBest(Comparator * comparator);
+    Solution * best(Comparator * comparator);
+    int indexWorst(Comparator * comparator);
+    Solution * worst(Comparator * comparator);
+    int size();
+    void printObjectivesToFile(std::string path);
+    void printObjectivesToFile(std::string path, bool append);
+    void printVariablesToFile(std::string file);
+    void printVariablesToFile(std::string file, bool append);
+    void clear();
+    void clear(bool del);
+    void remove(int i);
+    void remove(int i, bool del);
+    SolutionSet * join(SolutionSet * another);
+    void replace(int position, Solution * solution);
+    void replace(int position, Solution * solution, bool del);
+    std::vector <VectorOfDouble > writeObjectivesToMatrix();
+    void printObjectives();
 
-  //void reset() ;
-  //string toString();
+    //void reset() ;
+    //std::string toString();
 };
 
 

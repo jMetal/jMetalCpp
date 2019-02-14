@@ -21,27 +21,28 @@
 #ifndef __LZ09_H__
 #define __LZ09_H__
 
+#include "JMetalHeader.h"
 #include <math.h>
 #include <cstdlib>
-#include <vector>
 
-using namespace std;
+using namespace JMetal;
 
-class LZ09 {
+class LZ09
+{
 private:
-	int nvar_  ;
-	int nobj_  ;
-	int ltype_ ;
-  int dtype_ ;
-  int ptype_ ;
+    int nvar_  ;
+    int nobj_  ;
+    int ltype_ ;
+    int dtype_ ;
+    int ptype_ ;
 
 public:
-  LZ09 (int nvar, int nobj, int ptype, int dtype, int ltype) ;
-	void alphaFunction(double *alpha, vector<double> *x, int dim, int type) ;
-	double betaFunction(vector<double> * x, int type) ;
-	double psfunc2(double x, double t1, int dim, int type, int css) ;
-	double psfunc3(double x, double t1, double t2, int dim, int type) ;
-	void objective(vector<double> * x_var, vector <double> * y_obj) ;
+    LZ09 (int nvar, int nobj, int ptype, int dtype, int ltype) ;
+    void alphaFunction(double *alpha, VectorOfDouble *x, int dim, int type) ;
+    double betaFunction(VectorOfDouble * x, int type) ;
+    double psfunc2(double x, double t1, int dim, int type, int css) ;
+    double psfunc3(double x, double t1, double t2, int dim, int type) ;
+    void objective(VectorOfDouble * x_var, std::vector <double> * y_obj) ;
 
 };
 

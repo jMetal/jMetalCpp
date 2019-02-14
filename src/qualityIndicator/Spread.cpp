@@ -26,33 +26,37 @@
  * Constructor
  * Creates a new instance of a Spread object
  */
-Spread::Spread() {
-  utils_ = new MetricsUtil();
+Spread::Spread()
+{
+    utils_ = new MetricsUtil();
 } // Spread
 
 
 /**
  * Destructor
  */
-Spread::~Spread() {
-  delete utils_;
+Spread::~Spread()
+{
+    delete utils_;
 } // ~Spread
 
 
-bool Spread::compareFront(vector<double> pointOne, vector<double> pointTwo) {
+bool Spread::compareFront(VectorOfDouble pointOne, VectorOfDouble pointTwo)
+{
 
-  int value;
-  bool result = false;
+    int value;
+    bool result = false;
 
-  LexicoGraphicalComparator * c = new LexicoGraphicalComparator();
-  value = c->compare(&pointOne, &pointTwo);
-  delete c;
+    LexicoGraphicalComparator * c = new LexicoGraphicalComparator();
+    value = c->compare(&pointOne, &pointTwo);
+    delete c;
 
-  if (value == -1) {
-    result = true;
-  }
+    if (value == -1)
+    {
+        result = true;
+    }
 
-  return result;
+    return result;
 
 } // compareFront
 
@@ -64,75 +68,79 @@ bool Spread::compareFront(vector<double> pointOne, vector<double> pointTwo) {
  *  @param trueParetoFront The true pareto front.
  *  @param numberOfObjectives The number of objectives.
  */
-double Spread::spread(vector <vector<double> > front,
-    vector <vector<double> > trueParetoFront, int numberOfObjectives) {
+double Spread::spread(std::vector <VectorOfDouble > front,
+                      std::vector <VectorOfDouble > trueParetoFront, int numberOfObjectives)
+{
 
-  /**
-   * Stores the maximum values of true pareto front.
-   */
-  vector<double> maximumValue ;
+    /**
+     * Stores the maximum values of true pareto front.
+     */
+    VectorOfDouble maximumValue ;
 
-  /**
-   * Stores the minimum values of the true pareto front.
-   */
-  vector<double> minimumValue ;
+    /**
+     * Stores the minimum values of the true pareto front.
+     */
+    VectorOfDouble minimumValue ;
 
-  /**
-   * Stores the normalized front.
-   */
-  vector <vector<double> > normalizedFront ;
+    /**
+     * Stores the normalized front.
+     */
+    std::vector <VectorOfDouble > normalizedFront ;
 
-  /**
-   * Stores the normalized true Pareto front.
-   */
-  vector <vector<double> > normalizedParetoFront ;
+    /**
+     * Stores the normalized true Pareto front.
+     */
+    std::vector <VectorOfDouble > normalizedParetoFront ;
 
-  // STEP 1. Obtain the maximum and minimum values of the Pareto front
-  maximumValue = utils_->getMaximumValues(trueParetoFront, numberOfObjectives);
-  minimumValue = utils_->getMinimumValues(trueParetoFront, numberOfObjectives);
+    // STEP 1. Obtain the maximum and minimum values of the Pareto front
+    maximumValue = utils_->getMaximumValues(trueParetoFront, numberOfObjectives);
+    minimumValue = utils_->getMinimumValues(trueParetoFront, numberOfObjectives);
 
-  // STEP 2. Get the normalized front and true Pareto fronts
-  normalizedFront = utils_->getNormalizedFront(front,
-                                               maximumValue,
-                                               minimumValue);
-  normalizedParetoFront = utils_->getNormalizedFront(trueParetoFront,
-                                                     maximumValue,
-                                                     minimumValue);
+    // STEP 2. Get the normalized front and true Pareto fronts
+    normalizedFront = utils_->getNormalizedFront(front,
+                      maximumValue,
+                      minimumValue);
+    normalizedParetoFront = utils_->getNormalizedFront(trueParetoFront,
+                            maximumValue,
+                            minimumValue);
 
-  // STEP 3. Sort normalizedFront and normalizedParetoFront;
-  sort(normalizedFront.begin(), normalizedFront.end(), Spread::compareFront);
-  sort(normalizedParetoFront.begin(), normalizedParetoFront.end(), Spread::compareFront);
+    // STEP 3. Sort normalizedFront and normalizedParetoFront;
+    sort(normalizedFront.begin(), normalizedFront.end(), Spread::compareFront);
+    sort(normalizedParetoFront.begin(), normalizedParetoFront.end(), Spread::compareFront);
 
-  int numberOfPoints = normalizedFront.size();
-  // int numberOfTruePoints = normalizedParetoFront.length;
+    int numberOfPoints = normalizedFront.size();
+    // int numberOfTruePoints = normalizedParetoFront.length;
 
-  // STEP 4. Compute df and dl (See specifications in Deb's description of
-  // the metric)
-  double df = utils_->distance(normalizedFront[0],normalizedParetoFront[0]);
-  double dl = utils_->distance(normalizedFront[normalizedFront.size()-1],
-             normalizedParetoFront[normalizedParetoFront.size()-1]);
+    // STEP 4. Compute df and dl (See specifications in Deb's description of
+    // the metric)
+    double df = utils_->distance(normalizedFront[0],normalizedParetoFront[0]);
+    double dl = utils_->distance(normalizedFront[normalizedFront.size()-1],
+                                 normalizedParetoFront[normalizedParetoFront.size()-1]);
 
-  double mean = 0.0;
-  double diversitySum = df + dl;
+    double mean = 0.0;
+    double diversitySum = df + dl;
 
-  // STEP 5. Calculate the mean of distances between points i and (i - 1).
-  // (the poins are in lexicografical order)
-  for (int i = 0; i < (normalizedFront.size()-1); i++) {
-    mean += utils_->distance(normalizedFront[i],normalizedFront[i+1]);
-  } // for
-
-  mean = mean / (double)(numberOfPoints - 1);
-
-  // STEP 6. If there are more than a single point, continue computing the
-  // metric. In other case, return the worse value (1.0, see metric's
-  // description).
-  if (numberOfPoints > 1) {
-    for (int i = 0; i < (numberOfPoints -1); i++) {
-      diversitySum += fabs(utils_->distance(normalizedFront[i],
-                           normalizedFront[i+1]) - mean);
+    // STEP 5. Calculate the mean of distances between points i and (i - 1).
+    // (the poins are in lexicografical order)
+    for (int i = 0; i < (normalizedFront.size()-1); i++)
+    {
+        mean += utils_->distance(normalizedFront[i],normalizedFront[i+1]);
     } // for
-    return diversitySum / (df + dl + (numberOfPoints-1)*mean);
-  }
-  else
-    return 1.0;
+
+    mean = mean / (double)(numberOfPoints - 1);
+
+    // STEP 6. If there are more than a single point, continue computing the
+    // metric. In other case, return the worse value (1.0, see metric's
+    // description).
+    if (numberOfPoints > 1)
+    {
+        for (int i = 0; i < (numberOfPoints -1); i++)
+        {
+            diversitySum += fabs(utils_->distance(normalizedFront[i],
+                                                  normalizedFront[i+1]) - mean);
+        } // for
+        return diversitySum / (df + dl + (numberOfPoints-1)*mean);
+    }
+    else
+        return 1.0;
 } // spread

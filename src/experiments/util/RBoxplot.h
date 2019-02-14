@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -21,9 +22,11 @@
 #ifndef __RBOXPLOT__
 #define __RBOXPLOT__
 
-#include <string>
+#include "JMetalHeader.h"
 #include <FileUtils.h>
 #include <ExperimentReport.h>
+
+using namespace JMetal;
 
 class ExperimentReport;
 
@@ -31,10 +34,11 @@ class ExperimentReport;
  * Class for generating results in form of boxplots
  */
 
-class RBoxplot {
+class RBoxplot
+{
 public:
-  static void generateScripts(int rows, int cols, vector<string> problems,
-      string prefix, bool notch, ExperimentReport * experiment);
+    static void generateScripts(int rows, int cols, VectorOfString problems,
+                                std::string prefix, bool notch, ExperimentReport * experiment);
 };
 
 #endif /* __RBOXPLOT__ */

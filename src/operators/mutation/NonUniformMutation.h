@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2014 Antonio J. Nebro
 //
@@ -29,60 +30,61 @@
 /**
  * This class implements a non-uniform mutation operator.
  */
-class NonUniformMutation : public Mutation {
+class NonUniformMutation : public Mutation
+{
 
 private:
 
-  /**
-   * Valid solution types to apply this operator.
-   */
-  static const string VALID_TYPES[];
+    /**
+     * Valid solution types to apply this operator.
+     */
+    static const std::string VALID_TYPES[];
 
-  /**
-   * perturbation_ stores the perturbation value used in the Non Uniform
-   * mutation operator
-   */
-  double perturbation_;
+    /**
+     * perturbation_ stores the perturbation value used in the Non Uniform
+     * mutation operator
+     */
+    double perturbation_ = 0.0;
 
-  /**
-   * maxIterations_ stores the maximun number of iterations.
-   */
-  int maxIterations_;
+    /**
+     * maxIterations_ stores the maximun number of iterations.
+     */
+    int maxIterations_ = 0;
 
-  /**
-   * currentIteration_ stores the iteration in which the operator is going to be
-   * applied
-   */
-  int currentIteration_;
+    /**
+     * currentIteration_ stores the iteration in which the operator is going to be
+     * applied
+     */
+    int currentIteration_ = 0;
 
-  double mutationProbability_;
+    double mutationProbability_ = 0;
 
-  /**
-   * Performs the operation.
-   * @param probability Mutation probability
-   * @param solution The solution to mutate
-   * @throws JMException
-   */
-  void doMutation(double probability, Solution *solution);
+    /**
+     * Performs the operation.
+     * @param probability Mutation probability
+     * @param solution The solution to mutate
+     * @throws JMException
+     */
+    void doMutation(double probability, Solution *solution);
 
-  /**
-   * Calculates the delta value used in NonUniform mutation operator
-   */
-  double delta(double y, double bMutationParameter);
+    /**
+     * Calculates the delta value used in NonUniform mutation operator
+     */
+    double delta(double y, double bMutationParameter);
 
 public:
 
-  /**
-   * Constructor.
-   * Creates a new instance of the non uniform mutation
-   */
-  NonUniformMutation(map<string, void *> parameters);
+    /**
+     * Constructor.
+     * Creates a new instance of the non uniform mutation
+     */
+    NonUniformMutation(MapOfStringFunct parameters);
 
-  /**
-   * Executes the operation
-   * @param object An object containing the solution to mutate
-   */
-  void *execute(void *);
+    /**
+     * Executes the operation
+     * @param object An object containing the solution to mutate
+     */
+    void *execute(void *);
 
 }; // NonUniformMutation
 

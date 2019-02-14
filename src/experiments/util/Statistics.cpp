@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -30,19 +31,23 @@
  * @param last index of last position to consider in the vector
  * @return The median
  */
-double Statistics::calculateMedian(vector<double> vector_, int first, int last) {
-  double median = 0.0;
+double Statistics::calculateMedian(VectorOfDouble vector_, int first, int last)
+{
+    double median = 0.0;
 
-  int size = last - first + 1;
-  // cout << "size: " << size << "first: " << first << " last: " << last << endl;
+    int size = last - first + 1;
+    // std::cout << "size: " << size << "first: " << first << " last: " << last << std::endl;
 
-  if (size % 2 != 0) {
-    median = vector_[first + size / 2];
-  } else {
-    median = (vector_[first + size / 2 - 1] + vector_[first + size / 2]) / 2.0;
-  }
+    if (size % 2 != 0)
+    {
+        median = vector_[first + size / 2];
+    }
+    else
+    {
+        median = (vector_[first + size / 2 - 1] + vector_[first + size / 2]) / 2.0;
+    }
 
-  return median;
+    return median;
 } // calculatemedian
 
 
@@ -51,23 +56,28 @@ double Statistics::calculateMedian(vector<double> vector_, int first, int last) 
  * @param vector
  * @return The IQR
  */
-double Statistics::calculateIQR(vector<double> vector_) {
-  double q3 = 0.0;
-  double q1 = 0.0;
+double Statistics::calculateIQR(VectorOfDouble vector_)
+{
+    double q3 = 0.0;
+    double q1 = 0.0;
 
-  if (vector_.size() > 1) { // == 1 implies IQR = 0
-    if (vector_.size() % 2 != 0) {
-      q3 = calculateMedian(vector_, vector_.size() / 2 + 1, vector_.size() - 1);
-      q1 = calculateMedian(vector_, 0, vector_.size() / 2 - 1);
-      //cout << "Q1: [" << 0 << ", " << (vector.size()/2 - 1) << "] = " << q1 << endl;
-      //cout << "Q3: [" << (vector.size()/2+1) << ", " << (vector.size()-1) << "]= " << q3 << endl;
-    } else {
-      q3 = calculateMedian(vector_, vector_.size() / 2, vector_.size() - 1);
-      q1 = calculateMedian(vector_, 0, vector_.size() / 2 - 1);
-      //cout << "Q1: [" << 0 << ", " << (vector.size()/2 - 1) << "] = " << q1 << endl;
-      //cout << "Q3: [" << (vector.size()/2) << ", " << (vector.size()-1) << "]= " << q3 << endl;
-    } // else
-  } // if
+    if (vector_.size() > 1)   // == 1 implies IQR = 0
+    {
+        if (vector_.size() % 2 != 0)
+        {
+            q3 = calculateMedian(vector_, vector_.size() / 2 + 1, vector_.size() - 1);
+            q1 = calculateMedian(vector_, 0, vector_.size() / 2 - 1);
+            //std::cout << "Q1: [" << 0 << ", " << (vector.size()/2 - 1) << "] = " << q1 << std::endl;
+            //std::cout << "Q3: [" << (vector.size()/2+1) << ", " << (vector.size()-1) << "]= " << q3 << std::endl;
+        }
+        else
+        {
+            q3 = calculateMedian(vector_, vector_.size() / 2, vector_.size() - 1);
+            q1 = calculateMedian(vector_, 0, vector_.size() / 2 - 1);
+            //std::cout << "Q1: [" << 0 << ", " << (vector.size()/2 - 1) << "] = " << q1 << std::endl;
+            //std::cout << "Q3: [" << (vector.size()/2) << ", " << (vector.size()-1) << "]= " << q3 << std::endl;
+        } // else
+    } // if
 
-  return q3 - q1;
+    return q3 - q1;
 } // calculateIQR

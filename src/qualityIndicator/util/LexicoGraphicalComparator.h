@@ -22,12 +22,12 @@
 #define __LEXICOGRAPHICALCOMPARATOR__
 
 #include <Comparator.h>
-#include <vector>
 
-class LexicoGraphicalComparator : public Comparator {
+class LexicoGraphicalComparator : public Comparator
+{
 
 public:
-  int compare(void * o1, void * o2);
+    int compare(void * o1, void * o2);
 
 };
 

@@ -31,19 +31,21 @@
  * Constructor.
  * Defines a neighborhood of a given size.
  */
-AdaptiveRandomNeighborhood::AdaptiveRandomNeighborhood(SolutionSet * solutionSet, int numberOfRandomNeighbours) {
-  solutionSet_ = solutionSet;
-  numberOfRandomNeighbours_ = numberOfRandomNeighbours;
-  //problem_ = solutionSet_->get(0)->getProblem() ;
+AdaptiveRandomNeighborhood::AdaptiveRandomNeighborhood(SolutionSet * solutionSet, int numberOfRandomNeighbours)
+{
+    solutionSet_ = solutionSet;
+    numberOfRandomNeighbours_ = numberOfRandomNeighbours;
+    //problem_ = solutionSet_->get(0)->getProblem() ;
 
-  //list_ = new int * [solutionSet_->size()];
+    //list_ = snew int * [solutionSet_->size()];
 
-  for (int i = 0; i < solutionSet_->size(); i++) {
-    //list_[i] = new int []
-    vector<int> list_i;
-    list_i.push_back(i);
-    list_.push_back(list_i);
-  }
+    for (int i = 0; i < solutionSet_->size(); i++)
+    {
+        //list_[i] = snew int []
+        VectorOfInteger list_i;
+        list_i.push_back(i);
+        list_.push_back(list_i);
+    }
 
 //  if(std::find(v.begin(), v.end(), x) != v.end()) {
 //      /* v contains x */
@@ -51,90 +53,111 @@ AdaptiveRandomNeighborhood::AdaptiveRandomNeighborhood(SolutionSet * solutionSet
 //      /* v does not contain x */
 //  }
 
-  //cout << "list: " << list_ << endl;
-  for (int i = 0; i < solutionSet_->size(); i++) {
-    //list_.at(i).push_back(i);
-    for (int j = 0; j < numberOfRandomNeighbours_; j++) {
-      int random = PseudoRandom::randInt(0, solutionSet_->size() - 1);
-      //cout << "i: " << i >> " random: " << random << " listb: " << list_at(random) << endl;
-      //if (!list_.at(random).contains((Integer) i))
-      if (find(list_.at(random).begin(), list_.at(random).end(), i) == list_.at(random).end()) {
-        list_.at(random).push_back(i);
-      }
+    //std::cout << "list: " << list_ << std::endl;
+    for (int i = 0; i < solutionSet_->size(); i++)
+    {
+        //list_.at(i).push_back(i);
+        for (int j = 0; j < numberOfRandomNeighbours_; j++)
+        {
+            int random = PseudoRandom::randInt(0, solutionSet_->size() - 1);
+            //std::cout << "i: " << i >> " random: " << random << " listb: " << list_at(random) << std::endl;
+            //if (!list_.at(random).contains((Integer) i))
+            if (find(list_.at(random).begin(), list_.at(random).end(), i) == list_.at(random).end())
+            {
+                list_.at(random).push_back(i);
+            }
+        }
     }
-  }
-  //cout <<  "L: " << list_ << endl;
-  cout << "L:" << endl;
-  for (int i = 0; i < list_.size(); i++) {
-    cout << "\t[";
-    for (int j = 0; j < list_.at(i).size(); j++) {
-      cout << list_.at(i).at(j);
-      if (j < list_.at(i).size()-1) {
-        cout << ",";
-      } else {
-        cout << "]" << endl;
-      }
+    //std::cout <<  "L: " << list_ << std::endl;
+    std::cout << "L:" << std::endl;
+    for (int i = 0; i < list_.size(); i++)
+    {
+        std::cout << "\t[";
+        for (int j = 0; j < list_.at(i).size(); j++)
+        {
+            std::cout << list_.at(i).at(j);
+            if (j < list_.at(i).size()-1)
+            {
+                std::cout << ",";
+            }
+            else
+            {
+                std::cout << "]" << std::endl;
+            }
+        }
     }
-  }
 }
 
 
-vector<int> AdaptiveRandomNeighborhood::getNeighbors(int i) {
-  if (i > list_.size()) {
-    cerr << "Error in AdaptiveRandomNeighborhood.getNeighbors"
-        << "the parameter " << i << " is less than " << list_.size()
-        << endl;
-    exit(-1);
-  }
-  return list_.at(i);
-}
-
-
-int AdaptiveRandomNeighborhood::getNumberOfRandomNeighbours() {
-  return numberOfRandomNeighbours_;
-}
-
-
-SolutionSet * AdaptiveRandomNeighborhood::getBestFitnessSolutionInNeighborhood(Comparator * comparator) {
-  SolutionSet * result = new SolutionSet();
-  for (int i = 0; i < list_.size(); i++) {
-    Solution * bestSolution = solutionSet_->get(list_.at(i).at(0));
-    for (int j = 1; j < list_.at(i).size(); j++) {
-      if (comparator->compare(bestSolution, solutionSet_->get(list_.at(i).at(j))) > 0) {
-        bestSolution = solutionSet_->get(list_.at(i).at(j));
-      }
+VectorOfInteger AdaptiveRandomNeighborhood::getNeighbors(int i)
+{
+    if (i > list_.size())
+    {
+        cerr << "Error in AdaptiveRandomNeighborhood.getNeighbors"
+             << "the parameter " << i << " is less than " << list_.size()
+             << std::endl;
+        exit(-1);
     }
-    result->add(bestSolution);
-  }
-
-  return result;
+    return list_.at(i);
 }
 
 
-vector<vector<int>> AdaptiveRandomNeighborhood::getNeighborhood() {
-  return list_;
+int AdaptiveRandomNeighborhood::getNumberOfRandomNeighbours()
+{
+    return numberOfRandomNeighbours_;
 }
 
 
-void AdaptiveRandomNeighborhood::recompute() {
-  list_.clear();
-
-  for (int i = 0; i < solutionSet_->size(); i++) {
-    //list_[i] = new int []
-    vector<int> list_i;
-    list_i.push_back(i);
-    list_.push_back(list_i);
-  }
-
-  for (int i = 0; i < solutionSet_->size(); i++) {
-    for (int j = 0; j < numberOfRandomNeighbours_; j++) {
-      int random = PseudoRandom::randInt(0, solutionSet_->size() - 1);
-      //if (!list_.at(random).contains((Integer) i))
-      if (find(list_.at(random).begin(), list_.at(random).end(), i) == list_.at(random).end()) {
-        list_.at(random).push_back(i);
-      }
+SolutionSet * AdaptiveRandomNeighborhood::getBestFitnessSolutionInNeighborhood(Comparator * comparator)
+{
+    SolutionSet * result = snew SolutionSet();
+    for (int i = 0; i < list_.size(); i++)
+    {
+        Solution * bestSolution = solutionSet_->get(list_.at(i).at(0));
+        for (int j = 1; j < list_.at(i).size(); j++)
+        {
+            if (comparator->compare(bestSolution, solutionSet_->get(list_.at(i).at(j))) > 0)
+            {
+                bestSolution = solutionSet_->get(list_.at(i).at(j));
+            }
+        }
+        result->add(bestSolution);
     }
-  }
+
+    return result;
+}
+
+
+MatrixOfInteger AdaptiveRandomNeighborhood::getNeighborhood()
+{
+    return list_;
+}
+
+
+void AdaptiveRandomNeighborhood::recompute()
+{
+    list_.clear();
+
+    for (int i = 0; i < solutionSet_->size(); i++)
+    {
+        //list_[i] = snew int []
+        VectorOfInteger list_i;
+        list_i.push_back(i);
+        list_.push_back(list_i);
+    }
+
+    for (int i = 0; i < solutionSet_->size(); i++)
+    {
+        for (int j = 0; j < numberOfRandomNeighbours_; j++)
+        {
+            int random = PseudoRandom::randInt(0, solutionSet_->size() - 1);
+            //if (!list_.at(random).contains((Integer) i))
+            if (find(list_.at(random).begin(), list_.at(random).end(), i) == list_.at(random).end())
+            {
+                list_.at(random).push_back(i);
+            }
+        }
+    }
 
 }
 

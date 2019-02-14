@@ -22,7 +22,7 @@
 
 #include <Selection.h>
 
-Selection::Selection(map<string, void *> parameters)
-: Operator(parameters) {}
+Selection::Selection(MapOfStringFunct parameters)
+    : Operator(parameters) {}
 
 Selection::~Selection() { /* do nothing */ }

@@ -23,31 +23,33 @@
 #include <F09ShiftedRastrigin.h>
 
 // Fixed (class) parameters
-const string F09ShiftedRastrigin::FUNCTION_NAME = "Shifted Rastrigin's Function";
+const std::string F09ShiftedRastrigin::FUNCTION_NAME = "Shifted Rastrigin's Function";
 // TODO: Cambiar ruta
-const string F09ShiftedRastrigin::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/rastrigin_func_data.txt";
+const std::string F09ShiftedRastrigin::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/rastrigin_func_data.txt";
 
 
 /**
  * Constructor.
  */
 F09ShiftedRastrigin::F09ShiftedRastrigin(int dimension, double bias)
-    : F09ShiftedRastrigin(dimension, bias, DEFAULT_FILE_DATA) {
+    : F09ShiftedRastrigin(dimension, bias, DEFAULT_FILE_DATA)
+{
 } // F09ShiftedRastrigin
 
 
 /**
  * Constructor
  */
-F09ShiftedRastrigin::F09ShiftedRastrigin(int dimension, double bias, string file_data)
-    : TestFunc(dimension, bias, FUNCTION_NAME) {
+F09ShiftedRastrigin::F09ShiftedRastrigin(int dimension, double bias, std::string file_data)
+    : TestFunc(dimension, bias, FUNCTION_NAME)
+{
 
-  // Note: dimension starts from 0
-  m_o = new double[m_dimension];
-  m_z = new double[m_dimension];
+    // Note: dimension starts from 0
+    m_o = snew double[m_dimension];
+    m_z = snew double[m_dimension];
 
-  // Load the shifted global optimum
-  Benchmark::loadRowVectorFromFile(file_data, m_dimension, m_o);
+    // Load the shifted global optimum
+    Benchmark::loadRowVectorFromFile(file_data, m_dimension, m_o);
 
 } // F09ShiftedRastrigin
 
@@ -55,23 +57,25 @@ F09ShiftedRastrigin::F09ShiftedRastrigin(int dimension, double bias, string file
 /**
  * Destructor
  */
-F09ShiftedRastrigin::~F09ShiftedRastrigin() {
-  delete [] m_o;
-  delete [] m_z;
+F09ShiftedRastrigin::~F09ShiftedRastrigin()
+{
+    delete [] m_o;
+    delete [] m_z;
 } // ~F09ShiftedRastrigin
 
 
 /**
  * Function body
  */
-double F09ShiftedRastrigin::f(double * x) {
-  double result = 0.0;
+double F09ShiftedRastrigin::f(double * x)
+{
+    double result = 0.0;
 
-  Benchmark::shift(m_z, x, m_o, m_dimension);
+    Benchmark::shift(m_z, x, m_o, m_dimension);
 
-  result = Benchmark::rastrigin(m_z, m_dimension);
+    result = Benchmark::rastrigin(m_z, m_dimension);
 
-  result += m_bias;
+    result += m_bias;
 
-  return result;
+    return result;
 }

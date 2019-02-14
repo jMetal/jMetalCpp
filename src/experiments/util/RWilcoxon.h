@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -21,8 +22,10 @@
 #ifndef __RWILCOXON__
 #define __RWILCOXON__
 
-#include <string>
+#include "JMetalHeader.h"
 #include <ExperimentReport.h>
+
+using namespace JMetal;
 
 class ExperimentReport;
 
@@ -31,10 +34,11 @@ class ExperimentReport;
  * rank-sum test
  */
 
-class RWilcoxon {
+class RWilcoxon
+{
 public:
-  static void generateScripts(vector<string> problems, string prefix,
-      ExperimentReport * experiment);
+    static void generateScripts(VectorOfString problems, std::string prefix,
+                                ExperimentReport * experiment);
 
 }; // RWilcoxon
 

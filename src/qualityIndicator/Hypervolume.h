@@ -26,7 +26,7 @@
 #include <cstdlib>
 #include <vector>
 
-using namespace std;
+
 
 /**
  * This class implements the hypervolume indicator. The code is a C++ version
@@ -38,29 +38,30 @@ using namespace std;
  *           pp. 257-271, 1999.
  */
 
-class Hypervolume {
+class Hypervolume
+{
 
 private:
 
-  bool dominates(double * point1, double * point2, int noObjectives);
-  void swap(double** front, int i, int j);
-  int filterNondominatedSet(double** front, int noPoints, int noObjectives);
-  double surfaceUnchangedTo(double ** front, int noPoints, int objective);
-  int reduceNondominatedSet(double** front, int noPoints, int objective,
-      double threshold);
-  double** mergeFronts(double** front1, int sizeFront1, double** front2,
-      int sizeFront2, int noObjectives);
+    bool dominates(double * point1, double * point2, int noObjectives);
+    void swap(double** front, int i, int j);
+    int filterNondominatedSet(double** front, int noPoints, int noObjectives);
+    double surfaceUnchangedTo(double ** front, int noPoints, int objective);
+    int reduceNondominatedSet(double** front, int noPoints, int objective,
+                              double threshold);
+    double** mergeFronts(double** front1, int sizeFront1, double** front2,
+                         int sizeFront2, int noObjectives);
 
 public:
-  
-  MetricsUtil * utils_;
 
-  Hypervolume();
-  ~Hypervolume();
+    MetricsUtil * utils_;
 
-  double calculateHypervolume(double** front, int noPoints, int noObjectives);
-  double hypervolume(vector< vector<double> > paretoFront,
-      vector< vector<double> > paretoTrueFront, int numberOfObjectives);
+    Hypervolume();
+    ~Hypervolume();
+
+    double calculateHypervolume(double** front, int noPoints, int noObjectives);
+    double hypervolume(MatrixOfDouble paretoFront,
+                       MatrixOfDouble paretoTrueFront, int numberOfObjectives);
 
 };
 

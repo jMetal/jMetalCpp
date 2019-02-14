@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -23,65 +24,69 @@
 /**
  * Default constructor
  */
-DE_Settings::DE_Settings () : Settings() {
+DE_Settings::DE_Settings () : Settings()
+{
 } // DE_Settings
 
 /**
  * Destructor
  */
-DE_Settings::~DE_Settings () {
-  delete algorithm ;
-  delete crossover ; // Crossover operator
-  delete selection ; // Selection operator
+DE_Settings::~DE_Settings ()
+{
+    delete algorithm ;
+    delete crossover ; // Crossover operator
+    delete selection ; // Selection operator
 } // ~DE_Settings
 
 /**
  * Constructor
  */
-DE_Settings::DE_Settings(string problemName) {
-	problemName_ = problemName ;
+DE_Settings::DE_Settings(std::string problemName)
+{
+    problemName_ = problemName ;
 
-  problem_ = ProblemFactory::getProblem((char *) problemName_.c_str());
+    problem_ = ProblemFactory::getProblem((char *) problemName_.c_str());
 
-  // Algorithm parameters
-  populationSize_    = 100;
-  maxEvaluations_    = 25000;
-  crParameter_        = 0.5;
-  fParameter_         = 0.5;
-  deVariantParameter_ = "rand/1/bin";
+    // Algorithm parameters
+    populationSize_    = 100;
+    maxEvaluations_    = 25000;
+    crParameter_        = 0.5;
+    fParameter_         = 0.5;
+    deVariantParameter_ = "rand/1/bin";
 
 } // DE_Settings
 
 /**
  * Configure method
  */
-Algorithm * DE_Settings::configure() {
+Algorithm * DE_Settings::configure()
+{
 
-	algorithm = new DE(problem_);
-  algorithm->setInputParameter("populationSize",&populationSize_);
-  algorithm->setInputParameter("maxEvaluations",&maxEvaluations_);
+    algorithm = snew DE(problem_);
+    algorithm->setInputParameter("populationSize",&populationSize_);
+    algorithm->setInputParameter("maxEvaluations",&maxEvaluations_);
 
-	map<string, void *> parameters;
+   MapOfStringFunct parameters;
 
-	// Crossover operator
-  double crParameter = crParameter_;
-  double fParameter  = fParameter_;
-  parameters["CR"] =  &crParameter;
-  parameters["F"] = &fParameter;
-  string deVariantParameter = deVariantParameter_;
-  parameters["DE_VARIANT"] = &deVariantParameter;
-  crossover = new DifferentialEvolutionCrossover(parameters);
+    // Crossover operator
+    double crParameter = crParameter_;
+    double fParameter  = fParameter_;
+    parameters["CR"] =  &crParameter;
+    parameters["F"] = &fParameter;
+    std::string deVariantParameter = deVariantParameter_;
+    parameters["DE_VARIANT"] = &deVariantParameter;
+    crossover = snew DifferentialEvolutionCrossover(parameters);
 
-  // Selection operator
-  parameters.clear();
-  selection = new DifferentialEvolutionSelection(parameters) ;
+    // Selection operator
+    parameters.clear();
+    selection = snew DifferentialEvolutionSelection(parameters) ;
 
-	// Add the operators to the algorithm
-	algorithm->addOperator("crossover",crossover);
-	algorithm->addOperator("selection",selection);
+    // Add the operators to the algorithm
+    algorithm->addOperator("crossover",crossover);
+    algorithm->addOperator("selection",selection);
 
-	cout << "DE algorithm initialized." << endl;
+    std::cout << "DE algorithm initialized." << std::endl;
 
-	return algorithm ;
+    return algorithm ;
 } // configure
 

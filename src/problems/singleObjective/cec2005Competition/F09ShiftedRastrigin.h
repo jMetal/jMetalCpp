@@ -25,28 +25,29 @@
 #include <Benchmark.h>
 #include <TestFunc.h>
 
-class F09ShiftedRastrigin : public TestFunc {
+class F09ShiftedRastrigin : public TestFunc
+{
 
 private:
 
-  // Fixed (class) parameters
-  static const string FUNCTION_NAME;
-  static const string DEFAULT_FILE_DATA;
+    // Fixed (class) parameters
+    static const std::string FUNCTION_NAME;
+    static const std::string DEFAULT_FILE_DATA;
 
-  // Shifted global optimum
-  double * m_o;
+    // Shifted global optimum
+    double * m_o;
 
-  // In order to avoid excessive memory allocation,
-  // a fixed memory buffer is allocated for each function object.
-  double * m_z;
+    // In order to avoid excessive memory allocation,
+    // a fixed memory buffer is allocated for each function object.
+    double * m_z;
 
 public:
 
-  F09ShiftedRastrigin(int dimension, double bias);
-  F09ShiftedRastrigin(int dimension, double bias, string file_data);
-  ~F09ShiftedRastrigin();
+    F09ShiftedRastrigin(int dimension, double bias);
+    F09ShiftedRastrigin(int dimension, double bias, std::string file_data);
+    ~F09ShiftedRastrigin();
 
-  double f (double * x);
+    double f (double * x);
 
 }; // F09ShiftedRastrigin
 

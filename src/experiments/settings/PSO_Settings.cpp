@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -25,33 +26,36 @@
 /**
  * Default constructor
  */
-PSO_Settings::PSO_Settings () : Settings() {
+PSO_Settings::PSO_Settings () : Settings()
+{
 } // PSO_Settings
 
 
 /**
  * Destructor
  */
-PSO_Settings::~PSO_Settings () {
-  delete algorithm ;
-  delete mutation  ; // Mutation operator
+PSO_Settings::~PSO_Settings ()
+{
+    delete algorithm ;
+    delete mutation  ; // Mutation operator
 } // ~PSO_Settings
 
 
 /**
  * Constructor
  */
-PSO_Settings::PSO_Settings(string problemName) {
+PSO_Settings::PSO_Settings(std::string problemName)
+{
 
-	problemName_ = problemName ;
+    problemName_ = problemName ;
 
-  problem_ = ProblemFactory::getProblem((char *) problemName_.c_str());
+    problem_ = ProblemFactory::getProblem((char *) problemName_.c_str());
 
-  // Default settings
-  swarmSize_                 = 50 ;
-  maxIterations_             = 5000 ;
-  mutationDistributionIndex_ = 20.0 ;
-  mutationProbability_       = 1.0/problem_->getNumberOfVariables() ;
+    // Default settings
+    swarmSize_                 = 50 ;
+    maxIterations_             = 5000 ;
+    mutationDistributionIndex_ = 20.0 ;
+    mutationProbability_       = 1.0/problem_->getNumberOfVariables() ;
 
 } // PSO_Settings
 
@@ -59,27 +63,28 @@ PSO_Settings::PSO_Settings(string problemName) {
 /**
  * Configure method
  */
-Algorithm * PSO_Settings::configure() {
+Algorithm * PSO_Settings::configure()
+{
 
-	algorithm = new PSO(problem_);
-  algorithm->setInputParameter("swarmSize", &swarmSize_);
-  algorithm->setInputParameter("maxIterations", &maxIterations_);
+    algorithm = new PSO(problem_);
+    algorithm->setInputParameter("swarmSize", &swarmSize_);
+    algorithm->setInputParameter("maxIterations", &maxIterations_);
 
-	map<string, void *> parameters;
+   MapOfStringFunct parameters;
 
-  // Mutation operator
-  double mutationProbability = mutationProbability_;
-  double mutationDistributionIndex = mutationDistributionIndex_;
-  parameters["probability"] = &mutationProbability;
-  parameters["distributionIndex"] = &mutationDistributionIndex;
-  mutation = new PolynomialMutation(parameters);
+    // Mutation operator
+    double mutationProbability = mutationProbability_;
+    double mutationDistributionIndex = mutationDistributionIndex_;
+    parameters["probability"] = &mutationProbability;
+    parameters["distributionIndex"] = &mutationDistributionIndex;
+    mutation = new PolynomialMutation(parameters);
 
-	// Add the operators to the algorithm
-	algorithm->addOperator("mutation",mutation);
+    // Add the operators to the algorithm
+    algorithm->addOperator("mutation",mutation);
 
-	cout << "PSO algorithm initialized." << endl;
+    std::cout << "PSO algorithm initialized." << std::endl;
 
-	return algorithm ;
+    return algorithm ;
 
 } // configure
 

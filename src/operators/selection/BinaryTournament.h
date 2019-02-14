@@ -30,15 +30,16 @@
 /**
  * This class implements an binary tournament selection operator
  */
-class BinaryTournament : public Selection {
+class BinaryTournament : public Selection
+{
 
 private:
-  Comparator * comparator_;
+    Comparator * comparator_;
 
 public:
-  BinaryTournament(map<string, void *> parameters);
-  ~BinaryTournament();
-  void *execute(void *);
+    BinaryTournament(MapOfStringFunct parameters);
+    ~BinaryTournament();
+    void *execute(void *);
 
 };
 

@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -25,23 +26,24 @@
 #include <PSO.h>
 #include <PolynomialMutation.h>
 
-class PSO_Settings : public Settings {
+class PSO_Settings : public Settings
+{
 
 private:
-  int    swarmSize_                 ;
-  int    maxIterations_             ;
-  double mutationDistributionIndex_ ;
-  double mutationProbability_       ;
+    int    swarmSize_                 ;
+    int    maxIterations_             ;
+    double mutationDistributionIndex_ ;
+    double mutationProbability_       ;
 
-  Algorithm * algorithm ;
-  Operator  * mutation  ; // Mutation operator
+    Algorithm * algorithm ;
+    Operator  * mutation  ; // Mutation operator
 
 public:
-  PSO_Settings() ;
-  PSO_Settings(string problemName) ;
-	~PSO_Settings() ;
+    PSO_Settings() ;
+    PSO_Settings(std::string problemName) ;
+    ~PSO_Settings() ;
 
-  Algorithm * configure() ;
+    Algorithm * configure() ;
 }; // PSO_Settings
 
 #endif // __PSO_SETTINGS__

@@ -32,15 +32,16 @@
  * <code>Solution</code> objects) based on a constraint violation test +
  * dominance checking, as in NSGA-II.
  */
-class DominanceComparator : public Comparator {
+class DominanceComparator : public Comparator
+{
 
 private:
-  Comparator * overallConstraintViolationComparator_;
+    Comparator * overallConstraintViolationComparator_;
 
 public:
-  DominanceComparator();
-  ~DominanceComparator();
-  int compare(void *one, void *two);
+    DominanceComparator();
+    ~DominanceComparator();
+    int compare(void *one, void *two);
 };
 
 #endif

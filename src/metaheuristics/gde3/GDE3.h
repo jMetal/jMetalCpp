@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -33,14 +34,15 @@
   * @brief This class implements the GDE3 algorithm.
 **/
 
-class GDE3 : public Algorithm {
+class GDE3 : public Algorithm
+{
 private:
-  int populationSize_;
-  int maxEvaluations_;
-  //QualityIndicator *indicators_;
+    int populationSize_;
+    int maxEvaluations_;
+    //QualityIndicator *indicators_;
 public:
-  GDE3(Problem * problem);
-  SolutionSet * execute();
+    GDE3(Problem * problem);
+    SolutionSet * execute();
 };
 
 #endif /* __GDE3__ */

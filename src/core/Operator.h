@@ -23,11 +23,8 @@
 #ifndef __OPERATOR__
 #define __OPERATOR__
 
-#include <map>
-#include <string>
+#include "JMetalHeader.h"
 #include <iostream>
-
-using namespace std;
 
 /**
  * Stores the current operator parameters.
@@ -35,18 +32,22 @@ using namespace std;
  * and it allow objects to be accessed by their names, which  are specified
  * by the string.
 **/
-class Operator {
+
+using namespace JMetal;
+
+class Operator
+{
 
 protected:
-  map<string,void *> parameters_;
-    
+	MapOfStringFunct parameters_;
+
 public:
-  Operator ();
-  Operator (map<string, void*> parameters);
-  virtual ~Operator() = 0;
-  virtual void *execute(void *) = 0;
-  void setParameter(string name, void *value);
-  void *getParameter(string name);
+    Operator ();
+    Operator (MapOfStringFunct parameters);
+    virtual ~Operator() = 0;
+    virtual void *execute(void *) = 0;
+    void setParameter(std::string name, void *value);
+    void *getParameter(std::string name);
 
 }; // Operator
 

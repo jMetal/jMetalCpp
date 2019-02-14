@@ -33,17 +33,18 @@
  * This class implements an operator for binary selections using the same code
  * in Deb's NSGA-II implementation
  */
-class BinaryTournament2 : public Selection {
+class BinaryTournament2 : public Selection
+{
 
 private:
-  Comparator * dominance_;
-  int * a_;
-  int index_;
+    Comparator * dominance_;
+    int * a_;
+    int index_;
 
 public:
-  BinaryTournament2(map<string, void *> parameters);
-  ~BinaryTournament2();
-  void *execute(void *);
+    BinaryTournament2(MapOfStringFunct parameters);
+    ~BinaryTournament2();
+    void *execute(void *);
 
 };
 

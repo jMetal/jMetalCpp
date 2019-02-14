@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -25,10 +26,11 @@
 /**
  * Constructor
  */
-ArrayReal::ArrayReal() {
-  problem_ = NULL;
-  size_   = 0;
-  array_ = NULL;
+ArrayReal::ArrayReal()
+{
+    problem_ = nullptr;
+    size_   = 0;
+    //array_ = nullptr;
 } // Constructor
 
 
@@ -36,16 +38,19 @@ ArrayReal::ArrayReal() {
  * Constructor
  * @param size Size of the array
  */
-ArrayReal::ArrayReal(int size, Problem * problem) {
-  problem_ = problem;
-  size_   = size;
-  array_ = new double[size_];
+ArrayReal::ArrayReal(int size, Problem * problem)
+{
+    problem_ = problem;
+    size_   = size;
+    //array_ = snew double[size_];
+	array_.assign(size_, 0.0);
 
-  for (int i = 0; i < size_ ; i++) {
-    array_[i] = PseudoRandom::randDouble()*(problem_->getUpperLimit(i)-
-                                           problem_->getLowerLimit(i))+
-                                           problem_->getLowerLimit(i);
-  } // for
+    for (int i = 0; i < size_ ; i++)
+    {
+        array_[i] = PseudoRandom::randDouble()*(problem_->getUpperLimit(i)-
+                                                problem_->getLowerLimit(i))+
+                    problem_->getLowerLimit(i);
+    } // for
 } // Constructor
 
 
@@ -53,22 +58,26 @@ ArrayReal::ArrayReal(int size, Problem * problem) {
  * Copy Constructor
  * @param arrayReal The arrayDouble to copy
  */
-ArrayReal::ArrayReal(ArrayReal * arrayReal) {
-  problem_ = arrayReal->problem_ ;
-  size_  = arrayReal->size_;
-  array_ = new double[size_];
+ArrayReal::ArrayReal(ArrayReal * arrayReal)
+{
+    problem_ = arrayReal->problem_ ;
+    size_  = arrayReal->size_;
+    //array_ = snew double[size_];
+	array_.assign(size_, 0.0);
 
-  for (int i = 0; i < size_; i++) {
-    array_[i] = arrayReal->array_[i];
-  } // for
+    for (int i = 0; i < size_; i++)
+    {
+        array_[i] = arrayReal->array_[i];
+    } // for
 } // Copy Constructor
 
 
 /**
  * Destructor
  */
-ArrayReal::~ArrayReal() {
-  delete [] array_;
+ArrayReal::~ArrayReal()
+{
+    //delete [] array_;
 } // ~ArrayReal
 
 
@@ -76,8 +85,9 @@ ArrayReal::~ArrayReal() {
  * Creates an exact copy of a <code>BinaryReal</code> object.
  * @return The copy of the object
  */
-Variable * ArrayReal::deepCopy() {
-  return new ArrayReal(this);
+Variable * ArrayReal::deepCopy()
+{
+    return snew ArrayReal(this);
 } // deepCopy
 
 
@@ -85,8 +95,9 @@ Variable * ArrayReal::deepCopy() {
  * Returns the length of the arrayReal.
  * @return The length
  */
-int ArrayReal::getLength(){
-  return size_;
+int ArrayReal::getLength()
+{
+    return size_;
 } // getLength
 
 
@@ -95,18 +106,21 @@ int ArrayReal::getLength(){
  * @param index Index of value to be returned
  * @return the value in position index
  */
-double ArrayReal::getValue(int index) {
-  if ((index >= 0) && (index < size_))
-    return array_[index] ;
-  else {
-    cerr << "ArrayReal.getValue: index value (" << index << ") invalid" << endl;
-    exit(-1);
-  } // if
+double ArrayReal::getValue(int index)
+{
+    if ((index >= 0) && (index < size_))
+        return array_[index] ;
+    else
+    {
+        cerr << "ArrayReal.getValue: index value (" << index << ") invalid" << std::endl;
+        exit(-1);
+    } // if
 } // getValue
 
-double ArrayReal::getValue() {
-  cerr << "ERROR: ArrayReal::getValue() without index" << endl;
-  exit(-1);
+double ArrayReal::getValue()
+{
+    cerr << "ERROR: ArrayReal::getValue() without index" << std::endl;
+    exit(-1);
 } // getValue
 
 
@@ -115,16 +129,19 @@ double ArrayReal::getValue() {
  * @param index Index of value to be returned
  * @param value The value to be set in position index
  */
-void ArrayReal::setValue(int index, double value) {
-  if ((index >= 0) && (index < size_))
-    array_[index] = value;
-  else {
-    cout << "ArrayReal.getValue: index value (" << index << ") invalid" << endl;
-  } // if
+void ArrayReal::setValue(int index, double value)
+{
+    if ((index >= 0) && (index < size_))
+        array_[index] = value;
+    else
+    {
+        std::cout << "ArrayReal.getValue: index value (" << index << ") invalid" << std::endl;
+    } // if
 } // setValue
 
-void ArrayReal::setValue(double value) {
-  cout << "ERROR: ArrayReal::setValue(value) without index" << endl;
+void ArrayReal::setValue(double value)
+{
+    std::cout << "ERROR: ArrayReal::setValue(value) without index" << std::endl;
 } // setValue
 
 
@@ -133,18 +150,21 @@ void ArrayReal::setValue(double value) {
  * @param index The index of the value
  * @return the lower bound
  */
-double ArrayReal::getLowerBound(int index) {
-  if ((index >= 0) && (index < size_))
-    return problem_->getLowerLimit(index) ;
-  else {
-    cerr << "ArrayReal.getValue: index value (" << index << ") invalid" << endl;
-    exit(-1);
-  } // if
+double ArrayReal::getLowerBound(int index)
+{
+    if ((index >= 0) && (index < size_))
+        return problem_->getLowerLimit(index) ;
+    else
+    {
+        cerr << "ArrayReal.getValue: index value (" << index << ") invalid" << std::endl;
+        exit(-1);
+    } // if
 } // getLowerBound
 
-double ArrayReal::getLowerBound() {
-  cerr << "ERROR: ArrayReal::getLowerBound() without index" << endl;
-  exit(-1);
+double ArrayReal::getLowerBound()
+{
+    cerr << "ERROR: ArrayReal::getLowerBound() without index" << std::endl;
+    exit(-1);
 } // getLowerBound
 
 
@@ -153,30 +173,35 @@ double ArrayReal::getLowerBound() {
  * @param index The index of the value
  * @return the upper bound
  */
-double ArrayReal::getUpperBound(int index) {
-  if ((index >= 0) && (index < size_))
-    return problem_->getUpperLimit(index);
-  else {
-    cerr << "ArrayReal.getValue: index value (" << index << ") invalid" << endl;
-    exit(-1);
-  } // if
+double ArrayReal::getUpperBound(int index)
+{
+    if ((index >= 0) && (index < size_))
+        return problem_->getUpperLimit(index);
+    else
+    {
+        cerr << "ArrayReal.getValue: index value (" << index << ") invalid" << std::endl;
+        exit(-1);
+    } // if
 } // getLowerBound
 
-double ArrayReal::getUpperBound() {
-  cerr << "ERROR: ArrayReal::getUpperBound() without index" << endl;
-  exit(-1);
+double ArrayReal::getUpperBound()
+{
+    cerr << "ERROR: ArrayReal::getUpperBound() without index" << std::endl;
+    exit(-1);
 } // getUpperBound
 
 
 /**
- * Returns a string representing the object
+ * Returns a std::string representing the object
  * @return The string
  */
-string ArrayReal::toString(){
-  std::ostringstream ss;
-  for (int i = 0; i < (size_ - 1); i ++) {
-    ss << array_[i] << " ";
-  }
-  ss << array_[size_ -1];
-  return ss.str();
+std::string ArrayReal::toString()
+{
+    std::ostringstream ss;
+    for (int i = 0; i < (size_ - 1); i ++)
+    {
+        ss << array_[i] << " ";
+    }
+    ss << array_[size_ -1];
+    return ss.str();
 } // toString

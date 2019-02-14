@@ -29,14 +29,15 @@
  * This class implements a selection operator used for selecting the best
  * solution in a SolutionSet according to a given comparator
  */
-class BestSolutionSelection : public Selection {
+class BestSolutionSelection : public Selection
+{
 
 private:
-  Comparator * comparator_;
+    Comparator * comparator_;
 
 public:
-  BestSolutionSelection(map<string, void *> parameters);
-  void *execute(void *);
+    BestSolutionSelection(MapOfStringFunct parameters);
+    void *execute(void *);
 
 };
 

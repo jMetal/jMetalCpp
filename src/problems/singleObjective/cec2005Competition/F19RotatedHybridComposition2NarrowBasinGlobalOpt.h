@@ -26,52 +26,54 @@
 #include <HCJob.h>
 #include <TestFunc.h>
 
-class F19RotatedHybridComposition2NarrowBasinGlobalOpt : public TestFunc {
+class F19RotatedHybridComposition2NarrowBasinGlobalOpt : public TestFunc
+{
 
 private:
 
-  // Fixed (class) parameters
-  static const string FUNCTION_NAME;
-  static const string DEFAULT_FILE_DATA;
-  static const string DEFAULT_FILE_MX_PREFIX;
-  static const string DEFAULT_FILE_MX_SUFFIX;
+    // Fixed (class) parameters
+    static const std::string FUNCTION_NAME;
+    static const std::string DEFAULT_FILE_DATA;
+    static const std::string DEFAULT_FILE_MX_PREFIX;
+    static const std::string DEFAULT_FILE_MX_SUFFIX;
 
-  // Number of functions
-  static const int NUM_FUNC = 10;
+    // Number of functions
+    static const int NUM_FUNC = 10;
 
-  // Shifted global optimum
-  double ** m_o;
-  double *** m_M;
-  static const double m_sigma[NUM_FUNC];
-  static const double m_lambda[NUM_FUNC];
-  static const double m_func_biases[NUM_FUNC];
-  double * m_testPoint;
-  double * m_testPointM;
-  double * m_fmax;
+    // Shifted global optimum
+    double ** m_o;
+    double *** m_M;
+    static const double m_sigma[NUM_FUNC];
+    static const double m_lambda[NUM_FUNC];
+    static const double m_func_biases[NUM_FUNC];
+    double * m_testPoint;
+    double * m_testPointM;
+    double * m_fmax;
 
-  // In order to avoid excessive memory allocation,
-  // a fixed memory buffer is allocated for each function object.
-  double * m_w;
-  double ** m_z;
-  double ** m_zM;
+    // In order to avoid excessive memory allocation,
+    // a fixed memory buffer is allocated for each function object.
+    double * m_w;
+    double ** m_z;
+    double ** m_zM;
 
-  class MyHCJob : public HCJob {
-  public:
-    MyHCJob(int numFunc);
-    double basic_func(int func_no, double* x, int length);
-  };
+    class MyHCJob : public HCJob
+    {
+    public:
+        MyHCJob(int numFunc);
+        double basic_func(int func_no, double* x, int length);
+    };
 
-  MyHCJob * theJob;
+    MyHCJob * theJob;
 
-  string getFileMxName(string prefix, int dimension, string suffix);
+    std::string getFileMxName(std::string prefix, int dimension, std::string suffix);
 
 public:
 
-  F19RotatedHybridComposition2NarrowBasinGlobalOpt(int dimension, double bias);
-  F19RotatedHybridComposition2NarrowBasinGlobalOpt(int dimension, double bias, string file_data, string file_m);
-  ~F19RotatedHybridComposition2NarrowBasinGlobalOpt();
+    F19RotatedHybridComposition2NarrowBasinGlobalOpt(int dimension, double bias);
+    F19RotatedHybridComposition2NarrowBasinGlobalOpt(int dimension, double bias, std::string file_data, std::string file_m);
+    ~F19RotatedHybridComposition2NarrowBasinGlobalOpt();
 
-  double f (double * x);
+    double f (double * x);
 
 }; // F19RotatedHybridComposition2NarrowBasinGlobalOpt
 

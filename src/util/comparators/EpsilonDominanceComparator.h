@@ -29,41 +29,42 @@
  * This class implements a <code>Comparator</code> (a method for comparing
  * <code>Solution</code> objects) based on epsilon dominance.
  */
-class EpsilonDominanceComparator : public Comparator {
+class EpsilonDominanceComparator : public Comparator
+{
 
 private:
 
-  /**
-   * Stores the value of eta, needed for epsilon-dominance.
-   */
-  double eta_;
+    /**
+     * Stores the value of eta, needed for epsilon-dominance.
+     */
+    double eta_;
 
-  /**
-   * Stores a comparator for check the OverallConstraintComparator
-   */
-  Comparator *overallConstraintViolationComparator_;
+    /**
+     * Stores a comparator for check the OverallConstraintComparator
+     */
+    Comparator *overallConstraintViolationComparator_;
 
 public:
 
-  /**
-   * Constructor.
-   *  @param eta Value for epsilon-dominance.
-   */
-  EpsilonDominanceComparator(double eta);
+    /**
+     * Constructor.
+     *  @param eta Value for epsilon-dominance.
+     */
+    EpsilonDominanceComparator(double eta);
 
-  /**
-   * Destructor.
-   */
-  ~EpsilonDominanceComparator();
+    /**
+     * Destructor.
+     */
+    ~EpsilonDominanceComparator();
 
-  /**
-   * Compares two solutions.
-   * @param o1 Object representing the first <code>Solution</code>.
-   * @param o1 Object representing the second <code>Solution</code>.
-   * @return -1, or 0, or 1 if o1 dominates o2, both are
-   * non-dominated, or o1 is dominated by o2, respectively.
-   */
-  int compare(void *o1, void *o2);
+    /**
+     * Compares two solutions.
+     * @param o1 Object representing the first <code>Solution</code>.
+     * @param o1 Object representing the second <code>Solution</code>.
+     * @return -1, or 0, or 1 if o1 dominates o2, both are
+     * non-dominated, or o1 is dominated by o2, respectively.
+     */
+    int compare(void *o1, void *o2);
 };
 
 #endif

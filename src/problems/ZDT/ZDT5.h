@@ -27,18 +27,19 @@
 #include <BinarySolutionType.h>
 #include <Solution.h>
 
-class ZDT5 : public Problem {
+class ZDT5 : public Problem
+{
 private:
-	double evalG(Solution *x) ;
-	double evalH(double f, double g) ;
-  double evalV(double) ;
+    double evalG(Solution *x) ;
+    double evalH(double f, double g) ;
+    double evalV(double) ;
 
-	double * fx_ ;
+    double * fx_ ;
 public:
-	ZDT5(string solutionType, int numberOfVariables = 11);
-	void evaluate(Solution *solution);
+    ZDT5(std::string solutionType, int numberOfVariables = 11);
+    void evaluate(Solution *solution);
 
-	virtual ~ZDT5();
+    virtual ~ZDT5();
 };
 
 #endif /* __ZDT5_H__ */

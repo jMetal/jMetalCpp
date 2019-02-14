@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -31,32 +32,33 @@
  * This class extends the Binary class to represent a Real variable encoded by
  * a binary string
  */
-class BinaryReal : public Binary {
+class BinaryReal : public Binary
+{
 
 public:
 
-  static const int DEFAULT_PRECISION;
+    static const int DEFAULT_PRECISION;
 
-  BinaryReal();
-  BinaryReal(int numberOfBits, double lowerBound, double upperBound);
-  BinaryReal(BinaryReal * variable);
-  ~BinaryReal();
+    BinaryReal();
+    BinaryReal(int numberOfBits, double lowerBound, double upperBound);
+    BinaryReal(BinaryReal * variable);
+    ~BinaryReal();
 
-  void decode();
-  double getValue();
-  void setValue(double value);
-  Variable * deepCopy();
-  double getLowerBound();
-  double getUpperBound();
-  void setLowerBound(double bound);
-  void setUpperBound(double bound);
-  string toString();
+    void decode();
+    double getValue();
+    void setValue(double value);
+    Variable * deepCopy();
+    double getLowerBound();
+    double getUpperBound();
+    void setLowerBound(double bound);
+    void setUpperBound(double bound);
+    std::string toString();
 
 private:
     double value_;
     double lowerBound_ ;
     double upperBound_ ;
-    
+
 }; // BinaryReal
 
 #endif

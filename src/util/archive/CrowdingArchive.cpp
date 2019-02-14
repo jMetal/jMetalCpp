@@ -31,26 +31,28 @@
  * @param numberOfObjectives The number of objectives.
  */
 CrowdingArchive::CrowdingArchive(int maxSize, int numberOfObjectives)
-: Archive(maxSize) {
+    : Archive(maxSize)
+{
 
-  this->maxSize          = maxSize;
-  this->objectives       = numberOfObjectives;
-  this->dominance        = new DominanceComparator();
-  this->equals           = new EqualSolutions();
-  this->crowdingDistance = new CrowdingDistanceComparator();
-  this->distance         = new Distance();
+    this->maxSize          = maxSize;
+    this->objectives       = numberOfObjectives;
+    this->dominance        = snew DominanceComparator();
+    this->equals           = snew EqualSolutions();
+    this->crowdingDistance = snew CrowdingDistanceComparator();
+    this->distance         = snew Distance();
 
 } // CrowdingArchive
 
 /**
  * Destructor.
  */
-CrowdingArchive::~CrowdingArchive() {
+CrowdingArchive::~CrowdingArchive()
+{
 
-  delete dominance;
-  delete equals;
-  delete crowdingDistance;
-  delete distance;
+    delete dominance;
+    delete equals;
+    delete crowdingDistance;
+    delete distance;
 
 } // ~CrowdingArchive
 
@@ -65,40 +67,52 @@ CrowdingArchive::~CrowdingArchive() {
  * @return true if the <code>Solution</code> has been inserted, false
  * otherwise.
  */
-bool CrowdingArchive::add(Solution *solution){
-  int flag = 0;
-  int i = 0;
-  Solution * aux; //Store an solution temporally
-  while (i < solutionsList_.size()){
-    aux = solutionsList_[i];
+bool CrowdingArchive::add(Solution *solution)
+{
+    int flag = 0;
+    int i = 0;
+    Solution * aux; //Store an solution temporally
+    while (i < solutionsList_.size())
+    {
+        aux = solutionsList_[i];
 
-    flag = dominance->compare(solution,aux);
-    if (flag == 1) {               // The solution to add is dominated
-      return false;                // Discard the new solution
-    } else if (flag == -1) {       // A solution in the archive is dominated
-      // Remove it from the population
-      delete aux;
-      solutionsList_.erase (solutionsList_.begin()+i);
-    } else {
-        if (equals->compare(aux,solution)==0) {
-          // There is an equal solution in the population
-          return false; // Discard the new solution
-        }  // if
-        i++;
+        flag = dominance->compare(solution,aux);
+        if (flag == 1)                 // The solution to add is dominated
+        {
+            return false;                // Discard the new solution
+        }
+        else if (flag == -1)           // A solution in the archive is dominated
+        {
+            // Remove it from the population
+            delete aux;
+            solutionsList_.erase (solutionsList_.begin()+i);
+        }
+        else
+        {
+            if (equals->compare(aux,solution)==0)
+            {
+                // There is an equal solution in the population
+                return false; // Discard the new solution
+            }  // if
+            i++;
+        }
     }
-  }
-  // Insert the solution into the archive
-  bool res = true;
-  solutionsList_.push_back(solution);
-  if (size() > maxSize) { // The archive is full
-    distance->crowdingDistanceAssignment(this,objectives);
-    int indexWorst_ = indexWorst(crowdingDistance);
-    if (solution == solutionsList_[indexWorst_]) {
-      res = false;
-    } else {
-      delete solutionsList_[indexWorst_];
+    // Insert the solution into the archive
+    bool res = true;
+    solutionsList_.push_back(solution);
+    if (size() > maxSize)   // The archive is full
+    {
+        distance->crowdingDistanceAssignment(this,objectives);
+        int indexWorst_ = indexWorst(crowdingDistance);
+        if (solution == solutionsList_[indexWorst_])
+        {
+            res = false;
+        }
+        else
+        {
+            delete solutionsList_[indexWorst_];
+        }
+        remove(indexWorst_);
     }
-    remove(indexWorst_);
-  }
-  return res;
+    return res;
 } // add

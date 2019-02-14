@@ -23,6 +23,7 @@
 #ifndef __ALGORITHM__
 #define __ALGORITHM__
 
+#include "JMetalHeader.h"
 #include <string>
 #include <SolutionSet.h>
 #include <Operator.h>
@@ -35,26 +36,30 @@
  *  The class declares an abstract method called <code>execute</code>, which
  *  defines the behavior of the algorithm.
 **/
-class Algorithm {
+
+using namespace JMetal;
+
+class Algorithm
+{
 
 public:
-  Algorithm(Problem *problem);
-  virtual ~Algorithm();
-  virtual SolutionSet * execute() = 0; // this launch the execution
-                                       // of an algorithm
-  void addOperator(string name, Operator *operator_);
-  Operator * getOperator(string name);
-  void setInputParameter(string name, void *value);
-  void * getInputParameter(string name);
-  void setOutputParameter(string name, void *value);
-  void * getOutputParameter(string name);
-  Problem * getProblem();
+    Algorithm(Problem *problem);
+    virtual ~Algorithm();
+    virtual SolutionSet * execute() = 0; // this launch the execution
+    // of an algorithm
+    void addOperator(std::string name, Operator *operator_);
+    Operator * getOperator(std::string name);
+    void setInputParameter(std::string name, void *value);
+    void * getInputParameter(std::string name);
+    void setOutputParameter(std::string name, void *value);
+    void * getOutputParameter(std::string name);
+    Problem * getProblem();
 
 protected:
-  Problem *problem_;
-  map<string, Operator *> operators_;
-  map<string, void *> inputParameters_;
-  map<string, void *> outputParameters_;
+	Problem *problem_ = nullptr;
+	MapOfStringOperatorPtr operators_;
+	MapOfStringFunct inputParameters_;
+	MapOfStringFunct outputParameters_;
 
 }; // Algorithm
 

@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -22,44 +23,47 @@
 #ifndef Binary_h
 #define Binary_h
 
+#include "JMetalHeader.h"
 #include <Variable.h>
 #include <bitset>
-#include <vector>
 #include <PseudoRandom.h>
 #include <stdlib.h>
 
+using namespace JMetal;
+
 /**
- * This class implements a generic binary string variable.It can be used as
- * a base class other binary string based classes (e.g., binary coded integer
+ * This class implements a generic binary std::string variable.It can be used as
+ * a base class other binary std::string based classes (e.g., binary coded integer
  * or real variables).
  */
-class Binary : public Variable {
+class Binary : public Variable
+{
 
 public:
 
-  Binary();
-  Binary(int numberOfBits);
-  Binary(Binary * variable);
-  ~Binary();
+    Binary();
+    Binary(int numberOfBits);
+    Binary(Binary * variable);
+    ~Binary();
 
-  void decode();
-  Variable * deepCopy();
-  int getNumberOfBits();
-  bool getIth(int bit);
-  void setIth(int bit, bool value);
-  void flip(int bit) ;
-  int hammingDistance(Binary * other);
-  string toString();
-  int cardinality() ;
+    void decode();
+    Variable * deepCopy();
+    int getNumberOfBits();
+    bool getIth(int bit);
+    void setIth(int bit, bool value);
+    void flip(int bit) ;
+    int hammingDistance(Binary * other);
+    std::string toString();
+    int cardinality() ;
 
-  double getValue();
-  void setValue(double value);
-  double getLowerBound();
-  double getUpperBound();
+    double getValue();
+    void setValue(double value);
+    double getLowerBound();
+    double getUpperBound();
 
 protected:
-  vector<bool> * bits_;
-  int numberOfBits_;
+    VectorOfBoolean * bits_ = nullptr;
+    int numberOfBits_;
 };
 
 #endif

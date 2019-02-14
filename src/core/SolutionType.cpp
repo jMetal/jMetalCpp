@@ -28,8 +28,9 @@
  * Constructor
  * @param problem The problem to solve
 **/
-SolutionType::SolutionType(Problem *problem) {
-  problem_ = problem;
+SolutionType::SolutionType(Problem *problem)
+{
+    problem_ = problem;
 }
 
 /**
@@ -43,19 +44,22 @@ SolutionType::~SolutionType() { }
  * @param decisionVariables
  * @return An array of variables
 **/
-Variable ** SolutionType::copyVariables(Variable **vars) {
-  int numberOfVar = problem_->getNumberOfVariables();
-  int var;
-  Variable ** variables = new Variable*[numberOfVar];
+Variable ** SolutionType::copyVariables(Variable **vars)
+{
+    int numberOfVar = problem_->getNumberOfVariables();
+    int var;
+    Variable ** variables = new Variable*[numberOfVar];
 
-  if (variables == NULL)  {
-    cout << "Error grave: Impossible to reserve memory for allocating a copy of variables" << endl;
-    exit(-1);
-  }
+    if (variables == nullptr)
+    {
+        std::cout << "Error grave: Impossible to reserve memory for allocating a copy of variables" << std::endl;
+        exit(-1);
+    }
 
-  for (var = 0; var < numberOfVar; var++) {
-    variables[var] = vars[var]->deepCopy();
-  }
+    for (var = 0; var < numberOfVar; var++)
+    {
+        variables[var] = vars[var]->deepCopy();
+    }
 
-  return variables;
+    return variables;
 } // copyVariables

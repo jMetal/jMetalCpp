@@ -29,13 +29,14 @@
  * This class implements a <code>Comparator</code> (a method for comparing
  * <code>Solution</code> objects) based on the values of the variables.
  */
-class SolutionComparator : public Comparator {
+class SolutionComparator : public Comparator
+{
 
 private:
-  static double EPSILON;
+    static double EPSILON;
 
 public:
-  int compare(void * o1, void * o2);
+    int compare(void * o1, void * o2);
 
 }; // SolutionComparator
 

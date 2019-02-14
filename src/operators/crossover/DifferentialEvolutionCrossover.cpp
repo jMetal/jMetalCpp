@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -58,32 +59,37 @@ const double DifferentialEvolutionCrossover::DEFAULT_K = 0.5;
 /**
  * DEFAULT_VARIANT defines the default DE variant
  */
-const string DifferentialEvolutionCrossover::DEFAULT_DE_VARIANT = "rand/1/bin";
+const std::string DifferentialEvolutionCrossover::DEFAULT_DE_VARIANT = "rand/1/bin";
 
 
 /**
  * Constructor
  */
-DifferentialEvolutionCrossover::DifferentialEvolutionCrossover(map<string, void *> parameters)
-: Crossover(parameters) {
+DifferentialEvolutionCrossover::DifferentialEvolutionCrossover(MapOfStringFunct parameters)
+    : Crossover(parameters)
+{
 
-  CR_ = DEFAULT_CR ;
-  F_  = DEFAULT_F  ;
-  K_  = DEFAULT_K   ;
-  DE_Variant_ = DEFAULT_DE_VARIANT ;
+    CR_ = DEFAULT_CR ;
+    F_  = DEFAULT_F  ;
+    K_  = DEFAULT_K   ;
+    DE_Variant_ = DEFAULT_DE_VARIANT ;
 
-  if (parameters["CR"] != NULL) {
-    CR_ = *(double *) parameters["CR"];
-  }
-  if (parameters["F"] != NULL) {
-    F_ = *(double *) parameters["F"];
-  }
-  if (parameters["K"] != NULL) {
-    K_ = *(double *) parameters["K"];
-  }
-  if (parameters["DE_VARIANT"] != NULL) {
-    DE_Variant_ = *(string *) parameters["DE_VARIANT"];
-  }
+    if (parameters["CR"] != nullptr)
+    {
+        CR_ = *(double *) parameters["CR"];
+    }
+    if (parameters["F"] != nullptr)
+    {
+        F_ = *(double *) parameters["F"];
+    }
+    if (parameters["K"] != nullptr)
+    {
+        K_ = *(double *) parameters["K"];
+    }
+    if (parameters["DE_VARIANT"] != nullptr)
+    {
+        DE_Variant_ = *(std::string *) parameters["DE_VARIANT"];
+    }
 
 } // DifferentialEvolutionCrossover
 
@@ -93,190 +99,227 @@ DifferentialEvolutionCrossover::DifferentialEvolutionCrossover(map<string, void 
 * @param object An object containing an array of three parents
 * @return An object containing the offSprings
 */
-void * DifferentialEvolutionCrossover::execute(void *object) {
+void * DifferentialEvolutionCrossover::execute(void *object)
+{
 
-  void ** parameters = (void **) object;
-  Solution * current = (Solution *) parameters[0];
-  Solution ** parent = (Solution **) parameters[1];
-  // TODO: Comprobar la longitud de parents
+    void ** parameters = (void **) object;
+    Solution * current = (Solution *) parameters[0];
+    Solution ** parent = (Solution **) parameters[1];
+    // TODO: Comprobar la longitud de parents
 
-  Solution * child;
+    Solution * child;
 
-  // TODO: Chequear el tipo de parents
-  //  if (!(VALID_TYPES.contains(parent[0].getType().getClass()) &&
-  //        VALID_TYPES.contains(parent[1].getType().getClass()) &&
-  //        VALID_TYPES.contains(parent[2].getType().getClass())) ) {
-  //
-  //    Configuration.logger_.severe("DifferentialEvolutionCrossover.execute: " +
-  //        " the solutions " +
-  //        "are not of the right type. The type should be 'Real' or 'ArrayReal', but " +
-  //        parent[0].getType() + " and " +
-  //        parent[1].getType() + " and " +
-  //        parent[2].getType() + " are obtained");
-  //
-  //    Class cls = java.lang.String.class;
-  //    String name = cls.getName();
-  //    throw new JMException("Exception in " + name + ".execute()") ;
-  //  }
+    // TODO: Chequear el tipo de parents
+    //  if (!(VALID_TYPES.contains(parent[0].getType().getClass()) &&
+    //        VALID_TYPES.contains(parent[1].getType().getClass()) &&
+    //        VALID_TYPES.contains(parent[2].getType().getClass())) ) {
+    //
+    //    Configuration.logger_.severe("DifferentialEvolutionCrossover.execute: " +
+    //        " the solutions " +
+    //        "are not of the right type. The type should be 'Real' or 'ArrayReal', but " +
+    //        parent[0].getType() + " and " +
+    //        parent[1].getType() + " and " +
+    //        parent[2].getType() + " are obtained");
+    //
+    //    Class cls = java.lang.String.class;
+    //    String name = cls.getName();
+    //    throw new JMException("Exception in " + name + ".execute()") ;
+    //  }
 
-  int jrand;
+    int jrand;
 
-  child = new Solution(current);
+    child = snew Solution(current);
 
-  XReal * xParent0 = new XReal(parent[0]);
-  XReal * xParent1 = new XReal(parent[1]);
-  XReal * xParent2 = new XReal(parent[2]);
-  XReal * xCurrent = new XReal(current);
-  XReal * xChild   = new XReal(child);
+    XReal * xParent0 = snew XReal(parent[0]);
+    XReal * xParent1 = snew XReal(parent[1]);
+    XReal * xParent2 = snew XReal(parent[2]);
+    XReal * xCurrent = snew XReal(current);
+    XReal * xChild   = snew XReal(child);
 
-  int numberOfVariables = xParent0->getNumberOfDecisionVariables();
-  jrand = PseudoRandom::randInt(0, numberOfVariables - 1);
+    int numberOfVariables = xParent0->getNumberOfDecisionVariables();
+    jrand = PseudoRandom::randInt(0, numberOfVariables - 1);
 
-  // STEP 4. Checking the DE variant
-  if ((DE_Variant_.compare("rand/1/bin") == 0) ||
-      (DE_Variant_.compare("best/1/bin") == 0)) {
+    // STEP 4. Checking the DE variant
+    if ((DE_Variant_.compare("rand/1/bin") == 0) ||
+            (DE_Variant_.compare("best/1/bin") == 0))
+    {
 
-    for (int j=0; j < numberOfVariables; j++) {
-      if (PseudoRandom::randDouble(0, 1) < CR_ || j == jrand) {
-        double value;
-        value = xParent2->getValue(j)  + F_ * (xParent0->getValue(j) -
-                                              xParent1->getValue(j));
+        for (int j=0; j < numberOfVariables; j++)
+        {
+            if (PseudoRandom::randDouble(0, 1) < CR_ || j == jrand)
+            {
+                double value;
+                value = xParent2->getValue(j)  + F_ * (xParent0->getValue(j) -
+                                                       xParent1->getValue(j));
 
-        if (value < xChild->getLowerBound(j)) {
-          value =  xChild->getLowerBound(j);
-        }
-        if (value > xChild->getUpperBound(j)) {
-          value = xChild->getUpperBound(j);
-        }
-        /*
-        if (value < xChild.getLowerBound(j)) {
-          double rnd = PseudoRandom.randDouble(0, 1) ;
-          value = xChild.getLowerBound(j) + rnd *(xParent2.getValue(j) - xChild.getLowerBound(j)) ;
-        }
-        if (value > xChild.getUpperBound(j)) {
-          double rnd = PseudoRandom.randDouble(0, 1) ;
-          value = xChild.getUpperBound(j) - rnd*(xChild.getUpperBound(j)-xParent2.getValue(j)) ;
-        }
-        */
-        xChild->setValue(j, value);
-      }
-      else {
-        double value ;
-        value = xCurrent->getValue(j);
-        xChild->setValue(j, value);
-      } // else
-    } // for
+                if (value < xChild->getLowerBound(j))
+                {
+                    value =  xChild->getLowerBound(j);
+                }
+                if (value > xChild->getUpperBound(j))
+                {
+                    value = xChild->getUpperBound(j);
+                }
+                /*
+                if (value < xChild.getLowerBound(j)) {
+                  double rnd = PseudoRandom.randDouble(0, 1) ;
+                  value = xChild.getLowerBound(j) + rnd *(xParent2.getValue(j) - xChild.getLowerBound(j)) ;
+                }
+                if (value > xChild.getUpperBound(j)) {
+                  double rnd = PseudoRandom.randDouble(0, 1) ;
+                  value = xChild.getUpperBound(j) - rnd*(xChild.getUpperBound(j)-xParent2.getValue(j)) ;
+                }
+                */
+                xChild->setValue(j, value);
+            }
+            else
+            {
+                double value ;
+                value = xCurrent->getValue(j);
+                xChild->setValue(j, value);
+            } // else
+        } // for
 
-  } else if ((DE_Variant_.compare("rand/1/exp") == 0) ||
-          (DE_Variant_.compare("best/1/exp") == 0)) {
+    }
+    else if ((DE_Variant_.compare("rand/1/exp") == 0) ||
+             (DE_Variant_.compare("best/1/exp") == 0))
+    {
 
-    for (int j=0; j < numberOfVariables; j++) {
-      if (PseudoRandom::randDouble(0, 1) < CR_ || j == jrand) {
-        double value;
-        value = xParent2->getValue(j)  + F_ * (xParent0->getValue(j) -
-            xParent1->getValue(j));
+        for (int j=0; j < numberOfVariables; j++)
+        {
+            if (PseudoRandom::randDouble(0, 1) < CR_ || j == jrand)
+            {
+                double value;
+                value = xParent2->getValue(j)  + F_ * (xParent0->getValue(j) -
+                                                       xParent1->getValue(j));
 
-        if (value < xChild->getLowerBound(j)) {
-          value =  xChild->getLowerBound(j);
-        }
-        if (value > xChild->getUpperBound(j)) {
-          value = xChild->getUpperBound(j);
-        }
+                if (value < xChild->getLowerBound(j))
+                {
+                    value =  xChild->getLowerBound(j);
+                }
+                if (value > xChild->getUpperBound(j))
+                {
+                    value = xChild->getUpperBound(j);
+                }
 
-        xChild->setValue(j, value);
-      } else {
-        CR_ = 0.0;
-        double value;
-        value = xCurrent->getValue(j);
-        xChild->setValue(j, value);
-      } // if
-    } // for
+                xChild->setValue(j, value);
+            }
+            else
+            {
+                CR_ = 0.0;
+                double value;
+                value = xCurrent->getValue(j);
+                xChild->setValue(j, value);
+            } // if
+        } // for
 
-  } else if ((DE_Variant_.compare("current-to-rand/1") == 0) ||
-      (DE_Variant_.compare("current-to-best/1") == 0)) {
+    }
+    else if ((DE_Variant_.compare("current-to-rand/1") == 0) ||
+             (DE_Variant_.compare("current-to-best/1") == 0))
+    {
 
-    for (int j=0; j < numberOfVariables; j++) {
-      double value;
-      value = xCurrent->getValue(j) + K_ * (xParent2->getValue(j) -
-            xCurrent->getValue(j)) +
-            F_ * (xParent0->getValue(j) - xParent1->getValue(j));
+        for (int j=0; j < numberOfVariables; j++)
+        {
+            double value;
+            value = xCurrent->getValue(j) + K_ * (xParent2->getValue(j) -
+                                                  xCurrent->getValue(j)) +
+                    F_ * (xParent0->getValue(j) - xParent1->getValue(j));
 
-      if (value < xChild->getLowerBound(j)) {
-        value =  xChild->getLowerBound(j);
-      }
-      if (value > xChild->getUpperBound(j)) {
-        value = xChild->getUpperBound(j);
-      }
-      xChild->setValue(j, value) ;
-    } // for
+            if (value < xChild->getLowerBound(j))
+            {
+                value =  xChild->getLowerBound(j);
+            }
+            if (value > xChild->getUpperBound(j))
+            {
+                value = xChild->getUpperBound(j);
+            }
+            xChild->setValue(j, value) ;
+        } // for
 
-  } else if ((DE_Variant_.compare("current-to-rand/1/bin") == 0) ||
-      (DE_Variant_.compare("current-to-best/1/bin") == 0)) {
+    }
+    else if ((DE_Variant_.compare("current-to-rand/1/bin") == 0) ||
+             (DE_Variant_.compare("current-to-best/1/bin") == 0))
+    {
 
-    for (int j=0; j < numberOfVariables; j++) {
-      if (PseudoRandom::randDouble(0, 1) < CR_ || j == jrand) {
-        double value ;
-        value = xCurrent->getValue(j) + K_ * (xParent2->getValue(j) -
-            xCurrent->getValue(j)) +
-            F_ * (xParent0->getValue(j) - xParent1->getValue(j));
+        for (int j=0; j < numberOfVariables; j++)
+        {
+            if (PseudoRandom::randDouble(0, 1) < CR_ || j == jrand)
+            {
+                double value ;
+                value = xCurrent->getValue(j) + K_ * (xParent2->getValue(j) -
+                                                      xCurrent->getValue(j)) +
+                        F_ * (xParent0->getValue(j) - xParent1->getValue(j));
 
-        if (value < xChild->getLowerBound(j)) {
-          value =  xChild->getLowerBound(j);
-        }
-        if (value > xChild->getUpperBound(j)) {
-          value = xChild->getUpperBound(j);
-        }
+                if (value < xChild->getLowerBound(j))
+                {
+                    value =  xChild->getLowerBound(j);
+                }
+                if (value > xChild->getUpperBound(j))
+                {
+                    value = xChild->getUpperBound(j);
+                }
 
-        xChild->setValue(j, value);
-      }
-      else {
-        double value;
-        value = xCurrent->getValue(j);
-        xChild->setValue(j, value);
-      } // else
-    } // for
+                xChild->setValue(j, value);
+            }
+            else
+            {
+                double value;
+                value = xCurrent->getValue(j);
+                xChild->setValue(j, value);
+            } // else
+        } // for
 
-  } else if ((DE_Variant_.compare("current-to-rand/1/exp") == 0) ||
-      (DE_Variant_.compare("current-to-best/1/exp") == 0)) {
+    }
+    else if ((DE_Variant_.compare("current-to-rand/1/exp") == 0) ||
+             (DE_Variant_.compare("current-to-best/1/exp") == 0))
+    {
 
-    for (int j=0; j < numberOfVariables; j++) {
-      if (PseudoRandom::randDouble(0, 1) < CR_ || j == jrand) {
-        double value ;
-        value = xCurrent->getValue(j) + K_ * (xParent2->getValue(j) -
-            xCurrent->getValue(j)) +
-            F_ * (xParent0->getValue(j) - xParent1->getValue(j));
+        for (int j=0; j < numberOfVariables; j++)
+        {
+            if (PseudoRandom::randDouble(0, 1) < CR_ || j == jrand)
+            {
+                double value ;
+                value = xCurrent->getValue(j) + K_ * (xParent2->getValue(j) -
+                                                      xCurrent->getValue(j)) +
+                        F_ * (xParent0->getValue(j) - xParent1->getValue(j));
 
-        if (value < xChild->getLowerBound(j)) {
-          value =  xChild->getLowerBound(j);
-        }
-        if (value > xChild->getUpperBound(j)) {
-          value = xChild->getUpperBound(j);
-        }
+                if (value < xChild->getLowerBound(j))
+                {
+                    value =  xChild->getLowerBound(j);
+                }
+                if (value > xChild->getUpperBound(j))
+                {
+                    value = xChild->getUpperBound(j);
+                }
 
-        xChild->setValue(j, value);
-      } else {
-        CR_ = 0.0;
-        double value;
-        value = xCurrent->getValue(j);
-        xChild->setValue(j, value);
-      } // else
-    } // for
+                xChild->setValue(j, value);
+            }
+            else
+            {
+                CR_ = 0.0;
+                double value;
+                value = xCurrent->getValue(j);
+                xChild->setValue(j, value);
+            } // else
+        } // for
 
-  } else {
+    }
+    else
+    {
 
-    cerr << "DifferentialEvolutionCrossover.execute: " <<
-        " unknown DE variant (" << DE_Variant_ << ")" << endl;
-    cerr << "Exception in DifferentialEvolutionCrossover.execute()" << endl;
-    exit(-1);
+        cerr << "DifferentialEvolutionCrossover.execute: " <<
+             " unknown DE variant (" << DE_Variant_ << ")" << std::endl;
+        cerr << "Exception in DifferentialEvolutionCrossover.execute()" << std::endl;
+        exit(-1);
 
-  } // if
+    } // if
 
-  delete xParent0;
-  delete xParent1;
-  delete xParent2;
-  delete xCurrent;
-  delete xChild;
+    delete xParent0;
+    delete xParent1;
+    delete xParent2;
+    delete xCurrent;
+    delete xChild;
 
-  return child;
+    return child;
 
 } // execute

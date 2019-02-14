@@ -26,13 +26,14 @@
 #include <SolutionSet.h>
 #include <ObjectiveComparator.h>
 
-class gGA : public Algorithm {
+class gGA : public Algorithm
+{
 private:
-  int populationSize_;
-  int maxEvaluations_;
+    int populationSize_;
+    int maxEvaluations_;
 public:
-  gGA(Problem * problem);
-  SolutionSet * execute();
+    gGA(Problem * problem);
+    SolutionSet * execute();
 };
 
 #endif /* GGA_H_ */

@@ -29,16 +29,17 @@
  * This class allows to apply a SBX crossover operator using two parent
  * solutions.
 **/
-class HUXCrossover : public Crossover {
+class HUXCrossover : public Crossover
+{
 
 public:
-  HUXCrossover(map<string, void *> parameters);
-  void *execute(void *);
+    HUXCrossover(MapOfStringFunct parameters);
+    void *execute(void *);
 
 private:
-  double crossoverProbability_;
-  Solution ** doCrossover(double probability,
-      Solution * parent1, Solution * parent2);
+    double crossoverProbability_;
+    Solution ** doCrossover(double probability,
+                            Solution * parent1, Solution * parent2);
 };
 
 

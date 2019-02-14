@@ -23,35 +23,38 @@
 #include <Real.h>
 
 
-/** 
-  * Empty constructor. 
+/**
+  * Empty constructor.
   * It will only initialize all the variables.
  **/
-Real::Real() {
-  value_ = 0.0;
+Real::Real()
+{
+    value_ = 0.0;
 } // Real
 
 
 /**
  * Lower and Upper bounds based constructor.
- * It will initialize the upper and lower bounds of the 
+ * It will initialize the upper and lower bounds of the
  * variable and it will initialize its value to a random
  * value between those upper and lower bound values.
  **/
-Real::Real(double lowerBound, double upperBound) {
-  value_ = PseudoRandom::randDouble(lowerBound, upperBound);
-  lowerBound_ = lowerBound;
-  upperBound_ = upperBound;
+Real::Real(double lowerBound, double upperBound)
+{
+    value_ = PseudoRandom::randDouble(lowerBound, upperBound);
+    lowerBound_ = lowerBound;
+    upperBound_ = upperBound;
 } // Real
 
 
 /**
  * Constructor
  */
-Real::Real(Variable * variable) {
-  lowerBound_ = variable->getLowerBound();
-  upperBound_ = variable->getUpperBound();
-  value_      = variable->getValue();
+Real::Real(Variable * variable)
+{
+    lowerBound_ = variable->getLowerBound();
+    upperBound_ = variable->getUpperBound();
+    value_      = variable->getValue();
 } // Real
 
 
@@ -65,8 +68,9 @@ Real::~Real() { /* do nothing */ }
  * Gets the value of the <code>Real</code> variable.
  * @return the value.
  */
-double Real::getValue() {
-  return value_;
+double Real::getValue()
+{
+    return value_;
 } // getValue
 
 
@@ -74,8 +78,9 @@ double Real::getValue() {
  * Sets the value of the variable.
  * @param value The value.
  */
-void Real::setValue(double value) {
-  value_ = value;
+void Real::setValue(double value)
+{
+    value_ = value;
 } // setValue
 
 
@@ -83,8 +88,9 @@ void Real::setValue(double value) {
  * Returns a exact copy of the <code>Real</code> variable
  * @return the copy
  */
-Variable *Real::deepCopy() {
-  return new Real(this);
+Variable *Real::deepCopy()
+{
+    return new Real(this);
 } // deepCopy
 
 
@@ -92,8 +98,9 @@ Variable *Real::deepCopy() {
  * Gets the lower bound of the variable.
  * @return the lower bound.
  */
-double Real::getLowerBound() {
-  return lowerBound_;
+double Real::getLowerBound()
+{
+    return lowerBound_;
 } // getLowerBound
 
 
@@ -101,8 +108,9 @@ double Real::getLowerBound() {
  * Gets the upper bound of the variable.
  * @return the upper bound.
  */
-double Real::getUpperBound() {
-  return upperBound_;
+double Real::getUpperBound()
+{
+    return upperBound_;
 } // getUpperBound
 
 
@@ -110,8 +118,9 @@ double Real::getUpperBound() {
  * Sets the lower bound of the variable.
  * @param lowerBound The lower bound.
  */
-void Real::setLowerBound(double bound) {
-  lowerBound_ = bound;
+void Real::setLowerBound(double bound)
+{
+    lowerBound_ = bound;
 } // setLowerBound
 
 
@@ -119,19 +128,21 @@ void Real::setLowerBound(double bound) {
  * Sets the upper bound of the variable.
  * @param upperBound The upper bound.
  */
-void Real::setUpperBound(double bound) {
-  upperBound_ = bound;
+void Real::setUpperBound(double bound)
+{
+    upperBound_ = bound;
 } // setUpperBound
 
 
 /**
- * Returns a string representing the object
+ * Returns a std::string representing the object
  * @return The string
  */
-string Real::toString(){
-  std::ostringstream stringStream;
-  stringStream << value_ ;
-  string aux = stringStream.str() + " ";
+std::string Real::toString()
+{
+    std::ostringstream stringStream;
+    stringStream << value_ ;
+    std::string aux = stringStream.str() + " ";
 
-  return aux ;
+    return aux ;
 } // toString

@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //       Antonio J. Nebro <antonio@lcc.uma.es>
 //       Juan J. Durillo <durillo@lcc.uma.es>
 //
@@ -23,28 +24,30 @@
 #ifndef _PseudoRandom_h
 #define _PseudoRandom_h
 
+#include "JMetalHeader.h"
 #include <iostream>
 #include <RandomGenerator.h>
 #include <math.h>
 
 /**
- * This file is aimed at defining the interface for the random generator. 
+ * This file is aimed at defining the interface for the random generator.
  * The idea is that all the random numbers will be generated using a single
  * random generator which will be accesible throug this interface.
  **/
 
-class PseudoRandom {
+class PseudoRandom
+{
 //private:
 public:
-  static RandomGenerator * randomGenerator_;
-  PseudoRandom();
+    static RandomGenerator * randomGenerator_;
+    PseudoRandom();
 
 public:
-  static double randDouble();//    static int randInt();
-  static int randInt(int minBound, int maxBound);
-  static double randDouble(double minBound, double maxBound);
-  static double randNormal(double mean, double standardDeviation);
-  static double * randSphere(int dimension);
+    static double randDouble();//    static int randInt();
+    static int randInt(int minBound, int maxBound);
+    static double randDouble(double minBound, double maxBound);
+    static double randNormal(double mean, double standardDeviation);
+    static double * randSphere(int dimension);
 };
 
 

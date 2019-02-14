@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -42,101 +43,102 @@
  * (MCDM 2009), pp: 66-73. March 2009
  */
 
-class SMPSO : public Algorithm {
+class SMPSO : public Algorithm
+{
 
 private:
 
-  /**
-   * Stores the number of particles_ used
-   */
-  int swarmSize_;
-  /**
-   * Stores the maximum size for the archive
-   */
-  int archiveSize_;
-  /**
-   * Stores the maximum number of iteration_
-   */
-  int maxIterations_;
-  /**
-   * Stores the current number of iteration_
-   */
-  int iteration_;
-  /**
-   * Stores the particles
-   */
-  SolutionSet * particles_;
-  /**
-   * Stores the best_ solutions founds so far for each particles
-   */
-  Solution ** best_;
-  /**
-   * Stores the leaders_
-   */
-  CrowdingArchive * leaders_;
-  /**
-   * Stores the speed_ of each particle
-   */
-  double ** speed_;
-  /**
-   * Stores a comparator for checking dominance
-   */
-  Comparator * dominance_;
-  /**
-   * Stores a comparator for crowding checking
-   */
-  Comparator * crowdingDistanceComparator_;
-  /**
-   * Stores a <code>Distance</code> object
-   */
-  Distance * distance_;
-  /**
-   * Stores a operator for non uniform mutations
-   */
-  Operator * polynomialMutation_;
+    /**
+     * Stores the number of particles_ used
+     */
+    int swarmSize_;
+    /**
+     * Stores the maximum size for the archive
+     */
+    int archiveSize_;
+    /**
+     * Stores the maximum number of iteration_
+     */
+    int maxIterations_;
+    /**
+     * Stores the current number of iteration_
+     */
+    int iteration_;
+    /**
+     * Stores the particles
+     */
+    SolutionSet * particles_;
+    /**
+     * Stores the best_ solutions founds so far for each particles
+     */
+    Solution ** best_;
+    /**
+     * Stores the leaders_
+     */
+    CrowdingArchive * leaders_;
+    /**
+     * Stores the speed_ of each particle
+     */
+    double ** speed_;
+    /**
+     * Stores a comparator for checking dominance
+     */
+    Comparator * dominance_;
+    /**
+     * Stores a comparator for crowding checking
+     */
+    Comparator * crowdingDistanceComparator_;
+    /**
+     * Stores a <code>Distance</code> object
+     */
+    Distance * distance_;
+    /**
+     * Stores a operator for non uniform mutations
+     */
+    Operator * polynomialMutation_;
 
-  //QualityIndicator * indicators_; // QualityIndicator object
+    //QualityIndicator * indicators_; // QualityIndicator object
 
-  double r1Max_;
-  double r1Min_;
-  double r2Max_;
-  double r2Min_;
-  double C1Max_;
-  double C1Min_;
-  double C2Max_;
-  double C2Min_;
-  double WMax_;
-  double WMin_;
-  double ChVel1_;
-  double ChVel2_;
+    double r1Max_;
+    double r1Min_;
+    double r2Max_;
+    double r2Min_;
+    double C1Max_;
+    double C1Min_;
+    double C2Max_;
+    double C2Min_;
+    double WMax_;
+    double WMin_;
+    double ChVel1_;
+    double ChVel2_;
 
-  double trueHypervolume_;
-  //Hypervolume * hy_;
-  SolutionSet * trueFront_;
-  double * deltaMax_;
-  double * deltaMin_;
-  bool success_;
+    double trueHypervolume_;
+    //Hypervolume * hy_;
+    SolutionSet * trueFront_;
+    double * deltaMax_;
+    double * deltaMin_;
+    bool success_;
 
-  double inertiaWeight(int iter, int miter, double wma,
-                                            double wmin);
-  double constrictionCoefficient(double c1, double c2);
-  double velocityConstriction(double v, double * deltaMax,
-                                        double * deltaMin,
-                                        int variableIndex,
-                                        int particleIndex);
-  void computeSpeed(int iter, int miter);
-  void computeNewPositions();
-  void mopsoMutation(int actualIteration, int totalIterations);
-  void initParams();
-  void setAlgParams();
-  void deleteParams();
+    double inertiaWeight(int iter, int miter, double wma,
+                         double wmin);
+    double constrictionCoefficient(double c1, double c2);
+    double velocityConstriction(double v, double * deltaMax,
+                                double * deltaMin,
+                                int variableIndex,
+                                int particleIndex);
+    void computeSpeed(int iter, int miter);
+    void computeNewPositions();
+    void mopsoMutation(int actualIteration, int totalIterations);
+    void initParams();
+    void setAlgParams();
+    void deleteParams();
 
 public:
-  SMPSO(Problem * problem);
-  //TODO: SMPSO(Problem * problem, vector<double> variables, string trueParetoFront);
-  //TODO: SMPSO(Problem * problem, string trueParetoFront);
-  SolutionSet * execute();
-  //TODO: SolutionSet * getLeader();
+    SMPSO(Problem * problem);
+    //TODO: SMPSO(Problem * problem, VectorOfDouble variables, std::string trueParetoFront);
+    //TODO: SMPSO(Problem * problem, std::string trueParetoFront);
+    SolutionSet * execute();
+    //TODO: SolutionSet * getLeader();
 
 };
 

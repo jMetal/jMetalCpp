@@ -21,13 +21,14 @@
 
 
 #include <F11ShiftedRotatedWeierstrass.h>
+#include "JMetalHeader.h"
 
 // Fixed (class) parameters
-const string F11ShiftedRotatedWeierstrass::FUNCTION_NAME = "Shifted Rotated Weierstrass Function";
+const std::string F11ShiftedRotatedWeierstrass::FUNCTION_NAME = "Shifted Rotated Weierstrass Function";
 // TODO: Cambiar ruta
-const string F11ShiftedRotatedWeierstrass::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/weierstrass_data.txt";
-const string F11ShiftedRotatedWeierstrass::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/weierstrass_M_D";
-const string F11ShiftedRotatedWeierstrass::DEFAULT_FILE_MX_SUFFIX = ".txt";
+const std::string F11ShiftedRotatedWeierstrass::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/weierstrass_data.txt";
+const std::string F11ShiftedRotatedWeierstrass::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/weierstrass_M_D";
+const std::string F11ShiftedRotatedWeierstrass::DEFAULT_FILE_MX_SUFFIX = ".txt";
 
 const int F11ShiftedRotatedWeierstrass::Kmax = 20;
 const double F11ShiftedRotatedWeierstrass::a = 0.5;
@@ -38,29 +39,32 @@ const double F11ShiftedRotatedWeierstrass::b = 3.0;
  * Constructor.
  */
 F11ShiftedRotatedWeierstrass::F11ShiftedRotatedWeierstrass(int dimension, double bias)
-    : F11ShiftedRotatedWeierstrass(dimension, bias, DEFAULT_FILE_DATA, getFileMxName(DEFAULT_FILE_MX_PREFIX, dimension, DEFAULT_FILE_MX_SUFFIX)) {
+    : F11ShiftedRotatedWeierstrass(dimension, bias, DEFAULT_FILE_DATA, getFileMxName(DEFAULT_FILE_MX_PREFIX, dimension, DEFAULT_FILE_MX_SUFFIX))
+{
 } // F11ShiftedRotatedWeierstrass
 
 
 /**
  * Constructor
  */
-F11ShiftedRotatedWeierstrass::F11ShiftedRotatedWeierstrass(int dimension, double bias, string file_data, string file_m)
-    : TestFunc(dimension, bias, FUNCTION_NAME) {
+F11ShiftedRotatedWeierstrass::F11ShiftedRotatedWeierstrass(int dimension, double bias, std::string file_data, std::string file_m)
+    : TestFunc(dimension, bias, FUNCTION_NAME)
+{
 
-  // Note: dimension starts from 0
-  m_o = new double[m_dimension];
-  m_matrix = new double*[m_dimension];
-  for (int i=0; i<m_dimension; i++) {
-    m_matrix[i] = new double[m_dimension];
-  }
-  m_z = new double[m_dimension];
-  m_zM = new double[m_dimension];
+    // Note: dimension starts from 0
+    m_o = snew double[m_dimension];
+    m_matrix = snew double*[m_dimension];
+    for (int i=0; i<m_dimension; i++)
+    {
+        m_matrix[i] = snew double[m_dimension];
+    }
+    m_z = snew double[m_dimension];
+    m_zM = snew double[m_dimension];
 
-  // Load the shifted global optimum
-  Benchmark::loadRowVectorFromFile(file_data, m_dimension, m_o);
-  // Load the matrix
-  Benchmark::loadMatrixFromFile(file_m, m_dimension, m_dimension, m_matrix);
+    // Load the shifted global optimum
+    Benchmark::loadRowVectorFromFile(file_data, m_dimension, m_o);
+    // Load the matrix
+    Benchmark::loadMatrixFromFile(file_m, m_dimension, m_dimension, m_matrix);
 
 } // F11ShiftedRotatedWeierstrass
 
@@ -68,36 +72,40 @@ F11ShiftedRotatedWeierstrass::F11ShiftedRotatedWeierstrass(int dimension, double
 /**
  * Destructor
  */
-F11ShiftedRotatedWeierstrass::~F11ShiftedRotatedWeierstrass() {
-  delete [] m_o;
-  for (int i=0; i<m_dimension; i++) {
-    delete [] m_matrix[i];
-  }
-  delete [] m_matrix;
-  delete [] m_z;
-  delete [] m_zM;
+F11ShiftedRotatedWeierstrass::~F11ShiftedRotatedWeierstrass()
+{
+    delete [] m_o;
+    for (int i=0; i<m_dimension; i++)
+    {
+        delete [] m_matrix[i];
+    }
+    delete [] m_matrix;
+    delete [] m_z;
+    delete [] m_zM;
 } // ~F11ShiftedRotatedWeierstrass
 
 
 /**
  * Function body
  */
-double F11ShiftedRotatedWeierstrass::f(double * x) {
-  double result = 0.0;
+double F11ShiftedRotatedWeierstrass::f(double * x)
+{
+    double result = 0.0;
 
-  Benchmark::shift(m_z, x, m_o, m_dimension);
-  Benchmark::xA(m_zM, m_z, m_matrix, m_dimension);
+    Benchmark::shift(m_z, x, m_o, m_dimension);
+    Benchmark::xA(m_zM, m_z, m_matrix, m_dimension);
 
-  result = Benchmark::weierstrass(m_zM, m_dimension, a, b, Kmax);
+    result = Benchmark::weierstrass(m_zM, m_dimension, a, b, Kmax);
 
-  result += m_bias;
+    result += m_bias;
 
-  return result;
+    return result;
 }
 
 
-string F11ShiftedRotatedWeierstrass::getFileMxName(string prefix, int dimension, string suffix) {
-  std::stringstream sstm;
-  sstm << prefix << dimension << suffix;
-  return sstm.str();
+std::string F11ShiftedRotatedWeierstrass::getFileMxName(std::string prefix, int dimension, std::string suffix)
+{
+    std::stringstream sstm;
+    sstm << prefix << dimension << suffix;
+    return sstm.str();
 }

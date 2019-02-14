@@ -27,31 +27,32 @@
 //#include <cstdlib>
 #include <math.h>
 
-using namespace std;
 
-class FastHypervolume {
+
+class FastHypervolume
+{
 
 private:
 
-  Solution * referencePoint_;
-  int numberOfObjectives_;
-  double offset_ = 20.0;
+    Solution * referencePoint_;
+    int numberOfObjectives_;
+    double offset_ = 20.0;
 
-  void updateReferencePoint(SolutionSet * solutionSet);
-  double get2DHV(SolutionSet * solutionSet);
-  double computeHypervolume(SolutionSet * solutionSet);
+    void updateReferencePoint(SolutionSet * solutionSet);
+    double get2DHV(SolutionSet * solutionSet);
+    double computeHypervolume(SolutionSet * solutionSet);
 
-  // double computeSolutionHVContribution(SolutionSet * solutionSet,
-  //     int solutionIndex, double solutionSetHV);
+    // double computeSolutionHVContribution(SolutionSet * solutionSet,
+    //     int solutionIndex, double solutionSetHV);
 
 public:
 
-  FastHypervolume();
-  FastHypervolume(double offset);
-  ~FastHypervolume();
+    FastHypervolume();
+    FastHypervolume(double offset);
+    ~FastHypervolume();
 
 
-  void computeHVContributions(SolutionSet * solutionSet);
+    void computeHVContributions(SolutionSet * solutionSet);
 
 };
 

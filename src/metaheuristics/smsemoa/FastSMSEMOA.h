@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2014 Antonio J. Nebro
 //
@@ -22,6 +23,7 @@
 #ifndef _FAST_SMSEMOA_H_
 #define _FAST_SMSEMOA_H_
 
+#include "JMetalHeader.h"
 #include <Algorithm.h>
 #include <Problem.h>
 #include <SolutionSet.h>
@@ -31,20 +33,18 @@
 #include <Ranking.h>
 #include <CrowdingDistanceComparator.h>
 
-class FastSMSEMOA : public Algorithm {
+using namespace JMetal;
 
-private:
-
-  MetricsUtil * utils_;
-  Hypervolume * hv_;
-
-  vector<double> hvContributions(vector< vector<double> > front);
-
-
+class FastSMSEMOA : public Algorithm
+{
+protected:
+    MetricsUtil * utils_ = nullptr;
+    Hypervolume * hv_ = nullptr;
+    VectorOfDouble hvContributions(MatrixOfDouble front);
 public:
-  FastSMSEMOA(Problem * problem);
-  ~FastSMSEMOA();
-  SolutionSet * execute();
+    FastSMSEMOA(Problem * problem);
+    ~FastSMSEMOA();
+    SolutionSet * execute();
 };
 
 

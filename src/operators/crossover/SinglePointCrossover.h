@@ -30,16 +30,17 @@
  * This class allows to apply a SBX crossover operator using two parent
  * solutions.
 **/
-class SinglePointCrossover : public Crossover {
+class SinglePointCrossover : public Crossover
+{
 
 public:
-  SinglePointCrossover(map<string, void *> parameters);
-  void *execute(void *);
+    SinglePointCrossover(map<string, void *> parameters);
+    void *execute(void *);
 
 private:
-  double crossoverProbability_;
-  Solution ** doCrossover(double probability,
-      Solution * parent1, Solution * parent2);
+    double crossoverProbability_;
+    Solution ** doCrossover(double probability,
+                            Solution * parent1, Solution * parent2);
 };
 
 #endif

@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -26,25 +27,26 @@
 #include <DifferentialEvolutionCrossover.h>
 #include <DifferentialEvolutionSelection.h>
 
-class GDE3_Settings : public Settings{
+class GDE3_Settings : public Settings
+{
 
 private:
 
-  double CR_          ;
-  double F_           ;
-  int populationSize_ ;
-  int maxIterations_  ;
+    double CR_          ;
+    double F_           ;
+    int populationSize_ ;
+    int maxIterations_  ;
 
-  Algorithm * algorithm ;
-  Operator  * crossover ; // Crossover operator
-  Operator  * selection ; // Selection operator
+    Algorithm * algorithm ;
+    Operator  * crossover ; // Crossover operator
+    Operator  * selection ; // Selection operator
 
 public:
-	GDE3_Settings() ;
-	GDE3_Settings(string problemName) ;
-	~GDE3_Settings() ;
+    GDE3_Settings() ;
+    GDE3_Settings(std::string problemName) ;
+    ~GDE3_Settings() ;
 
-  Algorithm * configure() ;
+    Algorithm * configure() ;
 
 }; // GDE3_Settings
 

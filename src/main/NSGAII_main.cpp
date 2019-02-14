@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -47,78 +48,82 @@
  *                  5th International Conference, EMO 2009, pp: 183-197.
  *                  April 2009)
  */
-int main(int argc, char ** argv) {
+int main(int argc, char ** argv)
+{
 
-	clock_t t_ini, t_fin;
-  
-  Problem   * problem   ; // The problem to solve
-  Algorithm * algorithm ; // The algorithm to use
-  Operator  * crossover ; // Crossover operator
-  Operator  * mutation  ; // Mutation operator
-  Operator  * selection ; // Selection operator
+    clock_t t_ini, t_fin;
 
-  if (argc>=2) {
-    problem = ProblemFactory::getProblem(argc, argv);
-    cout << "Selected problem: " << problem->getName() << endl;
-  } else {
-    cout << "No problem selected." << endl;
-    cout << "Default problem will be used: Fonseca" << endl;
-    problem = ProblemFactory::getProblem(const_cast<char *>("Fonseca"));
-  }
-  
+    Problem   * problem   ; // The problem to solve
+    Algorithm * algorithm ; // The algorithm to use
+    Operator  * crossover ; // Crossover operator
+    Operator  * mutation  ; // Mutation operator
+    Operator  * selection ; // Selection operator
+
+    if (argc>=2)
+    {
+        problem = ProblemFactory::getProblem(argc, argv);
+        cout << "Selected problem: " << problem->getName() << endl;
+    }
+    else
+    {
+        cout << "No problem selected." << endl;
+        cout << "Default problem will be used: Fonseca" << endl;
+        problem = ProblemFactory::getProblem(const_cast<char *>("Fonseca"));
+    }
+
 //  QualityIndicator * indicators ; // Object to get quality indicators
 //	indicators = NULL ;
 
-	algorithm = new NSGAII(problem);
+    algorithm = new NSGAII(problem);
 
-  // Algorithm parameters
-  int populationSize = 100;
-  int maxEvaluations = 25000;
-  algorithm->setInputParameter("populationSize",&populationSize);
-  algorithm->setInputParameter("maxEvaluations",&maxEvaluations);
+    // Algorithm parameters
+    int populationSize = 100;
+    int maxEvaluations = 25000;
+    algorithm->setInputParameter("populationSize",&populationSize);
+    algorithm->setInputParameter("maxEvaluations",&maxEvaluations);
 
-	// Mutation and Crossover for Real codification
-	map<string, void *> parameters;
+    // Mutation and Crossover for Real codification
+    map<string, void *> parameters;
 
-  double crossoverProbability = 0.9;
-  double crossoverDistributionIndex = 20.0;
-  parameters["probability"] =  &crossoverProbability;
-  parameters["distributionIndex"] = &crossoverDistributionIndex;
-  crossover = new SBXCrossover(parameters);
+    double crossoverProbability = 0.9;
+    double crossoverDistributionIndex = 20.0;
+    parameters["probability"] =  &crossoverProbability;
+    parameters["distributionIndex"] = &crossoverDistributionIndex;
+    crossover = new SBXCrossover(parameters);
 
-	parameters.clear();
-  double mutationProbability = 1.0/problem->getNumberOfVariables();
-  double mutationDistributionIndex = 20.0;
-  parameters["probability"] = &mutationProbability;
-  parameters["distributionIndex"] = &mutationDistributionIndex;
-  mutation = new PolynomialMutation(parameters);
+    parameters.clear();
+    double mutationProbability = 1.0/problem->getNumberOfVariables();
+    double mutationDistributionIndex = 20.0;
+    parameters["probability"] = &mutationProbability;
+    parameters["distributionIndex"] = &mutationDistributionIndex;
+    mutation = new PolynomialMutation(parameters);
 
-	// Selection Operator
-	parameters.clear();
-	selection = new BinaryTournament2(parameters);
+    // Selection Operator
+    parameters.clear();
+    selection = new BinaryTournament2(parameters);
 
-	// Add the operators to the algorithm
-	algorithm->addOperator("crossover",crossover);
-	algorithm->addOperator("mutation",mutation);
-	algorithm->addOperator("selection",selection);
+    // Add the operators to the algorithm
+    algorithm->addOperator("crossover",crossover);
+    algorithm->addOperator("mutation",mutation);
+    algorithm->addOperator("selection",selection);
 
-	// Add the indicator object to the algorithm
+    // Add the indicator object to the algorithm
 //	algorithm->setInputParameter("indicators", indicators) ;
 
-	// Execute the Algorithm
-	t_ini = clock();
-	SolutionSet * population = algorithm->execute();
-	t_fin = clock();
-	double secs = (double) (t_fin - t_ini);
-	secs = secs / CLOCKS_PER_SEC;
+    // Execute the Algorithm
+    t_ini = clock();
+    SolutionSet * population = algorithm->execute();
+    t_fin = clock();
+    double secs = (double) (t_fin - t_ini);
+    secs = secs / CLOCKS_PER_SEC;
 
-	// Result messages
-	cout << "Total execution time: " << secs << "s" << endl;
-	cout << "Variables values have been written to file VAR" << endl;
-	population->printVariablesToFile("VAR");
-	cout << "Objectives values have been written to file FUN" << endl;
-	population->printObjectivesToFile("FUN");
-  
+    // Result messages
+    cout << "Total execution time: " << secs << "s" << endl;
+    cout << "Variables values have been written to file VAR" << endl;
+    population->printVariablesToFile("VAR");
+    cout << "Objectives values have been written to file FUN" << endl;
+    population->printObjectivesToFile("FUN");
+
 //  if (indicators != NULL) {
 //    cout << "Quality indicators" << endl;
 //    cout << "Hypervolume: " << indicators->getHypervolume(population) << endl;
@@ -126,15 +131,15 @@ int main(int argc, char ** argv) {
 //    cout << "IGD        : " << indicators->getIGD(population) << endl;
 //    cout << "Spread     : " << indicators->getSpread(population) << endl;
 //    cout << "Epsilon    : " << indicators->getEpsilon(population) << endl;
-//    
+//
 //    int evaluations = *(int *) algorithm->getOutputParameter("evaluations");;
 //    cout << "Speed      : " << evaluations << " evaluations" << endl;
 //  } // if
 
-  delete selection;
-  delete mutation;
-  delete crossover;
-  delete population;
-  delete algorithm;
+    delete selection;
+    delete mutation;
+    delete crossover;
+    delete population;
+    delete algorithm;
 
 } // main

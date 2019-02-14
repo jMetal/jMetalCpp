@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -30,44 +31,56 @@
  *    1: path is a folder
  *    2: path is a file
  */
-int FileUtils::existsPath(const char* path) {
-  int res = -1;
-  struct stat statbuf;
-  if (stat(path, &statbuf) != -1) {
-    if (S_ISDIR(statbuf.st_mode)) {
-     return 1;
-    } else {
-     return 2;
+int FileUtils::existsPath(const char* path)
+{
+    int res = -1;
+    struct stat statbuf;
+    if (stat(path, &statbuf) != -1)
+    {
+        /*
+        if (S_ISDIR(statbuf.st_mode))
+        {
+         return 1;
+        }
+        else
+        {
+         return 2;
+        }
+        */
     }
-  } else {
-    return 0;
-  }
-  return res;
+    else
+    {
+        return 0;
+    }
+    return res;
 } // existsPath
 
 
 /**
  * Creates a directory in the specified path
  */
-int FileUtils::createDirectory(string path) {
-  int res;
-  cout << "Creating directory: " << path << endl;
+int FileUtils::createDirectory(std::string path)
+{
+    int res;
+    std::cout << "Creating directory: " << path << std::endl;
 
-  if (path.size() > 512)
-    res = 1;
-  else {
-    for (int i = 0; i <= path.size(); i++)
-      if (path[i] == '/' || i == path.size()-1) {
-        string path2 = path.substr(0, i+1);
+    if (path.size() > 512)
+        res = 1;
+    else
+    {
+        for (int i = 0; i < path.size(); i++)
+            if (path[i] == '/' || i == path.size()-1)
+            {
+                std::string path2 = path.substr(0, i+1);
 
-        #ifdef WINDOWS
-        res = mkdir(path2.c_str());
-        #else
-        res = mkdir(path2.c_str() , S_IRWXU | S_IRWXG | S_IRWXO);
-        #endif
+#ifdef WINDOWS
+                //res = mkdir(path2.c_str());
+#else
+                res = mkdir(path2.c_str(), S_IRWXU | S_IRWXG | S_IRWXO);
+#endif
 
-      }
-  }
-  
-  return res;
+            }
+    }
+
+    return res;
 } // createDirectory

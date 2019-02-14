@@ -3,7 +3,7 @@
 //  Authors:
 //       Antonio J. Nebro <antonio@lcc.uma.es>
 //       Juan J. Durillo <durillo@lcc.uma.es>
-// 
+//
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
 //  This program is free software: you can redistribute it and/or modify
@@ -15,7 +15,7 @@
 //  but WITHOUT ANY WARRANTY; without even the implied warranty of
 //  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //  GNU Lesser General Public License for more details.
-// 
+//
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -31,12 +31,13 @@
   * @class Sphere
   * @brief Class representing problem Sphere
  **/
-class Sphere : public Problem {
-   
+class Sphere : public Problem
+{
+
 public:
-	Sphere(string solutionType, int numberOfVariables = 10);
-	~Sphere();
-	void evaluate(Solution *solution);
+    Sphere(string solutionType, int numberOfVariables = 10);
+    ~Sphere();
+    void evaluate(Solution *solution);
 };
 
 #endif

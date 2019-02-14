@@ -31,16 +31,18 @@ const double InvertedGenerationalDistance::pow_ = 2.0;
  * Constructor.
  * Creates a new instance of the generational distance metric.
  */
-InvertedGenerationalDistance::InvertedGenerationalDistance() {
-  utils_ = new MetricsUtil();
+InvertedGenerationalDistance::InvertedGenerationalDistance()
+{
+    utils_ = snew MetricsUtil();
 } // InvertedGenerationalDistance
 
 
 /**
  * Destructor
  */
-InvertedGenerationalDistance::~InvertedGenerationalDistance() {
-  delete utils_;
+InvertedGenerationalDistance::~InvertedGenerationalDistance()
+{
+    delete utils_;
 } // ~InvertedGenerationalDistance
 
 
@@ -50,56 +52,57 @@ InvertedGenerationalDistance::~InvertedGenerationalDistance() {
  * @param trueParetoFront The true pareto front
  */
 double InvertedGenerationalDistance::invertedGenerationalDistance(
-    vector< vector<double> > front, vector< vector<double> > trueParetoFront,
-    int numberOfObjectives) {
+    MatrixOfDouble front, MatrixOfDouble trueParetoFront,
+    int numberOfObjectives)
+{
 
-  /**
-   * Stores the maximum values of true pareto front.
-   */
-  vector<double> maximumValue;
+    /**
+     * Stores the maximum values of true pareto front.
+     */
+    VectorOfDouble maximumValue;
 
-  /**
-   * Stores the minimum values of the true pareto front.
-   */
-  vector<double> minimumValue;
+    /**
+     * Stores the minimum values of the true pareto front.
+     */
+    VectorOfDouble minimumValue;
 
-  /**
-   * Stores the normalized front.
-   */
-  vector< vector<double> > normalizedFront;
+    /**
+     * Stores the normalized front.
+     */
+    MatrixOfDouble normalizedFront;
 
-  /**
-   * Stores the normalized true Pareto front.
-   */
-  vector< vector<double> > normalizedParetoFront ;
+    /**
+     * Stores the normalized true Pareto front.
+     */
+    MatrixOfDouble normalizedParetoFront ;
 
-  // STEP 1. Obtain the maximum and minimum values of the Pareto front
-  maximumValue = utils_->getMaximumValues(trueParetoFront, numberOfObjectives);
-  minimumValue = utils_->getMinimumValues(trueParetoFront, numberOfObjectives);
+    // STEP 1. Obtain the maximum and minimum values of the Pareto front
+    maximumValue = utils_->getMaximumValues(trueParetoFront, numberOfObjectives);
+    minimumValue = utils_->getMinimumValues(trueParetoFront, numberOfObjectives);
 
-  // STEP 2. Get the normalized front and true Pareto fronts
-  normalizedFront       = utils_->getNormalizedFront(front,
-                                                maximumValue,
-                                                minimumValue);
-  normalizedParetoFront = utils_->getNormalizedFront(trueParetoFront,
-                                                maximumValue,
-                                                minimumValue);
+    // STEP 2. Get the normalized front and true Pareto fronts
+    normalizedFront       = utils_->getNormalizedFront(front,
+                            maximumValue,
+                            minimumValue);
+    normalizedParetoFront = utils_->getNormalizedFront(trueParetoFront,
+                            maximumValue,
+                            minimumValue);
 
-  // STEP 3. Sum the distances between each point of the true Pareto front and
-  // the nearest point in the true Pareto front
-  double sum = 0.0;
-  for (int i = 0; i < normalizedParetoFront.size(); i++)
-    sum += pow(utils_->distanceToClosedPoint(normalizedParetoFront[i],
-        normalizedFront),
-                                             pow_);
+    // STEP 3. Sum the distances between each point of the true Pareto front and
+    // the nearest point in the true Pareto front
+    double sum = 0.0;
+    for (int i = 0; i < normalizedParetoFront.size(); i++)
+        sum += pow(utils_->distanceToClosedPoint(normalizedParetoFront[i],
+                   normalizedFront),
+                   pow_);
 
 
-  // STEP 4. Obtain the sqrt of the sum
-  sum = pow(sum,1.0/pow_);
+    // STEP 4. Obtain the sqrt of the sum
+    sum = pow(sum,1.0/pow_);
 
-  // STEP 5. Divide the sum by the maximum number of points of the front
-  double generationalDistance = sum / normalizedParetoFront.size();
+    // STEP 5. Divide the sum by the maximum number of points of the front
+    double generationalDistance = sum / normalizedParetoFront.size();
 
-  return generationalDistance;
+    return generationalDistance;
 
 } // generationalDistance

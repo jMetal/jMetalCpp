@@ -31,10 +31,11 @@
  * equal or not. A dominance test is applied to decide about what solution
  * is the best.
  */
-class EqualSolutions : public Comparator {
+class EqualSolutions : public Comparator
+{
 
 public:
-  int compare(void *solution1, void *solution2);
+    int compare(void *solution1, void *solution2);
 };
 
 #endif

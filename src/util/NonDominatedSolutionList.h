@@ -30,18 +30,19 @@
  * This class implements an unbound list of non-dominated solutions
  */
 
-class NonDominatedSolutionList : public SolutionSet {
+class NonDominatedSolutionList : public SolutionSet
+{
 
 private:
-  Comparator * dominance;
-  Comparator * equal;
+    Comparator * dominance;
+    Comparator * equal;
 
 public:
-  NonDominatedSolutionList();
-  NonDominatedSolutionList(Comparator *dominance);
-  ~NonDominatedSolutionList();
+    NonDominatedSolutionList();
+    NonDominatedSolutionList(Comparator *dominance);
+    ~NonDominatedSolutionList();
 
-  bool add(Solution *solution);
+    bool add(Solution *solution);
 
 }; // NonDominatedSolutionList
 

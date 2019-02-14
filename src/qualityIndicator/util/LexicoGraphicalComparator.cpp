@@ -20,7 +20,9 @@
 
 
 #include <LexicoGraphicalComparator.h>
+#include "JMetalHeader.h"
 
+using namespace JMetal;
 
 /**
  * The compare method compare the objects o1 and o2.
@@ -28,23 +30,30 @@
  * @param o2 An object that reference a double[]
  * @return -1 if o1 < o1, 1 if o1 > o2 or 0 in other case.
  */
-int LexicoGraphicalComparator::compare(void * o1, void * o2) {
-  //Cast to vector<double> o1 and o2.
-  vector<double> pointOne = * (vector<double> *) o1;
-  vector<double> pointTwo = * (vector<double> *) o2;
+int LexicoGraphicalComparator::compare(void * o1, void * o2)
+{
+    //Cast to VectorOfDouble o1 and o2.
+    VectorOfDouble pointOne = * (VectorOfDouble *) o1;
+    VectorOfDouble pointTwo = * (VectorOfDouble *) o2;
 
-  //To determine the first i, that pointOne[i] != pointTwo[i];
-  int index = 0;
-  while ((index < pointOne.size()) && (index < pointTwo.size()) &&
-         pointOne[index] == pointTwo[index]) {
-    index++;
-  }
-  if ((index >= pointOne.size()) || (index >= pointTwo.size() )) {
+    //To determine the first i, that pointOne[i] != pointTwo[i];
+    int index = 0;
+    while ((index < pointOne.size()) && (index < pointTwo.size()) &&
+            pointOne[index] == pointTwo[index])
+    {
+        index++;
+    }
+    if ((index >= pointOne.size()) || (index >= pointTwo.size() ))
+    {
+        return 0;
+    }
+    else if (pointOne[index] < pointTwo[index])
+    {
+        return -1;
+    }
+    else if (pointOne[index] > pointTwo[index])
+    {
+        return 1;
+    }
     return 0;
-  } else if (pointOne[index] < pointTwo[index]) {
-    return -1;
-  } else if (pointOne[index] > pointTwo[index]) {
-    return 1;
-  }
-  return 0;
 } // compare

@@ -31,12 +31,13 @@
   * @class Schaffer
   * @brief Class representing problem Schaffer
  **/
-class Schaffer : public Problem {
+class Schaffer : public Problem
+{
 
 public:
-  Schaffer(string solutionType);
-  ~Schaffer();
-  void evaluate(Solution *solution);
+    Schaffer(std::string solutionType);
+    ~Schaffer();
+    void evaluate(Solution *solution);
 };
 
 #endif

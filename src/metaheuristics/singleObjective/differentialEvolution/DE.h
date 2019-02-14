@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -30,11 +31,12 @@
  * This class implements a differential evolution algorithm.
  */
 
-class DE : public Algorithm {
+class DE : public Algorithm
+{
 
 public:
-  DE(Problem * problem);
-  SolutionSet * execute();
+    DE(Problem * problem);
+    SolutionSet * execute();
 };
 
 #endif /* __DE__ */

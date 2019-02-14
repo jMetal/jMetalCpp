@@ -21,12 +21,12 @@
 
 #include <paes.h>
 
- /**
-  * Create a new PAES instance for resolve a problem
-  * @param problem Problem to solve
-  */
+/**
+ * Create a new PAES instance for resolve a problem
+ * @param problem Problem to solve
+ */
 
-paes::paes(Problem * problem) : Algorithm(problem){ }
+paes::paes(Problem * problem) : Algorithm(problem) { }
 
 /**
    * Tests two solutions to determine which one becomes be the guide of PAES
@@ -36,34 +36,39 @@ paes::paes(Problem * problem) : Algorithm(problem){ }
   */
 
 Solution * paes::test(Solution * solution, Solution * mutatedSolution,
-                       AdaptiveGridArchive * archive){
+                      AdaptiveGridArchive * archive)
+{
 
     int originalLocation = archive->getGrid()->location(solution);
     int mutatedLocation  = archive->getGrid()->location(mutatedSolution);
 
-    if (originalLocation == -1) {
-      return new Solution(mutatedSolution);
+    if (originalLocation == -1)
+    {
+        return new Solution(mutatedSolution);
     }
 
-    if (mutatedLocation == -1) {
-      return new Solution(solution);
+    if (mutatedLocation == -1)
+    {
+        return new Solution(solution);
     }
 
     if (archive->getGrid()->getLocationDensity(mutatedLocation) <
-        archive->getGrid()->getLocationDensity(originalLocation)) {
-      return new Solution(mutatedSolution);
+            archive->getGrid()->getLocationDensity(originalLocation))
+    {
+        return new Solution(mutatedSolution);
     }
 
     return new Solution(solution);
-  } // test
+} // test
 
-  /**
-  * Runs of the Paes algorithm.
-  * @return a <code>SolutionSet</code> that is a set of non dominated solutions
-  * as a result of the algorithm execution
-  */
+/**
+* Runs of the Paes algorithm.
+* @return a <code>SolutionSet</code> that is a set of non dominated solutions
+* as a result of the algorithm execution
+*/
 
-SolutionSet * paes::execute() {
+SolutionSet * paes::execute()
+{
     int bisections, archiveSize, maxEvaluations, evaluations;
     AdaptiveGridArchive * archive;
 
@@ -94,32 +99,38 @@ SolutionSet * paes::execute() {
     archive->add(new Solution(solution),evaluations );
 
     //Iterations....
-    do {
-      // Create the mutate one
-      Solution * mutatedIndividual = new Solution(solution);
-      mutationOperator->execute(mutatedIndividual);
+    do
+    {
+        // Create the mutate one
+        Solution * mutatedIndividual = new Solution(solution);
+        mutationOperator->execute(mutatedIndividual);
 
-      problem_->evaluate(mutatedIndividual);
-      problem_->evaluateConstraints(mutatedIndividual);
-      evaluations++;
-      //<-
+        problem_->evaluate(mutatedIndividual);
+        problem_->evaluateConstraints(mutatedIndividual);
+        evaluations++;
+        //<-
 
-      // Check dominance
-      int flag = dominance->compare(solution,mutatedIndividual);
+        // Check dominance
+        int flag = dominance->compare(solution,mutatedIndividual);
 
-      if (flag == 1) { //If mutate solution dominate
-        solution = new Solution(mutatedIndividual);
-        archive->add(mutatedIndividual,evaluations );
-      } else if (flag == 0) { //If none dominate the other
-            if (archive->add(mutatedIndividual,evaluations )) {
-              solution = test(solution,mutatedIndividual,archive);
+        if (flag == 1)   //If mutate solution dominate
+        {
+            solution = new Solution(mutatedIndividual);
+            archive->add(mutatedIndividual,evaluations );
         }
-      }
+        else if (flag == 0)     //If none dominate the other
+        {
+            if (archive->add(mutatedIndividual,evaluations ))
+            {
+                solution = test(solution,mutatedIndividual,archive);
+            }
+        }
 
 
-    } while (evaluations < maxEvaluations);
+    }
+    while (evaluations < maxEvaluations);
 
     //Return the  population of non-dominated solution
     return archive;
- }  // execute
+}  // execute
 

@@ -21,42 +21,46 @@
 
 
 #include <F10ShiftedRotatedRastrigin.h>
+#include "JMetalHeader.h"
 
 // Fixed (class) parameters
-const string F10ShiftedRotatedRastrigin::FUNCTION_NAME = "Shifted Rotated Rastrigin's Function";
+const std::string F10ShiftedRotatedRastrigin::FUNCTION_NAME = "Shifted Rotated Rastrigin's Function";
 // TODO: Cambiar ruta
-const string F10ShiftedRotatedRastrigin::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/rastrigin_func_data.txt";
-const string F10ShiftedRotatedRastrigin::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/rastrigin_M_D";
-const string F10ShiftedRotatedRastrigin::DEFAULT_FILE_MX_SUFFIX = ".txt";
+const std::string F10ShiftedRotatedRastrigin::DEFAULT_FILE_DATA = "../../data/cec2005CompetitionResources/supportData/rastrigin_func_data.txt";
+const std::string F10ShiftedRotatedRastrigin::DEFAULT_FILE_MX_PREFIX = "../../data/cec2005CompetitionResources/supportData/rastrigin_M_D";
+const std::string F10ShiftedRotatedRastrigin::DEFAULT_FILE_MX_SUFFIX = ".txt";
 
 
 /**
  * Constructor.
  */
 F10ShiftedRotatedRastrigin::F10ShiftedRotatedRastrigin(int dimension, double bias)
-    : F10ShiftedRotatedRastrigin(dimension, bias, DEFAULT_FILE_DATA, getFileMxName(DEFAULT_FILE_MX_PREFIX, dimension, DEFAULT_FILE_MX_SUFFIX)) {
+    : F10ShiftedRotatedRastrigin(dimension, bias, DEFAULT_FILE_DATA, getFileMxName(DEFAULT_FILE_MX_PREFIX, dimension, DEFAULT_FILE_MX_SUFFIX))
+{
 } // F10ShiftedRotatedRastrigin
 
 
 /**
  * Constructor
  */
-F10ShiftedRotatedRastrigin::F10ShiftedRotatedRastrigin(int dimension, double bias, string file_data, string file_m)
-    : TestFunc(dimension, bias, FUNCTION_NAME) {
+F10ShiftedRotatedRastrigin::F10ShiftedRotatedRastrigin(int dimension, double bias, std::string file_data, std::string file_m)
+    : TestFunc(dimension, bias, FUNCTION_NAME)
+{
 
-  // Note: dimension starts from 0
-  m_o = new double[m_dimension];
-  m_matrix = new double*[m_dimension];
-  for (int i=0; i<m_dimension; i++) {
-    m_matrix[i] = new double[m_dimension];
-  }
-  m_z = new double[m_dimension];
-  m_zM = new double[m_dimension];
+    // Note: dimension starts from 0
+    m_o = snew double[m_dimension];
+    m_matrix = snew double*[m_dimension];
+    for (int i=0; i<m_dimension; i++)
+    {
+        m_matrix[i] = snew double[m_dimension];
+    }
+    m_z = snew double[m_dimension];
+    m_zM = snew double[m_dimension];
 
-  // Load the shifted global optimum
-  Benchmark::loadRowVectorFromFile(file_data, m_dimension, m_o);
-  // Load the matrix
-  Benchmark::loadMatrixFromFile(file_m, m_dimension, m_dimension, m_matrix);
+    // Load the shifted global optimum
+    Benchmark::loadRowVectorFromFile(file_data, m_dimension, m_o);
+    // Load the matrix
+    Benchmark::loadMatrixFromFile(file_m, m_dimension, m_dimension, m_matrix);
 
 } // F10ShiftedRotatedRastrigin
 
@@ -64,36 +68,40 @@ F10ShiftedRotatedRastrigin::F10ShiftedRotatedRastrigin(int dimension, double bia
 /**
  * Destructor
  */
-F10ShiftedRotatedRastrigin::~F10ShiftedRotatedRastrigin() {
-  delete [] m_o;
-  for (int i=0; i<m_dimension; i++) {
-    delete [] m_matrix[i];
-  }
-  delete [] m_matrix;
-  delete [] m_z;
-  delete [] m_zM;
+F10ShiftedRotatedRastrigin::~F10ShiftedRotatedRastrigin()
+{
+    delete [] m_o;
+    for (int i=0; i<m_dimension; i++)
+    {
+        delete [] m_matrix[i];
+    }
+    delete [] m_matrix;
+    delete [] m_z;
+    delete [] m_zM;
 } // ~F10ShiftedRotatedRastrigin
 
 
 /**
  * Function body
  */
-double F10ShiftedRotatedRastrigin::f(double * x) {
-  double result = 0.0;
+double F10ShiftedRotatedRastrigin::f(double * x)
+{
+    double result = 0.0;
 
-  Benchmark::shift(m_z, x, m_o, m_dimension);
-  Benchmark::rotate(m_zM, m_z, m_matrix, m_dimension);
+    Benchmark::shift(m_z, x, m_o, m_dimension);
+    Benchmark::rotate(m_zM, m_z, m_matrix, m_dimension);
 
-  result = Benchmark::rastrigin(m_zM, m_dimension);
+    result = Benchmark::rastrigin(m_zM, m_dimension);
 
-  result += m_bias;
+    result += m_bias;
 
-  return result;
+    return result;
 }
 
 
-string F10ShiftedRotatedRastrigin::getFileMxName(string prefix, int dimension, string suffix) {
-  std::stringstream sstm;
-  sstm << prefix << dimension << suffix;
-  return sstm.str();
+std::string F10ShiftedRotatedRastrigin::getFileMxName(std::string prefix, int dimension, std::string suffix)
+{
+    std::stringstream sstm;
+    sstm << prefix << dimension << suffix;
+    return sstm.str();
 }

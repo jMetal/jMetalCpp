@@ -1,0 +1,2 @@
+add_subdirectory(solutionType)
+add_subdirectory(variable)

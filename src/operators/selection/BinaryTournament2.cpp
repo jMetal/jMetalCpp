@@ -35,65 +35,68 @@
  * Creates a new instance of the Binary tournament operator (Deb's
  * NSGA-II implementation version)
  */
-BinaryTournament2::BinaryTournament2(map<string, void *> parameters)
-: Selection(parameters) {
-  index_ = 0;
-  a_ = new int[1]; // Initialized as dummy
-  dominance_ = new DominanceComparator();
-  if (dominance_ == NULL) {
-    cout << "BinaryTournament::BinaryTournament: error creating comparator" ;
-    cout << endl ;
-    exit(-1) ;
-  }
+BinaryTournament2::BinaryTournament2(MapOfStringFunct parameters)
+    : Selection(parameters)
+{
+    index_ = 0;
+    a_ = snew int[1]; // Initialized as dummy
+    dominance_ = snew DominanceComparator();
+    if (dominance_ == nullptr)
+    {
+        std::cout << "BinaryTournament::BinaryTournament: error creating comparator" ;
+        std::cout << std::endl ;
+        exit(-1) ;
+    }
 }
 
 
 /**
  * Destructor
  */
-BinaryTournament2::~BinaryTournament2() {
-  delete dominance_;
-  delete [] a_;
+BinaryTournament2::~BinaryTournament2()
+{
+    delete dominance_;
+    delete [] a_;
 } // ~BinaryTournament2
 
-  
+
 /**
 * Performs the operation
 * @param object Object representing a SolutionSet
 * @return the selected solution
 */
-void * BinaryTournament2::execute(void * object) {
+void * BinaryTournament2::execute(void * object)
+{
 
-  SolutionSet * population = (SolutionSet *)object;
+    SolutionSet * population = (SolutionSet *)object;
 
-  if (index_ == 0) //Create the permutation
-  {
-    PermutationUtility * permutationUtility = new PermutationUtility();
-    delete [] a_;
-    a_= permutationUtility->intPermutation(population->size());
-    delete permutationUtility;
-  }
+    if (index_ == 0) //Create the permutation
+    {
+        PermutationUtility * permutationUtility = snew PermutationUtility();
+        delete [] a_;
+        a_= permutationUtility->intPermutation(population->size());
+        delete permutationUtility;
+    }
 
-  Solution * solution1;
-  Solution * solution2;
-  solution1 = population->get(a_[index_]);
-  solution2 = population->get(a_[index_+1]);
+    Solution * solution1;
+    Solution * solution2;
+    solution1 = population->get(a_[index_]);
+    solution2 = population->get(a_[index_+1]);
 
-  index_ = (index_ + 2) % population->size();
+    index_ = (index_ + 2) % population->size();
 
-  int flag = dominance_->compare(solution1,solution2);
-  if (flag == -1)
-    return solution1;
-  else if (flag == 1)
-    return solution2;
-  else if (solution1->getCrowdingDistance() > solution2->getCrowdingDistance())
-    return solution1;
-  else if (solution2->getCrowdingDistance() > solution1->getCrowdingDistance())
-    return solution2;
-  else
-    if (PseudoRandom::randDouble()<0.5)
-      return solution1;
+    int flag = dominance_->compare(solution1,solution2);
+    if (flag == -1)
+        return solution1;
+    else if (flag == 1)
+        return solution2;
+    else if (solution1->getCrowdingDistance() > solution2->getCrowdingDistance())
+        return solution1;
+    else if (solution2->getCrowdingDistance() > solution1->getCrowdingDistance())
+        return solution2;
+    else if (PseudoRandom::randDouble()<0.5)
+        return solution1;
     else
-      return solution2;
+        return solution2;
 
-} // execute 
+} // execute

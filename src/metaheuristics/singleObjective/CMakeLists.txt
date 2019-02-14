@@ -1,0 +1,4 @@
+add_subdirectory(cmaes)
+add_subdirectory(differentialEvolution)
+add_subdirectory(geneticAlgorithm)
+add_subdirectory(particleSwarmOptimization)

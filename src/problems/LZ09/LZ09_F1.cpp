@@ -23,82 +23,92 @@
 /**
  * Constructor
  */
-LZ09_F1::LZ09_F1(string solutionType, int ptype, int dtype, int ltype) {
-  numberOfVariables_  = 10;
-  numberOfObjectives_ = 2;
-  numberOfConstraints_= 0;
-  problemName_        = "LZ09_F1";
-  
-	 LZ09_  = new LZ09(numberOfVariables_,
-			               numberOfObjectives_,
-			               ptype,
-			               dtype,
-			               ltype) ;
+LZ09_F1::LZ09_F1(std::string solutionType, int ptype, int dtype, int ltype)
+{
+    numberOfVariables_  = 10;
+    numberOfObjectives_ = 2;
+    numberOfConstraints_= 0;
+    problemName_        = "LZ09_F1";
 
-		lowerLimit_ = new double[numberOfVariables_];
-		if (lowerLimit_ == NULL) {
-			cout << "LZ09_F1::LZ09_F1: Error reserving memory for storing the "
-					<< "variable lower limits" << endl;
-			exit(-1);
-		}
+    LZ09_  = snew LZ09(numberOfVariables_,
+                      numberOfObjectives_,
+                      ptype,
+                      dtype,
+                      ltype) ;
 
-		upperLimit_ = new double[numberOfVariables_];
-		if (upperLimit_ == NULL) {
-			cout << "LZ09_F1::LZ09_F1: Error reserving  memory for storing the "
-					<< "variable lower limits" << endl;
-			exit(-1);
-		}
+    lowerLimit_ = snew double[numberOfVariables_];
+    if (lowerLimit_ == nullptr)
+    {
+        std::cout << "LZ09_F1::LZ09_F1: Error reserving memory for storing the "
+             << "variable lower limits" << std::endl;
+        exit(-1);
+    }
 
-		for (int i = 0; i < numberOfVariables_; i++) {
-			lowerLimit_[i] = 0.0;
-			upperLimit_[i] = 1.0;
-		}
-    
-		if (solutionType.compare("BinaryReal") == 0)
-			solutionType_ = new BinaryRealSolutionType(this) ;
-		else if (solutionType.compare("Real") == 0) {
-			solutionType_ = new RealSolutionType(this) ;
-		}
-		else if (solutionType.compare("ArrayReal") == 0)
-			solutionType_ = new ArrayRealSolutionType(this) ;
-		else {
-			cout << "LZ09_F1::LZ09_F1: solution type " << solutionType << " invalid" << endl;
-			exit(-1) ;
-		}
-      
-		fx_ = new double[numberOfObjectives_] ;
-	  x_ = new double[numberOfVariables_];
+    upperLimit_ = snew double[numberOfVariables_];
+    if (upperLimit_ == nullptr)
+    {
+        std::cout << "LZ09_F1::LZ09_F1: Error reserving  memory for storing the "
+             << "variable lower limits" << std::endl;
+        exit(-1);
+    }
+
+    for (int i = 0; i < numberOfVariables_; i++)
+    {
+        lowerLimit_[i] = 0.0;
+        upperLimit_[i] = 1.0;
+    }
+
+    if (solutionType.compare("BinaryReal") == 0)
+        solutionType_ = snew BinaryRealSolutionType(this) ;
+    else if (solutionType.compare("Real") == 0)
+    {
+        solutionType_ = snew RealSolutionType(this) ;
+    }
+    else if (solutionType.compare("ArrayReal") == 0)
+        solutionType_ = snew ArrayRealSolutionType(this) ;
+    else
+    {
+        std::cout << "LZ09_F1::LZ09_F1: solution type " << solutionType << " invalid" << std::endl;
+        exit(-1) ;
+    }
+
+    fx_ = snew double[numberOfObjectives_] ;
+    x_ = snew double[numberOfVariables_];
 } // LZ09_F1::LZ09_F1
 
 /**
  * Destructor
  */
-LZ09_F1::~LZ09_F1 () {
-  delete [] lowerLimit_ ;
-  delete [] upperLimit_ ;
-  delete solutionType_ ;
-  delete LZ09_ ;
+LZ09_F1::~LZ09_F1 ()
+{
+    delete [] lowerLimit_ ;
+    delete [] upperLimit_ ;
+    delete solutionType_ ;
+    delete LZ09_ ;
 }
 
-void LZ09_F1::evaluate(Solution * solution) {
-	XReal * vars = new XReal(solution);
-  
-  vector<double> * x = new vector<double>(numberOfVariables_) ;
-  vector<double> * y = new vector<double>(numberOfObjectives_);
+void LZ09_F1::evaluate(Solution * solution)
+{
+    XReal * vars = snew XReal(solution);
 
-  for (int i = 0; i < numberOfVariables_; i++) {
-  	x->at(i) = vars->getValue(i);
-  } // for
-  for (int i = 0; i < numberOfObjectives_; i++) {
-    y->at(i) = 0.0 ;
-  } // for
+    VectorOfDouble * x = snew VectorOfDouble(numberOfVariables_) ;
+    VectorOfDouble * y = snew VectorOfDouble(numberOfObjectives_);
 
-  LZ09_->objective(x, y) ;
+    for (int i = 0; i < numberOfVariables_; i++)
+    {
+        x->at(i) = vars->getValue(i);
+    } // for
+    for (int i = 0; i < numberOfObjectives_; i++)
+    {
+        y->at(i) = 0.0 ;
+    } // for
 
-  for (int i = 0; i < numberOfObjectives_; i++)
-    solution->setObjective(i, y->at(i));
-  
-  delete x;
-  delete y;
-  delete vars;
+    LZ09_->objective(x, y) ;
+
+    for (int i = 0; i < numberOfObjectives_; i++)
+        solution->setObjective(i, y->at(i));
+
+    delete x;
+    delete y;
+    delete vars;
 }

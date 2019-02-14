@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -21,18 +22,19 @@
 #ifndef __EXPERIMENT_INDIVIDUAL__
 #define __EXPERIMENT_INDIVIDUAL__
 
-class ExperimentIndividual {
+class ExperimentIndividual
+{
 
 private:
-  int algorithmIndex_;
-  int problemIndex_;
-  int numRun_;
+    int algorithmIndex_;
+    int problemIndex_;
+    int numRun_;
 
 public:
-  ExperimentIndividual(int algorithmIndex, int problemIndex, int numRun);
-  int getAlgorithmIndex();
-  int getProblemIndex();
-  int getNumRun();
+    ExperimentIndividual(int algorithmIndex, int problemIndex, int numRun);
+    int getAlgorithmIndex();
+    int getProblemIndex();
+    int getNumRun();
 
 }; // ExperimentIndividual
 

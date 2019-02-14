@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -30,152 +31,163 @@
 /**
  * Constructor
  */
-RunExperiment::RunExperiment(ExperimentExecution * experiment, map<string, void *> map,
-    int id, int numberOfThreads, int numberOfProblems, int threadIndex,
-    mutex * mtx) {
+RunExperiment::RunExperiment(ExperimentExecution * experiment,MapOfStringFunct map,
+                             int id, int numberOfThreads, int numberOfProblems, int threadIndex,
+                             mutex * mtx)
+{
 
-  threadIndex_ = threadIndex;
+    threadIndex_ = threadIndex;
 
-  experiment_ = experiment;
-  id_ = id;
-  map_ = map;
-  numberOfThreads_ = numberOfThreads;
-  numberOfProblems_ = numberOfProblems;
+    experiment_ = experiment;
+    id_ = id;
+    map_ = map;
+    numberOfThreads_ = numberOfThreads;
+    numberOfProblems_ = numberOfProblems;
 
-  mutex_ = mtx;
+    mutex_ = mtx;
 
-  int partitions = numberOfProblems / numberOfThreads;
+    int partitions = numberOfProblems / numberOfThreads;
 
 } // RunExperiment
 
 
-void RunExperiment::run() {
+void RunExperiment::run()
+{
 
-  Algorithm * algorithm; // jMetal algorithm to be executed
+    Algorithm * algorithm; // jMetal algorithm to be executed
 
-  string experimentName = *(string*) map_["name"];
-  cout << experimentName << endl;
-  experimentBaseDirectory_ = *(string*) map_["experimentDirectory"];
-  cout << experimentBaseDirectory_ << endl;
-  algorithmNameList_ = *(vector<string>*) map_["algorithmNameList"];
-  problemList_ = *(vector<string>*) map_["problemList"];
-  independentRuns_ = *(int*) map_["independentRuns"];
-  cout << independentRuns_ << endl;
-  outputParetoFrontFile_ = *(string*) map_["outputParetoFrontFile"];
-  cout << outputParetoFrontFile_ << endl;
-  outputParetoSetFile_ = *(string*) map_["outputParetoSetFile"];
-  cout << outputParetoSetFile_ << endl;
+    std::string experimentName = *(string*) map_["name"];
+    std::cout << experimentName << std::endl;
+    experimentBaseDirectory_ = *(string*) map_["experimentDirectory"];
+    std::cout << experimentBaseDirectory_ << std::endl;
+    algorithmNameList_ = *(VectorOfString*) map_["algorithmNameList"];
+    problemList_ = *(VectorOfString*) map_["problemList"];
+    independentRuns_ = *(int*) map_["independentRuns"];
+    std::cout << independentRuns_ << std::endl;
+    outputParetoFrontFile_ = *(string*) map_["outputParetoFrontFile"];
+    std::cout << outputParetoFrontFile_ << std::endl;
+    outputParetoSetFile_ = *(string*) map_["outputParetoSetFile"];
+    std::cout << outputParetoSetFile_ << std::endl;
 
-  int numberOfAlgorithms = algorithmNameList_.size();
+    int numberOfAlgorithms = algorithmNameList_.size();
 
-  cout << "Experiment name: " <<  experimentName << endl;
-  cout << "Experiment directory: " << experimentBaseDirectory_ << endl;
-  cout << "Number of threads: " << numberOfThreads_ << endl;
+    std::cout << "Experiment name: " <<  experimentName << std::endl;
+    std::cout << "Experiment directory: " << experimentBaseDirectory_ << std::endl;
+    std::cout << "Number of threads: " << numberOfThreads_ << std::endl;
 
-  SolutionSet * resultFront = NULL;
+    SolutionSet * resultFront = nullptr;
 
-  int problemIndex = -1;
-  int algorithmIndex = -1;
-  int numRun = -1;
+    int problemIndex = -1;
+    int algorithmIndex = -1;
+    int numRun = -1;
 
-  bool end = false;
+    bool end = false;
 
-  while (!end) {
+    while (!end)
+    {
 
-    // WAIT MUTEX
+        // WAIT MUTEX
 //    int result = pthread_mutex_lock(mutex_) ;
 //    if (result != 0) {
-//      cerr << "RUNEXPERIMENT[" << threadIndex_ << "]: ERROR LOCKING THE MUTEX" << endl;
+//      cerr << "RUNEXPERIMENT[" << threadIndex_ << "]: ERROR LOCKING THE MUTEX" << std::endl;
 //      exit(-1) ;
 //    }
-    mutex_->lock();
+        mutex_->lock();
 
-    int experimentIndividualListIndex = experiment_->experimentIndividualListIndex_;
-    //  cout << "Thread[" << threadIndex_ << "] experimentIndividualListIndex = " <<
-    //      experimentIndividualListIndex << endl;
-    // cout << "Thread[" << threadIndex_ << "] experiment_->experimentIndividualList_.size() = " <<
-    //    experiment_->experimentIndividualList_.size() << endl;
-    if (experimentIndividualListIndex < experiment_->experimentIndividualList_.size()) {
-      ExperimentIndividual * expIndv
-          = experiment_->experimentIndividualList_[experimentIndividualListIndex];
-      problemIndex = expIndv->getProblemIndex();
-      algorithmIndex = expIndv->getAlgorithmIndex();
-      numRun = expIndv->getNumRun();
-      experiment_->experimentIndividualListIndex_ = experimentIndividualListIndex + 1;
-    } else {
-      // cout << "Thread[" << threadIndex_ << "] is finishing." << endl;
-      end = true;
-    }
+        int experimentIndividualListIndex = experiment_->experimentIndividualListIndex_;
+        //  std::cout << "Thread[" << threadIndex_ << "] experimentIndividualListIndex = " <<
+        //      experimentIndividualListIndex << std::endl;
+        // std::cout << "Thread[" << threadIndex_ << "] experiment_->experimentIndividualList_.size() = " <<
+        //    experiment_->experimentIndividualList_.size() << std::endl;
+        if (experimentIndividualListIndex < experiment_->experimentIndividualList_.size())
+        {
+            ExperimentIndividual * expIndv
+                = experiment_->experimentIndividualList_[experimentIndividualListIndex];
+            problemIndex = expIndv->getProblemIndex();
+            algorithmIndex = expIndv->getAlgorithmIndex();
+            numRun = expIndv->getNumRun();
+            experiment_->experimentIndividualListIndex_ = experimentIndividualListIndex + 1;
+        }
+        else
+        {
+            // std::cout << "Thread[" << threadIndex_ << "] is finishing." << std::endl;
+            end = true;
+        }
 
-    // SIGNAL MUTEX
+        // SIGNAL MUTEX
 //    result = pthread_mutex_unlock(mutex_) ;
 //    if (result != 0) {
-//      cerr << "RUNEXPERIMENT[" << threadIndex_ << "]: ERROR UNLOCKING THE MUTEX" << endl;
+//      cerr << "RUNEXPERIMENT[" << threadIndex_ << "]: ERROR UNLOCKING THE MUTEX" << std::endl;
 //      exit(-1) ;
 //    }
-    mutex_->unlock();
+        mutex_->unlock();
 
-    if (!end) {
+        if (!end)
+        {
 
-      Problem * problem; // The problem to solve
-      string problemName;
-      string pfFilePath = "";
+            Problem * problem; // The problem to solve
+            std::string problemName;
+            std::string pfFilePath = "";
 
-      // Get the problem from the list
-      problemName = problemList_[problemIndex] ;
+            // Get the problem from the list
+            problemName = problemList_[problemIndex] ;
 
-      char * problemName_ = (char *) problemName.c_str();
-      // TODO: Improve Settings
-      algorithm = experiment_->algorithmSettings(problemName, algorithmIndex,
-          experimentIndividualListIndex);
+            char * problemName_ = (char *) problemName.c_str();
+            // TODO: Improve Settings
+            algorithm = experiment_->algorithmSettings(problemName, algorithmIndex,
+                        experimentIndividualListIndex);
 
-      problem = algorithm->getProblem();
+            problem = algorithm->getProblem();
 
-      // Create output directories
-      string directory;
-      directory = experimentBaseDirectory_ + "/data/" + algorithmNameList_[algorithmIndex] + "/" +
-          problemList_[problemIndex];
-      if (FileUtils::existsPath(directory.c_str()) != 1) {
-        FileUtils::createDirectory(directory);
-        cout << "Creating directory: " << directory << endl;
-      }
+            // Create output directories
+            std::string directory;
+            directory = experimentBaseDirectory_ + "/data/" + algorithmNameList_[algorithmIndex] + "/" +
+                        problemList_[problemIndex];
+            if (FileUtils::existsPath(directory.c_str()) != 1)
+            {
+                FileUtils::createDirectory(directory);
+                std::cout << "Creating directory: " << directory << std::endl;
+            }
 
-      // Run the algorithm
-      cout << "Thread[" << threadIndex_ << "]: Start of algorithm: " <<
-          algorithmNameList_[algorithmIndex] << ", problem: " <<
-          problemList_[problemIndex] << ", run: " << numRun << endl;
-      resultFront= algorithm->execute();
+            // Run the algorithm
+            std::cout << "Thread[" << threadIndex_ << "]: Start of algorithm: " <<
+                 algorithmNameList_[algorithmIndex] << ", problem: " <<
+                 problemList_[problemIndex] << ", run: " << numRun << std::endl;
+            resultFront= algorithm->execute();
 
-      // Put the results in the output directory
-      stringstream outputParetoFrontFilePath;
-      stringstream outputParetoSetFilePath;
-      if (experiment_->isSingleObjective_) {
-        outputParetoFrontFilePath << directory << "/" << outputParetoFrontFile_;
-        outputParetoSetFilePath << directory << "/" << outputParetoSetFile_;
-      } else {
-        outputParetoFrontFilePath << directory << "/" << outputParetoFrontFile_
-            << "." << numRun;
-        outputParetoSetFilePath << directory << "/" << outputParetoSetFile_
-            << "." << numRun;
-      }
+            // Put the results in the output directory
+            stringstream outputParetoFrontFilePath;
+            stringstream outputParetoSetFilePath;
+            if (experiment_->isSingleObjective_)
+            {
+                outputParetoFrontFilePath << directory << "/" << outputParetoFrontFile_;
+                outputParetoSetFilePath << directory << "/" << outputParetoSetFile_;
+            }
+            else
+            {
+                outputParetoFrontFilePath << directory << "/" << outputParetoFrontFile_
+                                          << "." << numRun;
+                outputParetoSetFilePath << directory << "/" << outputParetoSetFile_
+                                        << "." << numRun;
+            }
 
-      resultFront->printObjectivesToFile(outputParetoFrontFilePath.str(),
-          experiment_->isSingleObjective_);
-      resultFront->printVariablesToFile(outputParetoSetFilePath.str(),
-          experiment_->isSingleObjective_);
+            resultFront->printObjectivesToFile(outputParetoFrontFilePath.str(),
+                                               experiment_->isSingleObjective_);
+            resultFront->printVariablesToFile(outputParetoSetFilePath.str(),
+                                              experiment_->isSingleObjective_);
 
-      cout << "Thread[" << threadIndex_ << "]: End of algorithm: " <<
-          algorithmNameList_[algorithmIndex] << ", problem: " <<
-          problemList_[problemIndex] << ", run: " << numRun << endl;
+            std::cout << "Thread[" << threadIndex_ << "]: End of algorithm: " <<
+                 algorithmNameList_[algorithmIndex] << ", problem: " <<
+                 problemList_[problemIndex] << ", run: " << numRun << std::endl;
 
-      delete resultFront;
-      delete experiment_->algorithmSettingsList_[experimentIndividualListIndex];
+            delete resultFront;
+            delete experiment_->algorithmSettingsList_[experimentIndividualListIndex];
 
-    } // if
+        } // if
 
-  } // while
+    } // while
 
-  cout << "Thread[" << threadIndex_ << "] has finished." << endl;
+    std::cout << "Thread[" << threadIndex_ << "] has finished." << std::endl;
 
 } // run
 

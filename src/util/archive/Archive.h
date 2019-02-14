@@ -26,10 +26,11 @@
 /**
  * This class represents the super class for archive objects.
  */
-class Archive : public SolutionSet {
+class Archive : public SolutionSet
+{
 
 public:
-  Archive(int size);
+    Archive(int size);
 
 };
 

@@ -29,16 +29,17 @@
 #include <XReal.h>
 #include <Solution.h>
 
-class DTLZ1 : public Problem {
+class DTLZ1 : public Problem
+{
 public:
-	DTLZ1(string solutionType, int numberOfVariables = 7, int numberOfObjectives = 3);
-	void evaluate(Solution *solution);
+    DTLZ1(std::string solutionType, int numberOfVariables = 7, int numberOfObjectives = 3);
+    void evaluate(Solution *solution);
 
-	virtual ~DTLZ1();
+    virtual ~DTLZ1();
 private:
-	double * fx_ ;
-  double * x_  ;
-  static const double PI;
+    double * fx_ ;
+    double * x_  ;
+    static const double PI;
 };
 
 #endif /* __DTLZ1_H__ */

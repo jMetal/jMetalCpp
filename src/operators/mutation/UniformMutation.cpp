@@ -27,20 +27,23 @@
 /**
  * Valid solution types to apply this operator.
  */
-const string UniformMutation::VALID_TYPES[] = {"Real", "ArrayReal"};
+const std::string UniformMutation::VALID_TYPES[] = {"Real", "ArrayReal"};
 
 /**
  * Constructor
  * Creates a new uniform mutation operator instance
  */
-UniformMutation::UniformMutation(map<string, void *> parameters)
-: Mutation(parameters) {
-  if (parameters["probability"] != NULL) {
-    mutationProbability_ = *(double *) parameters["probability"];
-  }
-  if (parameters["perturbation"] != NULL) {
-    perturbation_ = *(double *) parameters["perturbation"];
-  }
+UniformMutation::UniformMutation(MapOfStringFunct parameters)
+    : Mutation(parameters)
+{
+    if (parameters["probability"] != nullptr)
+    {
+        mutationProbability_ = *(double *) parameters["probability"];
+    }
+    if (parameters["perturbation"] != nullptr)
+    {
+        perturbation_ = *(double *) parameters["perturbation"];
+    }
 } // UniformMutation
 
 /**
@@ -48,28 +51,49 @@ UniformMutation::UniformMutation(map<string, void *> parameters)
  * @param probability Mutation probability
  * @param solution The solution to mutate
  */
-void UniformMutation::doMutation(double probability, Solution *solution) {
+void UniformMutation::doMutation(double probability, Solution *solution)
+{
 
-  XReal * x = new XReal(solution);
+    XReal * x = new XReal(solution);
 
-  for (int var=0; var < solution->getNumberOfVariables(); var++) {
-    if (PseudoRandom::randDouble() < probability) {
-      double rand = PseudoRandom::randDouble();
-      double tmp = (rand - 0.5)*perturbation_;
+    for (int var=0; var < solution->getNumberOfVariables(); var++)
+    {
+		double minMaxRange = ((x->getUpperBound(var) - x->getLowerBound(var)) / 2.0);
+        if (PseudoRandom::randDouble() < probability)
+        {
+            double rand = PseudoRandom::randDouble();
+            double tmp = (rand - 0.5)*perturbation_;
 
-      tmp += x->getValue(var);
+            tmp += x->getValue(var);
 
-      if (tmp < x->getLowerBound(var)) {
-        tmp = x->getLowerBound(var);
-      } else if (tmp > x->getUpperBound(var)) {
-        tmp = x->getUpperBound(var);
-      }
+            if (tmp < x->getLowerBound(var))
+            {
+                //tmp = x->getLowerBound(var);
+				tmp = x->getLowerBound(var) + minMaxRange;
+				if (perturbation_ > 0.0
+					&& perturbation_ < 1.0)
+				{
+					double prand = PseudoRandom::randDouble() * perturbation_;
+					tmp = x->getLowerBound(var) + minMaxRange * prand;
+				}
 
-      x->setValue(var, tmp) ;
-    } // if
-  } // for
+            }
+            else if (tmp > x->getUpperBound(var))
+            {
+                //tmp = x->getUpperBound(var);
+				if (perturbation_ > 0.0
+					&& perturbation_ < 1.0)
+				{
+					double prand = PseudoRandom::randDouble() * perturbation_;
+					tmp = x->getUpperBound(var) - minMaxRange * prand;
+				}
+            }
 
-  delete x;
+            x->setValue(var, tmp) ;
+        } // if
+    } // for
+
+    delete x;
 
 } // doMutation
 
@@ -78,9 +102,10 @@ void UniformMutation::doMutation(double probability, Solution *solution) {
  * @param object An object containing a solution
  * @return An object containing the mutated solution
  */
-void *UniformMutation::execute(void *object) {
-  Solution *solution = (Solution *)object;
-  // TODO: VALID_TYPES?
-  doMutation(mutationProbability_,solution);
-  return solution;
+void *UniformMutation::execute(void *object)
+{
+    Solution *solution = (Solution *)object;
+    // TODO: VALID_TYPES?
+    doMutation(mutationProbability_,solution);
+    return solution;
 } // execute

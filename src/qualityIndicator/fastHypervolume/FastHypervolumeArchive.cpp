@@ -33,28 +33,31 @@
  * @param numberOfObjectives The number of objectives.
  */
 FastHypervolumeArchive::FastHypervolumeArchive(int maxSize, int numberOfObjectives)
-: Archive(maxSize) {
-  this->maxSize         = maxSize;
-  this->objectives      = numberOfObjectives;
-  this->dominance       = new DominanceComparator();
-  this->equals          = new EqualSolutions();
-  this->referencePoint  = new Solution(objectives) ;
-  for (int i = 0; i < objectives; i++) {
-    referencePoint->setObjective(i, std::numeric_limits<double>::max());
-  }
-  crowdingDistance_ = new CrowdingComparator();
+    : Archive(maxSize)
+{
+    this->maxSize         = maxSize;
+    this->objectives      = numberOfObjectives;
+    this->dominance       = snew DominanceComparator();
+    this->equals          = snew EqualSolutions();
+    this->referencePoint  = snew Solution(objectives) ;
+    for (int i = 0; i < objectives; i++)
+    {
+        referencePoint->setObjective(i, std::numeric_limits<double>::max());
+    }
+    crowdingDistance_ = snew CrowdingComparator();
 } // FastHypervolumeArchive
 
 
 /**
  * Destructor.
  */
-FastHypervolumeArchive::~FastHypervolumeArchive() {
-  cout << "DELETING FASTHYPERVOLUMEARCHIVE" << endl;
-  delete dominance;
-  delete equals;
-  delete referencePoint;
-  delete crowdingDistance_;
+FastHypervolumeArchive::~FastHypervolumeArchive()
+{
+    std::cout << "DELETING FASTHYPERVOLUMEARCHIVE" << std::endl;
+    delete dominance;
+    delete equals;
+    delete referencePoint;
+    delete crowdingDistance_;
 } // ~FastHypervolumeArchive
 
 
@@ -69,53 +72,67 @@ FastHypervolumeArchive::~FastHypervolumeArchive() {
  * @return true if the <code>Solution</code> has been inserted, false
  * otherwise.
  */
-bool FastHypervolumeArchive::add(Solution *solution){
-  int flag = 0;
-  int i = 0;
-  Solution *aux; //Store an solution temporally
+bool FastHypervolumeArchive::add(Solution *solution)
+{
+    int flag = 0;
+    int i = 0;
+    Solution *aux; //Store an solution temporally
 
-  while (i < solutionsList_.size()){
-    aux = solutionsList_[i];
+    while (i < solutionsList_.size())
+    {
+        aux = solutionsList_[i];
 
-    flag = dominance->compare(solution,aux);
-    if (flag == 1) {               // The solution to add is dominated
-      return false;                // Discard the new solution
-    } else if (flag == -1) {       // A solution in the archive is dominated
-      // Remove it from the population
-      delete aux;
-      solutionsList_.erase(solutionsList_.begin() + i);
-    } else {
-      if (equals->compare(aux,solution)==0) {
-        // There is an equal solution in the population
-        return false; // Discard the new solution
-      }  // if
-      i++;
+        flag = dominance->compare(solution,aux);
+        if (flag == 1)                 // The solution to add is dominated
+        {
+            return false;                // Discard the new solution
+        }
+        else if (flag == -1)           // A solution in the archive is dominated
+        {
+            // Remove it from the population
+            delete aux;
+            solutionsList_.erase(solutionsList_.begin() + i);
+        }
+        else
+        {
+            if (equals->compare(aux,solution)==0)
+            {
+                // There is an equal solution in the population
+                return false; // Discard the new solution
+            }  // if
+            i++;
+        }
     }
-  }
-  // Insert the solution into the archive
-  bool res = true;
-  solutionsList_.push_back(solution);
-  if (size() > maxSize) { // The archive is full
-    computeHVContribution();
-    int indexWorst_ = indexWorst(crowdingDistance_);
-    if (solution == solutionsList_[indexWorst_]) {
-      res = false;
-    } else {
-      delete solutionsList_[indexWorst_];
+    // Insert the solution into the archive
+    bool res = true;
+    solutionsList_.push_back(solution);
+    if (size() > maxSize)   // The archive is full
+    {
+        computeHVContribution();
+        int indexWorst_ = indexWorst(crowdingDistance_);
+        if (solution == solutionsList_[indexWorst_])
+        {
+            res = false;
+        }
+        else
+        {
+            delete solutionsList_[indexWorst_];
+        }
+        remove(indexWorst_);
     }
-    remove(indexWorst_);
-  }
-  return res;
+    return res;
 } // add
 
 
 /**
  * This method forces to compute the contribution of each solution
  */
-void FastHypervolumeArchive::computeHVContribution() {
-  if (size() > 2) { // The contribution can be updated
-    FastHypervolume *fastHV = new FastHypervolume();
-    fastHV->computeHVContributions(this);
-    delete fastHV;
-  }
+void FastHypervolumeArchive::computeHVContribution()
+{
+    if (size() > 2)   // The contribution can be updated
+    {
+        FastHypervolume *fastHV = snew FastHypervolume();
+        fastHV->computeHVContributions(this);
+        delete fastHV;
+    }
 } // computeHVContribution

@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -30,31 +31,31 @@
  * Class implementing a decision variable representing an array of real values.
  * The real values of the array have their own bounds.
  */
-class ArrayReal : public Variable {
+class ArrayReal : public Variable
+{
+protected:
+	JMetal::VectorOfDouble array_;
+public:    
+    Problem * problem_ = nullptr;
+    int size_;
 
-public:
+    ArrayReal();
+    ArrayReal(int size, Problem * problem);
+    ArrayReal(ArrayReal * arrayReal);
+    ~ArrayReal();
 
-  double * array_;
-  Problem * problem_;
-  int size_;
+    Variable * deepCopy();
+    int getLength();
+    double getValue(int index);
+    void setValue(int index, double value);
+    double getLowerBound(int index);
+    double getUpperBound(int index);
+    std::string toString();
 
-  ArrayReal();
-  ArrayReal(int size, Problem * problem);
-  ArrayReal(ArrayReal * arrayReal);
-  ~ArrayReal();
-
-  Variable * deepCopy();
-  int getLength();
-  double getValue(int index);
-  void setValue(int index, double value);
-  double getLowerBound(int index);
-  double getUpperBound(int index);
-  string toString();
-
-  void setValue(double value);
-  double getValue();
-  double getLowerBound();
-  double getUpperBound();
+    void setValue(double value);
+    double getValue();
+    double getLowerBound();
+    double getUpperBound();
 };
 
 #endif

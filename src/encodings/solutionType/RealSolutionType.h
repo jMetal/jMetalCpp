@@ -29,11 +29,12 @@
 /**
  * This class is aimed at defining a Type encoding a Real solution
 **/
-class RealSolutionType : public SolutionType {
+class RealSolutionType : public SolutionType
+{
 
 public:
-  RealSolutionType(Problem *problem);
-  Variable **createVariables();
+    RealSolutionType(Problem *problem);
+    Variable **createVariables();
 
 };
 

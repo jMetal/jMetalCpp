@@ -29,14 +29,15 @@
  * This class implements a selection operator used for selecting the worst
  * solution in a SolutionSet according to a given comparator
  */
-class WorstSolutionSelection : public Selection {
+class WorstSolutionSelection : public Selection
+{
 
 private:
-  Comparator * comparator_;
+    Comparator * comparator_;
 
 public:
-  WorstSolutionSelection(map<string, void *> parameters);
-  void *execute(void *);
+    WorstSolutionSelection(map<string, void *> parameters);
+    void *execute(void *);
 
 };
 

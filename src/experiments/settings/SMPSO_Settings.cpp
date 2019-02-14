@@ -2,6 +2,7 @@
 //
 //  Author:
 //       Esteban López-Camacho <esteban@lcc.uma.es>
+//       Sérgio Vieira <sergiosvieira@gmail.com>
 //
 //  Copyright (c) 2011 Antonio J. Nebro, Juan J. Durillo
 //
@@ -25,34 +26,37 @@
 /**
  * Default constructor
  */
-SMPSO_Settings::SMPSO_Settings () : Settings() {
+SMPSO_Settings::SMPSO_Settings () : Settings()
+{
 } // SMPSO_Settings
 
 
 /**
  * Destructor
  */
-SMPSO_Settings::~SMPSO_Settings () {
-  delete algorithm ;
-  delete mutation  ; // Mutation operator
+SMPSO_Settings::~SMPSO_Settings ()
+{
+    delete algorithm ;
+    delete mutation  ; // Mutation operator
 } // ~SMPSO_Settings
 
 
 /**
  * Constructor
  */
-SMPSO_Settings::SMPSO_Settings(string problemName) {
+SMPSO_Settings::SMPSO_Settings(std::string problemName)
+{
 
-	problemName_ = problemName ;
+    problemName_ = problemName ;
 
-  problem_ = ProblemFactory::getProblem((char *) problemName_.c_str());
+    problem_ = ProblemFactory::getProblem((char *) problemName_.c_str());
 
-  // Default settings
-  swarmSize_                 = 100 ;
-  maxIterations_             = 250 ;
-  archiveSize_               = 100 ;
-  mutationDistributionIndex_ = 20.0 ;
-  mutationProbability_       = 1.0/problem_->getNumberOfVariables() ;
+    // Default settings
+    swarmSize_                 = 100 ;
+    maxIterations_             = 250 ;
+    archiveSize_               = 100 ;
+    mutationDistributionIndex_ = 20.0 ;
+    mutationProbability_       = 1.0/problem_->getNumberOfVariables() ;
 
 } // SMPSO_Settings
 
@@ -60,27 +64,28 @@ SMPSO_Settings::SMPSO_Settings(string problemName) {
 /**
  * Configure method
  */
-Algorithm * SMPSO_Settings::configure() {
+Algorithm * SMPSO_Settings::configure()
+{
 
-	algorithm = new SMPSO(problem_);
-  algorithm->setInputParameter("swarmSize", &swarmSize_);
-  algorithm->setInputParameter("maxIterations", &maxIterations_);
-  algorithm->setInputParameter("archiveSize", &archiveSize_);
+    algorithm = new SMPSO(problem_);
+    algorithm->setInputParameter("swarmSize", &swarmSize_);
+    algorithm->setInputParameter("maxIterations", &maxIterations_);
+    algorithm->setInputParameter("archiveSize", &archiveSize_);
 
-	map<string, void *> parameters;
+   MapOfStringFunct parameters;
 
-  double mutationProbability = mutationProbability_;
-  double mutationDistributionIndex = mutationDistributionIndex_;
-  parameters["probability"] = &mutationProbability;
-  parameters["distributionIndex"] = &mutationDistributionIndex;
-  mutation = new PolynomialMutation(parameters);
+    double mutationProbability = mutationProbability_;
+    double mutationDistributionIndex = mutationDistributionIndex_;
+    parameters["probability"] = &mutationProbability;
+    parameters["distributionIndex"] = &mutationDistributionIndex;
+    mutation = new PolynomialMutation(parameters);
 
-	// Add the operators to the algorithm
-	algorithm->addOperator("mutation",mutation);
+    // Add the operators to the algorithm
+    algorithm->addOperator("mutation",mutation);
 
-	cout << "SMPSO algorithm initialized." << endl;
+    std::cout << "SMPSO algorithm initialized." << std::endl;
 
-	return algorithm ;
+    return algorithm ;
 
 } // configure
 

@@ -25,31 +25,32 @@
 #include <Benchmark.h>
 #include <TestFunc.h>
 
-class F12Schwefel : public TestFunc {
+class F12Schwefel : public TestFunc
+{
 
 private:
 
-  // Fixed (class) parameters
-  static const string FUNCTION_NAME;
-  static const string DEFAULT_FILE_DATA;
+    // Fixed (class) parameters
+    static const std::string FUNCTION_NAME;
+    static const std::string DEFAULT_FILE_DATA;
 
-  // Shifted global optimum
-  double * m_o;
-  double ** m_a;
-  double ** m_b;
+    // Shifted global optimum
+    double * m_o;
+    double ** m_a;
+    double ** m_b;
 
-  // In order to avoid excessive memory allocation,
-  // a fixed memory buffer is allocated for each function object.
-  double * m_A;
-  double * m_B;
+    // In order to avoid excessive memory allocation,
+    // a fixed memory buffer is allocated for each function object.
+    double * m_A;
+    double * m_B;
 
 public:
 
-  F12Schwefel(int dimension, double bias);
-  F12Schwefel(int dimension, double bias, string file_data);
-  ~F12Schwefel();
+    F12Schwefel(int dimension, double bias);
+    F12Schwefel(int dimension, double bias, std::string file_data);
+    ~F12Schwefel();
 
-  double f (double * x);
+    double f (double * x);
 
 }; // F12Schwefel
 
