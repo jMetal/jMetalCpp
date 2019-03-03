@@ -29,6 +29,8 @@
 #include <ArrayRealSolutionType.h>
 #include <ArrayReal.h>
 #include <IntSolutionType.h>
+#include <IntNoneRepeatedSolutionType.h>
+
 /**
  * This class allows to apply a SBX crossover operator using two parent
  * solutions.
