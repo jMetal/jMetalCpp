@@ -49,7 +49,7 @@ XReal::XReal(Solution * solution) {
  */
 double XReal::getValue(int index) {
   if ((typeid(*type_) == typeid(RealSolutionType)) ||
-      (typeid(*type_) == typeid(BinaryRealSolutionType))){
+      (typeid(*type_) == typeid(BinaryRealSolutionType)) ||  (typeid(*type_) == typeid(IntSolutionType))  ||  (typeid(*type_) == typeid(IntNoneRepeatedSolutionType)) ){
     return solution_->getDecisionVariables()[index]->getValue();
   }
   else if (typeid(*type_) == typeid(ArrayRealSolutionType)) {
@@ -72,7 +72,7 @@ double XReal::getValue(int index) {
  */
 void XReal::setValue(int index, double value) {
   if ((typeid(*type_) == typeid(RealSolutionType)) ||
-      (typeid(*type_) == typeid(BinaryRealSolutionType))){
+      (typeid(*type_) == typeid(BinaryRealSolutionType)) ||  (typeid(*type_) == typeid(IntSolutionType)) ||  (typeid(*type_) == typeid(IntNoneRepeatedSolutionType)) ){
     solution_->getDecisionVariables()[index]->setValue(value);
   }
   else if (typeid(*type_) == typeid(ArrayRealSolutionType)) {
@@ -94,7 +94,7 @@ void XReal::setValue(int index, double value) {
  */
 double XReal::getLowerBound(int index) {
   if ((typeid(*type_) == typeid(RealSolutionType)) ||
-      (typeid(*type_) == typeid(BinaryRealSolutionType)))
+      (typeid(*type_) == typeid(BinaryRealSolutionType)) ||  (typeid(*type_) == typeid(IntSolutionType)) ||  (typeid(*type_) == typeid(IntNoneRepeatedSolutionType)))
     return solution_->getDecisionVariables()[index]->getLowerBound();
   else if (typeid(*type_) == typeid(ArrayRealSolutionType))
     return ((ArrayReal*)(solution_->getDecisionVariables()[0]))->getLowerBound(index);
@@ -115,7 +115,7 @@ double XReal::getLowerBound(int index) {
  */
 double XReal::getUpperBound(int index) {
   if ((typeid(*type_) == typeid(RealSolutionType)) ||
-      (typeid(*type_) == typeid(BinaryRealSolutionType)))
+      (typeid(*type_) == typeid(BinaryRealSolutionType)) ||  (typeid(*type_) == typeid(IntSolutionType)) ||  (typeid(*type_) == typeid(IntNoneRepeatedSolutionType)))
     return solution_->getDecisionVariables()[index]->getUpperBound();
   else if (typeid(*type_) == typeid(ArrayRealSolutionType))
     return ((ArrayReal*)(solution_->getDecisionVariables()[0]))->getUpperBound(index);
@@ -134,7 +134,7 @@ double XReal::getUpperBound(int index) {
  */
 int XReal::getNumberOfDecisionVariables() {
   if ((typeid(*type_) == typeid(RealSolutionType)) ||
-      (typeid(*type_) == typeid(BinaryRealSolutionType)))
+      (typeid(*type_) == typeid(BinaryRealSolutionType)) ||  (typeid(*type_) == typeid(IntSolutionType)) ||  (typeid(*type_) == typeid(IntNoneRepeatedSolutionType)))
     //return solution_->getDecisionVariables().length ;
     return solution_->getNumberOfVariables();
   else if (typeid(*type_) == typeid(ArrayRealSolutionType))
@@ -154,7 +154,7 @@ int XReal::getNumberOfDecisionVariables() {
  */
 int XReal::size() {
   if ((typeid(*type_) == typeid(RealSolutionType)) ||
-      (typeid(*type_) == typeid(BinaryRealSolutionType)))
+      (typeid(*type_) == typeid(BinaryRealSolutionType)) ||  (typeid(*type_) == typeid(IntSolutionType)) ||  (typeid(*type_) == typeid(IntNoneRepeatedSolutionType)))
     return solution_->getNumberOfVariables();
   else if (typeid(*type_) == typeid(ArrayRealSolutionType))
     return ((ArrayReal*)(solution_->getDecisionVariables()[0]))->getLength();

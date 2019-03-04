@@ -1,7 +1,6 @@
-//  XReal.h
+//  IntSolutionType.h
 //
 //  Author:
-//       Antonio J. Nebro <antonio@lcc.uma.es>
 //       Juan J. Durillo <durillo@lcc.uma.es>
 //       Esteban López-Camacho <esteban@lcc.uma.es>
 //
@@ -20,38 +19,24 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef XREAL_H_
-#define XREAL_H_
 
-#include <Solution.h>
-#include <BinaryRealSolutionType.h>
-#include <RealSolutionType.h>
-#include <ArrayRealSolutionType.h>
-#include <ArrayReal.h>
-#include <IntSolutionType.h>
-#include <IntNoneRepeatedSolutionType.h>
+#ifndef __INT_NONE_REPEATED_SOLUTION_TYPE__
+#define __INT_NONE_REPEATED_SOLUTION_TYPE__
+
+
+#include <JMetalInc/SolutionType.h>
+#include <JMetalInc/Int.h>
+#include <string>
 
 /**
- * This class allows to apply a SBX crossover operator using two parent
- * solutions.
+ * This class is aimed at defining a Type encoding a Int solution
 **/
-class XReal {
+class IntNoneRepeatedSolutionType : public SolutionType {
 
 public:
-  XReal();
-  XReal(Solution * solution);
-  double getValue(int index);
-  void setValue(int index, double value);
-  double getLowerBound(int index);
-  double getUpperBound(int index);
-  int getNumberOfDecisionVariables();
-  int size();
-  Solution * getSolution();
-
-private:
-  Solution * solution_;
-  SolutionType * type_;
+	IntNoneRepeatedSolutionType(Problem *problem);
+    Variable **createVariables();
 
 };
 
-#endif /* XREAL_H_ */
+#endif

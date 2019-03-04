@@ -1,4 +1,4 @@
-//  Real.h
+//  Int.h
 //
 //  Author:
 //       Juan J. Durillo <durillo@lcc.uma.es>
@@ -27,7 +27,7 @@
 #include <sstream>
 
 /**
- * This class implements a Real value decision variable
+ * This class implements a Int value decision variable
  */
 class Int : public Variable {
 

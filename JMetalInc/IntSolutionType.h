@@ -1,4 +1,4 @@
-//  RealSolutionType.h
+//  IntSolutionType.h
 //
 //  Author:
 //       Juan J. Durillo <durillo@lcc.uma.es>
@@ -19,21 +19,21 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef __Int_SOLUTION_TYPE__
-#define __Int_SOLUTION_TYPE__
+#ifndef __INT_SOLUTION_TYPE__
+#define __INT_SOLUTION_TYPE__
 
 #include <JMetalInc/SolutionType.h>
 #include <JMetalInc/Int.h>
 #include <string>
 
 /**
- * This class is aimed at defining a Type encoding a Real solution
+ * This class is aimed at defining a Type encoding a Int solution
 **/
 class IntSolutionType : public SolutionType {
 
 public:
 	IntSolutionType(Problem *problem);
-  Variable **createVariables();
+    Variable **createVariables();
 
 };
 
