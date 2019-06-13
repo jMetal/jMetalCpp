@@ -18,7 +18,7 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "problems/SIGA/BarrosF1F5.h"
+#include "BarrosF1F5.h"
 
 /**
  * Class constructor

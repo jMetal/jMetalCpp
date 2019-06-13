@@ -18,7 +18,7 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "problems/SIGA/BarrosF5F3.h"
+#include "BarrosF5F3.h"
 
 /**
  * Class constructor
@@ -102,8 +102,8 @@ void BarrosF5F3::evaluate(Solution *solution)
 	double value4 = -(value2 * sin(2.0 * PI * q * x[0]));
 	double value5 = value3 - value4;
 	fx[0] = value1 * value5;
-	double a = std::exp(-pow((x[1] - 0.2) / 0.004, 2.0));
-	double b = std::exp(-pow((x[1] - 0.6) / 0.4, 2.0));
+	double a = exp(-pow((x[1] - 0.2) / 0.004, 2.0));
+	double b = exp(-pow((x[1] - 0.6) / 0.4, 2.0));
 	fx[1] = (2.0 - a - 0.8 * b) / x[0];
 	solution->setObjective(0, fx[0]);
 	solution->setObjective(1, fx[1]);

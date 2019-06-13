@@ -1,5 +1,5 @@
 //#include "BarrosF1_F3.h"
-#include "problems/SIGA/BarrosF1F3.h"
+#include "BarrosF1F3.h"
 
 BarrosF1F3::BarrosF1F3(string solutionType, int numberOfVariables, int numberOfObjectives)
 {
@@ -51,8 +51,8 @@ void BarrosF1F3::evaluate(Solution * solution)
 	double x2 = vars->getValue(1);
 	delete vars;
 	double f1 = x1;
-	double a = std::exp(-pow ( (x2 - 0.2) / 0.004, 2.0));
-	double b = std::exp(-pow ( (x2 - 0.6) / 0.4, 2.0));
+	double a = exp(-pow ( (x2 - 0.2) / 0.004, 2.0));
+	double b = exp(-pow ( (x2 - 0.6) / 0.4, 2.0));
 	double f3 = (2.0 - a - 0.8 * b) / x1;
 	solution->setObjective(0, f1);
 	solution->setObjective(1, f3);
