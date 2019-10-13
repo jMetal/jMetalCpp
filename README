@@ -25,6 +25,10 @@ TABLE OF CONTENTS
 0. Updates
 =======================================================================================
 
+Version 1.8:
+  - Added new algorithm: GWO.
+  - Enhance input parameter with default value.
+
 Version 1.7:
   - Added a new algorithm: MOCH
   Expect new algorithms soon...
@@ -114,6 +118,7 @@ Additionally, we include single-objective variants of these techniques:
   PSO (Standard 2011) (NEW)                   StandardPSO2011_main
   ssGA (Steady-state Genetic Algorithm)       ssGA_main
   CMA-ES                                      CMAES_main
+  GWO (Grey Wolf Optimizer)                   GWO_main
 	
 To execute one metaheuristic just use its associated command. For example, to execute
 GDE3 simply type the following command:
