@@ -46,6 +46,7 @@ public:
   Operator * getOperator(string name);
   void setInputParameter(string name, void *value);
   void * getInputParameter(string name);
+  void * getInputParameter(string name, void *defaultValue);
   void setOutputParameter(string name, void *value);
   void * getOutputParameter(string name);
   Problem * getProblem();
