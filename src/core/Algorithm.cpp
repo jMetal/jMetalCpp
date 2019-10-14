@@ -90,6 +90,23 @@ void * Algorithm::getInputParameter(string name) {
   return inputParameters_[name];
 }
 
+/**
+ * Gets an input parameter through its name,
+ * and assign a default value if not exists. Typically,
+ * the method is invoked by an object representing an algorithm
+ * @param name The parameter name
+ * @param defaultValue Pointer to default parameter value
+ * @return Object representing the parameter or null if the parameter doesn't
+ * exist or the name is wrong
+**/
+void * Algorithm::getInputParameter(string name, void *defaultValue) {
+	if(inputParameters_.find(name) == inputParameters_.end()) {
+		// not found, use the defualt
+		inputParameters_[name] = defaultValue;
+	}
+	// found
+	return inputParameters_[name];
+}
 
 /**
  * Sets an output parameter that can be obtained by invoking
