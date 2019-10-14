@@ -379,6 +379,7 @@ SolutionSet * SMPSO::execute() {
     distance_->crowdingDistanceAssignment(leaders_,
       problem_->getNumberOfObjectives());
     iteration_++;
+
   }
 
   // Build the solution set result

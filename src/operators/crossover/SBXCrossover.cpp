@@ -91,6 +91,8 @@ Solution ** SBXCrossover::doCrossover(double probability, Solution *parent1, Sol
   XReal * offs1 = new XReal(offSpring[0]) ;
   XReal * offs2 = new XReal(offSpring[1]) ;
   
+
+
   int numberOfVariables = x1->getNumberOfDecisionVariables();
    
   if (PseudoRandom::randDouble() <= probability){
@@ -114,6 +116,7 @@ Solution ** SBXCrossover::doCrossover(double probability, Solution *parent1, Sol
             
           //cout << yL << " " << yu << endl;
           rand = PseudoRandom::randDouble();
+
           
           beta = 1.0 + (2.0*(y1-yL)/(y2-y1));
           alpha = 2.0 - pow(beta,-(distributionIndex_+1.0));
