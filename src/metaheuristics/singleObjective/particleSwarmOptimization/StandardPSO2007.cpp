@@ -274,6 +274,7 @@ SolutionSet * StandardPSO2007::execute() {
     if (bestCurrentFitness < bestFoundFitness) {
       bestFoundFitness = bestCurrentFitness ;
     }
+    if(problem_->evaluateStopConstraints(swarm_->best(comparator_))==true) break;
   }
 
   // Return a population with the best individual
