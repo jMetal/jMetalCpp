@@ -25,7 +25,9 @@
 #include <Problem.h>
 #include <math.h>
 #include <RealSolutionType.h>
+#include <IntSolutionType.h>
 #include <Solution.h>
+#include <IntNoneRepeatedSolutionType.h>
 
 /**
   * @class Sphere

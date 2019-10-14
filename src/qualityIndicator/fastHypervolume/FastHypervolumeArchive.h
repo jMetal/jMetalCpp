@@ -21,13 +21,13 @@
 #ifndef __FAST_HYPERVOLUME_ARCHIVE__
 #define __FAST_HYPERVOLUME_ARCHIVE__
 
-#include <FastHypervolumeArchive.h>
+#include "FastHypervolumeArchive.h"
 
-#include <Archive.h>
-#include <CrowdingComparator.h>
-#include <DominanceComparator.h>
-#include <EqualSolutions.h>
-#include <FastHypervolume.h>
+#include "Archive.h"
+#include "CrowdingComparator.h"
+#include "DominanceComparator.h"
+#include "EqualSolutions.h"
+#include "FastHypervolume.h"
 
 /**
  * This class implements a bounded archive based on the hypervolume quality indicator

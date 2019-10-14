@@ -22,11 +22,11 @@
 #ifndef __NSGAII_SETTINGS__
 #define __NSGAII_SETTINGS__
 
-#include <Settings.h>
-#include <NSGAII.h>
-#include <SBXCrossover.h>
-#include <PolynomialMutation.h>
-#include <BinaryTournament2.h>
+#include "Settings.h"
+#include "NSGAII.h"
+#include "SBXCrossover.h"
+#include "PolynomialMutation.h"
+#include "BinaryTournament2.h"
 
 class NSGAII_Settings : public Settings{
 private:

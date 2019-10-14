@@ -21,15 +21,15 @@
 #ifndef SMPSO_H_
 #define SMPSO_H_
 
-#include <Algorithm.h>
-#include <CrowdingArchive.h>
-#include <Distance.h>
+#include "Algorithm.h"
+#include "CrowdingArchive.h"
+#include "Distance.h"
 //#include <Hypervolume.h>
-#include <Problem.h>
+#include "Problem.h"
 //#include <QualityIndicator.h>
-#include <SolutionSet.h>
-#include <XReal.h>
-#include <PseudoRandom.h>
+#include "SolutionSet.h"
+#include "XReal.h"
+#include "PseudoRandom.h"
 #include <math.h>
 #include <vector>
 #include <string>

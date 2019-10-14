@@ -21,7 +21,7 @@
 #ifndef __FITNESS__
 #define __FITNESS__
 
-#include <MetricsUtil.h>
+#include "MetricsUtil.h"
 #include <vector>
 #include <fstream>
 #include <iostream>

@@ -21,10 +21,10 @@
 #ifndef __STANDARD_STUDY_EXECUTION__
 #define __STANDARD_STUDY_EXECUTION__
 
-#include <ExperimentExecution.h>
-#include <NSGAII_Settings.h>
-#include <GDE3_Settings.h>
-#include <SMPSO_Settings.h>
+#include "ExperimentExecution.h"
+#include "NSGAII_Settings.h"
+#include "GDE3_Settings.h"
+#include "SMPSO_Settings.h"
 #include <string>
 
 /**

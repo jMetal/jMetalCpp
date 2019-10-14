@@ -22,10 +22,10 @@
 #ifndef Binary_h
 #define Binary_h
 
-#include <Variable.h>
+#include "Variable.h"
 #include <bitset>
 #include <vector>
-#include <PseudoRandom.h>
+#include "PseudoRandom.h"
 #include <stdlib.h>
 
 /**

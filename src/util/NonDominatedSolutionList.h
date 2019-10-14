@@ -21,10 +21,10 @@
 #ifndef __NONDOMINATEDSOLUTIONLIST__
 #define __NONDOMINATEDSOLUTIONLIST__
 
-#include <Comparator.h>
-#include <DominanceComparator.h>
-#include <SolutionComparator.h>
-#include <SolutionSet.h>
+#include "Comparator.h"
+#include "DominanceComparator.h"
+#include "SolutionComparator.h"
+#include "SolutionSet.h"
 
 /**
  * This class implements an unbound list of non-dominated solutions

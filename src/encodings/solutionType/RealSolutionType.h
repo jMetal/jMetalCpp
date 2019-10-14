@@ -22,8 +22,8 @@
 #ifndef __REAL_SOLUTION_TYPE__
 #define __REAL_SOLUTION_TYPE__
 
-#include <SolutionType.h>
-#include <Real.h>
+#include "SolutionType.h"
+#include "Real.h"
 #include <string>
 
 /**

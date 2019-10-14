@@ -21,10 +21,10 @@
 #ifndef __DE_SETTINGS__
 #define __DE_SETTINGS__
 
-#include <Settings.h>
-#include <DE.h>
-#include <DifferentialEvolutionCrossover.h>
-#include <DifferentialEvolutionSelection.h>
+#include "Settings.h"
+#include "DE.h"
+#include "DifferentialEvolutionCrossover.h"
+#include "DifferentialEvolutionSelection.h"
 
 class DE_Settings : public Settings {
 private:

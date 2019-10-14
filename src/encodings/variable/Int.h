@@ -8,8 +8,8 @@
 #ifndef Int_h
 #define Int_h
 
-#include <Variable.h>
-#include <PseudoRandom.h>
+#include "Variable.h"
+#include "PseudoRandom.h"
 #include <sstream>
 
 /**

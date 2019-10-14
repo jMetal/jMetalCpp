@@ -21,10 +21,10 @@
 #ifndef __GDE3_SETTINGS__
 #define __GDE3_SETTINGS__
 
-#include <Settings.h>
-#include <GDE3.h>
-#include <DifferentialEvolutionCrossover.h>
-#include <DifferentialEvolutionSelection.h>
+#include "Settings.h"
+#include "GDE3.h"
+#include "DifferentialEvolutionCrossover.h"
+#include "DifferentialEvolutionSelection.h"
 
 class GDE3_Settings : public Settings{
 

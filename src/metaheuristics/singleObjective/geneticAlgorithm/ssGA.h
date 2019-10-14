@@ -21,11 +21,11 @@
 #ifndef __SSGA_H__
 #define __SSGA_H__
 
-#include <Algorithm.h>
-#include <Problem.h>
-#include <SolutionSet.h>
-#include <ObjectiveComparator.h>
-#include <WorstSolutionSelection.h>
+#include "Algorithm.h"
+#include "Problem.h"
+#include "SolutionSet.h"
+#include "ObjectiveComparator.h"
+#include "WorstSolutionSelection.h"
 
 /**
  * Class implementing a steady-state genetic algorithm

@@ -21,11 +21,11 @@
 #ifndef __SSGA_SETTINGS__
 #define __SSGA_SETTINGS__
 
-#include <Settings.h>
-#include <ssGA.h>
-#include <SBXCrossover.h>
-#include <PolynomialMutation.h>
-#include <BinaryTournament.h>
+#include "Settings.h"
+#include "ssGA.h"
+#include "SBXCrossover.h"
+#include "PolynomialMutation.h"
+#include "BinaryTournament.h"
 
 class ssGA_Settings : public Settings {
 private:

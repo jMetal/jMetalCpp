@@ -21,9 +21,9 @@
 #ifndef __BEST_SOLUTION_SELECTION__
 #define __BEST_SOLUTION_SELECTION__
 
-#include <SolutionSet.h>
-#include <Selection.h>
-#include <Comparator.h>
+#include "SolutionSet.h"
+#include "Selection.h"
+#include "Comparator.h"
 
 /**
  * This class implements a selection operator used for selecting the best

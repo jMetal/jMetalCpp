@@ -21,9 +21,9 @@
 #ifndef __PSO_SETTINGS__
 #define __PSO_SETTINGS__
 
-#include <Settings.h>
-#include <PSO.h>
-#include <PolynomialMutation.h>
+#include "Settings.h"
+#include "PSO.h"
+#include "PolynomialMutation.h"
 
 class PSO_Settings : public Settings {
 

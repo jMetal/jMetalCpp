@@ -23,7 +23,7 @@
 #ifndef __MUTATION__
 #define __MUTATION__
 
-#include <Operator.h>
+#include "Operator.h"
 
 /**
  * @class Mutation

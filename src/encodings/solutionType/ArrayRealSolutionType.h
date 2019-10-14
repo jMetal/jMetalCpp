@@ -21,8 +21,8 @@
 #ifndef __ARRAY_REAL_SOLUTION_TYPE__
 #define __ARRAY_REAL_SOLUTION_TYPE__
 
-#include <SolutionType.h>
-#include <ArrayReal.h>
+#include "SolutionType.h"
+#include "ArrayReal.h"
 
 /**
   * Class representing the solution type of solutions composed of an ArrayReal

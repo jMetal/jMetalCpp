@@ -23,12 +23,12 @@
 #ifndef __POLYNOMIAL_MUTATION__
 #define __POLYNOMIAL_MUTATION__
 
-#include <Mutation.h>
-#include <Solution.h>
+#include "Mutation.h"
+#include "Solution.h"
 #include <math.h>
 #include <float.h>
-#include <PseudoRandom.h>
-#include <XReal.h>
+#include "PseudoRandom.h"
+#include "XReal.h"
 
 /**
   * @class Mutation

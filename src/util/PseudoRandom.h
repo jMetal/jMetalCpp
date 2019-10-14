@@ -24,7 +24,7 @@
 #define _PseudoRandom_h
 
 #include <iostream>
-#include <RandomGenerator.h>
+#include "RandomGenerator.h"
 #include <math.h>
 
 /**

@@ -21,12 +21,12 @@
 #ifndef __MOEAD__
 #define __MOEAD__
 
-#include <Algorithm.h>
-#include <Problem.h>
-#include <SolutionSet.h>
+#include "Algorithm.h"
+#include "Problem.h"
+#include "SolutionSet.h"
 
-#include <UtilsMOEAD.h>
-#include <PseudoRandom.h>
+#include "UtilsMOEAD.h"
+#include "PseudoRandom.h"
 
 /**
  * This class implements the MOEA/D algorithm.

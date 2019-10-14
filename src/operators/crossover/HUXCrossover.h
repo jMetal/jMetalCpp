@@ -20,9 +20,9 @@
 
 #pragma once
 
-#include <Crossover.h>
-#include <Binary.h>
-#include <Solution.h>
+#include "Crossover.h"
+#include "Binary.h"
+#include "Solution.h"
 #include <math.h>
 
 /**

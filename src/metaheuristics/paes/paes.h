@@ -21,11 +21,11 @@
 #ifndef PAES_H_
 #define PAES_H_
 
-#include <Algorithm.h>
-#include <Problem.h>
-#include <SolutionSet.h>
-#include <DominanceComparator.h>
-#include <AdaptiveGridArchive.h>
+#include "Algorithm.h"
+#include "Problem.h"
+#include "SolutionSet.h"
+#include "DominanceComparator.h"
+#include "AdaptiveGridArchive.h"
 
 class paes : public Algorithm {
 

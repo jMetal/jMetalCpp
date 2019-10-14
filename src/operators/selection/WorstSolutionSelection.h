@@ -21,9 +21,9 @@
 #ifndef __WORST_SOLUTION_SELECTION__
 #define __WORST_SOLUTION_SELECTION__
 
-#include <SolutionSet.h>
-#include <Selection.h>
-#include <Comparator.h>
+#include "SolutionSet.h"
+#include "Selection.h"
+#include "Comparator.h"
 
 /**
  * This class implements a selection operator used for selecting the worst

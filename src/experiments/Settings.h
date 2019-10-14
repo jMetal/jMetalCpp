@@ -22,9 +22,9 @@
 #define __SETTINGS__
 
 #include <string>
-#include <Problem.h>
-#include <Algorithm.h>
-#include <ProblemFactory.h>
+#include "Problem.h"
+#include "Algorithm.h"
+#include "ProblemFactory.h"
 
 class Settings {
 protected:

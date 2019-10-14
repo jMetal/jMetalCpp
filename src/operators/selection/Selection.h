@@ -23,7 +23,7 @@
 #ifndef __SELECTION__
 #define __SELECTION__
 
-#include <Operator.h>
+#include "Operator.h"
 
 /**
   * @class Selection

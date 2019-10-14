@@ -21,7 +21,7 @@
 #ifndef __STANDARD_STUDY_REPORT_SO__
 #define __STANDARD_STUDY_REPORT_SO__
 
-#include <ExperimentReport.h>
+#include "ExperimentReport.h"
 #include <string>
 
 /**

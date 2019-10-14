@@ -21,8 +21,8 @@
 #ifndef __BINARY_REAL_SOLUTION_TYPE__
 #define __BINARY_REAL_SOLUTION_TYPE__
 
-#include <SolutionType.h>
-#include <BinaryReal.h>
+#include "SolutionType.h"
+#include "BinaryReal.h"
 
 /**
  * This class is aimed at defining a Type encoding a Real solution

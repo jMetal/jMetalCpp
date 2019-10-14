@@ -21,12 +21,12 @@
 #ifndef __BITFLIP_MUTATION__
 #define __BITFLIP_MUTATION__
 
-#include <Mutation.h>
-#include <Solution.h>
+#include "Mutation.h"
+#include "Solution.h"
 #include <math.h>
 #include <float.h>
-#include <PseudoRandom.h>
-#include <Binary.h>
+#include "PseudoRandom.h"
+#include "Binary.h"
 
 /**
   * @class Mutation

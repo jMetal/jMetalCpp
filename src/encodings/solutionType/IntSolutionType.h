@@ -8,8 +8,8 @@
 #ifndef __INT_SOLUTION_TYPE__
 #define __INT_SOLUTION_TYPE__
 
-#include <SolutionType.h>
-#include <Int.h>
+#include "SolutionType.h"
+#include "Int.h"
 #include <string>
 
 /**

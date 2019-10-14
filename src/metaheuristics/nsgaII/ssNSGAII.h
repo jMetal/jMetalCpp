@@ -21,12 +21,12 @@
 #ifndef __SSNSGAII__
 #define __SSNSGAII__
 
-#include <Algorithm.h>
-#include <Problem.h>
-#include <SolutionSet.h>
-#include <Distance.h>
-#include <Ranking.h>
-#include <CrowdingComparator.h>
+#include "Algorithm.h"
+#include "Problem.h"
+#include "SolutionSet.h"
+#include "Distance.h"
+#include "Ranking.h"
+#include "CrowdingComparator.h"
 //#include <QualityIndicator.h>
 
 /**

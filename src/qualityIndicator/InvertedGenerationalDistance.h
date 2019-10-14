@@ -21,7 +21,7 @@
 #ifndef __INVERTEDGENERATIONALDISTANCE__
 #define __INVERTEDGENERATIONALDISTANCE__
 
-#include <MetricsUtil.h>
+#include "MetricsUtil.h"
 #include <math.h>
 #include <vector>
 

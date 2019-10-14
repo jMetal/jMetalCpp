@@ -21,12 +21,12 @@
 #ifndef __GDE3__
 #define __GDE3__
 
-#include <Algorithm.h>
-#include <Problem.h>
-#include <SolutionSet.h>
-#include <Distance.h>
-#include <Ranking.h>
-#include <CrowdingComparator.h>
+#include "Algorithm.h"
+#include "Problem.h"
+#include "SolutionSet.h"
+#include "Distance.h"
+#include "Ranking.h"
+#include "CrowdingComparator.h"
 
 /**
   * @class GDE3

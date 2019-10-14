@@ -21,9 +21,9 @@
 #ifndef __EQUAL_SOLUTIONS__
 #define __EQUAL_SOLUTIONS__
 
-#include <Solution.h>
-#include <Comparator.h>
-#include <ObjectiveComparator.h>
+#include "Solution.h"
+#include "Comparator.h"
+#include "ObjectiveComparator.h"
 
 /**
  * This class implements a <code>Comparator</code> (a method for comparing

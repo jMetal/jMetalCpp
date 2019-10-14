@@ -10,8 +10,8 @@
 #define __INT_NONE_REPEATED_SOLUTION_TYPE__
 
 
-#include <SolutionType.h>
-#include <Int.h>
+#include "SolutionType.h"
+#include "Int.h"
 #include <string>
 
 /**

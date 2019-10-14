@@ -21,9 +21,9 @@
 #ifndef __SPX_CROSSOVER__
 #define __SPX_CROSSOVER__
 
-#include <Crossover.h>
-#include <Binary.h>
-#include <Solution.h>
+#include "Crossover.h"
+#include "Binary.h"
+#include "Solution.h"
 #include <math.h>
 
 /**
@@ -39,7 +39,7 @@ public:
 private:
   double crossoverProbability_;
   Solution ** doCrossover(double probability,
-      Solution * parent1, Solution * parent2);
+  Solution * parent1, Solution * parent2);
 };
 
 #endif

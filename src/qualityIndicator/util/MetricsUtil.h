@@ -29,8 +29,8 @@
 #include <sstream>
 #include <string>
 #include <math.h>
-#include <SolutionSet.h>
-#include <NonDominatedSolutionList.h>
+#include "SolutionSet.h"
+#include "NonDominatedSolutionList.h"
 
 using namespace std;
 

@@ -22,8 +22,8 @@
 #ifndef Real_h
 #define Real_h
 
-#include <Variable.h>
-#include <PseudoRandom.h>
+#include "Variable.h"
+#include "PseudoRandom.h"
 #include <sstream>
 
 /**

@@ -21,7 +21,7 @@
 #ifndef PERMUTATIONUTILITY_H_
 #define PERMUTATIONUTILITY_H_
 
-#include <PseudoRandom.h>
+#include "PseudoRandom.h"
 
 class PermutationUtility {
 

@@ -21,7 +21,7 @@
 #ifndef __LEXICOGRAPHICALCOMPARATOR__
 #define __LEXICOGRAPHICALCOMPARATOR__
 
-#include <Comparator.h>
+#include "Comparator.h"
 #include <vector>
 
 class LexicoGraphicalComparator : public Comparator {

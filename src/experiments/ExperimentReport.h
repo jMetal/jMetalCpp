@@ -33,17 +33,17 @@
 #include <sstream>
 #include <stddef.h>
 #include <fstream>
-#include <FileUtils.h>
-#include <RBoxplot.h>
-#include <RWilcoxon.h>
-#include <Statistics.h>
-#include <Hypervolume.h>
-#include <Spread.h>
-#include <InvertedGenerationalDistance.h>
-#include <Epsilon.h>
-#include <Fitness.h>
-#include <MetricsUtil.h>
-#include <Experiment.h>
+#include "FileUtils.h"
+#include "RBoxplot.h"
+#include "RWilcoxon.h"
+#include "Statistics.h"
+#include "Hypervolume.h"
+#include "Spread.h"
+#include "InvertedGenerationalDistance.h"
+#include "Epsilon.h"
+#include "Fitness.h"
+#include "MetricsUtil.h"
+#include "Experiment.h"
 
 using namespace std;
 
