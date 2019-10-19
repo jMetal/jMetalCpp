@@ -22,7 +22,7 @@
 
 
 #include <SBXCrossover.h>
-
+#include <complex>
 /**
   * @class SBXCrossover
   * @brief This class is aimed at representing a SBXCrossover operator
@@ -85,13 +85,12 @@ Solution ** SBXCrossover::doCrossover(double probability, Solution *parent1, Sol
   double y1, y2, yL, yu;
   double c1, c2;
   double alpha, beta, betaq;
-  double valueX1,valueX2;
+  double valueX1,valueX2,valueX1initial,valueX2initial;
   XReal * x1 = new XReal(parent1) ;
   XReal * x2 = new XReal(parent2) ;
   XReal * offs1 = new XReal(offSpring[0]) ;
   XReal * offs2 = new XReal(offSpring[1]) ;
   
-
 
   int numberOfVariables = x1->getNumberOfDecisionVariables();
    
@@ -99,8 +98,10 @@ Solution ** SBXCrossover::doCrossover(double probability, Solution *parent1, Sol
     for (i=0; i<numberOfVariables; i++){
       valueX1 = x1->getValue(i);
       valueX2 = x2->getValue(i);
-      
-      if (PseudoRandom::randDouble()<=0.5 ){
+      valueX1initial=valueX1;
+      valueX2initial=valueX2;
+     // cout << "valueX1 "<<valueX1<<" valueX2 "<<valueX2<<std::endl;
+      if (PseudoRandom::randDouble()<=0.5){
         if (fabs(valueX1- valueX2) > EPS){
           
           if (valueX1 < valueX2){
@@ -116,27 +117,31 @@ Solution ** SBXCrossover::doCrossover(double probability, Solution *parent1, Sol
             
           //cout << yL << " " << yu << endl;
           rand = PseudoRandom::randDouble();
-
+//cout <<"yL "<< yL << " yu "<<yu<<endl;
           
           beta = 1.0 + (2.0*(y1-yL)/(y2-y1));
+          //cout <<"beta "<< beta<<endl;
           alpha = 2.0 - pow(beta,-(distributionIndex_+1.0));
-            
+          //cout <<"alpha "<< beta<<endl;
+          //cout <<"distributionIndex_ "<< distributionIndex_<<endl;
           if (rand <= (1.0/alpha)){
             betaq = pow ((rand*alpha),(1.0/(distributionIndex_+1.0)));
           } else {
             betaq = pow ((1.0/(2.0 - rand*alpha)),(1.0/(distributionIndex_+1.0)));
           } // if
-          
+          //cout <<"betaq "<< betaq<<endl;
+          //cout <<"rand "<< rand<<endl;
           c1 = 0.5*((y1+y2)-betaq*(y2-y1));
           beta = 1.0 + (2.0*(yu-y2)/(y2-y1));
           alpha = 2.0 - pow(beta,-(distributionIndex_+1.0));
-          
+          //cout <<"beta2 "<< beta<<endl;
+          //cout <<"alpha2 "<< alpha<<endl;
           if (rand <= (1.0/alpha)){
             betaq = pow ((rand*alpha),(1.0/(distributionIndex_+1.0)));
           } else {
             betaq = pow ((1.0/(2.0 - rand*alpha)),(1.0/(distributionIndex_+1.0)));
           } // if
-            
+          //cout <<"betaq2 "<< betaq<<endl;
           c2 = 0.5*((y1+y2)+betaq*(y2-y1));
           
           if (c1<yL)
@@ -150,18 +155,30 @@ Solution ** SBXCrossover::doCrossover(double probability, Solution *parent1, Sol
           
           if (c2>yu)
             c2=yu;                        
-
+          //cout << "c1 "<<c1<<" c2 "<<c2<<std::endl;
           if (PseudoRandom::randDouble()<=0.5) {
+        	  if(std::isnan(c2) || std::isnan(c1)) {
+        		  c2=valueX1initial;
+        		  c1=valueX2initial;
+        	  }
+
             offs1->setValue(i,c2);
             offs2->setValue(i,c1);
           } else {
+        	  if(std::isnan(c2) || std::isnan(c1)) { // sometimes, c1 or c2 can be nan, so in this case use the values from the parents
+        	    c1=valueX1initial;
+        	    c2=valueX2initial;
+        	  }
             offs1->setValue(i,c1);
             offs2->setValue(i,c2);
           } // if
+
+
         } else {
           offs1->setValue(i,valueX1);
           offs2->setValue(i,valueX2);
         } // if
+
       } else {
         offs1->setValue(i,valueX2);
         offs2->setValue(i,valueX1);

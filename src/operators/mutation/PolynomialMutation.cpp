@@ -22,7 +22,7 @@
 
 
 #include <PolynomialMutation.h>
-
+#include <cmath>
 
 const double PolynomialMutation::ETA_M_DEFAULT_ = 20.0;
 const double PolynomialMutation::eta_m_ = ETA_M_DEFAULT_;
@@ -56,12 +56,13 @@ PolynomialMutation::~PolynomialMutation() { } // ~PolynomialMutation
  */
 void * PolynomialMutation::doMutation(double probability, Solution *solution) {        
   double rnd, delta1, delta2, mut_pow, deltaq;
-  double y, yl, yu, val, xy;
+  double y, yl, yu, val, xy, initalval;
   XReal * x = new XReal(solution);
     
   for (int var=0; var < solution->getNumberOfVariables(); var++) {
-    if (PseudoRandom::randDouble() <= probability) {
+    if (PseudoRandom::randDouble() <= probability ) {
       y  = x->getValue(var);
+      initalval=y;
       yl = x->getLowerBound(var);
       yu = x->getUpperBound(var);
       delta1 = (y-yl)/(yu-yl);
@@ -82,7 +83,12 @@ void * PolynomialMutation::doMutation(double probability, Solution *solution) {
         y = yl;
       if (y>yu)
         y = yu;
+
+      if(std::isnan(y)) // y can be nan result from the pow
+      x->setValue(var, initalval);
+      else
       x->setValue(var, y);
+
     }
   } // for
 
