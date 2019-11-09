@@ -84,6 +84,7 @@ SolutionSet * gGA::execute() {
        problem_->evaluateConstraints(newSolution);
        evaluations++;
        population->add(newSolution);
+       std::cout << "Create the initial solutionSet "<< std::endl;
   } //for
 
 //  cout << "gGA: Poblacion inicializada con size = " << population->size() << endl;
