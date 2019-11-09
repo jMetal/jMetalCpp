@@ -19,7 +19,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <gGA.h>
-
+#include <cmath>
 /*
  * This class implements the NSGA-II algorithm.
  */
@@ -81,9 +81,9 @@ SolutionSet * gGA::execute() {
   for (int i = 0; i < populationSize; i++) {
     newSolution = new Solution(problem_);
     problem_->evaluate(newSolution);
-    problem_->evaluateConstraints(newSolution);
-    evaluations++;
-    population->add(newSolution);
+       problem_->evaluateConstraints(newSolution);
+       evaluations++;
+       population->add(newSolution);
   } //for
 
 //  cout << "gGA: Poblacion inicializada con size = " << population->size() << endl;
@@ -92,34 +92,46 @@ SolutionSet * gGA::execute() {
   // Generations
   while (evaluations < maxEvaluations) {
 
+	  std::cout << "while (evaluations < maxEvaluations) "<< std::endl;
     // Create the offSpring solutionSet
     offspringPopulation = new SolutionSet(populationSize);
     Solution ** parents = new Solution*[2];
 
     for (int i = 0; i < (populationSize / 2); i++) {
+    	std::cout << " for (int i = 0; i < (populationSize / 2); i++) "<< std::endl;
       if (evaluations < maxEvaluations) {
-
+    	  std::cout << "  if (evaluations < maxEvaluations) "<< std::endl;
         //obtain parents
         parents[0] = (Solution *) (selectionOperator->execute(population));
-
+        std::cout << "   parents[0] = (Solution *) (selectionOperator->execute(population)); "<< std::endl;
         parents[1] = (Solution *) (selectionOperator->execute(population));
+        std::cout << "    parents[1] = (Solution *) (selectionOperator->execute(population)); "<< std::endl;
+
+
+
 
         Solution ** offSpring = (Solution **) (crossoverOperator->execute(parents));
+        std::cout << "    Solution ** offSpring = (Solution **) (crossoverOperator->execute(parents)); "<< std::endl;
 
         mutationOperator->execute(offSpring[0]);
+        std::cout << "     mutationOperator->execute(offSpring[0]); "<< std::endl;
         mutationOperator->execute(offSpring[1]);
+        std::cout << "    mutationOperator->execute(offSpring[1]); "<< std::endl;
 
 
 
         problem_->evaluate(offSpring[0]);
-
+        std::cout << "    problem_->evaluate(offSpring[0]); "<< std::endl;
         problem_->evaluateConstraints(offSpring[0]);
+        std::cout << "   problem_->evaluateConstraints(offSpring[0]); "<< std::endl;
         problem_->evaluate(offSpring[1]);
-
+        std::cout << "     problem_->evaluate(offSpring[1]); "<< std::endl;
         problem_->evaluateConstraints(offSpring[1]);
-
+        std::cout << "     problem_->evaluateConstraints(offSpring[1]); "<< std::endl;
         offspringPopulation->add(offSpring[0]);
+        std::cout << "      offspringPopulation->add(offSpring[0]); "<< std::endl;
         offspringPopulation->add(offSpring[1]);
+        std::cout << "       offspringPopulation->add(offSpring[1]); "<< std::endl;
         evaluations += 2;
         delete[] offSpring;
       } // if
