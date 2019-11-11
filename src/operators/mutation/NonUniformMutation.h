@@ -21,10 +21,10 @@
 #ifndef __NON_UNIFORM_MUTATION__
 #define __NON_UNIFORM_MUTATION__
 
-#include <Mutation.h>
-#include <Solution.h>
-#include <PseudoRandom.h>
-#include <XReal.h>
+#include "Mutation.h"
+#include "Solution.h"
+#include "PseudoRandom.h"
+#include "XReal.h"
 
 /**
  * This class implements a non-uniform mutation operator.

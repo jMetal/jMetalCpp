@@ -21,8 +21,8 @@
 #ifndef __SPREAD__
 #define __SPREAD__
 
-#include <MetricsUtil.h>
-#include <LexicoGraphicalComparator.h>
+#include "MetricsUtil.h"
+#include "LexicoGraphicalComparator.h"
 #include <vector>
 #include <algorithm>
 

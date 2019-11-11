@@ -21,8 +21,8 @@
 #ifndef __FAST_HYPERVOLUME__
 #define __FAST_HYPERVOLUME__
 
-#include <MetricsUtil.h>
-#include <ObjectiveComparator.h>
+#include "MetricsUtil.h"
+#include "ObjectiveComparator.h"
 //#include <iostream>
 //#include <cstdlib>
 #include <math.h>

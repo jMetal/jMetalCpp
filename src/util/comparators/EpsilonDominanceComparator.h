@@ -21,9 +21,9 @@
 #ifndef __EPSILON_DOMINANCE_COMPARATOR__
 #define __EPSILON_DOMINANCE_COMPARATOR__
 
-#include <Solution.h>
-#include <Comparator.h>
-#include <OverallConstraintViolationComparator.h>
+#include "Solution.h"
+#include "Comparator.h"
+#include "OverallConstraintViolationComparator.h"
 
 /**
  * This class implements a <code>Comparator</code> (a method for comparing

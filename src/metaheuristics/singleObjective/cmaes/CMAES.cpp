@@ -68,7 +68,7 @@ SolutionSet * CMAES::execute() {
     storeBest(comparator);
     //cout << counteval << ": " << bestSolutionEver->getObjective(0) << endl;
     updateDistribution();
-    
+    if(problem_->evaluateStopConstraints(bestSolutionEver)==true) break;
     delete population_;
     
   }

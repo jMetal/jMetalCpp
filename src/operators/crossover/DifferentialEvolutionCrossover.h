@@ -22,10 +22,10 @@
 #define __DIFFERENTIAL_EVOLUTION_CROSSOVER__
 
 #include <string>
-#include <Crossover.h>
-#include <Solution.h>
-#include <PseudoRandom.h>
-#include <XReal.h>
+#include "Crossover.h"
+#include "Solution.h"
+#include "PseudoRandom.h"
+#include "XReal.h"
 
 /**
  * Differential evolution crossover operators

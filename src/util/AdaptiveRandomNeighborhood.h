@@ -22,9 +22,9 @@
 #ifndef __ADAPTIVE_RANDOM_NEIGHBORHOOD__
 #define __ADAPTIVE_RANDOM_NEIGHBORHOOD__
 
-#include <Solution.h>
-#include <SolutionSet.h>
-#include <PseudoRandom.h>
+#include "Solution.h"
+#include "SolutionSet.h"
+#include "PseudoRandom.h"
 
 #include <vector>
 #include <algorithm>

@@ -21,13 +21,13 @@
 #ifndef __ADAPTIVEGRID__
 #define __ADAPTIVEGRID__
 
-#include <SolutionSet.h>
-#include <Solution.h>
+#include "SolutionSet.h"
+#include "Solution.h"
 #include <float.h>
-#include <ObjectiveComparator.h>
+#include "ObjectiveComparator.h"
 #include <math.h>
 #include <limits.h>
-#include <PseudoRandom.h>
+#include "PseudoRandom.h"
 
 /**
  * This class implements some utilities for calculating distances

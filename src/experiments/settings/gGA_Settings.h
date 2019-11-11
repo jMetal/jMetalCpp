@@ -21,11 +21,11 @@
 #ifndef __GGA_SETTINGS__
 #define __GGA_SETTINGS__
 
-#include <Settings.h>
-#include <gGA.h>
-#include <SBXCrossover.h>
-#include <PolynomialMutation.h>
-#include <BinaryTournament2.h>
+#include "Settings.h"
+#include "gGA.h"
+#include "SBXCrossover.h"
+#include "PolynomialMutation.h"
+#include "BinaryTournament2.h"
 
 class gGA_Settings : public Settings {
 private:

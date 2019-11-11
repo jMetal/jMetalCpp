@@ -27,11 +27,11 @@
 #include <mutex>
 #include <thread>
 //#include <pthread.h>
-#include <Settings.h>
-#include <Algorithm.h>
-#include <RunExperiment.h>
-#include <Experiment.h>
-#include <ExperimentIndividual.h>
+#include "Settings.h"
+#include "Algorithm.h"
+#include "RunExperiment.h"
+#include "Experiment.h"
+#include "ExperimentIndividual.h"
 
 using namespace std;
 

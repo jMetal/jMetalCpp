@@ -21,9 +21,9 @@
 #ifndef __SMPSO_SETTINGS__
 #define __SMPSO_SETTINGS__
 
-#include <Settings.h>
-#include <SMPSO.h>
-#include <PolynomialMutation.h>
+#include "Settings.h"
+#include "SMPSO.h"
+#include "PolynomialMutation.h"
 
 class SMPSO_Settings : public Settings{
 

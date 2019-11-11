@@ -21,15 +21,15 @@
 #ifndef OMOPSO_H_
 #define OMOPSO_H_
 
-#include <Algorithm.h>
-#include <SolutionSet.h>
+#include "Algorithm.h"
+#include "SolutionSet.h"
 
-#include <CrowdingArchive.h>
-#include <Distance.h>
-#include <EpsilonDominanceComparator.h>
-#include <NonDominatedSolutionList.h>
-#include <PseudoRandom.h>
-#include <XReal.h>
+#include "CrowdingArchive.h"
+#include "Distance.h"
+#include "EpsilonDominanceComparator.h"
+#include "NonDominatedSolutionList.h"
+#include "PseudoRandom.h"
+#include "XReal.h"
 
 /**
  * This class implements an asynchronous version of OMOPSO algorithm

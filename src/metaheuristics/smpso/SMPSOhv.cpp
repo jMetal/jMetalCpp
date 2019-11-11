@@ -329,6 +329,7 @@ SolutionSet *SMPSOhv::execute() {
     }
 
     iteration++;
+
   }
 
   // Build the solution set result

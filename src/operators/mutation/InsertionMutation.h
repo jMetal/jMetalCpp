@@ -9,12 +9,12 @@
 #ifndef SRC_OPERATORS_MUTATION_INSERTIONMUTATION_H_
 #define SRC_OPERATORS_MUTATION_INSERTIONMUTATION_H_
 
-#include <Mutation.h>
-#include <Solution.h>
+#include "Mutation.h"
+#include "Solution.h"
 #include <math.h>
 #include <float.h>
-#include <PseudoRandom.h>
-#include <Int.h>
+#include "PseudoRandom.h"
+#include "Int.h"
 class InsertionMutation  : public Mutation{
 public:
 	InsertionMutation(map<string, void *> parameters);

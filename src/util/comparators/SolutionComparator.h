@@ -21,9 +21,9 @@
 #ifndef __SOLUTIONCOMPARATOR__
 #define __SOLUTIONCOMPARATOR__
 
-#include <Comparator.h>
-#include <Distance.h>
-#include <Solution.h>
+#include "Comparator.h"
+#include "Distance.h"
+#include "Solution.h"
 
 /**
  * This class implements a <code>Comparator</code> (a method for comparing

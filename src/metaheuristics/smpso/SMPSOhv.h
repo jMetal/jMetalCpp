@@ -21,14 +21,14 @@
 #ifndef SMPSO_HV_H_
 #define SMPSO_HV_H_
 
-#include <Algorithm.h>
-#include <SolutionSet.h>
+#include "Algorithm.h"
+#include "SolutionSet.h"
 
-#include <CrowdingDistanceComparator.h>
-#include <Distance.h>
-#include <FastHypervolumeArchive.h>
-#include <Hypervolume.h>
-#include <XReal.h>
+#include "CrowdingDistanceComparator.h"
+#include "Distance.h"
+#include "FastHypervolumeArchive.h"
+#include "Hypervolume.h"
+#include "XReal.h"
 
 /**
  * This class implements the SMPSOhv algorithm described in:

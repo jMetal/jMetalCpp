@@ -132,7 +132,19 @@ void Problem::evaluateConstraints(Solution * solution) {
   // The default behavior is to do nothing. Only constrained problems have to
   // re-define this method
 } // evaluateConstraints
+/**
+ * Evaluates the stop constraints violation to stop an algorithm early
+ * object.
+ * @param solution The <code>Solutions</code> to evaluate.
+ */
+// bool Problem::evaluateStopConstraints(SolutionSet * Population){
 
+//	 std::cout<<" evaluateStopConstraints " << std::endl;
+//	return false;
+//}
+  bool Problem::evaluateStopConstraints(Solution * solution){
+	  return false;
+ }
 
 /**
  * Returns the number of bits that must be used to encode binary-real

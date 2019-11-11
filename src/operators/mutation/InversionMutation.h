@@ -8,12 +8,12 @@
 
 #ifndef SRC_OPERATORS_MUTATION_INVERSIONMUTATION_H_
 #define SRC_OPERATORS_MUTATION_INVERSIONMUTATION_H_
-#include <Mutation.h>
-#include <Solution.h>
+#include "Mutation.h"
+#include "Solution.h"
 #include <math.h>
 #include <float.h>
-#include <PseudoRandom.h>
-#include <Int.h>
+#include "PseudoRandom.h"
+#include "Int.h"
 class InversionMutation : public Mutation{
 public:
 	InversionMutation();

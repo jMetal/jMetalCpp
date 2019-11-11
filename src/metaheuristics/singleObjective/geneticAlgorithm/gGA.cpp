@@ -19,7 +19,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <gGA.h>
-
+#include <cmath>
 /*
  * This class implements the NSGA-II algorithm.
  */
@@ -76,13 +76,14 @@ SolutionSet * gGA::execute() {
 //  cout << "Comienza la inicializacion de la poblacion con size " << populationSize << endl;
 
   // Create the initial solutionSet
+
   Solution * newSolution;
   for (int i = 0; i < populationSize; i++) {
     newSolution = new Solution(problem_);
     problem_->evaluate(newSolution);
-    problem_->evaluateConstraints(newSolution);
-    evaluations++;
-    population->add(newSolution);
+       problem_->evaluateConstraints(newSolution);
+       evaluations++;
+       population->add(newSolution);
   } //for
 
 //  cout << "gGA: Poblacion inicializada con size = " << population->size() << endl;
@@ -90,22 +91,37 @@ SolutionSet * gGA::execute() {
 
   // Generations
   while (evaluations < maxEvaluations) {
-  
+
     // Create the offSpring solutionSet
     offspringPopulation = new SolutionSet(populationSize);
     Solution ** parents = new Solution*[2];
 
     for (int i = 0; i < (populationSize / 2); i++) {
       if (evaluations < maxEvaluations) {
+
         //obtain parents
         parents[0] = (Solution *) (selectionOperator->execute(population));
+
         parents[1] = (Solution *) (selectionOperator->execute(population));
+
+
+
+
+
         Solution ** offSpring = (Solution **) (crossoverOperator->execute(parents));
+
+
         mutationOperator->execute(offSpring[0]);
         mutationOperator->execute(offSpring[1]);
+
+
+
+
         problem_->evaluate(offSpring[0]);
+
         problem_->evaluateConstraints(offSpring[0]);
         problem_->evaluate(offSpring[1]);
+
         problem_->evaluateConstraints(offSpring[1]);
 
         offspringPopulation->add(offSpring[0]);
@@ -117,6 +133,7 @@ SolutionSet * gGA::execute() {
     delete[] parents;
 
     population->sort(comparator) ;
+
     offspringPopulation->sort(comparator) ;
 
     delete offspringPopulation->get(offspringPopulation->size()-1);
@@ -133,8 +150,13 @@ SolutionSet * gGA::execute() {
       population->add(offspringPopulation->get(i)) ;
     offspringPopulation->clear() ;
     delete offspringPopulation;
+
+
+    if(problem_->evaluateStopConstraints(population->best(comparator))==true) break;
+
   }
 
+  population->sort(comparator) ;// sorting final solutions
   delete comparator;
 
   SolutionSet * resultPopulation  = new SolutionSet(1) ;

@@ -21,10 +21,10 @@
 #ifndef ADAPTIVEGRIDARCHIVE_H_
 #define ADAPTIVEGRIDARCHIVE_H_
 
-#include <DominanceComparator.h>
-#include <Comparator.h>
-#include <AdaptiveGrid.h>
-#include <Archive.h>
+#include "DominanceComparator.h"
+#include "Comparator.h"
+#include "AdaptiveGrid.h"
+#include "Archive.h"
 #include <iostream>
 
 /**

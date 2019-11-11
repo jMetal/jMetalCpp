@@ -21,8 +21,8 @@
 #ifndef __EPSILON_OBJECTIVE_COMPARATOR__
 #define __EPSILON_OBJECTIVE_COMPARATOR__
 
-#include <Solution.h>
-#include <Comparator.h>
+#include "Solution.h"
+#include "Comparator.h"
 
 /**
  * This class implements a <code>Comparator</code> (a method for comparing

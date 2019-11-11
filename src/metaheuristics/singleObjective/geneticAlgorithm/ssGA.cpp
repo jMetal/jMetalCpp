@@ -110,7 +110,7 @@ SolutionSet * ssGA::execute() {
       population->remove(worstIndividual);
       population->add(new Solution(offspring[0]));
     } // if
-
+    if(problem_->evaluateStopConstraints(population->best(comparator))==true) break;
     delete offspring[0];
     delete offspring[1];
     delete [] offspring;

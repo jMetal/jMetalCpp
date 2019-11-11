@@ -21,10 +21,10 @@
 #ifndef __GGA_H__
 #define __GGA_H__
 
-#include <Algorithm.h>
-#include <Problem.h>
-#include <SolutionSet.h>
-#include <ObjectiveComparator.h>
+#include "Algorithm.h"
+#include "Problem.h"
+#include "SolutionSet.h"
+#include "ObjectiveComparator.h"
 
 class gGA : public Algorithm {
 private:

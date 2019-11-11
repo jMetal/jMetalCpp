@@ -21,11 +21,11 @@
 #ifndef __BINARY_TOURNAMENT__
 #define __BINARY_TOURNAMENT__
 
-#include <SolutionSet.h>
-#include <Selection.h>
-#include <Comparator.h>
-#include <DominanceComparator.h>
-#include <PseudoRandom.h>
+#include "SolutionSet.h"
+#include "Selection.h"
+#include "Comparator.h"
+#include "DominanceComparator.h"
+#include "PseudoRandom.h"
 
 /**
  * This class implements an binary tournament selection operator

@@ -21,8 +21,8 @@
 #ifndef __OVERALL_CONSTRAINT_VIOLATION_COMPARATOR__
 #define __OVERALL_CONSTRAINT_VIOLATION_COMPARATOR__
 
-#include <Comparator.h>
-#include <Solution.h>
+#include "Comparator.h"
+#include "Solution.h"
 
 /**
  * This class implements a <code>Comparator</code> (a method for comparing

@@ -21,10 +21,10 @@
 #ifndef __UNIFORM_MUTATION__
 #define __UNIFORM_MUTATION__
 
-#include <Mutation.h>
-#include <Solution.h>
-#include <PseudoRandom.h>
-#include <XReal.h>
+#include "Mutation.h"
+#include "Solution.h"
+#include "PseudoRandom.h"
+#include "XReal.h"
 
 /**
  * This class implements a uniform mutation operator.

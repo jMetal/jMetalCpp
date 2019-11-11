@@ -23,8 +23,8 @@
 #ifndef __SOLUTION_TYPE__
 #define __SOLUTION_TYPE__
 
-#include <Problem.h>
-#include <Variable.h>
+#include "Problem.h"
+#include "Variable.h"
 #include <stddef.h>
 #include <string>
 

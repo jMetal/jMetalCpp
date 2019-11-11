@@ -22,14 +22,14 @@
 #ifndef _FAST_SMSEMOA_H_
 #define _FAST_SMSEMOA_H_
 
-#include <Algorithm.h>
-#include <Problem.h>
-#include <SolutionSet.h>
-#include <QualityIndicator.h>
-#include <MetricsUtil.h>
-#include <FastHypervolume.h>
-#include <Ranking.h>
-#include <CrowdingDistanceComparator.h>
+#include "Algorithm.h"
+#include "Problem.h"
+#include "SolutionSet.h"
+#include "QualityIndicator.h"
+#include "MetricsUtil.h"
+#include "FastHypervolume.h"
+#include "Ranking.h"
+#include "CrowdingDistanceComparator.h"
 
 class FastSMSEMOA : public Algorithm {
 

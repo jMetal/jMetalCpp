@@ -22,7 +22,7 @@
 #define __RWILCOXON__
 
 #include <string>
-#include <ExperimentReport.h>
+#include "ExperimentReport.h"
 
 class ExperimentReport;
 

@@ -23,11 +23,11 @@
 #ifndef __BINARY_TOURNAMENT_2__
 #define __BINARY_TOURNAMENT_2__
 
-#include <SolutionSet.h>
-#include <Selection.h>
-#include <Comparator.h>
-#include <PermutationUtility.h>
-#include <DominanceComparator.h>
+#include "SolutionSet.h"
+#include "Selection.h"
+#include "Comparator.h"
+#include "PermutationUtility.h"
+#include "DominanceComparator.h"
 
 /**
  * This class implements an operator for binary selections using the same code

@@ -23,7 +23,7 @@
 #ifndef __COMPARATOR__
 #define __COMPARATOR__
 
-#include <Solution.h>
+#include "Solution.h"
 
 /**
  * @class DominanceComparator

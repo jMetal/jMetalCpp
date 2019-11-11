@@ -38,7 +38,7 @@ BINDIR := bin
 HEADER_DIRS := $(shell find $(SRCDIR)/* -type d -print)
 
 # Header files directories
-HEADER_FILES := $(shell find ./JMetalInc -type f -name *.$(HEADEREXT))
+HEADER_FILES := $(shell find $(SRCDIR)/* -type f -name *.$(HEADEREXT))
 
 # Header files names
 HEADER_NAMES := $(shell find $(SRCDIR) -type f -name *.$(HEADEREXT) -exec basename \{} \; )

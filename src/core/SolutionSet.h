@@ -30,12 +30,12 @@
 #include <fstream>
 #include <vector>
 #include <stddef.h>
-#include <Solution.h>
-#include <Comparator.h>
+#include "Solution.h"
+#include "Comparator.h"
 
 using namespace std;
 
-//class Solution ;
+class Solution ;
 class Comparator;
 
 /**

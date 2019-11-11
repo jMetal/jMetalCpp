@@ -20,15 +20,15 @@
 
 #pragma once
 
-#include <Algorithm.h>
-#include <Problem.h>
-#include <SolutionSet.h>
-#include <Distance.h>
-#include <Ranking.h>
-#include <Distance.h>
-#include <Binary.h>
-#include <Solution.h>
-#include <CrowdingComparator.h>
+#include "Algorithm.h"
+#include "Problem.h"
+#include "SolutionSet.h"
+#include "Distance.h"
+#include "Ranking.h"
+#include "Distance.h"
+#include "Binary.h"
+#include "Solution.h"
+#include "CrowdingComparator.h"
 #include <cmath>
 #include <iostream>
 // Juanjo: I am following the same sintax as in the other algorithms. 

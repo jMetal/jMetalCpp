@@ -22,15 +22,15 @@
 #ifndef SMSEMOA_H_
 #define SMSEMOA_H_
 
-#include <Algorithm.h>
-#include <Problem.h>
-#include <SolutionSet.h>
-#include <PseudoRandom.h>
-#include <QualityIndicator.h>
-#include <MetricsUtil.h>
-#include <Hypervolume.h>
-#include <Ranking.h>
-#include <CrowdingDistanceComparator.h>
+#include "Algorithm.h"
+#include "Problem.h"
+#include "SolutionSet.h"
+#include "PseudoRandom.h"
+#include "QualityIndicator.h"
+#include "MetricsUtil.h"
+#include "Hypervolume.h"
+#include "Ranking.h"
+#include "CrowdingDistanceComparator.h"
 
 class SMSEMOA : public Algorithm {
 

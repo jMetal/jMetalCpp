@@ -21,9 +21,9 @@
 #ifndef Array_Real_h
 #define Array_Real_h
 
-#include <Variable.h>
-#include <Problem.h>
-#include <PseudoRandom.h>
+#include "Variable.h"
+#include "Problem.h"
+#include "PseudoRandom.h"
 #include <sstream>
 
 /**

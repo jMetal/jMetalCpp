@@ -23,10 +23,10 @@
 #ifndef __RANKING__
 #define __RANKING__
 
-#include <SolutionSet.h>
-#include <Solution.h>
-#include <DominanceComparator.h>
-#include <OverallConstraintViolationComparator.h>
+#include "SolutionSet.h"
+#include "Solution.h"
+#include "DominanceComparator.h"
+#include "OverallConstraintViolationComparator.h"
 #include <vector>
 
 /**

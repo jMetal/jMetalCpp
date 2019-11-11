@@ -7,9 +7,9 @@
 
 #ifndef SRC_OPERATORS_CROSSOVER_OXCROSSOVER_H_
 #define SRC_OPERATORS_CROSSOVER_OXCROSSOVER_H_
-#include <Crossover.h>
-#include <Solution.h>
-#include <Int.h>
+#include "Crossover.h"
+#include "Solution.h"
+#include "Int.h"
 #include <math.h>
 class OXCrossover: public Crossover {
 public:

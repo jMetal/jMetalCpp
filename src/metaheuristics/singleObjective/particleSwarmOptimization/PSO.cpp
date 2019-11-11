@@ -63,7 +63,8 @@ PSO::PSO(Problem *problem) : Algorithm(problem) {
 void PSO::initParams() {
   particlesSize_ = *(int *) getInputParameter("swarmSize");
   maxIterations_ = *(int *) getInputParameter("maxIterations");
-
+  std::cout << "PSO particlesSize_ "<< particlesSize_ << std::endl;
+  std::cout << "PSO maxIterations_ "<< maxIterations_ << std::endl;
   polynomialMutation_ = operators_["mutation"];
 
   iteration_ = 0;
@@ -296,6 +297,7 @@ SolutionSet * PSO::execute() {
 
   //-> Step 7. Iterations ..
   while (iteration_ < maxIterations_) {
+
     int * bestIndividualPtr = (int*)findBestSolution_->execute(particles_);
     int bestIndividual = *bestIndividualPtr;
     delete bestIndividualPtr;
@@ -331,6 +333,7 @@ SolutionSet * PSO::execute() {
 
     }
     iteration_++;
+    if(problem_->evaluateStopConstraints(globalBest_)==true) break;
   }
 
   // Return a population with the best individual

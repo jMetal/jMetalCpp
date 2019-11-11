@@ -21,13 +21,13 @@
 #ifndef __CMAES__
 #define __CMAES__
 
-#include <Algorithm.h>
-#include <Problem.h>
-#include <SolutionSet.h>
-#include <Comparator.h>
-#include <ObjectiveComparator.h>
+#include "Algorithm.h"
+#include "Problem.h"
+#include "SolutionSet.h"
+#include "Comparator.h"
+#include "ObjectiveComparator.h"
 
-#include <UtilsCMAES.h>
+#include "UtilsCMAES.h"
 
 #include <math.h>
 #include <random>

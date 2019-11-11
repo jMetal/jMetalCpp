@@ -24,9 +24,9 @@
 #define __ALGORITHM__
 
 #include <string>
-#include <SolutionSet.h>
-#include <Operator.h>
-#include <Problem.h>
+#include "SolutionSet.h"
+#include "Operator.h"
+#include "Problem.h"
 
 /**
  *  This class implements a generic template for the algorithms developed in

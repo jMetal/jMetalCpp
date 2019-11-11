@@ -136,6 +136,7 @@ SolutionSet * DE::execute() {
    offspringPopulation->clear();
    delete offspringPopulation;
    population->sort(comparator);
+   if(problem_->evaluateStopConstraints(population->get(0))==true) break;
   } // while
 
   delete comparator;

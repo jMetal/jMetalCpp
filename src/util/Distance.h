@@ -23,10 +23,10 @@
 #ifndef __DISTANCE__
 #define __DISTANCE__
 
-#include <SolutionSet.h>
-#include <Solution.h>
+#include "SolutionSet.h"
+#include "Solution.h"
 #include <float.h>
-#include <ObjectiveComparator.h>
+#include "ObjectiveComparator.h"
 #include <math.h>
 
 using namespace std;

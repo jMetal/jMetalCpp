@@ -21,10 +21,10 @@
 #ifndef __DE__
 #define __DE__
 
-#include <Algorithm.h>
-#include <Problem.h>
-#include <SolutionSet.h>
-#include <ObjectiveComparator.h>
+#include "Algorithm.h"
+#include "Problem.h"
+#include "SolutionSet.h"
+#include "ObjectiveComparator.h"
 
 /**
  * This class implements a differential evolution algorithm.

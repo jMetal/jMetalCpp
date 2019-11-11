@@ -28,9 +28,9 @@
 #include <limits>
 #include <stdlib.h>
 #include <stddef.h>
-#include <Problem.h>
-#include <Variable.h>
-#include <SolutionType.h>
+#include "Problem.h"
+#include "Variable.h"
+#include "SolutionType.h"
 
 
 //using namespace std;

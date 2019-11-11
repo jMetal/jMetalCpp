@@ -21,14 +21,14 @@
 #ifndef __PSO__
 #define __PSO__
 
-#include <Algorithm.h>
-#include <BestSolutionSelection.h>
-#include <ObjectiveComparator.h>
-#include <Problem.h>
+#include "Algorithm.h"
+#include "BestSolutionSelection.h"
+#include "ObjectiveComparator.h"
+#include "Problem.h"
 //#include <QualityIndicator.h>
-#include <SolutionSet.h>
-#include <XReal.h>
-#include <PseudoRandom.h>
+#include "SolutionSet.h"
+#include "XReal.h"
+#include "PseudoRandom.h"
 #include <math.h>
 #include <string>
 

@@ -22,14 +22,14 @@
 #ifndef __STANDARD_PSO_2007__
 #define __STANDARD_PSO_2007__
 
-#include <Algorithm.h>
-#include <Problem.h>
-#include <SolutionSet.h>
-#include <XReal.h>
-#include <Comparator.h>
-#include <ObjectiveComparator.h>
-#include <BestSolutionSelection.h>
-#include <AdaptiveRandomNeighborhood.h>
+#include "Algorithm.h"
+#include "Problem.h"
+#include "SolutionSet.h"
+#include "XReal.h"
+#include "Comparator.h"
+#include "ObjectiveComparator.h"
+#include "BestSolutionSelection.h"
+#include "AdaptiveRandomNeighborhood.h"
 
 #include <math.h>
 

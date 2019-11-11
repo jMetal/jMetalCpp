@@ -21,11 +21,11 @@
 #ifndef __STANDARD_STUDY_EXECUTION_SO__
 #define __STANDARD_STUDY_EXECUTION_SO__
 
-#include <ExperimentExecution.h>
-#include <gGA_Settings.h>
-#include <ssGA_Settings.h>
-#include <DE_Settings.h>
-#include <PSO_Settings.h>
+#include "ExperimentExecution.h"
+#include "gGA_Settings.h"
+#include "ssGA_Settings.h"
+#include "DE_Settings.h"
+#include "PSO_Settings.h"
 #include <string>
 
 /**

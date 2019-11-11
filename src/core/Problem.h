@@ -25,14 +25,15 @@
 
 #include <string>
 #include <iostream>
-#include <SolutionType.h>
-#include <Solution.h>
+#include "SolutionType.h"
+#include "Solution.h"
 #include <stddef.h>
-
+#include "SolutionSet.h"
 using namespace std;
 
 class SolutionType;
 class Solution;
+class SolutionSet;
 
 /**
  * Abstract class representing a multiobjective optimization problem
@@ -74,6 +75,9 @@ public:
   SolutionType * getSolutionType();
   string getName();
   int getNumberOfBits();
+ // virtual bool evaluateStopConstraints(SolutionSet * Population);
+  virtual bool evaluateStopConstraints(Solution * solution);
+
 
 }; // Problem
 

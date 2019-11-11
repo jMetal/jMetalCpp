@@ -21,10 +21,10 @@
 #ifndef __DIFFERENTIAL_EVOLUTION_SELECTION__
 #define __DIFFERENTIAL_EVOLUTION_SELECTION__
 
-#include <Selection.h>
-#include <Solution.h>
-#include <SolutionSet.h>
-#include <PseudoRandom.h>
+#include "Selection.h"
+#include "Solution.h"
+#include "SolutionSet.h"
+#include "PseudoRandom.h"
 
 /**
  * Class implementing the selection operator used in DE: three different solutions

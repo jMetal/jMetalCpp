@@ -23,13 +23,13 @@
 #ifndef XREAL_H_
 #define XREAL_H_
 
-#include <Solution.h>
-#include <BinaryRealSolutionType.h>
-#include <RealSolutionType.h>
-#include <ArrayRealSolutionType.h>
-#include <ArrayReal.h>
-#include <IntSolutionType.h>
-#include <IntNoneRepeatedSolutionType.h>
+#include "Solution.h"
+#include "BinaryRealSolutionType.h"
+#include "RealSolutionType.h"
+#include "ArrayRealSolutionType.h"
+#include "ArrayReal.h"
+#include "IntSolutionType.h"
+#include "IntNoneRepeatedSolutionType.h"
 
 /**
  * This class allows to apply a SBX crossover operator using two parent

@@ -21,7 +21,7 @@
 #ifndef __ARCHIVE__
 #define __ARCHIVE__
 
-#include <SolutionSet.h>
+#include "SolutionSet.h"
 
 /**
  * This class represents the super class for archive objects.
