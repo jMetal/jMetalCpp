@@ -49,11 +49,11 @@ int main(int argc, char ** argv) {
     cout << "Default problem will be used: OneMax" << endl;
 
     char ** argv = new char*[2];
-    argv[0] = new char[3];
+    argv[0] = new char[5];
     strcpy(argv[0], "400");
-    argv[1] = new char[1];
+    argv[1] = new char[4];
     strcpy(argv[1], "2");
-    char * problemName = new char[6];
+    char * problemName = new char[8];
     strcpy(problemName, "OneMax");
 
     problem = ProblemFactory::getProblem(problemName, 2, argv);

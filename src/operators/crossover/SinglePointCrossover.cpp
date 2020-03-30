@@ -66,7 +66,7 @@ Solution ** SinglePointCrossover::doCrossover(double probability, Solution *pare
     int totalNumberOfBits = 0;
     for (int i = 0; i < parent1->getProblem()->getNumberOfVariables(); i++) {
       totalNumberOfBits +=
-          ((Binary *)(parent1->getDecisionVariables()[0]))->getNumberOfBits() ;
+          ((Binary *)(parent1->getDecisionVariables()[i]))->getNumberOfBits() ;
     }
 
     //2. Calculate the point to make the crossover
