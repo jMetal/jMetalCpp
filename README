@@ -25,6 +25,9 @@ TABLE OF CONTENTS
 0. Updates
 =======================================================================================
 
+Version 1.9:
+  - Added new algorithm: Whale Optimizer Algorithm (WOA).
+
 Version 1.8:
   - Added new algorithm: GWO.
   - Enhance input parameter with default value.
@@ -119,7 +122,8 @@ Additionally, we include single-objective variants of these techniques:
   ssGA (Steady-state Genetic Algorithm)       ssGA_main
   CMA-ES                                      CMAES_main
   GWO (Grey Wolf Optimizer)                   GWO_main
-	
+  WOA (Whale Optimizer Algorithm)             WOA_main
+
 To execute one metaheuristic just use its associated command. For example, to execute
 GDE3 simply type the following command:
 	
