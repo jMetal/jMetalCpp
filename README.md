@@ -371,7 +371,9 @@ In each .cpp file, you can specify the following parameters:
   - experimentBaseDirectory:
     Directory path where all the experiments result will be	stored. Inside this
     folder, the following structure will be created:
-    
+   
+```text
+
     - <experimentalBaseDirectory/experimentName>
         |-data
           |- <algorithm_1>
@@ -406,6 +408,8 @@ In each .cpp file, you can specify the following parameters:
             |- <problem_n>
               Result files from problem n using algorithm m.
 							
+```
+
 Each algorithm used in the execution must be properly configured. This is done in the
 algorithmSettings method in each .cpp file. For each algorithm (NSGAII, GDE3, gGA...),
 this version of jMetalCpp provides a Settings class with a default configuration. You
