@@ -1,8 +1,8 @@
-# jMetalCpp project Web site
+# jMetalCpp project Web site
 
 jMetalCpp is a C++ based framework for multi-objective optimization. It is a fork of the [jMetal project](https://github.com/jmetal/jmetal).
 
-## TABLE OF CONTENTS
+## TABLE OF CONTENTS
 
 0. Updates
 1. Requirements
