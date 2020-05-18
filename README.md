@@ -64,12 +64,7 @@ software package.
 From version 1.5, it is mandatory to use a C++ compilator with C++11 support. This is
 needed to use the C++11 threads library.
 
-=======================================================================================
-
-
-=======================================================================================
-2. Installing jMetalCpp
-=======================================================================================
+### 2. Installing jMetalCpp
 
 Copy the compressed file to the location where you want to install jMetal and
 unzip it.
@@ -77,12 +72,7 @@ unzip it.
 Then, compile the code with the following command:
   % make
 
-=======================================================================================
-
-
-=======================================================================================	
-3. Executing jMetal
-=======================================================================================
+### 3. Executing jMetal
 
 All the main binaries are in the subfolder 'main included in the 'bin' folder. Enter
 this folder to execute jMetal.
@@ -124,12 +114,8 @@ GDE3 simply type the following command:
 	
   % ./GDE3_main
 
-=======================================================================================
 
-
-=======================================================================================
-4. Choosing a problem
-=======================================================================================
+### 4. Choosing a problem
 
 If you execute an algorithm like before, a default problem will be used for each
 algorithm. You can specify what problem to solve by passing it as a parameter. For
@@ -177,12 +163,7 @@ The list of single-objective problems currently is composed of:
   - Sphere
   - CEC2005
 
-=======================================================================================
-
-
-=======================================================================================
-5. Configuring a problem
-=======================================================================================
+###  5. Configuring a problem
 
 When you select a problem to solve, you can configure some problem parameters passing
 them as parameters. If a problem has three parameters, you can choose to specify one,
@@ -258,12 +239,8 @@ are setting one, two or the three of them.
  	%./gGA_main CEC2005 Real 1
  	%./gGA_main CEC2005 Real 1 20
 
-=======================================================================================
 
-
-=======================================================================================
-6. Calculating quality indicators
-=======================================================================================
+### 6. Calculating quality indicators
 
 To assess the performance of multi-objective metaheuristics, quality indicators are
 needed to evaluate the quality of the obtained Pareto front approximations.
@@ -304,12 +281,9 @@ the following command:
 Remember to change the file paths to whatever the actual location of the files
 containing the Pareto fronts is.
 		
-=======================================================================================
 
+### 7. Advanced: Building a Experiment
 
-=======================================================================================
-7. Advanced: Building a Experiment
-=======================================================================================
 
 Since this version of jMetalCpp, it is possible to create experimental studies. An
 experiment consists of a list of algorithms which are used to solve a list of problems,
@@ -334,12 +308,8 @@ The report part allows to apply quality indicators to measure the quality of the
 data, and calculates statistical information yielding the Latex tables and figures
 commented previously.
 
-=======================================================================================
 
-
-=======================================================================================
-  7.1. Executing a experiment
-=======================================================================================
+####  7.1. Executing a experiment
 
 To execute the 'execution part' of a experiment, you only need to execute the
 corresponding command. This version of jMetalCpp provides two already implemented
@@ -427,12 +397,7 @@ to execute the same algorithm more than once in a experiment with different
 configurations, but you will have to implement a different Settings class for each
 variant of the algorithm.
 
-=======================================================================================
-
-
-=======================================================================================
-  7.2. Generating reports from a experiment 
-=======================================================================================
+####   7.2. Generating reports from a experiment 
 
 To execute the 'report part' of a experiment, you only need to execute the
 corresponding command. For this part, this version of jMetalCpp provides three already
@@ -506,11 +471,9 @@ match with the ones included in the execution part which was previously run:
  <experimentalBaseDirectory/experimentName/referenceFronts> will contain the obtained
  reference fronts of the solved problems.
  
-=======================================================================================
 
-=======================================================================================
-8. Installation
-=======================================================================================
+### 8. Installation
+
 - For installation: make install 
 - For uninstallation : make uninstall
 - To install in not usr/local/, set a path to PREFIX. For example export PREFIX=a/b/c 
