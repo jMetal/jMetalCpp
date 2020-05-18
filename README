@@ -26,18 +26,18 @@ TABLE OF CONTENTS
 =======================================================================================
 
 Version 1.10:
-  - Added new algorithm: Moth-Flame Optimization Algorithm (MFO).
+  - Added new algorithm: Moth-Flame Optimization Algorithm (MFO). Contributor: Ahmad Dajani
 
 Version 1.9:
-  - Added new algorithm: Whale Optimizer Algorithm (WOA).
+  - Added new algorithm: Whale Optimizer Algorithm (WOA). Contributor: Ahmad Dajani
 
 Version 1.8:
-  - Added new algorithm: GWO.
+  - Added new algorithm: GWO. Contributor: Ahmad Dajani
   - Enhance input parameter with default value.
 
 Version 1.7:
   - Added a new algorithm: MOCH
-  Expect new algorithms soon...
+  Expect new algorithms soon
 
 Version 1.6:
   - Added new algorithms: OMOPSO, PAES, SMPSOhv, StandardPSO2007 and StandardPSO2011
