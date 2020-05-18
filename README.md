@@ -333,8 +333,8 @@ experiments to be used as templates. Feel free to edit these experiments or crea
 ones. Remember that after editing the code, you will have to compile the code again.
 
 The two provided experiments are:
-  - StandardStudyExecution
-  - StandardStudyExecutionSO
+  - `StandardStudyExecution`
+  - `StandardStudyExecutionSO`
 	
 The first one is a multi-objective experiment. The second one is a single-objective
 one. In order to execute a experiment, you only have to enter its corresponding
@@ -352,23 +352,23 @@ files. You will have to edit the corresponding .cpp files located in the
 
 In each .cpp file, you can specify the following parameters:
 
-  - experimentName:
+  - `experimentName`:
     Self-explanatory. It will be used to create a folder when to store the
     results.
     
-  - algorithmNameList:
+  - `algorithmNameList`:
     List of algorithms to be executed for each problem in the experiment.
     
-  - problemList:
+  - `problemList`:
     List of problems that will be resolved in the experiment.
     
-  - independentRuns:
+  - `independentRuns`:
     Number of times that each problem will be executed for each algorithm.
     
-  - numberOfThreads:
+  - `numberOfThreads`:
     Number of threads that will be used to execute the algorithms concurrently.
     
-  - experimentBaseDirectory:
+  - `experimentBaseDirectory`:
     Directory path where all the experiments result will be	stored. Inside this
     folder, the following structure will be created:
    
