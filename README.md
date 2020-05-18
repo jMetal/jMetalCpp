@@ -76,7 +76,7 @@ Then, compile the code with the following command:
 
 ### 3. Executing jMetal
 
-All the main binaries are in the subfolder 'main included in the 'bin' folder. Enter
+All the main binaries are in the subfolder `main` included in the `bin` folder. Enter
 this folder to execute jMetal.
 
 ```
@@ -244,7 +244,7 @@ are setting one, two or the three of them.
  CEC2005        Solution type       Problem number          Number of variables
 ``` 
  The <problem number> variable accepts values from 1 to 25. The default values for
- <Solution type> and <Number of variables> are "Real" and 10.
+ `Solution type` and `Number of variables` are `Real` and 10.
  Examples:
 
 ```
@@ -274,7 +274,7 @@ This quality indicators require to know the true Pareto front of the problems. I
 case of the included benchmark problems, their Pareto fronts can be downloaded from
 http://jmetal.sourceforge.net/problems.html
 
-The quality indicator binaries are included in 'bin/qualityIndicator/main'.
+The quality indicator binaries are included in `bin/qualityIndicator/main`.
 Enter this folder to execute any indicator.
 ```	
 % cd bin
@@ -287,7 +287,7 @@ To calculate a quality indicator you have to execute the following command:
 % ./<QualityIndicatorCommand> <SolutionFrontFile> <TrueFrontFile> <numberOfObjectives>
 ```
 
-For example, if you need to calculate the hypervolume indicator on the FUN file
+For example, if you need to calculate the hypervolume indicator on the `FUN file
 obtained by a metaheuristic when trying to solve the ZDT1 problem, you have to execute
 the following command:
 ```
@@ -421,7 +421,7 @@ variant of the algorithm.
 
 ####   7.2. Generating reports from a experiment 
 
-To execute the 'report part' of a experiment, you only need to execute the
+To execute the `report part` of a experiment, you only need to execute the
 corresponding command. For this part, this version of jMetalCpp provides three already
 implemented experiments. The first two ones generate reports for the multi-objective
 experiment and the third one generate reports for the single-objective variant. As
@@ -430,20 +430,20 @@ create new ones from them. Remember that after editing the code, you will have t
 compile the code again.
 
 The three provided experiments are:
-  - StandardStudyReportPF
-  - StandardStudyReportRF
-  - StandardStudyReportSO
+  - `StandardStudyReportPF`
+  - `StandardStudyReportRF`
+  - `StandardStudyReportSO
 
 The experiments in the Java version of jMetal assume that you known in advance the true
 Pareto front of the solved problems, and this assumption is considered in the
-StandardStudyReportPF (PF stands for "Pareto Front"). However, if the Pareto fronts are
+`StandardStudyReportPF` (PF stands for "Pareto Front"). However, if the Pareto fronts are
 unknown, as usually happens when solving real problem, the approach then is to obtain a
 reference Pareto front from all the front of solutions produced by all the algorithms
-in every independent run. The StandardStudyReportRF (RF stands for "Reference Front")
+in every independent run. The `StandardStudyReportRF` (RF stands for "Reference Front")
 is designed to get this reference fronts, which are then used to apply the desired
 quality indicators.
 
-StandardStudyReportSO generates the reports for a single-objective experiment.
+`StandardStudyReportSO` generates the reports for a single-objective experiment.
 
 In order to execute an experiment report, you only need to enter its corresponding
 command. For example:
@@ -476,7 +476,7 @@ match with the ones included in the execution part which was previously run:
   - indicatorList:
     List of quality indicators that will be calculated in the reports. When doing
     a experiment about single-objective algorithms, the only possible value is
-    "FIT".
+    `FIT`.
     
   - paretoFrontFile:
     List of optimal pareto front files that will be used to calculate the
