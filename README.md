@@ -3,6 +3,7 @@
 jMetalCpp is a C++ based framework for multi-objective optimization. It is a fork of the [jMetal project](https://github.com/jmetal/jmetal).
 
 ## TABLE OF CONTENTS
+
 0. Updates
 1. Requirements
 2. Installing jMetalCpp
@@ -14,12 +15,9 @@ jMetalCpp is a C++ based framework for multi-objective optimization. It is a for
   7.1. Executing a experiment
   7.2. Generating reports from a experiment
 8. Installation  
-=======================================================================================
 
 
-=======================================================================================
-0. Updates
-=======================================================================================
+# 0. Updates
 
 Version 1.10:
   - Added new algorithm: Moth-Flame Optimization Algorithm (MFO). Contributor: Ahmad Dajani (@adajani)
