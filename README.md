@@ -70,18 +70,22 @@ Copy the compressed file to the location where you want to install jMetal and
 unzip it.
 
 Then, compile the code with the following command:
+```
   % make
+```
 
 ### 3. Executing jMetal
 
 All the main binaries are in the subfolder 'main included in the 'bin' folder. Enter
 this folder to execute jMetal.
-	
+
+```
   % cd bin
   % cd main
+```
 
 The following multi-objective metaheuristics are provided in this version of jMetal:
-
+```text
   Algorithm                                   Command
   ---------------------------------------------------------
   NSGA-II                                     NSGAII_main
@@ -93,9 +97,10 @@ The following multi-objective metaheuristics are provided in this version of jMe
   PAES (NEW)                                  PAES_main
   SMS-EMOA                                    SMSEMOA_main
   MOEA/D                                      MOEAD_main
-	
-Additionally, we include single-objective variants of these techniques:
+```
 
+Additionally, we include single-objective variants of these techniques:
+``` text
   Algorithm                                   Command
   ---------------------------------------------------------
   DE (Differential Evolution)                 DE_main
@@ -108,12 +113,13 @@ Additionally, we include single-objective variants of these techniques:
   GWO (Grey Wolf Optimizer)                   GWO_main
   WOA (Whale Optimizer Algorithm)             WOA_main
   MFO (Moth-Flame Optimization Algorithm)     MFO_main
-
+```
 To execute one metaheuristic just use its associated command. For example, to execute
 GDE3 simply type the following command:
 	
+```
   % ./GDE3_main
-
+```
 
 ### 4. Choosing a problem
 
@@ -121,9 +127,10 @@ If you execute an algorithm like before, a default problem will be used for each
 algorithm. You can specify what problem to solve by passing it as a parameter. For
 example, if you desire to execute the Generational Genetic Algorithm to solve the
 Sphere problem, you need to execute the following command:
-	
+```
   % ./gGA_main Sphere
-	
+```
+
 The following multi-objective problems are currently included:
   - Fonseca
   - Kursawe
@@ -170,7 +177,7 @@ them as parameters. If a problem has three parameters, you can choose to specify
 two or the three of them.
 
 The following parameters can be configured when going to solve a problem:
-
+```text
  Problem        Parameter 1         Parameter 2             Parameter 3
 --------------------------------------------------------------------------------------
  Fonseca        Solution type
@@ -205,7 +212,7 @@ The following parameters can be configured when going to solve a problem:
  ZDT4           Solution type       Number of variables
  ZDT5           Solution type       Number of variables
  ZDT6           Solution type       Number of variables
-
+```
 The following values are allowed for the 'Solution type' parameter:
 	- Real
 	- Binary
@@ -213,15 +220,18 @@ The following values are allowed for the 'Solution type' parameter:
 For example, if you want to solve the DTLZ5 problem using SMPSO using 'Real" as
 solution type, you would need to execute the following command:
 	
+```
 	% ./SMPSO_main DTLZ5 Real
-	
+```
+
 In the future, a binary-real encoding will be available.	
 	
 If you intend to modify the default parameters of the DTLZ5 problem with ten variables
 and two objectives, the following command must be executed:
-
+```
 	%./SMPSO_main DTLZ5 Real 10 2
 	
+
 The CEC 2005 problems are an exception, as the order of the parameters change if you
 are setting one, two or the three of them.
 
