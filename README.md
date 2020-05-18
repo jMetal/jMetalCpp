@@ -20,13 +20,13 @@ jMetalCpp is a C++ based framework for multi-objective optimization. It is a for
 ### 0. Updates
 
 Version 1.10:
-  - Added new algorithm: Moth-Flame Optimization Algorithm (MFO). Contributor: Ahmad Dajani (@adajani)
+  - Added new algorithm: Moth-Flame Optimization Algorithm (MFO). Contributor: Ahmad Dajani (https://github.com/adajani)
 
 Version 1.9:
-  - Added new algorithm: Whale Optimizer Algorithm (WOA). Contributor: Ahmad Dajani (@adajani)
+  - Added new algorithm: Whale Optimizer Algorithm (WOA). Contributor: Ahmad Dajani (https://github.com/adajani)
 
 Version 1.8:
-  - Added new algorithm: GWO. Contributor: Ahmad Dajani (@adajani)
+  - Added new algorithm: GWO. Contributor: Ahmad Dajani (https://github.com/adajani)
   - Enhance input parameter with default value.
 
 Version 1.7:
