@@ -71,7 +71,7 @@ unzip it.
 
 Then, compile the code with the following command:
 ```
-  % make
+% make
 ```
 
 ### 3. Executing jMetal
@@ -80,8 +80,8 @@ All the main binaries are in the subfolder 'main included in the 'bin' folder. E
 this folder to execute jMetal.
 
 ```
-  % cd bin
-  % cd main
+% cd bin
+% cd main
 ```
 
 The following multi-objective metaheuristics are provided in this version of jMetal:
@@ -118,7 +118,7 @@ To execute one metaheuristic just use its associated command. For example, to ex
 GDE3 simply type the following command:
 	
 ```
-  % ./GDE3_main
+% ./GDE3_main
 ```
 
 ### 4. Choosing a problem
@@ -128,7 +128,7 @@ algorithm. You can specify what problem to solve by passing it as a parameter. F
 example, if you desire to execute the Generational Genetic Algorithm to solve the
 Sphere problem, you need to execute the following command:
 ```
-  % ./gGA_main Sphere
+% ./gGA_main Sphere
 ```
 
 The following multi-objective problems are currently included:
@@ -221,7 +221,7 @@ For example, if you want to solve the DTLZ5 problem using SMPSO using 'Real" as
 solution type, you would need to execute the following command:
 	
 ```
-	% ./SMPSO_main DTLZ5 Real
+% ./SMPSO_main DTLZ5 Real
 ```
 
 In the future, a binary-real encoding will be available.	
@@ -229,26 +229,29 @@ In the future, a binary-real encoding will be available.
 If you intend to modify the default parameters of the DTLZ5 problem with ten variables
 and two objectives, the following command must be executed:
 ```
-	%./SMPSO_main DTLZ5 Real 10 2
+%./SMPSO_main DTLZ5 Real 10 2
+```
 	
 
 The CEC 2005 problems are an exception, as the order of the parameters change if you
 are setting one, two or the three of them.
 
+```text
  Problem        Parameter 1         Parameter 2             Parameter 3
 --------------------------------------------------------------------------------------
  CEC2005        Problem number
  CEC2005        Solution type       Problem number
  CEC2005        Solution type       Problem number          Number of variables
- 
+``` 
  The <problem number> variable accepts values from 1 to 25. The default values for
  <Solution type> and <Number of variables> are "Real" and 10.
  Examples:
- 
- 	%./gGA_main CEC2005 1
- 	%./gGA_main CEC2005 Real 1
- 	%./gGA_main CEC2005 Real 1 20
 
+```
+% ./gGA_main CEC2005 1
+% ./gGA_main CEC2005 Real 1
+% ./gGA_main CEC2005 Real 1 20
+```
 
 ### 6. Calculating quality indicators
 
@@ -257,6 +260,7 @@ needed to evaluate the quality of the obtained Pareto front approximations.
 
 The following quality indicators are provided in this version of jMetal:
 
+```text
   Quality Indicator                     Command
   ---------------------------------------------------------------------
   Hypervolume                           Hypervolume
@@ -264,6 +268,7 @@ The following quality indicators are provided in this version of jMetal:
   Epsilon                               Epsilon
   Generational Distance                 GenerationalDistance
   Inverted Generational Distance        InvertedGenerationalDistance
+ ```
 	
 This quality indicators require to know the true Pareto front of the problems. In the
 case of the included benchmark problems, their Pareto fronts can be downloaded from
@@ -271,22 +276,23 @@ http://jmetal.sourceforge.net/problems.html
 
 The quality indicator binaries are included in 'bin/qualityIndicator/main'.
 Enter this folder to execute any indicator.
-	
-  % cd bin
-  % cd qualityIndicator
-  % cd main
-
+```	
+% cd bin
+% cd qualityIndicator
+% cd main
+```
 To calculate a quality indicator you have to execute the following command:
 
-  % ./<QualityIndicatorCommand> <SolutionFrontFile> <TrueFrontFile>
-    <numberOfObjectives>
+```
+% ./<QualityIndicatorCommand> <SolutionFrontFile> <TrueFrontFile> <numberOfObjectives>
+```
 
 For example, if you need to calculate the hypervolume indicator on the FUN file
 obtained by a metaheuristic when trying to solve the ZDT1 problem, you have to execute
 the following command:
-
-  % ./Hypervolume /home/username/jmetalcpp-test/FUN
-    /home/username/jmetalcpp-test/ZDT1.pf 2
+```
+% ./Hypervolume /home/username/jmetalcpp-test/FUN/home/username/jmetalcpp-test/ZDT1.pf 2
+```
 		
 Remember to change the file paths to whatever the actual location of the files
 containing the Pareto fronts is.
@@ -334,7 +340,9 @@ The first one is a multi-objective experiment. The second one is a single-object
 one. In order to execute a experiment, you only have to enter its corresponding
 command. For example:
 
-  % ./StandardStudyExecution
+```
+% ./StandardStudyExecution
+```
 	
 Before executing the experiments, it is important to change some parameters in the code
 accordingly to your needs and to your system configuration. Thus, you need to indicate
@@ -435,9 +443,10 @@ StandardStudyReportSO generates the reports for a single-objective experiment.
 
 In order to execute an experiment report, you only need to enter its corresponding
 command. For example:
+```
+% ./StandardStudyReportPF
+```
 
-  % ./StandardStudyReportPF
-	
 As before, the experiment report programs must be properly configured before running
 them. It is very important that the list of parameters enumerated in the following do
 match with the ones included in the execution part which was previously run:
