@@ -163,7 +163,7 @@ void PSO::computeSpeed(int iter, int miter) {
   double r1, r2;
   //double W ;
   double C1, C2;
-  double wmax, wmin, deltaMax, deltaMin;
+  double wmax, wmin;// , deltaMax, deltaMin;
   XReal * bestGlobal;
 
   bestGlobal = new XReal(globalBest_) ;

@@ -45,6 +45,9 @@ include_directories(${include_dirs})
 set(library_target jmetal)
 add_library(${library_target} STATIC ${source_files} ${header_files})
 target_link_libraries(${library_target} PRIVATE Threads::Threads)
+if(MSVC) # ignore function must return a value on MSCV
+  target_compile_options(${library_target} PRIVATE /w34716)
+endif()
 install(TARGETS ${library_target} DESTINATION lib)
 install(FILES ${header_files} DESTINATION include)
 
