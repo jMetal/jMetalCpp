@@ -38,7 +38,7 @@
 #include <PositionBasedCrossover.h>
 int main(int argc, char ** argv) {
 
-	clock_t t_ini, t_fin;
+  // clock_t t_ini, t_fin;
 
   Problem   * problem   ; // The problem to solve
   Algorithm * algorithm ; // The algorithm to use

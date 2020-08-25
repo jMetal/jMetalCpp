@@ -196,7 +196,7 @@ double SMPSO::velocityConstriction(double v, double * deltaMax,
  */
 void SMPSO::computeSpeed(int iter, int miter) {
   double r1, r2, W, C1, C2;
-  double wmax, wmin, deltaMax, deltaMin;
+  double wmax, wmin;// , deltaMax, deltaMin;
   XReal * bestGlobal;
 
   for (int i = 0; i < swarmSize_; i++) {

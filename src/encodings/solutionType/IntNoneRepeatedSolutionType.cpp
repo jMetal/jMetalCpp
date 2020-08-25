@@ -38,7 +38,7 @@ Variable **IntNoneRepeatedSolutionType::createVariables() {
   double LowerBound=problem_->getLowerLimit(1);// Assuming all Variables have same lower and upper bound. If not then can not use this Solution type
   double UpperBound=problem_->getUpperLimit(1);
 
-  int  values[problem_->getNumberOfVariables()];
+  int* values = new int[problem_->getNumberOfVariables()];
   int Index=0;
 
   for (i = LowerBound; i <= UpperBound; i++) {
@@ -77,5 +77,6 @@ if(Repeated==true)
     variables[i] = val;
   }
 */
+  delete[] values;
   return variables;
 } // createVariables

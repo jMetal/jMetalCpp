@@ -1,6 +1,7 @@
 # jMetalCpp project Web site
 
-jMetalCpp is a C++ based framework for multi-objective optimization. It is a fork of the [jMetal project](https://github.com/jmetal/jmetal).
+jMetalCpp is a C++ based framework for multi-objective optimization. It is a
+fork of the [jMetal project](https://github.com/jmetal/jmetal).
 
 ## TABLE OF CONTENTS
 
@@ -14,19 +15,26 @@ jMetalCpp is a C++ based framework for multi-objective optimization. It is a for
 7. Advanced: Building a Experiment
   7.1. Executing a experiment
   7.2. Generating reports from a experiment
-8. Installation  
+8. Installation
 
 
 ### 0. Updates
 
+Version 1.11:
+  - Added support for CMake and successfully build on Windows with
+    MSCV 2019. Contributor: Dimitar Stanev (https://github.com/mitkof6)
+
 Version 1.10:
-  - Added new algorithm: Moth-Flame Optimization Algorithm (MFO). Contributor: Ahmad Dajani (https://github.com/adajani)
+  - Added new algorithm: Moth-Flame Optimization Algorithm (MFO). Contributor:
+    Ahmad Dajani (https://github.com/adajani)
 
 Version 1.9:
-  - Added new algorithm: Whale Optimizer Algorithm (WOA). Contributor: Ahmad Dajani (https://github.com/adajani)
+  - Added new algorithm: Whale Optimizer Algorithm (WOA). Contributor: Ahmad
+    Dajani (https://github.com/adajani)
 
 Version 1.8:
-  - Added new algorithm: GWO. Contributor: Ahmad Dajani (https://github.com/adajani)
+  - Added new algorithm: GWO. Contributor: Ahmad Dajani
+    (https://github.com/adajani)
   - Enhance input parameter with default value.
 
 Version 1.7:
@@ -34,7 +42,8 @@ Version 1.7:
   Expect new algorithms soon
 
 Version 1.6:
-  - Added new algorithms: OMOPSO, PAES, SMPSOhv, StandardPSO2007 and StandardPSO2011
+  - Added new algorithms: OMOPSO, PAES, SMPSOhv, StandardPSO2007 and
+    StandardPSO2011
   - Added CEC 2005 problems
 
 Version 1.5:
@@ -43,13 +52,14 @@ Version 1.5:
   - Changed POSIX threads to C++11 built-in threads.
 
 Version 1.0.1:
-  - Fixed a bug that prevented the last Wilcoxon table being generated correctly.
+  - Fixed a bug that prevented the last Wilcoxon table being generated
+    correctly.
   - Changed FIT quality indicator to be minimized instead of being maximized.
-	
-Version 1.0: 
+
+Version 1.0:
   - Added quality indicators.
   - Added experiments.
-	
+
 Version 0.1:
   - First version.
 
@@ -61,8 +71,8 @@ jMetalCpp has been developed in Unix machines (Ubuntu and MacOS X) as well as in
 Windows making use of Cygwin. The make utility has been used to compile the
 software package.
 
-From version 1.5, it is mandatory to use a C++ compilator with C++11 support. This is
-needed to use the C++11 threads library.
+From version 1.5, it is mandatory to use a C++ compilator with C++11
+support. This is needed to use the C++11 threads library.
 
 ### 2. Installing jMetalCpp
 
@@ -70,21 +80,34 @@ Copy the compressed file to the location where you want to install jMetal and
 unzip it.
 
 Then, compile the code with the following command:
+
 ```
 % make
 ```
 
+One can also use the CMake building system to compile the project independently
+of the OS. Example for building on Linux can be found below:
+
+```
+mkdir build
+cd build
+cmake .. -DCMAKE_INSTALL_PREFIX=../install
+make
+```
+
 ### 3. Executing jMetal
 
-All the main binaries are in the subfolder `main` included in the `bin` folder. Enter
-this folder to execute jMetal.
+All the main binaries are in the subfolder `main` included in the `bin`
+folder. Enter this folder to execute jMetal.
 
 ```
 % cd bin
 % cd main
 ```
 
-The following multi-objective metaheuristics are provided in this version of jMetal:
+The following multi-objective metaheuristics are provided in this version of
+jMetal:
+
 ```text
   Algorithm                                   Command
   ---------------------------------------------------------
@@ -100,6 +123,7 @@ The following multi-objective metaheuristics are provided in this version of jMe
 ```
 
 Additionally, we include single-objective variants of these techniques:
+
 ``` text
   Algorithm                                   Command
   ---------------------------------------------------------
@@ -114,8 +138,9 @@ Additionally, we include single-objective variants of these techniques:
   WOA (Whale Optimizer Algorithm)             WOA_main
   MFO (Moth-Flame Optimization Algorithm)     MFO_main
 ```
-To execute one metaheuristic just use its associated command. For example, to execute
-GDE3 simply type the following command:
+
+To execute one metaheuristic just use its associated command. For example, to
+execute GDE3 simply type the following command:
 	
 ```
 % ./GDE3_main
@@ -124,9 +149,11 @@ GDE3 simply type the following command:
 ### 4. Choosing a problem
 
 If you execute an algorithm like before, a default problem will be used for each
-algorithm. You can specify what problem to solve by passing it as a parameter. For
-example, if you desire to execute the Generational Genetic Algorithm to solve the
-Sphere problem, you need to execute the following command:
+algorithm. You can specify what problem to solve by passing it as a
+parameter. For example, if you desire to execute the Generational Genetic
+Algorithm to solve the Sphere problem, you need to execute the following
+command:
+
 ```
 % ./gGA_main Sphere
 ```
@@ -172,11 +199,12 @@ The list of single-objective problems currently is composed of:
 
 ###  5. Configuring a problem
 
-When you select a problem to solve, you can configure some problem parameters passing
-them as parameters. If a problem has three parameters, you can choose to specify one,
-two or the three of them.
+When you select a problem to solve, you can configure some problem parameters
+passing them as parameters. If a problem has three parameters, you can choose to
+specify one, two or the three of them.
 
 The following parameters can be configured when going to solve a problem:
+
 ```text
  Problem        Parameter 1         Parameter 2             Parameter 3
 --------------------------------------------------------------------------------------
@@ -255,8 +283,8 @@ are setting one, two or the three of them.
 
 ### 6. Calculating quality indicators
 
-To assess the performance of multi-objective metaheuristics, quality indicators are
-needed to evaluate the quality of the obtained Pareto front approximations.
+To assess the performance of multi-objective metaheuristics, quality indicators
+are needed to evaluate the quality of the obtained Pareto front approximations.
 
 The following quality indicators are provided in this version of jMetal:
 
@@ -270,9 +298,9 @@ The following quality indicators are provided in this version of jMetal:
   Inverted Generational Distance        InvertedGenerationalDistance
  ```
 	
-This quality indicators require to know the true Pareto front of the problems. In the
-case of the included benchmark problems, their Pareto fronts can be downloaded from
-http://jmetal.sourceforge.net/problems.html
+This quality indicators require to know the true Pareto front of the
+problems. In the case of the included benchmark problems, their Pareto fronts
+can be downloaded from http://jmetal.sourceforge.net/problems.html
 
 The quality indicator binaries are included in `bin/qualityIndicator/main`.
 Enter this folder to execute any indicator.
@@ -288,8 +316,9 @@ To calculate a quality indicator you have to execute the following command:
 ```
 
 For example, if you need to calculate the hypervolume indicator on the `FUN file
-obtained by a metaheuristic when trying to solve the ZDT1 problem, you have to execute
-the following command:
+obtained by a metaheuristic when trying to solve the ZDT1 problem, you have to
+execute the following command:
+
 ```
 % ./Hypervolume /home/username/jmetalcpp-test/FUN/home/username/jmetalcpp-test/ZDT1.pf 2
 ```
@@ -301,54 +330,55 @@ containing the Pareto fronts is.
 ### 7. Advanced: Building a Experiment
 
 
-Since this version of jMetalCpp, it is possible to create experimental studies. An
-experiment consists of a list of algorithms which are used to solve a list of problems,
-performing a number of independent runs. The results are then evaluated by applying
-quality indicators and, as an output, a set of Latex files and R scripts are produced.
-These files include Latex tables with means/medians and standard deviations/IQRs, Latex
-tables including the results of applying the Wilcoxon rank-sum tests, and eps figures
-containing boxplots. 
+Since this version of jMetalCpp, it is possible to create experimental
+studies. An experiment consists of a list of algorithms which are used to solve
+a list of problems, performing a number of independent runs. The results are
+then evaluated by applying quality indicators and, as an output, a set of Latex
+files and R scripts are produced.  These files include Latex tables with
+means/medians and standard deviations/IQRs, Latex tables including the results
+of applying the Wilcoxon rank-sum tests, and eps figures containing boxplots.
 
-Experiments are divided in two independent parts: an execution part and a report part.
-This approach is different from the one used in the Java version of jMetal. The current
-one included in jMetalCpp is more flexible and includes a more efficient parallel
-scheme to run the experiments in parallel.
+Experiments are divided in two independent parts: an execution part and a report
+part.  This approach is different from the one used in the Java version of
+jMetal. The current one included in jMetalCpp is more flexible and includes a
+more efficient parallel scheme to run the experiments in parallel.
 
 The execution part is the one which executes all the problems using the selected
-algorithms. Each problem will be executed a specified number of times. As the number of
-configuration can be high and they are independent among then, the algorithms can be
-executed concurrently by a specified number of threads in order to take advantage of
-current multi-core processors.
+algorithms. Each problem will be executed a specified number of times. As the
+number of configuration can be high and they are independent among then, the
+algorithms can be executed concurrently by a specified number of threads in
+order to take advantage of current multi-core processors.
 
-The report part allows to apply quality indicators to measure the quality of the result
-data, and calculates statistical information yielding the Latex tables and figures
-commented previously.
+The report part allows to apply quality indicators to measure the quality of the
+result data, and calculates statistical information yielding the Latex tables
+and figures commented previously.
 
 
 ####  7.1. Executing a experiment
 
 To execute the 'execution part' of a experiment, you only need to execute the
-corresponding command. This version of jMetalCpp provides two already implemented
-experiments to be used as templates. Feel free to edit these experiments or create new
-ones. Remember that after editing the code, you will have to compile the code again.
+corresponding command. This version of jMetalCpp provides two already
+implemented experiments to be used as templates. Feel free to edit these
+experiments or create new ones. Remember that after editing the code, you will
+have to compile the code again.
 
 The two provided experiments are:
   - `StandardStudyExecution`
   - `StandardStudyExecutionSO`
 	
-The first one is a multi-objective experiment. The second one is a single-objective
-one. In order to execute a experiment, you only have to enter its corresponding
-command. For example:
+The first one is a multi-objective experiment. The second one is a
+single-objective one. In order to execute a experiment, you only have to enter
+its corresponding command. For example:
 
 ```
 % ./StandardStudyExecution
 ```
 	
-Before executing the experiments, it is important to change some parameters in the code
-accordingly to your needs and to your system configuration. Thus, you need to indicate
-the current paths where to store the output files and from where to read the input
-files. You will have to edit the corresponding .cpp files located in the
-'jmetalcpp/src/experiments/' folder.
+Before executing the experiments, it is important to change some parameters in
+the code accordingly to your needs and to your system configuration. Thus, you
+need to indicate the current paths where to store the output files and from
+where to read the input files. You will have to edit the corresponding .cpp
+files located in the 'jmetalcpp/src/experiments/' folder.
 
 In each .cpp file, you can specify the following parameters:
 
@@ -410,50 +440,54 @@ In each .cpp file, you can specify the following parameters:
 							
 ```
 
-Each algorithm used in the execution must be properly configured. This is done in the
-algorithmSettings method in each .cpp file. For each algorithm (NSGAII, GDE3, gGA...),
-this version of jMetalCpp provides a Settings class with a default configuration. You
-can edit these Setting classes to change the algorithm parameters. Don't forget to edit
-the algorithmSettings to configure each algorithm used in the experiment. It's possible
-to execute the same algorithm more than once in a experiment with different
-configurations, but you will have to implement a different Settings class for each
-variant of the algorithm.
+Each algorithm used in the execution must be properly configured. This is done
+in the algorithmSettings method in each .cpp file. For each algorithm (NSGAII,
+GDE3, gGA...), this version of jMetalCpp provides a Settings class with a
+default configuration. You can edit these Setting classes to change the
+algorithm parameters. Don't forget to edit the algorithmSettings to configure
+each algorithm used in the experiment. It's possible to execute the same
+algorithm more than once in a experiment with different configurations, but you
+will have to implement a different Settings class for each variant of the
+algorithm.
 
 ####   7.2. Generating reports from a experiment 
 
 To execute the `report part` of a experiment, you only need to execute the
-corresponding command. For this part, this version of jMetalCpp provides three already
-implemented experiments. The first two ones generate reports for the multi-objective
-experiment and the third one generate reports for the single-objective variant. As
-before, they are templates, so feel free to edit them according to your needs or to
-create new ones from them. Remember that after editing the code, you will have to
-compile the code again.
+corresponding command. For this part, this version of jMetalCpp provides three
+already implemented experiments. The first two ones generate reports for the
+multi-objective experiment and the third one generate reports for the
+single-objective variant. As before, they are templates, so feel free to edit
+them according to your needs or to create new ones from them. Remember that
+after editing the code, you will have to compile the code again.
 
 The three provided experiments are:
   - `StandardStudyReportPF`
   - `StandardStudyReportRF`
   - `StandardStudyReportSO
 
-The experiments in the Java version of jMetal assume that you known in advance the true
-Pareto front of the solved problems, and this assumption is considered in the
-`StandardStudyReportPF` (PF stands for "Pareto Front"). However, if the Pareto fronts are
-unknown, as usually happens when solving real problem, the approach then is to obtain a
-reference Pareto front from all the front of solutions produced by all the algorithms
-in every independent run. The `StandardStudyReportRF` (RF stands for "Reference Front")
-is designed to get this reference fronts, which are then used to apply the desired
-quality indicators.
+The experiments in the Java version of jMetal assume that you known in advance
+the true Pareto front of the solved problems, and this assumption is considered
+in the `StandardStudyReportPF` (PF stands for "Pareto Front"). However, if the
+Pareto fronts are unknown, as usually happens when solving real problem, the
+approach then is to obtain a reference Pareto front from all the front of
+solutions produced by all the algorithms in every independent run. The
+`StandardStudyReportRF` (RF stands for "Reference Front") is designed to get
+this reference fronts, which are then used to apply the desired quality
+indicators.
 
 `StandardStudyReportSO` generates the reports for a single-objective experiment.
 
-In order to execute an experiment report, you only need to enter its corresponding
-command. For example:
+In order to execute an experiment report, you only need to enter its
+corresponding command. For example:
+
 ```
 % ./StandardStudyReportPF
 ```
 
-As before, the experiment report programs must be properly configured before running
-them. It is very important that the list of parameters enumerated in the following do
-match with the ones included in the execution part which was previously run:
+As before, the experiment report programs must be properly configured before
+running them. It is very important that the list of parameters enumerated in the
+following do match with the ones included in the execution part which was
+previously run:
 
   - experimentName:
     Self-explanatory. It will be used to know the folder from where to read the
@@ -490,13 +524,14 @@ match with the ones included in the execution part which was previously run:
     and this parameter is not especified, reference pareto fronts will be
     generated to calculate the quality indicators.
 
- In case of executing the StandardStudyReportRF program, a directory
- <experimentalBaseDirectory/experimentName/referenceFronts> will contain the obtained
- reference fronts of the solved problems.
+In case of executing the StandardStudyReportRF program, a directory
+<experimentalBaseDirectory/experimentName/referenceFronts> will contain the
+obtained reference fronts of the solved problems.
  
 
 ### 8. Installation
 
 - For installation: make install 
 - For uninstallation : make uninstall
-- To install in not usr/local/, set a path to PREFIX. For example export PREFIX=a/b/c 
+- To install in not usr/local/, set a path to PREFIX. For example export
+  PREFIX=a/b/c

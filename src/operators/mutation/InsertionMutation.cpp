@@ -5,7 +5,6 @@
  *      Author: Emad Alharbi
  *      University of York,UK
  */
-
 #include "InsertionMutation.h"
 
 InsertionMutation::InsertionMutation(map<string, void *> parameters)
